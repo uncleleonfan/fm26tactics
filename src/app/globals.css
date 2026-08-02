@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --primary: 135 100% 45%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 217 33% 17%;
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 16% 65%;
+    --border: 217 33% 17%;
+    --ring: 135 100% 45%;
+  }
+
+  * {
+    @apply border-[#1C2436];
+  }
+
+  body {
+    @apply bg-[#0A0E17] text-[#F1F5F9] font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-[#00E676]/30 text-[#00E676];
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[#0A0E17];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#1C2436] rounded-full hover:bg-[#2a3348];
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-[#141A26]/60 backdrop-blur-xl border border-[#1C2436]/50 rounded-2xl;
+  }
+
+  .glass-card {
+    @apply bg-[#1C2436]/40 backdrop-blur-lg border border-[#1C2436]/30 rounded-xl
+           hover:bg-[#1C2436]/60 hover:border-primary/20 transition-all duration-300;
+  }
+
+  .neon-border {
+    @apply border border-primary/30 shadow-[0_0_15px_rgba(0,230,118,0.1)];
+  }
+
+  .neon-glow {
+    @apply shadow-[0_0_20px_rgba(0,230,118,0.15)];
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-[#00C853] bg-clip-text text-transparent;
+  }
+
+  .pitch-line {
+    @apply stroke-[#1C2436] stroke-[1.5] fill-none;
+  }
+
+  .pitch-marker {
+    @apply fill-[#1C2436]/50 stroke-[#1C2436] stroke-[1];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

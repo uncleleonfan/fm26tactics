@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/builder/page": "app/builder/page.js",
+  "/page": "app/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/roles/page": "app/roles/page.js",
+  "/roles/[slug]/page": "app/roles/[slug]/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/guides/page": "app/guides/page.js",
+  "/tactics/page": "app/tactics/page.js",
+  "/about/page": "app/about/page.js",
+  "/tactics/[slug]/page": "app/tactics/[slug]/page.js"
+}

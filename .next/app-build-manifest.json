@@ -1,0 +1,99 @@
+{
+  "pages": {
+    "/not-found": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/app/not-found-e51a8ad5430da3cf.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/app/_not-found/page-887a6b78f334643d.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/css/19d15ab1ba7d7cb8.css",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/98-d0778eadcc99c49d.js",
+      "static/chunks/app/layout-fdf291f944a3346f.js"
+    ],
+    "/builder/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/app/builder/page-0d704e69aaac1bd0.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/904-66fb54dbd0987bc9.js",
+      "static/chunks/app/page-7e47bf9c1753cdf5.js"
+    ],
+    "/roles/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/98-d0778eadcc99c49d.js",
+      "static/chunks/app/roles/page-b52124953007882c.js"
+    ],
+    "/roles/[slug]/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/98-d0778eadcc99c49d.js",
+      "static/chunks/356-be6894d01673a344.js",
+      "static/chunks/app/roles/[slug]/page-d21aea57c3e4ff44.js"
+    ],
+    "/guides/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/app/guides/page-050d95bf86d8b365.js"
+    ],
+    "/tactics/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/98-d0778eadcc99c49d.js",
+      "static/chunks/app/tactics/page-16368bebb71998e3.js"
+    ],
+    "/about/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/app/about/page-f8ef4fff16333fac.js"
+    ],
+    "/tactics/[slug]/page": [
+      "static/chunks/webpack-bbb75ff9f74ed7f1.js",
+      "static/chunks/fd9d1056-83811740eb3c2b2a.js",
+      "static/chunks/117-4f368cb82cb6ec61.js",
+      "static/chunks/main-app-d371657053f0dfe8.js",
+      "static/chunks/972-50e15506bbc54c2d.js",
+      "static/chunks/98-d0778eadcc99c49d.js",
+      "static/chunks/app/tactics/[slug]/page-cfd20ec36b0d58df.js"
+    ]
+  }
+}
