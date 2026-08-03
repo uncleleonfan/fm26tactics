@@ -208,9 +208,6 @@ export default function RoleDetailPage({ params }: Props) {
             {/* Native Ad */}
             <NativeAd />
 
-            {/* Skyscraper */}
-            <SkyscraperAd />
-
             {/* FM26 Tactic Builder CTA */}
             <div className="glass-panel p-5 sticky top-24">
               <h3 className="text-sm font-semibold mb-3">Try This Role</h3>

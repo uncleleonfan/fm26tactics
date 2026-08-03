@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useId } from "react";
 
 const SKYSCRAPER_KEY = "0a10f1179828aa089fc729009bdc247d";
 
@@ -15,61 +15,55 @@ function isChineseLocale(): boolean {
 }
 
 /**
- * Skyscraper (160×600) vertical ad.
+ * Skyscraper (160×600) vertical ad — left sidebar only.
  *
- * We deliberately avoid `next/script` for the invoke.js payload
- * because Adsterra's `format:'iframe'` script places the iframe at
- * the physical position of the `<script>` tag.  With `next/script`
- * + `lazyOnload` the tag ends up at the bottom of the document,
- * defeating the sidebar placement and occasionally triggering a
- * popunder.  Instead we inject the script directly inside the
- * container div via `useEffect`.
+ * Runs in a sandboxed `<iframe srcDoc>` so:
+ * 1. No `atOptions` global variable conflict.
+ * 2. The `sandbox` attribute (without `allow-popups`) blocks
+ *    popunders / overlays from escaping the iframe.
  */
 export function SkyscraperAd() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const injectedRef = useRef(false);
   const [hidden, setHidden] = useState(false);
+  const id = useId();
 
-  // Hide the entire slot for Chinese locales
   useEffect(() => {
     if (isChineseLocale()) setHidden(true);
   }, []);
 
-  // Inject invoke.js *inside* the container so the iframe is
-  // rendered at the correct position.
-  useEffect(() => {
-    if (hidden) return;
-    if (!containerRef.current || injectedRef.current) return;
-    injectedRef.current = true;
+  if (hidden) return null;
 
-    // Must be set on `window` BEFORE invoke.js loads
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).atOptions = {
-      key: SKYSCRAPER_KEY,
-      format: "iframe",
-      height: 600,
-      width: 160,
-      params: {},
-    };
-
-    const script = document.createElement("script");
-    script.src = `https://www.highperformanceformat.com/${SKYSCRAPER_KEY}/invoke.js`;
-    script.async = true;
-    containerRef.current.appendChild(script);
-  }, [hidden]);
+  const adHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:transparent;overflow:hidden}
+    a,img{max-width:100%;display:block}
+  </style>
+</head>
+<body>
+  <script>
+    atOptions={key:'${SKYSCRAPER_KEY}',format:'iframe',height:600,width:160,params:{}}
+  </script>
+  <script src="https://www.highperformanceformat.com/${SKYSCRAPER_KEY}/invoke.js"></script>
+</body>
+</html>`;
 
   return (
-    <div
-      ref={containerRef}
-      className="flex justify-center relative w-[160px] h-[600px]"
-      style={hidden ? { display: "none" } : undefined}
-    >
-      {/* Placeholder — absolute-positioned so the iframe overlays it */}
-      <div className="absolute inset-0 rounded-xl border border-dashed border-[#1C2436] bg-surface/50 flex items-center justify-center">
+    <div className="relative w-[160px] h-[600px]">
+      <div className="absolute inset-0 rounded-xl border border-dashed border-[#1C2436] bg-surface/50 flex items-center justify-center pointer-events-none">
         <span className="text-[10px] uppercase tracking-widest text-text-muted select-none">
           Advertisement
         </span>
       </div>
+      <iframe
+        srcDoc={adHtml}
+        className="absolute inset-0 w-full h-full border-0"
+        sandbox="allow-scripts allow-same-origin"
+        scrolling="no"
+        title={`skyscraper-ad-${id}`}
+      />
     </div>
   );
 }
