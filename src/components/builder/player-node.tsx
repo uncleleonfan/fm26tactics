@@ -11,7 +11,6 @@ interface PlayerNodeProps {
   isDragging: boolean;
   onMouseDown: (e: React.MouseEvent) => void;
   onTouchStart: (e: React.TouchEvent) => void;
-  onTap: () => void;
 }
 
 const dutyColors: Record<string, string> = {
@@ -28,14 +27,18 @@ export function PlayerNode({
   isDragging,
   onMouseDown,
   onTouchStart,
-  onTap,
 }: PlayerNodeProps) {
   const role = playerRoles.find((r) => r.id === player.roleId);
   const color = dutyColors[player.duty] || "#00E676";
   const radius = isGoalkeeper ? 3.6 : 3.2;
 
   const abbr = role
-    ? role.name.split(" ").map((w) => w[0]).join("").slice(0, 3).toUpperCase()
+    ? role.name
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .slice(0, 3)
+        .toUpperCase()
     : "";
   const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
   const labelOffsetY = player.y < 12 ? radius + 1.5 : -(radius + 1.5);
@@ -55,26 +58,35 @@ export function PlayerNode({
         e.stopPropagation();
         onTouchStart(e);
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        onTap();
-      }}
     >
       {/* Invisible touch target — larger hit area */}
-      <circle
-        r={touchRadius}
-        fill="transparent"
-        stroke="none"
-        pointerEvents="all"
-      />
+      <circle r={touchRadius} fill="transparent" stroke="none" pointerEvents="all" />
 
-      {/* Glow */}
+      {/* Glow — selected or dragging */}
       {(isSelected || isDragging) && (
-        <circle r={radius + 1.2} fill="none" stroke={color} strokeWidth="0.4" opacity="0.4">
+        <circle
+          r={radius + 1.2}
+          fill="none"
+          stroke={color}
+          strokeWidth="0.4"
+          opacity="0.4"
+        >
           {isDragging && (
             <>
-              <animate attributeName="r" from={radius + 1.2} to={radius + 2.4} dur="0.8s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="0.4" to="0" dur="0.8s" repeatCount="indefinite" />
+              <animate
+                attributeName="r"
+                from={radius + 1.2}
+                to={radius + 2.4}
+                dur="0.8s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                from="0.4"
+                to="0"
+                dur="0.8s"
+                repeatCount="indefinite"
+              />
             </>
           )}
         </circle>
@@ -91,12 +103,7 @@ export function PlayerNode({
       />
 
       {/* Duty indicator */}
-      <circle
-        r={radius - 0.9}
-        fill={color}
-        opacity="0.9"
-        pointerEvents="none"
-      />
+      <circle r={radius - 0.9} fill={color} opacity="0.9" pointerEvents="none" />
 
       {/* Jersey number */}
       <text
@@ -112,7 +119,7 @@ export function PlayerNode({
         {number}
       </text>
 
-      {/* Role label */}
+      {/* Role label — shown when selected */}
       {isSelected && role && (
         <g transform={`translate(0, ${labelOffsetY})`} pointerEvents="none">
           <rect

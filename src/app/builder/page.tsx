@@ -31,12 +31,16 @@ export default function BuilderPage() {
 
   const selectedPlayer = state.players.find((p) => p.id === selectedPlayerId);
 
+  // Highlight only — used during drag, does NOT open bottom sheet
   const handleSelectPlayer = (playerId: string | null) => {
     setSelectedPlayerId(playerId);
-    if (playerId) {
-      setSidebarTab("role");
-      setShowMobileSidebar(true);
-    }
+  };
+
+  // Tap on mobile — highlight AND open bottom sheet
+  const handleTapPlayer = (playerId: string) => {
+    setSelectedPlayerId(playerId);
+    setSidebarTab("role");
+    setShowMobileSidebar(true);
   };
 
   // Shared sidebar content for desktop and mobile
@@ -146,6 +150,7 @@ export default function BuilderPage() {
           state={state}
           onMovePlayer={movePlayer}
           onSelectPlayer={handleSelectPlayer}
+          onTapPlayer={handleTapPlayer}
           selectedPlayerId={selectedPlayerId}
           onChangeRole={setPlayerRole}
           onChangeDuty={setPlayerDuty}

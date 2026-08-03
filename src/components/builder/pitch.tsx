@@ -2,21 +2,25 @@
 
 import { useRef, useState } from "react";
 import { PlayerNode } from "./player-node";
-import type { TacticBoardState, FormationType } from "@/types/tactic";
+import type { TacticBoardState } from "@/types/tactic";
 
 interface PitchProps {
   state: TacticBoardState;
   onMovePlayer: (playerId: string, x: number, y: number, snap?: boolean) => void;
   onSelectPlayer: (playerId: string | null) => void;
+  onTapPlayer: (playerId: string) => void;
   selectedPlayerId: string | null;
   onChangeRole: (playerId: string, roleId: string) => void;
   onChangeDuty: (playerId: string, duty: "defend" | "support" | "attack") => void;
 }
 
+const TAP_THRESHOLD_PX = 8; // Max screen-pixel movement to count as a tap
+
 export function Pitch({
   state,
   onMovePlayer,
   onSelectPlayer,
+  onTapPlayer,
   selectedPlayerId,
   onChangeRole,
   onChangeDuty,
@@ -24,6 +28,7 @@ export function Pitch({
   const svgRef = useRef<SVGSVGElement>(null);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const dragOffsetRef = useRef<{ dx: number; dy: number }>({ dx: 0, dy: 0 });
+  const touchStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   // Shared coordinate conversion — works for both mouse and touch
   const toSvgCoords = (clientX: number, clientY: number) => {
@@ -40,7 +45,9 @@ export function Pitch({
     if (!player) return;
     const coords = toSvgCoords(clientX, clientY);
     dragOffsetRef.current = { dx: player.x - coords.x, dy: player.y - coords.y };
+    touchStartRef.current = { x: clientX, y: clientY };
     setDraggingId(playerId);
+    // Highlight the player during drag, but don't open any panel
     onSelectPlayer(playerId);
   };
 
@@ -55,7 +62,18 @@ export function Pitch({
   };
 
   const endDrag = (clientX: number, clientY: number) => {
-    if (draggingId) {
+    if (!draggingId) return;
+
+    // Touch: detect tap vs drag
+    const dx = clientX - touchStartRef.current.x;
+    const dy = clientY - touchStartRef.current.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < TAP_THRESHOLD_PX) {
+      // Minimal movement → treat as a tap, open settings panel
+      onTapPlayer(draggingId);
+    } else {
+      // Significant movement → snap to nearest grid position
       const coords = toSvgCoords(clientX, clientY);
       onMovePlayer(
         draggingId,
@@ -219,7 +237,6 @@ export function Pitch({
               isDragging={player.id === draggingId}
               onMouseDown={(e) => handlePlayerMouseDown(player.id, e)}
               onTouchStart={(e) => handlePlayerTouchStart(player.id, e)}
-              onTap={() => onSelectPlayer(player.id)}
             />
           );
         })}
