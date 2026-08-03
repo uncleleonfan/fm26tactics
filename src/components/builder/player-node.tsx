@@ -10,7 +10,8 @@ interface PlayerNodeProps {
   isSelected: boolean;
   isDragging: boolean;
   onMouseDown: (e: React.MouseEvent) => void;
-  onDoubleClick: () => void;
+  onTouchStart: (e: React.TouchEvent) => void;
+  onTap: () => void;
 }
 
 const dutyColors: Record<string, string> = {
@@ -26,7 +27,8 @@ export function PlayerNode({
   isSelected,
   isDragging,
   onMouseDown,
-  onDoubleClick,
+  onTouchStart,
+  onTap,
 }: PlayerNodeProps) {
   const role = playerRoles.find((r) => r.id === player.roleId);
   const color = dutyColors[player.duty] || "#00E676";
@@ -38,16 +40,34 @@ export function PlayerNode({
   const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
   const labelOffsetY = player.y < 12 ? radius + 1.5 : -(radius + 1.5);
 
+  // Larger touch target on mobile
+  const touchRadius = radius + 2.5;
+
   return (
     <g
       transform={`translate(${player.x}, ${player.y})`}
-      style={{ cursor: isDragging ? "grabbing" : "grab" }}
+      style={{ cursor: isDragging ? "grabbing" : "pointer" }}
       onMouseDown={(e) => {
         e.stopPropagation();
         onMouseDown(e);
       }}
-      onDoubleClick={onDoubleClick}
+      onTouchStart={(e) => {
+        e.stopPropagation();
+        onTouchStart(e);
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onTap();
+      }}
     >
+      {/* Invisible touch target — larger hit area */}
+      <circle
+        r={touchRadius}
+        fill="transparent"
+        stroke="none"
+        pointerEvents="all"
+      />
+
       {/* Glow */}
       {(isSelected || isDragging) && (
         <circle r={radius + 1.2} fill="none" stroke={color} strokeWidth="0.4" opacity="0.4">
@@ -67,6 +87,7 @@ export function PlayerNode({
         stroke={color}
         strokeWidth={isSelected ? "0.5" : "0.3"}
         className="transition-all duration-150"
+        pointerEvents="none"
       />
 
       {/* Duty indicator */}
@@ -74,9 +95,10 @@ export function PlayerNode({
         r={radius - 0.9}
         fill={color}
         opacity="0.9"
+        pointerEvents="none"
       />
 
-      {/* Jersey number — always visible */}
+      {/* Jersey number */}
       <text
         y={0}
         textAnchor="middle"
@@ -90,9 +112,9 @@ export function PlayerNode({
         {number}
       </text>
 
-      {/* Role label — shown on selection, auto-sized */}
+      {/* Role label */}
       {isSelected && role && (
-        <g transform={`translate(0, ${labelOffsetY})`}>
+        <g transform={`translate(0, ${labelOffsetY})`} pointerEvents="none">
           <rect
             x={-labelWidth / 2}
             y={-2.2}

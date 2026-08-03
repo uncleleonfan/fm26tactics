@@ -25,45 +25,78 @@ export function Pitch({
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const dragOffsetRef = useRef<{ dx: number; dy: number }>({ dx: 0, dy: 0 });
 
-  const toSvgCoords = (e: React.MouseEvent) => {
+  // Shared coordinate conversion — works for both mouse and touch
+  const toSvgCoords = (clientX: number, clientY: number) => {
     if (!svgRef.current) return { x: 0, y: 0 };
     const rect = svgRef.current.getBoundingClientRect();
     return {
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
+      x: ((clientX - rect.left) / rect.width) * 100,
+      y: ((clientY - rect.top) / rect.height) * 100,
     };
   };
 
-  const handlePlayerMouseDown = (playerId: string, e: React.MouseEvent) => {
+  const startDrag = (playerId: string, clientX: number, clientY: number) => {
     const player = state.players.find((p) => p.id === playerId);
     if (!player) return;
-    const mouse = toSvgCoords(e);
-    dragOffsetRef.current = { dx: player.x - mouse.x, dy: player.y - mouse.y };
+    const coords = toSvgCoords(clientX, clientY);
+    dragOffsetRef.current = { dx: player.x - coords.x, dy: player.y - coords.y };
     setDraggingId(playerId);
     onSelectPlayer(playerId);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const doDrag = (clientX: number, clientY: number) => {
     if (!draggingId) return;
-    const mouse = toSvgCoords(e);
+    const coords = toSvgCoords(clientX, clientY);
     onMovePlayer(
       draggingId,
-      mouse.x + dragOffsetRef.current.dx,
-      mouse.y + dragOffsetRef.current.dy
+      coords.x + dragOffsetRef.current.dx,
+      coords.y + dragOffsetRef.current.dy
     );
   };
 
-  const handleMouseUp = (e: React.MouseEvent) => {
+  const endDrag = (clientX: number, clientY: number) => {
     if (draggingId) {
-      const mouse = toSvgCoords(e);
+      const coords = toSvgCoords(clientX, clientY);
       onMovePlayer(
         draggingId,
-        mouse.x + dragOffsetRef.current.dx,
-        mouse.y + dragOffsetRef.current.dy,
+        coords.x + dragOffsetRef.current.dx,
+        coords.y + dragOffsetRef.current.dy,
         true
       );
     }
     setDraggingId(null);
+  };
+
+  // Mouse handlers
+  const handlePlayerMouseDown = (playerId: string, e: React.MouseEvent) => {
+    startDrag(playerId, e.clientX, e.clientY);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    doDrag(e.clientX, e.clientY);
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    endDrag(e.clientX, e.clientY);
+  };
+
+  // Touch handlers
+  const handlePlayerTouchStart = (playerId: string, e: React.TouchEvent) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    if (touch) startDrag(playerId, touch.clientX, touch.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!draggingId) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    if (touch) doDrag(touch.clientX, touch.clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touch = e.changedTouches[0];
+    if (touch) endDrag(touch.clientX, touch.clientY);
   };
 
   return (
@@ -73,10 +106,12 @@ export function Pitch({
         ref={svgRef}
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"
-        className="h-full w-auto max-w-full aspect-[2/3] cursor-crosshair"
+        className="h-full w-auto max-w-full aspect-[2/3] touch-none select-none"
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Pitch outline */}
         <rect
@@ -183,7 +218,8 @@ export function Pitch({
               isSelected={player.id === selectedPlayerId}
               isDragging={player.id === draggingId}
               onMouseDown={(e) => handlePlayerMouseDown(player.id, e)}
-              onDoubleClick={() => onSelectPlayer(player.id)}
+              onTouchStart={(e) => handlePlayerTouchStart(player.id, e)}
+              onTap={() => onSelectPlayer(player.id)}
             />
           );
         })}

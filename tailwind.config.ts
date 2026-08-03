@@ -45,6 +45,7 @@ const config: Config = {
         "fade-in": "fadeIn 0.5s ease-out",
         "fade-up": "fadeUp 0.6s ease-out",
         "slide-in-right": "slideInRight 0.3s ease-out",
+        "slide-up": "slideUp 0.3s ease-out",
         "pulse-glow": "pulseGlow 2s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
       },
@@ -60,6 +61,10 @@ const config: Config = {
         slideInRight: {
           "0%": { opacity: "0", transform: "translateX(20px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
         },
         pulseGlow: {
           "0%, 100%": { boxShadow: "0 0 5px rgba(0, 230, 118, 0.2)" },
