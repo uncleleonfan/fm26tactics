@@ -8,6 +8,7 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
 import { generateSEO } from "@/lib/metadata";
 import { NativeAd } from "@/components/shared/native-ad";
+import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import type { PlayerDuty } from "@/types/tactic";
 
 interface Props {
@@ -218,6 +219,9 @@ export default function RoleDetailPage({ params }: Props) {
           <div className="space-y-6">
             {/* Native Ad */}
             <NativeAd />
+
+            {/* Skyscraper */}
+            <SkyscraperAd />
 
             {/* FM26 Tactic Builder CTA */}
             <div className="glass-panel p-5 sticky top-24">
