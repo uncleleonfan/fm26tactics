@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        mono: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        mono: ["var(--font-jetbrains-mono)", ...defaultTheme.fontFamily.mono],
       },
       colors: {
         background: {

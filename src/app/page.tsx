@@ -1,12 +1,30 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/hero";
-import { FeaturedTactics } from "@/components/home/featured-tactics";
-import { LatestGuides } from "@/components/home/latest-guides";
-import { TacticBuilderCTA } from "@/components/home/cta-section";
-import { StatsSection } from "@/components/home/stats-section";
-import { CommunityInsights } from "@/components/home/community-insights";
 import { JsonLd } from "@/components/shared/json-ld";
 import { siteConfig } from "@/lib/metadata";
+
+// Lazy-load below-fold sections — code-split to reduce initial JS bundle
+const CommunityInsights = dynamic(
+  () => import("@/components/home/community-insights").then((m) => ({ default: m.CommunityInsights })),
+  { ssr: true }
+);
+const FeaturedTactics = dynamic(
+  () => import("@/components/home/featured-tactics").then((m) => ({ default: m.FeaturedTactics })),
+  { ssr: true }
+);
+const StatsSection = dynamic(
+  () => import("@/components/home/stats-section").then((m) => ({ default: m.StatsSection })),
+  { ssr: true }
+);
+const TacticBuilderCTA = dynamic(
+  () => import("@/components/home/cta-section").then((m) => ({ default: m.TacticBuilderCTA })),
+  { ssr: true }
+);
+const LatestGuides = dynamic(
+  () => import("@/components/home/latest-guides").then((m) => ({ default: m.LatestGuides })),
+  { ssr: true }
+);
 
 export const metadata: Metadata = {
   title: "FM26 Tactics — Best Football Manager 2026 Tactics & Formations",

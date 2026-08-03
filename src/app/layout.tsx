@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -9,7 +9,13 @@ import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/lib/metadata";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -116,7 +122,7 @@ export default function RootLayout({
         />
         <link rel="canonical" href="https://fm26tactics.com" />
       </head>
-      <body className={`${inter.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
         <GoogleAnalytics />
         <SpeedInsights />
         <Header />
