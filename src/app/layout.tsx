@@ -22,12 +22,10 @@ export const metadata: Metadata = {
     template: "%s | FM26 Tactics",
   },
   description:
-    "The ultimate Football Manager 2026 tactics guide. Explore formations, player roles, training tips, and use our interactive tactic builder to craft winning strategies.",
+    "Master Football Manager 2026 with expert tactics, proven formations, player roles analysis, and an interactive builder to craft winning strategies.",
   keywords: [
-    "fm 26 tactics", "fm26 tactics", "fm 2026 tactics", "football manager 2026 tactics",
-    "FM26", "Football Manager 2026", "formations", "gegenpress",
-    "tiki-taka", "player roles", "training", "tactic builder",
-    "fm26 best tactics", "fm 26 formations",
+    "fm 26 tactics", "fm26 tactics", "football manager 2026",
+    "fm26 formations", "tiki-taka", "player roles",
   ],
   authors: [{ name: "FM26 Tactics", url: "https://fm26tactics.com" }],
   metadataBase: new URL("https://fm26tactics.com"),
@@ -38,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "FM26 Tactics",
     title: "FM26 Tactics — Master Football Manager 2026",
     description:
-      "The ultimate Football Manager 2026 tactics guide. Explore formations, player roles, and use our interactive tactic builder.",
+      "Master Football Manager 2026 with expert tactics, proven formations, and our interactive builder.",
     images: [
       {
         url: "/images/og/default.jpg",
@@ -66,9 +64,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/images/og/default.jpg",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
   verification: {
     google: undefined, // Add your Google Search Console verification code here

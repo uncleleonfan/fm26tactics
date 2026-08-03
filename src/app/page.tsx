@@ -11,11 +11,10 @@ import { siteConfig } from "@/lib/metadata";
 export const metadata: Metadata = {
   title: "FM26 Tactics — Best Football Manager 2026 Tactics & Formations",
   description:
-    "Discover the best FM 26 tactics, formations, and player roles. Community-tested meta tactics, interactive tactic builder, and in-depth guides for Football Manager 2026.",
+    "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides for Football Manager 2026.",
   keywords: [
-    "fm 26 tactics", "fm26 tactics", "fm 2026 tactics",
-    "football manager 2026 tactics", "fm26 best tactics",
-    "fm26 formations", "fm 26 formations", "fm26 gegenpress",
+    "fm 26 tactics", "fm26 best tactics", "fm 26 formations",
+    "football manager 2026", "fm26 gegenpress",
   ],
   alternates: {
     canonical: "https://fm26tactics.com",
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FM26 Tactics — Best Football Manager 2026 Tactics & Formations",
     description:
-      "Discover the best FM 26 tactics, formations, and player roles. Community-tested meta tactics, interactive tactic builder, and in-depth guides.",
+      "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides.",
     url: "https://fm26tactics.com",
     type: "website",
     siteName: "FM26 Tactics",
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "FM26 Tactics",
-    description: "Best Football Manager 2026 tactics, formations & interactive builder.",
+    description: "Best FM 26 tactics, meta formations & interactive builder for Football Manager 2026.",
     images: ["https://fm26tactics.com/images/og/default.jpg"],
   },
 };
