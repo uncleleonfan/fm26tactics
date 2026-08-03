@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 const STORAGE_KEY = "fm26tactics_ads_off";
 
 export function useAdToggle() {
-  const [adsOff, setAdsOff] = useState(false);
+  const [adsOff, setAdsOff] = useState(true);
 
   useEffect(() => {
     try {
