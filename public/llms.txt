@@ -1,19 +1,18 @@
 # FM26 Tactics
-> The ultimate Football Manager 2026 tactics hub.
-> Community-tested tactics, formations, player roles, interactive builder, and in-depth guides.
+> The ultimate Football Manager 2026 tactics hub — community-tested tactics, formations, player roles, interactive builder, and in-depth guides.
 
 ## Docs
-- Tactics: https://fm26tactics.com/tactics — Browse all FM26 meta tactics
-- Guides: https://fm26tactics.com/guides — Training, scouting & tactical guides
-- Player Roles: https://fm26tactics.com/roles — Complete FM26 role analysis
-- Tactic Builder: https://fm26tactics.com/builder — Interactive tactic designer
+- [Tactics](https://fm26tactics.com/tactics): Browse all FM26 meta tactics
+- [Guides](https://fm26tactics.com/guides): Training, scouting & tactical guides
+- [Player Roles](https://fm26tactics.com/roles): Complete FM26 role analysis
+- [Tactic Builder](https://fm26tactics.com/builder): Interactive tactic designer
 
 ## Discover
-- Formations: https://fm26tactics.com/tactics — 14+ formations from 4-2-3-1 to 3-4-2-1
-- Meta Tactics: https://fm26tactics.com/tactics — Community-tested & ranked by performance
-- FAQs: https://fm26tactics.com/guides — Answer-first guides for common FM questions
+- [Formations](https://fm26tactics.com/tactics): 14+ formations from 4-2-3-1 to 3-4-2-1
+- [Meta Tactics](https://fm26tactics.com/tactics): Community-tested & ranked by performance
+- [FAQs](https://fm26tactics.com/guides): Answer-first guides for common FM questions
 
 ## Optional
-- About: https://fm26tactics.com/about
-- Privacy: https://fm26tactics.com/privacy
-- Terms: https://fm26tactics.com/terms
+- [About](https://fm26tactics.com/about)
+- [Privacy](https://fm26tactics.com/privacy)
+- [Terms](https://fm26tactics.com/terms)
