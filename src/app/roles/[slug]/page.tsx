@@ -7,6 +7,7 @@ import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Responsi
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
 import { generateSEO } from "@/lib/metadata";
+import { NativeAd } from "@/components/shared/native-ad";
 import type { PlayerDuty } from "@/types/tactic";
 
 interface Props {
@@ -215,6 +216,9 @@ export default function RoleDetailPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Native Ad */}
+            <NativeAd />
+
             {/* FM26 Tactic Builder CTA */}
             <div className="glass-panel p-5 sticky top-24">
               <h3 className="text-sm font-semibold mb-3">Try This Role</h3>

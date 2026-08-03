@@ -5,6 +5,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { ArrowLeft, Clock, Calendar, Tag, BookOpen, BarChart3, Flame, Target, Users, ClipboardCheck, Crosshair } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
+import { NativeAd } from "@/components/shared/native-ad";
 import { formatDate } from "@/lib/utils";
 import type { Guide } from "contentlayer/generated";
 
@@ -158,6 +159,9 @@ export function GuideDetail({ guide }: GuideDetailProps) {
         <article className="prose-custom">
           <MDXContent components={mdxComponents} />
         </article>
+
+        {/* Native Ad */}
+        <NativeAd />
       </div>
     </div>
   );
