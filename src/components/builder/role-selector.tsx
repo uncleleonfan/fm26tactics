@@ -69,7 +69,7 @@ export function RoleSelector({
                         : "bg-red-500/20 text-red-400 border-red-500/50"
                       : available
                       ? "bg-surface border-surface-border text-text-muted hover:text-text-secondary"
-                      : "bg-surface/50 border-surface-border text-text-muted/30 cursor-not-allowed"
+                      : "bg-surface/50 border-surface-border text-text-muted/50 cursor-not-allowed"
                   }`}
                 >
                   {duty.charAt(0).toUpperCase() + duty.slice(1)}

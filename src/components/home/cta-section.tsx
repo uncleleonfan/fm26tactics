@@ -175,7 +175,7 @@ export function TacticBuilderCTA() {
                         cy={dot.y}
                         r={dot.r}
                         fill={dot.highlight ? "#00E676" : "#1C2436"}
-                        stroke={dot.highlight ? "#00E676" : "#475569"}
+                        stroke={dot.highlight ? "#00E676" : "#7483A0"}
                         strokeWidth="2"
                       />
                       {dot.highlight && (

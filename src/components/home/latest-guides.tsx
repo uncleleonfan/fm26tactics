@@ -51,7 +51,7 @@ export function LatestGuides() {
                 <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-1">
                   {guide.title}
                 </h3>
-                <span className="shrink-0 text-[9px] px-1.5 py-0.5 rounded bg-surface border border-surface-border text-text-muted capitalize">
+                <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-surface border border-surface-border text-text-muted capitalize">
                   {guide.difficulty}
                 </span>
               </div>

@@ -131,7 +131,7 @@ export default function RoleDetailPage({ params }: Props) {
                     className={`text-xs font-medium px-3 py-1 rounded-full border ${
                       available
                         ? `text-${duty === "defend" ? "accent-blue" : duty === "support" ? "amber-400" : "red-400"}`
-                        : "text-text-muted/30 line-through"
+                        : "text-text-muted/50 line-through"
                     }`}
                     style={{
                       color: available ? dutyColors[duty] : undefined,
@@ -181,7 +181,7 @@ export default function RoleDetailPage({ params }: Props) {
                     <PolarRadiusAxis
                       angle={90}
                       domain={[0, 100]}
-                      tick={{ fill: "#475569", fontSize: 10 }}
+                      tick={{ fill: "#7483A0", fontSize: 10 }}
                     />
                     <Radar
                       name={role.name}

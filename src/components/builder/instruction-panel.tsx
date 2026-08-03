@@ -155,7 +155,7 @@ export function InstructionPanel({
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
                 instructions.inPossession.includes(inst)
                   ? "bg-primary border-primary"
-                  : "border-[#475569]"
+                  : "border-text-muted/60"
               }`}>
                 {instructions.inPossession.includes(inst) && (
                   <svg width="10" height="10" viewBox="0 0 10 10">
@@ -196,7 +196,7 @@ export function InstructionPanel({
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
                 instructions.inTransition.includes(inst)
                   ? "bg-primary border-primary"
-                  : "border-[#475569]"
+                  : "border-text-muted/60"
               }`}>
                 {instructions.inTransition.includes(inst) && (
                   <svg width="10" height="10" viewBox="0 0 10 10">
@@ -237,7 +237,7 @@ export function InstructionPanel({
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
                 instructions.outOfPossession.includes(inst)
                   ? "bg-primary border-primary"
-                  : "border-[#475569]"
+                  : "border-text-muted/60"
               }`}>
                 {instructions.outOfPossession.includes(inst) && (
                   <svg width="10" height="10" viewBox="0 0 10 10">
