@@ -8,6 +8,8 @@ interface SEOProps {
   type?: "website" | "article";
   publishedTime?: string;
   tags?: string[];
+  keywords?: string[];
+  author?: string;
 }
 
 export function generateSEO({
@@ -18,28 +20,52 @@ export function generateSEO({
   type = "website",
   publishedTime,
   tags,
+  keywords,
+  author,
 }: SEOProps): Metadata {
   const url = `https://fm26tactics.com${path}`;
+  const fullTitle = type === "article" ? title : undefined;
 
   return {
-    title,
+    title: fullTitle,
     description,
+    keywords: keywords || undefined,
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
-      title,
+      title: `${title}`,
       description,
       url,
       siteName: "FM26 Tactics",
+      locale: "en_US",
       type,
-      images: image ? [{ url: image, width: 1200, height: 630 }] : undefined,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
       ...(publishedTime && { publishedTime }),
       ...(tags && { tags }),
+      ...(author && type === "article" && { article: { authors: [author], publishedTime } }),
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${title}`,
       description,
-      images: image ? [image] : undefined,
+      images: [image],
     },
   };
 }
@@ -49,7 +75,6 @@ export const siteConfig = {
   url: "https://fm26tactics.com",
   description: "Master Football Manager 2026 tactics with expert guides, player role analysis, and our interactive tactic builder.",
   links: {
-    twitter: "https://twitter.com/fm26tactics",
-    github: "https://github.com/fm26tactics",
+    github: "https://github.com/uncleleonfan/fm26tactics",
   },
 };
