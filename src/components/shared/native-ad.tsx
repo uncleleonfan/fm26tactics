@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Script from "next/script";
+import { useAdToggle } from "@/hooks/use-ad-toggle";
 
 const ADSTERRA_ZONE =
   "caffcdba1878c0c7c8b337c8016e362e";
@@ -19,10 +20,13 @@ function isChineseLocale(): boolean {
 
 export function NativeAd() {
   const [hidden, setHidden] = useState(false);
+  const { adsOff } = useAdToggle();
 
   useEffect(() => {
     if (isChineseLocale()) setHidden(true);
   }, []);
+
+  if (adsOff) return null;
 
   return (
     <div className="my-10" style={hidden ? { display: "none" } : undefined}>

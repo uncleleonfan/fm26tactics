@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useId } from "react";
+import { useAdToggle } from "@/hooks/use-ad-toggle";
 
 const SKYSCRAPER_KEY = "0a10f1179828aa089fc729009bdc247d";
 
@@ -24,13 +25,14 @@ function isChineseLocale(): boolean {
  */
 export function SkyscraperAd() {
   const [hidden, setHidden] = useState(false);
+  const { adsOff } = useAdToggle();
   const id = useId();
 
   useEffect(() => {
     if (isChineseLocale()) setHidden(true);
   }, []);
 
-  if (hidden) return null;
+  if (hidden || adsOff) return null;
 
   const adHtml = `<!DOCTYPE html>
 <html>

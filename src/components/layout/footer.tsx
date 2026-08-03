@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdToggle } from "@/components/shared/ad-toggle";
 
 const footerLinks = {
   Tactics: [
@@ -68,9 +69,12 @@ export function Footer() {
             &copy; {new Date().getFullYear()} FM26 Tactics. All rights reserved.
             Football Manager is a trademark of Sports Interactive.
           </p>
-          <p className="text-xs text-text-muted">
-            fm26tactics.com
-          </p>
+          <div className="flex items-center gap-4">
+            <AdToggle />
+            <p className="text-xs text-text-muted">
+              fm26tactics.com
+            </p>
+          </div>
         </div>
       </div>
     </footer>
