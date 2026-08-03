@@ -9,9 +9,9 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#1B5E2020,transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,#448AFF10,transparent_50%)]" />
 
-        {/* Animated pitch lines */}
+        {/* Animated pitch lines (desktop only — skip DOM on mobile) */}
         <svg
-          className="absolute inset-0 w-full h-full opacity-[0.03]"
+          className="absolute inset-0 w-full h-full opacity-[0.03] hidden sm:block"
           viewBox="0 0 1200 800"
         >
           <line x1="200" y1="0" x2="200" y2="800" stroke="#00E676" strokeWidth="1" />

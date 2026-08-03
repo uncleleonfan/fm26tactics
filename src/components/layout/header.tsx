@@ -1,11 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SearchDialog } from "@/components/shared/search-dialog";
+
+const SearchDialog = dynamic(
+  () => import("@/components/shared/search-dialog").then((m) => ({ default: m.SearchDialog })),
+  { ssr: false }
+);
 
 const navLinks = [
   { href: "/tactics", label: "Tactics" },
