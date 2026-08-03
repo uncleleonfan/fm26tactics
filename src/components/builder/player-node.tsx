@@ -41,7 +41,9 @@ export function PlayerNode({
         .toUpperCase()
     : "";
   const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
-  const labelOffsetY = player.y < 12 ? radius + 1.5 : -(radius + 1.5);
+  // Label always above for GK (top of pitch), auto-flip for outfield players
+  const labelAbove = isGoalkeeper || player.y >= 12;
+  const labelOffsetY = labelAbove ? -(radius + 3.5) : radius + 3.5;
 
   // Larger touch target on mobile
   const touchRadius = radius + 2.5;
@@ -119,8 +121,8 @@ export function PlayerNode({
         {number}
       </text>
 
-      {/* Role label — shown when selected */}
-      {isSelected && role && (
+      {/* Role label — always visible */}
+      {role && (
         <g transform={`translate(0, ${labelOffsetY})`} pointerEvents="none">
           <rect
             x={-labelWidth / 2}
@@ -131,7 +133,7 @@ export function PlayerNode({
             fill="#141A26"
             stroke={color}
             strokeWidth="0.25"
-            opacity="0.95"
+            opacity={isSelected ? 0.95 : 0.8}
           />
           <text
             y={0}
@@ -142,6 +144,7 @@ export function PlayerNode({
             fontWeight="700"
             fontFamily="Inter, sans-serif"
             pointerEvents="none"
+            opacity={isSelected ? 1 : 0.8}
           >
             {abbr}
           </text>
