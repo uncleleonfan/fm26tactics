@@ -2,6 +2,7 @@ import Link from "next/link";
 import { allGuides } from "contentlayer/generated";
 import { BookOpen, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import type { Metadata } from "next";
 import { generateSEO } from "@/lib/metadata";
 
@@ -72,8 +73,9 @@ export default function GuidesPage() {
         </div>
 
         {/* Category sections with guides */}
-        <div className="space-y-10">
-          {allCategories.map((cat) => {
+        <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
+          <div className="min-w-0 space-y-10">
+            {allCategories.map((cat) => {
             const catGuides = guidesByCategory[cat] || [];
             return (
               <section key={cat}>
@@ -128,7 +130,14 @@ export default function GuidesPage() {
                 )}
               </section>
             );
-          })}
+            })}
+          </div>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <SkyscraperAd />
+            </div>
+          </aside>
         </div>
       </div>
     </div>

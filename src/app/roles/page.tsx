@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Shield, Zap, Swords, Crosshair, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import { playerRoles } from "@/lib/tactics-data";
 import { formatDate } from "@/lib/utils";
 import type { PlayerRoleCategory } from "@/types/tactic";
@@ -41,7 +42,9 @@ export default function RolesPage() {
           </p>
         </div>
 
-        {categories.map((category) => {
+        <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
+          <div className="min-w-0">
+            {categories.map((category) => {
           const catRoles = playerRoles.filter((r) => r.category === category);
           const config = categoryConfig[category];
 
@@ -53,7 +56,7 @@ export default function RolesPage() {
                 <span className="text-xs text-text-muted">{catRoles.length} roles</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {catRoles.map((role) => (
                   <Link
                     key={role.id}
@@ -115,7 +118,15 @@ export default function RolesPage() {
               </div>
             </section>
           );
-        })}
+            })}
+          </div>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <SkyscraperAd />
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );

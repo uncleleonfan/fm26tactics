@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, Calendar, Tag, BookOpen, BarChart3, Flame, Target, Us
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
 import { NativeAd } from "@/components/shared/native-ad";
+import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import { formatDate } from "@/lib/utils";
 import type { Guide } from "contentlayer/generated";
 
@@ -88,7 +89,7 @@ export function GuideDetail({ guide }: GuideDetailProps) {
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
@@ -98,70 +99,82 @@ export function GuideDetail({ guide }: GuideDetailProps) {
           className="mb-8"
         />
 
-        <Link
-          href="/guides"
-          className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-6 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Guides
-        </Link>
+        <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
+          <div className="min-w-0">
+            <div className="max-w-4xl">
+              <Link
+                href="/guides"
+                className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-6 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Guides
+              </Link>
 
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md border ${cat.color} bg-surface border-surface-border`}>
-              {cat.icon}
-              {cat.label}
-            </span>
-            <span className={`text-[10px] font-medium px-2.5 py-0.5 rounded-full border ${diff.className}`}>
-              {diff.label}
-            </span>
-          </div>
+              {/* Header */}
+              <div className="mb-8">
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md border ${cat.color} bg-surface border-surface-border`}>
+                    {cat.icon}
+                    {cat.label}
+                  </span>
+                  <span className={`text-[10px] font-medium px-2.5 py-0.5 rounded-full border ${diff.className}`}>
+                    {diff.label}
+                  </span>
+                </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
-            {guide.title}
-          </h1>
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                  {guide.title}
+                </h1>
 
-          <p className="text-lg text-text-secondary mb-6">{guide.description}</p>
+                <p className="text-lg text-text-secondary mb-6">{guide.description}</p>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pb-6 border-b border-[#1C2436]/50">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5" />
-              Published {formatDate(guide.publishedAt)}
-            </span>
-            {guide.updatedAt && (
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" />
-                Updated {formatDate(guide.updatedAt)}
-              </span>
-            )}
-            {guide.author && (
-              <span className="text-text-muted">by {guide.author}</span>
-            )}
-          </div>
+                <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pb-6 border-b border-[#1C2436]/50">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5" />
+                    Published {formatDate(guide.publishedAt)}
+                  </span>
+                  {guide.updatedAt && (
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5" />
+                      Updated {formatDate(guide.updatedAt)}
+                    </span>
+                  )}
+                  {guide.author && (
+                    <span className="text-text-muted">by {guide.author}</span>
+                  )}
+                </div>
 
-          {guide.tags && guide.tags.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 pt-4">
-              <Tag className="w-3.5 h-3.5 text-text-muted" />
-              {guide.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2.5 py-0.5 rounded-full bg-surface border border-surface-border text-text-secondary"
-                >
-                  {tag}
-                </span>
-              ))}
+                {guide.tags && guide.tags.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-2 pt-4">
+                    <Tag className="w-3.5 h-3.5 text-text-muted" />
+                    {guide.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2.5 py-0.5 rounded-full bg-surface border border-surface-border text-text-secondary"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* MDX Content */}
+              <article className="prose-custom">
+                <MDXContent components={mdxComponents} />
+              </article>
+
+              {/* Native Ad */}
+              <NativeAd />
             </div>
-          )}
+          </div>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <SkyscraperAd />
+            </div>
+          </aside>
         </div>
-
-        {/* MDX Content */}
-        <article className="prose-custom">
-          <MDXContent components={mdxComponents} />
-        </article>
-
-        {/* Native Ad */}
-        <NativeAd />
       </div>
     </div>
   );
