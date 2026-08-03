@@ -137,7 +137,7 @@ export default function RoleDetailPage({ params }: Props) {
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-extrabold mb-4">{role.name}</h1>
-            <p className="text-text-secondary text-lg leading-relaxed mb-6">{role.description}</p>
+            <p className="text-text-primary/80 text-lg leading-relaxed mb-6">{role.description}</p>
 
             {/* Duties */}
             <div className="flex items-center gap-3 mb-8">

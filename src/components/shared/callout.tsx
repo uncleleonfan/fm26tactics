@@ -33,10 +33,10 @@ export function Callout({ type = "info", title, children, className }: CalloutPr
         className
       )}
     >
-      <p className="text-xs font-semibold uppercase tracking-wider mb-1 opacity-85">
+      <p className="text-xs font-semibold uppercase tracking-wider mb-1.5 opacity-75">
         {title || labels[type]}
       </p>
-      <div className="text-sm text-text-primary leading-relaxed">{children}</div>
+      <div className="text-base text-text-primary/90 leading-7">{children}</div>
     </div>
   );
 }

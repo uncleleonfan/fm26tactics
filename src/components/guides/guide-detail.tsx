@@ -28,41 +28,41 @@ const difficultyConfig: Record<string, { label: string; className: string }> = {
 const mdxComponents = {
   Callout,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
-    <h2 className="text-xl font-bold text-text-primary mt-10 mb-4 pb-2 border-b border-[#1C2436]/50" {...props} />
+    <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50" {...props} />
   ),
   h3: (props: React.HTMLProps<HTMLHeadingElement>) => (
-    <h3 className="text-lg font-semibold text-text-primary mt-8 mb-3" {...props} />
+    <h3 className="text-xl font-semibold text-text-primary mt-8 mb-3" {...props} />
   ),
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (
-    <p className="text-sm text-text-secondary leading-7 mb-4" {...props} />
+    <p className="text-base text-text-primary/90 leading-7 mb-5" {...props} />
   ),
   ul: (props: React.HTMLProps<HTMLUListElement>) => (
-    <ul className="space-y-2 mb-4 ml-4" {...props} />
+    <ul className="space-y-2 mb-5 ml-5" {...props} />
   ),
   li: (props: React.HTMLProps<HTMLLIElement>) => (
-    <li className="text-sm text-text-secondary leading-7 list-disc marker:text-primary" {...props} />
+    <li className="text-base text-text-primary/90 leading-7 list-disc marker:text-primary/60" {...props} />
   ),
   ol: ({ children }: { children?: React.ReactNode }) => (
-    <ol className="space-y-2 mb-4 ml-4 list-decimal">{children}</ol>
+    <ol className="space-y-2 mb-5 ml-5 list-decimal text-text-primary/90">{children}</ol>
   ),
   strong: (props: React.HTMLProps<HTMLElement>) => (
     <strong className="text-text-primary font-semibold" {...props} />
   ),
   code: (props: React.HTMLProps<HTMLElement>) => (
-    <code className="px-1.5 py-0.5 rounded bg-surface border border-surface-border text-primary text-xs font-mono" {...props} />
+    <code className="px-1.5 py-0.5 rounded bg-surface border border-surface-border text-primary text-sm font-mono" {...props} />
   ),
   blockquote: (props: React.HTMLProps<HTMLQuoteElement>) => (
-    <blockquote className="border-l-2 border-primary/50 pl-4 py-3 my-4 bg-primary/5 rounded-r-lg" {...props}>
-      <p className="text-sm text-text-secondary italic">{props.children}</p>
+    <blockquote className="border-l-2 border-primary/40 pl-5 py-3 my-6 bg-primary/5 rounded-r-lg" {...props}>
+      <p className="text-base text-text-secondary/90 italic leading-7">{props.children}</p>
     </blockquote>
   ),
   table: (props: React.HTMLProps<HTMLTableElement>) => (
-    <div className="overflow-x-auto mb-6 rounded-lg border border-[#1C2436]">
+    <div className="overflow-x-auto mb-6 rounded-lg border border-[#1C2436]/50">
       <table className="w-full text-sm border-collapse" {...props} />
     </div>
   ),
   thead: (props: React.HTMLProps<HTMLTableSectionElement>) => (
-    <thead className="bg-[#141A26]" {...props} />
+    <thead className="bg-[#141A26]/80" {...props} />
   ),
   tbody: (props: React.HTMLProps<HTMLTableSectionElement>) => (
     <tbody {...props} />
@@ -74,7 +74,7 @@ const mdxComponents = {
     <th className="text-left p-3.5 text-text-primary font-semibold text-xs uppercase tracking-wider border-b border-[#1C2436]" {...props} />
   ),
   td: (props: React.HTMLProps<HTMLTableDataCellElement>) => (
-    <td className="p-3.5 text-text-secondary leading-relaxed" {...props} />
+    <td className="p-3.5 text-text-secondary text-sm leading-relaxed" {...props} />
   ),
 };
 
