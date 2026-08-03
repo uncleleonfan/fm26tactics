@@ -55,15 +55,24 @@ const mdxComponents = {
     </blockquote>
   ),
   table: (props: React.HTMLProps<HTMLTableElement>) => (
-    <div className="overflow-x-auto mb-6">
+    <div className="overflow-x-auto mb-6 rounded-lg border border-[#1C2436]">
       <table className="w-full text-sm border-collapse" {...props} />
     </div>
   ),
+  thead: (props: React.HTMLProps<HTMLTableSectionElement>) => (
+    <thead className="bg-[#141A26]" {...props} />
+  ),
+  tbody: (props: React.HTMLProps<HTMLTableSectionElement>) => (
+    <tbody {...props} />
+  ),
+  tr: (props: React.HTMLProps<HTMLTableRowElement>) => (
+    <tr className="border-b border-[#1C2436]/40 last:border-b-0 even:bg-[#111827]/40 hover:bg-[#141A26]/80 transition-colors" {...props} />
+  ),
   th: (props: React.HTMLProps<HTMLTableHeaderCellElement>) => (
-    <th className="text-left p-3 bg-surface border border-[#1C2436] text-text-primary font-semibold" {...props} />
+    <th className="text-left p-3.5 text-text-primary font-semibold text-xs uppercase tracking-wider border-b border-[#1C2436]" {...props} />
   ),
   td: (props: React.HTMLProps<HTMLTableDataCellElement>) => (
-    <td className="p-3 border border-[#1C2436] text-text-secondary" {...props} />
+    <td className="p-3.5 text-text-secondary leading-relaxed" {...props} />
   ),
 };
 
