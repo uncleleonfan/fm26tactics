@@ -34,9 +34,22 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-[#00C853] flex items-center justify-center">
-              <span className="text-background-primary font-bold text-sm">F</span>
-            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              fill="none"
+              className="w-8 h-8"
+            >
+              <rect width="32" height="32" rx="6" className="fill-background-primary" />
+              <circle cx="16" cy="16" r="12" className="stroke-primary" strokeWidth="2" fill="none" />
+              <path
+                d="M11 10L7.5 14L11 21M21 10L24.5 14L21 21M16 7V15M11 16H21M16 19V25"
+                className="stroke-primary"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
             <span className="text-lg font-bold tracking-tight">
               <span className="text-text-primary">FM26</span>
               <span className="gradient-text">Tactics</span>
