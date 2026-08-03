@@ -119,9 +119,17 @@ export default function RoleDetailPage({ params }: Props) {
           All Roles
         </Link>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
+        <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-8">
+          {/* Left skyscraper ad */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <SkyscraperAd />
+            </div>
+          </aside>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-2">
               <span className="text-xs font-semibold text-text-muted uppercase tracking-wider bg-surface px-2.5 py-1 rounded-md">
                 {role.category}
@@ -238,6 +246,7 @@ export default function RoleDetailPage({ params }: Props) {
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </div>

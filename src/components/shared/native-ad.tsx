@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Script from "next/script";
 
 const ADSTERRA_ZONE =
@@ -7,14 +8,27 @@ const ADSTERRA_ZONE =
 const CONTAINER_ID = `container-${ADSTERRA_ZONE}`;
 
 export function NativeAd() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
   return (
     <div className="my-10">
-      <Script
-        id="adsterra-native"
-        src={`https://pl30662924.effectivecpmnetwork.com/${ADSTERRA_ZONE}/invoke.js`}
-        strategy="lazyOnload"
-        data-cfasync="false"
-      />
+      {/* Only load ad on desktop — skip DNS/TCP/TLS + script download on mobile */}
+      {isDesktop && (
+        <Script
+          id="adsterra-native"
+          src={`https://pl30662924.effectivecpmnetwork.com/${ADSTERRA_ZONE}/invoke.js`}
+          strategy="lazyOnload"
+          data-cfasync="false"
+        />
+      )}
       <div
         id={CONTAINER_ID}
         className="min-h-[90px] rounded-xl border border-dashed border-[#1C2436] bg-surface/50 flex items-center justify-center"

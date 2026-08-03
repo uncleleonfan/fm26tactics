@@ -73,7 +73,14 @@ export default function GuidesPage() {
         </div>
 
         {/* Category sections with guides */}
-        <div className="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
+        <div className="lg:grid lg:grid-cols-[200px_1fr_200px] lg:gap-8">
+          {/* Left skyscraper ad */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <SkyscraperAd />
+            </div>
+          </aside>
+
           <div className="min-w-0 space-y-10">
             {allCategories.map((cat) => {
             const catGuides = guidesByCategory[cat] || [];
