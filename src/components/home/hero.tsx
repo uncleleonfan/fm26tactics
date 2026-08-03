@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
@@ -49,22 +46,16 @@ export function HeroSection() {
         </svg>
       </div>
 
-      {/* Content */}
+      {/* Content — fully server-rendered, zero JS for FCP */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="max-w-3xl">
-          {/* Badge — client-animated, non-critical for crawlers */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Football Manager 2026
-            </span>
-          </motion.div>
+          {/* Badge */}
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            Football Manager 2026
+          </span>
 
-          {/* H1 — always in the DOM, server-rendered for crawlers */}
+          {/* H1 */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
             Master{" "}
             <span className="gradient-text">FM26</span>
@@ -79,13 +70,8 @@ export function HeroSection() {
             interactive tactic builder to craft the perfect strategy.
           </p>
 
-          {/* CTA Buttons — client-animated */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-3"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href="/builder"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-background-primary font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300 group"
@@ -99,9 +85,9 @@ export function HeroSection() {
             >
               Browse Tactics
             </Link>
-          </motion.div>
+          </div>
 
-          {/* Citation — visible to AI crawlers, boosts citability (+115%) */}
+          {/* Citation */}
           <p className="text-xs text-text-muted mt-8 leading-relaxed">
             <cite>
               Curated from 44+ community-tested tactics and 2,700+ simulated

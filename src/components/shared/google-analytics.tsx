@@ -1,5 +1,3 @@
-"use client";
-
 import Script from "next/script";
 
 const GA_ID = "G-VRVQP5CPK2";
