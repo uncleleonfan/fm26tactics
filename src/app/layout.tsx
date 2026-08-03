@@ -94,6 +94,8 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://pl30662924.effectivecpmnetwork.com" />
+        <link rel="preconnect" href="https://www.highperformanceformat.com" />
         <JsonLd
           data={{
             "@context": "https://schema.org",

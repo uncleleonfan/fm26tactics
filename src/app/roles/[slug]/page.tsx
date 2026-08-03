@@ -1,15 +1,24 @@
-"use client";
-
-import { useMemo } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowLeft, Check, Zap, Target } from "lucide-react";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
+import { ArrowLeft, Check, Target } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
-import { generateSEO } from "@/lib/metadata";
 import { NativeAd } from "@/components/shared/native-ad";
 import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import type { PlayerDuty } from "@/types/tactic";
+
+const RoleRadarChart = dynamic(
+  () =>
+    import("./role-radar-chart").then((mod) => mod.RoleRadarChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="glass-panel p-6 mb-8">
+        <div className="h-[300px] animate-pulse rounded-lg bg-surface/50" />
+      </div>
+    ),
+  }
+);
 
 interface Props {
   params: { slug: string };
@@ -166,37 +175,8 @@ export default function RoleDetailPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Radar Chart */}
-            <div className="glass-panel p-6 mb-8">
-              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Zap className="w-4 h-4 text-primary" />
-                Attribute Importance
-              </h2>
-              <div className="h-[300px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart data={chartData}>
-                    <PolarGrid stroke="#1C2436" />
-                    <PolarAngleAxis
-                      dataKey="attribute"
-                      tick={{ fill: "#94A3B8", fontSize: 11 }}
-                    />
-                    <PolarRadiusAxis
-                      angle={90}
-                      domain={[0, 100]}
-                      tick={{ fill: "#7483A0", fontSize: 10 }}
-                    />
-                    <Radar
-                      name={role.name}
-                      dataKey="rating"
-                      stroke="#00E676"
-                      fill="#00E676"
-                      fillOpacity={0.15}
-                      strokeWidth={2}
-                    />
-                  </RadarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+            {/* Radar Chart — lazy-loaded recharts (~250KB deferred from critical path) */}
+            <RoleRadarChart roleName={role.name} data={chartData} />
 
             {/* Suitable Formations */}
             <div className="glass-panel p-6">

@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Grip, Users, Settings, Share2 } from "lucide-react";
-import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -32,8 +32,27 @@ const steps = [
 ];
 
 export function TacticBuilderCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.unobserve(el);
+  }, []);
+
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section ref={sectionRef} className="relative py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent-blue/5" />
 
@@ -43,39 +62,48 @@ export function TacticBuilderCTA() {
             {/* Left Content */}
             <div>
               {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+              <div
+                className={`transition-all duration-500 ease-out ${
+                  inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-5"
+                }`}
               >
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-4">
                   Interactive Tool
                 </span>
-              </motion.div>
+              </div>
 
               {/* H2 — always in DOM, server-rendered */}
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-                Build Your Own{" "}
-                <span className="gradient-text">Tactic</span>
-              </h2>
+              <div
+                className={`transition-all duration-500 ease-out delay-100 ${
+                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+                  Build Your Own{" "}
+                  <span className="gradient-text">Tactic</span>
+                </h2>
 
-              <p className="text-text-secondary mb-8 leading-relaxed">
-                Stop imagining and start creating. Our interactive Tactic
-                Builder lets you visualize every aspect of your FM26 formation
-                in real-time.
-              </p>
+                <p className="text-text-secondary mb-8 leading-relaxed">
+                  Stop imagining and start creating. Our interactive Tactic
+                  Builder lets you visualize every aspect of your FM26 formation
+                  in real-time.
+                </p>
+              </div>
 
-              {/* Steps — now use <h3> for sequential heading hierarchy */}
+              {/* Steps */}
               <div className="space-y-3 mb-8">
                 {steps.map((step, i) => (
-                  <motion.div
+                  <div
                     key={step.title}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.1 }}
-                    className="flex items-start gap-3 glass-card p-4"
+                    className={`flex items-start gap-3 glass-card p-4 transition-all duration-400 ease-out ${
+                      inView
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 -translate-x-5"
+                    }`}
+                    style={{
+                      transitionDelay: `${i * 0.1 + 0.15}s`,
+                      transitionDuration: "0.5s",
+                    }}
                   >
                     <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                       {step.icon}
@@ -88,7 +116,7 @@ export function TacticBuilderCTA() {
                         {step.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 

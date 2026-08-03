@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Shield, Zap, Swords, Crosshair, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
