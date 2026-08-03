@@ -13,12 +13,47 @@ export function TacticExport({ state, onClose }: TacticExportProps) {
   const [copied, setCopied] = useState(false);
 
   const exportAsImage = () => {
-    const svgEl = document.querySelector("svg");
+    const svgEl = document.getElementById("tactic-pitch-svg") as SVGSVGElement | null;
     if (!svgEl) return;
 
     const clone = svgEl.cloneNode(true) as SVGSVGElement;
-    clone.setAttribute("width", "600");
-    clone.setAttribute("height", "900");
+    const originalWidth = svgEl.clientWidth || 400;
+    const originalHeight = svgEl.clientHeight || 600;
+
+    clone.setAttribute("width", String(originalWidth));
+    clone.setAttribute("height", String(originalHeight));
+
+    // Inline computed styles into the clone so the exported SVG is self-contained
+    const inlineStyles = (source: Element, target: Element) => {
+      const computed = window.getComputedStyle(source);
+      const styles: string[] = [];
+      // Only inline styles that actually affect rendering
+      const relevant = [
+        "fill", "stroke", "stroke-width", "stroke-dasharray", "stroke-linecap",
+        "stroke-linejoin", "opacity", "font-size", "font-family", "font-weight",
+        "text-anchor", "dominant-baseline", "rx", "ry",
+      ];
+      for (const prop of relevant) {
+        const val = computed.getPropertyValue(prop);
+        if (val && val !== "rgba(0, 0, 0, 0)" && val !== "auto") {
+          styles.push(`${prop}:${val}`);
+        }
+      }
+      if (styles.length) {
+        (target as HTMLElement).style.cssText = styles.join(";");
+      }
+    };
+
+    // Walk both trees in sync and inline styles
+    const walkAndInline = (src: Element, dst: Element) => {
+      inlineStyles(src, dst);
+      const srcChildren = Array.from(src.children);
+      const dstChildren = Array.from(dst.children);
+      for (let i = 0; i < Math.min(srcChildren.length, dstChildren.length); i++) {
+        walkAndInline(srcChildren[i], dstChildren[i]);
+      }
+    };
+    walkAndInline(svgEl, clone);
 
     const serializer = new XMLSerializer();
     const svgString = serializer.serializeToString(clone);

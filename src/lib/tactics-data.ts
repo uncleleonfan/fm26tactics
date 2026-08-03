@@ -201,7 +201,9 @@ export const styleLabels: Record<string, string> = {
   "wing-play": "Wing Play",
   "route-one": "Route One",
   "fluid": "Fluid Attack",
+  "fluid-counter-attack": "Fluid Counter",
   "park-the-bus": "Park the Bus",
+  "control-possession": "Control Possession",
 };
 
 export const styleColors: Record<string, string> = {
@@ -211,7 +213,9 @@ export const styleColors: Record<string, string> = {
   "wing-play": "bg-purple-500/20 text-purple-400 border-purple-500/30",
   "route-one": "bg-orange-500/20 text-orange-400 border-orange-500/30",
   "fluid": "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+  "fluid-counter-attack": "bg-teal-500/20 text-teal-400 border-teal-500/30",
   "park-the-bus": "bg-slate-500/20 text-slate-400 border-slate-500/30",
+  "control-possession": "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
 };
 
 export const mentalityDescriptions: Record<string, string> = {

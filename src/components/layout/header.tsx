@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/tactics", label: "Tactics" },
   { href: "/roles", label: "Player Roles" },
   { href: "/guides", label: "Guides" },
+  { href: "/meta", label: "Meta" },
   { href: "/builder", label: "Tactic Builder", highlight: true },
 ];
 

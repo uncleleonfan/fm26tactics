@@ -67,16 +67,16 @@ export function useTacticBuilder() {
     }));
   }, []);
 
-  const movePlayer = useCallback((playerId: string, x: number, y: number) => {
+  const movePlayer = useCallback((playerId: string, x: number, y: number, snap = false) => {
     const clampedX = Math.max(5, Math.min(95, x));
     const clampedY = Math.max(5, Math.min(95, y));
-    const snappedX = Math.round(clampedX / 2.5) * 2.5;
-    const snappedY = Math.round(clampedY / 2.5) * 2.5;
+    const finalX = snap ? Math.round(clampedX / 2.5) * 2.5 : clampedX;
+    const finalY = snap ? Math.round(clampedY / 2.5) * 2.5 : clampedY;
 
     setState((prev) => ({
       ...prev,
       players: prev.players.map((p) =>
-        p.id === playerId ? { ...p, x: snappedX, y: snappedY } : p
+        p.id === playerId ? { ...p, x: finalX, y: finalY } : p
       ),
     }));
   }, []);
@@ -140,14 +140,19 @@ export function useTacticBuilder() {
     const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
     setState({
       formation: preset.formation,
-      players: preset.positions.map((pos, i) => ({
-        id: `player-${i}`,
-        x: pos.x,
-        y: pos.y,
-        roleId: i === 0 ? "sweeper-keeper" : (roles[i % roles.length] || roles[0]).id,
-        duty: "support" as PlayerDuty,
-        individualInstructions: [],
-      })),
+      players: preset.positions.map((pos, i) => {
+        const role = i === 0
+          ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
+          : roles[i % roles.length] || roles[0];
+        return {
+          id: `player-${i}`,
+          x: pos.x,
+          y: pos.y,
+          roleId: role.id,
+          duty: role.availableDuties[0] || "support",
+          individualInstructions: [],
+        };
+      }),
       teamInstructions: {
         mentality: "balanced",
         inPossession: [],

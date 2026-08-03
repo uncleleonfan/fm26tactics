@@ -1,59 +1,58 @@
 import Link from "next/link";
-import { BookOpen, ClipboardCheck, Crosshair, Flame, Target, Users } from "lucide-react";
+import { allGuides } from "contentlayer/generated";
+import { BookOpen, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
+import type { Metadata } from "next";
+import { generateSEO } from "@/lib/metadata";
 
-const guideCategories = [
-  {
-    key: "training",
-    title: "Training Guides",
-    description: "Optimize player development with proven training schedules and techniques.",
-    icon: <ClipboardCheck className="w-5 h-5" />,
-    color: "text-accent-blue",
-    bg: "bg-accent-blue/5 border-accent-blue/10",
-  },
-  {
-    key: "set-pieces",
-    title: "Set Pieces",
-    description: "Master corner kicks, free kicks, throw-ins, and penalty strategies.",
-    icon: <Target className="w-5 h-5" />,
-    color: "text-primary",
-    bg: "bg-primary/5 border-primary/10",
-  },
-  {
-    key: "scouting",
-    title: "Scouting & Recruitment",
-    description: "Build a world-class scouting network to find the next wonderkids.",
-    icon: <Crosshair className="w-5 h-5" />,
-    color: "text-amber-400",
-    bg: "bg-amber-500/5 border-amber-500/10",
-  },
-  {
-    key: "team-management",
-    title: "Team Management",
-    description: "Handle player morale, dynamics, contracts, and squad harmony.",
-    icon: <Users className="w-5 h-5" />,
-    color: "text-purple-400",
-    bg: "bg-purple-500/5 border-purple-500/10",
-  },
-  {
-    key: "match-day",
-    title: "Match Day Strategy",
-    description: "Pre-match preparation, opposition analysis, and in-game adjustments.",
-    icon: <BookOpen className="w-5 h-5" />,
-    color: "text-red-400",
-    bg: "bg-red-500/5 border-red-500/10",
-  },
-  {
-    key: "youth-development",
-    title: "Youth Development",
-    description: "Nurture academy prospects into first-team superstars.",
-    icon: <Flame className="w-5 h-5" />,
-    color: "text-orange-400",
-    bg: "bg-orange-500/5 border-orange-500/10",
-  },
-];
+export const metadata: Metadata = generateSEO({
+  title: "FM26 Guides — Training, Tactics & Strategy Tutorials",
+  description: "Comprehensive Football Manager 2026 guides. Learn tactics, training, scouting, youth development, and match day preparation.",
+  path: "/guides",
+});
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  training: <ClipboardCheck className="w-4 h-4" />,
+  "set-pieces": <Target className="w-4 h-4" />,
+  scouting: <Crosshair className="w-4 h-4" />,
+  "team-management": <Users className="w-4 h-4" />,
+  "match-day": <BookOpen className="w-4 h-4" />,
+  "youth-development": <Flame className="w-4 h-4" />,
+};
+
+const categoryColors: Record<string, string> = {
+  training: "text-accent-blue",
+  "set-pieces": "text-primary",
+  scouting: "text-amber-400",
+  "team-management": "text-purple-400",
+  "match-day": "text-red-400",
+  "youth-development": "text-orange-400",
+};
+
+const difficultyBadge: Record<string, string> = {
+  beginner: "bg-green-500/20 text-green-400 border-green-500/30",
+  intermediate: "bg-amber-500/20 text-amber-400 border-amber-500/30",
+  advanced: "bg-red-500/20 text-red-400 border-red-500/30",
+};
 
 export default function GuidesPage() {
+  // Group guides by category
+  const guidesByCategory: Record<string, typeof allGuides> = {};
+  allGuides.forEach((g) => {
+    if (!guidesByCategory[g.category]) guidesByCategory[g.category] = [];
+    guidesByCategory[g.category].push(g);
+  });
+
+  const allCategories = ["team-management", "match-day", "training", "set-pieces", "scouting", "youth-development"] as const;
+  const categoryLabels: Record<string, string> = {
+    training: "Training Guides",
+    "set-pieces": "Set Pieces",
+    scouting: "Scouting & Recruitment",
+    "team-management": "Team Management & Strategy",
+    "match-day": "Match Day Strategy",
+    "youth-development": "Youth Development",
+  };
+
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -68,30 +67,68 @@ export default function GuidesPage() {
           </h1>
           <p className="text-text-secondary max-w-2xl">
             Comprehensive guides covering every aspect of Football Manager 2026.
-            From training schedules to scouting networks, we&apos;ve got you covered.
+            From building your first tactic to mastering gegenpressing.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {guideCategories.map((guide) => (
-            <div
-              key={guide.key}
-              className={`glass-panel p-6 ${guide.bg} hover:border-primary/20 transition-all cursor-pointer group`}
-            >
-              <div className={`w-10 h-10 rounded-xl bg-surface border border-surface-border flex items-center justify-center ${guide.color} mb-4 group-hover:scale-110 transition-transform`}>
-                {guide.icon}
-              </div>
-              <h3 className="text-base font-semibold text-text-primary mb-2">{guide.title}</h3>
-              <p className="text-sm text-text-secondary mb-4 leading-relaxed">
-                {guide.description}
-              </p>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-text-muted">Coming Soon</span>
-                <span className="w-1 h-1 rounded-full bg-text-muted" />
-                <span className="text-xs text-text-muted">Multiple guides</span>
-              </div>
-            </div>
-          ))}
+        {/* Category sections with guides */}
+        <div className="space-y-10">
+          {allCategories.map((cat) => {
+            const catGuides = guidesByCategory[cat] || [];
+            return (
+              <section key={cat}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={categoryColors[cat]}>
+                    {categoryIcons[cat]}
+                  </div>
+                  <h2 className="text-lg font-bold text-text-primary">{categoryLabels[cat]}</h2>
+                  <span className="text-xs text-text-muted">
+                    {catGuides.length} {catGuides.length === 1 ? "guide" : "guides"}
+                  </span>
+                </div>
+
+                {catGuides.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {catGuides.map((guide) => (
+                      <Link
+                        key={guide.slug}
+                        href={`/guides/${guide.slug}`}
+                        className="glass-card p-5 group"
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-2 pr-4">
+                            {guide.title}
+                          </h3>
+                          <span className={`shrink-0 text-[10px] font-medium px-2 py-0.5 rounded-full border ${difficultyBadge[guide.difficulty] || difficultyBadge.beginner}`}>
+                            {guide.difficulty}
+                          </span>
+                        </div>
+                        <p className="text-xs text-text-secondary line-clamp-2 mb-3 leading-relaxed">
+                          {guide.description}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <div className="flex flex-wrap gap-1">
+                            {guide.tags?.slice(0, 3).map((tag) => (
+                              <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <span className="ml-auto text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs">
+                            Read <ArrowRight className="w-3 h-3" />
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="glass-card p-5 border-dashed">
+                    <p className="text-sm text-text-muted">Guides for this category are coming soon. Check back for updates.</p>
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div>
       </div>
     </div>

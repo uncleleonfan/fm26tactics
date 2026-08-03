@@ -6,7 +6,7 @@ import type { TacticBoardState, FormationType } from "@/types/tactic";
 
 interface PitchProps {
   state: TacticBoardState;
-  onMovePlayer: (playerId: string, x: number, y: number) => void;
+  onMovePlayer: (playerId: string, x: number, y: number, snap?: boolean) => void;
   onSelectPlayer: (playerId: string | null) => void;
   selectedPlayerId: string | null;
   onChangeRole: (playerId: string, roleId: string) => void;
@@ -23,26 +23,57 @@ export function Pitch({
 }: PitchProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [draggingId, setDraggingId] = useState<string | null>(null);
+  const dragOffsetRef = useRef<{ dx: number; dy: number }>({ dx: 0, dy: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!draggingId || !svgRef.current) return;
-
+  const toSvgCoords = (e: React.MouseEvent) => {
+    if (!svgRef.current) return { x: 0, y: 0 };
     const rect = svgRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    onMovePlayer(draggingId, x, y);
+    return {
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    };
   };
 
-  const handleMouseUp = () => {
+  const handlePlayerMouseDown = (playerId: string, e: React.MouseEvent) => {
+    const player = state.players.find((p) => p.id === playerId);
+    if (!player) return;
+    const mouse = toSvgCoords(e);
+    dragOffsetRef.current = { dx: player.x - mouse.x, dy: player.y - mouse.y };
+    setDraggingId(playerId);
+    onSelectPlayer(playerId);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!draggingId) return;
+    const mouse = toSvgCoords(e);
+    onMovePlayer(
+      draggingId,
+      mouse.x + dragOffsetRef.current.dx,
+      mouse.y + dragOffsetRef.current.dy
+    );
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (draggingId) {
+      const mouse = toSvgCoords(e);
+      onMovePlayer(
+        draggingId,
+        mouse.x + dragOffsetRef.current.dx,
+        mouse.y + dragOffsetRef.current.dy,
+        true
+      );
+    }
     setDraggingId(null);
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center p-4">
+    <div className="flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
       <svg
+        id="tactic-pitch-svg"
         ref={svgRef}
         viewBox="0 0 100 100"
-        className="w-full max-w-[600px] aspect-[2/3] cursor-crosshair"
+        preserveAspectRatio="xMidYMid meet"
+        className="h-full w-auto max-w-full aspect-[2/3] cursor-crosshair"
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
@@ -147,13 +178,11 @@ export function Pitch({
             <PlayerNode
               key={player.id}
               player={player}
+              number={index + 1}
               isGoalkeeper={isGk}
               isSelected={player.id === selectedPlayerId}
               isDragging={player.id === draggingId}
-              onMouseDown={() => {
-                setDraggingId(player.id);
-                onSelectPlayer(player.id);
-              }}
+              onMouseDown={(e) => handlePlayerMouseDown(player.id, e)}
               onDoubleClick={() => onSelectPlayer(player.id)}
             />
           );

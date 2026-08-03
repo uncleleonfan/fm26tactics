@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
+import { generateSEO } from "@/lib/metadata";
 import Link from "next/link";
+
+export const metadata: Metadata = generateSEO({
+  title: "About FM26 Tactics — Your Ultimate FM26 Resource",
+  description: "FM26 Tactics is the leading resource for Football Manager 2026 players. In-depth tactic guides, role analysis, and an interactive tactic builder.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

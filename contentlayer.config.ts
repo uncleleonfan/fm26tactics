@@ -10,7 +10,7 @@ export const Tactic = defineDocumentType(() => ({
     formation: { type: "string", required: true },
     style: {
       type: "enum",
-      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid", "park-the-bus"],
+      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid-counter-attack", "park-the-bus", "control-possession"],
       required: true,
     },
     difficulty: {
@@ -85,7 +85,9 @@ export const Guide = defineDocumentType(() => ({
     },
     tags: { type: "list", of: { type: "string" }, required: true },
     publishedAt: { type: "date", required: true },
+    updatedAt: { type: "date", required: false },
     coverImage: { type: "string", required: false },
+    author: { type: "string", required: false },
   },
   computedFields: {
     slug: {

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const footerLinks = {
   Tactics: [
@@ -21,6 +24,9 @@ const footerLinks = {
 } as const;
 
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname === "/builder") return null;
+
   return (
     <footer className="glass-panel border-t border-[#1C2436]/50 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">

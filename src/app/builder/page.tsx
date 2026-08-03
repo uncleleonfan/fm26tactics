@@ -33,26 +33,28 @@ export default function BuilderPage() {
   return (
     <div className="h-screen bg-background-primary flex flex-col">
       {/* Top Toolbar */}
-      <div className="shrink-0 glass-panel border-b border-[#1C2436]/50 px-4 py-3">
-        <div className="max-w-full mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+      <div className="shrink-0 glass-panel border-b border-[#1C2436]/50 px-4 py-2.5">
+        <div className="max-w-full mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+          <div className="flex items-center gap-3 min-w-0">
             <Link
               href="/"
-              className="flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors"
+              className="flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors shrink-0"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">Back</span>
             </Link>
-            <span className="w-px h-5 bg-[#1C2436]" />
-            <h1 className="text-sm font-semibold">
+            <span className="w-px h-5 bg-[#1C2436] hidden sm:block" />
+            <h1 className="text-sm font-semibold hidden sm:block truncate">
               <span className="gradient-text">Tactic Builder</span>
-              <span className="text-text-muted ml-2 font-mono text-xs">
-                {state.formation}
-              </span>
             </h1>
           </div>
 
-          <div className="flex items-center gap-2">
+          <FormationPresets
+            currentFormation={state.formation}
+            onSelect={setFormation}
+          />
+
+          <div className="flex items-center gap-2 justify-end">
             <button
               onClick={resetTactic}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
@@ -68,16 +70,6 @@ export default function BuilderPage() {
               <span>Export</span>
             </button>
           </div>
-        </div>
-      </div>
-
-      {/* Formation Presets Bar */}
-      <div className="shrink-0 px-4 py-3 border-b border-[#1C2436]/30 bg-surface/30">
-        <div className="max-w-full mx-auto">
-          <FormationPresets
-            currentFormation={state.formation}
-            onSelect={setFormation}
-          />
         </div>
       </div>
 

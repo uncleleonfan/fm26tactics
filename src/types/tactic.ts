@@ -1,11 +1,12 @@
 export type FormationType =
   | "4-2-3-1" | "4-3-3" | "4-4-2" | "3-5-2" | "5-3-2"
   | "4-2-2-2" | "4-1-4-1" | "3-4-3" | "4-4-1-1" | "5-2-3"
-  | "4-2-4" | "3-4-2-1" | "4-3-2-1";
+  | "4-2-4" | "3-4-2-1" | "4-3-2-1" | "4-1-2-1-2";
 
 export type PlayStyle =
   | "gegenpress" | "tiki-taka" | "counter-attack"
-  | "wing-play" | "route-one" | "fluid" | "park-the-bus";
+  | "wing-play" | "route-one" | "fluid" | "fluid-counter-attack"
+  | "park-the-bus" | "control-possession";
 
 export type Mentality =
   | "very-defensive" | "defensive" | "cautious"

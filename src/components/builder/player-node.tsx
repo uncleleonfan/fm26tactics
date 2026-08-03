@@ -5,10 +5,11 @@ import type { PlayerNode as PlayerNodeType } from "@/types/tactic";
 
 interface PlayerNodeProps {
   player: PlayerNodeType;
+  number: number;
   isGoalkeeper: boolean;
   isSelected: boolean;
   isDragging: boolean;
-  onMouseDown: () => void;
+  onMouseDown: (e: React.MouseEvent) => void;
   onDoubleClick: () => void;
 }
 
@@ -20,6 +21,7 @@ const dutyColors: Record<string, string> = {
 
 export function PlayerNode({
   player,
+  number,
   isGoalkeeper,
   isSelected,
   isDragging,
@@ -28,7 +30,13 @@ export function PlayerNode({
 }: PlayerNodeProps) {
   const role = playerRoles.find((r) => r.id === player.roleId);
   const color = dutyColors[player.duty] || "#00E676";
-  const radius = isGoalkeeper ? 3 : 2.2;
+  const radius = isGoalkeeper ? 3.6 : 3.2;
+
+  const abbr = role
+    ? role.name.split(" ").map((w) => w[0]).join("").slice(0, 3).toUpperCase()
+    : "";
+  const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
+  const labelOffsetY = player.y < 12 ? radius + 1.5 : -(radius + 1.5);
 
   return (
     <g
@@ -36,17 +44,17 @@ export function PlayerNode({
       style={{ cursor: isDragging ? "grabbing" : "grab" }}
       onMouseDown={(e) => {
         e.stopPropagation();
-        onMouseDown();
+        onMouseDown(e);
       }}
       onDoubleClick={onDoubleClick}
     >
       {/* Glow */}
       {(isSelected || isDragging) && (
-        <circle r={radius + 1.5} fill="none" stroke={color} strokeWidth="0.3" opacity="0.3">
+        <circle r={radius + 1.2} fill="none" stroke={color} strokeWidth="0.4" opacity="0.4">
           {isDragging && (
             <>
-              <animate attributeName="r" from={radius + 1.5} to={radius + 2.5} dur="0.8s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="0.3" to="0" dur="0.8s" repeatCount="indefinite" />
+              <animate attributeName="r" from={radius + 1.2} to={radius + 2.4} dur="0.8s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="0.4" to="0" dur="0.8s" repeatCount="indefinite" />
             </>
           )}
         </circle>
@@ -63,51 +71,52 @@ export function PlayerNode({
 
       {/* Duty indicator */}
       <circle
-        r={radius - 0.7}
+        r={radius - 0.9}
         fill={color}
-        opacity="0.8"
+        opacity="0.9"
       />
 
-      {/* Role label */}
+      {/* Jersey number — always visible */}
+      <text
+        y={0}
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="#0A0E17"
+        fontSize={isGoalkeeper ? "2.3" : "2.1"}
+        fontFamily="Inter, sans-serif"
+        fontWeight="700"
+        pointerEvents="none"
+      >
+        {number}
+      </text>
+
+      {/* Role label — shown on selection, auto-sized */}
       {isSelected && role && (
-        <g transform="translate(0, -4)">
+        <g transform={`translate(0, ${labelOffsetY})`}>
           <rect
-            x={-10}
-            y={-3}
-            width={20}
-            height={5}
-            rx={0.5}
+            x={-labelWidth / 2}
+            y={-2.2}
+            width={labelWidth}
+            height={4.4}
+            rx={1}
             fill="#141A26"
             stroke={color}
-            strokeWidth="0.15"
+            strokeWidth="0.25"
             opacity="0.95"
           />
           <text
-            y={0.8}
+            y={0}
             textAnchor="middle"
+            dominantBaseline="central"
             fill={color}
-            fontSize="1.2"
-            fontWeight="600"
+            fontSize="2"
+            fontWeight="700"
             fontFamily="Inter, sans-serif"
+            pointerEvents="none"
           >
-            {role.name.split(" ").map((w) => w[0]).join("").slice(0, 3)}
+            {abbr}
           </text>
         </g>
-      )}
-
-      {/* Jersey number */}
-      {!isSelected && (
-        <text
-          y={0.6}
-          textAnchor="middle"
-          fill={color}
-          fontSize="1"
-          fontFamily="Inter, sans-serif"
-          fontWeight="600"
-          opacity="0.7"
-        >
-          {player.id.split("-")[1]}
-        </text>
       )}
     </g>
   );
