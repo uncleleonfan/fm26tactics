@@ -1,23 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
+/**
+ * Defers loading @vercel/speed-insights until well after the critical
+ * rendering path is complete.  The module is NEVER imported at module
+ * level — only inside a useEffect callback on the client — so an
+ * import-time error in a fringe mobile browser cannot crash the whole
+ * application.
+ */
 export function DeferredSpeedInsights() {
-  const [mounted, setMounted] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [Comp, setComp] = useState<React.ComponentType | null>(null);
 
+  // Wait 2 s before even attempting to load the chunk
   useEffect(() => {
-    // Defer analytics to idle — avoids competing with critical rendering resources
-    const id = requestIdleCallback
-      ? requestIdleCallback(() => setMounted(true))
-      : setTimeout(() => setMounted(true), 2000);
-    return () => {
-      if (typeof id === "number") {
-        cancelIdleCallback ? cancelIdleCallback(id) : clearTimeout(id);
-      }
-    };
+    const timer = setTimeout(() => setReady(true), 2_000);
+    return () => clearTimeout(timer);
   }, []);
 
-  if (!mounted) return null;
-  return <SpeedInsights />;
+  // Load the chunk lazily on the client only
+  useEffect(() => {
+    if (!ready || Comp) return;
+
+    import("@vercel/speed-insights/next")
+      .then((m) => setComp(() => m.SpeedInsights))
+      .catch(() => {
+        // Silently ignore — analytics failure must never crash the app
+      });
+  }, [ready, Comp]);
+
+  if (!Comp) return null;
+  return <Comp />;
 }

@@ -76,3 +76,11 @@
     text-wrap: balance;
   }
 }
+
+/* safe fallback for dvh units on browsers that don't support them */
+@supports not (height: 100dvh) {
+  .h-dvh {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+}
