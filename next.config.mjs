@@ -15,17 +15,6 @@ const nextConfig = {
       },
     ],
   },
-  // Redirect www → non-www (canonical URL)
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.fm26tactics.com" }],
-        destination: "https://fm26tactics.com/:path*",
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     return [
       {
