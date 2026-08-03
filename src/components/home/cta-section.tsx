@@ -3,35 +3,35 @@
 import Link from "next/link";
 import { ArrowRight, Grip, Users, Settings, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 const steps = [
   {
     icon: <Grip className="w-5 h-5" />,
     title: "Drag & Drop Players",
-    description: "Position your 11 players anywhere on the pitch with smooth drag-and-drop controls.",
+    description:
+      "Position your 11 players anywhere on the pitch with smooth drag-and-drop controls.",
   },
   {
     icon: <Users className="w-5 h-5" />,
     title: "Assign Roles & Duties",
-    description: "Choose from all FM26 player roles and duties — defend, support, or attack.",
+    description:
+      "Choose from all FM26 player roles and duties — defend, support, or attack.",
   },
   {
     icon: <Settings className="w-5 h-5" />,
     title: "Configure Team Instructions",
-    description: "Set mentality, in-possession, transition, and out-of-possession instructions.",
+    description:
+      "Set mentality, in-possession, transition, and out-of-possession instructions.",
   },
   {
     icon: <Share2 className="w-5 h-5" />,
     title: "Export & Share",
-    description: "Save your tactic as an image or share a link with the community.",
+    description:
+      "Save your tactic as an image or share a link with the community.",
   },
 ];
 
 export function TacticBuilderCTA() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background */}
@@ -42,28 +42,31 @@ export function TacticBuilderCTA() {
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             {/* Left Content */}
             <div>
-              {mounted && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-4">
-                    Interactive Tool
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-                    Build Your Own{" "}
-                    <span className="gradient-text">Tactic</span>
-                  </h2>
-                  <p className="text-text-secondary mb-8 leading-relaxed">
-                    Stop imagining and start creating. Our interactive Tactic Builder
-                    lets you visualize every aspect of your FM26 formation in real-time.
-                  </p>
-                </motion.div>
-              )}
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-4">
+                  Interactive Tool
+                </span>
+              </motion.div>
 
-              {/* Steps */}
+              {/* H2 — always in DOM, server-rendered */}
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+                Build Your Own{" "}
+                <span className="gradient-text">Tactic</span>
+              </h2>
+
+              <p className="text-text-secondary mb-8 leading-relaxed">
+                Stop imagining and start creating. Our interactive Tactic
+                Builder lets you visualize every aspect of your FM26 formation
+                in real-time.
+              </p>
+
+              {/* Steps — now use <h3> for sequential heading hierarchy */}
               <div className="space-y-3 mb-8">
                 {steps.map((step, i) => (
                   <motion.div
@@ -78,8 +81,12 @@ export function TacticBuilderCTA() {
                       {step.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-text-primary">{step.title}</h4>
-                      <p className="text-xs text-text-secondary mt-0.5">{step.description}</p>
+                      <h3 className="text-sm font-semibold text-text-primary">
+                        {step.title}
+                      </h3>
+                      <p className="text-xs text-text-secondary mt-0.5">
+                        {step.description}
+                      </p>
                     </div>
                   </motion.div>
                 ))}
@@ -98,21 +105,68 @@ export function TacticBuilderCTA() {
             <div className="hidden lg:block">
               <div className="relative">
                 {/* Preview Pitch */}
-                <svg viewBox="0 0 400 600" className="w-full max-w-sm mx-auto">
+                <svg
+                  viewBox="0 0 400 600"
+                  className="w-full max-w-sm mx-auto"
+                >
                   {/* Pitch */}
-                  <rect x="20" y="20" width="360" height="560" rx="8" fill="#0A0E17" stroke="#1C2436" strokeWidth="2" />
-                  <line x1="20" y1="300" x2="380" y2="300" stroke="#1C2436" strokeWidth="1.5" />
-                  <circle cx="200" cy="300" r="70" stroke="#1C2436" strokeWidth="1.5" fill="none" />
-                  <rect x="130" y="20" width="140" height="80" stroke="#1C2436" strokeWidth="1.5" fill="none" />
-                  <rect x="130" y="500" width="140" height="80" stroke="#1C2436" strokeWidth="1.5" fill="none" />
+                  <rect
+                    x="20"
+                    y="20"
+                    width="360"
+                    height="560"
+                    rx="8"
+                    fill="#0A0E17"
+                    stroke="#1C2436"
+                    strokeWidth="2"
+                  />
+                  <line
+                    x1="20"
+                    y1="300"
+                    x2="380"
+                    y2="300"
+                    stroke="#1C2436"
+                    strokeWidth="1.5"
+                  />
+                  <circle
+                    cx="200"
+                    cy="300"
+                    r="70"
+                    stroke="#1C2436"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                  <rect
+                    x="130"
+                    y="20"
+                    width="140"
+                    height="80"
+                    stroke="#1C2436"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                  <rect
+                    x="130"
+                    y="500"
+                    width="140"
+                    height="80"
+                    stroke="#1C2436"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
 
                   {/* Player Nodes */}
                   {[
-                    { x: 200, y: 540, r: 8 }, { x: 130, y: 440, r: 8 },
-                    { x: 270, y: 440, r: 8 }, { x: 200, y: 340, r: 8 },
-                    { x: 90, y: 260, r: 8 }, { x: 170, y: 300, r: 8 },
-                    { x: 230, y: 300, r: 8 }, { x: 310, y: 260, r: 8 },
-                    { x: 150, y: 160, r: 8 }, { x: 250, y: 160, r: 8 },
+                    { x: 200, y: 540, r: 8 },
+                    { x: 130, y: 440, r: 8 },
+                    { x: 270, y: 440, r: 8 },
+                    { x: 200, y: 340, r: 8 },
+                    { x: 90, y: 260, r: 8 },
+                    { x: 170, y: 300, r: 8 },
+                    { x: 230, y: 300, r: 8 },
+                    { x: 310, y: 260, r: 8 },
+                    { x: 150, y: 160, r: 8 },
+                    { x: 250, y: 160, r: 8 },
                     { x: 200, y: 80, r: 8, highlight: true },
                   ].map((dot, i) => (
                     <g key={i}>
@@ -125,9 +179,29 @@ export function TacticBuilderCTA() {
                         strokeWidth="2"
                       />
                       {dot.highlight && (
-                        <circle cx={dot.x} cy={dot.y} r={14} fill="none" stroke="#00E676" strokeWidth="1" opacity="0.3">
-                          <animate attributeName="r" from="14" to="18" dur="1.5s" repeatCount="indefinite" />
-                          <animate attributeName="opacity" from="0.3" to="0" dur="1.5s" repeatCount="indefinite" />
+                        <circle
+                          cx={dot.x}
+                          cy={dot.y}
+                          r={14}
+                          fill="none"
+                          stroke="#00E676"
+                          strokeWidth="1"
+                          opacity="0.3"
+                        >
+                          <animate
+                            attributeName="r"
+                            from="14"
+                            to="18"
+                            dur="1.5s"
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="opacity"
+                            from="0.3"
+                            to="0"
+                            dur="1.5s"
+                            repeatCount="indefinite"
+                          />
                         </circle>
                       )}
                     </g>

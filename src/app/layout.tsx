@@ -91,6 +91,18 @@ export default function RootLayout({
             name: siteConfig.name,
             url: siteConfig.url,
             description: siteConfig.description,
+            author: {
+              "@type": "Person",
+              name: "FM26 Tactics",
+              url: siteConfig.url,
+            },
+            publisher: {
+              "@type": "Person",
+              name: "FM26 Tactics",
+              url: siteConfig.url,
+            },
+            sameAs: [siteConfig.links.github],
+            dateModified: "2026-08-03",
             potentialAction: {
               "@type": "SearchAction",
               target: {
