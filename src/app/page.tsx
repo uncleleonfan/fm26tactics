@@ -4,27 +4,36 @@ import { HeroSection } from "@/components/home/hero";
 import { JsonLd } from "@/components/shared/json-ld";
 import { siteConfig } from "@/lib/metadata";
 
-// Lazy-load below-fold sections — code-split to reduce initial JS bundle
+// ssr: false — eliminates preload links for chunks, preventing bandwidth competition
+// on mobile. Content loads instantly after hydration via local JS chunks.
 const CommunityInsights = dynamic(
   () => import("@/components/home/community-insights").then((m) => ({ default: m.CommunityInsights })),
-  { ssr: true }
+  { ssr: false, loading: () => <SectionPlaceholder /> }
 );
 const FeaturedTactics = dynamic(
   () => import("@/components/home/featured-tactics").then((m) => ({ default: m.FeaturedTactics })),
-  { ssr: true }
+  { ssr: false, loading: () => <SectionPlaceholder /> }
 );
 const StatsSection = dynamic(
   () => import("@/components/home/stats-section").then((m) => ({ default: m.StatsSection })),
-  { ssr: true }
+  { ssr: false, loading: () => <SectionPlaceholder /> }
 );
 const TacticBuilderCTA = dynamic(
   () => import("@/components/home/cta-section").then((m) => ({ default: m.TacticBuilderCTA })),
-  { ssr: true }
+  { ssr: false, loading: () => <SectionPlaceholderTall /> }
 );
 const LatestGuides = dynamic(
   () => import("@/components/home/latest-guides").then((m) => ({ default: m.LatestGuides })),
-  { ssr: true }
+  { ssr: false, loading: () => <SectionPlaceholder /> }
 );
+
+// Placeholder skeletons with matching approx height — prevents CLS
+function SectionPlaceholder() {
+  return <div className="py-16" />;
+}
+function SectionPlaceholderTall() {
+  return <div className="py-24" />;
+}
 
 export const metadata: Metadata = {
   title: "FM26 Tactics — Best Football Manager 2026 Tactics & Formations",

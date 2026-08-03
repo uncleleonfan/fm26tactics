@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { MainWrapper } from "@/components/layout/main-wrapper";
 import { JsonLd } from "@/components/shared/json-ld";
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { DeferredSpeedInsights } from "@/components/shared/deferred-speed-insights";
 import { siteConfig } from "@/lib/metadata";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -15,6 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  preload: false, // only used for code snippets, don't compete with Inter on critical path
 });
 
 export const viewport: Viewport = {
@@ -91,6 +92,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
         <JsonLd
           data={{
             "@context": "https://schema.org",
@@ -124,7 +127,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
         <GoogleAnalytics />
-        <SpeedInsights />
+        <DeferredSpeedInsights />
         <Header />
         <MainWrapper>{children}</MainWrapper>
         <Footer />
