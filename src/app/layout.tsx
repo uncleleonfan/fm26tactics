@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { MainWrapper } from "@/components/layout/main-wrapper";
 import { JsonLd } from "@/components/shared/json-ld";
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/lib/metadata";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -117,6 +118,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
         <GoogleAnalytics />
+        <SpeedInsights />
         <Header />
         <MainWrapper>{children}</MainWrapper>
         <Footer />
