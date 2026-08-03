@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import remarkGfm from "remark-gfm";
 
 export const Tactic = defineDocumentType(() => ({
   name: "Tactic",
@@ -105,7 +106,7 @@ export default makeSource({
   contentDirPath: "content",
   documentTypes: [Tactic, Role, Guide],
   mdx: {
-    remarkPlugins: [],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [],
   },
 });
