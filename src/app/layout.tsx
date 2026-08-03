@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MainWrapper } from "@/components/layout/main-wrapper";
 import { JsonLd } from "@/components/shared/json-ld";
+import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { siteConfig } from "@/lib/metadata";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -105,6 +106,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://fm26tactics.com" />
       </head>
       <body className={`${inter.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
+        <GoogleAnalytics />
         <Header />
         <MainWrapper>{children}</MainWrapper>
         <Footer />
