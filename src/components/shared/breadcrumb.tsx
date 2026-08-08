@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { JsonLd } from "@/components/shared/json-ld";
+import { JsonLd } from "./json-ld";
 
 interface BreadcrumbItem {
   label: string;
@@ -13,39 +12,46 @@ interface BreadcrumbProps {
   className?: string;
 }
 
-function getBreadcrumbJsonLd(items: BreadcrumbItem[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.label,
-      item: item.href ? `https://fm26tactics.com${item.href}` : undefined,
-    })),
-  };
-}
-
-export function Breadcrumb({ items, className }: BreadcrumbProps) {
+export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd(items)} />
-      <nav className={cn("flex items-center gap-1.5 text-sm", className)} aria-label="Breadcrumb">
-        {items.map((item, i) => (
-          <div key={item.label} className="flex items-center gap-1.5">
-            {i > 0 && <ChevronRight className="w-3.5 h-3.5 text-text-muted" aria-hidden="true" />}
-            {item.href ? (
-              <Link
-                href={item.href}
-                className="text-text-secondary hover:text-text-primary transition-colors"
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <span className="text-text-primary">{item.label}</span>
-            )}
-          </div>
-        ))}
+      {/* Structured data */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: items.map((item, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: item.label,
+            ...(item.href ? { item: `https://fm26tactics.com${item.href}` } : {}),
+          })),
+        }}
+      />
+
+      {/* Visual breadcrumb */}
+      <nav aria-label="Breadcrumb" className={className}>
+        <ol className="flex items-center flex-wrap gap-1 text-sm">
+          {items.map((item, i) => (
+            <li key={item.href || item.label} className="flex items-center gap-1">
+              {i > 0 && (
+                <ChevronRight className="w-3.5 h-3.5 text-text-muted shrink-0" />
+              )}
+              {i === items.length - 1 ? (
+                <span className="text-text-primary font-medium">{item.label}</span>
+              ) : item.href ? (
+                <Link
+                  href={item.href}
+                  className="text-text-muted hover:text-primary transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span className="text-text-primary font-medium">{item.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
       </nav>
     </>
   );

@@ -5,6 +5,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { ArrowLeft, Clock, Calendar, Tag, BarChart3 } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
+import { RelatedTactics } from "@/components/shared/related-tactics";
 import { NativeAd } from "@/components/shared/native-ad";
 import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
@@ -151,6 +152,13 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
               <article className="prose-custom">
                 <MDXContent components={mdxComponents} />
               </article>
+
+              {/* Related Tactics — internal linking for SEO */}
+              <RelatedTactics
+                currentSlug={tactic.slug}
+                tags={tactic.tags || []}
+                formation={tactic.formation}
+              />
 
               {/* Native Ad */}
               <NativeAd />
