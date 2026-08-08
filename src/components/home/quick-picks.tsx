@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Clock, Flame } from "lucide-react";
 
@@ -39,6 +42,9 @@ const quickPicks: QuickPick[] = [
 ];
 
 export function QuickPicks() {
+  const t = useTranslations("home");
+  const cm = useTranslations("common");
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
       {/* Section Header */}
@@ -46,11 +52,11 @@ export function QuickPicks() {
         <div className="inline-flex items-center gap-2 mb-3">
           <Flame className="w-4 h-4 text-amber-400" />
           <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">
-            Start Here
+            {t("startHere")}
           </span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-          Most <span className="gradient-text">In-Depth</span> Guides
+          {t("mostInDepth")}
         </h2>
         <p className="text-text-secondary text-sm max-w-lg mx-auto">
           These are our most popular, deeply researched tactics that readers
@@ -75,7 +81,7 @@ export function QuickPicks() {
               <div className="absolute top-0 right-0">
                 <div className="bg-amber-500 text-background-primary text-[10px] font-bold px-3 py-0.5 rounded-bl-lg flex items-center gap-1">
                   <Flame className="w-3 h-3" />
-                  MOST POPULAR
+                  {t("mostPopular")}
                 </div>
               </div>
             )}
@@ -105,14 +111,14 @@ export function QuickPicks() {
             <div className="flex items-center justify-between pt-4 border-t border-[#1C2436]/50">
               <span className="flex items-center gap-1.5 text-xs text-text-muted">
                 <Clock className="w-3.5 h-3.5" />
-                {pick.readTime} min read
+                {pick.readTime} {cm("minRead")}
               </span>
               <span
                 className={`inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2 ${
                   pick.highlight ? "text-amber-400" : "text-primary"
                 }`}
               >
-                Read guide
+                {cm("readGuide")}
                 <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </div>

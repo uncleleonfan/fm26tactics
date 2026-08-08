@@ -1,7 +1,12 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, ChevronDown, Flame } from "lucide-react";
 
 export function HeroSection() {
+  const t = useTranslations("home");
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background */}
@@ -17,32 +22,9 @@ export function HeroSection() {
           <line x1="200" y1="0" x2="200" y2="800" stroke="#00E676" strokeWidth="1" />
           <line x1="1000" y1="0" x2="1000" y2="800" stroke="#00E676" strokeWidth="1" />
           <line x1="0" y1="400" x2="1200" y2="400" stroke="#00E676" strokeWidth="1" />
-          <circle
-            cx="600"
-            cy="400"
-            r="150"
-            stroke="#00E676"
-            strokeWidth="1"
-            fill="none"
-          />
-          <rect
-            x="200"
-            y="200"
-            width="200"
-            height="400"
-            stroke="#00E676"
-            strokeWidth="1"
-            fill="none"
-          />
-          <rect
-            x="800"
-            y="200"
-            width="200"
-            height="400"
-            stroke="#00E676"
-            strokeWidth="1"
-            fill="none"
-          />
+          <circle cx="600" cy="400" r="150" stroke="#00E676" strokeWidth="1" fill="none" />
+          <rect x="200" y="200" width="200" height="400" stroke="#00E676" strokeWidth="1" fill="none" />
+          <rect x="800" y="200" width="200" height="400" stroke="#00E676" strokeWidth="1" fill="none" />
         </svg>
       </div>
 
@@ -52,7 +34,7 @@ export function HeroSection() {
           {/* Badge */}
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Football Manager 2026
+            {t("subtitle")}
           </span>
 
           {/* H1 */}
@@ -65,9 +47,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-lg sm:text-xl text-text-secondary max-w-xl mb-8 leading-relaxed">
-            The most comprehensive Football Manager 2026 tactics hub.
-            Explore formations, analyze player roles, and use our
-            interactive tactic builder to craft the perfect strategy.
+            {t("heroDescription")}
           </p>
 
           {/* CTA Buttons */}
@@ -76,14 +56,14 @@ export function HeroSection() {
               href="/builder"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-background-primary font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300 group"
             >
-              Try Tactic Builder
+              {t("tryBuilder")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/tactics"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#1C2436] text-text-primary font-medium hover:bg-surface-hover hover:border-primary/20 transition-all duration-300"
             >
-              Browse Tactics
+              {t("browseTactics")}
             </Link>
           </div>
 
@@ -94,7 +74,7 @@ export function HeroSection() {
           >
             <span className="flex items-center gap-1.5">
               <Flame className="w-4 h-4 text-amber-400" />
-              <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">Trending</span>
+              <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">{t("trending")}</span>
             </span>
             <span className="text-sm text-text-primary font-medium group-hover:text-amber-200 transition-colors">
               3-5-2 Catenaccio — The Art of Defensive Solidity
@@ -107,41 +87,13 @@ export function HeroSection() {
             <cite>
               Curated from 44+ community-tested tactics and 2,700+ simulated
               matches across{" "}
-              <a
-                href="https://fm-arena.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                FM-Arena
-              </a>
+              <a href="https://fm-arena.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">FM-Arena</a>
               ,{" "}
-              <a
-                href="https://fmscout.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                FM Scout
-              </a>
+              <a href="https://fmscout.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">FM Scout</a>
               ,{" "}
-              <a
-                href="https://sortitoutsi.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Sortitoutsi
-              </a>
+              <a href="https://sortitoutsi.net" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sortitoutsi</a>
               , and{" "}
-              <a
-                href="https://passion4fm.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Passion4FM
-              </a>
+              <a href="https://passion4fm.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Passion4FM</a>
               .
             </cite>
           </p>

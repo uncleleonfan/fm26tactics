@@ -7,7 +7,7 @@
     "guides": "Anleitungen",
     "meta": "Meta",
     "tacticBuilder": "Taktik-Builder",
-    "search": "Suche",
+    "search": "Suchen",
     "toggleMenu": "Menü umschalten"
   },
   "common": {
@@ -22,18 +22,23 @@
     "backToHome": "Zurück zur Startseite",
     "allRightsReserved": "Alle Rechte vorbehalten. Football Manager ist eine Marke von Sports Interactive.",
     "continueReading": "Weiterlesen",
-    "tacticalGuide": "Taktischer Leitfaden",
-    "relatedGuide": "Verwandte Anleitung",
-    "relatedTactics": "Verwandte Taktiken",
-    "relatedGuides": "Verwandte Anleitungen",
-    "readCompanionGuide": "Lies den begleitenden Strategie-Leitfaden",
+    "tacticalGuide": "Taktik-Anleitung",
+    "relatedGuide": "Ähnliche Anleitung",
+    "relatedTactics": "Ähnliche Taktiken",
+    "relatedGuides": "Ähnliche Anleitungen",
+    "readCompanionGuide": "Lies die begleitende Strategie-Anleitung",
     "companionTactic": "Begleitende Taktik",
-    "viewDetails": "Details anzeigen"
+    "viewDetails": "Details anzeigen",
+    "all": "Alle",
+    "searchPlaceholder": "Taktiken, Anleitungen & mehr durchsuchen...",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "description": "Beschreibung",
+    "loading": "Laden..."
   },
   "filter": {
     "allFormations": "Alle Formationen",
     "allStyles": "Alle Stile",
-    "allLevels": "Alle Niveaus",
+    "allLevels": "Alle Level",
     "clearAll": "Alle Filter löschen",
     "beginner": "Anfänger",
     "intermediate": "Fortgeschritten",
@@ -42,12 +47,12 @@
   "home": {
     "subtitle": "Football Manager 2026",
     "heroTitle": "Meistere FM26-Taktiken wie nie zuvor",
-    "heroDescription": "Experten-Taktiken, tiefgehende Anleitungen, Spielerrollen-Analyse und ein interaktiver Builder — alles, was du brauchst, um in Football Manager 2026 zu dominieren.",
+    "heroDescription": "Experten-Taktiken, detaillierte Anleitungen, Rollen-Analyse und ein interaktiver Builder — alles, was du brauchst, um in FM26 zu dominieren.",
     "tryBuilder": "Taktik-Builder testen",
     "browseTactics": "Taktiken durchsuchen",
-    "trending": "Im Trend",
-    "startHere": "Hier starten",
-    "mostInDepth": "Ausführlichste Anleitungen",
+    "trending": "Beliebt",
+    "startHere": "Starte hier",
+    "mostInDepth": "Detaillierteste Anleitungen",
     "mostPopular": "AM BELIEBTESTEN",
     "featuredTactics": "Empfohlene Taktiken",
     "viewAll": "Alle anzeigen",
@@ -67,51 +72,84 @@
     "interactiveBuilder": "Interaktiver Builder",
     "interactiveBuilderDesc": "Visueller Taktik-Ersteller mit Echtzeit-Feedback",
     "communityData": "Community-Daten",
-    "communitySubtitle": "Was die Meta sagt"
+    "communitySubtitle": "Was die Meta sagt",
+    "features": "Funktionen"
   },
   "blog": {
     "title": "FM26 Taktik-Blog",
+    "description": "Detaillierte Football Manager 2026 Anleitungen, Taktiken und Meta-Analysen.",
     "subtitle": "Bleib auf dem Laufenden",
-    "description": "Ausführliche Anleitungen, Meta-Analyse & Tipps",
+    "ctaText": "Neue Anleitungen, Meta-Updates und taktische Analysen — regelmäßig veröffentlicht.",
     "browseAll": "Alle Taktiken durchsuchen",
-    "noPosts": "Noch keine Blog-Beiträge. Schau bald wieder vorbei!",
+    "noPosts": "Noch keine Blog-Beiträge. Bleib dran!",
     "backToBlog": "Zurück zu allen Artikeln"
   },
   "tactics": {
     "title": "Taktik-Bibliothek",
-    "backToTactics": "Zurück zu Taktiken"
+    "description": "Entdecke unsere Sammlung von FM26-Taktiken — jede mit vollständigen Spielerrollen, Team-Anweisungen und Leistungsanalyse.",
+    "backToTactics": "Zurück zu Taktiken",
+    "noTactics": "Keine Taktiken entsprechen deinen Filtern"
   },
   "guides": {
     "title": "FM26 Anleitungen",
+    "description": "Umfassende Anleitungen zu Training, Standards, Kader-Management und Spielvorbereitung.",
     "backToGuides": "Zurück zu Anleitungen",
-    "comingSoon": "Anleitungen für diese Kategorie folgen in Kürze",
+    "comingSoon": "Anleitungen für diese Kategorie folgen in Kürze.",
     "training": "Trainings-Anleitungen",
     "setPieces": "Standardsituationen",
     "scouting": "Scouting & Rekrutierung",
     "teamManagement": "Team-Management & Strategie",
     "matchDay": "Spieltag-Strategie",
-    "youthDevelopment": "Jugendentwicklung"
+    "youthDevelopment": "Jugendentwicklung",
+    "read": "Anleitung lesen",
+    "guidesCount_one": "Anleitung",
+    "guidesCount_other": "Anleitungen"
   },
   "roles": {
     "title": "Spielerrollen-Enzyklopädie",
+    "description": "Vollständige Referenz für jede FM26-Spielerrolle — Attribute, Aufgaben und taktische Einordnung.",
     "goalkeepers": "Torhüter",
     "defenders": "Verteidiger",
     "midfielders": "Mittelfeldspieler",
     "forwards": "Stürmer",
-    "rolesCount": "Rollen"
+    "rolesCount": "Rollen",
+    "duty": "Aufgabe",
+    "attributes": "Schlüsselattribute",
+    "bestFor": "Am besten für"
   },
   "best": {
-    "title": "FM26 Beste Taktiken 2026",
-    "subtitle": "Top-Meta-Formationen im Ranking",
-    "description": "Das definitive Ranking der besten FM26-Taktiken, getestet gegen die FM26 Match-Engine mit detaillierten Leistungsdaten."
+    "title": "FM26 Beste Taktiken",
+    "subtitle": "Top Meta-Formationen im Ranking",
+    "description": "Das definitive Ranking der besten FM26-Taktiken, getestet gegen die FM26 Match-Engine mit detaillierten Leistungsdaten.",
+    "updatedBadge": "Aktualisiert August 2026",
+    "whyRanks": "Warum auf Platz #",
+    "viewFullTactic": "Vollständige Taktik anzeigen",
+    "howToChooseTitle": "So wählst du die beste FM26-Taktik für DEIN Team",
+    "strongWingers": "Starke Flügelspieler?",
+    "strongWingersText": "Nutze 4-2-3-1 oder 4-3-3 DM Wide — deine Flügel dominieren die Außenbahnen.",
+    "stackedMidfield": "Überlegenes Mittelfeld?",
+    "stackedMidfieldText": "Nutze 4-3-3 DM Wide (Kontrolle) oder 4-2-3-1 (Angriff) — überlade das Zentrum.",
+    "defensiveRock": "Defensiv-Bollwerk?",
+    "defensiveRockText": "Nutze 5-2-2-1 oder 3-5-2 Catenaccio — mauern und kontern.",
+    "underdog": "Außenseiter / Kleiner Verein?",
+    "underdogText": "Nutze 4-4-2 Konter oder 5-3-2 — kompakt stehen, frustrieren und Nadelstiche setzen.",
+    "ctaTitle": "Erstelle deine eigene beste FM26-Taktik",
+    "ctaText": "Nutze unseren interaktiven Taktik-Builder für ein maßgeschneidertes System.",
+    "ctaButton": "Taktik-Builder öffnen"
   },
   "builder": {
     "pageTitle": "FM26 Taktik-Builder",
-    "pageDescription": "Erstelle und teile FM26-Taktiken mit unserem Drag-and-Drop-Taktik-Builder."
+    "pageDescription": "Erstelle und teile FM26-Taktiken mit unserem Drag & Drop Taktik-Builder.",
+    "formation": "Formation",
+    "mentality": "Mentalität",
+    "instructions": "Team-Anweisungen",
+    "reset": "Zurücksetzen",
+    "share": "Taktik teilen",
+    "export": "Bild exportieren"
   },
   "meta": {
     "pageTitle": "FM26 Meta-Analyse",
-    "pageDescription": "Community-basierte FM26 Meta-Analyse — verfolge die effektivsten Formationen, Spielerrollen und taktischen Trends."
+    "pageDescription": "Community-basierte FM26 Meta-Analyse — verfolge die effektivsten Formationen, Spielerrollen und Trends."
   },
   "footer": {
     "tactics": "Taktiken",
@@ -126,7 +164,7 @@
     "contact": "Kontakt",
     "privacyPolicy": "Datenschutz",
     "termsOfService": "Nutzungsbedingungen",
-    "brandDescription": "Deine ultimative Ressource, um Football Manager 2026 Taktiken zu meistern. Entdecke Formationen, Spielerrollen und entwickle Gewinnstrategien."
+    "brandDescription": "Deine ultimative Ressource, um Football Manager 2026 Taktiken zu meistern. Entdecke Formationen, Spielerrollen und entwickle Siegerstrategien."
   },
   "about": {
     "title": "Über FM26 Tactics",
@@ -135,7 +173,7 @@
   },
   "contact": {
     "title": "Kontaktiere uns",
-    "subtitle": "Wir freuen uns, von dir zu hören",
+    "subtitle": "Wir freuen uns von dir zu hören",
     "email": "E-Mail",
     "github": "GitHub",
     "backToHome": "Zurück zur Startseite"
@@ -148,7 +186,7 @@
   },
   "error": {
     "notFound": "Seite nicht gefunden",
-    "notFoundDesc": "Die gesuchte Seite existiert nicht. Durchsuche unsere FM26-Taktikbibliothek, Anleitungen und Blog.",
+    "notFoundDesc": "Die gesuchte Seite existiert nicht. Durchstöbere unsere Taktiken, Anleitungen und den Blog.",
     "somethingWrong": "Etwas ist schiefgelaufen",
     "tryAgain": "Erneut versuchen",
     "goHome": "Zur Startseite",

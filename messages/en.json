@@ -28,7 +28,12 @@
     "relatedGuides": "Related Guides",
     "readCompanionGuide": "Read the companion strategy guide",
     "companionTactic": "Companion Tactic",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "all": "All",
+    "searchPlaceholder": "Search tactics, guides & more...",
+    "noResults": "No results found.",
+    "description": "Description",
+    "loading": "Loading..."
   },
   "filter": {
     "allFormations": "All Formations",
@@ -67,47 +72,80 @@
     "interactiveBuilder": "Interactive Builder",
     "interactiveBuilderDesc": "Visual tactic creator with real-time feedback",
     "communityData": "Community Data",
-    "communitySubtitle": "What the Meta Says"
+    "communitySubtitle": "What the Meta Says",
+    "features": "Features"
   },
   "blog": {
     "title": "FM26 Tactics Blog",
+    "description": "In-depth Football Manager 2026 guides, tactics, and meta analysis to help you dominate the pitch.",
     "subtitle": "Stay Updated",
-    "description": "In-depth guides, meta analysis & tips",
+    "ctaText": "New guides, meta updates, and tactical analysis delivered regularly.",
     "browseAll": "Browse All Tactics",
     "noPosts": "No blog posts yet. Stay tuned!",
     "backToBlog": "Back to all articles"
   },
   "tactics": {
     "title": "Tactics Library",
-    "backToTactics": "Back to Tactics"
+    "description": "Explore our collection of FM26 tactics — each with complete player roles, team instructions, and performance breakdown. Find the perfect system for your squad.",
+    "backToTactics": "Back to Tactics",
+    "noTactics": "No tactics match your filters"
   },
   "guides": {
     "title": "FM26 Guides",
+    "description": "Comprehensive guides covering training, set pieces, squad management, and match preparation — everything you need to master FM26.",
     "backToGuides": "Back to Guides",
-    "comingSoon": "Guides for this category are coming soon",
+    "comingSoon": "Guides for this category are coming soon.",
     "training": "Training Guides",
     "setPieces": "Set Pieces",
     "scouting": "Scouting & Recruitment",
     "teamManagement": "Team Management & Strategy",
     "matchDay": "Match Day Strategy",
-    "youthDevelopment": "Youth Development"
+    "youthDevelopment": "Youth Development",
+    "read": "Read the guide",
+    "guidesCount_one": "guide",
+    "guidesCount_other": "guides"
   },
   "roles": {
     "title": "Player Roles Encyclopedia",
+    "description": "Complete reference for every FM26 player role — attributes, duties, and tactical fit.",
     "goalkeepers": "Goalkeepers",
     "defenders": "Defenders",
     "midfielders": "Midfielders",
     "forwards": "Forwards",
-    "rolesCount": "roles"
+    "rolesCount": "roles",
+    "duty": "Duty",
+    "attributes": "Key Attributes",
+    "bestFor": "Best For"
   },
   "best": {
-    "title": "FM26 Best Tactics 2026",
+    "title": "FM26 Best Tactics",
     "subtitle": "Top Meta Formations Ranked",
-    "description": "The definitive ranking of the best FM26 tactics, tested against the FM26 match engine with detailed performance data."
+    "description": "The definitive ranking of the best FM26 tactics, tested against the FM26 match engine with detailed performance data.",
+    "updatedBadge": "Updated August 2026",
+    "whyRanks": "Why it ranks #",
+    "viewFullTactic": "View full tactic",
+    "howToChooseTitle": "How to Choose the Best FM26 Tactic for YOUR Team",
+    "strongWingers": "Strong Wingers?",
+    "strongWingersText": "Use 4-2-3-1 or 4-3-3 DM Wide — your wingers will dominate the flanks.",
+    "stackedMidfield": "Stacked Midfield?",
+    "stackedMidfieldText": "Use 4-3-3 DM Wide (control) or 4-2-3-1 (attack) — overcrowd the middle third.",
+    "defensiveRock": "Defensive Rock?",
+    "defensiveRockText": "Use 5-2-2-1 or 3-5-2 Catenaccio — park the bus and hit on the counter.",
+    "underdog": "Underdog / Small Club?",
+    "underdogText": "Use 4-4-2 Counter or 5-3-2 — stay compact, frustrate, and counter-punch.",
+    "ctaTitle": "Build Your Own Best FM26 Tactic",
+    "ctaText": "Use our interactive tactic builder to create a custom system tailored to your squad.",
+    "ctaButton": "Open Tactic Builder"
   },
   "builder": {
     "pageTitle": "FM26 Tactic Builder",
-    "pageDescription": "Build and share FM26 tactics with our drag-and-drop tactic builder."
+    "pageDescription": "Build and share FM26 tactics with our drag-and-drop tactic builder.",
+    "formation": "Formation",
+    "mentality": "Mentality",
+    "instructions": "Team Instructions",
+    "reset": "Reset",
+    "share": "Share Tactic",
+    "export": "Export Image"
   },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
 import { BookOpen, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
@@ -36,7 +37,22 @@ const difficultyBadge: Record<string, string> = {
   advanced: "bg-red-500/20 text-red-400 border-red-500/30",
 };
 
-export default function GuidesPage() {
+export default async function GuidesPage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
+  const gd = await getTranslations({ locale, namespace: "guides" });
+  const cm = await getTranslations({ locale, namespace: "common" });
+
+  const categoryKeys: Record<string, string> = {
+    training: "training",
+    "set-pieces": "setPieces",
+    scouting: "scouting",
+    "team-management": "teamManagement",
+    "match-day": "matchDay",
+    "youth-development": "youthDevelopment",
+  };
+
+  const allCategories = ["team-management", "match-day", "training", "set-pieces", "scouting", "youth-development"] as const;
+
   // Group guides by category
   const guidesByCategory: Record<string, typeof allGuides> = {};
   allGuides.forEach((g) => {
@@ -44,21 +60,11 @@ export default function GuidesPage() {
     guidesByCategory[g.category].push(g);
   });
 
-  const allCategories = ["team-management", "match-day", "training", "set-pieces", "scouting", "youth-development"] as const;
-  const categoryLabels: Record<string, string> = {
-    training: "Training Guides",
-    "set-pieces": "Set Pieces",
-    scouting: "Scouting & Recruitment",
-    "team-management": "Team Management & Strategy",
-    "match-day": "Match Day Strategy",
-    "youth-development": "Youth Development",
-  };
-
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Breadcrumb
-          items={[{ label: "Home", href: "/" }, { label: "Guides" }]}
+          items={[{ label: cm("home"), href: "/" }, { label: gd("title") }]}
           className="mb-6"
         />
 
@@ -67,14 +73,11 @@ export default function GuidesPage() {
             FM26 <span className="gradient-text">Guides</span>
           </h1>
           <p className="text-text-secondary max-w-2xl">
-            Comprehensive guides covering every aspect of Football Manager 2026.
-            From building your first tactic to mastering gegenpressing.
+            {gd("description")}
           </p>
         </div>
 
-        {/* Category sections with guides */}
         <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-8">
-          {/* Left skyscraper ad */}
           <aside className="hidden lg:block">
             <div className="sticky top-24 space-y-6">
               <SkyscraperAd />
@@ -83,63 +86,64 @@ export default function GuidesPage() {
 
           <div className="min-w-0 space-y-10">
             {allCategories.map((cat) => {
-            const catGuides = guidesByCategory[cat] || [];
-            return (
-              <section key={cat}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={categoryColors[cat]}>
-                    {categoryIcons[cat]}
+              const catGuides = guidesByCategory[cat] || [];
+              return (
+                <section key={cat}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={categoryColors[cat]}>
+                      {categoryIcons[cat]}
+                    </div>
+                    <h2 className="text-lg font-bold text-text-primary">
+                      {gd(categoryKeys[cat] as any)}
+                    </h2>
+                    <span className="text-xs text-text-muted">
+                      {catGuides.length} {catGuides.length === 1 ? gd("guidesCount_one") : gd("guidesCount_other")}
+                    </span>
                   </div>
-                  <h2 className="text-lg font-bold text-text-primary">{categoryLabels[cat]}</h2>
-                  <span className="text-xs text-text-muted">
-                    {catGuides.length} {catGuides.length === 1 ? "guide" : "guides"}
-                  </span>
-                </div>
 
-                {catGuides.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {catGuides.map((guide) => (
-                      <Link
-                        key={guide.slug}
-                        href={`/guides/${guide.slug}`}
-                        className="glass-card p-5 group"
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-2 pr-4">
-                            {guide.title}
-                          </h3>
-                          <span className={`shrink-0 text-[10px] font-medium px-2 py-0.5 rounded-full border ${difficultyBadge[guide.difficulty] || difficultyBadge.beginner}`}>
-                            {guide.difficulty}
-                          </span>
-                        </div>
-                        <p className="text-xs text-text-secondary line-clamp-2 mb-3 leading-relaxed">
-                          {guide.description}
-                        </p>
-                        <div className="flex items-center gap-2">
-                          <div className="flex flex-wrap gap-1">
-                            {guide.tags?.slice(0, 3).map((tag) => (
-                              <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
-                                {tag}
-                              </span>
-                            ))}
+                  {catGuides.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {catGuides.map((guide) => (
+                        <Link
+                          key={guide.slug}
+                          href={`/guides/${guide.slug}`}
+                          className="glass-card p-5 group"
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-2 pr-4">
+                              {guide.title}
+                            </h3>
+                            <span className={`shrink-0 text-[10px] font-medium px-2 py-0.5 rounded-full border ${difficultyBadge[guide.difficulty] || difficultyBadge.beginner}`}>
+                              {guide.difficulty}
+                            </span>
                           </div>
-                          <span className="ml-auto text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs">
-                            Read <ArrowRight className="w-3 h-3" />
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="glass-card p-5 border-dashed">
-                    <p className="text-sm text-text-muted">Guides for this category are coming soon. Check back for updates.</p>
-                  </div>
-                )}
-              </section>
-            );
+                          <p className="text-xs text-text-secondary line-clamp-2 mb-3 leading-relaxed">
+                            {guide.description}
+                          </p>
+                          <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap gap-1">
+                              {guide.tags?.slice(0, 3).map((tag) => (
+                                <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <span className="ml-auto text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs">
+                              {gd("read")} <ArrowRight className="w-3 h-3" />
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="glass-card p-5 border-dashed">
+                      <p className="text-sm text-text-muted">{gd("comingSoon")}</p>
+                    </div>
+                  )}
+                </section>
+              );
             })}
           </div>
-
         </div>
       </div>
     </div>

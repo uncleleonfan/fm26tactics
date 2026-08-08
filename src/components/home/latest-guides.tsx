@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
 import { ArrowRight, BookOpen, FileText, Target, Crosshair, Users, Flame } from "lucide-react";
@@ -12,6 +15,8 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export function LatestGuides() {
+  const t = useTranslations("home");
+
   // Get the 6 most recently published guides
   const guides = allGuides
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
@@ -22,7 +27,7 @@ export function LatestGuides() {
       <div className="flex items-end justify-between mb-10">
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-            Latest <span className="gradient-text">Guides</span>
+            {t("latestGuides")}
           </h2>
           <p className="text-text-secondary text-sm">
             In-depth tutorials to level up your FM26 management
@@ -32,7 +37,7 @@ export function LatestGuides() {
           href="/guides"
           className="hidden sm:inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
-          All Guides <ArrowRight className="w-3 h-3" />
+          {t("allGuides")} <ArrowRight className="w-3 h-3" />
         </Link>
       </div>
 
