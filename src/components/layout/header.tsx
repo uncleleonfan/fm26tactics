@@ -14,6 +14,7 @@ const SearchDialog = dynamic(
 
 const navLinks = [
   { href: "/tactics", label: "Tactics" },
+  { href: "/best", label: "Best Tactics" },
   { href: "/blog", label: "Blog" },
   { href: "/roles", label: "Player Roles" },
   { href: "/guides", label: "Guides" },
