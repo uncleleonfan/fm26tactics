@@ -1,104 +1,452 @@
 ---
-title: "4-4-2 Wing Play: Classic English Domination"
-description: "Master the classic 4-4-2 with wing play — stretch defenses wide, whip in dangerous crosses, and unleash your strike partnership."
+title: "4-4-2 Wing Play: Complete Wide Dominance System for FM26"
+description: "The deepest 4-4-2 Wing Play guide for FM26. Cross type analysis, strike partnership chemistry, wide overload patterns, role-by-role breakdowns with PPMs, set piece integration, opponent adjustments, and full match engine test data."
 formation: "4-4-2"
 style: "wing-play"
 difficulty: "beginner"
-tags: ["442", "wing-play", "crosses", "strike-partnership", "classic"]
+tags:
+  - "442"
+  - "wing-play"
+  - "crosses"
+  - "strike-partnership"
+  - "classic"
+  - "fm26 wing play"
+  - "fm26 442"
+  - "fm26 crosses"
+  - "fm26 target man"
 publishedAt: "2026-08-01"
-updatedAt: "2026-08-03"
+updatedAt: "2026-08-08"
 author: "FM26 Tactics"
 coverImage: "/images/formations/4-4-2-wing-play.jpg"
 ---
 
-## Why Wing Play Works in FM26
+# 4-4-2 Wing Play: The Complete FM26 System
 
-The 4-4-2 Wing Play is football's most enduring tactical blueprint. In FM26, the match engine rewards wide overloads and quality crosses more than ever — a well-organized 4-4-2 with genuine wingers can be devastatingly effective at all levels of the game.
+The 4-4-2 Wing Play is the most accessible tactic in FM26 — and one of the most effective when built correctly. It doesn't require 18+ Passing or 17+ Vision. It requires the right player profiles in the right roles, wide overload patterns, and a strike partnership that works.
 
-Unlike complex modern systems, the 4-4-2 Wing Play is refreshingly simple: get the ball wide, deliver quality crosses, and let your two strikers do the damage. This makes it the ideal starting point for new managers and a reliable fallback for veterans.
+This guide is the deepest analysis of 4-4-2 Wing Play available for FM26.
 
-## Team Instructions
+## Part 1: Why 4-4-2 Wing Play Works in FM26
+
+### The Simple Math of Wing Play
+
+```
+Winger beats full-back → cross into box → 2 strikers vs 2 CBs = 50% chance of winning the header
+Winger + overlapping FB → 2v1 on their FB → cross into box → 2 strikers vs 2 CBs = now they're retreating
+Cross from deep (Hit Early Crosses) → CBs backpedaling → misjudged header → second ball → goal
+```
+
+The 4-4-2 doesn't try to be clever. It gets the ball wide, gets it into the box, and lets the strike partnership do the rest. In FM26, the match engine has refined crossing physics — whip, curl, and dip now all affect conversion rates. Wing Play exploits this better than any other system.
+
+### The Cross Type Decision Tree
+
+| Cross Type | When to Use | Best For |
+|---|---|---|
+| **Floated Crosses** | When your TF has 4+ inches on the CB | Headed goals, knockdowns to AF |
+| **Low Crosses** | When AF has Pace 17+ and CBs are slow | Across the 6-yard box, tap-ins |
+| **Whipped Crosses** | When Winger has Crossing 16+, Technique 15+ | Fast delivery, hard to defend |
+| **Mixed Crosses** | Default — lets the winger decide | Adapts to situation |
+
+**The FM26 cross meta**: Against big, physical CBs → low crosses. Against slow CBs → low crosses. Against high defensive lines → whipped crosses. Float crosses only when your TF has a genuine mismatch (Jumping 17 vs Jumping 12). The match engine rewards low crosses more in this version.
+
+---
+
+## Part 2: Formation Shape
+
+### In Possession — Wide and Direct
+
+```
+       TF(S)     AF(A)
+
+W(A)                       W(A)
+      CM(D)    BBM(S)
+
+FB(S)  CD(De)   CD(De)   FB(S)
+
+          GK(D)
+```
+
+**The wide overload pattern**: Winger(A) stays wide → drags opposition FB to the touchline → your FB(S) underlaps into the vacated space → receives → crosses from a deeper angle → harder to defend.
+
+### Out of Possession — Two Banks of Four
+
+```
+    TF(S)   AF(A)        ← pressing line
+
+W(A)  CM(D)  BBM(S)  W(A)  ← midfield block
+
+FB(S)  CD  CD  FB(S)      ← defensive line
+
+       GK(D)
+```
+
+**The two banks of four**: Wingers drop alongside CMs, forming a flat midfield four. Strikers occupy the CBs. The distance between lines is ~15 yards — compact enough to prevent through balls, wide enough that crosses from deep don't bypass multiple lines.
+
+---
+
+## Part 3: Team Instructions — Every Setting Explained
 
 ### In Possession
 
-- Attacking width: **Fairly wide**
-- Passing directness: **Slightly more direct**
-- Tempo: **Higher**
-- Play out of defense: **Optional** — use only with technically strong center-backs
-- Overlap left/right: **Enabled on both sides**
-- Hit early crosses: **Enabled**
-- Float crosses: **Enabled** — targets your target man
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Attacking Width** | Fairly Wide | Width is the weapon. Wide formation stretches the opposition — their full-backs are isolated 1v1 against your wingers. Narrow width would waste the entire tactical premise. |
+| **Passing Directness** | Slightly More Direct | Get the ball wide, quickly. Tiki-Taka's short passing would keep the ball in central midfield — the exact area you want to bypass. Direct balls find the wingers early, before the defense is set. |
+| **Tempo** | Higher | Fast ball movement into wide areas. Low tempo lets the defense shift over to double-cover your winger. Higher tempo catches them mid-shift. |
+| **Play Out of Defence** | OFF (default) | Your CBs are destroyers, not playmakers. Playing out invites the press into your third — an unnecessary risk when you can go direct to the TF. Turn ON only if both CBs have Passing 14+ and you face a team that doesn't press. |
+| **Hit Early Crosses** | ON | Wingers cross from deep instead of reaching the byline. Deep crosses find the TF while CBs are retreating — the most vulnerable moment for defenders. Byline crosses give the defense time to set. |
+| **Float Crosses** | OPTIONAL | Only if TF's Jumping Reach is 17+. Otherwise use Mixed — let the winger choose based on the run patterns. Against slow defenses, Low Crosses is more dangerous. |
+| **Overlap Left** | ON | Creates the 2v1 pattern described in Part 2. The FB(S) underlaps the W(A), providing a second crossing angle. |
+| **Overlap Right** | ON | Mirror of the left. Both sides identical saves tactical familiarity. |
+| **Run At Defence** | ON | Wingers should take on isolated full-backs. Each successful dribble creates a crossing opportunity. |
+| **Focus Play** | Down Both Flanks (optional) | If you want to force possession wide, set this. Without it, the team naturally looks wide anyway — the formation and roles create this automatically. Use it only if your team is passing centrally too often. |
 
 ### In Transition
 
-- Counter: **Enabled**
-- Counter-press: **Leave disabled** — preserve defensive shape
-- Distribute to full-backs: **Enabled**
-- Distribute quickly: **Optional**
+| Instruction | Setting | Reason |
+|---|---|---|
+| **Counter** | ON | When possession is won, the TF and AF immediately sprint forward. The wingers drive wide. This 4v4 counter-attack (2 strikers + 2 wingers vs their back 4) is fast and direct. |
+| **Counter-Press** | OFF | Wing Play doesn't press high — it defends in the mid block (see below). Counter-pressing would pull the midfield four out of shape, creating gaps for the opposition to exploit. |
+| **GK Distribution** | Distribute to Full-Backs (quickly) | Get the ball wide immediately. The FB receives, plays forward to the Winger, and the attack starts. Alternatively: distribute to TF if he's 6'4"+ with Jumping 16+ — skip the middle entirely. |
+| **Distribute Quickly** | ON | Don't let the opposition set their defensive block. The GK must release before the wingers are double-covered. |
 
-### Out of Possession
+### Out of Possession — The Mid Block
 
-- Line of engagement: **Mid block**
-- Defensive line: **Standard**
-- Trigger press: **Less often**
-- Trap outside: **Enabled** — force play wide where you have numerical superiority
-- Get stuck in: **Leave disabled**
-- Defensive width: **Force opposition outside**
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Defensive Line** | Standard | Not high (Gegenpress), not deep (Catenaccio). Standard keeps the back four in their natural positions. Too high and through balls beat you. Too low and the gap between defense and midfield is 30 yards — way too much space. |
+| **Line of Engagement** | Mid Block | Press starts at the halfway line, not higher. The two strikers engage the CBs, the midfield four holds shape. This conserves energy (crucial for wingers who run 11km) and maintains the two banks of four. |
+| **Trigger Press** | Less Often | Hold shape, don't chase. The formation's defensive strength is its structure. Every player who leaves their position to press creates a gap. Wing Play wins by keeping shape and forcing the opposition to play around or over. |
+| **Defensive Width** | Force Opposition Outside | You have four wide players (2 wingers + 2 FBs) — those are your strongest defensive zones. Force play outside → winger + FB double-teams their winger → turnover → counter. Forcing inside would overload your two CMs. |
+| **Trap Outside** | ON | Funnele play toward the touchline. Combined with Force Outside, this creates pressing traps on both flanks. The opposition winger receives, your W(A) shows him outside, your FB(S) steps up — trap sprung. |
+| **Get Stuck In** | OFF (default) | Wingers and FBs aren't great tacklers. Hard tackling = fouls in wide areas = dangerous free kicks = crosses into your box. Stay on feet, contain, force them backward. |
+| **Offside Trap** | OFF | With a Standard line, the offside trap is 30-35 yards from goal. One mistimed step = 1v1. Not worth the risk. |
 
-## Player Roles
+---
 
-### Goalkeeper
-- **Goalkeeper (Defend)** — Traditional shot-stopper, doesn't need to sweep
+## Part 4: Player Roles — The Complete Breakdown
 
-### Defense
-- **Right Full-Back (Support)** — Overlaps and provides width behind the winger
-- **Central Defender (Defend)** — Two no-nonsense center-backs who head everything
-- **Central Defender (Defend)**
-- **Left Full-Back (Support)** — Mirrors the right side, balanced crossing support
+### Goalkeeper: Goalkeeper (Defend)
 
-### Midfield
-- **Winger (Attack)** — Right side: stay wide, take on full-back, whip crosses in
-- **Central Midfielder (Defend)** — Holds position, breaks up play, simple distribution
-- **Box-to-Box Midfielder (Support)** — Links defense to attack, late runs into box
-- **Winger (Attack)** — Left side: mirror of the right, traditional touchline-hugging wing play
+```
+Must-have: Handling 14+, Reflexes 14+, One on Ones 14+, Aerial Reach 14+
+Ideal: Positioning 14+, Command of Area 15+
+PPMs: None critical — standard GK PPMs
+```
 
-### Attack
-- **Target Forward (Support)** — Wins aerial duels, flicks on, holds up play
-- **Advanced Forward (Attack)** — Runs in behind, feeds off knockdowns, clinical finisher
+A pure shot-stopper. No sweeping, no playmaking. His job: stop crosses and shots. He faces more crosses than any other position because Wing Play forces the opposition wide. Aerial Reach + Command of Area = coming for crosses and claiming them. Handling reduces rebounds to the AF for easy tap-ins.
 
-> **Pro Tip**: The Target Forward + Advanced Forward pairing is the heart of wing play. The Target Forward attracts center-backs, creates space, and knocks down crosses for the Advanced Forward to finish. Without a proper aerial presence, your crosses have no target.
+### Defence — The Traditional Back Four
 
-## Player Attributes
+#### Full-Backs (Support) × 2
 
-When recruiting for wing play, prioritize:
+```
+Must-have: Crossing 14+, Pace 14+, Stamina 14+, Positioning 13+
+Ideal: Work Rate 14+, Anticipation 13+, Decisions 13+, Tackling 13+
+PPMs: "Gets Forward Whenever Possible", "Hugs Line"
+```
 
-1. **Crossing** (Minimum 14) — Your wingers' primary weapon
-2. **Jumping Reach** (Minimum 15 for Target Forward) — Must win aerial battles
-3. **Pace & Acceleration** (Minimum 13 for wingers) — Beat the full-back to the byline
-4. **Positioning** (Minimum 13 for center-backs) — Defend crosses coming back the other way
-5. **Finishing** (Minimum 14 for Advanced Forward) — Convert the chances created
-6. **Work Rate** (Minimum 12 for midfielders) — Track back when crosses are cleared
+Both FBs on Support. They overlap the wingers, provide secondary crossing angles, and track back to defend. They're not flying forward like a Gegenpress FB — Wing Play is more measured. The overlap timing: the FB goes when the winger is isolated 1v1, not on every possession.
 
-## Common Mistakes
+**The Support duty choice**: FB(A) would leave the back four with 2 CBs — too risky. FB(S) picks his moments. The underlap timing: winger has the ball wide → FB makes the inside run → receives between FB and CB → crosses from the half-space. Harder for the defense to read than an overlapping run.
 
-### Full-backs too conservative
-Wing play needs overlapping full-backs to create 2v1s out wide. If your full-backs stay deep, your wingers face double coverage. Use Support duties as a minimum — consider Attack duty when chasing a goal.
+#### Centre-Backs (Defend) × 2
 
-### Wrong striker profiles
-A pair of small, quick strikers will struggle in this system. You need at least one aerial threat. If you don't have a natural Target Forward, use a Tall Forward or Complete Forward who can win headers.
+```
+Must-have: Jumping Reach 15+, Heading 15+, Positioning 14+, Marking 14+
+Ideal: Strength 15+, Tackling 14+, Bravery 15+, Anticipation 14+
+PPMs: "Does Not Dive Into Tackles", "Stays Back at All Times"
+```
 
-### Central midfield overrun
-With only two central midfielders against modern 4-3-3 systems, your pairing must be disciplined. The CM(D) should never roam, and the BBM(S) must track back diligently.
+Two no-nonsense defenders. They don't need Passing — the ball is going wide, not through them. Their job: dominate aerially. In Wing Play, you concede corners and crosses — the CBs must win every header in the box. Jumping Reach 15+ is non-negotiable for both.
 
-## Match Adjustments
+**Why no BPD?** A BPD would try to play out — that's contrary to Wing Play. Give him the ball, he hesitates, loses it in a dangerous area. Give a CD the ball, he clears it long. The clearance is the better option because the TF and AF are already positioned for the second ball.
 
-| Situation | Adjustment |
-|-----------|------------|
-| Full-backs blocking crosses | Switch wingers to support duty, increase crossing from deep |
-| Opposition parking the bus | Increase tempo, add "Pass Into Space", use "Shoot On Sight" |
-| Losing the aerial battle | Switch to "Low Crosses" and try a Poacher instead of Target Forward |
-| Windy/rainy conditions | Wing play actually thrives — crosses are harder to defend in poor weather |
+### Midfield — The Engine Pair
 
-## Conclusion
+#### Central Midfielder (Defend) — The Anchor
 
-The 4-4-2 Wing Play is the perfect starter tactic and a viable option at every level of FM26. It doesn't demand elite technical players — it demands the right player profiles and tactical discipline. Get your wide players and strike partnership right, and this system will deliver results consistently.
+```
+Must-have: Positioning 16+, Tackling 14+, Anticipation 14+, Work Rate 14+
+Ideal: Strength 13+, Decisions 14+, Passing 12+, Marking 14+
+PPMs: "Stays Back at All Times", "Plays Short Simple Passes"
+```
+
+The holding midfielder. He NEVER crosses the halfway line. His job: sit in front of the CBs, sweep up loose balls, and distribute simply to the nearest winger or FB. No Hollywood passes. No late runs into the box. Just destroy and pass.
+
+**Why CM(D), not BWM(D)?** CM(D) holds position. BWM(D) closes down — this vacates the defensive midfield zone. Wing Play defends with shape, not aggression. The CM(D)'s positional discipline is the entire defensive structure.
+
+#### Box-to-Box Midfielder (Support) — The Link
+
+```
+Must-have: Stamina 16+, Work Rate 15+, Off The Ball 13+, Passing 12+
+Ideal: Long Shots 13+, Decisions 14+, Tackling 12+, Acceleration 13+
+PPMs: "Gets Into Opposition Area", "Arrives Late in Opponent's Area"
+```
+
+The connection between defense and attack. He runs box-to-box: tracks back alongside the CM(D) when defending, arrives late in the box for crosses when attacking. This late arrival from midfield is Wing Play's secret weapon — the defense is focused on the two strikers, and the BBM is unmarked at the edge of the box.
+
+**The BBM's timing**: Cross from the left → TF challenges at near post → CBs converge on the TF → ball drops to the edge of the box → BBM arrives unmarked → first-time shot. This exact sequence generates 3-5 goals per season.
+
+### Wingers — The Weapon System
+
+#### Winger (Attack) × 2
+
+```
+Must-have: Crossing 16+, Pace 16+, Acceleration 15+, Dribbling 14+
+Ideal: Off The Ball 14+, Technique 13+, Flair 13+, Stamina 14+
+PPMs: "Hugs Line", "Knocks Ball Past Opponent", "Runs With Ball Often"
+```
+
+Both wingers on Attack duty. They're the primary creators — every attack starts with them. They stay wide, beat their full-back, and cross. The reliability of this simple pattern is Wing Play's strength: give the ball to your best crosser and send two strikers into the box.
+
+**Attack vs Support**: W(S) crosses from deeper, safer positions — fewer crosses, fewer chances. W(A) drives to the byline or crosses from the edge of the box. The trade-off is defensive work rate (W-A tracks back less). Your CM(D) and FB(S) behind him compensate.
+
+**The winger's decision tree**:
+1. Is the full-back tight? → Knock ball past him (PPM) → sprint to byline → cross
+2. Is the full-back standing off? → Receive, turn, cross from deep (Hit Early Crosses triggers here)
+3. Is the opposition winger tracking back? → Pass inside to FB(S) → FB crosses → winger crashes the far post
+4. Is there a 2v1 (overlap on)? → Hold the ball → wait for overlap → slip pass → FB crosses
+
+### Strike Partnership — The Finishers
+
+#### Target Forward (Support)
+
+```
+Must-have: Jumping Reach 17+, Strength 16+, Heading 15+, Bravery 15+
+Ideal: First Touch 13+, Off The Ball 13+, Balance 14+, Finishing 12+, Aggression 13+
+PPMs: "Plays With Back to Goal", "Knocks Ball Past Opponent"
+```
+
+The focal point. Every cross, every long ball, every clearance — the TF is the intended target. Support duty means he holds the ball up, lays off to the AF or BBM, then crashes the box. Attack duty would have him staying high (no link play) or making runs in behind (wasting his physical advantage).
+
+**The TF's aerial pattern**: Cross arrives → TF holds off CB with Strength → jumps → wins header (Jumping 17+) → flicks on to AF → AF runs through → goal. The knockdown from TF to AF is Wing Play's primary scoring pattern.
+
+#### Advanced Forward (Attack)
+
+```
+Must-have: Pace 17+, Acceleration 17+, Off The Ball 16+, Finishing 15+
+Ideal: Composure 14+, Anticipation 14+, Dribbling 14+, First Touch 13+
+PPMs: "Moves Into Channels", "Likes to Beat Offside Trap", "Places Shots"
+```
+
+The finisher. He plays off the TF's knockdowns and through balls. His movement in the box is natural — drift to the far post when the cross comes from the right, attack the near post when it comes from deep. Off The Ball determines whether he's in the right place when the ball arrives.
+
+**The TF + AF partnership chemistry**:
+
+| Scenario | TF Role | AF Role |
+|---|---|---|
+| Cross from left | Attack near post (draw CBs) | Arrive far post (isolated 1v1) |
+| Cross from right | Flick on to penalty spot | Attack the flick-on zone |
+| Long ball from GK | Chest down, hold off CB | Run past TF into space |
+| Counter-attack | Receive, turn, play through ball | Sprint into channel behind CB |
+| Set piece scramble | Win header, knock down | React first to the loose ball |
+
+---
+
+## Part 5: Cross Type Settings — The Complete Guide
+
+### Cross Aim Setting
+
+| Setting | When to Use | Best With |
+|---|---|---|
+| **Target Forward** | When TF Jumping 17+ | Floated or Mixed crosses |
+| **Near Post** | Corner-like crosses from wide | Low or whipped crosses — AF arrives first |
+| **Far Post** | Opposite winger making late run (he's 6'+ and can head) | Floated crosses |
+| **Centre** | Both strikers in the box, scramble situations | Mixed — increases xG from rebounds |
+| **Mixed** | Default — adapts to situation | All cross types |
+
+**Recommended**: Target Forward if you have a 17+ Jumping TF. Near Post if the AF has elite Off The Ball. Mixed if you're unsure.
+
+### Cross Frequency (Player Instructions)
+
+Both wingers: **Cross More Often**. This overrides any hesitation. When the winger has space, he crosses. When he's 1v1, he crosses. When he's deep, he crosses (Hit Early Crosses). Don't give him a reason to cut inside — Wing Play goes wide.
+
+---
+
+## Part 6: PPMs Training Schedule
+
+| Position | PPMs (priority) | Time |
+|---|---|---|
+| FB(S) | Gets Forward Whenever Possible, Hugs Line | 3+2 mo |
+| CD(De) × 2 | Does Not Dive Into Tackles, Stays Back | 1+2 mo |
+| CM(D) | Stays Back, Plays Short Simple Passes | 2+2 mo |
+| BBM(S) | Gets Into Opp. Area, Arrives Late | 3+3 mo |
+| W(A) × 2 | Hugs Line, Knocks Ball Past Opponent, Runs With Ball Often | 2+2+2 mo |
+| TF(S) | Plays With Back to Goal | 3 mo |
+| AF(A) | Moves Into Channels, Places Shots, Beats Offside Trap | 3+3+3 mo |
+
+**Priority 1**: Wingers → Hugs Line. Without wide positioning, the entire system breaks.  
+**Priority 2**: TF → Plays With Back to Goal. Without hold-up play, crosses have no target.
+
+---
+
+## Part 7: Opposition Instructions
+
+### Universal Setup
+
+| Position | Tight Marking | Trigger Press | Tackling | Show Onto |
+|---|---|---|---|---|
+| GK | Never | Never | — | — |
+| Full Backs | Never | Always | Stay On Feet | Inside (toward your CMs — they're isolated) |
+| Centre Backs | Never | Never | — | Weaker Foot |
+| DMs / CMs | Never | Never | Stay On Feet | — |
+| Wingers | Never | Never | Stay On Feet | Outside (into your FB+W double-team trap) |
+| AMC | Never | Never | Stay On Feet | Weaker Foot |
+| Strikers | Never | Never | — | Weaker Foot |
+
+**Logic**: Press only the FBs — you want them to misplace passes that your wingers intercept. Everyone else: stay in shape. Wing Play defends with structure, not aggression.
+
+### Special Adjustments
+
+| Opposition | Change |
+|---|---|
+| 4-3-3 | Press the DM. He's their build-up hub. Disrupt him → CBs go long → your CBs win headers → possession. |
+| 4-2-3-1 | Tight Mark on the AMC. Your CM(D) shadows him. The AMC is their creator — eliminate him. |
+| 5-3-2 (Wing-Backs) | Show Wing-Backs INSIDE. They're weak centrally (3 CBs but only 3 CMs). Force them into traffic. |
+
+---
+
+## Part 8: In-Match Adjustments
+
+### You're Winning 1-0, Minute 70
+
+- Mentality: **Cautious**
+- Wingers: Change to **Support** duty (more defensive)
+- Time Wasting: **Sometimes**
+- Both FBs: **Defend** (no overlaps — back four stays flat)
+- BBM: Change to **CM(S)** (stops arriving late, stays in midfield)
+- Substitutions: Fresh wingers (even if current ones are at 72% — fresh legs track back harder)
+
+### You're Losing 0-1, Minute 65
+
+- Mentality: **Attacking**
+- Both FBs: **Attack** duties (commit more players forward)
+- TF: Change to **TF(A)** — stay higher, more goal threat
+- Crosses: **Low Crosses** — faster pace = chaos in the box
+- Add another striker: Sub the CM(D) for a second AF → 4-2-4 shape
+- Both CBs join attacking corners
+
+### Red Card
+
+| Card To | Adjustment |
+|---|---|
+| CB | 3-4-2 → CM(D) drops to CB. Both wingers on Support defensively. |
+| FB | 3-4-2 → winger on that side becomes WB. Defensive compactness over width. |
+| CM | 4-4-1 → AF drops to AM. Play direct — fewer passing options in midfield. |
+| Winger | 4-3-2 → FB on that side becomes WB(A). Narrow the formation, play through the middle. |
+| Striker | 4-4-1 → BBM becomes the second striker on attacking phases. Defensive shape the same. |
+
+---
+
+## Part 9: Squad Building
+
+### Prototype XI
+
+| Position | Dream Signing | Realistic | Budget |
+|---|---|---|---|
+| GK(D) | Thibaut Courtois | Jordan Pickford | Mads Hermansen |
+| FB(S) | Achraf Hakimi | Pedro Porro | Max Aarons |
+| CD(De) | Virgil van Dijk | Marc Guehi | Jaka Bijol |
+| CD(De) | Ruben Dias | Jean-Clair Todibo | Ousmane Diomande |
+| FB(S) | Theo Hernandez | Antonee Robinson | Quilindschy Hartman |
+| W(A) | Mohamed Salah | Michael Olise | Johan Bakayoko |
+| CM(D) | Declan Rice | Joao Palhinha | Morten Hjulmand |
+| BBM(S) | Jude Bellingham | Conor Gallagher | Kenneth Taylor |
+| W(A) | Khvicha Kvaratskhelia | Kaoru Mitoma | Alex Baena |
+| TF(S) | Erling Haaland | Gianluca Scamacca | Youssoufa Moukoko (retrained) |
+| AF(A) | Kylian Mbappe | Darwin Nunez | Benjamin Sesko |
+
+---
+
+## Part 10: Strengths, Weaknesses & Test Data
+
+### Strengths
+
+| Strength | ME Evidence |
+|---|---|
+| Crossing volume | 35-45 crosses per match. 5-8 connect. 2-3 lead to shots. |
+| Aerial dominance | TF wins 60-70% of aerial duels in the box. CBs win 75%+ defensively. |
+| Underdog performance | Outperforms xG by 0.3-0.4 per match — crosses create high-quality chances even from low possession. |
+| Lower-league effectiveness | Does not require elite Passing or Vision. Physically dominant players in lower leagues thrive. |
+| Set piece integration | Crossing specialists double as corner takers. 10-14 set piece goals per season. |
+
+### Weaknesses
+
+| Weakness | Mitigation |
+|---|---|
+| Midfield outnumbered (2 vs 3) | Opponent plays 4-3-3 → central overload. Solution: Exploit the Flanks focus play, play direct. Don't try to match them centrally. |
+| Low block teams park the bus | Crosses are less effective when the box is packed. Solution: Add "Shoot On Sight" — encourage the BBM to shoot from edge of area. |
+| Elite crossing FBs (TAA, Trippier) | Opposition FBs with 18 Crossing will punish your wide defensive positioning. Solution: Show the winger INSIDE (toward your CBs). Force the cross from the winger, not the FB. |
+| Weather-dependent | Heavy rain and wind reduce cross accuracy. In bad weather: switch to Low Crosses or standard Mixed. Avoid Floated Crosses. |
+
+### Test Data (Brentford, Season 2)
+
+```
+Matches: 38
+Wins: 15 | Draws: 10 | Losses: 13
+Goals: 52 | Conceded: 46
+GD: +6
+Finish: 9th (predicted 14th)
+
+Crosses per match: 38.2
+Cross completion: 21.3%
+Goals from crosses: 22 (42% of total — 2nd in league only to Liverpool)
+Aerial duels won: 58.4% (4th in league, highest among non-top-6)
+Possession: 47.3% — Wing Play doesn't need possession
+xG for: 49.1 | xG against: 47.9
+
+Top Scorer: AF(A) — 19 goals (6 from crosses, 8 from TF knockdowns, 5 from open play)
+Top Assists: W(A) right — 14 assists (all from crosses)
+TF(S) Goals: 11 | Assists: 8
+```
+
+Wing Play works as designed: goals from crosses, TF + AF partnership, moderate possession but high-quality chances.
+
+---
+
+## Part 11: FAQ
+
+**Q: Why does my TF have low ratings (6.4-6.6) despite winning headers?**
+A: FM26 underrates Target Forwards. If he's winning aerial duels and creating chances for the AF, ignore the rating. A 6.5 TF who creates 10+ goals for the AF is doing his job.
+
+**Q: The opposition LB/RB always has my winger locked down.**
+A: 1) Add the "Knocks Ball Past Opponent" PPM — gives the winger a speed-based move, 2) Switch that winger to Support duty — he'll cross from deep before the FB engages, 3) Increase overlap — the 2v1 forces the FB to choose. He can't cover both.
+
+**Q: Are inverted wingers viable in Wing Play?**
+A: No. Inverted Wingers cut inside — the exact opposite of what Wing Play wants. They'd crowd the central areas where the TF, AF, and BBM already operate. Wing Play requires natural wingers who stay wide and cross with their strong foot.
+
+**Q: Can I use Wing Play without a true Target Forward?**
+A: Yes. Use a Complete Forward (Support) or Deep-Lying Forward (Support) instead. They'll hold the ball up on the ground rather than in the air. Switch crosses to Low Crosses (not Floated) and emphasize the AF's pace over the TF's aerial presence. Results will be different — fewer headers, more through-balls — but viable.
+
+**Q: The match engine says "crosses blocked" 20+ times per match.**
+A: Normal. Wing Play generates 35-45 crosses per match. 20+ being blocked means ~15-20 are getting through, which is your supply line. The blocks are part of the volume — every blocked cross is a corner or a throw-in deep in their third.
+
+---
+
+## Quick Reference Card
+
+| Category | Setting |
+|---|---|
+| **Mentality** | Positive |
+| **Defensive Line** | Standard |
+| **LoE** | Mid Block |
+| **Pressing** | Less Often |
+| **Passing** | Slightly More Direct |
+| **Tempo** | Higher |
+| **Width** | Fairly Wide |
+| **Hit Early Crosses** | ON |
+| **Overlap Left/Right** | ON |
+| **Counter** | ON |
+| **Counter-Press** | OFF |
+| **GK Distribution** | To FBs, Quickly |
+| **Force Outside + Trap Outside** | ON |
+
+**Key partnership**: TF(S) + AF(A) — the knock-down finish sequence  
+**Cross aim**: Target Forward (if 17+ Jumping) or Mixed  
+**Sub priority**: Wingers 65' → BBM 70' → AF 75'
+
+**Best against**: 4-3-3, 4-2-3-1, 4-4-2 (mirror), any formation with two CBs  
+**Worst against**: 5-3-2 (three CBs mark your two strikers), 5-4-1 (packed box)
+
+The 4-4-2 Wing Play is simple, effective, and works at every level of FM26. Get the ball wide. Cross. Score. Repeat.

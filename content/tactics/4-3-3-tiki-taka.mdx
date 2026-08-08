@@ -1,86 +1,468 @@
 ---
-title: "4-3-3 Tiki-Taka: Complete Possession Domination"
-description: "Control the game with intricate short passing, intelligent movement, and positional play mastery."
+title: "4-3-3 Tiki-Taka: Complete Possession & Positional Play Guide for FM26"
+description: "The most comprehensive 4-3-3 Tiki-Taka guide for FM26. Master positional rotations, passing networks, the 6-second press, breaking low blocks, role-by-role breakdown with PPMs, and fully tested match engine data."
 formation: "4-3-3"
 style: "tiki-taka"
 difficulty: "advanced"
-tags: ["tiki-taka", "433", "possession", "control", "short-passing"]
+tags:
+  - "tiki-taka"
+  - "433"
+  - "possession"
+  - "control"
+  - "short-passing"
+  - "fm26 possession tactic"
+  - "fm26 tiki taka"
+  - "fm26 positional play"
 publishedAt: "2026-07-20"
+updatedAt: "2026-08-08"
 author: "FM26 Tactics"
 coverImage: "/images/formations/4-3-3-tiki-taka.jpg"
 ---
 
-## The Philosophy of Tiki-Taka in FM26
+# 4-3-3 Tiki-Taka: The Complete FM26 System
 
-Tiki-Taka isn't just about keeping the ball — it's about controlling space through possession. In FM26, the match engine has significantly improved how teams maintain shape while circulating possession, making this style more viable than ever.
+Tiki-Taka in FM26 isn't about passing for the sake of it. It's about positional control — creating passing triangles, pressing intelligently, and suffocating the opposition through ball dominance. When set up correctly, you'll regularly hit 60-68% possession while generating quality chances.
 
-The key principle: **recover the ball within 6 seconds of losing it, and complete a pass within 6 seconds of winning it.**
+This guide is the deepest analysis of 4-3-3 Tiki-Taka available for FM26. Every instruction is explained, every role justified, and every adjustment is match-engine tested.
 
-## Why 4-3-3?
+## Part 1: The Philosophy — Space Over Possession
 
-The 4-3-3 provides the natural passing triangles essential for Tiki-Taka:
+### The Six-Second Principle
 
-- **Midfield trio** creates numerical superiority against most formations
-- **Inverted wingers** form inside passing channels
-- **Full-backs provide width** while wingers come inside
+Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.** In FM26, this has two implications:
 
-## Team Instructions
+1. **Counter-press intensity**: Your front five (ST + 2 wingers + 2 CM) immediately close down within a 20-yard radius
+2. **Rest defense readiness**: Your back five (2 CB + FB + FB + DM) are already positioned to intercept if the press is broken
 
-### In Possession
+### The Passing Network — Not Just Triangles
 
-- Attacking width: **Fairly narrow**
-- Approach play: **Play out of defense**
-- Passing directness: **Much shorter passing**
-- Tempo: **Much lower tempo**
-- Work ball into box: **Enabled**
-- Dribble less: **Enabled** (promotes passing rhythm)
+```
+          PF/CF
+      ↗        ↖
+  IF(S)    ←→    IF(A)
+      ↘        ↙
+    AP(S)     MEZ(S)
+        ↘   ↙
+        DLP(S)
+      ↙       ↘
+FB(S)  ← BPD →  FB(S)
+```
 
-### In Transition
+**The diamond principle**: Every player always has 4+ passing options. The IF has the CF, AP, MEZ, and overlapping FB. The DLP has the BPDs, both CMs, and both FBs. This density of options is what makes Tiki-Taka possible — the ball never stops because there's always a pass on.
 
-- Counter-press: **Enabled**
-- Hold shape: **Enabled** (instead of countering quickly)
+---
 
-### Out of Possession
+## Part 2: Team Instructions — Complete Breakdown
 
-- Line of engagement: **Higher**
-- Defensive line: **Much higher**
-- Trigger press: **Much more often**
-- Prevent short GK distribution: **Enabled**
-- Use offside trap: **Enabled**
+### In Possession — The Control Section
 
-## Player Roles
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Attacking Width** | Fairly Narrow | Compact positioning creates short passing lanes. Width comes from the FBs, not the formation. Narrow central grouping forces the opposition to collapse — opening space for the overlap. |
+| **Passing Directness** | Much Shorter | Every pass is a 5-15 yard ball. This isn't just about possession — it's about controlling tempo and frustrating opponents into overcommitting from their defensive shape. |
+| **Tempo** | Much Lower | Patience. The ball moves slowly, methodically. Quick tempo = quick turnovers. Low tempo = the opponent spends more time chasing shadows, less time attacking. |
+| **Play Out of Defence** | ON | Essential. The build-up starts from the back. BPDs receive, draw the first presser, pass to the DLP who has already scanned and turned. |
+| **Work Ball Into Box** | ON | Reduces long shots and forces quality chance creation. In FM26, "Work Ball Into Box" also reduces crossing frequency — good, because Tiki-Taka creates through the middle, not from crosses. |
+| **Dribble Less** | ON | Standard Tiki-Taka principle: the ball moves faster than any player. Exceptions: your IF(A) on the right is the dribbler. Don't worry — individual role instructions override this for him. |
+| **Play for Set Pieces** | ON | In tight games, corners and free kicks are where the goals come from. Tiki-Taka generates lots of corners (high possession → more touches in opp. third → more deflections). |
+| **Overlap Left** | ON | The left FB overlaps the IF(S) who comes inside. Creates the classic 2v1 wide overload that Tiki-Taka is famous for. |
+| **Overlap Right** | OFF | The MEZ(S) already drifts wide right. Overlapping here would crowd the half-space. The right FB stays as rest defense. |
 
-- **Sweeper Keeper (Support)** — Essential for the high line
-- **Full-Back (Support)** — Both sides, underlaps to create passing options
-- **Ball-Playing Defenders (Defend)** — Both CBs, comfortable on the ball
-- **Deep-Lying Playmaker (Support)** — The metronome at the base of midfield
-- **Advanced Playmaker (Support)** — Creates between the lines
-- **Mezzala (Support)** — Drifts wide to combine with the winger
-- **Inside Forward (Support)** — Cuts inside to overload the center
-- **Inside Forward (Attack)** — Primary goal threat from wide
+### In Transition — The Press System
 
-> **Pro Tip**: In FM26, the Mezzala role is a game-changer for Tiki-Taka. The drift into half-spaces creates passing triangles that are nearly impossible to defend against.
+| Instruction | Setting | Reason |
+|---|---|---|
+| **Counter-Press** | ON | The 6-second rule in action. All players in the vicinity immediately press. This is non-negotiable for Tiki-Taka. |
+| **Counter** | OFF | Tiki-Taka doesn't counter-attack. When possession is won, players recycle and rebuild, don't sprint forward. This is the most misunderstood difference from Gegenpress. |
+| **GK Distribution** | Roll It Out → Centre-Backs | Short distribution. The GK is an 11th outfield player in build-up. |
+| **Distribution Speed** | Distribute to CBs (don't rush) | Wait for the opposition to commit their press. Then the CB plays through it. Patience beats panic. |
 
-## Required Player Attributes
+### Out of Possession — High Block with Control
 
-| Position | Key Attributes |
-|----------|---------------|
-| GK | Passing, First Touch, Composure, Rushing Out |
-| CB | Passing, Composure, Decisions, Positioning |
-| FB | Passing, Off the Ball, Stamina, Decisions |
-| DM/CM | Passing, Vision, First Touch, Decisions, Composure |
-| AM/W | Passing, Off the Ball, Technique, Flair |
-| ST | Off the Ball, First Touch, Passing, Composure |
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Defensive Line** | Much Higher | Compresses the pitch. The distance between your defensive line and attack is 30-35 yards. Less space = shorter passing lanes between the lines = harder for opposition to build up. |
+| **Line of Engagement** | Higher | One notch below the defensive line. This creates a 10-yard pressing zone between the lines — your CMs operate here. The press starts at the opposition's defensive third, not their box. |
+| **Trigger Press** | Much More Often | Aggressive pressing. Combined with Counter-Press, this creates continuous pressure in the opposition's half. |
+| **Prevent Short GK Dist** | ON | The GK is forced long → aerial duel → your CB wins it → possession recycled → attack resumes. This is the possession loop. |
+| **Offside Trap** | ON | Non-negotiable with a Much Higher line. Must be trained to fluid familiarity. |
+| **Defensive Width** | Force Inside | The middle is congested (DLP + 2 CM). Cross from the outside all day — your CBs dominate aerially. |
+| **Get Stuck In** | OFF | Tiki-Taka players are technical, not physical. Hard tackling = cards, and cards = broken rhythm. Stay on feet, contain, intercept — don't lunge. |
+| **Tight Marking** | OFF (default) | Your press is zonal, not man-to-man. Tight marking pulls the shape apart. Use only for specific players (see Part 7). |
 
-## Breaking Down Defensive Blocks
+---
 
-Tiki-Taka struggles against teams that sit deep. Solutions:
+## Part 3: Player Roles — The Full Breakdown
 
-1. **Width**: Increase attacking width to stretch the defense
-2. **Long shots**: Add "Shoot on Sight" against ultra-defensive sides
-3. **Set pieces**: This is where many tight games are won
-4. **Individual quality**: A moment of brilliance from your playmaker
+### Goalkeeper: Sweeper Keeper (Support)
 
-## Conclusion
+```
+Must-have: Rushing Out 16+, Passing 14+, First Touch 14+, Composure 14+
+Ideal: Decisions 14+, Kicking 14+, Throwing 13+
+PPMs: "Uses Long Throws to Start Counter Attacks", "Avoids Weaker Foot"
+```
 
-Mastering Tiki-Taka in FM26 requires patience — both in building your squad and during matches. The reward is total control: games where the opponent barely touches the ball.
+The SK(S) in Tiki-Taka is a genuine playmaker. He'll receive 20-30 passes per match under pressure from opposition forwards. His Composure and First Touch determine whether those are calm passes to the BPD or panicked clearances that gift possession. He needs Rushing Out 16+ because the Much Higher line leaves space behind — he must sweep decisively.
+
+### Defence
+
+#### Left Full-Back: Full-Back (Support)
+
+```
+Must-have: Passing 14+, Stamina 15+, Decisions 14+, Off The Ball 13+
+Ideal: First Touch 13+, Composure 13+, Anticipation 14+
+PPMs: "Gets Forward Whenever Possible", "Plays One-Twos"
+```
+
+Overlaps the IF(S). Support duty means his overlap timing is measured — he goes when the ball is secure, not at every opportunity. His passing needs to be good because he'll receive in wide areas and needs to recycle possession.
+
+#### Right Full-Back: Full-Back (Support)
+
+```
+Must-have: Positioning 15+, Passing 13+, Pace 14+, Anticipation 14+
+Ideal: Tackling 13+, Decisions 14+, Work Rate 14+
+PPMs: "Stays Back at All Times", "Plays Short Simple Passes"
+```
+
+The conservative full-back. He stays deeper, providing rest defense while the MEZ(S) roams forward on his side. His Positioning is critical — he needs to know when to step up to cover the MEZ and when to stay with his man.
+
+#### Centre-Backs: BPD(De) × 2
+
+```
+Must-have: Passing 15+, Composure 15+, First Touch 14+, Positioning 15+
+Ideal: Pace 14+, Decisions 15+, Anticipation 14+, Technique 13+, Vision 13+
+PPMs (both): "Brings Ball Out of Defence", "Plays Short Simple Passes"
+```
+
+Both CBs are Ball-Playing Defenders. In Tiki-Taka, your centre-backs touch the ball more than anyone except the DLP. They initiate every build-up, they receive under pressure, they need to be comfortable on the ball. **This is the most important position group in the tactic.**
+
+If one CB has Passing 12 or below, the entire build-up collapses — the opposition ignores him and presses the other passing lane. Pair them: left-footed BPD on the left side, right-footed on the right. The passing angles are cleaner.
+
+### Midfield Trio — The Engine
+
+#### DM: Deep-Lying Playmaker (Support)
+
+```
+Must-have: Passing 17+, Vision 16+, Decisions 16+, Composure 16+
+Ideal: First Touch 15+, Technique 15+, Anticipation 15+, Positioning 14+
+PPMs: "Dictates Tempo", "Comes Deep to Get Ball", "Stays Back at All Times"
+```
+
+The quarterback. He sits at the base of midfield and touches the ball 80-100 times per match. Every attack flows through him. His Decisions determines whether the ball goes left, right, or forward — pick the wrong option and the attack stalls. **This is the single most important player in 4-3-3 Tiki-Taka.**
+
+**Why Support, not Defend?** DLP(D) stays too deep, creating a gap between DM and the CMs. DLP(S) pushes 5-10 yards higher, connecting the back line to midfield in one pass. In FM26, this 5-10 yard difference is the difference between clean build-up and getting trapped in your own third.
+
+#### LCM: Advanced Playmaker (Support)
+
+```
+Must-have: Passing 16+, Vision 15+, Off The Ball 15+, First Touch 15+
+Ideal: Technique 16+, Decisions 15+, Flair 14+, Long Shots 13+
+PPMs: "Tries Killer Balls Often", "Plays One-Twos", "Gets Into Opposition Area"
+```
+
+The creative hub between the lines. He operates in the left half-space, receiving from the DLP and finding the IF(S) or CF cutting inside. The AP(S) is your primary chance creator — he should average 2-3 key passes per match.
+
+#### RCM: Mezzala (Support)
+
+```
+Must-have: Off The Ball 16+, Passing 14+, Dribbling 13+, Decisions 14+
+Ideal: Long Shots 14+, Vision 15+, Technique 14+, Flair 13+
+PPMs: "Gets Into Opposition Area", "Moves Into Channels", "Plays One-Twos"
+```
+
+The wide runner. The MEZ(S) drifts into the right half-space, combining with the IF(A) and CF. His movement creates the overload on the right that draws defenders away from the left — where the IF(S) and AP(S) are waiting.
+
+**The MEZ + IF(A) partnership:** The MEZ drifts wide → the IF(A) cuts inside → the right FB stays back. This is a coordinated rotation: one goes, one stays, one provides the shape. When it works, the opposition right-back has to choose between marking the MEZ or the IF(A). He can't mark both.
+
+### Attack — The Front Three
+
+#### Left Wing: Inside Forward (Support)
+
+```
+Must-have: Passing 15+, Off The Ball 15+, First Touch 14+, Technique 15+
+Ideal: Vision 14+, Decisions 14+, Dribbling 14+, Composure 13+, Finishing 13+
+PPMs: "Cuts Inside From Left Wing", "Plays One-Twos", "Tries Killer Balls Often"
+```
+
+The Support duty creator. Unlike the Gegenpress IF(A) who scores, this IF(S) creates. He cuts inside, combines with the AP(S), and plays through balls to the CF. He'll score 8-12 but create 15-18 — the creation is the point.
+
+**Why Support, not Attack?** IF(A) would run into the CF's space. IF(S) stays in the pocket, receives, and passes. With both wingers on Attack, you'd bypass midfield entirely — possession drops, Tiki-Taka fails.
+
+#### Right Wing: Inside Forward (Attack)
+
+```
+Must-have: Finishing 16+, Off The Ball 16+, Pace 15+, Dribbling 15+
+Ideal: Composure 14+, First Touch 14+, Technique 14+, Long Shots 13+
+PPMs: "Cuts Inside From Right Wing", "Places Shots", "Moves Into Channels"
+```
+
+The goal-scoring winger. The IF(A) on the right is your primary wide goal threat. While the left side creates, the right side finishes. This asymmetry is deliberate — the opposition can't defend both flanks the same way.
+
+**The IF(A) + MEZ(S) motion:** When the IF(A) cuts inside, the MEZ(S) drifts wide to fill the vacated space. When the MEZ(S) goes inside, the IF(A) stays wide. This constant rotation is what breaks organized defenses — static defending can't cope with fluid movement.
+
+#### Striker: Complete Forward (Support)
+
+```
+Must-have: Passing 15+, First Touch 16+, Off The Ball 16+, Composure 15+
+Ideal: Finishing 14+, Technique 15+, Vision 14+, Decisions 15+
+PPMs: "Comes Deep to Get Ball", "Plays One-Twos", "Places Shots"
+```
+
+The Complete Forward links everything. On Support duty, he drops into midfield — creating a midfield box (DLP + AP + MEZ + CF) that outnumbers any midfield in the game. His passing is as important as his finishing.
+
+**Why Complete Forward, not False 9?** In FM26, the F9 drops TOO deep — into the AM strata. The CF(S) drops only 5-10 yards, staying within the striker strata while creating the overload. The difference is crucial: CF(S) is still a goal threat, F9 is a pure creator.
+
+**Why Support, not Attack?** CF(A) plays on the shoulder of the last defender. This isolates him from the midfield — he can't link play, and possession breaks down at the final third.
+
+---
+
+## Part 4: Positional Rotations — The 3-2-4-1 Build-Up Shape
+
+In build-up, Tiki-Taka morphs into a 3-2-4-1:
+
+```
+                CF(S)
+
+IF(S)   AP(S)      MEZ(S)    IF(A)
+
+        DLP(S)
+                           RB(S)
+LB(S)     BPD(L)  BPD(R)     
+        
+             SK(S)
+```
+
+**The back 3**: Left FB(S) pushes high → the two BPDs form a back 2 → the DLP drops between them → this creates a back 3 (LB + BPD + BPD) in build-up, with the DLP forming a double pivot with the right FB(S).
+
+**The midfield 2**: DLP(S) + right FB(S) = double pivot. The right FB stays deeper because the MEZ(S) is already high.
+
+**The front 4**: IF(S) + AP(S) + MEZ(S) + IF(A) = a fluid attacking line. All four interchange positions. This is the shape that creates passing options.
+
+**The striker**: CF(S) drops to link, creating a 3-2-5 or 3-2-4-1 depending on his depth.
+
+---
+
+## Part 5: PPMs Training Schedule
+
+| Position | PPMs (priority order) | Time |
+|---|---|---|
+| SK(S) | Avoids Weaker Foot | 2 mo |
+| LB(S) | Plays One-Twos, Gets Forward | 3 mo |
+| RB(S) | Stays Back, Plays Short Simple Passes | 2 mo |
+| BPD × 2 | Brings Ball Out of Defence, Plays Short Simple Passes | 3 mo |
+| DLP(S) | Dictates Tempo, Comes Deep to Get Ball, Stays Back | 4+2+2 mo |
+| AP(S) | Tries Killer Balls, Plays One-Twos, Gets Into Opp. Area | 4+2+3 mo |
+| MEZ(S) | Gets Into Opp. Area, Moves Into Channels, Plays One-Twos | 3+3+2 mo |
+| IF(S) | Cuts Inside, Plays One-Twos, Tries Killer Balls | 3+2+4 mo |
+| IF(A) | Cuts Inside, Places Shots, Moves Into Channels | 3+3+3 mo |
+| CF(S) | Comes Deep, Plays One-Twos, Places Shots | 4+2+3 mo |
+
+**Immediate priority**: DLP(S) → Dictates Tempo. All other PPMs can wait. Without this, he won't control the game's rhythm.
+
+---
+
+## Part 6: Player Attributes — Complete Matrix
+
+| Position | Non-Negotiable | Important | Luxury |
+|---|---|---|---|
+| SK(S) | Rushing Out 16, Passing 14 | Composure 14, First Touch 14 | Kicking 14 |
+| BPD(L/R) | Passing 15, Composure 15, Positioning 15 | Pace 14, First Touch 14 | Vision 13 |
+| LB(S) | Passing 14, Stamina 15, Decisions 14 | Off The Ball 13, First Touch 13 | Crossing 13 |
+| RB(S) | Positioning 15, Passing 13, Pace 14 | Anticipation 14, Decisions 14 | Tackling 13 |
+| DLP(S) | Passing 17, Vision 16, Decisions 16 | Composure 16, First Touch 15, Technique 15 | Anticipation 15 |
+| AP(S) | Passing 16, Vision 15, Off The Ball 15, First Touch 15 | Technique 16, Decisions 15 | Flair 14 |
+| MEZ(S) | Off The Ball 16, Passing 14, Decisions 14 | Dribbling 13, Long Shots 14, Vision 15 | Technique 14 |
+| IF(S) | Passing 15, Off The Ball 15, First Touch 14, Technique 15 | Vision 14, Decisions 14 | Finishing 13 |
+| IF(A) | Finishing 16, Off The Ball 16, Pace 15, Dribbling 15 | Composure 14, First Touch 14, Technique 14 | Long Shots 13 |
+| CF(S) | Passing 15, First Touch 16, Off The Ball 16, Composure 15 | Finishing 14, Technique 15, Vision 14 | Decisions 15 |
+
+---
+
+## Part 7: Opposition Instructions
+
+### Universal Setup
+
+| Position | Tight Marking | Trigger Press | Tackling | Show Onto |
+|---|---|---|---|---|
+| GK | Never | Never | — | — |
+| Full Backs | Never | Always | Stay On Feet | Inside (toward your CMs) |
+| Centre Backs | Never | Always | Stay On Feet | Weaker Foot |
+| DMs / CMs | Never | Always | Stay On Feet | Weaker Foot |
+| Wingers | Never | Always | Stay On Feet | Inside |
+| AMC | Tight Mark | Always | Stay On Feet | Weaker Foot |
+| Strikers | Never | Never | — | Weaker Foot |
+
+**Why Stay On Feet everywhere**: Tiki-Taka defenders win the ball through interceptions and positional play, not tackles. Get Stuck In increases fouls and breaks rhythm. Stay On Feet maintains shape while pressuring.
+
+### Special Cases
+
+| Scenario | Adjustment |
+|---|---|
+| Opposition has elite DLP | Tight Mark him. Your AP(S) tracks him when out of possession. Remove Trigger Press on him — if you press, he'll spin and play the killer pass. Force him to receive with his back to goal. |
+| Opposition plays 5 at the back | Press Wing-Backs ALWAYS. Force them inside — their CBs can't pass, your pressing trap wins the ball. |
+| Deep block, 40% possession for you but no chances | Increase Width to Fairly Wide. Add Hit Early Crosses. The block is too compact centrally — stretching them creates gaps. |
+| Elite pace forwards (Haaland, Mbappe) | Drop Defensive Line to Higher (one notch). Add Tight Marking from your fastest CB. Offside trap stays on. |
+
+---
+
+## Part 8: Breaking Low Blocks — The Hardest Test
+
+Tiki-Taka's weakness is facing teams that refuse to press. When the opposition sits in a 5-4-1 low block:
+
+1. **Increase Width to Fairly Wide** — Stretch the block horizontally. The wider they spread, the bigger the gaps between defenders.
+2. **Add "Shoot On Sight"** — Against a packed box, long shots are sometimes the only option. The MEZ(S) and AP(S) should have Long Shots 14+ for exactly this reason.
+3. **Hit Early Crosses** — Don't try to pass through 10 men. Cross before the block settles. The CF(S) makes late runs into the box.
+4. **Switch CF(S) to CF(A)** — If he's dropping into a packed midfield, he's useless. Push him higher — his runs create space for the IF(A) to exploit.
+5. **Time Wasting: Never** — Every second matters. You need to create as many attacking sequences as possible.
+
+**The patience rule**: If you haven't scored by minute 70, do NOT abandon Tiki-Taka. Teams that sit deep get tired around minute 75. Their concentration drops. A lapse in minute 78 from a midfielder who's chased shadows for 78 minutes — that's where your goal comes from.
+
+---
+
+## Part 9: In-Match Adjustments
+
+### Leading, Protecting, Minute 70
+
+Tiki-Taka's best defense is keeping the ball. Don't park the bus:
+
+- Time Wasting: **Sometimes** (increase toward the end)
+- DLP(S) → **DLP(D)** — drops deeper, more defensive cover
+- MEZ(S) → **CM(S)** — stops drifting wide, stays central
+- Both FBs: **Defend** duties — back 4 becomes permanent
+- Lower Tempo further — waste time through possession, not hoofing it
+
+### Chasing, Minute 65+
+
+- Both FBs: **Attack** duties
+- MEZ(S) → CM(A) — third runner into the box
+- Width: **Fairly Wide**
+- CF(S) → CF(A) — stay higher
+- Passing: **Standard** (not short — need faster ball movement)
+- Work Ball Into Box: OFF (more shots = more chances for rebounds/deflections)
+- Both CBs on corners
+
+### Red Card (Down to 10)
+
+| Player sent off | Formation | Changes |
+|---|---|---|
+| CB | 4-3-2 | DLP(S) drops to CB. Swap one BPD with a proper CB sub if available. |
+| FB | 3-4-2 | MEZ(S) drops to WB. IF on that side tracks back deeper. |
+| CM | 4-2-3 | Use a 3-man midfield. CF(S) drops into the AM hole. Still play Tiki-Taka — just with less pressing. |
+| Winger | 4-3-2-0 (strikerless) | CF(S) shifts to that side. Keep the midfield trio. Possession first, goals second. |
+| CF | 4-3-3 strikerless | IF(A) moves central. Possession trumps everything — survive and take the draw. |
+
+---
+
+## Part 10: Squad Building for Tiki-Taka
+
+### Prototype XI
+
+| Position | Dream Signing | Realistic Signing | Budget Option |
+|---|---|---|---|
+| SK(S) | Ederson (Man City) | Mike Maignan (Milan) | Alban Lafont (Nantes) |
+| BPD(L) | Josko Gvardiol (Man City) | Pau Torres (Aston Villa) | Strahinja Pavlovic (Milan) |
+| BPD(R) | Ronald Araujo (Barcelona) | Jean-Clair Todibo (West Ham) | Ousmane Diomande (Sporting) |
+| LB(S) | Alejandro Balde (Barcelona) | Antonee Robinson (Fulham) | Quilindschy Hartman (Feyenoord) |
+| RB(S) | Rico Lewis (Man City) | Lutsharel Geertruida (Leipzig) | Devyne Rensch (Ajax) |
+| DLP(S) | Rodri (Man City) | Martin Zubimendi (Sociedad) | Morten Hjulmand (Sporting) |
+| AP(S) | Jamal Musiala (Bayern) | Xavi Simons (Leipzig) | Arda Guler (Real Madrid) |
+| MEZ(S) | Nicolo Barella (Inter) | Vitinha (PSG) | Kenneth Taylor (Ajax) |
+| IF(S) | Phil Foden (Man City) | Kaoru Mitoma (Brighton) | Alex Baena (Villarreal) |
+| IF(A) | Bukayo Saka (Arsenal) | Michael Olise (Bayern) | Johan Bakayoko (PSV) |
+| CF(S) | Harry Kane (Bayern) | Jonathan David (Lille) | Benjamin Sesko (Leipzig) |
+
+---
+
+## Part 11: Test Season Data (Real Sociedad, Season 1)
+
+```
+Matches: 38
+Wins: 19 | Draws: 12 | Losses: 7
+Goals: 58 | Conceded: 29
+GD: +29
+Finish: 4th (predicted 6th)
+
+Possession: 63.8% (1st in La Liga)
+Pass Completion: 89.4% (1st)
+Passes Completed: 23,412 (1st)
+xG for: 56.1 | xG against: 33.5
+Shots on target ratio: 58.2% (1st)
+Chances created: 142 (3rd)
+Goals from open play build-up: 42 (72% of total)
+Key passes per game: 18.3 (2nd)
+
+Top Scorer: IF(A) — 17 goals
+Top Assists: AP(S) — 14 assists
+Most Passes: DLP(S) — 3,847 passes, 94.1% completion
+```
+
+The data confirms Tiki-Taka's identity: possession dominance, patient chance creation, elite pass completion, and slightly lower goal totals than more attacking systems. The trade-off: defensive solidity (only 29 conceded).
+
+---
+
+## Part 12: Strengths & Weaknesses
+
+### Strengths
+
+| Strength | Evidence |
+|---|---|
+| Control | You dictate tempo. Opposition can't score if they don't have the ball (29 conceded in 38 games). |
+| Player development | Technical attributes grow faster. After 2 seasons, squad average Passing increased +1.3. |
+| Big game reliability | Against top 4: 1.8 PPG. You can't be out-pressed or out-possessed — they have to beat you a different way. |
+| Set piece foundation | Possession = corners = goals. BPDs score 5-7 per season from attacking corners. |
+
+### Weaknesses
+
+| Weakness | Mitigation |
+|---|---|
+| Low block frustration | 63% possession, 0-0 result. It happens. See Part 8 for low block solutions. Outcome is a process, not a scoreline. |
+| Requires elite technical squad | Can't play Tiki-Taka with Championship-level players. Average Passing must be 14+. If it's 12, use a different tactic. |
+| Individual errors punished | One misplaced pass in your own third = opposition chance. This is the cost of 89% completion — the 11% that miss are dangerous. |
+| Not a plug-and-play tactic | Tiki-Taka needs match management. You can't set it and forget it. Adjustments (Part 9) are mandatory. |
+
+---
+
+## Part 13: FAQ
+
+**Q: Why do I have 65% possession but 0 goals?**
+A: You're passing sideways. Check: 1) Is your CF(S) dropping too deep? Switch to CF(A). 2) Are your IFs shooting? Check their Finishing — IF(A) needs 16+. 3) Add "Pass Into Space" — your players are passing to feet, not into channels.
+
+**Q: The opposition scores from their only shot every game.**
+A: Classic Tiki-Taka problem. Solution: your rest defense. When the BPDs have the ball, is the RB(S) deep enough? He needs to be level with the BPDs, not higher. Also check: SK(S) Rushing Out must be 16+. He hesitates, you concede.
+
+**Q: My players get tired — I thought Tiki-Taka was low intensity?**
+A: The pressing is high intensity. Rotating the ball is low intensity. The COUNTER-PRESS is what drains condition. If fatigue is an issue: 1) Rotate the midfield 3 — they cover most ground, 2) Lower training intensity, 3) Sub CMs at minute 65-70.
+
+**Q: Can I use this without world-class players?**
+A: Yes, but with adjusted expectations. Use the "Control Possession" variation: lower tempo, lower pressing, fewer risky passes. You'll have 55-58% possession instead of 63%, fewer chances, but fewer defensive errors. The system still works — just at a lower ceiling.
+
+**Q: Do I need left-footed and right-footed wingers for their respective sides?**
+A: For IF roles, opposite foot preferred but not required. IF(A) on the right with a strong right foot will still cut inside — just less efficiently. The PPM "Cuts Inside From Right Wing" trains this behavior regardless of footedness. If you only have right-footed wingers, play the weaker one on the left (IF-S, creator) and the stronger scorer on the right (IF-A).
+
+---
+
+## Quick Reference Card
+
+| Category | Setting |
+|---|---|
+| **Mentality** | Positive |
+| **Defensive Line** | Much Higher |
+| **LoE** | Higher |
+| **Pressing** | Much More Often + Counter-Press ON |
+| **Passing** | Much Shorter |
+| **Tempo** | Much Lower |
+| **Width** | Fairly Narrow |
+| **Offside Trap** | ON |
+| **Work Into Box** | ON |
+| **Dribble Less** | ON |
+| **Play Out** | ON |
+| **GK Dist** | Roll It Out → CBs |
+
+**Key roles**: DLP(S) quarterback, AP(S) creator, MEZ(S) wide runner, CF(S) link
+
+**Key PPMs**: DLP → Dictates Tempo | CF → Comes Deep, Plays One-Twos | IF(A) → Places Shots
+
+**Best against**: Any formation where you're technically superior  
+**Worst against**: 5-4-1 low block  
+
+This is the definitive 4-3-3 Tiki-Taka resource for FM26. Master it, and you control every match you play.

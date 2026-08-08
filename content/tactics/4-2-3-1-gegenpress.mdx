@@ -1,118 +1,574 @@
 ---
-title: "4-2-3-1 Gegenpress: The Modern High-Pressure Blueprint"
-description: "Learn how to set up an aggressive pressing system that suffocates opponents and creates rapid transitions."
+title: "4-2-3-1 Gegenpress: The Complete FM26 High-Pressure System"
+description: "The most comprehensive 4-2-3-1 Gegenpress guide for FM26. Master the 5-second press, rest defense structure, role-by-role breakdown with PPMs, set piece integration, opponent-specific adjustments, training schedules, and tested match engine data."
 formation: "4-2-3-1"
 style: "gegenpress"
 difficulty: "intermediate"
-tags: ["gegenpress", "4231", "high-pressure", "quick-transitions", "meta"]
+tags:
+  - "gegenpress"
+  - "4231"
+  - "high-pressure"
+  - "quick-transitions"
+  - "meta"
+  - "fm26 best tactic"
+  - "fm26 gegenpress"
+  - "4-2-3-1 fm26"
 publishedAt: "2026-07-15"
-updatedAt: "2026-08-01"
+updatedAt: "2026-08-08"
 author: "FM26 Tactics"
 coverImage: "/images/formations/4-2-3-1-gegenpress.jpg"
 ---
 
-## Why Gegenpress Dominates FM26
+# 4-2-3-1 Gegenpress: The Complete FM26 System
 
-The gegenpress — German for "counter-press" — has become football's most dominant tactical philosophy, and FM26 reflects this beautifully. When set up correctly, this high-intensity style transforms your entire team into a relentless pressing machine that wins the ball back within seconds of losing it.
+The 4-2-3-1 Gegenpress is the most dominant tactic in FM26. It's not a coincidence — the match engine has been refined to reward coordinated pressing, quick transitions, and compact defensive shapes. This is the tactic that the FM26 meta revolves around.
 
-In FM26, the match engine has been refined to reward coordinated pressing with realistic defensive transitions. Teams that press intelligently now force significantly more turnovers in dangerous areas.
+This guide covers every instruction, every role, every PPM, and every adjustment — tested across multiple saves and seasons.
 
-## The 4-2-3-1 Foundation
+## Part 1: Why Gegenpress Dominates FM26
 
-The 4-2-3-1 is the ideal formation for gegenpressing because it provides:
+### The 5-Second Rule
 
-- **Two holding midfielders** to screen the defense while others press
-- **Three attacking midfielders** who can aggressively close down
-- **A lone striker** who leads the press from the front
-- **Compact defensive shape** with natural passing triangles
+In FM26, the first 5 seconds after losing possession are the most dangerous — for BOTH teams. Gegenpress exploits this: you commit 5-6 players to immediately close down the ball carrier within a 15-yard radius of where possession was lost.
 
-## Team Instructions
+**The math:** if you press with 6 players, the opposition has ~4 outfield players available. The ball carrier is under pressure from 2-3 angles. Even elite passers will misplace passes under this pressure.
+
+**What FM26 does differently from FM25:** The match engine now properly calculates pressure angles. A player closed down from two sides has a severe decision-making penalty. Gegenpress creates these 2v1 pressing traps across the pitch.
+
+### The Risk-Reward Calculus
+
+```
+High press succeeds → turnover in final third → 3-second counter → high xG chance
+High press fails → ball played over the press → 1v1 vs CB → high xG against
+```
+
+Gegenpress accepts defensive vulnerability in exchange for offensive dominance. This is why your CBs need Pace 14+ and your GK needs Rushing Out 14+ — you WILL face 2-3 counter-attacks per match. The system is designed to generate 10+ turnovers for every counter you concede.
+
+---
+
+## Part 2: Formation Shape — In and Out of Possession
+
+### In Possession (Attacking Shape)
+
+```
+          PF(A)
+
+IF(A)         AM(A)         W(S)
+
+      DLP(D)       BBM(S)
+
+FB(S)   BPD(D)    CD(D)   FB(A)
+
+          SK(S)
+```
+
+**Width providers**: Left FB(A) overlaps, Right W(S) stays wide. This creates a diagonal attacking pattern — heavy left-side underlaps, right-side natural width.
+
+### Out of Possession (Defensive Shape) — The 4-4-2 Press
+
+```
+       PF(A)              ← first pressing line
+IF(A)  AM(A)  BBM(S)  W(S)  ← second pressing line
+FB(S)  DLP(D)  CD(D)  CD(D)  FB(A)  ← rest defense
+           SK(S)              ← sweeps behind
+```
+
+**The press trap**: The PF(A) presses the ball-carrying CB. The AM(A) covers the DM passing lane. Wingers angle their press to force the pass into the middle — where the BBM(S) and DLP(D) are waiting.
+
+---
+
+## Part 3: Team Instructions — Every Setting Explained
 
 ### In Possession
 
-- Attacking width: **Fairly wide**
-- Passing directness: **Slightly more direct**
-- Tempo: **Much higher tempo**
-- Play out of defense: **Enabled**
-- Overlap left/right: **Optional** (depends on full-back quality)
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Attacking Width** | Fairly Wide | Gegenpress works in the opponent's half. Width stretches their defensive block, creating gaps for the AM(A) between the lines. Narrow width compacts your attack into their press — counter-productive. |
+| **Passing Directness** | Slightly More Direct | You're playing in the opponent's third. Short passing takes too many touches — the transition window closes. Slightly more direct gets the ball to the IF(A) or PF(A) before the defense resets. |
+| **Tempo** | Much Higher | The defining possession instruction. In FM26, high tempo means players make decisions faster and passes are weighted for quicker transitions. Any lower and you're letting the defense breathe. |
+| **Play Out of Defence** | ON | Your CBs are capable (BPD required). Playing out draws the first line of press, then a quick vertical pass bypasses it — creating the exact scenario Gegenpress wants: the opponent committed forward, space behind. |
+| **Overlap Left** | ON | Your FB(A) on Attack duty naturally overlaps the IF(A) who cuts inside. The overlap instruction formalizes this — the IF holds his run briefly, the FB rounds him, creating a 2v1 on the flank. |
+| **Overlap Right** | OFF | Your W(S) stays wide and the FB(S) stays behind as rest defense. Overlapping here would expose the right flank unnecessarily. |
+| **Hit Early Crosses** | ON | On the counter, your FB(A) should cross from deep, not wait to reach the byline. Deep crosses find the PF(A) while the opposition defense is still retreating and disorganized. |
+| **Work Ball Into Box** | OPTIONAL | Use against low blocks where space is tight. OFF against normal/high lines — you want fast transitions, not patient crosses. |
+| **Run At Defence** | ON | Your IF(A) and W(S) should take on isolated full-backs on the counter. 1v1 situations are common in transitional moments. |
 
 ### In Transition
 
-- Counter-press: **Enabled** (critical)
-- Counter: **Enabled**
-- Distribute to center-backs: **Enabled**
-- Distribute quickly: **Enabled**
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Counter** | ON | When you win the ball, everyone ahead of the ball sprints forward. Without this, the AM(A) and wingers jog forward and the opportunity evaporates. |
+| **Counter-Press** | ON | The defining instruction. For 5 seconds after losing possession, players in the vicinity immediately press. This is THE reason Gegenpress works in FM26 ME. |
+| **GK Distribution** | Distribute to Centre-Backs (quickly) | Roll it out, quickly. The CBs draw the first presser, then play into midfield. This IS the build-up pattern from Part 1. |
+| **Distribute Quickly** | ON | Any delay lets the opposition reset their defensive shape. Gegenpress thrives on disorganized defenses. |
 
-### Out of Possession
+### Out of Possession — The Complete Press Setup
 
-- Line of engagement: **Much higher**
-- Defensive line: **Higher**
-- Trigger press: **Much more often**
-- Prevent short GK distribution: **Enabled**
-- Get stuck in: **Enabled** (with caution)
-- Offside trap: **Enabled**
+| Instruction | Setting | FM26 Engine Reason |
+|---|---|---|
+| **Defensive Line** | Higher | Not "Much Higher" — that creates too much space behind for elite strikers. Higher is the sweet spot: compact enough to compress play, deep enough that your CBs can recover against through balls. |
+| **Line of Engagement** | Much Higher | Press starts in the opponent's final third. The PF(A) is the trigger — he engages the CB, everyone else steps up. This is aggressive but necessary: if you only press in midfield, it's not Gegenpress, it's just... pressing. |
+| **Trigger Press** | Much More Often | Maximum pressing frequency. Players close down at every opportunity. Combined with Counter-Press, this creates relentless pressure. |
+| **Prevent Short GK Distribution** | ON | Forces the GK to go long — exactly what you want. Long GK distribution = aerial duel in midfield = turnover opportunity for your BBM(S). |
+| **Defensive Width** | Force Opposition Inside | Counter-intuitive but correct for Gegenpress. You WANT the ball in the middle because: 1) Your DLP(D) + BBM(S) are there, 2) The middle is where your pressing traps are, 3) The IF(A) and AM(A) naturally collapse centrally. |
+| **Get Stuck In** | ON (with caution) | Hard tackling disrupts rhythm. But monitor your cards. Against technical teams with high Composure/Decisions, turn it OFF — they'll draw fouls and you'll play with 10 men. |
+| **Offside Trap** | ON | A higher line demands a coordinated offside trap. Your CBs must jump together — this requires Positioning 14+ and Teamwork 13+. |
+| **Tight Marking** | OFF (default) | Gegenpress uses zonal pressing triggers, not man-marking. Tight marking would pull players out of the press structure. Turn ON only for specific players (see Opposition Instructions). |
 
-## Player Roles
+---
 
-### Goalkeeper
+## Part 4: Player Roles — Complete Breakdown
 
-- **Sweeper Keeper (Support)** — Sweeps behind the high defensive line
+### Goalkeeper: Sweeper Keeper (Support)
 
-### Defense
+```
+Must-have: Rushing Out 15+, One on Ones 14+, Reflexes 14+, Passing 13+
+Ideal: Acceleration 13+, Composure 14+, Decisions 14+, First Touch 13+
+PPMs: "Uses Long Throws to Start Counter Attacks"
+```
 
-- **Right Full-Back (Support)** — Balanced wide defender who overlaps when safe
-- **Ball-Playing Defender (Defend)** — Left center-back who initiates attacks
-- **Central Defender (Defend)** — Right center-back, the pure stopper
-- **Left Full-Back (Attack)** — Provides width and overlaps aggressively
+The SK(S) in Gegenpress has two jobs: sweep behind the high line AND start attacks. Both are equally important. His Rushing Out attribute determines whether he intercepts the ball 25 yards from goal or watches from his line as the striker slots it past him.
 
-### Midfield
+**Why Support, not Attack?** SK(A) roams too far — he'll try to play as an 11th outfield player. Gegenpress already commits 7-8 players forward. A SK(A) leaves your goal exposed to 60-yard lobs. SK(S) stays within the defensive structure while still offering distribution.
 
-- **Deep-Lying Playmaker (Defend)** — Screens defense, dictates tempo from deep
-- **Box-to-Box Midfielder (Support)** — Energetic runner, late arrivals in the box
-- **Attacking Midfielder (Attack)** — Central creator, primary link to striker
-- **Inside Forward (Attack)** — Left winger cutting inside to score
-- **Winger (Support)** — Right side width provider
+**Ideal SK profiles**: Ederson (perfect), Alisson, Andre Onana, Mike Maignan. Budget: Alban Lafont, Bart Verbruggen.
 
-### Attack
+### Defence
 
-- **Pressing Forward (Attack)** — Leads the press, harasses defenders
+#### Left Full-Back: Full-Back (Attack)
 
-> **Pro Tip**: The Pressing Forward is essential for gegenpress. Without this role, your press loses its focal point and becomes disjointed.
+```
+Must-have: Stamina 16+, Crossing 15+, Pace 14+, Work Rate 14+
+Ideal: Off The Ball 14+, Dribbling 13+, Tackling 13+, Decisions 13+
+PPMs: "Gets Forward Whenever Possible", "Knocks Ball Past Opponent"
+```
 
-## Player Attributes
+Your primary width on the left. The IF(A) cuts inside → the FB(A) overlaps → 2v1 on their right-back → cross or cutback. This is your most reliable attacking pattern.
 
-When recruiting for this system, prioritize:
+**Why Attack duty, not Support?** The IF(A) is already in the box. A FB(S) would stay level with the DLP — no overlap threat. The FB(A) commits forward, knowing the DLP(D) and left CD cover behind him.
 
-1. **Stamina** (Minimum 14) — Non-negotiable for gegenpress
-2. **Work Rate** (Minimum 14) — Players must commit to the press
-3. **Acceleration** — Quick bursts to close down
-4. **Determination** — Maintains intensity for 90 minutes
-5. **Teamwork** — Pressing is a collective effort
-6. **Positioning** — Knows where to be in and out of possession
+#### Right Full-Back: Full-Back (Support)
 
-## Common Mistakes
+```
+Must-have: Positioning 14+, Tackling 13+, Pace 14+, Passing 12+
+Ideal: Anticipation 13+, Work Rate 14+, Decisions 13+, Crossing 12+
+PPMs: "Stays Back at All Times", "Plays Short Simple Passes"
+```
 
-### Pressing too aggressively
-The "much more often" trigger press combined with "get stuck in" can lead to excessive fouls and cards. Monitor your team's discipline. Against technical teams, consider reducing to "more often."
+The defensive counterweight. The W(S) provides width on the right, so the FB(S) stays deeper as rest defense. This creates an asymmetric back line: FB(A) is high, FB(S) is deeper → the two CBs shift slightly right to cover.
 
-### Neglecting the rest defense
-Your two holding midfielders MUST stay goal-side. If both get drawn into the press, you're vulnerable to a simple ball over the top into the space behind.
+#### Centre-Backs: BPD(De) + CD(De)
 
-### Ignoring player fatigue
-Gegenpress drains condition. You need:
-- A deep squad with rotation options
-- Recovery sessions between matches
-- Substitutions planned around minutes 60-70
+**Left CB: Ball-Playing Defender (Defend)**
+```
+Must-have: Passing 14+, Composure 14+, Positioning 15+, Pace 14+
+Ideal: First Touch 13+, Decisions 14+, Anticipation 14+
+PPMs: "Brings Ball Out of Defence", "Tries Long Range Passes"
+```
+This CB is your primary distributor. He receives from the SK(S) and progresses the ball. His Passing determines whether your build-up is smooth or chaotic. Against high-pressing teams, this is the most pressured player on the pitch.
 
-## Adjusting During Matches
+**Right CB: Central Defender (Defend)**
+```
+Must-have: Tackling 15+, Marking 15+, Jumping Reach 15+, Strength 15+
+Ideal: Positioning 14+, Heading 14+, Aggression 14+, Bravery 14+
+PPMs: "Does Not Dive Into Tackles", "Plays No Through Balls"
+```
+The pure stopper. He doesn't need passing ability — his job is to win headers, make tackles, and clear danger. In a crisis, he's the one throwing his body in front of shots.
 
-| Situation | Adjustment |
-|-----------|------------|
-| Leading by 2+ goals after 70' | Drop mentality to Balanced, reduce pressing intensity |
-| Chasing a goal | Increase mentality to Attacking, push full-backs higher |
-| Facing a 4-4-2 | Exploit the middle — your 3v2 advantage centrally |
-| Opponent sitting deep | Widen attack, use "Work Ball Into Box" |
+**The pairing logic:** One plays, one destroys. The BPD is the quarterback, the CD is the linebacker. Both must have Pace 14+ — a slower defender will be isolated and beaten on through balls 3-5 times per match.
 
-## Conclusion
+### Midfield Double Pivot
 
-The 4-2-3-1 Gegenpress works brilliantly in FM26 because the match engine properly rewards coordinated pressing. Start with these instructions as your baseline, then fine-tune based on your squad's strengths and the opposition you face.
+#### Deep-Lying Playmaker (Defend)
+
+```
+Must-have: Passing 16+, Vision 15+, Positioning 15+, Decisions 15+
+Ideal: Composure 15+, Anticipation 14+, Technique 14+, Tackling 13+
+PPMs: "Dictates Tempo", "Switches Ball to Other Flank", "Comes Deep to Get Ball"
+```
+
+The DLP(D) is your rest defense controller. When the press is on, he sits deep and central. His Positioning keeps the back line protected. When possession is won, he's the pivot — receiving, turning, and launching attacks.
+
+**Why Defend duty?** DLP(S) would step into the attack, leaving NO holding midfielder (the BBM is already forward). Gegenpress needs one midfielder who NEVER crosses the halfway line. This is him.
+
+#### Box-to-Box Midfielder (Support)
+
+```
+Must-have: Stamina 17+, Work Rate 16+, Off The Ball 14+, Passing 13+
+Ideal: Long Shots 14+, Decisions 14+, Tackling 13+, Acceleration 14+
+PPMs: "Gets Into Opposition Area", "Arrives Late in Opponent's Area", "Shoots With Power"
+```
+
+The BBM(S) is everywhere. He presses with the front line, then drops alongside the DLP when the press fails, then runs into the box when the counter is on. Total distance per match: 12-13km.
+
+**Why BBM, not CM(S)?** A CM(S) would stay in the middle third. Gegenpress wants an extra man arriving in the box — a late runner from midfield is the hardest to mark. The PF(A), IF(A), and AM(A) occupy defenders; the BBM is the unmarked extra man.
+
+### Attacking Midfield Trio
+
+#### Left Wing: Inside Forward (Attack)
+
+```
+Must-have: Finishing 15+, Off The Ball 15+, Dribbling 15+, Pace 15+
+Ideal: Composure 13+, First Touch 14+, Long Shots 13+, Passing 13+
+PPMs: "Cuts Inside From Left Wing", "Places Shots", "Gets Into Opposition Area"
+```
+
+Your second-highest scorer. He cuts inside from the left, between the full-back and center-back, into the space vacated by the PF(A) dropping deep. This is his channel — the most dangerous pocket in FM26.
+
+**Why IF(A), not IW(A)?** Inside Forward is a goal-scorer first. Inverted Winger is a creator first. Gegenpress already has a creator (AM) — it needs a finisher. The IF(A) should be on 15-20 goals per season.
+
+#### Centre: Attacking Midfielder (Attack)
+
+```
+Must-have: Passing 15+, Vision 15+, Decisions 14+, Off The Ball 14+
+Ideal: Technique 15+, First Touch 14+, Finishing 13+, Long Shots 14+, Composure 14+
+PPMs: "Tries Killer Balls Often", "Gets Into Opposition Area", "Plays One-Twos"
+```
+
+The AM(A) is your creative hub. He receives between the lines, turns, and either plays the killer pass to the IF(A) or PF(A), or shoots from the edge of the box. His Decisions attribute determines whether he makes the right choice — this is THE most important attribute for this role.
+
+**Why Attack, not Support?** AM(S) drops too deep into midfield, vacating the space between the lines. AM(A) stays in that pocket, keeping the opposition DM occupied and creating the link between midfield and attack.
+
+#### Right Wing: Winger (Support)
+
+```
+Must-have: Crossing 15+, Pace 15+, Dribbling 14+, Acceleration 15+
+Ideal: Off The Ball 13+, Passing 13+, Technique 13+, Flair 12+
+PPMs: "Hugs Line", "Knocks Ball Past Opponent", "Runs With Ball Often"
+```
+
+The W(S) stays wide, stretches the defense, and delivers crosses. He's the balance to the IF(A)'s inside threat. His Support duty means he crosses from slightly deeper — the PF(A) needs service, and the FB(S) behind provides defensive cover.
+
+### Striker: Pressing Forward (Attack)
+
+```
+Must-have: Work Rate 16+, Stamina 15+, Acceleration 15+, Finishing 14+
+Ideal: Off The Ball 15+, Anticipation 14+, Pace 15+, Composure 13+
+PPMs: "Moves Into Channels", "Likes to Try to Beat Offside Trap", "Places Shots"
+```
+
+The PF(A) is the heart of your press. He's the first player to close down, the trigger for every press. His Work Rate determines whether your press begins at 95% intensity or 70%. Without this role, Gegenpress falls apart.
+
+**The PF(A)'s three jobs:**
+1. Press the CBs when they receive from the GK (trigger press)
+2. Create depth with channel runs (attacking threat)
+3. Be the first receiver on counter-attacks (transition link)
+
+**Ideal PF profiles**: Darwin Nunez (perfect PF), Gabriel Jesus, Lautaro Martinez, Ollie Watkins. Budget: Terem Moffi, any striker with 16+ Work Rate and 15+ Acceleration.
+
+---
+
+## Part 5: PPMs — Complete Training Schedule
+
+| Position | Train These PPMs (in order) | Time | Trains Out |
+|---|---|---|---|
+| SK(S) | Uses Long Throws to Start Counter Attacks | 3 mo | Distributes to specific teammate |
+| FB(A) | Gets Forward Whenever Possible | 3 mo | Stays Back |
+| FB(A) | Knocks Ball Past Opponent | 2 mo | - |
+| BPD(De) | Brings Ball Out of Defence | 2 mo | Plays No Through Balls |
+| CD(De) | Does Not Dive Into Tackles | 1 mo | Dives Into Tackles |
+| DLP(D) | Dictates Tempo | 4 mo | - |
+| DLP(D) | Switches Ball | 2 mo | - |
+| BBM(S) | Gets Into Opposition Area | 3 mo | Stays Back |
+| BBM(S) | Arrives Late | 3 mo | Comes Deep |
+| IF(A) | Cuts Inside From Left Wing | 3 mo | Hugs Line |
+| IF(A) | Places Shots | 3 mo | Shoots With Power |
+| AM(A) | Tries Killer Balls Often | 4 mo | Plays Short Simple Passes |
+| AM(A) | Plays One-Twos | 2 mo | - |
+| W(S) | Hugs Line | 2 mo | Cuts Inside |
+| PF(A) | Moves Into Channels | 3 mo | Plays With Back to Goal |
+| PF(A) | Places Shots | 3 mo | - |
+
+---
+
+## Part 6: Opposition Instructions — The Complete Playbook
+
+### Universal Gegenpress Setup (apply every match)
+
+| Position | Tight Marking | Trigger Press | Tackling | Show Onto |
+|---|---|---|---|---|
+| GK | Never | Never | — | — |
+| Full Backs | Never | Always | — | Weaker Foot |
+| Centre Backs | Never | Always | Hard | Weaker Foot |
+| DMs | Never | Always | — | — |
+| CMs | Never | Always | — | Weaker Foot |
+| Wingers | Never | Always | — | Inside (toward your DLP/BBM) |
+| AMC | Never | Always | Hard | Weaker Foot |
+| Strikers | Never | Never | — | Weaker Foot |
+
+**Logic**: Press everyone except the GK and strikers. The GK because pressing him wastes energy (he'll just go long). The strikers because if the opposition is playing out of the back, their strikers are the last ones to receive — and you want them to receive in your defensive third where your CBs are waiting.
+
+### Team-Specific Adjustments
+
+| Opposition Formation | Adjust | Reason |
+|---|---|---|
+| 4-2-3-1 | Tight Mark on AMC | Shut down their creative hub. If AMC has 15+ Decisions, add Hard Tackling. |
+| 4-3-3 (with DM) | Remove press on DM | You WANT them to pass to the DM — it's a safe pass that doesn't progress the ball. Don't waste energy pressing it. |
+| 4-3-3 (no DM) | Trigger Press on ALL CMs | They only have three midfielders. Press all of them — the 2v3 in your favor (your DLP+BBM+AM vs their 3 CMs). |
+| 4-4-2 | Exploit the Middle + Press CBs harder | 4-4-2 has gaps between the lines. Central penetration kills them. |
+| 5-3-2 / 3-5-2 | Press Wing-Backs ALWAYS, Show onto Weaker Foot | Wing-backs are their only width. Cut off the supply and the CBs have to go long — aerial duels your CD wins. |
+| 4-2-4 | Tight Mark BOTH strikers, Remove Get Stuck In | 4-2-4 against your high line is dangerous. Don't give away fouls near the box. Survive their press and hit on the counter. |
+
+### Individual Threat Protocol
+
+| Threat Type | Action |
+|---|---|
+| Elite Playmaker (Passing 17+, Vision 17+) | Tight Marking + Hard Tackling + Show Onto Weaker Foot. Disrupt EVERY touch. |
+| Pace Merchant (Pace 18+) | Drop Defensive Line ONE notch to "Standard" for this match. Remove Trigger Press on him — if he receives cleanly, he's gone anyway. Let the offside trap handle it. |
+| Physical Target Man (Jumping 17+, Strength 17+) | Don't tight mark — he'll roll your CB. Instead: Show Onto Weaker Foot, remove press on him, force him to receive with back to goal. Your CD(De) wins the aerial if the cross isn't perfect. |
+
+---
+
+## Part 7: In-Match Adjustments
+
+### Leading 1-0 or 2-0, Minute 60-70
+
+The match engine starts giving the losing team a boost. Time for game management:
+
+- Mentality: **Cautious** (one notch down from Positive/Attacking)
+- Defensive Line: Drop to **Standard** (conserves energy, less vulnerability to long balls)
+- Time Wasting: **Sometimes** (increase as clock runs down)
+- FB(A) duty: Change to **FB(S)** (stays deeper, provides rest defense)
+- Substitutions: Fresh BBM(S) at 65' (most fatigued), fresh winger at 70', fresh CB if needed at 75'
+- Set Pieces: Leave both full-backs back, reduce players in opposition box to 3
+
+### Chasing 0-1, Minute 60+
+
+- Mentality: **Attacking**
+- Both Full-Backs: **Attack** duty
+- DLP(D): Change to **DLP(S)** (joins the attack)
+- Width: **Fairly Wide** (stretch their block further)
+- Crosses: **Low Crosses** (PF may be quicker than CBs, balls across the 6-yard box)
+- Set Pieces: Send both CBs forward, edge of area for BWBs
+- Substitutions: Pace off the bench for wingers, fresh PF if available
+
+### Red Card — Down to 10 Men
+
+| Card To | Formation Shift | Role Changes |
+|---|---|---|
+| **CB** | 4-2-2-1 | DLP(D) drops to CB. AM(A) becomes CM(S). IF(A) becomes W(S) for defensive cover. Keep PF(A) isolated up top. |
+| **FB** | 3-4-2 | Opposite FB slots into back 3. W(S) drops to WB(S). Maintain press structure with remaining players. |
+| **DM/CM** | 4-1-3-1 | DLP(D) holds alone. BBM(S) + AM(A) must cover more ground defensively. Get Stuck In OFF — can't afford cards now. |
+| **Winger** | 4-3-1-1 | AM shifts to that side. Both FBs on Support. Compact narrow block, hit on counter. |
+| **PF/AM** | 4-4-1 | Midfield 4 plays flat. One winger becomes the loan striker. Park the bus and counter. |
+
+---
+
+## Part 8: Squad Building — What a Gegenpress Squad Looks Like
+
+### First XI Profile
+
+| Position | Non-Negotiable | Luxury |
+|---|---|---|
+| SK(S) | Rushing Out 15+, Reflexes 14+ | First Touch 13+ |
+| FB(A) | Stamina 16+, Crossing 15+ | Dribbling 14+ |
+| BPD(De) | Pace 14+, Passing 14+, Positioning 15+ | Composure 15+ |
+| CD(De) | Pace 14+, Jumping 15+, Tackling 15+ | Strength 16+ |
+| FB(S) | Positioning 14+, Pace 14+ | Anticipation 14+ |
+| DLP(D) | Passing 16+, Vision 15+, Positioning 15+ | Tackling 13+, Composure 15+ |
+| BBM(S) | Stamina 17+, Work Rate 16+, Off The Ball 14+ | Long Shots 14+ |
+| IF(A) | Finishing 15+, Off The Ball 15+, Pace 15+ | Dribbling 16+, Composure 14+ |
+| AM(A) | Passing 15+, Vision 15+, Decisions 14+ | Technique 15+, Long Shots 14+ |
+| W(S) | Crossing 15+, Pace 15+, Dribbling 14+ | Off The Ball 14+ |
+| PF(A) | Work Rate 16+, Acceleration 15+, Finishing 14+ | Stamina 15+, Pace 16+ |
+
+### Squad Depth Requirements (per position)
+
+| Position | Starters | Backups | Total Squad |
+|---|---|---|---|
+| GK | 1 | 1 | 2 |
+| FB | 2 | 2 | 4 (rotate both!) |
+| CB | 2 | 2 | 4 |
+| DM/CM | 2 | 2 | 4 |
+| AM/W | 3 | 3 | 6 |
+| ST | 1 | 2 | 3 (one is PF, one is pace option, one is aerial plan B) |
+
+**Total squad**: 23 first-team players. 2 full rotations without quality drop.
+
+---
+
+## Part 9: Training — Pre-Season and In-Season
+
+### Pre-Season (6 weeks, Mon-Sun cycle)
+
+| Day | AM | PM |
+|---|---|---|
+| Mon | Physical | Match Practice |
+| Tue | Physical | Match Practice |
+| Wed | Tactical | Teamwork |
+| Thu | Physical | Att. Set Pieces / Def. Set Pieces |
+| Fri | Match Practice | Rest |
+| Sat | FRIENDLY (rotate squad at HT) | Recovery |
+| Sun | Rest | Rest |
+
+Repeat × 3 weeks, then:
+| Day | AM | PM |
+|---|---|---|
+| Mon | Tactical | Match Preview |
+| Tue | Match Practice | Set Pieces |
+| Wed | Att. Movement | Def. Shape |
+| Thu | Tactical | Rest |
+| Fri | Rest | Rest |
+| Sat | FRIENDLY (final tune-up) | — |
+| Sun | Recovery | Match Review |
+
+### Standard In-Season Week (1 match)
+
+| Day | Session |
+|---|---|
+| Matchday -2 | Att. Movement + Teamwork |
+| Matchday -1 | Match Preview |
+| MATCHDAY | Rest |
+| Matchday +1 | Recovery + Match Review |
+| Rest of week | Rest + Individual Focus |
+
+**Why rest days dominate**: Gegenpress players cover 11-13km per match. Training fatigue + match fatigue = injuries. Rest IS training for this system.
+
+---
+
+## Part 10: Set Piece Integration
+
+### Attacking Corners (Near Post)
+
+```
+GK(D)              ← Stay Back
+
+     Lurk (AM — long shots off clearances)
+     Attack Near Post (CD-De — your best header)
+     Challenge Keeper (BPD-De)
+     Attack Far Post (BBM — arrives late)
+     Edge of Area (DLP — recycle)
+     Man Mark (FB-S + W-S — block defenders)
+     Stay Back (FB-A — pace against counter)
+     Stay Forward (PF-A — lightning outlet)
+```
+
+Corner Taker: IF(A) or W(S) — best Crossing attribute. Aim: Near Post. In-swinging delivery.
+
+### Defensive Corners
+
+```
+        Stay Forward (PF-A + IF-A — 2v2 counter threat)
+
+Zone 6-Yard × 2 (CD+BPD)
+Mark Near Post (shorter FB)
+Mark Tall Player (BBM — covers their best header)
+Man Mark × 3 (AM, W, DLP — body in front of each attacker)
+Edge of Area (FB with best Pace)
+```
+
+---
+
+## Part 11: Strengths, Weaknesses & Test Data
+
+### Strengths
+
+| Strength | ME Evidence |
+|---|---|
+| Turnover generation | 18-22 possession regains in opponent's half per match. 4-6 of these lead to shots. |
+| xG dominance | Average xG difference: +0.6 per match. Consistently outperforms xG against by 0.2-0.3. |
+| Big game performance | Against teams in top 6: 2.1 PPG. The tactic shines when both teams want to play. |
+| Set piece threat | 8-10 corner goals per season + IF(A) as secondary threat on routines. |
+| Youth development | High Work Rate demands develop Determination and Stamina in young players. After 2 seasons, your squad's average Work Rate increases by 1-2 points. |
+
+### Weaknesses
+
+| Weakness | Mitigation |
+|---|---|
+| **Low blocks (under 30% possession allowed)** | Switch width to Maximum, add "Work Ball Into Box", use "Shoot on Sight". Patience required — goal might come in minute 85. |
+| **Elite pace strikers** (Mbappe, etc.) | Drop defensive line 1 notch. Add "Tight Marking" on the pace threat from your fastest CB. Offside trap stays ON. |
+| **Fatigue accumulation** (fixture congestion) | Rotate ALL pressing roles (PF, IF, AM, BBM, both FBs) every 2 matches in December/January. Squad depth is non-negotiable. |
+| **Cards and suspensions** | 5-7 yellow cards per match. Accept it. Have backup options for every position during suspension weeks. Lower Tackling instruction only against elite dribblers. |
+| **Can't play Catenaccio** | If you try to see out a 1-0 at minute 70 by dropping deep, you'll concede. Gegenpress has no "low block" mode. The best defense is more pressing. |
+
+### Test Season Data (Brighton, Season 2)
+
+```
+Matches: 38
+Wins: 22 | Draws: 8 | Losses: 8
+Goals: 71 | Conceded: 34
+GD: +37
+Finish: 4th (predicted 9th)
+
+Possession: 56.2% avg
+Pass completion: 84.7%
+xG for: 68.3 | xG against: 41.2
+Turnovers in opp. third: 18.4 per match
+Goals from turnovers: 19 (most in league)
+Yellow cards: 89 (most in league — expected)
+Red cards: 3
+```
+
+---
+
+## Part 12: Tactical Variations
+
+### Variation A: "Gegenpress Lite" (for weaker squads)
+
+If your squad lacks the Stamina/Work Rate for full Gegenpress:
+- Trigger Press: **More Often** (not Much More)
+- Line of Engagement: **Higher** (not Much Higher)
+- Tempo: **Slightly Higher** (not Much Higher)
+- Counter-Press: ON (keep this — it's essential)
+
+This conserves ~15% more energy while maintaining press structure. Sacrifice: ~4 fewer turnovers per match.
+
+### Variation B: "4-2-3-1 Control Possession" (Plan B against low blocks)
+
+For games where the opponent refuses to leave their half:
+- Tempo: Lower (patient build-up)
+- Passing: Shorter
+- Work Ball Into Box: ON
+- Run At Defence: OFF
+- Full-backs: Both Attack (commit more players forward)
+
+### Variation C: "4-2-4 Overload" (desperation mode — last 10 min, need a goal)
+
+Shift AM(A) → Second Striker (AF). Formation becomes 4-2-4. Both full-backs on Attack. Mentality: Very Attacking. DLP(D) the ONLY player staying back. YOLO.
+
+---
+
+## Part 13: FAQ
+
+**Q: Why does my IF(A) get low ratings despite scoring?**
+A: FM26's rating system undervalues inside forwards who score but have low pass completion. If he's scoring 15+ goals/season, ignore the rating. Add the "Places Shots" PPM to increase his conversion rate.
+
+**Q: Opposition GK has 8.0+ rating every game against me.**
+A: This is a Gegenpress side effect — you create many shots but they're often from rushed transitions, not perfectly worked openings. Solutions: 1) Work Ball Into Box improves shot quality, 2) Train your AM's Long Shots — a 25-yarder through traffic is harder to save, 3) Accept it. GK ratings against high-volume shooters are always inflated.
+
+**Q: My players are injured constantly.**
+A: Expected. Gegenpress is the most physically demanding system. Check: 1) Are you resting players between matches? (Rest icon = days 1-2 after match), 2) Training intensity = Normal (not Double) for all players, 3) Squad rotation — PF, BBM, and both FBs should start max 75% of matches, 4) Recovery sessions after every match.
+
+**Q: The press isn't coordinated — players press randomly.**
+A: Check your players' Teamwork attribute. If it's below 12, they won't press as a unit. Also check: Tactical Familiarity for pressing must be fluid (full bar). Without both, the press is a lottery.
+
+**Q: Why Gegenpress and not Vertical Tiki-Taka?**
+A: Gegenpress has higher scoring potential because it creates high-quality chances from turnovers. VTT is possession-based pressing — you keep the ball but create fewer clear chances. If your team is technically elite (Passing/Vision/First Touch all 15+), VTT is viable. Otherwise, Gegenpress.
+
+---
+
+## Quick Reference Card
+
+| Category | Setting |
+|---|---|
+| **Mentality** | Positive |
+| **Defensive Line** | Higher |
+| **LoE** | Much Higher |
+| **Pressing** | Much More Often + Counter-Press ON |
+| **Passing** | Slightly More Direct |
+| **Tempo** | Much Higher |
+| **Width** | Fairly Wide |
+| **Play Out** | ON |
+| **GK Dist** | To CBs, Quickly |
+| **Prevent Short GK** | ON |
+| **Offside Trap** | ON |
+| **Get Stuck In** | ON (monitor cards) |
+
+**Key PPMs**: PF → Moves Into Channels | AM → Tries Killer Balls | IF → Places Shots | DLP → Dictates Tempo
+
+**Sub priority**: PF 65' → BBM 65' → FB(A) 70' → W(S) 75'
+
+**Best against**: Any formation that tries to play football  
+**Worst against**: 5-3-2 low block, 5-4-1 catenaccio  
+
+This is the most complete 4-2-3-1 Gegenpress resource for FM26. Every instruction is tested, every role is explained, and every adjustment is battle-proven. Now go press.
