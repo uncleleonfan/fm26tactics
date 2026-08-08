@@ -36,7 +36,7 @@ function SectionPlaceholderTall() {
 }
 
 export const metadata: Metadata = {
-  title: "FM26 Tactics — Best Football Manager 2026 Tactics & Formations",
+  title: "FM26 Tactics — Best Tactics & Formations for FM 2026",
   description:
     "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides for Football Manager 2026.",
   keywords: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     canonical: "https://fm26tactics.com",
   },
   openGraph: {
-    title: "FM26 Tactics — Best Football Manager 2026 Tactics & Formations",
+    title: "FM26 Tactics — Best Tactics & Formations for FM 2026",
     description:
       "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides.",
     url: "https://fm26tactics.com",
