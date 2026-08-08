@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/hero";
+import { QuickPicks } from "@/components/home/quick-picks";
 import { JsonLd } from "@/components/shared/json-ld";
 import { siteConfig } from "@/lib/metadata";
 
@@ -147,6 +148,7 @@ export default function HomePage() {
         }}
       />
       <HeroSection />
+      <QuickPicks />
       <CommunityInsights />
       <FeaturedTactics />
       <StatsSection />

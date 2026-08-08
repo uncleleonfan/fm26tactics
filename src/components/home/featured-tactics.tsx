@@ -16,14 +16,14 @@ interface FeaturedTactic {
 
 const featuredTactics: FeaturedTactic[] = [
   {
-    slug: "4-2-3-1-gegenpress",
-    title: "4-2-3-1 Gegenpress: The Modern High-Pressure Blueprint",
-    formation: "4-2-3-1",
-    style: "gegenpress",
-    difficulty: "intermediate",
-    excerpt: "Learn how to set up an aggressive pressing system that suffocates opponents and creates rapid transitions.",
-    readTime: 12,
-    rating: 4.8,
+    slug: "3-5-2-catenaccio",
+    title: "3-5-2 Catenaccio: The Art of Defensive Solidity",
+    formation: "3-5-2",
+    style: "park-the-bus",
+    difficulty: "beginner",
+    excerpt: "Build an impregnable defensive fortress — suffocate attacks and strike with devastating counter-attacks.",
+    readTime: 11,
+    rating: 4.4,
   },
   {
     slug: "4-3-3-tiki-taka",
@@ -34,6 +34,16 @@ const featuredTactics: FeaturedTactic[] = [
     excerpt: "Control the game with intricate short passing, intelligent movement, and positional play mastery.",
     readTime: 15,
     rating: 4.6,
+  },
+  {
+    slug: "4-2-3-1-gegenpress",
+    title: "4-2-3-1 Gegenpress: The Modern High-Pressure Blueprint",
+    formation: "4-2-3-1",
+    style: "gegenpress",
+    difficulty: "intermediate",
+    excerpt: "Learn how to set up an aggressive pressing system that suffocates opponents and creates rapid transitions.",
+    readTime: 12,
+    rating: 4.8,
   },
   {
     slug: "3-5-2-counter-attack",
@@ -54,16 +64,6 @@ const featuredTactics: FeaturedTactic[] = [
     excerpt: "Master the classic 4-4-2 with wing play — stretch defenses wide, whip in crosses, and unleash your strike partnership.",
     readTime: 10,
     rating: 4.5,
-  },
-  {
-    slug: "3-5-2-catenaccio",
-    title: "3-5-2 Catenaccio: The Art of Defensive Solidity",
-    formation: "3-5-2",
-    style: "park-the-bus",
-    difficulty: "beginner",
-    excerpt: "Build an impregnable defensive fortress — suffocate attacks and strike with devastating counter-attacks.",
-    readTime: 11,
-    rating: 4.4,
   },
   {
     slug: "4-3-3-fluid-counter",

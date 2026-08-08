@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Flame } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -71,7 +71,7 @@ export function HeroSection() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <Link
               href="/builder"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-background-primary font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300 group"
@@ -86,6 +86,21 @@ export function HeroSection() {
               Browse Tactics
             </Link>
           </div>
+
+          {/* Trending Tactic Quick Link */}
+          <Link
+            href="/tactics/3-5-2-catenaccio"
+            className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 hover:bg-amber-500/15 hover:border-amber-500/40 transition-all duration-300 group"
+          >
+            <span className="flex items-center gap-1.5">
+              <Flame className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">Trending</span>
+            </span>
+            <span className="text-sm text-text-primary font-medium group-hover:text-amber-200 transition-colors">
+              3-5-2 Catenaccio — The Art of Defensive Solidity
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 text-amber-400 group-hover:translate-x-1 transition-transform" />
+          </Link>
 
           {/* Citation */}
           <p className="text-xs text-text-muted mt-8 leading-relaxed">
