@@ -7,5 +7,15 @@
   "trailingSlash": false,
   "github": {
     "silent": true
-  }
+  },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "www.fm26tactics.com" }
+      ],
+      "destination": "https://fm26tactics.com/:1",
+      "permanent": true
+    }
+  ]
 }
