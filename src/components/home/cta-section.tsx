@@ -1,37 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Grip, Users, Settings, Share2 } from "lucide-react";
 
-const steps = [
-  {
-    icon: <Grip className="w-5 h-5" />,
-    title: "Drag & Drop Players",
-    description:
-      "Position your 11 players anywhere on the pitch with smooth drag-and-drop controls.",
-  },
-  {
-    icon: <Users className="w-5 h-5" />,
-    title: "Assign Roles & Duties",
-    description:
-      "Choose from all FM26 player roles and duties — defend, support, or attack.",
-  },
-  {
-    icon: <Settings className="w-5 h-5" />,
-    title: "Configure Team Instructions",
-    description:
-      "Set mentality, in-possession, transition, and out-of-possession instructions.",
-  },
-  {
-    icon: <Share2 className="w-5 h-5" />,
-    title: "Export & Share",
-    description:
-      "Save your tactic as an image or share a link with the community.",
-  },
-];
-
 export function TacticBuilderCTA() {
+  const t = useTranslations("home");
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -51,6 +26,29 @@ export function TacticBuilderCTA() {
     return () => observer.unobserve(el);
   }, []);
 
+  const steps = [
+    {
+      icon: <Grip className="w-5 h-5" />,
+      title: t("dragDropPlayers"),
+      description: t("dragDropPlayersDesc"),
+    },
+    {
+      icon: <Users className="w-5 h-5" />,
+      title: t("assignRoles"),
+      description: t("assignRolesDesc"),
+    },
+    {
+      icon: <Settings className="w-5 h-5" />,
+      title: t("configureInstructions"),
+      description: t("configureInstructionsDesc"),
+    },
+    {
+      icon: <Share2 className="w-5 h-5" />,
+      title: t("exportShare"),
+      description: t("exportShareDesc"),
+    },
+  ];
+
   return (
     <section ref={sectionRef} className="relative py-20 overflow-hidden">
       {/* Background */}
@@ -68,7 +66,7 @@ export function TacticBuilderCTA() {
                 }`}
               >
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-4">
-                  Interactive Tool
+                  {t("interactiveTool")}
                 </span>
               </div>
 
@@ -79,14 +77,12 @@ export function TacticBuilderCTA() {
                 }`}
               >
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-                  Build Your Own{" "}
-                  <span className="gradient-text">Tactic</span>
+                  {t("buildYourOwn")}{" "}
+                  <span className="gradient-text">{t("tacticHighlight")}</span>
                 </h2>
 
                 <p className="text-text-secondary mb-8 leading-relaxed">
-                  Stop imagining and start creating. Our interactive Tactic
-                  Builder lets you visualize every aspect of your FM26 formation
-                  in real-time.
+                  {t("builderDescription")}
                 </p>
               </div>
 
@@ -124,7 +120,7 @@ export function TacticBuilderCTA() {
                 href="/builder"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-background-primary font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300 group"
               >
-                Open Tactic Builder
+                {t("openBuilder")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

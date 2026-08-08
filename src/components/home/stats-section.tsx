@@ -1,28 +1,34 @@
-import { Link } from "@/i18n/routing";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Shield, Zap, Compass } from "lucide-react";
 
 export function StatsSection() {
+  const t = useTranslations("stats");
+
+  const stats = [
+    {
+      icon: <Shield className="w-6 h-6" />,
+      title: t("formations"),
+      description: t("formationsDesc"),
+    },
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: t("playerRoles"),
+      description: t("playerRolesDesc"),
+    },
+    {
+      icon: <Compass className="w-6 h-6" />,
+      title: t("guides"),
+      description: t("guidesDesc"),
+    },
+  ];
+
   return (
     <section className="border-t border-[#1C2436]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <Shield className="w-6 h-6" />,
-              title: "10+ Formations",
-              description: "From classic 4-4-2 to modern 3-4-2-1, every formation analyzed in depth.",
-            },
-            {
-              icon: <Zap className="w-6 h-6" />,
-              title: "All Player Roles",
-              description: "Complete database of FM26 player roles with attribute requirements and best setups.",
-            },
-            {
-              icon: <Compass className="w-6 h-6" />,
-              title: "Interactive Builder",
-              description: "Visual drag-and-drop tactic editor to experiment with formations in real-time.",
-            },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.title} className="text-center">
               <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mx-auto mb-4">
                 {stat.icon}

@@ -39,11 +39,11 @@ export function HeroSection() {
 
           {/* H1 */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
-            Master{" "}
+            {t("heroLine1")}{" "}
             <span className="gradient-text">FM26</span>
             <br />
-            Tactics Like{" "}
-            <span className="gradient-text">Never Before</span>
+            {t("heroLine2")}{" "}
+            <span className="gradient-text">{t("heroHighlight2")}</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-text-secondary max-w-xl mb-8 leading-relaxed">
@@ -77,7 +77,7 @@ export function HeroSection() {
               <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">{t("trending")}</span>
             </span>
             <span className="text-sm text-text-primary font-medium group-hover:text-amber-200 transition-colors">
-              3-5-2 Catenaccio — The Art of Defensive Solidity
+              {t("trendingTacticText")}
             </span>
             <ArrowRight className="w-3.5 h-3.5 text-amber-400 group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -85,16 +85,20 @@ export function HeroSection() {
           {/* Citation */}
           <p className="text-xs text-text-muted mt-8 leading-relaxed">
             <cite>
-              Curated from 44+ community-tested tactics and 2,700+ simulated
-              matches across{" "}
-              <a href="https://fm-arena.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">FM-Arena</a>
-              ,{" "}
-              <a href="https://fmscout.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">FM Scout</a>
-              ,{" "}
-              <a href="https://sortitoutsi.net" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sortitoutsi</a>
-              , and{" "}
-              <a href="https://passion4fm.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Passion4FM</a>
-              .
+              {t.rich("heroCitation", {
+                fmarena: (chunks) => (
+                  <a href="https://fm-arena.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{chunks}</a>
+                ),
+                fmscout: (chunks) => (
+                  <a href="https://fmscout.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{chunks}</a>
+                ),
+                sorti: (chunks) => (
+                  <a href="https://sortitoutsi.net" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{chunks}</a>
+                ),
+                p4fm: (chunks) => (
+                  <a href="https://passion4fm.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{chunks}</a>
+                ),
+              })}
             </cite>
           </p>
         </div>

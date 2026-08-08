@@ -74,6 +74,12 @@ const difficultyColors: Record<string, string> = {
   advanced: "bg-red-500/20 text-red-400",
 };
 
+const difficultyKey: Record<string, string> = {
+  beginner: "difficultyBeginner",
+  intermediate: "difficultyIntermediate",
+  advanced: "difficultyAdvanced",
+};
+
 export function FeaturedTactics() {
   const t = useTranslations("home");
   const cm = useTranslations("common");
@@ -87,7 +93,7 @@ export function FeaturedTactics() {
             {t("featuredTactics").split(" ").slice(1).join(" ")}
           </h2>
           <p className="text-text-secondary text-sm">
-            Top-rated formations and play styles analyzed by the community
+            {t("featuredTacticsSubtitle")}
           </p>
         </div>
         <Link
@@ -112,7 +118,7 @@ export function FeaturedTactics() {
               </span>
               <div className="flex items-center gap-2">
                 <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${difficultyColors[tactic.difficulty]}`}>
-                  {tactic.difficulty}
+                  {t(difficultyKey[tactic.difficulty] as Parameters<typeof t>[0])}
                 </span>
               </div>
             </div>

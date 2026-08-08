@@ -59,8 +59,7 @@ export function QuickPicks() {
           {t("mostInDepth")}
         </h2>
         <p className="text-text-secondary text-sm max-w-lg mx-auto">
-          These are our most popular, deeply researched tactics that readers
-          spend 10+ minutes studying. Pick one and dive in.
+          {t("quickPicksSubtitle")}
         </p>
       </div>
 
