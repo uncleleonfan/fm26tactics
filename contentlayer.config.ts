@@ -102,9 +102,41 @@ export const Guide = defineDocumentType(() => ({
   },
 }));
 
+export const Blog = defineDocumentType(() => ({
+  name: "Blog",
+  filePathPattern: "blog/**/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+    category: {
+      type: "enum",
+      options: ["tactics", "formations", "player-roles", "set-pieces", "meta", "beginner"],
+      required: true,
+    },
+    tags: { type: "list", of: { type: "string" }, required: true },
+    publishedAt: { type: "date", required: true },
+    updatedAt: { type: "date", required: false },
+    author: { type: "string", required: false },
+    readTime: { type: "number", required: true },
+    relatedTactic: { type: "string", required: false },
+    relatedGuide: { type: "string", required: false },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.replace("blog/", ""),
+    },
+    url: {
+      type: "string",
+      resolve: (doc) => `/blog/${doc._raw.flattenedPath.replace("blog/", "")}`,
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Tactic, Role, Guide],
+  documentTypes: [Tactic, Role, Guide, Blog],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [],

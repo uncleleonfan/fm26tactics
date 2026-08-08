@@ -1,4 +1,4 @@
-import { allTactics, allGuides } from "contentlayer/generated";
+import { allTactics, allGuides, allBlogs } from "contentlayer/generated";
 import { playerRoles } from "@/lib/tactics-data";
 import type { MetadataRoute } from "next";
 
@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { url: base, lastModified: now, changeFrequency: "daily" as const, priority: 1 },
     { url: `${base}/tactics`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${base}/roles`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/guides`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/builder`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.9 },
@@ -33,6 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const blogRoutes = allBlogs.map((post) => ({
+    url: `${base}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt || post.publishedAt),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
   const roleRoutes = playerRoles.map((role) => ({
     url: `${base}/roles/${role.id}`,
     lastModified: now,
@@ -40,5 +48,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...tacticRoutes, ...guideRoutes, ...roleRoutes];
+  return [...staticRoutes, ...tacticRoutes, ...guideRoutes, ...blogRoutes, ...roleRoutes];
 }
