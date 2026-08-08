@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "FM26 Tactics Blog — In-Depth Guides, Meta Analysis & Tips",
   description:
     "Expert FM26 tactics blog covering gegenpress setups, player roles, set piece routines, meta analysis, and beginner guides. Updated weekly with community-tested strategies.",
+  keywords: [
+    "fm26 blog", "football manager 2026 guides", "fm26 tactics blog",
+    "fm26 meta", "gegenpress guide", "player roles explained",
+  ],
   alternates: {
     canonical: "https://fm26tactics.com/blog",
   },
@@ -17,6 +21,34 @@ export const metadata: Metadata = {
       "Expert FM26 tactics blog covering gegenpress setups, player roles, set piece routines, meta analysis, and beginner guides.",
     url: "https://fm26tactics.com/blog",
     type: "website",
+    siteName: "FM26 Tactics",
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/og/default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "FM26 Tactics Blog — Expert Guides & Meta Analysis",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FM26 Tactics Blog — In-Depth Guides & Meta Analysis",
+    description:
+      "Expert FM26 tactics blog covering gegenpress setups, player roles, set piece routines, meta analysis, and beginner guides.",
+    images: ["https://fm26tactics.com/images/og/default.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

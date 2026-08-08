@@ -65,7 +65,7 @@ export function generateSEO({
       card: "summary_large_image",
       title: `${title}`,
       description,
-      images: [image],
+      images: [image.startsWith("http") ? image : `https://fm26tactics.com${image}`],
     },
   };
 }

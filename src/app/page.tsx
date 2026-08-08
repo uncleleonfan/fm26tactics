@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/hero";
 import { QuickPicks } from "@/components/home/quick-picks";
 import { JsonLd } from "@/components/shared/json-ld";
-import { siteConfig } from "@/lib/metadata";
 
 // ssr: false — eliminates preload links for chunks, preventing bandwidth competition
 // on mobile. Content loads instantly after hydration via local JS chunks.
@@ -75,30 +74,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: siteConfig.name,
-          url: siteConfig.url,
-          description: siteConfig.description,
-          author: {
-            "@type": "Person",
-            name: "FM26 Tactics",
-            url: siteConfig.url,
-          },
-          sameAs: [siteConfig.links.github],
-          dateModified: "2026-08-03",
-          potentialAction: {
-            "@type": "SearchAction",
-            target: {
-              "@type": "EntryPoint",
-              urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
-            },
-            "query-input": "required name=search_term_string",
-          },
-        }}
-      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

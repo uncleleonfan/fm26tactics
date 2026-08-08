@@ -114,7 +114,7 @@ export default function RootLayout({
               url: siteConfig.url,
             },
             sameAs: [siteConfig.links.github],
-            dateModified: "2026-08-03",
+            dateModified: "2026-08-08",
             potentialAction: {
               "@type": "SearchAction",
               target: {
@@ -125,7 +125,7 @@ export default function RootLayout({
             },
           }}
         />
-        <link rel="canonical" href="https://fm26tactics.com" />
+        {/* canonical is auto-injected by Next.js metadata API */}
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
         <GoogleAnalytics />

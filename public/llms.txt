@@ -12,6 +12,14 @@
 - [Meta Tactics](https://fm26tactics.com/tactics): Community-tested & ranked by performance
 - [FAQs](https://fm26tactics.com/guides): Answer-first guides for common FM questions
 
+## Blog
+- [FM26 Blog](https://fm26tactics.com/blog): In-depth guides, meta analysis & tips
+- [Beginner Tactics](https://fm26tactics.com/blog/fm26-best-tactics-beginners): FM26 best tactics for beginners
+- [Gegenpress Setup](https://fm26tactics.com/blog/gegenpress-setup-guide): Complete gegenpress setup guide
+- [Player Roles](https://fm26tactics.com/blog/player-roles-explained): FM26 player roles explained
+- [Corner Tactics](https://fm26tactics.com/blog/corner-tactics-guide): FM26 corner tactics guide
+- [Meta Analysis](https://fm26tactics.com/blog/meta-tactics-community): FM26 meta tactics community analysis
+
 ## Optional
 - [About](https://fm26tactics.com/about)
 - [Privacy](https://fm26tactics.com/privacy)

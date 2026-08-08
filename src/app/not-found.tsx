@@ -1,4 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Page Not Found — FM26 Tactics",
+  description:
+    "The page you're looking for doesn't exist. Browse our FM26 tactics library, guides, and blog.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (

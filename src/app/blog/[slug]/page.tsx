@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { allBlogs } from "contentlayer/generated";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { BlogDetail } from "@/components/blog/blog-detail";
 
 export async function generateStaticParams() {
@@ -17,21 +18,48 @@ export async function generateMetadata({
   const post = allBlogs.find((p) => p.slug === params.slug);
   if (!post) return { title: "Post Not Found" };
 
+  const url = `https://fm26tactics.com/blog/${post.slug}`;
+
   return {
     title: post.title,
     description: post.description,
-    alternates: {
-      canonical: `https://fm26tactics.com/blog/${post.slug}`,
-    },
+    alternates: { canonical: url },
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `https://fm26tactics.com/blog/${post.slug}`,
+      url,
       type: "article",
+      siteName: "FM26 Tactics",
+      locale: "en_US",
       publishedTime: post.publishedAt,
       authors: post.author ? [post.author] : undefined,
+      images: [
+        {
+          url: "/images/og/default.jpg",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [`https://fm26tactics.com/images/og/default.jpg`],
     },
     keywords: post.tags?.join(", "),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
   };
 }
 
@@ -43,8 +71,37 @@ export default function BlogPostPage({
   const post = allBlogs.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    author: post.author
+      ? { "@type": "Person", name: post.author }
+      : undefined,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://fm26tactics.com/blog/${post.slug}`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "FM26 Tactics",
+      url: "https://fm26tactics.com",
+    },
+    image: "https://fm26tactics.com/images/og/default.jpg",
+    articleSection: post.category,
+    keywords: post.tags?.join(", "),
+  };
+
   return (
     <main className="min-h-screen bg-background-primary">
+      <Script
+        id="blog-article-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <BlogDetail post={post} />
     </main>
   );
