@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/routing"
+import { useSearchParams } from "next/navigation";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formationPresets, styleLabels } from "@/lib/tactics-data";

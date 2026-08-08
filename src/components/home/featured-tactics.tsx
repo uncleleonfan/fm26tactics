@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Star, Clock, ArrowRight } from "lucide-react";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import type { FormationType, PlayStyle } from "@/types/tactic";

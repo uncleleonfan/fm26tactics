@@ -1,27 +1,49 @@
-import Link from "next/link";
+"use client";
 
-const footerLinks = {
-  Tactics: [
-    { label: "All Tactics", href: "/tactics" },
-    { label: "4-2-3-1", href: "/tactics?formation=4-2-3-1" },
-    { label: "4-3-3", href: "/tactics?formation=4-3-3" },
-    { label: "3-5-2", href: "/tactics?formation=3-5-2" },
-  ],
-  Resources: [
-    { label: "Player Roles", href: "/roles" },
-    { label: "Training Guides", href: "/guides?category=training" },
-    { label: "Set Pieces", href: "/guides?category=set-pieces" },
-    { label: "Tactic Builder", href: "/builder" },
-  ],
-  Company: [
-    { label: "About Us", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-  ],
-} as const;
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+
+
+// ── Footer link groups type ──────────────────────────────────────────────
+interface FooterLinkGroup {
+  key: string;
+  links: { label: string; href: string }[];
+}
 
 export function Footer() {
+  const t = useTranslations("common");
+  const ft = useTranslations("footer");
+
+  const footerGroups: FooterLinkGroup[] = [
+    {
+      key: ft("tactics"),
+      links: [
+        { label: ft("allTactics"), href: "/tactics" },
+        { label: "4-2-3-1", href: "/tactics?formation=4-2-3-1" },
+        { label: "4-3-3", href: "/tactics?formation=4-3-3" },
+        { label: "3-5-2", href: "/tactics?formation=3-5-2" },
+      ],
+    },
+    {
+      key: ft("resources"),
+      links: [
+        { label: ft("playerRoles"), href: "/roles" },
+        { label: ft("trainingGuides"), href: "/guides?category=training" },
+        { label: ft("setPieces"), href: "/guides?category=set-pieces" },
+        { label: ft("tacticBuilder"), href: "/builder" },
+      ],
+    },
+    {
+      key: ft("company"),
+      links: [
+        { label: ft("aboutUs"), href: "/about" },
+        { label: ft("contact"), href: "/contact" },
+        { label: ft("privacyPolicy"), href: "/privacy" },
+        { label: ft("termsOfService"), href: "/terms" },
+      ],
+    },
+  ];
+
   return (
     <footer className="glass-panel border-t border-[#1C2436]/50 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
@@ -38,17 +60,16 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-text-secondary leading-relaxed">
-              Your ultimate resource for mastering Football Manager 2026 tactics.
-              Explore formations, player roles, and build winning strategies.
+              {ft("brandDescription")}
             </p>
           </div>
 
           {/* Link Groups */}
-          {(Object.keys(footerLinks) as Array<keyof typeof footerLinks>).map((group) => (
-            <div key={group}>
-              <h4 className="text-sm font-semibold text-text-primary mb-3">{group}</h4>
+          {footerGroups.map((group) => (
+            <div key={group.key}>
+              <h4 className="text-sm font-semibold text-text-primary mb-3">{group.key}</h4>
               <ul className="space-y-2">
-                {footerLinks[group].map((link) => (
+                {group.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
@@ -65,12 +86,9 @@ export function Footer() {
 
         <div className="border-t border-[#1C2436]/50 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-muted">
-            &copy; {new Date().getFullYear()} FM26 Tactics. All rights reserved.
-            Football Manager is a trademark of Sports Interactive.
+            &copy; {new Date().getFullYear()} FM26 Tactics. {t("allRightsReserved")}
           </p>
-          <p className="text-xs text-text-muted">
-            fm26tactics.com
-          </p>
+          <p className="text-xs text-text-muted">fm26tactics.com</p>
         </div>
       </div>
     </footer>

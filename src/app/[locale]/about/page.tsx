@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { generateSEO } from "@/lib/metadata";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export const metadata: Metadata = generateSEO({
   title: "About FM26 Tactics — Your Ultimate FM26 Resource",

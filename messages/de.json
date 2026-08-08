@@ -1,0 +1,164 @@
+{
+  "nav": {
+    "tactics": "Taktiken",
+    "bestTactics": "Beste Taktiken",
+    "blog": "Blog",
+    "playerRoles": "Spielerrollen",
+    "guides": "Anleitungen",
+    "meta": "Meta",
+    "tacticBuilder": "Taktik-Builder",
+    "search": "Suche",
+    "toggleMenu": "Menü umschalten"
+  },
+  "common": {
+    "home": "Startseite",
+    "readMore": "Weiterlesen",
+    "readGuide": "Anleitung lesen",
+    "minRead": "Min. Lesezeit",
+    "by": "von",
+    "published": "Veröffentlicht",
+    "updated": "Aktualisiert",
+    "backTo": "Zurück zu",
+    "backToHome": "Zurück zur Startseite",
+    "allRightsReserved": "Alle Rechte vorbehalten. Football Manager ist eine Marke von Sports Interactive.",
+    "continueReading": "Weiterlesen",
+    "tacticalGuide": "Taktischer Leitfaden",
+    "relatedGuide": "Verwandte Anleitung",
+    "relatedTactics": "Verwandte Taktiken",
+    "relatedGuides": "Verwandte Anleitungen",
+    "readCompanionGuide": "Lies den begleitenden Strategie-Leitfaden",
+    "companionTactic": "Begleitende Taktik",
+    "viewDetails": "Details anzeigen"
+  },
+  "filter": {
+    "allFormations": "Alle Formationen",
+    "allStyles": "Alle Stile",
+    "allLevels": "Alle Niveaus",
+    "clearAll": "Alle Filter löschen",
+    "beginner": "Anfänger",
+    "intermediate": "Fortgeschritten",
+    "advanced": "Experte"
+  },
+  "home": {
+    "subtitle": "Football Manager 2026",
+    "heroTitle": "Meistere FM26-Taktiken wie nie zuvor",
+    "heroDescription": "Experten-Taktiken, tiefgehende Anleitungen, Spielerrollen-Analyse und ein interaktiver Builder — alles, was du brauchst, um in Football Manager 2026 zu dominieren.",
+    "tryBuilder": "Taktik-Builder testen",
+    "browseTactics": "Taktiken durchsuchen",
+    "trending": "Im Trend",
+    "startHere": "Hier starten",
+    "mostInDepth": "Ausführlichste Anleitungen",
+    "mostPopular": "AM BELIEBTESTEN",
+    "featuredTactics": "Empfohlene Taktiken",
+    "viewAll": "Alle anzeigen",
+    "latestGuides": "Neueste Anleitungen",
+    "allGuides": "Alle Anleitungen",
+    "interactiveTool": "Interaktives Tool",
+    "buildYourOwn": "Erstelle deine eigene Taktik",
+    "dragDropPlayers": "Spieler per Drag & Drop",
+    "assignRoles": "Rollen & Aufgaben zuweisen",
+    "configureInstructions": "Team-Anweisungen konfigurieren",
+    "exportShare": "Exportieren & Teilen",
+    "openBuilder": "Taktik-Builder öffnen",
+    "formations": "10+ Formationen",
+    "formationsDesc": "Bewährte taktische Systeme von 4-4-2 bis 3-5-2",
+    "allRoles": "Alle Spielerrollen",
+    "allRolesDesc": "Vollständige Rollen-Enzyklopädie mit Attributen",
+    "interactiveBuilder": "Interaktiver Builder",
+    "interactiveBuilderDesc": "Visueller Taktik-Ersteller mit Echtzeit-Feedback",
+    "communityData": "Community-Daten",
+    "communitySubtitle": "Was die Meta sagt"
+  },
+  "blog": {
+    "title": "FM26 Taktik-Blog",
+    "subtitle": "Bleib auf dem Laufenden",
+    "description": "Ausführliche Anleitungen, Meta-Analyse & Tipps",
+    "browseAll": "Alle Taktiken durchsuchen",
+    "noPosts": "Noch keine Blog-Beiträge. Schau bald wieder vorbei!",
+    "backToBlog": "Zurück zu allen Artikeln"
+  },
+  "tactics": {
+    "title": "Taktik-Bibliothek",
+    "backToTactics": "Zurück zu Taktiken"
+  },
+  "guides": {
+    "title": "FM26 Anleitungen",
+    "backToGuides": "Zurück zu Anleitungen",
+    "comingSoon": "Anleitungen für diese Kategorie folgen in Kürze",
+    "training": "Trainings-Anleitungen",
+    "setPieces": "Standardsituationen",
+    "scouting": "Scouting & Rekrutierung",
+    "teamManagement": "Team-Management & Strategie",
+    "matchDay": "Spieltag-Strategie",
+    "youthDevelopment": "Jugendentwicklung"
+  },
+  "roles": {
+    "title": "Spielerrollen-Enzyklopädie",
+    "goalkeepers": "Torhüter",
+    "defenders": "Verteidiger",
+    "midfielders": "Mittelfeldspieler",
+    "forwards": "Stürmer",
+    "rolesCount": "Rollen"
+  },
+  "best": {
+    "title": "FM26 Beste Taktiken 2026",
+    "subtitle": "Top-Meta-Formationen im Ranking",
+    "description": "Das definitive Ranking der besten FM26-Taktiken, getestet gegen die FM26 Match-Engine mit detaillierten Leistungsdaten."
+  },
+  "builder": {
+    "pageTitle": "FM26 Taktik-Builder",
+    "pageDescription": "Erstelle und teile FM26-Taktiken mit unserem Drag-and-Drop-Taktik-Builder."
+  },
+  "meta": {
+    "pageTitle": "FM26 Meta-Analyse",
+    "pageDescription": "Community-basierte FM26 Meta-Analyse — verfolge die effektivsten Formationen, Spielerrollen und taktischen Trends."
+  },
+  "footer": {
+    "tactics": "Taktiken",
+    "resources": "Ressourcen",
+    "company": "Unternehmen",
+    "allTactics": "Alle Taktiken",
+    "playerRoles": "Spielerrollen",
+    "trainingGuides": "Trainings-Anleitungen",
+    "setPieces": "Standardsituationen",
+    "tacticBuilder": "Taktik-Builder",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt",
+    "privacyPolicy": "Datenschutz",
+    "termsOfService": "Nutzungsbedingungen",
+    "brandDescription": "Deine ultimative Ressource, um Football Manager 2026 Taktiken zu meistern. Entdecke Formationen, Spielerrollen und entwickle Gewinnstrategien."
+  },
+  "about": {
+    "title": "Über FM26 Tactics",
+    "mission": "Unsere Mission",
+    "backToHome": "Zurück zur Startseite"
+  },
+  "contact": {
+    "title": "Kontaktiere uns",
+    "subtitle": "Wir freuen uns, von dir zu hören",
+    "email": "E-Mail",
+    "github": "GitHub",
+    "backToHome": "Zurück zur Startseite"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung"
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen"
+  },
+  "error": {
+    "notFound": "Seite nicht gefunden",
+    "notFoundDesc": "Die gesuchte Seite existiert nicht. Durchsuche unsere FM26-Taktikbibliothek, Anleitungen und Blog.",
+    "somethingWrong": "Etwas ist schiefgelaufen",
+    "tryAgain": "Erneut versuchen",
+    "goHome": "Zur Startseite",
+    "browseTactics": "Taktiken durchsuchen"
+  },
+  "lang": {
+    "switch": "Sprache wechseln",
+    "en": "English",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "fr": "Français"
+  }
+}

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
 import { ArrowRight, BookOpen, FileText, Target, Crosshair, Users, Flame } from "lucide-react";
 

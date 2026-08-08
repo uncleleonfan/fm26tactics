@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight, Clock, Tag } from "lucide-react";
 import type { Blog } from "contentlayer/generated";
 

@@ -2,7 +2,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { Callout } from "@/components/shared/callout";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import type { Blog } from "contentlayer/generated";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
 
 const categoryColors: Record<string, string> = {

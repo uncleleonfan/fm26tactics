@@ -2,31 +2,35 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { usePathname } from "@/i18n/routing";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
 const SearchDialog = dynamic(
   () => import("@/components/shared/search-dialog").then((m) => ({ default: m.SearchDialog })),
   { ssr: false }
 );
 
-const navLinks = [
-  { href: "/tactics", label: "Tactics" },
-  { href: "/best", label: "Best Tactics" },
-  { href: "/blog", label: "Blog" },
-  { href: "/roles", label: "Player Roles" },
-  { href: "/guides", label: "Guides" },
-  { href: "/meta", label: "Meta" },
-  { href: "/builder", label: "Tactic Builder", highlight: true },
-];
-
 export function Header() {
+  const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
-  const isBuilder = pathname === "/builder";
+
+  const navLinks = [
+    { href: "/tactics", label: t("tactics") },
+    { href: "/best", label: t("bestTactics") },
+    { href: "/blog", label: t("blog") },
+    { href: "/roles", label: t("playerRoles") },
+    { href: "/guides", label: t("guides") },
+    { href: "/meta", label: t("meta") },
+    { href: "/builder", label: t("tacticBuilder"), highlight: true },
+  ];
+
+  const isBuilder = pathname.endsWith("/builder");
 
   if (isBuilder) return null;
 
@@ -78,10 +82,11 @@ export function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <button
               onClick={() => setSearchOpen(true)}
               className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-all"
-              aria-label="Search"
+              aria-label={t("search")}
             >
               <Search className="w-4 h-4" />
             </button>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowLeft, RotateCw, Download, Info, X, Settings } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
 import { Pitch } from "@/components/builder/pitch";

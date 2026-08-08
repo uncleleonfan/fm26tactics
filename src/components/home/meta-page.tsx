@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowLeft, TrendingUp, Shield, Zap, Star, AlertTriangle, CheckCircle, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
 import {
   topTestedTactics,

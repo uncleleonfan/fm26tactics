@@ -1,0 +1,164 @@
+{
+  "nav": {
+    "tactics": "Tattiche",
+    "bestTactics": "Migliori Tattiche",
+    "blog": "Blog",
+    "playerRoles": "Ruoli",
+    "guides": "Guide",
+    "meta": "Meta",
+    "tacticBuilder": "Creatore Tattiche",
+    "search": "Cerca",
+    "toggleMenu": "Attiva menu"
+  },
+  "common": {
+    "home": "Home",
+    "readMore": "Leggi tutto",
+    "readGuide": "Leggi la guida",
+    "minRead": "min di lettura",
+    "by": "di",
+    "published": "Pubblicato",
+    "updated": "Aggiornato",
+    "backTo": "Torna a",
+    "backToHome": "Torna alla Home",
+    "allRightsReserved": "Tutti i diritti riservati. Football Manager è un marchio di Sports Interactive.",
+    "continueReading": "Continua a leggere",
+    "tacticalGuide": "Guida Tattica",
+    "relatedGuide": "Guida Correlata",
+    "relatedTactics": "Tattiche Correlate",
+    "relatedGuides": "Guide Correlate",
+    "readCompanionGuide": "Leggi la guida strategica complementare",
+    "companionTactic": "Tattica Complementare",
+    "viewDetails": "Visualizza dettagli"
+  },
+  "filter": {
+    "allFormations": "Tutte le formazioni",
+    "allStyles": "Tutti gli stili",
+    "allLevels": "Tutti i livelli",
+    "clearAll": "Cancella tutti i filtri",
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzato"
+  },
+  "home": {
+    "subtitle": "Football Manager 2026",
+    "heroTitle": "Domina le Tattiche di FM26 Come Mai Prima",
+    "heroDescription": "Tattiche esperte, guide approfondite, analisi dei ruoli e un creatore interattivo — tutto ciò di cui hai bisogno per dominare in Football Manager 2026.",
+    "tryBuilder": "Prova il Creatore Tattiche",
+    "browseTactics": "Sfoglia Tattiche",
+    "trending": "Di tendenza",
+    "startHere": "Inizia da qui",
+    "mostInDepth": "Guide più Approfondite",
+    "mostPopular": "PIÙ POPOLARE",
+    "featuredTactics": "Tattiche in Evidenza",
+    "viewAll": "Vedi tutto",
+    "latestGuides": "Ultime Guide",
+    "allGuides": "Tutte le Guide",
+    "interactiveTool": "Strumento Interattivo",
+    "buildYourOwn": "Crea la Tua Tattica",
+    "dragDropPlayers": "Trascina i Giocatori",
+    "assignRoles": "Assegna Ruoli e Compiti",
+    "configureInstructions": "Configura Istruzioni di Squadra",
+    "exportShare": "Esporta e Condividi",
+    "openBuilder": "Apri Creatore Tattiche",
+    "formations": "10+ Formazioni",
+    "formationsDesc": "Sistemi tattici collaudati dal 4-4-2 al 3-5-2",
+    "allRoles": "Tutti i Ruoli",
+    "allRolesDesc": "Enciclopedia completa dei ruoli con attributi",
+    "interactiveBuilder": "Creatore Interattivo",
+    "interactiveBuilderDesc": "Creatore visivo di tattiche con feedback in tempo reale",
+    "communityData": "Dati della Community",
+    "communitySubtitle": "Cosa Dice il Meta"
+  },
+  "blog": {
+    "title": "Blog Tattiche FM26",
+    "subtitle": "Rimani Aggiornato",
+    "description": "Guide approfondite, analisi meta e consigli",
+    "browseAll": "Sfoglia Tutte le Tattiche",
+    "noPosts": "Nessun articolo ancora. Torna a trovarci!",
+    "backToBlog": "Torna a tutti gli articoli"
+  },
+  "tactics": {
+    "title": "Libreria Tattiche",
+    "backToTactics": "Torna alle Tattiche"
+  },
+  "guides": {
+    "title": "Guide FM26",
+    "backToGuides": "Torna alle Guide",
+    "comingSoon": "Guide per questa categoria in arrivo",
+    "training": "Guide all'Allenamento",
+    "setPieces": "Calci Piazzati",
+    "scouting": "Scouting e Reclutamento",
+    "teamManagement": "Gestione Squadra e Strategia",
+    "matchDay": "Strategia Partita",
+    "youthDevelopment": "Sviluppo Giovanile"
+  },
+  "roles": {
+    "title": "Enciclopedia dei Ruoli",
+    "goalkeepers": "Portieri",
+    "defenders": "Difensori",
+    "midfielders": "Centrocampisti",
+    "forwards": "Attaccanti",
+    "rolesCount": "ruoli"
+  },
+  "best": {
+    "title": "FM26 Migliori Tattiche 2026",
+    "subtitle": "Classifica delle Migliori Formazioni Meta",
+    "description": "La classifica definitiva delle migliori tattiche FM26, testate contro il motore di gioco FM26 con dati dettagliati sulle prestazioni."
+  },
+  "builder": {
+    "pageTitle": "Creatore Tattiche FM26",
+    "pageDescription": "Crea e condividi tattiche FM26 con il nostro creatore tattico drag-and-drop."
+  },
+  "meta": {
+    "pageTitle": "Analisi Meta FM26",
+    "pageDescription": "Analisi meta FM26 basata sulla community — segui le formazioni più efficaci, i ruoli dei giocatori e le tendenze tattiche."
+  },
+  "footer": {
+    "tactics": "Tattiche",
+    "resources": "Risorse",
+    "company": "Azienda",
+    "allTactics": "Tutte le Tattiche",
+    "playerRoles": "Ruoli dei Giocatori",
+    "trainingGuides": "Guide all'Allenamento",
+    "setPieces": "Calci Piazzati",
+    "tacticBuilder": "Creatore Tattiche",
+    "aboutUs": "Chi Siamo",
+    "contact": "Contatti",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Termini di Servizio",
+    "brandDescription": "La tua risorsa definitiva per padroneggiare le tattiche di Football Manager 2026. Esplora formazioni, ruoli dei giocatori e crea strategie vincenti."
+  },
+  "about": {
+    "title": "Chi Siamo — FM26 Tactics",
+    "mission": "La Nostra Missione",
+    "backToHome": "Torna alla Home"
+  },
+  "contact": {
+    "title": "Contattaci",
+    "subtitle": "Ci piacerebbe sentirti",
+    "email": "Email",
+    "github": "GitHub",
+    "backToHome": "Torna alla Home"
+  },
+  "privacy": {
+    "title": "Privacy Policy"
+  },
+  "terms": {
+    "title": "Termini di Servizio"
+  },
+  "error": {
+    "notFound": "Pagina non trovata",
+    "notFoundDesc": "La pagina che stai cercando non esiste. Sfoglia la nostra libreria di tattiche FM26, guide e blog.",
+    "somethingWrong": "Qualcosa è andato storto",
+    "tryAgain": "Riprova",
+    "goHome": "Vai alla Home",
+    "browseTactics": "Sfoglia Tattiche"
+  },
+  "lang": {
+    "switch": "Cambia lingua",
+    "en": "English",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "fr": "Français"
+  }
+}

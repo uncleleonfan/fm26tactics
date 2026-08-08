@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { ArrowLeft, Clock, Calendar, Tag, BarChart3 } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";

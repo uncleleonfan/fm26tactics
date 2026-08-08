@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight, ChevronDown, Flame } from "lucide-react";
 
 export function HeroSection() {

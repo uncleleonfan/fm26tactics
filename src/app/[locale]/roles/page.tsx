@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Shield, Zap, Swords, Crosshair, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { SkyscraperAd } from "@/components/shared/skyscraper-ad";

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { TrendingUp, Award, BarChart3, ExternalLink } from "lucide-react";
 import { topTestedTactics, metaRoles } from "@/lib/community-data";
 

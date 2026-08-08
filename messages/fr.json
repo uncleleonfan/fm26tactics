@@ -1,0 +1,164 @@
+{
+  "nav": {
+    "tactics": "Tactiques",
+    "bestTactics": "Meilleures Tactiques",
+    "blog": "Blog",
+    "playerRoles": "Rôles",
+    "guides": "Guides",
+    "meta": "Méta",
+    "tacticBuilder": "Créateur Tactique",
+    "search": "Rechercher",
+    "toggleMenu": "Basculer le menu"
+  },
+  "common": {
+    "home": "Accueil",
+    "readMore": "Lire la suite",
+    "readGuide": "Lire le guide",
+    "minRead": "min de lecture",
+    "by": "par",
+    "published": "Publié",
+    "updated": "Mis à jour",
+    "backTo": "Retour à",
+    "backToHome": "Retour à l'accueil",
+    "allRightsReserved": "Tous droits réservés. Football Manager est une marque de Sports Interactive.",
+    "continueReading": "Continuer la lecture",
+    "tacticalGuide": "Guide Tactique",
+    "relatedGuide": "Guide Connexe",
+    "relatedTactics": "Tactiques Connexes",
+    "relatedGuides": "Guides Connexes",
+    "readCompanionGuide": "Lire le guide stratégique complémentaire",
+    "companionTactic": "Tactique Complémentaire",
+    "viewDetails": "Voir les détails"
+  },
+  "filter": {
+    "allFormations": "Toutes les formations",
+    "allStyles": "Tous les styles",
+    "allLevels": "Tous les niveaux",
+    "clearAll": "Effacer tous les filtres",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé"
+  },
+  "home": {
+    "subtitle": "Football Manager 2026",
+    "heroTitle": "Maîtrisez les Tactiques FM26 Comme Jamais",
+    "heroDescription": "Tactiques expertes, guides approfondis, analyse des rôles et un créateur interactif — tout ce dont vous avez besoin pour dominer dans Football Manager 2026.",
+    "tryBuilder": "Essayer le Créateur",
+    "browseTactics": "Parcourir les Tactiques",
+    "trending": "Tendance",
+    "startHere": "Commencez ici",
+    "mostInDepth": "Guides les Plus Approfondis",
+    "mostPopular": "LE PLUS POPULAIRE",
+    "featuredTactics": "Tactiques en Vedette",
+    "viewAll": "Voir tout",
+    "latestGuides": "Derniers Guides",
+    "allGuides": "Tous les Guides",
+    "interactiveTool": "Outil Interactif",
+    "buildYourOwn": "Créez Votre Propre Tactique",
+    "dragDropPlayers": "Glissez-Déposez les Joueurs",
+    "assignRoles": "Attribuez Rôles et Tâches",
+    "configureInstructions": "Configurez les Consignes d'Équipe",
+    "exportShare": "Exporter et Partager",
+    "openBuilder": "Ouvrir le Créateur Tactique",
+    "formations": "10+ Formations",
+    "formationsDesc": "Systèmes tactiques éprouvés du 4-4-2 au 3-5-2",
+    "allRoles": "Tous les Rôles",
+    "allRolesDesc": "Encyclopédie complète des rôles avec attributs",
+    "interactiveBuilder": "Créateur Interactif",
+    "interactiveBuilderDesc": "Créateur visuel de tactiques avec retour en temps réel",
+    "communityData": "Données Communautaires",
+    "communitySubtitle": "Ce que Dit la Méta"
+  },
+  "blog": {
+    "title": "Blog Tactiques FM26",
+    "subtitle": "Restez Informé",
+    "description": "Guides approfondis, analyse méta et astuces",
+    "browseAll": "Parcourir Toutes les Tactiques",
+    "noPosts": "Pas encore d'articles. Revenez bientôt !",
+    "backToBlog": "Retour à tous les articles"
+  },
+  "tactics": {
+    "title": "Bibliothèque de Tactiques",
+    "backToTactics": "Retour aux Tactiques"
+  },
+  "guides": {
+    "title": "Guides FM26",
+    "backToGuides": "Retour aux Guides",
+    "comingSoon": "Guides pour cette catégorie à venir",
+    "training": "Guides d'Entraînement",
+    "setPieces": "Coups de Pied Arrêtés",
+    "scouting": "Scouting et Recrutement",
+    "teamManagement": "Gestion d'Équipe et Stratégie",
+    "matchDay": "Stratégie de Match",
+    "youthDevelopment": "Développement des Jeunes"
+  },
+  "roles": {
+    "title": "Encyclopédie des Rôles",
+    "goalkeepers": "Gardiens",
+    "defenders": "Défenseurs",
+    "midfielders": "Milieux de Terrain",
+    "forwards": "Attaquants",
+    "rolesCount": "rôles"
+  },
+  "best": {
+    "title": "FM26 Meilleures Tactiques 2026",
+    "subtitle": "Top Formations Méta Classées",
+    "description": "Le classement définitif des meilleures tactiques FM26, testées contre le moteur de jeu FM26 avec des données de performance détaillées."
+  },
+  "builder": {
+    "pageTitle": "Créateur Tactique FM26",
+    "pageDescription": "Créez et partagez des tactiques FM26 avec notre créateur tactique par glisser-déposer."
+  },
+  "meta": {
+    "pageTitle": "Analyse Méta FM26",
+    "pageDescription": "Analyse méta FM26 basée sur la communauté — suivez les formations les plus efficaces, les rôles des joueurs et les tendances tactiques."
+  },
+  "footer": {
+    "tactics": "Tactiques",
+    "resources": "Ressources",
+    "company": "Entreprise",
+    "allTactics": "Toutes les Tactiques",
+    "playerRoles": "Rôles des Joueurs",
+    "trainingGuides": "Guides d'Entraînement",
+    "setPieces": "Coups de Pied Arrêtés",
+    "tacticBuilder": "Créateur Tactique",
+    "aboutUs": "À Propos",
+    "contact": "Contact",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation",
+    "brandDescription": "Votre ressource ultime pour maîtriser les tactiques de Football Manager 2026. Explorez les formations, les rôles des joueurs et élaborez des stratégies gagnantes."
+  },
+  "about": {
+    "title": "À Propos de FM26 Tactics",
+    "mission": "Notre Mission",
+    "backToHome": "Retour à l'Accueil"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous aimerions vous entendre",
+    "email": "E-mail",
+    "github": "GitHub",
+    "backToHome": "Retour à l'Accueil"
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité"
+  },
+  "terms": {
+    "title": "Conditions d'Utilisation"
+  },
+  "error": {
+    "notFound": "Page Introuvable",
+    "notFoundDesc": "La page que vous cherchez n'existe pas. Parcourez notre bibliothèque de tactiques, guides et blog FM26.",
+    "somethingWrong": "Quelque chose s'est mal passé",
+    "tryAgain": "Réessayer",
+    "goHome": "Accueil",
+    "browseTactics": "Parcourir les Tactiques"
+  },
+  "lang": {
+    "switch": "Changer de langue",
+    "en": "English",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "fr": "Français"
+  }
+}

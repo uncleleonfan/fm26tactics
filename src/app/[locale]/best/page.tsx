@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { allTactics } from "contentlayer/generated";
 import { ArrowRight, Trophy, Star, Zap, Shield } from "lucide-react";
 import { styleLabels, styleColors } from "@/lib/tactics-data";

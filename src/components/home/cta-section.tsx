@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight, Grip, Users, Settings, Share2 } from "lucide-react";
 
 const steps = [

@@ -1,0 +1,164 @@
+{
+  "nav": {
+    "tactics": "Tactics",
+    "bestTactics": "Best Tactics",
+    "blog": "Blog",
+    "playerRoles": "Player Roles",
+    "guides": "Guides",
+    "meta": "Meta",
+    "tacticBuilder": "Tactic Builder",
+    "search": "Search",
+    "toggleMenu": "Toggle menu"
+  },
+  "common": {
+    "home": "Home",
+    "readMore": "Read more",
+    "readGuide": "Read guide",
+    "minRead": "min read",
+    "by": "by",
+    "published": "Published",
+    "updated": "Updated",
+    "backTo": "Back to",
+    "backToHome": "Back to Home",
+    "allRightsReserved": "All rights reserved. Football Manager is a trademark of Sports Interactive.",
+    "continueReading": "Continue Reading",
+    "tacticalGuide": "Tactical Guide",
+    "relatedGuide": "Related Guide",
+    "relatedTactics": "Related Tactics",
+    "relatedGuides": "Related Guides",
+    "readCompanionGuide": "Read the companion strategy guide",
+    "companionTactic": "Companion Tactic",
+    "viewDetails": "View Details"
+  },
+  "filter": {
+    "allFormations": "All Formations",
+    "allStyles": "All Styles",
+    "allLevels": "All Levels",
+    "clearAll": "Clear all filters",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "home": {
+    "subtitle": "Football Manager 2026",
+    "heroTitle": "Master FM26 Tactics Like Never Before",
+    "heroDescription": "Expert tactics, deep-dive guides, player role analysis, and an interactive builder — everything you need to dominate in Football Manager 2026.",
+    "tryBuilder": "Try Tactic Builder",
+    "browseTactics": "Browse Tactics",
+    "trending": "Trending",
+    "startHere": "Start Here",
+    "mostInDepth": "Most In-Depth Guides",
+    "mostPopular": "MOST POPULAR",
+    "featuredTactics": "Featured Tactics",
+    "viewAll": "View all",
+    "latestGuides": "Latest Guides",
+    "allGuides": "All Guides",
+    "interactiveTool": "Interactive Tool",
+    "buildYourOwn": "Build Your Own Tactic",
+    "dragDropPlayers": "Drag & Drop Players",
+    "assignRoles": "Assign Roles & Duties",
+    "configureInstructions": "Configure Team Instructions",
+    "exportShare": "Export & Share",
+    "openBuilder": "Open Tactic Builder",
+    "formations": "10+ Formations",
+    "formationsDesc": "Proven tactical systems from 4-4-2 to 3-5-2",
+    "allRoles": "All Player Roles",
+    "allRolesDesc": "Complete role encyclopedia with attributes",
+    "interactiveBuilder": "Interactive Builder",
+    "interactiveBuilderDesc": "Visual tactic creator with real-time feedback",
+    "communityData": "Community Data",
+    "communitySubtitle": "What the Meta Says"
+  },
+  "blog": {
+    "title": "FM26 Tactics Blog",
+    "subtitle": "Stay Updated",
+    "description": "In-depth guides, meta analysis & tips",
+    "browseAll": "Browse All Tactics",
+    "noPosts": "No blog posts yet. Stay tuned!",
+    "backToBlog": "Back to all articles"
+  },
+  "tactics": {
+    "title": "Tactics Library",
+    "backToTactics": "Back to Tactics"
+  },
+  "guides": {
+    "title": "FM26 Guides",
+    "backToGuides": "Back to Guides",
+    "comingSoon": "Guides for this category are coming soon",
+    "training": "Training Guides",
+    "setPieces": "Set Pieces",
+    "scouting": "Scouting & Recruitment",
+    "teamManagement": "Team Management & Strategy",
+    "matchDay": "Match Day Strategy",
+    "youthDevelopment": "Youth Development"
+  },
+  "roles": {
+    "title": "Player Roles Encyclopedia",
+    "goalkeepers": "Goalkeepers",
+    "defenders": "Defenders",
+    "midfielders": "Midfielders",
+    "forwards": "Forwards",
+    "rolesCount": "roles"
+  },
+  "best": {
+    "title": "FM26 Best Tactics 2026",
+    "subtitle": "Top Meta Formations Ranked",
+    "description": "The definitive ranking of the best FM26 tactics, tested against the FM26 match engine with detailed performance data."
+  },
+  "builder": {
+    "pageTitle": "FM26 Tactic Builder",
+    "pageDescription": "Build and share FM26 tactics with our drag-and-drop tactic builder."
+  },
+  "meta": {
+    "pageTitle": "FM26 Meta Analysis",
+    "pageDescription": "Community-sourced FM26 meta analysis — track the most effective formations, player roles, and tactical trends."
+  },
+  "footer": {
+    "tactics": "Tactics",
+    "resources": "Resources",
+    "company": "Company",
+    "allTactics": "All Tactics",
+    "playerRoles": "Player Roles",
+    "trainingGuides": "Training Guides",
+    "setPieces": "Set Pieces",
+    "tacticBuilder": "Tactic Builder",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "brandDescription": "Your ultimate resource for mastering Football Manager 2026 tactics. Explore formations, player roles, and build winning strategies."
+  },
+  "about": {
+    "title": "About FM26 Tactics",
+    "mission": "Our Mission",
+    "backToHome": "Back to Home"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "We'd love to hear from you",
+    "email": "Email",
+    "github": "GitHub",
+    "backToHome": "Back to Home"
+  },
+  "privacy": {
+    "title": "Privacy Policy"
+  },
+  "terms": {
+    "title": "Terms of Service"
+  },
+  "error": {
+    "notFound": "Page Not Found",
+    "notFoundDesc": "The page you're looking for doesn't exist. Browse our FM26 tactics library, guides, and blog.",
+    "somethingWrong": "Something went wrong",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home",
+    "browseTactics": "Browse Tactics"
+  },
+  "lang": {
+    "switch": "Switch language",
+    "en": "English",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "fr": "Français"
+  }
+}

@@ -1,4 +1,7 @@
 import { withContentlayer } from "next-contentlayer";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -29,4 +32,4 @@ const nextConfig = {
   },
 };
 
-export default withContentlayer(nextConfig);
+export default withNextIntl(withContentlayer(nextConfig));

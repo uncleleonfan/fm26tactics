@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
 import { BookOpen, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";

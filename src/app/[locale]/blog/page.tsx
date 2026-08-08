@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { allBlogs } from "contentlayer/generated";
 import { BlogList } from "@/components/blog/blog-list";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {

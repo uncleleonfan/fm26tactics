@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowLeft, Check, Target } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
