@@ -24,10 +24,10 @@ export function generateSEO({
   author,
 }: SEOProps): Metadata {
   const url = `https://fm26tactics.com${path}`;
-  const fullTitle = type === "article" ? title : undefined;
+  const fullTitle = title;
 
   return {
-    title: fullTitle,
+    title: { absolute: fullTitle },
     description,
     keywords: keywords || undefined,
     alternates: { canonical: url },
