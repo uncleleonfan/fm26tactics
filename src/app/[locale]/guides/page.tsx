@@ -100,6 +100,8 @@ export default async function GuidesPage({ params }: { params: { locale: string 
                         <Link
                           key={guide.slug}
                           href={`/guides/${guide.slug}`}
+                          data-track="card_guide_list"
+                          data-track-label={guide.slug}
                           className="glass-card p-5 group"
                         >
                           <div className="flex items-start justify-between mb-3">

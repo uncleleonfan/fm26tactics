@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useTransition, useState, useRef, useEffect } from "react";
 import { routing } from "@/i18n/routing";
+import { trackEvent } from "@/lib/analytics";
 
 const localeLabels: Record<string, string> = {
   en: "🇬🇧 EN",
@@ -31,6 +32,7 @@ export function LanguageSwitcher() {
   }, []);
 
   function switchTo(nextLocale: string) {
+    trackEvent("nav_lang_switch", { label: nextLocale });
     startTransition(() => {
       router.replace(
         pathname,

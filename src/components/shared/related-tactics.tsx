@@ -41,6 +41,8 @@ export function RelatedTactics({ currentSlug, tags, formation }: RelatedTacticsP
           <Link
             key={tactic.slug}
             href={`/tactics/${tactic.slug}`}
+            data-track="card_related_tactic"
+            data-track-label={tactic.slug}
             className="glass-card p-4 group hover:border-primary/30 transition-all duration-200"
           >
             <span className="text-xs font-mono font-bold text-primary bg-primary/10 px-2 py-0.5 rounded mb-2 inline-block">

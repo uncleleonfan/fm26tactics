@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Download, Share2, Check, Copy, FileText, FileJson, Upload } from "lucide-react";
 import { encodeTacticState } from "@/hooks/use-tactic-builder";
+import { trackEvent } from "@/lib/analytics";
 import { playerRoles } from "@/lib/tactics-data";
 import type { TacticBoardState } from "@/types/tactic";
 
@@ -142,6 +143,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const fileBase = `fm26-tactic-${state.formation.replace(/-/g, "")}`;
 
   const exportAsSvg = () => {
+    trackEvent("builder_download", { label: "svg" });
     const output = buildSvgString(state);
     if (!output) return;
     const blob = new Blob([output.svgString], { type: "image/svg+xml" });
@@ -151,6 +153,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsPng = () => {
+    trackEvent("builder_download", { label: "png" });
     const output = buildSvgString(state);
     if (!output) return;
 
@@ -178,6 +181,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsTxt = () => {
+    trackEvent("builder_download", { label: "txt" });
     const blob = new Blob([buildTacticText(state)], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     triggerDownload(url, `${fileBase}.txt`);
@@ -185,6 +189,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsJson = () => {
+    trackEvent("builder_download", { label: "json" });
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     triggerDownload(url, `${fileBase}.json`);
@@ -210,12 +215,14 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const copyToClipboard = async () => {
+    trackEvent("builder_copy_text");
     await navigator.clipboard.writeText(buildTacticText(state));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const copyShareLink = async () => {
+    trackEvent("builder_copy_share_link");
     const encoded = encodeTacticState(state);
     const url = `${window.location.origin}${window.location.pathname}?tactic=${encodeURIComponent(encoded)}`;
     await navigator.clipboard.writeText(url);

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { mentalityDescriptions } from "@/lib/tactics-data";
+import { trackEvent } from "@/lib/analytics";
 import type { TeamInstruction, Mentality } from "@/types/tactic";
 
 interface InstructionPanelProps {
@@ -79,7 +80,10 @@ export function InstructionPanel({
         {tabs.map((tab) => (
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
+            onClick={() => {
+              setActiveTab(tab.key);
+              trackEvent("builder_instructions_tab", { label: tab.key });
+            }}
             className={`flex-1 pb-2 text-xs font-medium transition-colors ${
               activeTab === tab.key
                 ? "text-primary border-b-2 border-primary"
@@ -103,7 +107,10 @@ export function InstructionPanel({
             return (
               <button
                 key={m}
-                onClick={() => onSetMentality(m)}
+                onClick={() => {
+                  onSetMentality(m);
+                  trackEvent("builder_set_mentality", { label: m });
+                }}
                 className={`w-full text-left p-3 rounded-lg border transition-all ${
                   isSelected
                     ? "bg-primary/10 border-primary/30"
@@ -149,7 +156,10 @@ export function InstructionPanel({
               <input
                 type="checkbox"
                 checked={instructions.inPossession.includes(inst)}
-                onChange={() => onToggleInstruction("inPossession", inst)}
+                onChange={() => {
+                  onToggleInstruction("inPossession", inst);
+                  trackEvent("builder_toggle_instruction", { label: `inPossession:${inst}` });
+                }}
                 className="sr-only"
               />
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
@@ -190,7 +200,10 @@ export function InstructionPanel({
               <input
                 type="checkbox"
                 checked={instructions.inTransition.includes(inst)}
-                onChange={() => onToggleInstruction("inTransition", inst)}
+                onChange={() => {
+                  onToggleInstruction("inTransition", inst);
+                  trackEvent("builder_toggle_instruction", { label: `inTransition:${inst}` });
+                }}
                 className="sr-only"
               />
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
@@ -231,7 +244,10 @@ export function InstructionPanel({
               <input
                 type="checkbox"
                 checked={instructions.outOfPossession.includes(inst)}
-                onChange={() => onToggleInstruction("outOfPossession", inst)}
+                onChange={() => {
+                  onToggleInstruction("outOfPossession", inst);
+                  trackEvent("builder_toggle_instruction", { label: `outOfPossession:${inst}` });
+                }}
                 className="sr-only"
               />
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${

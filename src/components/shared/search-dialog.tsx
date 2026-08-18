@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "@/i18n/routing";
 import { Search, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 interface SearchResult {
   title: string;
@@ -155,6 +156,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                 <button
                   key={result.url}
                   onClick={() => {
+                    trackEvent("search_result_click", { label: result.url });
                     router.push(result.url);
                     onOpenChange(false);
                   }}

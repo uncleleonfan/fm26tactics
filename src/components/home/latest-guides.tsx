@@ -41,6 +41,7 @@ export function LatestGuides() {
         </div>
         <Link
           href="/guides"
+          data-track="cta_view_all_guides"
           className="hidden sm:inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
           {t("allGuides")} <ArrowRight className="w-3 h-3" />
@@ -52,6 +53,8 @@ export function LatestGuides() {
           <Link
             key={guide.slug}
             href={`/guides/${guide.slug}`}
+            data-track="card_guide"
+            data-track-label={guide.slug}
             className="glass-card p-5 group flex gap-4"
           >
             <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">

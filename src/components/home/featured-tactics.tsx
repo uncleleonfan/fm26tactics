@@ -98,6 +98,7 @@ export function FeaturedTactics() {
         </div>
         <Link
           href="/tactics"
+          data-track="cta_view_all_tactics"
           className="hidden sm:inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
           {t("viewAll")} <ArrowRight className="w-3 h-3" />
@@ -109,6 +110,8 @@ export function FeaturedTactics() {
           <Link
             key={tactic.slug}
             href={`/tactics/${tactic.slug}`}
+            data-track="card_featured_tactic"
+            data-track-label={tactic.slug}
             className="glass-card p-6 group"
           >
             {/* Formation Badge */}
@@ -162,6 +165,7 @@ export function FeaturedTactics() {
 
       <Link
         href="/tactics"
+        data-track="cta_view_all_tactics"
         className="sm:hidden mt-6 flex items-center justify-center gap-1 text-sm text-primary"
       >
         {t("viewAll")} <ArrowRight className="w-3 h-3" />

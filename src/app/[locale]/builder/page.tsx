@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
+import { trackEvent } from "@/lib/analytics";
 import { formationPresets } from "@/lib/tactics-data";
 import { Pitch } from "@/components/builder/pitch";
 import { RoleSelector } from "@/components/builder/role-selector";
@@ -46,18 +47,23 @@ export default function BuilderPage() {
     setSelectedPlayerId(playerId);
     setSidebarTab("role");
     setShowMobileSidebar(true);
+    trackEvent("builder_select_player", { label: playerId });
   };
 
   const openFormationPanel = () => {
     setSidebarTab("formation");
     setShowMobileSidebar(true);
+    trackEvent("builder_open_formation");
   };
 
   const sidebarContent = (
     <>
       <div className="flex border-b border-[#1C2436]/50 shrink-0">
         <button
-          onClick={() => setSidebarTab("role")}
+          onClick={() => {
+            setSidebarTab("role");
+            trackEvent("builder_tab", { label: "role" });
+          }}
           className={`flex-1 py-3 text-xs font-medium transition-colors ${
             sidebarTab === "role"
               ? "text-primary border-b-2 border-primary bg-primary/5"
@@ -67,7 +73,10 @@ export default function BuilderPage() {
           Player Role
         </button>
         <button
-          onClick={() => setSidebarTab("instructions")}
+          onClick={() => {
+            setSidebarTab("instructions");
+            trackEvent("builder_tab", { label: "instructions" });
+          }}
           className={`flex-1 py-3 text-xs font-medium transition-colors ${
             sidebarTab === "instructions"
               ? "text-primary border-b-2 border-primary bg-primary/5"
@@ -77,7 +86,10 @@ export default function BuilderPage() {
           {t("instructions")}
         </button>
         <button
-          onClick={() => setSidebarTab("formation")}
+          onClick={() => {
+            setSidebarTab("formation");
+            trackEvent("builder_tab", { label: "formation" });
+          }}
           className={`flex-1 py-3 text-xs font-medium transition-colors ${
             sidebarTab === "formation"
               ? "text-primary border-b-2 border-primary bg-primary/5"
@@ -156,7 +168,10 @@ export default function BuilderPage() {
 
           <div className="flex items-center gap-1 sm:gap-2">
             <button
-              onClick={resetTactic}
+              onClick={() => {
+                resetTactic();
+                trackEvent("builder_reset");
+              }}
               className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
               aria-label={t("reset")}
             >
@@ -164,7 +179,10 @@ export default function BuilderPage() {
               <span className="hidden sm:inline">{t("reset")}</span>
             </button>
             <button
-              onClick={() => setShowExport(true)}
+              onClick={() => {
+                setShowExport(true);
+                trackEvent("builder_open_export");
+              }}
               className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg bg-primary text-background-primary text-xs font-semibold hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
             >
               <Download className="w-3.5 h-3.5" />
@@ -190,7 +208,10 @@ export default function BuilderPage() {
       </div>
 
       <button
-        onClick={() => setShowMobileSidebar(true)}
+        onClick={() => {
+          setShowMobileSidebar(true);
+          trackEvent("builder_open_sidebar");
+        }}
         className="lg:hidden fixed bottom-4 right-4 z-30 w-12 h-12 rounded-full bg-primary text-background-primary shadow-lg flex items-center justify-center hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] transition-all active:scale-95"
         aria-label="Open settings"
       >

@@ -2,6 +2,7 @@
 
 import { Check, ChevronDown, LayoutGrid, Flame } from "lucide-react";
 import { formationPresets } from "@/lib/tactics-data";
+import { trackEvent } from "@/lib/analytics";
 import { tacticTemplates } from "@/lib/tactic-templates";
 import type { TacticTemplate } from "@/lib/tactic-templates";
 import type { FormationType } from "@/types/tactic";
@@ -55,7 +56,10 @@ export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: 
           {tacticTemplates.map((t) => (
             <button
               key={t.id}
-              onClick={() => onApplyTemplate(t)}
+              onClick={() => {
+                onApplyTemplate(t);
+                trackEvent("builder_apply_template", { label: t.id });
+              }}
               className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg bg-gradient-to-r from-[#0E1625] to-[#111B2A] border border-[#1C2436]/50 hover:border-primary/40 hover:shadow-[0_0_15px_rgba(0,230,118,0.08)] transition-all text-left group"
             >
               <div className="flex-1 min-w-0">
@@ -92,7 +96,10 @@ export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: 
             return (
               <button
                 key={preset.formation}
-                onClick={() => onSelect(preset.formation)}
+                onClick={() => {
+                  onSelect(preset.formation);
+                  trackEvent("builder_select_formation", { label: preset.formation });
+                }}
                 className={`w-full flex items-center gap-3 px-2.5 py-2 rounded-lg text-left transition-all ${
                   active
                     ? "bg-primary/10 border border-primary/30 ring-1 ring-primary/20"

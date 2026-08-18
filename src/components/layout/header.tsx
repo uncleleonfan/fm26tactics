@@ -7,6 +7,7 @@ import { Link } from "@/i18n/routing";
 import { usePathname } from "@/i18n/routing";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
 const SearchDialog = dynamic(
@@ -39,7 +40,11 @@ export function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 h-16 glass-panel border-b border-[#1C2436]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link
+            href="/"
+            data-track="nav_logo"
+            className="flex items-center gap-2 group"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -68,6 +73,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                data-track="nav_link"
+                data-track-label={link.href}
                 className={cn(
                   "px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                   link.highlight
@@ -84,7 +91,10 @@ export function Header() {
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <button
-              onClick={() => setSearchOpen(true)}
+              onClick={() => {
+                setSearchOpen(true);
+                trackEvent("nav_search_open");
+              }}
               className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-all"
               aria-label={t("search")}
             >
@@ -98,7 +108,10 @@ export function Header() {
 
             {/* Mobile menu button */}
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => {
+                setMobileOpen(!mobileOpen);
+                trackEvent("nav_mobile_menu");
+              }}
               className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary"
               aria-label="Toggle menu"
             >
@@ -115,6 +128,8 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  data-track="nav_link_mobile"
+                  data-track-label={link.href}
                   onClick={() => setMobileOpen(false)}
                   className={cn(
                     "px-4 py-3 rounded-lg text-sm font-medium transition-all",

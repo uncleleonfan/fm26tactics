@@ -118,6 +118,7 @@ export function TacticBuilderCTA() {
 
               <Link
                 href="/builder"
+                data-track="cta_open_builder"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-background-primary font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300 group"
               >
                 {t("openBuilder")}

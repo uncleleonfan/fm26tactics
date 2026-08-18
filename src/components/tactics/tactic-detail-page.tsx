@@ -83,6 +83,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
               {/* Back link */}
               <Link
                 href="/tactics"
+                data-track="detail_back"
                 className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-6 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />

@@ -32,7 +32,12 @@ export function TacticCard({
   const diff = difficultyConfig[difficulty];
 
   return (
-    <Link href={`/tactics/${slug}`} className="glass-card overflow-hidden group">
+    <Link
+      href={`/tactics/${slug}`}
+      data-track="card_tactic"
+      data-track-label={slug}
+      className="glass-card overflow-hidden group"
+    >
       {/* Header with formation */}
       <div className="p-5 pb-4">
         <div className="flex items-center justify-between mb-3">

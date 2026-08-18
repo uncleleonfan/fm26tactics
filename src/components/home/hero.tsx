@@ -54,6 +54,7 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <Link
               href="/builder"
+              data-track="cta_try_builder"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-background-primary font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300 group"
             >
               {t("tryBuilder")}
@@ -61,6 +62,7 @@ export function HeroSection() {
             </Link>
             <Link
               href="/tactics"
+              data-track="cta_browse_tactics"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#1C2436] text-text-primary font-medium hover:bg-surface-hover hover:border-primary/20 transition-all duration-300"
             >
               {t("browseTactics")}
@@ -70,6 +72,8 @@ export function HeroSection() {
           {/* Trending Tactic Quick Link */}
           <Link
             href="/tactics/3-5-2-catenaccio"
+            data-track="cta_trending_tactic"
+            data-track-label="3-5-2-catenaccio"
             className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 hover:bg-amber-500/15 hover:border-amber-500/40 transition-all duration-300 group"
           >
             <span className="flex items-center gap-1.5">

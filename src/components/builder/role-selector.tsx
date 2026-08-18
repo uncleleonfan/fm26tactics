@@ -1,6 +1,7 @@
 "use client";
 
 import { playerRoles } from "@/lib/tactics-data";
+import { trackEvent } from "@/lib/analytics";
 import type { PlayerDuty, PlayerRoleCategory } from "@/types/tactic";
 
 interface RoleSelectorProps {
@@ -32,7 +33,10 @@ export function RoleSelector({
       {/* Role Select */}
       <select
         value={selectedRoleId}
-        onChange={(e) => onChangeRole(e.target.value)}
+        onChange={(e) => {
+          onChangeRole(e.target.value);
+          trackEvent("builder_select_role", { label: e.target.value });
+        }}
         className="w-full bg-surface border border-surface-border text-text-primary text-sm rounded-lg px-3 py-2.5 mb-3 outline-none focus:border-primary/50 transition-colors"
       >
         {categories.map((cat) => (
@@ -59,7 +63,10 @@ export function RoleSelector({
                 <button
                   key={duty}
                   disabled={!available}
-                  onClick={() => onChangeDuty(duty)}
+                  onClick={() => {
+                    onChangeDuty(duty);
+                    trackEvent("builder_select_duty", { label: duty });
+                  }}
                   className={`flex-1 py-1.5 text-xs font-medium rounded-lg border transition-all ${
                     selectedDuty === duty && available
                       ? duty === "defend"

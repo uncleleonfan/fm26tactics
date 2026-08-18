@@ -69,7 +69,13 @@ export default async function RolesPage({ params }: { params: { locale: string }
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {catRoles.map((role) => (
-                      <Link key={role.id} href={`/roles/${role.id}`} className="glass-card p-5 group">
+                      <Link
+                        key={role.id}
+                        href={`/roles/${role.id}`}
+                        data-track="card_role"
+                        data-track-label={role.id}
+                        className="glass-card p-5 group"
+                      >
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">

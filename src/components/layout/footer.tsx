@@ -50,7 +50,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-3">
+            <Link href="/" data-track="footer_logo" className="flex items-center gap-2 mb-3">
               <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-[#00C853] flex items-center justify-center">
                 <span className="text-background-primary font-bold text-xs">F</span>
               </div>
@@ -73,6 +73,8 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      data-track="footer_link"
+                      data-track-label={link.href}
                       className="text-sm text-text-secondary hover:text-primary transition-colors"
                     >
                       {link.label}

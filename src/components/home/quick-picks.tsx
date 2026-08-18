@@ -70,6 +70,8 @@ export function QuickPicks() {
           <Link
             key={pick.slug}
             href={pick.href || `/tactics/${pick.slug}`}
+            data-track="card_quick_pick"
+            data-track-label={pick.slug}
             className={`relative glass-card p-6 group overflow-hidden transition-all duration-300 hover:scale-[1.02] ${
               pick.highlight
                 ? "border-amber-500/30 hover:border-amber-500/50 bg-amber-500/[0.03]"
