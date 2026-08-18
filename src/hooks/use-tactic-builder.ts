@@ -260,6 +260,13 @@ export function useTacticBuilder() {
     setState(createDefaultState());
   }, []);
 
+  /** Load a tactic from an external source (e.g. imported .json). Returns false if invalid. */
+  const loadTactic = useCallback((value: unknown) => {
+    if (!isValidTacticState(value)) return false;
+    setState(value);
+    return true;
+  }, []);
+
   return {
     state,
     setFormation,
@@ -270,6 +277,7 @@ export function useTacticBuilder() {
     toggleInstruction,
     applyTemplate,
     resetTactic,
+    loadTactic,
   };
 }
 

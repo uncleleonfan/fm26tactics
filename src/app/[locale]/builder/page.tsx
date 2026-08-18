@@ -26,6 +26,7 @@ export default function BuilderPage() {
     toggleInstruction,
     resetTactic,
     applyTemplate,
+    loadTactic,
   } = useTacticBuilder();
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
@@ -223,7 +224,13 @@ export default function BuilderPage() {
         </>
       )}
 
-      {showExport && <TacticExport state={state} onClose={() => setShowExport(false)} />}
+      {showExport && (
+        <TacticExport
+          state={state}
+          onClose={() => setShowExport(false)}
+          onImport={loadTactic}
+        />
+      )}
     </div>
   );
 }

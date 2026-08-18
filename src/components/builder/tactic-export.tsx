@@ -1,19 +1,76 @@
 "use client";
 
-import { useState } from "react";
-import { Download, Share2, Check, Copy } from "lucide-react";
+import { useRef, useState } from "react";
+import { Download, Share2, Check, Copy, FileText, FileJson, Upload } from "lucide-react";
 import { encodeTacticState } from "@/hooks/use-tactic-builder";
+import { playerRoles } from "@/lib/tactics-data";
 import type { TacticBoardState } from "@/types/tactic";
 
 interface TacticExportProps {
   state: TacticBoardState;
   onClose: () => void;
+  onImport: (value: unknown) => boolean;
 }
 
 interface SvgOutput {
   svgString: string;
   width: number;
   height: number;
+}
+
+const CATEGORY_SHORT: Record<string, string> = {
+  goalkeeper: "GK",
+  defender: "D",
+  midfielder: "M",
+  forward: "F",
+};
+
+function cap(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+/** Full human-readable tactic card — formation, every player's role & duty, and all team instructions. */
+function buildTacticText(state: TacticBoardState): string {
+  const { formation, players, teamInstructions } = state;
+  const lines: string[] = [];
+
+  lines.push(`FM26 TACTIC — ${formation}`);
+  lines.push("Generated with FM26 Tactics Builder — www.fm26tactics.com");
+  lines.push("");
+
+  lines.push("FORMATION");
+  lines.push(formation);
+  lines.push("");
+
+  lines.push("LINEUP & ROLES");
+  players.forEach((p, i) => {
+    const role = playerRoles.find((r) => r.id === p.roleId);
+    const category = CATEGORY_SHORT[role?.category ?? ""] ?? "P";
+    const roleName = role?.name ?? p.roleId;
+    lines.push(`${i + 1}. ${category} — ${roleName} (${cap(p.duty)})`);
+  });
+  lines.push("");
+
+  lines.push("TEAM INSTRUCTIONS");
+  lines.push(`Mentality: ${cap(teamInstructions.mentality)}`);
+  lines.push(
+    `In Possession: ${teamInstructions.inPossession.join(", ") || "None"}`
+  );
+  lines.push(
+    `In Transition: ${teamInstructions.inTransition.join(", ") || "None"}`
+  );
+  lines.push(
+    `Out of Possession: ${teamInstructions.outOfPossession.join(", ") || "None"}`
+  );
+  lines.push("");
+
+  lines.push("HOW TO REPLICATE IN FM26");
+  lines.push(`1. Open FM26 → Tactics → New Tactic and pick the ${formation} formation.`);
+  lines.push("2. Assign each player the role & duty listed above (order matches the pitch from the back).");
+  lines.push("3. Set team mentality and tick the team instructions above.");
+  lines.push("4. Share your in-game result back at www.fm26tactics.com");
+
+  return lines.join("\n");
 }
 
 function buildSvgString(state: TacticBoardState): SvgOutput | null {
@@ -76,16 +133,20 @@ function triggerDownload(href: string, filename: string) {
   document.body.removeChild(link);
 }
 
-export function TacticExport({ state, onClose }: TacticExportProps) {
+export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
+  const [importMsg, setImportMsg] = useState<"ok" | "fail" | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const fileBase = `fm26-tactic-${state.formation.replace(/-/g, "")}`;
 
   const exportAsSvg = () => {
     const output = buildSvgString(state);
     if (!output) return;
     const blob = new Blob([output.svgString], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
-    triggerDownload(url, `fm26-tactic-${state.formation.replace(/-/g, "")}.svg`);
+    triggerDownload(url, `${fileBase}.svg`);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
@@ -109,26 +170,47 @@ export function TacticExport({ state, onClose }: TacticExportProps) {
       canvas.toBlob((blob) => {
         if (!blob) return;
         const url = URL.createObjectURL(blob);
-        triggerDownload(url, `fm26-tactic-${state.formation.replace(/-/g, "")}.png`);
+        triggerDownload(url, `${fileBase}.png`);
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       }, "image/png");
     };
     img.src = svgUrl;
   };
 
+  const exportAsTxt = () => {
+    const blob = new Blob([buildTacticText(state)], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    triggerDownload(url, `${fileBase}.txt`);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const exportAsJson = () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    triggerDownload(url, `${fileBase}.json`);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const handleImportFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result));
+        const ok = onImport(parsed);
+        setImportMsg(ok ? "ok" : "fail");
+        if (ok) {
+          setTimeout(onClose, 900);
+        }
+      } catch {
+        setImportMsg("fail");
+      }
+      setTimeout(() => setImportMsg(null), 2500);
+    };
+    reader.readAsText(file);
+  };
+
   const copyToClipboard = async () => {
-    const text = `FM26 Tactic: ${state.formation}
-    
-Team Instructions:
-- Mentality: ${state.teamInstructions.mentality.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}
-- In Possession: ${state.teamInstructions.inPossession.join(", ") || "None"}
-- In Transition: ${state.teamInstructions.inTransition.join(", ") || "None"}
-- Out of Possession: ${state.teamInstructions.outOfPossession.join(", ") || "None"}
-
-Players: ${state.players.length}
-Generated with FM26 Tactics Builder — www.fm26tactics.com`;
-
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(buildTacticText(state));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -144,10 +226,14 @@ Generated with FM26 Tactics Builder — www.fm26tactics.com`;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
-      <div className="relative glass-panel p-6 w-[320px] animate-fade-in">
+      <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
         <h3 className="text-sm font-semibold text-text-primary mb-4">Export Tactic</h3>
 
         <div className="space-y-3">
+          <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold">
+            Images
+          </p>
+
           <button
             onClick={exportAsSvg}
             className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
@@ -169,6 +255,60 @@ Generated with FM26 Tactics Builder — www.fm26tactics.com`;
               <p className="text-[10px] text-text-muted">Shareable image, ready for Discord & forums</p>
             </div>
           </button>
+
+          <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
+            Files
+          </p>
+
+          <button
+            onClick={exportAsTxt}
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
+          >
+            <FileText className="w-4 h-4 text-text-secondary group-hover:text-primary" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-text-primary">Download .txt</p>
+              <p className="text-[10px] text-text-muted">Full tactic card — follow it in-game</p>
+            </div>
+          </button>
+
+          <button
+            onClick={exportAsJson}
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
+          >
+            <FileJson className="w-4 h-4 text-text-secondary group-hover:text-primary" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-text-primary">Download .json</p>
+              <p className="text-[10px] text-text-muted">Backup / share & re-import the exact tactic</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
+          >
+            <Upload className="w-4 h-4 text-text-secondary group-hover:text-primary" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-text-primary">
+                {importMsg === "ok" ? "Loaded!" : importMsg === "fail" ? "Invalid file" : "Import .json"}
+              </p>
+              <p className="text-[10px] text-text-muted">Restore a tactic from a saved .json file</p>
+            </div>
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json,application/json"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) handleImportFile(file);
+              e.target.value = "";
+            }}
+          />
+
+          <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
+            Share
+          </p>
 
           <button
             onClick={copyShareLink}
@@ -200,7 +340,7 @@ Generated with FM26 Tactics Builder — www.fm26tactics.com`;
               <p className="text-sm font-medium text-text-primary">
                 {copied ? "Copied!" : "Copy as Text"}
               </p>
-              <p className="text-[10px] text-text-muted">Copy tactic instructions</p>
+              <p className="text-[10px] text-text-muted">Copy the full tactic card to clipboard</p>
             </div>
           </button>
         </div>
