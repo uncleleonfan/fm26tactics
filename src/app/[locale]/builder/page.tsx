@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Info, X, Settings } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
+import { formationPresets } from "@/lib/tactics-data";
 import { Pitch } from "@/components/builder/pitch";
 import { RoleSelector } from "@/components/builder/role-selector";
 import { InstructionPanel } from "@/components/builder/instruction-panel";
-import { FormationPresets } from "@/components/builder/formation-presets";
+import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
 import type { FormationType, PlayerDuty } from "@/types/tactic";
 
@@ -29,10 +30,12 @@ export default function BuilderPage() {
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [showExport, setShowExport] = useState(false);
-  const [sidebarTab, setSidebarTab] = useState<"role" | "instructions">("role");
+  const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation">("role");
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
   const selectedPlayer = state.players.find((p) => p.id === selectedPlayerId);
+  const currentFormationLabel =
+    formationPresets.find((f) => f.formation === state.formation)?.label ?? state.formation;
 
   const handleSelectPlayer = (playerId: string | null) => {
     setSelectedPlayerId(playerId);
@@ -41,6 +44,11 @@ export default function BuilderPage() {
   const handleTapPlayer = (playerId: string) => {
     setSelectedPlayerId(playerId);
     setSidebarTab("role");
+    setShowMobileSidebar(true);
+  };
+
+  const openFormationPanel = () => {
+    setSidebarTab("formation");
     setShowMobileSidebar(true);
   };
 
@@ -67,6 +75,16 @@ export default function BuilderPage() {
         >
           {t("instructions")}
         </button>
+        <button
+          onClick={() => setSidebarTab("formation")}
+          className={`flex-1 py-3 text-xs font-medium transition-colors ${
+            sidebarTab === "formation"
+              ? "text-primary border-b-2 border-primary bg-primary/5"
+              : "text-text-muted hover:text-text-secondary"
+          }`}
+        >
+          Formation
+        </button>
       </div>
 
       <div className="p-4 overflow-y-auto flex-1">
@@ -87,11 +105,17 @@ export default function BuilderPage() {
               </p>
             </div>
           )
-        ) : (
+        ) : sidebarTab === "instructions" ? (
           <InstructionPanel
             instructions={state.teamInstructions}
             onSetMentality={setTeamMentality}
             onToggleInstruction={toggleInstruction}
+          />
+        ) : (
+          <FormationPanel
+            currentFormation={state.formation}
+            onSelect={setFormation}
+            onApplyTemplate={applyTemplate}
           />
         )}
       </div>
@@ -116,11 +140,18 @@ export default function BuilderPage() {
             </h1>
           </div>
 
-          <FormationPresets
-            currentFormation={state.formation}
-            onSelect={setFormation}
-            onApplyTemplate={applyTemplate}
-          />
+          <button
+            onClick={openFormationPanel}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border font-mono text-xs font-bold tracking-wider transition-all ${
+              sidebarTab === "formation"
+                ? "bg-primary/10 border-primary/30 text-primary"
+                : "bg-[#0E1625] border-[#1C2436] text-text-primary hover:border-primary/40"
+            }`}
+          >
+            <LayoutGrid className="w-4 h-4 text-text-muted" />
+            <span className="hidden sm:inline">{currentFormationLabel}</span>
+            <span className="sm:hidden">Formation</span>
+          </button>
 
           <div className="flex items-center gap-1 sm:gap-2">
             <button
@@ -175,7 +206,9 @@ export default function BuilderPage() {
                   ? selectedPlayer
                     ? `Player Role — #${state.players.indexOf(selectedPlayer) + 1}`
                     : "Player Role"
-                  : t("instructions")}
+                  : sidebarTab === "formation"
+                    ? "Formation"
+                    : t("instructions")}
               </h3>
               <button
                 onClick={() => setShowMobileSidebar(false)}
