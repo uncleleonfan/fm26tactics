@@ -52,7 +52,7 @@ export default function TacticPage({ params }: Props) {
           "@type": "Article",
           headline: tactic.title,
           description: tactic.description,
-          url: `https://fm26tactics.com/tactics/${tactic.slug}`,
+          url: `https://www.fm26tactics.com/tactics/${tactic.slug}`,
           datePublished: tactic.publishedAt,
           dateModified: tactic.updatedAt || tactic.publishedAt,
           author: {
@@ -62,11 +62,11 @@ export default function TacticPage({ params }: Props) {
           publisher: {
             "@type": "Organization",
             name: "FM26 Tactics",
-            url: "https://fm26tactics.com",
+            url: "https://www.fm26tactics.com",
           },
           mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": `https://fm26tactics.com/tactics/${tactic.slug}`,
+            "@id": `https://www.fm26tactics.com/tactics/${tactic.slug}`,
           },
         }}
       />

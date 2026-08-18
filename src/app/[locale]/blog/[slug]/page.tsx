@@ -18,7 +18,7 @@ export async function generateMetadata({
   const post = allBlogs.find((p) => p.slug === params.slug);
   if (!post) return { title: "Post Not Found" };
 
-  const url = `https://fm26tactics.com/blog/${post.slug}`;
+  const url = `https://www.fm26tactics.com/blog/${post.slug}`;
 
   return {
     title: post.title,
@@ -46,7 +46,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [`https://fm26tactics.com/images/og/default.jpg`],
+      images: [`https://www.fm26tactics.com/images/og/default.jpg`],
     },
     keywords: post.tags?.join(", "),
     robots: {
@@ -83,14 +83,14 @@ export default function BlogPostPage({
     dateModified: post.publishedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://fm26tactics.com/blog/${post.slug}`,
+      "@id": `https://www.fm26tactics.com/blog/${post.slug}`,
     },
     publisher: {
       "@type": "Organization",
       name: "FM26 Tactics",
-      url: "https://fm26tactics.com",
+      url: "https://www.fm26tactics.com",
     },
-    image: "https://fm26tactics.com/images/og/default.jpg",
+    image: "https://www.fm26tactics.com/images/og/default.jpg",
     articleSection: post.category,
     keywords: post.tags?.join(", "),
   };

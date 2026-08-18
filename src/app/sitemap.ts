@@ -3,7 +3,7 @@ import { playerRoles } from "@/lib/tactics-data";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://fm26tactics.com";
+  const base = "https://www.fm26tactics.com";
   const now = new Date();
 
   const staticRoutes = [

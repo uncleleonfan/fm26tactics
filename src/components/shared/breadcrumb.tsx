@@ -24,7 +24,7 @@ export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
             "@type": "ListItem",
             position: i + 1,
             name: item.label,
-            ...(item.href ? { item: `https://fm26tactics.com${item.href}` } : {}),
+            ...(item.href ? { item: `https://www.fm26tactics.com${item.href}` } : {}),
           })),
         }}
       />

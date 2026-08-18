@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://fm26tactics.com/sitemap.xml",
+    sitemap: "https://www.fm26tactics.com/sitemap.xml",
   };
 }

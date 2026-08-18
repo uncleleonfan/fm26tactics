@@ -79,7 +79,7 @@ Team Instructions:
 - Out of Possession: ${state.teamInstructions.outOfPossession.join(", ") || "None"}
 
 Players: ${state.players.length}
-Generated with FM26 Tactics Builder — fm26tactics.com`;
+Generated with FM26 Tactics Builder — www.fm26tactics.com`;
 
     await navigator.clipboard.writeText(text);
     setCopied(true);

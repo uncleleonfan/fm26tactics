@@ -58,12 +58,12 @@ export async function generateMetadata({
       "fm 26 tactics", "fm26 tactics", "fm26 best tactics", "best fm26 tactics",
       "football manager 2026", "fm26 formations", "tiki-taka", "player roles",
     ],
-    authors: [{ name: "FM26 Tactics", url: "https://fm26tactics.com" }],
-    metadataBase: new URL("https://fm26tactics.com"),
+    authors: [{ name: "FM26 Tactics", url: "https://www.fm26tactics.com" }],
+    metadataBase: new URL("https://www.fm26tactics.com"),
     openGraph: {
       type: "website",
       locale: ogLocale,
-      url: "https://fm26tactics.com",
+      url: "https://www.fm26tactics.com",
       siteName: "FM26 Tactics",
       title: "Best FM26 Tactics & Formations",
       description:
@@ -81,7 +81,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: "FM26 Tactics",
       description: "Master Football Manager 2026 tactics with expert guides and an interactive builder.",
-      images: ["https://fm26tactics.com/images/og/default.jpg"],
+      images: ["https://www.fm26tactics.com/images/og/default.jpg"],
     },
     robots: {
       index: true,
@@ -100,12 +100,12 @@ export async function generateMetadata({
       apple: "/favicon.svg",
     },
     alternates: {
-      canonical: "https://fm26tactics.com",
+      canonical: "https://www.fm26tactics.com",
       languages: {
-        en: "https://fm26tactics.com",
-        de: "https://fm26tactics.com/de",
-        it: "https://fm26tactics.com/it",
-        fr: "https://fm26tactics.com/fr",
+        en: "https://www.fm26tactics.com",
+        de: "https://www.fm26tactics.com/de",
+        it: "https://www.fm26tactics.com/it",
+        fr: "https://www.fm26tactics.com/fr",
       },
     },
   };

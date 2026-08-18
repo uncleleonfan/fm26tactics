@@ -88,7 +88,7 @@ export function Footer() {
           <p className="text-xs text-text-muted">
             &copy; {new Date().getFullYear()} FM26 Tactics. {t("allRightsReserved")}
           </p>
-          <p className="text-xs text-text-muted">fm26tactics.com</p>
+          <p className="text-xs text-text-muted">www.fm26tactics.com</p>
         </div>
       </div>
     </footer>

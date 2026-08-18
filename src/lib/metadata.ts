@@ -23,7 +23,7 @@ export function generateSEO({
   keywords,
   author,
 }: SEOProps): Metadata {
-  const url = `https://fm26tactics.com${path}`;
+  const url = `https://www.fm26tactics.com${path}`;
   const fullTitle = title;
 
   return {
@@ -65,14 +65,14 @@ export function generateSEO({
       card: "summary_large_image",
       title: `${title}`,
       description,
-      images: [image.startsWith("http") ? image : `https://fm26tactics.com${image}`],
+      images: [image.startsWith("http") ? image : `https://www.fm26tactics.com${image}`],
     },
   };
 }
 
 export const siteConfig = {
   name: "FM26 Tactics",
-  url: "https://fm26tactics.com",
+  url: "https://www.fm26tactics.com",
   description: "Master Football Manager 2026 tactics with expert guides, player role analysis, and our interactive tactic builder.",
   links: {
     github: "https://github.com/uncleleonfan/fm26tactics",

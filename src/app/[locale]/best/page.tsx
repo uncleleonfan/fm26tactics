@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     "fm26 best tactics", "best fm26 tactics", "fm26 top tactics",
     "fm26 meta formations", "best formations fm26", "top fm26 tactics 2026",
   ],
-  alternates: { canonical: "https://fm26tactics.com/best" },
+  alternates: { canonical: "https://www.fm26tactics.com/best" },
   openGraph: {
     title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
     description: "Discover the best FM26 tactics ranked and tested. Top meta formations that dominate Football Manager 2026.",
-    url: "https://fm26tactics.com/best",
+    url: "https://www.fm26tactics.com/best",
     type: "website", siteName: "FM26 Tactics", locale: "en_US",
     images: [{ url: "/images/og/default.jpg", width: 1200, height: 630, alt: "FM26 Best Tactics 2026" }],
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
     description: "The best FM26 tactics ranked. Top meta formations that dominate Football Manager 2026.",
-    images: ["https://fm26tactics.com/images/og/default.jpg"],
+    images: ["https://www.fm26tactics.com/images/og/default.jpg"],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
 };

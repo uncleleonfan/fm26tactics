@@ -44,13 +44,13 @@ export const metadata: Metadata = {
     "football manager 2026", "fm26 gegenpress",
   ],
   alternates: {
-    canonical: "https://fm26tactics.com",
+    canonical: "https://www.fm26tactics.com",
   },
   openGraph: {
     title: "Best FM26 Tactics & Formations",
     description:
       "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides.",
-    url: "https://fm26tactics.com",
+    url: "https://www.fm26tactics.com",
     type: "website",
     siteName: "FM26 Tactics",
     locale: "en_US",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best FM26 Tactics & Formations",
     description: "Best FM 26 tactics, meta formations & interactive builder for Football Manager 2026.",
-    images: ["https://fm26tactics.com/images/og/default.jpg"],
+    images: ["https://www.fm26tactics.com/images/og/default.jpg"],
   },
 };
 

@@ -53,7 +53,7 @@ export default function GuidePage({ params }: Props) {
           "@type": "Article",
           headline: guide.title,
           description: guide.description,
-          url: `https://fm26tactics.com/guides/${guide.slug}`,
+          url: `https://www.fm26tactics.com/guides/${guide.slug}`,
           datePublished: guide.publishedAt,
           dateModified: guide.publishedAt,
           author: {
@@ -63,11 +63,11 @@ export default function GuidePage({ params }: Props) {
           publisher: {
             "@type": "Organization",
             name: "FM26 Tactics",
-            url: "https://fm26tactics.com",
+            url: "https://www.fm26tactics.com",
           },
           mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": `https://fm26tactics.com/guides/${guide.slug}`,
+            "@id": `https://www.fm26tactics.com/guides/${guide.slug}`,
           },
         }}
       />
