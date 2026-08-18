@@ -24,6 +24,7 @@ export default function BuilderPage() {
     setTeamMentality,
     toggleInstruction,
     resetTactic,
+    applyTemplate,
   } = useTacticBuilder();
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
@@ -115,7 +116,11 @@ export default function BuilderPage() {
             </h1>
           </div>
 
-          <FormationPresets currentFormation={state.formation} onSelect={setFormation} />
+          <FormationPresets
+            currentFormation={state.formation}
+            onSelect={setFormation}
+            onApplyTemplate={applyTemplate}
+          />
 
           <div className="flex items-center gap-1 sm:gap-2">
             <button
