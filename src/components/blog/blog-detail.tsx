@@ -3,7 +3,7 @@ import { Callout } from "@/components/shared/callout";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import type { Blog } from "contentlayer/generated";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
 
 const categoryColors: Record<string, string> = {
   tactics: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -176,6 +176,31 @@ export function BlogDetail({ post }: BlogDetailProps) {
           </div>
         </div>
       )}
+
+      {/* Builder CTA */}
+      <div className="mt-12">
+        <Link
+          href="/builder"
+          className="block glass-card p-6 sm:p-8 border border-primary/20 bg-gradient-to-r from-primary/10 via-transparent to-accent-blue/5 group"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-text-primary mb-1">
+                Build Your Own FM26 Tactic
+              </h3>
+              <p className="text-sm text-text-secondary leading-relaxed">
+                Want to create a custom system? Use our free FM26 Tactic Builder —
+                drag players onto the pitch, assign any player role, and export
+                your formation for Football Manager 2026.
+              </p>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-background-primary text-sm font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300">
+              Open Tactic Builder
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </div>
+        </Link>
+      </div>
 
       {/* Back to Blog */}
       <div className="mt-12 pt-8 border-t border-[#1C2436]/50">

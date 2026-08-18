@@ -118,11 +118,23 @@
     "ctaText": "New guides, meta updates, and tactical analysis delivered regularly.",
     "browseAll": "Browse All Tactics",
     "noPosts": "No blog posts yet. Stay tuned!",
-    "backToBlog": "Back to all articles"
+    "backToBlog": "Back to all articles",
+    "builderCtaTitle": "Build Your Own FM26 Tactic",
+    "builderCtaText": "Want to create a custom system? Use our free FM26 Tactic Builder — drag players onto the pitch, assign any player role, and export your formation for Football Manager 2026.",
+    "builderCtaButton": "Open Tactic Builder"
   },
   "tactics": {
     "title": "Tactics Library",
     "description": "Explore our collection of FM26 tactics — each with complete player roles, team instructions, and performance breakdown. Find the perfect system for your squad.",
+    "h1": "FM26 Tactics — Best Formations & Strategies",
+    "introTitle": "Best FM26 Tactics & Formations",
+    "introText1": "Welcome to the FM26 Tactics Library — the complete database of Football Manager 2026 tactics and formations. Every system below is broken down with full player roles, team instructions, and a performance overview, so you can find the best FM26 tactic for your squad. Whether you want to press high with a gegenpress, control games with tiki-taka, or frustrate opponents on the counter-attack, there is a proven blueprint here for every style of play.",
+    "introText2": "New to the game? Start with the 4-2-3-1 gegenpress or the balanced 4-4-2 wing play — both are widely considered the best FM26 tactics for beginners. Experienced managers can explore the meta 4-3-3 systems or the deep 3-5-2 shapes, and every tactic page explains exactly how to set it up, which roles to use, and how the system performs against the FM26 match engine.",
+    "quickNavTitle": "Jump to a Formation",
+    "builderCtaTitle": "Build Your Own FM26 Tactic",
+    "builderCtaText": "Don't see the perfect system? Use our free interactive FM26 Tactic Builder to create a custom formation in minutes — place players, assign roles and duties, and export your tactic for Football Manager 2026.",
+    "builderCtaButton": "Open Tactic Builder",
+    "relatedGuidesTitle": "Related FM26 Guides",
     "backToTactics": "Back to Tactics",
     "noTactics": "No tactics match your filters"
   },
