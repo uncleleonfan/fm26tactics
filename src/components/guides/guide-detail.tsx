@@ -6,8 +6,6 @@ import { ArrowLeft, Clock, Calendar, Tag, BookOpen, BarChart3, Flame, Target, Us
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
 import { RelatedGuides } from "@/components/shared/related-guides";
-import { NativeAd } from "@/components/shared/native-ad";
-import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import { formatDate } from "@/lib/utils";
 import type { Guide } from "contentlayer/generated";
 
@@ -100,14 +98,7 @@ export function GuideDetail({ guide }: GuideDetailProps) {
           className="mb-8"
         />
 
-        <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-8">
-          {/* Left skyscraper ad */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
-              <SkyscraperAd />
-            </div>
-          </aside>
-
+        <div>
           <div className="min-w-0">
             <div className="max-w-4xl">
               <Link
@@ -178,12 +169,8 @@ export function GuideDetail({ guide }: GuideDetailProps) {
                 tags={guide.tags || []}
                 category={guide.category}
               />
-
-              {/* Native Ad */}
-              <NativeAd />
             </div>
           </div>
-
         </div>
       </div>
     </div>

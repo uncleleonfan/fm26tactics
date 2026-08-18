@@ -6,8 +6,6 @@ import { ArrowLeft, Clock, Calendar, Tag, BarChart3 } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
 import { RelatedTactics } from "@/components/shared/related-tactics";
-import { NativeAd } from "@/components/shared/native-ad";
-import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { formatDate } from "@/lib/utils";
 import type { Tactic } from "contentlayer/generated";
@@ -79,14 +77,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
           className="mb-8"
         />
 
-        <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-8">
-          {/* Left skyscraper ad */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
-              <SkyscraperAd />
-            </div>
-          </aside>
-
+        <div>
           <div className="min-w-0">
             <div className="max-w-4xl">
               {/* Back link */}
@@ -160,11 +151,8 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                 formation={tactic.formation}
               />
 
-              {/* Native Ad */}
-              <NativeAd />
             </div>
           </div>
-
         </div>
       </div>
     </div>

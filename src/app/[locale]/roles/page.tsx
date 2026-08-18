@@ -2,7 +2,6 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Shield, Zap, Swords, Crosshair, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
-import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import { playerRoles } from "@/lib/tactics-data";
 import type { PlayerRoleCategory } from "@/types/tactic";
 
@@ -56,13 +55,7 @@ export default async function RolesPage({ params }: { params: { locale: string }
           <p className="text-text-secondary max-w-2xl">{rl("description")}</p>
         </div>
 
-        <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-8">
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
-              <SkyscraperAd />
-            </div>
-          </aside>
-
+        <div>
           <div className="min-w-0">
             {categories.map((category) => {
               const catRoles = playerRoles.filter((r) => r.category === category);

@@ -3,8 +3,6 @@ import { Link } from "@/i18n/routing";
 import { ArrowLeft, Check, Target } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
-import { NativeAd } from "@/components/shared/native-ad";
-import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import type { PlayerDuty } from "@/types/tactic";
 
 const RoleRadarChart = dynamic(
@@ -119,14 +117,7 @@ export default function RoleDetailPage({ params }: Props) {
           All Roles
         </Link>
 
-        <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-8">
-          {/* Left skyscraper ad */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
-              <SkyscraperAd />
-            </div>
-          </aside>
-
+        <div>
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2">
@@ -205,9 +196,6 @@ export default function RoleDetailPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Native Ad */}
-            <NativeAd />
-
             {/* FM26 Tactic Builder CTA */}
             <div className="glass-panel p-5 sticky top-24">
               <h3 className="text-sm font-semibold mb-3">Try This Role</h3>

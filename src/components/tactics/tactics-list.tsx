@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { TacticCard } from "@/components/tactics/tactic-card";
 import { TacticFilterBar } from "@/components/tactics/tactic-filter-bar";
-import { SkyscraperAd } from "@/components/shared/skyscraper-ad";
 import type { FormationType, PlayStyle } from "@/types/tactic";
 import type { Tactic } from "contentlayer/generated";
 
@@ -38,7 +37,7 @@ export function TacticsList({ tactics }: Props) {
   }, [filters, tactics]);
 
   return (
-    <div className="lg:grid lg:grid-cols-[1fr_160px] lg:gap-8">
+    <div>
       <div className="min-w-0">
         <TacticFilterBar
           currentFilters={filters}
@@ -80,13 +79,6 @@ export function TacticsList({ tactics }: Props) {
           </div>
         )}
       </div>
-
-      {/* Right skyscraper ad */}
-      <aside className="hidden lg:block">
-        <div className="sticky top-24 space-y-6">
-          <SkyscraperAd />
-        </div>
-      </aside>
     </div>
   );
 }
