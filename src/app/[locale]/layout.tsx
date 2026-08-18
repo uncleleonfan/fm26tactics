@@ -49,7 +49,7 @@ export async function generateMetadata({
 
   return {
     title: {
-      default: "FM26 Tactics — Master Football Manager 2026",
+      default: "Best FM26 Tactics & Formations",
       template: "%s | FM26 Tactics",
     },
     description:
@@ -65,7 +65,7 @@ export async function generateMetadata({
       locale: ogLocale,
       url: "https://fm26tactics.com",
       siteName: "FM26 Tactics",
-      title: "FM26 Tactics — Master Football Manager 2026",
+      title: "Best FM26 Tactics & Formations",
       description:
         "Master Football Manager 2026 with expert tactics, proven formations, and our interactive builder.",
       images: [

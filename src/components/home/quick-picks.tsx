@@ -11,6 +11,7 @@ interface QuickPick {
   description: string;
   readTime: number;
   highlight?: boolean;
+  href?: string;
 }
 
 const quickPicks: QuickPick[] = [
@@ -64,11 +65,11 @@ export function QuickPicks() {
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {quickPicks.map((pick) => (
           <Link
             key={pick.slug}
-            href={`/tactics/${pick.slug}`}
+            href={pick.href || `/tactics/${pick.slug}`}
             className={`relative glass-card p-6 group overflow-hidden transition-all duration-300 hover:scale-[1.02] ${
               pick.highlight
                 ? "border-amber-500/30 hover:border-amber-500/50 bg-amber-500/[0.03]"
