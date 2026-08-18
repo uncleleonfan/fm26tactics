@@ -95,6 +95,26 @@ export default function BlogPostPage({
     keywords: post.tags?.join(", "),
   };
 
+  const faqItems = (post.faq ?? []) as Array<{
+    question: string;
+    answer: string;
+  }>;
+
+  const faqJsonLd = faqItems.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
   return (
     <main className="min-h-screen bg-background-primary">
       <Script
@@ -102,6 +122,13 @@ export default function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      {faqJsonLd && (
+        <Script
+          id="blog-faq-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <BlogDetail post={post} />
     </main>
   );

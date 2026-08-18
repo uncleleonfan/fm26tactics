@@ -121,6 +121,7 @@ export const Blog = defineDocumentType(() => ({
     readTime: { type: "number", required: true },
     relatedTactic: { type: "string", required: false },
     relatedGuide: { type: "string", required: false },
+    faq: { type: "json", required: false },
   },
   computedFields: {
     slug: {
