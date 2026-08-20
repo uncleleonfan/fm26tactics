@@ -77,6 +77,38 @@ const attributeData: Record<string, Array<{ attribute: string; rating: number }>
     { attribute: "Composure", rating: 75 },
     { attribute: "Technique", rating: 85 },
   ],
+  "line-holding-keeper": [
+    { attribute: "Aerial Reach", rating: 90 },
+    { attribute: "Reflexes", rating: 90 },
+    { attribute: "Handling", rating: 85 },
+    { attribute: "Positioning", rating: 85 },
+    { attribute: "Command of Area", rating: 80 },
+    { attribute: "Decisions", rating: 80 },
+  ],
+  "overlapping-centre-back": [
+    { attribute: "Pace", rating: 85 },
+    { attribute: "Off the Ball", rating: 85 },
+    { attribute: "Passing", rating: 75 },
+    { attribute: "Work Rate", rating: 80 },
+    { attribute: "Acceleration", rating: 85 },
+    { attribute: "Positioning", rating: 80 },
+  ],
+  "playmaking-wing-back": [
+    { attribute: "Passing", rating: 90 },
+    { attribute: "Crossing", rating: 85 },
+    { attribute: "Vision", rating: 85 },
+    { attribute: "Dribbling", rating: 80 },
+    { attribute: "Work Rate", rating: 85 },
+    { attribute: "Stamina", rating: 85 },
+  ],
+  "channel-midfielder": [
+    { attribute: "Off the Ball", rating: 90 },
+    { attribute: "Acceleration", rating: 85 },
+    { attribute: "Passing", rating: 80 },
+    { attribute: "First Touch", rating: 80 },
+    { attribute: "Decisions", rating: 85 },
+    { attribute: "Teamwork", rating: 85 },
+  ],
 };
 
 export default function RoleDetailPage({ params }: Props) {

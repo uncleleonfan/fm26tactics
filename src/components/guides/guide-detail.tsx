@@ -16,6 +16,7 @@ const categoryConfig: Record<string, { label: string; icon: React.ReactNode; col
   "team-management": { label: "Team Management", icon: <Users className="w-3.5 h-3.5" />, color: "text-purple-400" },
   "match-day": { label: "Match Day", icon: <BookOpen className="w-3.5 h-3.5" />, color: "text-red-400" },
   "youth-development": { label: "Youth Development", icon: <Flame className="w-3.5 h-3.5" />, color: "text-orange-400" },
+  tactics: { label: "Tactics", icon: <BarChart3 className="w-3.5 h-3.5" />, color: "text-primary" },
 };
 
 const difficultyConfig: Record<string, { label: string; className: string }> = {

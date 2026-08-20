@@ -76,7 +76,7 @@ export const Guide = defineDocumentType(() => ({
     description: { type: "string", required: true },
     category: {
       type: "enum",
-      options: ["training", "set-pieces", "scouting", "team-management", "match-day", "youth-development"],
+      options: ["training", "set-pieces", "scouting", "team-management", "match-day", "youth-development", "tactics"],
       required: true,
     },
     difficulty: {

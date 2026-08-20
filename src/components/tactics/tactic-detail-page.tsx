@@ -2,11 +2,13 @@
 
 import { Link } from "@/i18n/routing";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { ArrowLeft, Clock, Calendar, Tag, BarChart3 } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Tag, BarChart3, Copy, Check, LayoutTemplate } from "lucide-react";
+import { useState } from "react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
 import { RelatedTactics } from "@/components/shared/related-tactics";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
+import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
 import { formatDate } from "@/lib/utils";
 import type { Tactic } from "contentlayer/generated";
 
@@ -64,6 +66,19 @@ interface TacticDetailPageProps {
 export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
   const MDXContent = useMDXComponent(tactic.body.code);
   const diff = difficultyConfig[tactic.difficulty];
+  const [copied, setCopied] = useState(false);
+  const copyText = tacticCopyTexts[tactic.slug];
+
+  const handleCopy = async () => {
+    if (!copyText) return;
+    try {
+      await navigator.clipboard.writeText(copyText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard unavailable — fall back to nothing
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
@@ -109,6 +124,36 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                 </h1>
 
                 <p className="text-lg text-text-secondary mb-6">{tactic.description}</p>
+
+                {copyText && (
+                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                    <button
+                      onClick={handleCopy}
+                      data-track="tactic_copy_setup"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/20 transition-colors"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          Setup Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Copy Full Setup
+                        </>
+                      )}
+                    </button>
+                    <Link
+                      href="/builder"
+                      data-track="tactic_open_builder"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-surface-border text-text-secondary text-sm font-semibold hover:border-primary/40 hover:text-text-primary transition-colors"
+                    >
+                      <LayoutTemplate className="w-4 h-4" />
+                      Open in Tactic Builder
+                    </Link>
+                  </div>
+                )}
 
                 {/* Meta */}
                 <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pb-6 border-b border-[#1C2436]/50">

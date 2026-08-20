@@ -284,6 +284,43 @@ export const playerRoles: PlayerRoleData[] = [
     description: "A physical presence who holds up the ball and brings teammates into play with knock-downs and layoffs.",
     bestFormations: ["4-4-2", "3-5-2"],
   },
+  // === FM26 NEW ROLES ===
+  {
+    id: "line-holding-keeper",
+    name: "Line-Holding Keeper",
+    category: "goalkeeper",
+    availableDuties: ["defend"],
+    keyAttributes: ["Aerial Reach", "Reflexes", "Handling", "Positioning", "Command of Area", "Decisions"],
+    description: "A traditional goalkeeper introduced in FM26 who holds his line and stays deep — ideal for defences that sit back and protect the box.",
+    bestFormations: ["4-4-2", "5-3-2", "4-2-3-1"],
+  },
+  {
+    id: "overlapping-centre-back",
+    name: "Overlapping Centre-Back",
+    category: "defender",
+    availableDuties: ["defend", "support"],
+    keyAttributes: ["Pace", "Off the Ball", "Passing", "Work Rate", "Acceleration", "Positioning"],
+    description: "A FM26 centre-back role for three-at-the-back systems who steps out and overlaps on the flank, adding an extra body in the final third.",
+    bestFormations: ["3-5-2", "5-3-2", "3-4-3"],
+  },
+  {
+    id: "playmaking-wing-back",
+    name: "Playmaking Wing-Back",
+    category: "defender",
+    availableDuties: ["support", "attack"],
+    keyAttributes: ["Passing", "Crossing", "Vision", "Dribbling", "Work Rate", "Stamina"],
+    description: "The advanced FM26 wing-back role that drifts inside to dictate play, creating overloads while the wide forward stretches the pitch.",
+    bestFormations: ["3-5-2", "3-4-3", "5-2-3"],
+  },
+  {
+    id: "channel-midfielder",
+    name: "Channel Midfielder",
+    category: "midfielder",
+    availableDuties: ["support", "attack"],
+    keyAttributes: ["Off the Ball", "Acceleration", "Passing", "First Touch", "Decisions", "Teamwork"],
+    description: "A new FM26 midfielder who attacks the half-spaces between the lines, arriving late in the box and combining between midfield and attack.",
+    bestFormations: ["4-3-3", "4-2-3-1", "3-4-3"],
+  },
 ];
 
 export const styleLabels: Record<string, string> = {

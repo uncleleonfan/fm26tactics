@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
-import { BookOpen, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
+import { BookOpen, BarChart3, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import type { Metadata } from "next";
 import { generateSEO } from "@/lib/metadata";
@@ -19,6 +19,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "team-management": <Users className="w-4 h-4" />,
   "match-day": <BookOpen className="w-4 h-4" />,
   "youth-development": <Flame className="w-4 h-4" />,
+  tactics: <BarChart3 className="w-4 h-4" />,
 };
 
 const categoryColors: Record<string, string> = {
@@ -28,6 +29,7 @@ const categoryColors: Record<string, string> = {
   "team-management": "text-purple-400",
   "match-day": "text-red-400",
   "youth-development": "text-orange-400",
+  tactics: "text-primary",
 };
 
 const difficultyBadge: Record<string, string> = {
@@ -48,9 +50,10 @@ export default async function GuidesPage({ params }: { params: { locale: string 
     "team-management": "teamManagement",
     "match-day": "matchDay",
     "youth-development": "youthDevelopment",
+    tactics: "tactics",
   };
 
-  const allCategories = ["team-management", "match-day", "training", "set-pieces", "scouting", "youth-development"] as const;
+  const allCategories = ["tactics", "team-management", "match-day", "training", "set-pieces", "scouting", "youth-development"] as const;
 
   // Group guides by category
   const guidesByCategory: Record<string, typeof allGuides> = {};
