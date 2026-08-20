@@ -9,6 +9,7 @@ import type {
   TeamInstruction,
   TacticBoardState,
   TacticPhase,
+  TacticPhaseState,
   Mentality,
   PlayerDuty,
 } from "@/types/tactic";
@@ -41,16 +42,50 @@ function isValidTacticState(value: unknown): value is TacticBoardState {
   );
 }
 
-/** Ensure a state always has both phases — legacy states get both phases seeded from the single shape. */
+/** Repair a phase so its player count matches its formation preset (older drafts had wrong counts). */
+function repairPhaseShape(phase: TacticPhaseState): TacticPhaseState {
+  const preset = formationPresets.find((f) => f.formation === phase.formation);
+  if (!preset || phase.players.length === preset.positions.length) return phase;
+  const nonGkRoles = playerRoles.filter((r) => r.category !== "goalkeeper");
+  return {
+    ...phase,
+    players: preset.positions.map((pos, i) => {
+      const existing = phase.players[i];
+      if (existing) return existing; // keep custom positions & roles where they exist
+      const role =
+        i === 0
+          ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
+          : nonGkRoles[i % nonGkRoles.length] || nonGkRoles[0];
+      return {
+        id: `player-${i}`,
+        x: pos.x,
+        y: pos.y,
+        roleId: role.id,
+        duty: role.availableDuties[0] || "support",
+        individualInstructions: [],
+      };
+    }),
+  };
+}
+
+/** Ensure a state always has both phases and each phase matches its formation's player count. */
 function normalizePhases(state: TacticBoardState): TacticBoardState {
-  if (state.phases) return state;
+  const hasPhases = !!state.phases;
+  const inPossession = repairPhaseShape(
+    hasPhases ? state.phases!.inPossession : { formation: state.formation, players: state.players }
+  );
+  const outOfPossession = repairPhaseShape(
+    hasPhases
+      ? state.phases!.outOfPossession
+      : { formation: state.formation, players: state.players }
+  );
+  const top = state.activePhase === "outOfPossession" ? outOfPossession : inPossession;
   return {
     ...state,
-    activePhase: "inPossession",
-    phases: {
-      inPossession: { formation: state.formation, players: state.players },
-      outOfPossession: { formation: state.formation, players: state.players },
-    },
+    activePhase: state.activePhase ?? "inPossession",
+    phases: { inPossession, outOfPossession },
+    formation: top.formation,
+    players: top.players,
   };
 }
 

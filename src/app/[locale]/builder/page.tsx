@@ -12,7 +12,7 @@ import { RoleSelector } from "@/components/builder/role-selector";
 import { InstructionPanel } from "@/components/builder/instruction-panel";
 import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
-import type { FormationType, PlayerDuty } from "@/types/tactic";
+import type { FormationType, PlayerDuty, TacticBoardState } from "@/types/tactic";
 
 export default function BuilderPage() {
   const t = useTranslations("builder");
@@ -63,8 +63,8 @@ export default function BuilderPage() {
   // Dual-phase helpers — top-level state mirrors the active phase
   const activePhase = state.activePhase ?? "inPossession";
   const phases = state.phases ?? {
-    inPossession: { formation: state.formation },
-    outOfPossession: { formation: state.formation },
+    inPossession: { formation: state.formation, players: state.players },
+    outOfPossession: { formation: state.formation, players: state.players },
   };
   const ipFormationLabel =
     formationPresets.find((f) => f.formation === phases.inPossession.formation)?.label ??
@@ -72,6 +72,15 @@ export default function BuilderPage() {
   const oopFormationLabel =
     formationPresets.find((f) => f.formation === phases.outOfPossession.formation)?.label ??
     phases.outOfPossession.formation;
+
+  // Dual-phase = the two boards differ — show both side by side, like FM26's split team instructions
+  const ipPlayers = phases.inPossession.players ?? [];
+  const oopPlayers = phases.outOfPossession.players ?? [];
+  const isDual =
+    phases.inPossession.formation !== phases.outOfPossession.formation ||
+    ipPlayers.length !== oopPlayers.length ||
+    JSON.stringify(ipPlayers.map((p) => p.roleId)) !==
+      JSON.stringify(oopPlayers.map((p) => p.roleId));
 
   const handleSwitchPhase = (phase: "inPossession" | "outOfPossession") => {
     setActivePhase(phase);
@@ -89,6 +98,71 @@ export default function BuilderPage() {
     setSidebarTab("role");
     setShowMobileSidebar(true);
     trackEvent("builder_select_player", { label: playerId });
+  };
+
+  /** One side of the dual-phase board — clicking/dragging a player activates that phase first. */
+  const renderPhaseBoard = (
+    phase: "inPossession" | "outOfPossession",
+    label: string,
+    formationLabel: string
+  ) => {
+    const phaseState = phases[phase];
+    const isActive = activePhase === phase;
+    const boardState: TacticBoardState = {
+      ...state,
+      formation: phaseState.formation,
+      players: phaseState.players ?? [],
+    };
+    const activate = () => {
+      if (!isActive) setActivePhase(phase);
+    };
+    return (
+      <div
+        className={`flex-1 flex flex-col min-w-0 transition-opacity ${
+          isActive ? "" : "opacity-75"
+        }`}
+      >
+        <div
+          className={`shrink-0 flex items-center justify-center gap-2 px-3 py-1.5 border-b text-xs font-semibold transition-colors ${
+            isActive
+              ? "bg-primary/10 border-primary/30 text-primary"
+              : "bg-[#0E1625]/40 border-[#1C2436]/50 text-text-muted"
+          }`}
+        >
+          <span>{label}</span>
+          <span className="font-mono text-[10px] text-text-muted">{formationLabel}</span>
+          {isActive && (
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-primary/15 text-primary font-bold uppercase tracking-wide">
+              Editing
+            </span>
+          )}
+        </div>
+        <Pitch
+          state={boardState}
+          onMovePlayer={(id, x, y, snap) => {
+            activate();
+            movePlayer(id, x, y, snap);
+          }}
+          onSelectPlayer={(id) => {
+            if (id) activate();
+            handleSelectPlayer(id);
+          }}
+          onTapPlayer={(id) => {
+            activate();
+            handleTapPlayer(id);
+          }}
+          selectedPlayerId={isActive ? selectedPlayerId : null}
+          onChangeRole={(id, roleId) => {
+            activate();
+            setPlayerRole(id, roleId);
+          }}
+          onChangeDuty={(id, duty) => {
+            activate();
+            setPlayerDuty(id, duty);
+          }}
+        />
+      </div>
+    );
   };
 
   const openFormationPanel = () => {
@@ -286,15 +360,38 @@ export default function BuilderPage() {
       </div>
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
-        <Pitch
-          state={state}
-          onMovePlayer={movePlayer}
-          onSelectPlayer={handleSelectPlayer}
-          onTapPlayer={handleTapPlayer}
-          selectedPlayerId={selectedPlayerId}
-          onChangeRole={setPlayerRole}
-          onChangeDuty={setPlayerDuty}
-        />
+        {isDual ? (
+          <>
+            {/* Desktop — two independent boards, like FM26's split team instructions */}
+            <div className="hidden lg:flex flex-1 min-w-0">
+              {renderPhaseBoard("inPossession", "In Possession", ipFormationLabel)}
+              <div className="w-px bg-[#1C2436]/50 shrink-0" />
+              {renderPhaseBoard("outOfPossession", "Out of Possession", oopFormationLabel)}
+            </div>
+            {/* Mobile — single active board, switched via the phase bar */}
+            <div className="lg:hidden flex-1 min-w-0">
+              <Pitch
+                state={state}
+                onMovePlayer={movePlayer}
+                onSelectPlayer={handleSelectPlayer}
+                onTapPlayer={handleTapPlayer}
+                selectedPlayerId={selectedPlayerId}
+                onChangeRole={setPlayerRole}
+                onChangeDuty={setPlayerDuty}
+              />
+            </div>
+          </>
+        ) : (
+          <Pitch
+            state={state}
+            onMovePlayer={movePlayer}
+            onSelectPlayer={handleSelectPlayer}
+            onTapPlayer={handleTapPlayer}
+            selectedPlayerId={selectedPlayerId}
+            onChangeRole={setPlayerRole}
+            onChangeDuty={setPlayerDuty}
+          />
+        )}
         <aside className="hidden lg:flex lg:flex-col w-[320px] shrink-0 border-l border-[#1C2436]/50 bg-surface/30">
           {sidebarContent}
         </aside>

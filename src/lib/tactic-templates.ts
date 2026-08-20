@@ -262,8 +262,9 @@ export const dualPhaseTemplates: DualPhaseTemplate[] = [
     outOfPossessionRoles: [
       { roleId: "line-holding-keeper", duty: "defend" },
       { roleId: "full-back", duty: "defend" },
-      { roleId: "full-back", duty: "defend" },
       { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "full-back", duty: "defend" },
       { roleId: "channel-midfielder", duty: "support" },
       { roleId: "deep-lying-playmaker", duty: "defend" },
       { roleId: "box-to-box-midfielder", duty: "support" },
