@@ -5,6 +5,15 @@ import { TacticsList } from "@/components/tactics/tactics-list";
 import { JsonLd } from "@/components/shared/json-ld";
 import { allTactics } from "contentlayer/generated";
 import { ArrowRight, BookOpen, LayoutGrid, Sparkles } from "lucide-react";
+import { generateSEO } from "@/lib/metadata";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = generateSEO({
+  title: "FM26 Tactics Library — Best FM26 Tactics & Formations",
+  description:
+    "Explore the complete FM26 tactics library — every formation with player roles, team instructions, and performance breakdowns. Find the best FM26 tactics for your squad in Football Manager 2026.",
+  path: "/tactics",
+});
 
 const formationAnchors = [
   { slug: "4-3-3-tiki-taka", label: "4-3-3", style: "Tiki-Taka" },
