@@ -9,6 +9,7 @@ const categoryColors: Record<string, string> = {
   "set-pieces": "bg-orange-500/10 text-orange-400 border-orange-500/20",
   meta: "bg-amber-500/10 text-amber-400 border-amber-500/20",
   beginner: "bg-primary/10 text-primary border-primary/20",
+  wonderkids: "bg-rose-500/10 text-rose-400 border-rose-500/20",
 };
 
 const categoryLabels: Record<string, string> = {
@@ -18,6 +19,7 @@ const categoryLabels: Record<string, string> = {
   "set-pieces": "Set Pieces",
   meta: "Meta",
   beginner: "Beginner",
+  wonderkids: "Wonderkids",
 };
 
 interface BlogListProps {

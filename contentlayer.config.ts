@@ -111,7 +111,7 @@ export const Blog = defineDocumentType(() => ({
     description: { type: "string", required: true },
     category: {
       type: "enum",
-      options: ["tactics", "formations", "player-roles", "set-pieces", "meta", "beginner"],
+      options: ["tactics", "formations", "player-roles", "set-pieces", "meta", "beginner", "wonderkids"],
       required: true,
     },
     tags: { type: "list", of: { type: "string" }, required: true },
