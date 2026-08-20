@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, Check, Target } from "lucide-react";
+import { ArrowLeft, Check, Sparkles, Target } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
+import { roleWonderkids, roleWonderkidTiers } from "@/lib/role-wonderkids";
 import type { PlayerDuty } from "@/types/tactic";
 
 const RoleRadarChart = dynamic(
@@ -26,6 +27,12 @@ const dutyColors: Record<PlayerDuty, string> = {
   defend: "#448AFF",
   support: "#FFB300",
   attack: "#FF5252",
+};
+
+const tierColors: Record<string, string> = {
+  Budget: "#00C853",
+  Mid: "#FFB300",
+  Marquee: "#FF5252",
 };
 
 // Simulated attribute ratings for the radar chart
@@ -192,6 +199,65 @@ export default function RoleDetailPage({ params }: Props) {
                 ))}
               </div>
             </div>
+
+            {/* Top Wonderkids for This Role */}
+            {(() => {
+              const picks = roleWonderkids[role.id];
+              if (!picks?.length) return null;
+              return (
+                <div className="glass-panel p-6 mt-8">
+                  <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    Top Wonderkids for This Role
+                  </h2>
+                  <p className="text-xs text-text-muted mb-4">
+                    FM26 mid-season database · fees vary with your save
+                  </p>
+                  <div className="space-y-3">
+                    {picks.map((p) => (
+                      <div
+                        key={p.name}
+                        className="flex items-start gap-3 p-3 rounded-lg bg-surface border border-surface-border"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-sm font-semibold text-text-primary">
+                              {p.name}
+                            </span>
+                            <span className="text-xs text-text-muted">
+                              {p.club} · {p.age}
+                            </span>
+                            <span
+                              className="text-[10px] font-medium px-2 py-0.5 rounded-full border"
+                              style={{
+                                color: tierColors[p.tier],
+                                borderColor: `${tierColors[p.tier]}40`,
+                                backgroundColor: `${tierColors[p.tier]}1a`,
+                              }}
+                            >
+                              {p.tier} · {roleWonderkidTiers[p.tier]}
+                            </span>
+                          </div>
+                          <p className="text-xs mt-1.5 text-text-secondary">{p.reason}</p>
+                        </div>
+                        <span className="shrink-0 text-[11px] font-mono px-2 py-1 rounded-md bg-surface border border-surface-border text-text-secondary">
+                          {p.duty}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-text-muted mt-4">
+                    More picks for every formation →{" "}
+                    <Link
+                      href="/blog/fm26-wonderkids-by-formation"
+                      className="text-primary hover:underline"
+                    >
+                      FM26 Wonderkids by Formation
+                    </Link>
+                  </p>
+                </div>
+              );
+            })()}
           </div>
 
           {/* Sidebar */}

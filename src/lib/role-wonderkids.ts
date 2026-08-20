@@ -1,0 +1,353 @@
+// === FM26 Wonderkids by Player Role ===
+// Data compiled from the public FM26 mid-season database (August 2026),
+// synthesized from FM Blog, FourFourTwo's wonderkid lists, cloudspress.com
+// and community shortlists. Clubs, ages and fees vary with database/save.
+
+export interface RoleWonderKid {
+  name: string;
+  club: string;
+  age: number;
+  tier: "Budget" | "Mid" | "Marquee";
+  duty: string; // recommended role + duty in-game
+  reason: string; // one-line why he fits this role
+}
+
+export const roleWonderkids: Record<string, RoleWonderKid[]> = {
+  "sweeper-keeper": [
+    {
+      name: "Guillaume Restes",
+      club: "Toulouse",
+      age: 21,
+      tier: "Mid",
+      duty: "SK (De)",
+      reason: "Elite shot-stopping with 15+ Reflexes and calm distribution — the archetypal sweeper keeper for a high line.",
+    },
+    {
+      name: "Bart Verbruggen",
+      club: "Brighton",
+      age: 23,
+      tier: "Mid",
+      duty: "SK (Su)",
+      reason: "Modern sweeper keeper who excels at sweeping behind a high line and starting attacks with long passes.",
+    },
+    {
+      name: "Lucas Chevalier",
+      club: "Lille",
+      age: 24,
+      tier: "Mid",
+      duty: "SK (De)",
+      reason: "Top-tier reactions and 1v1s with genuine command of the area — ready-made for the top leagues now.",
+    },
+  ],
+  goalkeeper: [
+    {
+      name: "Guillaume Restes",
+      club: "Toulouse",
+      age: 21,
+      tier: "Mid",
+      duty: "GK (De)",
+      reason: "Outstanding Reflexes and Handling for his age — a traditional shot-stopper who will anchor a defence for a decade.",
+    },
+    {
+      name: "Lucas Chevalier",
+      club: "Lille",
+      age: 24,
+      tier: "Mid",
+      duty: "GK (De)",
+      reason: "The best young pure goalkeeper in the database — elite reactions, aerial command and penalty saves.",
+    },
+  ],
+  "ball-playing-defender": [
+    {
+      name: "Pau Cubarsí",
+      club: "Barcelona",
+      age: 19,
+      tier: "Marquee",
+      duty: "BPD (De)",
+      reason: "Elite Anticipation and Composure on the ball — the best young ball-playing CB in the game.",
+    },
+    {
+      name: "Leny Yoro",
+      club: "Man United",
+      age: 20,
+      tier: "Marquee",
+      duty: "BPD (De)",
+      reason: "16+ Acceleration in a 6'3 frame with genuine passing range — carries the ball out and recovers instantly.",
+    },
+    {
+      name: "Ousmane Diomande",
+      club: "Sporting",
+      age: 22,
+      tier: "Mid",
+      duty: "BPD (De)",
+      reason: "Progresses the ball with real pace and still dominates duels — the complete modern defender at a fair price.",
+    },
+  ],
+  "central-defender": [
+    {
+      name: "Ousmane Diomande",
+      club: "Sporting",
+      age: 22,
+      tier: "Mid",
+      duty: "CD (De)",
+      reason: "Combines recovery pace with 17+ Jumping Reach — shuts down both the aerial game and the ball over the top.",
+    },
+    {
+      name: "Abdellah Ouazane",
+      club: "Brentford",
+      age: 21,
+      tier: "Budget",
+      duty: "CD (De)",
+      reason: "6'4, cheap and dominant in the air — the budget rock of any back line.",
+    },
+    {
+      name: "Leny Yoro",
+      club: "Man United",
+      age: 20,
+      tier: "Marquee",
+      duty: "CD (De)",
+      reason: "Elite positioning and recovery speed make him the rare young CB who thrives in a high defensive line.",
+    },
+  ],
+  "full-back": [
+    {
+      name: "Iván Fresneda",
+      club: "Sporting",
+      age: 21,
+      tier: "Mid",
+      duty: "FB (Su)",
+      reason: "A workhorse with 15+ Work Rate and Stamina who overlaps all day and still recovers — the complete full-back.",
+    },
+    {
+      name: "Héctor Fort",
+      club: "Barcelona",
+      age: 20,
+      tier: "Budget",
+      duty: "FB (At)",
+      reason: "High-energy, cheap and tactically flexible — provides the attacking width a narrow system needs.",
+    },
+    {
+      name: "Jorrel Hato",
+      club: "Ajax",
+      age: 20,
+      tier: "Mid",
+      duty: "FB (Su)",
+      reason: "A natural left-sided CB with 15+ Acceleration — defends the space behind while still joining the attack.",
+    },
+  ],
+  "wing-back": [
+    {
+      name: "Patrick Dorgu",
+      club: "Lecce",
+      age: 21,
+      tier: "Mid",
+      duty: "WB (Su)",
+      reason: "16+ Work Rate and Stamina — owns the entire flank alone for 90 minutes, both directions.",
+    },
+    {
+      name: "Iván Fresneda",
+      club: "Sporting",
+      age: 21,
+      tier: "Mid",
+      duty: "WB (Au)",
+      reason: "The attacking wing-back profile — relentless overlapping runs with the engine to recover afterwards.",
+    },
+    {
+      name: "Valentín Barco",
+      club: "Brighton",
+      age: 22,
+      tier: "Mid",
+      duty: "WB (Su)",
+      reason: "A dribbling, crossing left-sided wing-back — elite set pieces and deliveries from the flank.",
+    },
+  ],
+  "deep-lying-playmaker": [
+    {
+      name: "Adam Wharton",
+      club: "Crystal Palace",
+      age: 22,
+      tier: "Mid",
+      duty: "DLP (Su)",
+      reason: "16+ Passing and First Touch — the deep metronome who turns defence into attack with one pass over the press.",
+    },
+    {
+      name: "Ayyoub Bouaddi",
+      club: "Lille",
+      age: 18,
+      tier: "Mid",
+      duty: "DLP (De)",
+      reason: "An 18-year-old ball carrier who beats the first press phase — the deepest value in young playmakers.",
+    },
+    {
+      name: "Arthur Vermeeren",
+      club: "RB Leipzig",
+      age: 21,
+      tier: "Mid",
+      duty: "DLP (De)",
+      reason: "Positionally mature beyond his years with elite scanning — screens the back line and dictates tempo.",
+    },
+  ],
+  "box-to-box-midfielder": [
+    {
+      name: "Warren Zaïre-Emery",
+      club: "PSG",
+      age: 20,
+      tier: "Marquee",
+      duty: "BBM (Su)",
+      reason: "15+ Work Rate and Stamina with elite technicals — presses for 90 minutes and still arrives in the box.",
+    },
+    {
+      name: "João Neves",
+      club: "PSG",
+      age: 21,
+      tier: "Marquee",
+      duty: "BBM (Su)",
+      reason: "18+ Work Rate and press-resistant ball-carrying — the definition of the modern box-to-box engine.",
+    },
+    {
+      name: "Kobbie Mainoo",
+      club: "Man United",
+      age: 21,
+      tier: "Mid",
+      duty: "BBM (Su)",
+      reason: "Carries the ball through midfield transitions with elite composure — the link between defence and attack.",
+    },
+  ],
+  "advanced-playmaker": [
+    {
+      name: "Arda Güler",
+      club: "Real Madrid",
+      age: 21,
+      tier: "Marquee",
+      duty: "AP (Su)",
+      reason: "16+ Technique and elite first touch between the lines — turns half-chances into goals from the #10 slot.",
+    },
+    {
+      name: "Nico Paz",
+      club: "Como",
+      age: 21,
+      tier: "Mid",
+      duty: "AP (Su)",
+      reason: "16 Passing, 17 Vision at 21 — the best young playmaker outside the elite clubs, and affordable.",
+    },
+    {
+      name: "Franco Mastantuono",
+      club: "River Plate",
+      age: 19,
+      tier: "Mid",
+      duty: "AP (At)",
+      reason: "A 17-year-old creative engine with elite Flair — the most exciting young #10 to emerge from South America.",
+    },
+  ],
+  "inside-forward": [
+    {
+      name: "Lamine Yamal",
+      club: "Barcelona",
+      age: 19,
+      tier: "Marquee",
+      duty: "IF (At)",
+      reason: "Generational — elite Acceleration and dribbling, the highest-potential player in FM26. Cut inside and finish.",
+    },
+    {
+      name: "Estêvão",
+      club: "Chelsea",
+      age: 19,
+      tier: "Marquee",
+      duty: "IF (At)",
+      reason: "17+ Acceleration and Dribbling with a genuine goal threat — the classic modern inside forward.",
+    },
+    {
+      name: "Ethan Nwaneri",
+      club: "Arsenal",
+      age: 19,
+      tier: "Mid",
+      duty: "IF (Su)",
+      reason: "A lethal left-footed wide talent who cuts inside onto his stronger foot — the affordable elite option.",
+    },
+  ],
+  "advanced-forward": [
+    {
+      name: "Endrick",
+      club: "Real Madrid",
+      age: 20,
+      tier: "Marquee",
+      duty: "AF (At)",
+      reason: "17+ Acceleration and Finishing — times his runs onto through balls better than any young striker.",
+    },
+    {
+      name: "Vitor Roque",
+      club: "Barcelona",
+      age: 21,
+      tier: "Mid",
+      duty: "AF (At)",
+      reason: "A one-touch finisher with 16+ Acceleration — the lone striker who turns one chance into a goal.",
+    },
+    {
+      name: "Evan Ferguson",
+      club: "Brighton",
+      age: 21,
+      tier: "Mid",
+      duty: "AF (At)",
+      reason: "Strong, quick enough and a natural finisher — a 25-goal-a-season number 9 in the making.",
+    },
+  ],
+  "pressing-forward": [
+    {
+      name: "Vitor Roque",
+      club: "Barcelona",
+      age: 21,
+      tier: "Mid",
+      duty: "PF (At)",
+      reason: "Relentless from-the-front pressure with the finishing to punish the mistakes he forces.",
+    },
+    {
+      name: "Evan Ferguson",
+      club: "Brighton",
+      age: 21,
+      tier: "Mid",
+      duty: "PF (At)",
+      reason: "Chases every lost cause and still scores 20+ — the perfect pressing-forward profile for a gegenpress.",
+    },
+    {
+      name: "Assane Diao",
+      club: "Como",
+      age: 20,
+      tier: "Budget",
+      duty: "PF (At)",
+      reason: "Genuine pace and direct running — the budget pressing forward who turns regains into goals.",
+    },
+  ],
+  "target-forward": [
+    {
+      name: "Benjamin Šeško",
+      club: "RB Leipzig",
+      age: 23,
+      tier: "Mid",
+      duty: "TF (Su)",
+      reason: "6'5 with 17 Jumping Reach and Heading — the delivery target who wins every aerial duel and scores the knockdowns.",
+    },
+    {
+      name: "Samu Omorodion",
+      club: "Porto",
+      age: 22,
+      tier: "Mid",
+      duty: "TF (At)",
+      reason: "A powerful 6'4 target man with genuine pace — pinches defenders, holds the ball up and finishes the flick-ons.",
+    },
+    {
+      name: "Evan Ferguson",
+      club: "Brighton",
+      age: 21,
+      tier: "Mid",
+      duty: "TF (Su)",
+      reason: "Drops deep to link play and wins the knockdowns — a modern target man who creates for the runner beside him.",
+    },
+  ],
+};
+
+// Quick budget summary used by the role detail page footer.
+export const roleWonderkidTiers: Record<RoleWonderKid["tier"], string> = {
+  Budget: "Under €20m",
+  Mid: "€20–50m",
+  Marquee: "€50m+",
+};
