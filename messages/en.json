@@ -193,7 +193,8 @@
     "instructions": "Team Instructions",
     "reset": "Reset",
     "share": "Share Tactic",
-    "export": "Export Image"
+    "export": "Export & Download",
+    "exportNudge": "Done building? Hit Export to save your tactic as image, text or backup."
   },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",

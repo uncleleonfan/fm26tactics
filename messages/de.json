@@ -193,7 +193,8 @@
     "instructions": "Team-Anweisungen",
     "reset": "Zurücksetzen",
     "share": "Taktik teilen",
-    "export": "Bild exportieren"
+    "export": "Exportieren & Herunterladen",
+    "exportNudge": "Fertig gebaut? Klicke auf Export, um deine Taktik als Bild, Text oder Backup zu speichern."
   },
   "meta": {
     "pageTitle": "FM26 Meta-Analyse",

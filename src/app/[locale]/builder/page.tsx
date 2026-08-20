@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid } from "lucide-react";
@@ -34,6 +34,25 @@ export default function BuilderPage() {
   const [showExport, setShowExport] = useState(false);
   const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation">("role");
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
+  const [showNudge, setShowNudge] = useState(false);
+
+  // One-time hint nudging users to the Export button (dismissed forever after close)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const dismissed = window.localStorage.getItem("fm26-builder-nudge-dismissed");
+    if (!dismissed) {
+      setShowNudge(true);
+      trackEvent("builder_nudge_shown");
+    }
+  }, []);
+
+  const dismissNudge = () => {
+    setShowNudge(false);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("fm26-builder-nudge-dismissed", "1");
+    }
+    trackEvent("builder_nudge_dismiss");
+  };
 
   const selectedPlayer = state.players.find((p) => p.id === selectedPlayerId);
   const currentFormationLabel =
@@ -191,6 +210,29 @@ export default function BuilderPage() {
           </div>
         </div>
       </div>
+
+      {showNudge && (
+        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
+          <button
+            onClick={() => {
+              setShowExport(true);
+              dismissNudge();
+              trackEvent("builder_open_export");
+            }}
+            className="flex items-center gap-2 flex-1 min-w-0 text-left text-xs text-text-primary hover:text-primary transition-colors"
+          >
+            <Download className="w-3.5 h-3.5 text-primary shrink-0" />
+            <span className="truncate">{t("exportNudge")}</span>
+          </button>
+          <button
+            onClick={dismissNudge}
+            className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
+            aria-label="Dismiss"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
         <Pitch

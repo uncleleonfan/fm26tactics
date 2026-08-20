@@ -139,11 +139,21 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const [shareCopied, setShareCopied] = useState(false);
   const [importMsg, setImportMsg] = useState<"ok" | "fail" | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const openTimeRef = useRef(Date.now());
 
   const fileBase = `fm26-tactic-${state.formation.replace(/-/g, "")}`;
 
+  // ms the export dialog stayed open — distinguishes "opened & closed instantly"
+  // from "read the options but didn't download". Sent with every exit/download.
+  const dwellTime = () => Date.now() - openTimeRef.current;
+
+  const closeWithDwell = () => {
+    trackEvent("builder_export_close", { value: dwellTime() });
+    onClose();
+  };
+
   const exportAsSvg = () => {
-    trackEvent("builder_download", { label: "svg" });
+    trackEvent("builder_download", { label: "svg", value: dwellTime() });
     const output = buildSvgString(state);
     if (!output) return;
     const blob = new Blob([output.svgString], { type: "image/svg+xml" });
@@ -153,7 +163,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsPng = () => {
-    trackEvent("builder_download", { label: "png" });
+    trackEvent("builder_download", { label: "png", value: dwellTime() });
     const output = buildSvgString(state);
     if (!output) return;
 
@@ -181,7 +191,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsTxt = () => {
-    trackEvent("builder_download", { label: "txt" });
+    trackEvent("builder_download", { label: "txt", value: dwellTime() });
     const blob = new Blob([buildTacticText(state)], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     triggerDownload(url, `${fileBase}.txt`);
@@ -189,7 +199,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsJson = () => {
-    trackEvent("builder_download", { label: "json" });
+    trackEvent("builder_download", { label: "json", value: dwellTime() });
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     triggerDownload(url, `${fileBase}.json`);
@@ -202,11 +212,13 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
       try {
         const parsed = JSON.parse(String(reader.result));
         const ok = onImport(parsed);
+        trackEvent("builder_import", { label: ok ? "ok" : "fail", value: dwellTime() });
         setImportMsg(ok ? "ok" : "fail");
         if (ok) {
-          setTimeout(onClose, 900);
+          setTimeout(closeWithDwell, 900);
         }
       } catch {
+        trackEvent("builder_import", { label: "fail", value: dwellTime() });
         setImportMsg("fail");
       }
       setTimeout(() => setImportMsg(null), 2500);
@@ -215,14 +227,14 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const copyToClipboard = async () => {
-    trackEvent("builder_copy_text");
+    trackEvent("builder_copy_text", { value: dwellTime() });
     await navigator.clipboard.writeText(buildTacticText(state));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const copyShareLink = async () => {
-    trackEvent("builder_copy_share_link");
+    trackEvent("builder_copy_share_link", { value: dwellTime() });
     const encoded = encodeTacticState(state);
     const url = `${window.location.origin}${window.location.pathname}?tactic=${encodeURIComponent(encoded)}`;
     await navigator.clipboard.writeText(url);
@@ -232,7 +244,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/60" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
       <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
         <h3 className="text-sm font-semibold text-text-primary mb-4">Export Tactic</h3>
 
@@ -353,7 +365,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
         </div>
 
         <button
-          onClick={onClose}
+          onClick={closeWithDwell}
           className="w-full mt-4 py-2 text-xs text-text-muted hover:text-text-secondary transition-colors"
         >
           Cancel

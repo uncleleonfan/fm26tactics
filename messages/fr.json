@@ -193,7 +193,8 @@
     "instructions": "Consignes d'Équipe",
     "reset": "Réinitialiser",
     "share": "Partager la Tactique",
-    "export": "Exporter l'Image"
+    "export": "Exporter & Télécharger",
+    "exportNudge": "Terminé ? Cliquez sur Exporter pour enregistrer votre tactique en image, texte ou sauvegarde."
   },
   "meta": {
     "pageTitle": "Analyse Méta FM26",
