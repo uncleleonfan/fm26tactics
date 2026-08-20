@@ -14,9 +14,7 @@ export interface TestedTactic {
   efficiency: string; // pts/114
   style: string;
   notes: string;
-  // External download links (verified Aug 2026)
-  downloadUrl?: string; // fmscout.com tactic page — only set when FM Scout publishes the tactic
-  arenaUrl: string;     // fm-arena.com thread page — source of truth, always available
+  arenaUrl: string; // fm-arena.com thread page — source of truth, always available
 }
 
 export const topTestedTactics: TestedTactic[] = [
@@ -32,8 +30,6 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "70.2%",
     style: "Gegenpress",
     notes: "Still the benchmark. Elite attacking output, 93 goals/season. Pairs pacey wingers with a strike duo.",
-    // FM Scout hosts the same ZaZ Autumn series (page titled "3.08"); fm-arena thread is the exact 3.39 ST version
-    downloadUrl: "https://www.fmscout.com/a-zaz-autumn-fm26-tactic.html",
     arenaUrl: "https://fm-arena.com/thread/19215-zaz-autumn-3-39-st/",
   },
   {
