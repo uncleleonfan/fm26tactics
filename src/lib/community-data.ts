@@ -14,6 +14,9 @@ export interface TestedTactic {
   efficiency: string; // pts/114
   style: string;
   notes: string;
+  // External download links (verified Aug 2026)
+  downloadUrl?: string; // fmscout.com tactic page — only set when FM Scout publishes the tactic
+  arenaUrl: string;     // fm-arena.com thread page — source of truth, always available
 }
 
 export const topTestedTactics: TestedTactic[] = [
@@ -29,6 +32,9 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "70.2%",
     style: "Gegenpress",
     notes: "Still the benchmark. Elite attacking output, 93 goals/season. Pairs pacey wingers with a strike duo.",
+    // FM Scout hosts the same ZaZ Autumn series (page titled "3.08"); fm-arena thread is the exact 3.39 ST version
+    downloadUrl: "https://www.fmscout.com/a-zaz-autumn-fm26-tactic.html",
+    arenaUrl: "https://fm-arena.com/thread/19215-zaz-autumn-3-39-st/",
   },
   {
     rank: 2,
@@ -42,6 +48,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "68.9%",
     style: "Control Possession",
     notes: "Best defensive record among top tactics. Only 45 goals conceded. Perfect for underdog saves.",
+    arenaUrl: "https://fm-arena.com/thread/19999-granny-poison-26-3-v2/",
   },
   {
     rank: 3,
@@ -55,6 +62,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "68.3%",
     style: "Control Possession",
     notes: "More attacking 4-5-1 variant. Uses Advanced Wing-Backs for width. 87 goals scored.",
+    arenaUrl: "https://fm-arena.com/thread/20090-granny-poison-451-26-3-awb/",
   },
   {
     rank: 4,
@@ -68,6 +76,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "68.2%",
     style: "Gegenpress",
     notes: "Five-back system that still scores 85 goals. Perfect blend of defense and attack.",
+    arenaUrl: "https://fm-arena.com/thread/20239-5-1-2-2-purge-pp-v4-0/",
   },
   {
     rank: 5,
@@ -81,6 +90,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "68.2%",
     style: "Gegenpress",
     notes: "Most attacking top-5 tactic. 89 goals for — ideal for elite teams wanting to dominate.",
+    arenaUrl: "https://fm-arena.com/thread/18844-424-tianxia/",
   },
   {
     rank: 6,
@@ -94,6 +104,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "67.7%",
     style: "Gegenpress",
     notes: "Earlier ZaZ variant. 91 goals but leakier at the back (53 conceded).",
+    arenaUrl: "https://fm-arena.com/thread/16891-zaz-summer-1-2-st/",
   },
   {
     rank: 7,
@@ -107,6 +118,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "66.8%",
     style: "Control Possession",
     notes: "Best defense in the top 10. Only 41 goals conceded. Unique 3-3-3-1 shape inspired by Bielsa.",
+    arenaUrl: "https://fm-arena.com/thread/17839-3331-bielsa-s-dream-pos-v2/",
   },
   {
     rank: 8,
@@ -120,6 +132,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "66.8%",
     style: "Gegenpress",
     notes: "Another strong 4-2-4 variant with double DM protection.",
+    arenaUrl: "https://fm-arena.com/thread/18652-424-shanhai-dm-url/",
   },
   {
     rank: 9,
@@ -133,6 +146,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "66.8%",
     style: "Control Possession",
     notes: "Best 3-4-3 in testing. Inverted wing-backs create midfield overloads.",
+    arenaUrl: "https://fm-arena.com/thread/18039-343-invertide-v8-1/",
   },
   {
     rank: 10,
@@ -146,6 +160,7 @@ export const topTestedTactics: TestedTactic[] = [
     efficiency: "66.6%",
     style: "Gegenpress",
     notes: "Top 4-2-3-1 in testing. Balanced output with classic #10 role.",
+    arenaUrl: "https://fm-arena.com/thread/17930-4231-fwxm-newveggie-v2/",
   },
 ];
 
