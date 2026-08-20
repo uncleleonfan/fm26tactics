@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, TrendingUp, Shield, Zap, Star, AlertTriangle, CheckCircle, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
+import { ArrowLeft, TrendingUp, Shield, Zap, Star, AlertTriangle, CheckCircle, Download, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import {
   topTestedTactics,
@@ -102,12 +102,12 @@ export function MetaPage() {
                           href={t.arenaUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          title="View on FM-Arena"
-                          onClick={() => trackEvent("meta_view_arena", { label: t.name })}
-                          className="inline-flex items-center gap-1 text-[10px] font-medium text-primary hover:underline"
+                          title="Download from FM-Arena"
+                          onClick={() => trackEvent("meta_download", { label: t.name })}
+                          className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded bg-primary text-background-primary hover:opacity-90 transition-opacity"
                         >
-                          <ExternalLink className="w-3 h-3" />
-                          FM-Arena
+                          <Download className="w-3 h-3" />
+                          Download
                         </a>
                       </div>
                     </td>
