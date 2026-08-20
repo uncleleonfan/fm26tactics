@@ -75,10 +75,10 @@ export function CommunityInsights() {
         {/* Quick Meta Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {[
-            { label: t("bestFormation"), value: "4-2-4", sub: "80.0 PTS · 93 GF", icon: BarChart3 },
+            { label: t("bestFormation"), value: "3-4-3", sub: "81.1 PTS · Atonement", icon: BarChart3 },
             { label: t("bestDefense"), value: "3-3-3-1", sub: "41 GA · Bielsa Style", icon: BarChart3 },
             { label: t("opRole"), value: "Advanced WB", sub: "S+ Tier · Elite Width", icon: Award },
-            { label: t("testedTactics"), value: "44+", sub: "2,700 matches", icon: TrendingUp },
+            { label: t("testedTactics"), value: "2,700", sub: "matches per tactic", icon: TrendingUp },
           ].map((stat, i) => (
             <div key={i} className="glass-panel p-4 text-center">
               <stat.icon className="w-4 h-4 text-text-muted mx-auto mb-2" />

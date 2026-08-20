@@ -20,17 +20,17 @@ export interface TestedTactic {
 export const topTestedTactics: TestedTactic[] = [
   {
     rank: 1,
-    name: "ZaZ - Autumn 3.39 ST",
-    author: "ZaZ",
-    formation: "4-2-4",
-    pts: 80.0,
-    gd: 45,
-    gf: 93,
-    ga: 48,
-    efficiency: "70.2%",
-    style: "Gegenpress",
-    notes: "Still the benchmark. Elite attacking output, 93 goals/season. Pairs pacey wingers with a strike duo.",
-    arenaUrl: "https://fm-arena.com/thread/19215-zaz-autumn-3-39-st/",
+    name: "Atonement",
+    author: "CBP87",
+    formation: "3-4-3",
+    pts: 81.1,
+    gd: 44,
+    gf: 90,
+    ga: 46,
+    efficiency: "71.1%",
+    style: "Control Possession",
+    notes: "New #1 — a patient possession + high-press 3-4-3. Best xG differential on the board (+36.4) and elite home/away balance.",
+    arenaUrl: "https://fm-arena.com/thread/20283-atonement/",
   },
   {
     rank: 2,
@@ -90,6 +90,20 @@ export const topTestedTactics: TestedTactic[] = [
   },
   {
     rank: 6,
+    name: "The Raptor 3421",
+    author: "CBP87",
+    formation: "3-4-2-1",
+    pts: 77.7,
+    gd: 38,
+    gf: 81,
+    ga: 43,
+    efficiency: "68.2%",
+    style: "Gegenpress",
+    notes: "New entry — 3-4-2-1 with the best defensive numbers outside the top 3 (43 GA). CBP87's third top-10 tactic this patch.",
+    arenaUrl: "https://fm-arena.com/thread/20407-the-raptor-3421/",
+  },
+  {
+    rank: 7,
     name: "ZaZ - Summer 1.2 ST",
     author: "ZaZ",
     formation: "4-2-4",
@@ -99,11 +113,11 @@ export const topTestedTactics: TestedTactic[] = [
     ga: 53,
     efficiency: "67.7%",
     style: "Gegenpress",
-    notes: "Earlier ZaZ variant. 91 goals but leakier at the back (53 conceded).",
+    notes: "Highest scorer in the top 10 (91 goals) but leakier at the back (53 conceded).",
     arenaUrl: "https://fm-arena.com/thread/16891-zaz-summer-1-2-st/",
   },
   {
-    rank: 7,
+    rank: 8,
     name: "3331 Bielsa's Dream POS v2",
     author: "E Land Guy",
     formation: "3-3-3-1",
@@ -117,7 +131,7 @@ export const topTestedTactics: TestedTactic[] = [
     arenaUrl: "https://fm-arena.com/thread/17839-3331-bielsa-s-dream-pos-v2/",
   },
   {
-    rank: 8,
+    rank: 9,
     name: "424 ShanHai DM URL",
     author: "A Smile",
     formation: "4-2-4",
@@ -131,20 +145,6 @@ export const topTestedTactics: TestedTactic[] = [
     arenaUrl: "https://fm-arena.com/thread/18652-424-shanhai-dm-url/",
   },
   {
-    rank: 9,
-    name: "343 Invertide v8.1",
-    author: "Abel Asano",
-    formation: "3-4-3",
-    pts: 76.2,
-    gd: 35,
-    gf: 79,
-    ga: 44,
-    efficiency: "66.8%",
-    style: "Control Possession",
-    notes: "Best 3-4-3 in testing. Inverted wing-backs create midfield overloads.",
-    arenaUrl: "https://fm-arena.com/thread/18039-343-invertide-v8-1/",
-  },
-  {
     rank: 10,
     name: "4231 fwxm newveggie v2",
     author: "Feiwuxiaomei",
@@ -155,7 +155,7 @@ export const topTestedTactics: TestedTactic[] = [
     ga: 45,
     efficiency: "66.6%",
     style: "Gegenpress",
-    notes: "Top 4-2-3-1 in testing. Balanced output with classic #10 role.",
+    notes: "Top 4-2-3-1 in testing (tied with Gerrard's HIGHWAY STAR on 75.9 PTS). Balanced output with classic #10 role.",
     arenaUrl: "https://fm-arena.com/thread/17930-4231-fwxm-newveggie-v2/",
   },
 ];
@@ -171,11 +171,11 @@ export interface FormationInsight {
 }
 
 export const formationInsights: FormationInsight[] = [
-  { formation: "4-2-4", avgPts: 77.0, avgGD: 38, appearances: 4, verdict: "Most aggressive meta formation. 90+ goal potential with 2 strikers + 2 wingers.", tier: "S" },
-  { formation: "4-5-1 / 4-1-4-1", avgPts: 76.0, avgGD: 37, appearances: 5, verdict: "Best defensive solidity. Low goals conceded, consistent results across all team levels.", tier: "S" },
+  { formation: "3-4-3 / 3-4-2-1 / 3-3-3-1", avgPts: 78.3, avgGD: 39, appearances: 3, verdict: "The new meta king — Atonement (81.1 PTS) leads a three-back revolution. Elite attack and defense in one shape.", tier: "S" },
+  { formation: "4-2-4", avgPts: 77.0, avgGD: 37, appearances: 3, verdict: "Most aggressive meta formation. 90+ goal potential with 2 strikers + 2 wingers, still three entries in the top 10.", tier: "S" },
+  { formation: "4-5-1 / 4-1-4-1", avgPts: 78.3, avgGD: 40, appearances: 2, verdict: "Best defensive solidity. CBP87's Granny Poison series dominates the shape — low goals conceded, consistent at every club level.", tier: "S" },
   { formation: "5-1-2-2", avgPts: 77.8, avgGD: 40, appearances: 1, verdict: "Surprise meta contender. 5-defender systems can be elite with the right setup.", tier: "A" },
-  { formation: "3-4-3 / 3-3-3-1", avgPts: 76.2, avgGD: 36, appearances: 2, verdict: "Three-back systems are viable. Need pacey wide CBs and hardworking wing-backs.", tier: "A" },
-  { formation: "4-2-3-1", avgPts: 75.9, avgGD: 36, appearances: 1, verdict: "Classic formation still strong. Most familiar setup for transitioning players.", tier: "A" },
+  { formation: "4-2-3-1", avgPts: 75.9, avgGD: 36, appearances: 1, verdict: "Classic formation still strong. Most familiar setup for transitioning players (tied with HIGHWAY STAR on 75.9 PTS).", tier: "A" },
 ];
 
 // === Community OP/Meta Player Roles (Source: Passion4FM, FM Blog) ===
