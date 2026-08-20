@@ -42,10 +42,26 @@ export interface TeamInstruction {
   outOfPossession: string[];
 }
 
+/** Which phase of play the builder is currently editing. */
+export type TacticPhase = "inPossession" | "outOfPossession";
+
+/** A single phase's shape — formation + player roles (position map is inferred from the formation preset). */
+export interface TacticPhaseState {
+  formation: FormationType;
+  players: PlayerNode[];
+}
+
 export interface TacticBoardState {
   formation: FormationType;
   players: PlayerNode[];
   teamInstructions: TeamInstruction;
+  /** Currently edited phase. Top-level formation/players mirror this phase. */
+  activePhase?: TacticPhase;
+  /** Separate shapes for attack (in possession) and defence (out of possession). */
+  phases?: {
+    inPossession: TacticPhaseState;
+    outOfPossession: TacticPhaseState;
+  };
 }
 
 export interface FormationPreset {

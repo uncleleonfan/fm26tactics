@@ -2,12 +2,13 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
-import type { TacticTemplate } from "@/lib/tactic-templates";
+import type { TacticTemplate, DualPhaseTemplate } from "@/lib/tactic-templates";
 import type {
   FormationType,
   PlayerNode,
   TeamInstruction,
   TacticBoardState,
+  TacticPhase,
   Mentality,
   PlayerDuty,
 } from "@/types/tactic";
@@ -40,6 +41,29 @@ function isValidTacticState(value: unknown): value is TacticBoardState {
   );
 }
 
+/** Ensure a state always has both phases — legacy states get both phases seeded from the single shape. */
+function normalizePhases(state: TacticBoardState): TacticBoardState {
+  if (state.phases) return state;
+  return {
+    ...state,
+    activePhase: "inPossession",
+    phases: {
+      inPossession: { formation: state.formation, players: state.players },
+      outOfPossession: { formation: state.formation, players: state.players },
+    },
+  };
+}
+
+/** Return the current phases object, seeding from the top-level shape if absent. */
+function ensurePhases(state: TacticBoardState): NonNullable<TacticBoardState["phases"]> {
+  return (
+    state.phases ?? {
+      inPossession: { formation: state.formation, players: state.players },
+      outOfPossession: { formation: state.formation, players: state.players },
+    }
+  );
+}
+
 /** Encode a tactic state into a compact URL-safe string. */
 export function encodeTacticState(state: TacticBoardState): string {
   return btoa(unescape(encodeURIComponent(JSON.stringify(state))));
@@ -59,7 +83,7 @@ export function decodeTacticState(encoded: string): TacticBoardState | null {
 function createDefaultState(): TacticBoardState {
   const preset = formationPresets[0];
   const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
-  return {
+  const base = {
     formation: preset.formation,
     players: preset.positions.map((pos, i) => {
       const role = i === 0
@@ -75,12 +99,13 @@ function createDefaultState(): TacticBoardState {
       };
     }),
     teamInstructions: {
-      mentality: "balanced",
-      inPossession: [],
-      inTransition: [],
-      outOfPossession: [],
+      mentality: "balanced" as Mentality,
+      inPossession: [] as string[],
+      inTransition: [] as string[],
+      outOfPossession: [] as string[],
     },
   };
+  return normalizePhases(base);
 }
 
 function loadInitialState(): TacticBoardState {
@@ -89,20 +114,47 @@ function loadInitialState(): TacticBoardState {
     const encoded = new URLSearchParams(window.location.search).get("tactic");
     if (encoded) {
       const decoded = decodeTacticState(encoded);
-      if (decoded) return decoded;
+      if (decoded) return normalizePhases(decoded);
     }
     // 2. Last saved draft
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (isValidTacticState(parsed)) return parsed;
+        if (isValidTacticState(parsed)) return normalizePhases(parsed);
       }
     } catch {
       // ignore corrupted storage
     }
   }
   return createDefaultState();
+}
+
+/** Build a phase's players from a formation preset + role assignments (falling back to sensible roles). */
+function buildPhasePlayers(
+  preset: { formation: FormationType; positions: { x: number; y: number }[] },
+  assignments: { roleId: string; duty: PlayerDuty }[] | undefined,
+  idPrefix: string
+): PlayerNode[] {
+  const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
+  return preset.positions.map((pos, i) => {
+    const assignment = assignments?.[i];
+    const role = assignment
+      ? playerRoles.find((r) => r.id === assignment.roleId)
+      : undefined;
+    const fallback = i === 0
+      ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
+      : roles[i % roles.length] || roles[0];
+    const chosen = role || fallback;
+    return {
+      id: `${idPrefix}-${i}`,
+      x: pos.x,
+      y: pos.y,
+      roleId: chosen.id,
+      duty: assignment?.duty || chosen.availableDuties[0] || "support",
+      individualInstructions: [],
+    };
+  });
 }
 
 export function useTacticBuilder() {
@@ -120,15 +172,29 @@ export function useTacticBuilder() {
     return () => clearTimeout(timer);
   }, [state]);
 
+  /** Switch the actively edited phase; top-level shape mirrors the chosen phase. */
+  const setActivePhase = useCallback((phase: TacticPhase) => {
+    setState((prev) => {
+      const phases = ensurePhases(prev);
+      const target = phases[phase];
+      return {
+        ...prev,
+        activePhase: phase,
+        formation: target.formation,
+        players: target.players,
+      };
+    });
+  }, []);
+
   const setFormation = useCallback((formation: FormationType) => {
     const preset = formationPresets.find((f) => f.formation === formation);
     if (!preset) return;
 
     const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
-    setState((prev) => ({
-      ...prev,
-      formation,
-      players: preset.positions.map((pos, i) => {
+    setState((prev) => {
+      const activePhase = prev.activePhase ?? "inPossession";
+      const phases = ensurePhases(prev);
+      const players = preset.positions.map((pos, i) => {
         const existing = prev.players[i];
         if (existing) {
           return { ...existing, x: pos.x, y: pos.y };
@@ -137,15 +203,24 @@ export function useTacticBuilder() {
           ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
           : roles[i % roles.length] || roles[0];
         return {
-          id: `player-${Date.now()}-${i}`,
+          id: `${activePhase}-${i}`,
           x: pos.x,
           y: pos.y,
           roleId: role.id,
           duty: role.availableDuties[0] || "support",
           individualInstructions: [],
         };
-      }),
-    }));
+      });
+      return {
+        ...prev,
+        formation,
+        players,
+        phases: {
+          ...phases,
+          [activePhase]: { formation, players },
+        },
+      };
+    });
   }, []);
 
   const movePlayer = useCallback((playerId: string, x: number, y: number, snap = false) => {
@@ -154,21 +229,31 @@ export function useTacticBuilder() {
     const finalX = snap ? Math.round(clampedX / 2.5) * 2.5 : clampedX;
     const finalY = snap ? Math.round(clampedY / 2.5) * 2.5 : clampedY;
 
-    setState((prev) => ({
-      ...prev,
-      players: prev.players.map((p) =>
+    setState((prev) => {
+      const activePhase = prev.activePhase ?? "inPossession";
+      const phases = ensurePhases(prev);
+      const players = prev.players.map((p) =>
         p.id === playerId ? { ...p, x: finalX, y: finalY } : p
-      ),
-    }));
+      );
+      return {
+        ...prev,
+        players,
+        phases: {
+          ...phases,
+          [activePhase]: { ...phases[activePhase], players },
+        },
+      };
+    });
   }, []);
 
   const setPlayerRole = useCallback((playerId: string, roleId: string) => {
     const role = playerRoles.find((r) => r.id === roleId);
     if (!role) return;
 
-    setState((prev) => ({
-      ...prev,
-      players: prev.players.map((p) =>
+    setState((prev) => {
+      const activePhase = prev.activePhase ?? "inPossession";
+      const phases = ensurePhases(prev);
+      const players = prev.players.map((p) =>
         p.id === playerId
           ? {
               ...p,
@@ -176,17 +261,34 @@ export function useTacticBuilder() {
               duty: role.availableDuties[0] || p.duty,
             }
           : p
-      ),
-    }));
+      );
+      return {
+        ...prev,
+        players,
+        phases: {
+          ...phases,
+          [activePhase]: { ...phases[activePhase], players },
+        },
+      };
+    });
   }, []);
 
   const setPlayerDuty = useCallback((playerId: string, duty: PlayerDuty) => {
-    setState((prev) => ({
-      ...prev,
-      players: prev.players.map((p) =>
+    setState((prev) => {
+      const activePhase = prev.activePhase ?? "inPossession";
+      const phases = ensurePhases(prev);
+      const players = prev.players.map((p) =>
         p.id === playerId ? { ...p, duty } : p
-      ),
-    }));
+      );
+      return {
+        ...prev,
+        players,
+        phases: {
+          ...phases,
+          [activePhase]: { ...phases[activePhase], players },
+        },
+      };
+    });
   }, []);
 
   const setTeamMentality = useCallback((mentality: Mentality) => {
@@ -216,32 +318,47 @@ export function useTacticBuilder() {
     []
   );
 
-  /** One-click apply of a curated meta tactic template. */
+  /** One-click apply of a curated meta tactic template (both phases share the same shape). */
   const applyTemplate = useCallback((template: TacticTemplate) => {
     const preset = formationPresets.find((f) => f.formation === template.formation);
     if (!preset) return;
 
-    const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
+    const players = buildPhasePlayers(preset, template.roleAssignments, "player");
+    const phaseState = { formation: template.formation, players };
     setState({
-      formation: template.formation,
-      players: preset.positions.map((pos, i) => {
-        const assignment = template.roleAssignments[i];
-        const role = assignment
-          ? playerRoles.find((r) => r.id === assignment.roleId)
-          : undefined;
-        const fallback = i === 0
-          ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
-          : roles[i % roles.length] || roles[0];
-        const chosen = role || fallback;
-        return {
-          id: `player-${i}`,
-          x: pos.x,
-          y: pos.y,
-          roleId: chosen.id,
-          duty: assignment?.duty || chosen.availableDuties[0] || "support",
-          individualInstructions: [],
-        };
-      }),
+      ...phaseState,
+      activePhase: "inPossession",
+      phases: {
+        inPossession: phaseState,
+        outOfPossession: phaseState,
+      },
+      teamInstructions: {
+        mentality: template.mentality,
+        inPossession: [...template.inPossession],
+        inTransition: [...template.inTransition],
+        outOfPossession: [...template.outOfPossession],
+      },
+    });
+  }, []);
+
+  /** One-click apply of a dual-phase blueprint — different attacking and defensive shapes. */
+  const applyDualPhaseTemplate = useCallback((template: DualPhaseTemplate) => {
+    const ipPreset = formationPresets.find((f) => f.formation === template.inPossessionFormation);
+    const oopPreset = formationPresets.find((f) => f.formation === template.outOfPossessionFormation);
+    if (!ipPreset || !oopPreset) return;
+
+    const inPossession = {
+      formation: template.inPossessionFormation,
+      players: buildPhasePlayers(ipPreset, template.inPossessionRoles, "ip"),
+    };
+    const outOfPossession = {
+      formation: template.outOfPossessionFormation,
+      players: buildPhasePlayers(oopPreset, template.outOfPossessionRoles, "oop"),
+    };
+    setState({
+      ...inPossession,
+      activePhase: "inPossession",
+      phases: { inPossession, outOfPossession },
       teamInstructions: {
         mentality: template.mentality,
         inPossession: [...template.inPossession],
@@ -263,12 +380,13 @@ export function useTacticBuilder() {
   /** Load a tactic from an external source (e.g. imported .json). Returns false if invalid. */
   const loadTactic = useCallback((value: unknown) => {
     if (!isValidTacticState(value)) return false;
-    setState(value);
+    setState(normalizePhases(value));
     return true;
   }, []);
 
   return {
     state,
+    setActivePhase,
     setFormation,
     movePlayer,
     setPlayerRole,
@@ -276,6 +394,7 @@ export function useTacticBuilder() {
     setTeamMentality,
     toggleInstruction,
     applyTemplate,
+    applyDualPhaseTemplate,
     resetTactic,
     loadTactic,
   };

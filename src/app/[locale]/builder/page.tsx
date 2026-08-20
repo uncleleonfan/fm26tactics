@@ -19,6 +19,7 @@ export default function BuilderPage() {
   const cm = useTranslations("common");
   const {
     state,
+    setActivePhase,
     setFormation,
     movePlayer,
     setPlayerRole,
@@ -27,6 +28,7 @@ export default function BuilderPage() {
     toggleInstruction,
     resetTactic,
     applyTemplate,
+    applyDualPhaseTemplate,
     loadTactic,
   } = useTacticBuilder();
 
@@ -57,6 +59,26 @@ export default function BuilderPage() {
   const selectedPlayer = state.players.find((p) => p.id === selectedPlayerId);
   const currentFormationLabel =
     formationPresets.find((f) => f.formation === state.formation)?.label ?? state.formation;
+
+  // Dual-phase helpers — top-level state mirrors the active phase
+  const activePhase = state.activePhase ?? "inPossession";
+  const phases = state.phases ?? {
+    inPossession: { formation: state.formation },
+    outOfPossession: { formation: state.formation },
+  };
+  const ipFormationLabel =
+    formationPresets.find((f) => f.formation === phases.inPossession.formation)?.label ??
+    phases.inPossession.formation;
+  const oopFormationLabel =
+    formationPresets.find((f) => f.formation === phases.outOfPossession.formation)?.label ??
+    phases.outOfPossession.formation;
+
+  const handleSwitchPhase = (phase: "inPossession" | "outOfPossession") => {
+    setActivePhase(phase);
+    // player ids differ between phases — reset the selection
+    setSelectedPlayerId(null);
+    trackEvent("builder_switch_phase", { label: phase });
+  };
 
   const handleSelectPlayer = (playerId: string | null) => {
     setSelectedPlayerId(playerId);
@@ -148,6 +170,7 @@ export default function BuilderPage() {
             currentFormation={state.formation}
             onSelect={setFormation}
             onApplyTemplate={applyTemplate}
+            onApplyDualPhase={applyDualPhaseTemplate}
           />
         )}
       </div>
@@ -233,6 +256,34 @@ export default function BuilderPage() {
           </button>
         </div>
       )}
+
+      {/* Phase switcher — FM26 split team instructions */}
+      <div className="shrink-0 flex items-center justify-center gap-1 px-3 py-2 border-b border-[#1C2436]/50 bg-surface/20">
+        <div className="flex rounded-lg bg-[#0E1625] border border-[#1C2436]/60 p-0.5">
+          <button
+            onClick={() => handleSwitchPhase("inPossession")}
+            className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-md text-xs font-semibold transition-all ${
+              activePhase === "inPossession"
+                ? "bg-primary/15 text-primary border border-primary/30"
+                : "text-text-muted hover:text-text-secondary border border-transparent"
+            }`}
+          >
+            <span>In Possession</span>
+            <span className="font-mono text-[10px] text-text-muted">{ipFormationLabel}</span>
+          </button>
+          <button
+            onClick={() => handleSwitchPhase("outOfPossession")}
+            className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-md text-xs font-semibold transition-all ${
+              activePhase === "outOfPossession"
+                ? "bg-primary/15 text-primary border border-primary/30"
+                : "text-text-muted hover:text-text-secondary border border-transparent"
+            }`}
+          >
+            <span>Out of Possession</span>
+            <span className="font-mono text-[10px] text-text-muted">{oopFormationLabel}</span>
+          </button>
+        </div>
+      </div>
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
         <Pitch

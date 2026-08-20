@@ -1,16 +1,17 @@
 "use client";
 
-import { Check, ChevronDown, LayoutGrid, Flame } from "lucide-react";
+import { Check, ChevronDown, LayoutGrid, Flame, GitBranch } from "lucide-react";
 import { formationPresets } from "@/lib/tactics-data";
 import { trackEvent } from "@/lib/analytics";
-import { tacticTemplates } from "@/lib/tactic-templates";
-import type { TacticTemplate } from "@/lib/tactic-templates";
+import { tacticTemplates, dualPhaseTemplates } from "@/lib/tactic-templates";
+import type { TacticTemplate, DualPhaseTemplate } from "@/lib/tactic-templates";
 import type { FormationType } from "@/types/tactic";
 
 interface FormationPanelProps {
   currentFormation: FormationType;
   onSelect: (formation: FormationType) => void;
   onApplyTemplate: (template: TacticTemplate) => void;
+  onApplyDualPhase: (template: DualPhaseTemplate) => void;
 }
 
 function formatStyle(style: string) {
@@ -42,7 +43,12 @@ function MiniPitch({ positions }: { positions: { x: number; y: number }[] }) {
  * Rendered inside the builder sidebar (desktop) / bottom drawer (mobile),
  * so it inherits the page-height scroll container — no overflow issues.
  */
-export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: FormationPanelProps) {
+export function FormationPanel({
+  currentFormation,
+  onSelect,
+  onApplyTemplate,
+  onApplyDualPhase,
+}: FormationPanelProps) {
   return (
     <div className="space-y-4">
       {/* Meta templates — one-click apply */}
@@ -72,6 +78,45 @@ export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: 
                   </span>
                 </div>
                 <p className="text-[10px] text-text-muted mt-0.5 line-clamp-1">{t.description}</p>
+              </div>
+              <ChevronDown className="w-3.5 h-3.5 -rotate-90 text-text-muted group-hover:text-primary shrink-0" />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Dual-phase blueprints — separate attacking & defending shapes */}
+      <div>
+        <div className="flex items-center gap-2 mb-2 px-1">
+          <GitBranch className="w-4 h-4 text-primary" />
+          <h3 className="text-sm font-semibold text-text-primary">Dual-Phase Blueprints</h3>
+          <span className="text-[10px] text-text-muted ml-auto">Attack + defence</span>
+        </div>
+        <p className="text-[10px] text-text-muted mb-2 px-1 leading-snug">
+          FM26's split team instructions — set a different shape for in possession vs out of possession.
+        </p>
+        <div className="space-y-1.5">
+          {dualPhaseTemplates.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => {
+                onApplyDualPhase(t);
+                trackEvent("builder_apply_dual_phase", { label: t.id });
+              }}
+              className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg bg-gradient-to-r from-[#0E1625] to-[#111B2A] border border-[#1C2436]/50 hover:border-primary/40 hover:shadow-[0_0_15px_rgba(0,230,118,0.08)] transition-all text-left group"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-mono text-xs font-bold text-text-primary truncate">
+                    {t.name}
+                  </span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-primary/15 text-primary font-semibold uppercase tracking-wide shrink-0">
+                    {formatStyle(t.style)}
+                  </span>
+                </div>
+                <p className="text-[10px] text-text-muted mt-0.5 line-clamp-2 leading-snug">
+                  {t.description}
+                </p>
               </div>
               <ChevronDown className="w-3.5 h-3.5 -rotate-90 text-text-muted group-hover:text-primary shrink-0" />
             </button>

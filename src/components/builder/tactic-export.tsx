@@ -30,19 +30,15 @@ function cap(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-/** Full human-readable tactic card — formation, every player's role & duty, and all team instructions. */
-function buildTacticText(state: TacticBoardState): string {
-  const { formation, players, teamInstructions } = state;
-  const lines: string[] = [];
-
-  lines.push(`FM26 TACTIC — ${formation}`);
-  lines.push("Generated with FM26 Tactics Builder — www.fm26tactics.com");
+function renderPhaseBlock(
+  lines: string[],
+  phaseLabel: string,
+  formation: string,
+  players: TacticBoardState["players"]
+) {
+  lines.push(`——— ${phaseLabel} ———`);
+  lines.push(`FORMATION: ${formation}`);
   lines.push("");
-
-  lines.push("FORMATION");
-  lines.push(formation);
-  lines.push("");
-
   lines.push("LINEUP & ROLES");
   players.forEach((p, i) => {
     const role = playerRoles.find((r) => r.id === p.roleId);
@@ -51,6 +47,51 @@ function buildTacticText(state: TacticBoardState): string {
     lines.push(`${i + 1}. ${category} — ${roleName} (${cap(p.duty)})`);
   });
   lines.push("");
+}
+
+/** Full human-readable tactic card — formation(s), every player's role & duty, and all team instructions. */
+function buildTacticText(state: TacticBoardState): string {
+  const { formation, players, teamInstructions, phases } = state;
+  const lines: string[] = [];
+
+  const isDual =
+    phases &&
+    phases.inPossession.formation !== phases.outOfPossession.formation;
+
+  if (isDual) {
+    lines.push(
+      `FM26 TACTIC — ${phases.inPossession.formation} / ${phases.outOfPossession.formation} (Dual-Phase)`
+    );
+    lines.push("Generated with FM26 Tactics Builder — www.fm26tactics.com");
+    lines.push("");
+
+    // In-possession phase
+    renderPhaseBlock(
+      lines,
+      "IN POSSESSION (WITH BALL)",
+      phases.inPossession.formation,
+      phases.inPossession.players
+    );
+
+    // Out-of-possession phase
+    renderPhaseBlock(
+      lines,
+      "OUT OF POSSESSION (WITHOUT BALL)",
+      phases.outOfPossession.formation,
+      phases.outOfPossession.players
+    );
+  } else {
+    lines.push(`FM26 TACTIC — ${formation}`);
+    lines.push("Generated with FM26 Tactics Builder — www.fm26tactics.com");
+    lines.push("");
+
+    renderPhaseBlock(
+      lines,
+      "FORMATION",
+      formation,
+      players
+    );
+  }
 
   lines.push("TEAM INSTRUCTIONS");
   lines.push(`Mentality: ${cap(teamInstructions.mentality)}`);
@@ -66,8 +107,17 @@ function buildTacticText(state: TacticBoardState): string {
   lines.push("");
 
   lines.push("HOW TO REPLICATE IN FM26");
-  lines.push(`1. Open FM26 → Tactics → New Tactic and pick the ${formation} formation.`);
-  lines.push("2. Assign each player the role & duty listed above (order matches the pitch from the back).");
+  if (isDual) {
+    lines.push(
+      `1. Open FM26 → Tactics → pick the ${phases.inPossession.formation} formation as your attacking shape (In Possession).`
+    );
+    lines.push(
+      `2. Set the ${phases.outOfPossession.formation} formation as your defensive shape (Out of Possession) — FM26 keeps both under one tactic.`
+    );
+  } else {
+    lines.push(`1. Open FM26 → Tactics → New Tactic and pick the ${formation} formation.`);
+    lines.push("2. Assign each player the role & duty listed above (order matches the pitch from the back).");
+  }
   lines.push("3. Set team mentality and tick the team instructions above.");
   lines.push("4. Share your in-game result back at www.fm26tactics.com");
 
@@ -141,7 +191,12 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const openTimeRef = useRef(Date.now());
 
-  const fileBase = `fm26-tactic-${state.formation.replace(/-/g, "")}`;
+  const phases = state.phases;
+  const isDual =
+    phases && phases.inPossession.formation !== phases.outOfPossession.formation;
+  const fileBase = isDual
+    ? `fm26-tactic-${phases.inPossession.formation.replace(/-/g, "")}-${phases.outOfPossession.formation.replace(/-/g, "")}`
+    : `fm26-tactic-${state.formation.replace(/-/g, "")}`;
 
   // ms the export dialog stayed open — distinguishes "opened & closed instantly"
   // from "read the options but didn't download". Sent with every exit/download.
