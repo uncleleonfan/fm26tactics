@@ -247,7 +247,14 @@ export default function RoleDetailPage({ params }: Props) {
                     ))}
                   </div>
                   <p className="text-xs text-text-muted mt-4">
-                    More picks for every formation →{" "}
+                    Full role-by-role list →{" "}
+                    <Link
+                      href="/blog/fm26-wonderkids-by-role"
+                      className="text-primary hover:underline"
+                    >
+                      FM26 Wonderkids by Role
+                    </Link>{" "}
+                    · Picks for every formation →{" "}
                     <Link
                       href="/blog/fm26-wonderkids-by-formation"
                       className="text-primary hover:underline"
