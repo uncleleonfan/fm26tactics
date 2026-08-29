@@ -35,7 +35,6 @@ export function generateStaticParams() {
 const localeOgMap: Record<string, string> = {
   en: "en_US",
   de: "de_DE",
-  it: "it_IT",
   fr: "fr_FR",
 };
 
@@ -101,12 +100,6 @@ export async function generateMetadata({
     },
     alternates: {
       canonical: "https://www.fm26tactics.com",
-      languages: {
-        en: "https://www.fm26tactics.com",
-        de: "https://www.fm26tactics.com/de",
-        it: "https://www.fm26tactics.com/it",
-        fr: "https://www.fm26tactics.com/fr",
-      },
     },
   };
 }
@@ -152,14 +145,6 @@ export default async function LocaleLayout({
             },
             sameAs: [siteConfig.links.github],
             dateModified: "2026-08-08",
-            potentialAction: {
-              "@type": "SearchAction",
-              target: {
-                "@type": "EntryPoint",
-                urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
-              },
-              "query-input": "required name=search_term_string",
-            },
           }}
         />
       </head>

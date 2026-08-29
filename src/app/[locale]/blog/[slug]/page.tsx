@@ -80,7 +80,7 @@ export default function BlogPostPage({
       ? { "@type": "Person", name: post.author }
       : undefined,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `https://www.fm26tactics.com/blog/${post.slug}`,

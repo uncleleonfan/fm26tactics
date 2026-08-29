@@ -66,7 +66,7 @@ export function LatestGuides() {
                   {guide.title}
                 </h3>
                 <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
-                  {t(difficultyKey[guide.difficulty] as Parameters<typeof t>[0])}
+                  {t((difficultyKey[guide.difficulty ?? "beginner"] ?? "difficultyBeginner") as Parameters<typeof t>[0])}
                 </span>
               </div>
               <p className="text-xs text-text-secondary line-clamp-2 leading-relaxed">

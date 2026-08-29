@@ -111,7 +111,7 @@ export default async function GuidesPage({ params }: { params: { locale: string 
                             <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-2 pr-4">
                               {guide.title}
                             </h3>
-                            <span className={`shrink-0 text-[10px] font-medium px-2 py-0.5 rounded-full border ${difficultyBadge[guide.difficulty] || difficultyBadge.beginner}`}>
+                            <span className={`shrink-0 text-[10px] font-medium px-2 py-0.5 rounded-full border ${difficultyBadge[guide.difficulty ?? "beginner"] || difficultyBadge.beginner}`}>
                               {guide.difficulty}
                             </span>
                           </div>

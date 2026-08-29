@@ -53,10 +53,10 @@ export function BlogList({ posts }: BlogListProps) {
           <div className="flex items-center gap-2 mb-3 flex-wrap">
             <span
               className={`text-[11px] font-medium px-2 py-0.5 rounded-md border ${
-                categoryColors[post.category] || "bg-surface text-text-muted border-surface-border"
+                categoryColors[post.category ?? ""] || "bg-surface text-text-muted border-surface-border"
               }`}
             >
-              {categoryLabels[post.category] || post.category}
+              {categoryLabels[post.category ?? ""] || post.category}
             </span>
             {post.tags?.slice(0, 3).map((tag: string) => (
               <span

@@ -138,6 +138,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
   const [importMsg, setImportMsg] = useState<"ok" | "fail" | null>(null);
+  const [exportError, setExportError] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const openTimeRef = useRef(Date.now());
 
@@ -152,10 +153,21 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     onClose();
   };
 
+  // Surface previously-silent failures (missing SVG node, canvas/blob/clipboard errors)
+  // and count them separately from successful downloads.
+  const exportFail = (label: string) => {
+    trackEvent("builder_download_fail", { label, value: dwellTime() });
+    setExportError(true);
+    setTimeout(() => setExportError(false), 2500);
+  };
+
   const exportAsSvg = () => {
-    trackEvent("builder_download", { label: "svg", value: dwellTime() });
     const output = buildSvgString(state);
-    if (!output) return;
+    if (!output) {
+      exportFail("svg");
+      return;
+    }
+    trackEvent("builder_download", { label: "svg", value: dwellTime() });
     const blob = new Blob([output.svgString], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
     triggerDownload(url, `${fileBase}.svg`);
@@ -163,9 +175,12 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const exportAsPng = () => {
-    trackEvent("builder_download", { label: "png", value: dwellTime() });
     const output = buildSvgString(state);
-    if (!output) return;
+    if (!output) {
+      exportFail("png");
+      return;
+    }
+    trackEvent("builder_download", { label: "png", value: dwellTime() });
 
     const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(output.svgString)}`;
     const img = new Image();
@@ -175,18 +190,25 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
       canvas.width = output.width * scale;
       canvas.height = output.height * scale;
       const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+      if (!ctx) {
+        exportFail("png");
+        return;
+      }
       // Solid background so dark text is always visible
       ctx.fillStyle = "#0A0E17";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       canvas.toBlob((blob) => {
-        if (!blob) return;
+        if (!blob) {
+          exportFail("png");
+          return;
+        }
         const url = URL.createObjectURL(blob);
         triggerDownload(url, `${fileBase}.png`);
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       }, "image/png");
     };
+    img.onerror = () => exportFail("png");
     img.src = svgUrl;
   };
 
@@ -227,19 +249,27 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   };
 
   const copyToClipboard = async () => {
-    trackEvent("builder_copy_text", { value: dwellTime() });
-    await navigator.clipboard.writeText(buildTacticText(state));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(buildTacticText(state));
+      trackEvent("builder_copy_text", { value: dwellTime() });
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      exportFail("text");
+    }
   };
 
   const copyShareLink = async () => {
-    trackEvent("builder_copy_share_link", { value: dwellTime() });
     const encoded = encodeTacticState(state);
     const url = `${window.location.origin}${window.location.pathname}?tactic=${encodeURIComponent(encoded)}`;
-    await navigator.clipboard.writeText(url);
-    setShareCopied(true);
-    setTimeout(() => setShareCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(url);
+      trackEvent("builder_copy_share_link", { value: dwellTime() });
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2000);
+    } catch {
+      exportFail("share");
+    }
   };
 
   return (
@@ -247,6 +277,12 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
       <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
       <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
         <h3 className="text-sm font-semibold text-text-primary mb-4">Export Tactic</h3>
+
+        {exportError && (
+          <p className="mb-3 text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-3 py-2">
+            Export failed — please try again
+          </p>
+        )}
 
         <div className="space-y-3">
           <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold">

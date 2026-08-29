@@ -10,6 +10,13 @@ interface SEOProps {
   tags?: string[];
   keywords?: string[];
   author?: string;
+  ogLocale?: string;
+  /**
+   * hreflang alternates for FULLY translated pages only, e.g.
+   * { en: "https://.../tactics/x", tr: "https://.../tr/tactics/x", "x-default": "https://.../tactics/x" }
+   * Omit for untranslated locale shells (they stay plain self-canonical).
+   */
+  languageAlternates?: Record<string, string>;
 }
 
 export function generateSEO({
@@ -22,6 +29,8 @@ export function generateSEO({
   tags,
   keywords,
   author,
+  ogLocale = "en_US",
+  languageAlternates,
 }: SEOProps): Metadata {
   const url = `https://www.fm26tactics.com${path}`;
   const fullTitle = title;
@@ -30,7 +39,10 @@ export function generateSEO({
     title: { absolute: fullTitle },
     description,
     keywords: keywords || undefined,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      ...(languageAlternates && { languages: languageAlternates }),
+    },
     robots: {
       index: true,
       follow: true,
@@ -47,7 +59,7 @@ export function generateSEO({
       description,
       url,
       siteName: "FM26 Tactics",
-      locale: "en_US",
+      locale: ogLocale,
       type,
       images: [
         {

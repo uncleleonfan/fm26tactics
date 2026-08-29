@@ -85,7 +85,7 @@ interface GuideDetailProps {
 export function GuideDetail({ guide }: GuideDetailProps) {
   const MDXContent = useMDXComponent(guide.body.code);
   const cat = categoryConfig[guide.category] || categoryConfig["team-management"];
-  const diff = difficultyConfig[guide.difficulty] || difficultyConfig["beginner"];
+  const diff = difficultyConfig[guide.difficulty ?? "beginner"] || difficultyConfig["beginner"];
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">

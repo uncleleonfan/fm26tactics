@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { formationPresets } from "@/lib/tactics-data";
@@ -28,6 +28,7 @@ export default function BuilderPage() {
     resetTactic,
     applyTemplate,
     loadTactic,
+    sharedLoadMsg,
   } = useTacticBuilder();
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
@@ -210,6 +211,15 @@ export default function BuilderPage() {
           </div>
         </div>
       </div>
+
+      {sharedLoadMsg === "ok" && (
+        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
+          <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+          <span className="text-xs text-text-primary">
+            Shared tactic loaded — tweak it and export your own version
+          </span>
+        </div>
+      )}
 
       {showNudge && (
         <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">

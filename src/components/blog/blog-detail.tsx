@@ -98,10 +98,10 @@ export function BlogDetail({ post }: BlogDetailProps) {
       <div className="flex items-center gap-3 mb-4 flex-wrap">
         <span
           className={`text-xs font-medium px-2.5 py-1 rounded-md border ${
-            categoryColors[post.category] || "bg-surface text-text-muted border-surface-border"
+            categoryColors[post.category ?? ""] || "bg-surface text-text-muted border-surface-border"
           }`}
         >
-          {categoryLabels[post.category] || post.category}
+          {categoryLabels[post.category ?? ""] || post.category}
         </span>
         {post.tags?.slice(0, 3).map((tag: string) => (
           <span key={tag} className="text-xs text-text-muted flex items-center gap-1">

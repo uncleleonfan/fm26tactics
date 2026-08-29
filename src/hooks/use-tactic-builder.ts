@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
 import type { TacticTemplate } from "@/lib/tactic-templates";
 import type {
@@ -107,6 +108,26 @@ function loadInitialState(): TacticBoardState {
 
 export function useTacticBuilder() {
   const [state, setState] = useState<TacticBoardState>(loadInitialState);
+  const [sharedLoadMsg, setSharedLoadMsg] = useState<"ok" | "fail" | null>(null);
+  const sharedTrackedRef = useRef(false);
+
+  // Fired when the page is opened via a shared link (?tactic=...).
+  // The ref guards against StrictMode's double effect run in dev.
+  useEffect(() => {
+    if (sharedTrackedRef.current) return;
+    const encoded =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("tactic")
+        : null;
+    if (!encoded) return;
+    sharedTrackedRef.current = true;
+    const ok = !!decodeTacticState(encoded);
+    trackEvent("builder_shared_load", { label: ok ? "ok" : "fail" });
+    if (ok) {
+      setSharedLoadMsg("ok");
+      setTimeout(() => setSharedLoadMsg(null), 5000);
+    }
+  }, []);
 
   // Auto-save draft to localStorage (debounced)
   useEffect(() => {
@@ -278,6 +299,7 @@ export function useTacticBuilder() {
     applyTemplate,
     resetTactic,
     loadTactic,
+    sharedLoadMsg,
   };
 }
 

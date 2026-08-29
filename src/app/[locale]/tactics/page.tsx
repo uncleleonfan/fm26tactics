@@ -3,8 +3,9 @@ import { Link } from "@/i18n/routing";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { TacticsList } from "@/components/tactics/tactics-list";
 import { JsonLd } from "@/components/shared/json-ld";
-import { allTactics } from "contentlayer/generated";
-import { ArrowRight, BookOpen, LayoutGrid, Sparkles } from "lucide-react";
+import { allTactics, allTacticTrs } from "contentlayer/generated";
+import type { Tactic } from "contentlayer/generated";
+import { ArrowRight, BookOpen, Globe, LayoutGrid, Sparkles } from "lucide-react";
 import { generateSEO } from "@/lib/metadata";
 import type { Metadata } from "next";
 
@@ -14,6 +15,9 @@ export const metadata: Metadata = generateSEO({
     "Explore the complete FM26 tactics library — every formation with player roles, team instructions, and performance breakdowns. Find the best FM26 tactics for your squad in Football Manager 2026.",
   path: "/tactics",
 });
+
+// Turkish pilot: only translated tactics are exposed under /tr (see docs/optimization-plan-2026-09.md §2b)
+const trSlugs = new Set(allTacticTrs.map((t) => t.slug));
 
 const formationAnchors = [
   { slug: "4-3-3-tiki-taka", label: "4-3-3", style: "Tiki-Taka" },
@@ -75,6 +79,10 @@ export default async function TacticsListPage({
   params: { locale: string };
 }) {
   const { locale } = params;
+  const isTr = locale === "tr";
+  const anchors = isTr
+    ? formationAnchors.filter((a) => trSlugs.has(a.slug))
+    : formationAnchors;
   const tc = await getTranslations({ locale, namespace: "tactics" });
   const cm = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
@@ -120,7 +128,7 @@ export default async function TacticsListPage({
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
-            {formationAnchors.map((anchor) => (
+            {anchors.map((anchor) => (
               <Link
                 key={anchor.slug}
                 href={`/tactics/${anchor.slug}`}
@@ -135,7 +143,26 @@ export default async function TacticsListPage({
           </div>
         </nav>
 
-        <TacticsList tactics={allTactics} />
+        <TacticsList tactics={(isTr ? allTacticTrs : allTactics) as Tactic[]} />
+
+        {/* Turkish pilot: remaining tactics live in the English library */}
+        {isTr && (
+          <div className="mt-6 glass-panel border border-primary/10 rounded-xl p-4 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 min-w-0">
+              <Globe className="w-4 h-4 text-primary shrink-0" />
+              <p className="text-sm text-text-secondary">
+                Diğer taktikler İngilizce kütüphanede — çeviriler yolda.
+              </p>
+            </div>
+            <a
+              href="/tactics"
+              className="shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+            >
+              Tam kütüphane
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        )}
 
         {/* Builder CTA */}
         <section className="mt-12">

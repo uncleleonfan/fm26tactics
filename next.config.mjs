@@ -18,6 +18,21 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        // it locale removed (zero traffic validation, see docs/optimization-plan-2026-09.md §2b)
+        source: "/it",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/it/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
