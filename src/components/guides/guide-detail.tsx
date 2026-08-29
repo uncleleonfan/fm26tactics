@@ -5,6 +5,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { ArrowLeft, Clock, Calendar, Tag, BookOpen, BarChart3, Flame, Target, Users, ClipboardCheck, Crosshair } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
+import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedGuides } from "@/components/shared/related-guides";
 import { formatDate } from "@/lib/utils";
 import type { Guide } from "contentlayer/generated";
@@ -27,6 +28,7 @@ const difficultyConfig: Record<string, { label: string; className: string }> = {
 
 const mdxComponents = {
   Callout,
+  a: MdxLink,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50" {...props} />
   ),

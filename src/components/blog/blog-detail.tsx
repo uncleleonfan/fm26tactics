@@ -1,5 +1,6 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { Callout } from "@/components/shared/callout";
+import { MdxLink } from "@/components/shared/mdx-link";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import type { Blog } from "contentlayer/generated";
 import { Link } from "@/i18n/routing";
@@ -27,6 +28,7 @@ const categoryLabels: Record<string, string> = {
 
 const mdxComponents = {
   Callout,
+  a: MdxLink,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h2
       className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50"
@@ -69,9 +71,6 @@ const mdxComponents = {
   ),
   td: (props: React.HTMLProps<HTMLTableDataCellElement>) => (
     <td className="p-3 border-b border-[#1C2436]/40 text-text-secondary text-sm leading-relaxed" {...props} />
-  ),
-  a: (props: React.HTMLProps<HTMLAnchorElement>) => (
-    <a className="text-primary hover:underline" {...props} target={props.href?.startsWith("http") ? "_blank" : undefined} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />
   ),
 };
 

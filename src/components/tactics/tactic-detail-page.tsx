@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, Calendar, Tag, BarChart3, Copy, Check, LayoutTemplate
 import { useState } from "react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
+import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedTactics } from "@/components/shared/related-tactics";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
@@ -14,6 +15,7 @@ import type { Tactic } from "contentlayer/generated";
 
 const mdxComponents = {
   Callout,
+  a: MdxLink,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50" {...props} />
   ),
