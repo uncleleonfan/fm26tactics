@@ -34,6 +34,10 @@ const dutyColors: Record<string, { bg: string; text: string; border: string }> =
 
 const categories: PlayerRoleCategory[] = ["goalkeeper", "defender", "midfielder", "forward"];
 
+// "Aerial Reach" -> "aerialReach" (i18n attr dictionary key)
+const attrKey = (a: string) => a.replace(/ (.)/g, (_m: string, c: string) => c.toUpperCase());
+const dutyKey = (d: string) => `duty${d.charAt(0).toUpperCase()}${d.slice(1)}`;
+
 export default async function RolesPage({ params }: { params: { locale: string } }) {
   const { locale } = params;
   const rl = await getTranslations({ locale, namespace: "roles" });
@@ -50,7 +54,7 @@ export default async function RolesPage({ params }: { params: { locale: string }
 
         <div className="mb-10">
           <h1 className="text-3xl font-bold mb-2">
-            Player <span className="gradient-text">Roles</span> Encyclopedia
+            {rl("titleA")} <span className="gradient-text">{rl("titleH")}</span> {rl("titleB")}
           </h1>
           <p className="text-text-secondary max-w-2xl">{rl("description")}</p>
         </div>
@@ -79,29 +83,32 @@ export default async function RolesPage({ params }: { params: { locale: string }
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">
-                              {role.name}
+                              {rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name}
                             </h3>
                           </div>
                         </div>
                         <p className="text-xs text-text-secondary line-clamp-2 mb-4 leading-relaxed">
-                          {role.description}
+                          {rl.has(`roleDesc.${role.id}`) ? rl(`roleDesc.${role.id}`) : role.description}
                         </p>
                         <div className="flex flex-wrap gap-1.5 mb-4">
                           {role.availableDuties.map((duty) => {
                             const d = dutyColors[duty];
                             return (
                               <span key={duty} className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${d.bg} ${d.text} ${d.border}`}>
-                                {duty.charAt(0).toUpperCase() + duty.slice(1)}
+                                {rl(dutyKey(duty))}
                               </span>
                             );
                           })}
                         </div>
                         <div className="flex flex-wrap gap-1">
-                          {role.keyAttributes.slice(0, 4).map((attr) => (
-                            <span key={attr} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
-                              {attr}
-                            </span>
-                          ))}
+                          {role.keyAttributes.slice(0, 4).map((attr) => {
+                            const k = `attr.${attrKey(attr)}`;
+                            return (
+                              <span key={attr} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                                {rl.has(k) ? rl(k) : attr}
+                              </span>
+                            );
+                          })}
                           {role.keyAttributes.length > 4 && (
                             <span className="text-[10px] px-2 py-0.5 rounded text-text-muted">
                               +{role.keyAttributes.length - 4}

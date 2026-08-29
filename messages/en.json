@@ -197,7 +197,191 @@
     "rolesCount": "roles",
     "duty": "Duty",
     "attributes": "Key Attributes",
-    "bestFor": "Best For"
+    "bestFor": "Best For",
+    "titleA": "Player",
+    "titleH": "Roles",
+    "titleB": "Encyclopedia",
+    "allRoles": "All Roles",
+    "notFound": "Role not found",
+    "backToEncyclopedia": "Return to Roles Encyclopedia",
+    "availableDuties": "Available Duties:",
+    "dutyDefend": "Defend",
+    "dutySupport": "Support",
+    "dutyAttack": "Attack",
+    "bestFormations": "Best Formations",
+    "attributeImportance": "Attribute Importance",
+    "wkTitle": "Top Wonderkids for This Role",
+    "wkNote": "FM26 mid-season database · fees vary with your save",
+    "wkMoreList": "Full role-by-role list",
+    "wkMorePicks": "Picks for every formation",
+    "tierBudget": "Budget",
+    "tierMid": "Mid",
+    "tierMarquee": "Marquee",
+    "priceBudget": "Under €20m",
+    "priceMid": "€20–50m",
+    "priceMarquee": "€50m+",
+    "tryThisRole": "Try This Role",
+    "tryThisRoleDesc": "Add {role} to your custom tactic using our interactive builder.",
+    "openBuilder": "Open Tactic Builder",
+    "relatedRoles": "Related Roles",
+    "attr": {
+      "acceleration": "Acceleration",
+      "aerialReach": "Aerial Reach",
+      "aggression": "Aggression",
+      "anticipation": "Anticipation",
+      "balance": "Balance",
+      "bravery": "Bravery",
+      "commandOfArea": "Command of Area",
+      "composure": "Composure",
+      "crossing": "Crossing",
+      "decisions": "Decisions",
+      "dribbling": "Dribbling",
+      "finishing": "Finishing",
+      "firstTouch": "First Touch",
+      "flair": "Flair",
+      "handling": "Handling",
+      "heading": "Heading",
+      "jumpingReach": "Jumping Reach",
+      "longShots": "Long Shots",
+      "marking": "Marking",
+      "offTheBall": "Off the Ball",
+      "pace": "Pace",
+      "passing": "Passing",
+      "positioning": "Positioning",
+      "reflexes": "Reflexes",
+      "rushingOut": "Rushing Out",
+      "stamina": "Stamina",
+      "strength": "Strength",
+      "tackling": "Tackling",
+      "teamwork": "Teamwork",
+      "technique": "Technique",
+      "vision": "Vision",
+      "workRate": "Work Rate"
+    },
+    "roleName": {
+      "sweeper-keeper": "Sweeper Keeper",
+      "goalkeeper": "Goalkeeper",
+      "ball-playing-defender": "Ball-Playing Defender",
+      "central-defender": "Central Defender",
+      "full-back": "Full-Back",
+      "wing-back": "Wing-Back",
+      "deep-lying-playmaker": "Deep-Lying Playmaker",
+      "box-to-box-midfielder": "Box-to-Box Midfielder",
+      "advanced-playmaker": "Advanced Playmaker",
+      "inside-forward": "Inside Forward",
+      "advanced-forward": "Advanced Forward",
+      "pressing-forward": "Pressing Forward",
+      "target-forward": "Target Forward",
+      "line-holding-keeper": "Line-Holding Keeper",
+      "overlapping-centre-back": "Overlapping Centre-Back",
+      "playmaking-wing-back": "Playmaking Wing-Back",
+      "channel-midfielder": "Channel Midfielder"
+    },
+    "roleDesc": {
+      "sweeper-keeper": "A goalkeeper who sweeps up balls behind the defensive line and initiates counter-attacks with long distribution.",
+      "goalkeeper": "The standard goalkeeper role. Stays between the sticks, organizes the defense, and makes saves.",
+      "ball-playing-defender": "A center-back who builds play from the back with accurate passing and composure under pressure.",
+      "central-defender": "The traditional no-nonsense defender. Wins aerial duels and makes crucial tackles.",
+      "full-back": "Balanced wide defender who supports both attack and defense from the flanks.",
+      "wing-back": "An attacking-minded wide player who provides the main source of width in formations without wingers.",
+      "deep-lying-playmaker": "A midfield orchestrator who dictates tempo from deep positions with incisive passing range.",
+      "box-to-box-midfielder": "An energetic midfielder who contributes at both ends of the pitch with relentless running.",
+      "advanced-playmaker": "The creative hub operating between the lines, threading through balls and unlocking defenses.",
+      "inside-forward": "Cuts inside from wide positions to score goals, acting more like a striker than a traditional winger.",
+      "advanced-forward": "The primary goal-scoring outlet who plays on the shoulder of the last defender.",
+      "pressing-forward": "A defensive forward who harasses opposition defenders and forces mistakes high up the pitch.",
+      "target-forward": "A physical presence who holds up the ball and brings teammates into play with knock-downs and layoffs.",
+      "line-holding-keeper": "A traditional goalkeeper introduced in FM26 who holds his line and stays deep — ideal for defences that sit back and protect the box.",
+      "overlapping-centre-back": "A FM26 centre-back role for three-at-the-back systems who steps out and overlaps on the flank, adding an extra body in the final third.",
+      "playmaking-wing-back": "The advanced FM26 wing-back role that drifts inside to dictate play, creating overloads while the wide forward stretches the pitch.",
+      "channel-midfielder": "A new FM26 midfielder who attacks the half-spaces between the lines, arriving late in the box and combining between midfield and attack."
+    },
+    "wk": {
+      "sweeper-keeper": [
+        "Elite shot-stopping with 15+ Reflexes and calm distribution — the archetypal sweeper keeper for a high line.",
+        "Modern sweeper keeper who excels at sweeping behind a high line and starting attacks with long passes.",
+        "Top-tier reactions and 1v1s with genuine command of the area — ready-made for the top leagues now."
+      ],
+      "goalkeeper": [
+        "Outstanding Reflexes and Handling for his age — a traditional shot-stopper who will anchor a defence for a decade.",
+        "The best young pure goalkeeper in the database — elite reactions, aerial command and penalty saves."
+      ],
+      "ball-playing-defender": [
+        "Elite Anticipation and Composure on the ball — the best young ball-playing CB in the game.",
+        "16+ Acceleration in a 6'3 frame with genuine passing range — carries the ball out and recovers instantly.",
+        "Progresses the ball with real pace and still dominates duels — the complete modern defender at a fair price."
+      ],
+      "central-defender": [
+        "Combines recovery pace with 17+ Jumping Reach — shuts down both the aerial game and the ball over the top.",
+        "6'4, cheap and dominant in the air — the budget rock of any back line.",
+        "Elite positioning and recovery speed make him the rare young CB who thrives in a high defensive line."
+      ],
+      "full-back": [
+        "A workhorse with 15+ Work Rate and Stamina who overlaps all day and still recovers — the complete full-back.",
+        "High-energy, cheap and tactically flexible — provides the attacking width a narrow system needs.",
+        "A natural left-sided CB with 15+ Acceleration — defends the space behind while still joining the attack."
+      ],
+      "wing-back": [
+        "16+ Work Rate and Stamina — owns the entire flank alone for 90 minutes, both directions.",
+        "The attacking wing-back profile — relentless overlapping runs with the engine to recover afterwards.",
+        "A dribbling, crossing left-sided wing-back — elite set pieces and deliveries from the flank."
+      ],
+      "deep-lying-playmaker": [
+        "16+ Passing and First Touch — the deep metronome who turns defence into attack with one pass over the press.",
+        "An 18-year-old ball carrier who beats the first press phase — the deepest value in young playmakers.",
+        "Positionally mature beyond his years with elite scanning — screens the back line and dictates tempo."
+      ],
+      "box-to-box-midfielder": [
+        "15+ Work Rate and Stamina with elite technicals — presses for 90 minutes and still arrives in the box.",
+        "18+ Work Rate and press-resistant ball-carrying — the definition of the modern box-to-box engine.",
+        "Carries the ball through midfield transitions with elite composure — the link between defence and attack."
+      ],
+      "advanced-playmaker": [
+        "16+ Technique and elite first touch between the lines — turns half-chances into goals from the #10 slot.",
+        "16 Passing, 17 Vision at 21 — the best young playmaker outside the elite clubs, and affordable.",
+        "A 17-year-old creative engine with elite Flair — the most exciting young #10 to emerge from South America."
+      ],
+      "inside-forward": [
+        "Generational — elite Acceleration and dribbling, the highest-potential player in FM26. Cut inside and finish.",
+        "17+ Acceleration and Dribbling with a genuine goal threat — the classic modern inside forward.",
+        "A lethal left-footed wide talent who cuts inside onto his stronger foot — the affordable elite option."
+      ],
+      "advanced-forward": [
+        "17+ Acceleration and Finishing — times his runs onto through balls better than any young striker.",
+        "A one-touch finisher with 16+ Acceleration — the lone striker who turns one chance into a goal.",
+        "Strong, quick enough and a natural finisher — a 25-goal-a-season number 9 in the making."
+      ],
+      "pressing-forward": [
+        "Relentless from-the-front pressure with the finishing to punish the mistakes he forces.",
+        "Chases every lost cause and still scores 20+ — the perfect pressing-forward profile for a gegenpress.",
+        "Genuine pace and direct running — the budget pressing forward who turns regains into goals."
+      ],
+      "target-forward": [
+        "6'5 with 17 Jumping Reach and Heading — the delivery target who wins every aerial duel and scores the knockdowns.",
+        "A powerful 6'4 target man with genuine pace — pinches defenders, holds the ball up and finishes the flick-ons.",
+        "Drops deep to link play and wins the knockdowns — a modern target man who creates for the runner beside him."
+      ],
+      "line-holding-keeper": [
+        "Huge 6'7 frame, elite Aerial Reach and 15+ Reflexes — a ready-made line-holding wall for a low block.",
+        "Outstanding positional sense and 1v1s; holds his line beautifully when the defence sits deep.",
+        "Calm, commanding and consistent — top-tier Handling and Command of Area for a settled back five."
+      ],
+      "overlapping-centre-back": [
+        "Rapid, reads the game superbly and carries the ball out — the modern overlapping CB for a back three.",
+        "Left-footed, composed and quick — steps out of a back three to overlap and deliver crosses.",
+        "Comfortable stepping forward with the ball and superb at recovering on the cover."
+      ],
+      "playmaking-wing-back": [
+        "Left-sided and technically gifted — glides inside to dictate play and overlaps relentlessly.",
+        "Excellent stamina and crossing; the archetypal attacking playmaking wing-back for a 3-5-2.",
+        "Explosive on the overlap with sharp passing — drives into the final third and picks out cutbacks."
+      ],
+      "channel-midfielder": [
+        "Bursts into the half-spaces, arrives late and can finish — the definition of a channel runner.",
+        "Press-resistant with a wand of a first touch; glides between the lines and links midfield to attack.",
+        "Exceptional balance and passing in tight spaces — thrives on the half-turn in the channels."
+      ]
+    }
   },
   "best": {
     "title": "FM26 Best Tactics",

@@ -197,7 +197,191 @@
     "rolesCount": "rôles",
     "duty": "Tâche",
     "attributes": "Attributs Clés",
-    "bestFor": "Idéal Pour"
+    "bestFor": "Idéal Pour",
+    "titleA": "Encyclopédie",
+    "titleH": "des Rôles",
+    "titleB": "Joueur",
+    "allRoles": "Tous les rôles",
+    "notFound": "Rôle introuvable",
+    "backToEncyclopedia": "Retour à l'encyclopédie des rôles",
+    "availableDuties": "Tâches disponibles :",
+    "dutyDefend": "Défendre",
+    "dutySupport": "Soutenir",
+    "dutyAttack": "Attaquer",
+    "bestFormations": "Meilleures Formations",
+    "attributeImportance": "Importance des Attributs",
+    "wkTitle": "Meilleurs Jeunes pour ce Rôle",
+    "wkNote": "Base de données FM26 mi-saison · les frais varient selon votre sauvegarde",
+    "wkMoreList": "Liste complète rôle par rôle",
+    "wkMorePicks": "Sélections pour chaque formation",
+    "tierBudget": "Petit budget",
+    "tierMid": "Intermédiaire",
+    "tierMarquee": "Star",
+    "priceBudget": "Moins de 20 M€",
+    "priceMid": "20–50 M€",
+    "priceMarquee": "50 M€+",
+    "tryThisRole": "Essayer ce Rôle",
+    "tryThisRoleDesc": "Ajoutez {role} à votre tactique personnalisée avec notre créateur interactif.",
+    "openBuilder": "Ouvrir le Créateur de Tactique",
+    "relatedRoles": "Rôles Similaires",
+    "attr": {
+      "acceleration": "Accélération",
+      "aerialReach": "Détente",
+      "aggression": "Agressivité",
+      "anticipation": "Anticipation",
+      "balance": "Équilibre",
+      "bravery": "Courage",
+      "commandOfArea": "Autorité sur la surface",
+      "composure": "Sang-froid",
+      "crossing": "Centres",
+      "decisions": "Décisions",
+      "dribbling": "Dribble",
+      "finishing": "Finition",
+      "firstTouch": "Premier contact",
+      "flair": "Talent",
+      "handling": "Prise de balle",
+      "heading": "Jeu de tête",
+      "jumpingReach": "Détente verticale",
+      "longShots": "Tirs de loin",
+      "marking": "Marquage",
+      "offTheBall": "Déplacements",
+      "pace": "Vitesse",
+      "passing": "Passes",
+      "positioning": "Placement",
+      "reflexes": "Réflexes",
+      "rushingOut": "Sorties",
+      "stamina": "Endurance",
+      "strength": "Puissance",
+      "tackling": "Tacles",
+      "teamwork": "Jeu collectif",
+      "technique": "Technique",
+      "vision": "Vision",
+      "workRate": "Volume de jeu"
+    },
+    "roleName": {
+      "sweeper-keeper": "Gardien Libéro",
+      "goalkeeper": "Gardien de But",
+      "ball-playing-defender": "Défenseur Constructeur",
+      "central-defender": "Défenseur Central",
+      "full-back": "Latéral",
+      "wing-back": "Piston",
+      "deep-lying-playmaker": "Meneur Reculé",
+      "box-to-box-midfielder": "Milieu Box-to-Box",
+      "advanced-playmaker": "Meneur Avancé",
+      "inside-forward": "Ailier Inversé",
+      "advanced-forward": "Attaquant de Pointe",
+      "pressing-forward": "Attaquant Presseur",
+      "target-forward": "Attaquant Cible",
+      "line-holding-keeper": "Gardien Tenant la Ligne",
+      "overlapping-centre-back": "Défenseur Central Montant",
+      "playmaking-wing-back": "Piston Meneur",
+      "channel-midfielder": "Milieu de Couloir"
+    },
+    "roleDesc": {
+      "sweeper-keeper": "Un gardien qui balaye les ballons derrière la ligne défensive et lance les contre-attaques avec de longues relances.",
+      "goalkeeper": "Le rôle de gardien standard. Reste sur sa ligne, organise la défense et effectue des arrêts.",
+      "ball-playing-defender": "Un défenseur central qui construit le jeu depuis l'arrière avec des passes précises et du sang-froid sous la pression.",
+      "central-defender": "Le défenseur classique sans compromis. Gagne les duels aériens et réalise des tacles décisifs.",
+      "full-back": "Défenseur latéral équilibré qui soutient attaque et défense depuis les couloirs.",
+      "wing-back": "Un joueur excentré à vocation offensive qui apporte la principale source de largeur dans les formations sans ailiers.",
+      "deep-lying-playmaker": "Un chef d'orchestre du milieu qui dicte le tempo depuis les postes reculés avec une gamme de passes percutantes.",
+      "box-to-box-midfielder": "Un milieu énergique qui contribue aux deux extrémités du terrain avec une course inlassable.",
+      "advanced-playmaker": "Le pivot créatif évoluant entre les lignes, distillant des passes en profondeur et déverrouillant les défenses.",
+      "inside-forward": "Reçoit depuis les ailes pour marquer, se comportant plus comme un attaquant qu'un ailier traditionnel.",
+      "advanced-forward": "Le buteur principal qui joue sur l'épaule du dernier défenseur.",
+      "pressing-forward": "Un attaquant défensif qui harcèle les défenseurs adverses et provoque des erreurs haut sur le terrain.",
+      "target-forward": "Une présence physique qui garde le ballon et fait entrer ses coéquipiers dans le jeu par ses déviations et remises.",
+      "line-holding-keeper": "Un gardien traditionnel introduit dans FM26 qui tient sa ligne et reste profond — idéal pour les défenses reculées qui protègent la surface.",
+      "overlapping-centre-back": "Un rôle FM26 de défenseur central pour les systèmes à trois qui sort et monte au couloir, ajoutant un homme supplémentaire dans le dernier tiers.",
+      "playmaking-wing-back": "Le rôle avancé FM26 de piston qui rentre pour dicter le jeu, créant des surnombres tandis que l'attaquant large étire le terrain.",
+      "channel-midfielder": "Un nouveau milieu FM26 qui attaque les demi-espaces entre les lignes, arrive tard dans la surface et fait le lien entre milieu et attaque."
+    },
+    "wk": {
+      "sweeper-keeper": [
+        "Arrêts d'élite avec 15+ Réflexes et une relance sereine — le gardien libéro archétypal pour une ligne haute.",
+        "Gardien libéro moderne, excellent pour balayer derrière une ligne haute et lancer les attaques par de longues passes.",
+        "Réactions au plus haut niveau et duels 1v1 avec une réelle autorité sur la surface — prêt immédiatement pour l'élite."
+      ],
+      "goalkeeper": [
+        "Réflexes et prise de balle exceptionnels pour son âge — un arrêteur traditionnel qui portera une défense pendant dix ans.",
+        "Le meilleur jeune gardien pur de la base de données — réflexes d'élite, domination aérienne et arrêts sur penalty."
+      ],
+      "ball-playing-defender": [
+        "Anticipation et sang-froid d'élite avec le ballon — le meilleur jeune défenseur constructeur du jeu.",
+        "16+ Accélération dans un gabarit de 1,91 m avec une vraie qualité de passe — porte le ballon et récupère instantanément.",
+        "Fait progresser le ballon avec un vrai tempo et domine toujours les duels — le défenseur moderne complet à prix juste."
+      ],
+      "central-defender": [
+        "Combine vitesse de récupération et 17+ détente verticale — ferme à la fois le jeu aérien et le ballon par-dessus.",
+        "1,93 m, bon marché et dominant dans les airs — le roc à petit budget de toute ligne défensive.",
+        "Un placement d'élite et une vitesse de récupération en font le rare jeune DC qui excelle dans une ligne défensive haute."
+      ],
+      "full-back": [
+        "Un infatigable avec 15+ volume de jeu et endurance qui monte tout le match et revient encore — le latéral complet.",
+        "Énergique, bon marché et flexible tactiquement — apporte la largeur offensive dont un système étroit a besoin.",
+        "Un DC naturel côté gauche avec 15+ Accélération — défend l'espace derrière tout en rejoignant l'attaque."
+      ],
+      "wing-back": [
+        "16+ volume de jeu et endurance — possède le couloir seul pendant 90 minutes, dans les deux sens.",
+        "Le profil du piston offensif — des courses de déborderment incessantes avec le moteur pour récupérer ensuite.",
+        "Un piston gauche qui dribble et centre — coups de pied arrêtés et centres d'élite depuis le couloir."
+      ],
+      "deep-lying-playmaker": [
+        "16+ Passes et premier contact — le métronome reculé qui transforme la défense en attaque d'un seul passe par-dessus le pressing.",
+        "Un porteur de balle de 18 ans qui bat la première phase de pressing — la meilleure affaire parmi les jeunes meneurs.",
+        "Maturité positionnelle au-delà de son âge avec une lecture d'élite — protège la défense et dicte le tempo."
+      ],
+      "box-to-box-midfielder": [
+        "15+ volume de jeu et endurance avec une technique d'élite — presse pendant 90 minutes et arrive quand même dans la surface.",
+        "18+ volume de jeu et conduite résistante au pressing — la définition du moteur box-to-box moderne.",
+        "Porte le ballon dans les transitions avec un sang-froid d'élite — le lien entre défense et attaque."
+      ],
+      "advanced-playmaker": [
+        "16+ Technique et premier contact d'élite entre les lignes — transforme les demi-occasions en buts depuis le poste de 10.",
+        "16 Passes, 17 Vision à 21 ans — le meilleur jeune meneur hors clubs élite, et abordable.",
+        "Un moteur créatif de 17 ans avec un talent d'élite — le jeune 10 le plus excitant venu d'Amérique du Sud."
+      ],
+      "inside-forward": [
+        "Générationnel — Accélération et dribble d'élite, le joueur au meilleur potentiel de FM26. Rentre et conclut.",
+        "17+ Accélération et Dribble avec une véritable menace offensive — l'ailier inversé moderne par excellence.",
+        "Un talent excentré gauche-foot redoutable qui rentre sur son bon pied — l'option élite abordable."
+      ],
+      "advanced-forward": [
+        "17+ Accélération et Finition — chronomètre ses courses sur les passes en profondeur mieux que n'importe quel jeune attaquant.",
+        "Un finisseur au premier contact avec 16+ Accélération — l'attaquant unique qui transforme une occasion en but.",
+        "Puissant, suffisamment rapide et finisseur né — un 9 à 25 buts par saison en devenir."
+      ],
+      "pressing-forward": [
+        "Pressing sans relâche depuis l'avant avec la finition pour punir les erreurs qu'il provoque.",
+        "Court après chaque ballon perdu et marque quand même 20+ — le profil d'attaquant presseur parfait pour un contre-pressing.",
+        "Vitesse réelle et courses directes — l'attaquant presseur à petit budget qui transforme les récupérations en buts."
+      ],
+      "target-forward": [
+        "1,96 m avec 17 détente et jeu de tête — la cible des centres qui gagne chaque duel aérien et marque sur les déviations.",
+        "Une cible puissante de 1,93 m avec une vraie vitesse — coince les défenseurs, garde le ballon et conclut les prolongations.",
+        "Redescend pour faire jouer et gagne les déviations — une cible moderne qui crée pour le coureur à ses côtés."
+      ],
+      "line-holding-keeper": [
+        "Gabarit immense de 2,00 m, détente d'élite et 15+ Réflexes — un mur sur sa ligne tout prêt pour un bloc bas.",
+        "Sens du placement et duels 1v1 remarquables ; tient sa ligne admirablement quand la défense est basse.",
+        "Calme, autoritaire et régulier — prise de balle et autorité sur la surface de très haut niveau pour une défense à cinq installée."
+      ],
+      "overlapping-centre-back": [
+        "Rapide, lit remarquablement le jeu et sort avec le ballon — le DC montant moderne pour une défense à trois.",
+        "Gaucher, calme et rapide — sort d'une défense à trois pour déborder et centrer.",
+        "À l'aise pour avancer avec le ballon et excellent pour couvrir au retour."
+      ],
+      "playmaking-wing-back": [
+        "Côté gauche et techniquement doué — glisse à l'intérieur pour dicter le jeu et déborde sans relâche.",
+        "Endurance et centres excellents ; le piston meneur offensif archétypal pour un 3-5-2.",
+        "Explosif dans le déborderment avec des passes précises — pénètre le dernier tiers et sert les centres retraits."
+      ],
+      "channel-midfielder": [
+        "Explose dans les demi-espaces, arrive tard et sait finir — la définition du coureur de couloir.",
+        "Résistant au pressing avec une première touche de magicien ; glisse entre les lignes et relie milieu et attaque.",
+        "Équilibre et passes exceptionnels dans les espaces réduits — excelle en demi-tour dans les couloirs."
+      ]
+    }
   },
   "best": {
     "title": "Meilleures Tactiques FM26",

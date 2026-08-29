@@ -1,6 +1,7 @@
 "use client";
 
 import { Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   RadarChart,
   PolarGrid,
@@ -21,11 +22,13 @@ interface Props {
 }
 
 export function RoleRadarChart({ roleName, data }: Props) {
+  const t = useTranslations("roles");
+
   return (
     <div className="glass-panel p-6 mb-8">
       <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
         <Zap className="w-4 h-4 text-primary" />
-        Attribute Importance
+        {t("attributeImportance")}
       </h2>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">

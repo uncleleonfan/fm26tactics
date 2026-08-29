@@ -197,7 +197,191 @@
     "rolesCount": "rol",
     "duty": "Görev",
     "attributes": "Temel Özellikler",
-    "bestFor": "En Uygun Olduğu"
+    "bestFor": "En Uygun Olduğu",
+    "titleA": "Oyuncu",
+    "titleH": "Rolleri",
+    "titleB": "Ansiklopedisi",
+    "allRoles": "Tüm Roller",
+    "notFound": "Rol bulunamadı",
+    "backToEncyclopedia": "Rol Ansiklopedisine Dön",
+    "availableDuties": "Kullanılabilir Görevler:",
+    "dutyDefend": "Savunma",
+    "dutySupport": "Destek",
+    "dutyAttack": "Hücum",
+    "bestFormations": "En İyi Dizilişler",
+    "attributeImportance": "Özellik Önemi",
+    "wkTitle": "Bu Rol için En İyi Yetenekler",
+    "wkNote": "FM26 sezon ortası veritabanı · ücretler kaydınıza göre değişir",
+    "wkMoreList": "Rol rol tam liste",
+    "wkMorePicks": "Her diziliş için öneriler",
+    "tierBudget": "Ekonomik",
+    "tierMid": "Orta",
+    "tierMarquee": "Yıldız",
+    "priceBudget": "20 milyon € altı",
+    "priceMid": "20–50 milyon €",
+    "priceMarquee": "50 milyon € üzeri",
+    "tryThisRole": "Bu Rolü Dene",
+    "tryThisRoleDesc": "{role} rolünü interaktif taktik oluşturucumuzla kendi taktiğinize ekleyin.",
+    "openBuilder": "Taktik Oluşturucuyu Aç",
+    "relatedRoles": "İlgili Roller",
+    "attr": {
+      "acceleration": "İvmelenme",
+      "aerialReach": "Hava Topu Erişimi",
+      "aggression": "Agresiflik",
+      "anticipation": "Önsezi",
+      "balance": "Denge",
+      "bravery": "Cesaret",
+      "commandOfArea": "Alan Hâkimiyeti",
+      "composure": "Soğukkanlılık",
+      "crossing": "Orta",
+      "decisions": "Karar Alma",
+      "dribbling": "Çalım",
+      "finishing": "Bitiricilik",
+      "firstTouch": "İlk Dokunuş",
+      "flair": "Yaratıcılık",
+      "handling": "Tutuş",
+      "heading": "Kafa Vuruşu",
+      "jumpingReach": "Zıplama",
+      "longShots": "Uzaktan Şut",
+      "marking": "Markaj",
+      "offTheBall": "Topsuz Oyun",
+      "pace": "Hız",
+      "passing": "Pas",
+      "positioning": "Pozisyon Alma",
+      "reflexes": "Refleks",
+      "rushingOut": "Çıkışlar",
+      "stamina": "Dayanıklılık",
+      "strength": "Güç",
+      "tackling": "Müdahale",
+      "teamwork": "Takım Oyunu",
+      "technique": "Teknik",
+      "vision": "Vizyon",
+      "workRate": "Çalışkanlık"
+    },
+    "roleName": {
+      "sweeper-keeper": "Süpürücü Kaleci",
+      "goalkeeper": "Kaleci",
+      "ball-playing-defender": "Top Dağıtan Stoper",
+      "central-defender": "Stoper",
+      "full-back": "Bek",
+      "wing-back": "Kanat Beki",
+      "deep-lying-playmaker": "Derin Oyun Kurucu",
+      "box-to-box-midfielder": "Box-to-Box Orta Saha",
+      "advanced-playmaker": "Gelişmiş Oyun Kurucu",
+      "inside-forward": "İçe Dönen Kanat",
+      "advanced-forward": "Gelişmiş Forvet",
+      "pressing-forward": "Pres Yapan Forvet",
+      "target-forward": "Hedef Forvet",
+      "line-holding-keeper": "Çizgide Duran Kaleci",
+      "overlapping-centre-back": "Bindirme Yapan Stoper",
+      "playmaking-wing-back": "Oyun Kurucu Kanat Beki",
+      "channel-midfielder": "Kanal Orta Sahası"
+    },
+    "roleDesc": {
+      "sweeper-keeper": "Savunma çizgisinin gerisinde topları süpüren ve uzun dağıtımlarla kontra atakları başlatan kaleci.",
+      "goalkeeper": "Standart kaleci rolü. Kalesinde kalır, savunmayı organizelar ve kurtarışlar yapar.",
+      "ball-playing-defender": "İsabetli paslar ve baskı altında soğukkanlılıkla oyunu geriye doğru kuran stoper.",
+      "central-defender": "Geleneksel, işini sağlam yapan defans oyuncusu. Hava toplarını kazanır ve kritik müdahaleleri yapar.",
+      "full-back": "Hem hücuma hem savunmaya kanatlardan destek veren dengeli geniş defans oyuncusu.",
+      "wing-back": "Kanatsız dizilişlerde takımın ana genişlik kaynağını oluşturan hücumcu kanat oyuncusu.",
+      "deep-lying-playmaker": "Keskin pas menziliyle derinlerden tempo dikte eden orta saha orkestra şefi.",
+      "box-to-box-midfielder": "Bitmek bilmeyen koşularıyla sahada iki uçta da katkı veren enerjik orta saha.",
+      "advanced-playmaker": "Aradaki hatlarda oynayan, deliği açan paslar atan ve savunmaları çözen yaratıcı beyni.",
+      "inside-forward": "Kanatlardan içeri keserek gol atan, geleneksel kanattan çok forvete benzeyen oyuncu.",
+      "advanced-forward": "Son defans oyuncusunun omuz dibinde oynayan ana gol silahı.",
+      "pressing-forward": "Rakip defans oyuncularını sıkıştıran ve sahada yüksekte hata yapmaya zorlayan defansif forvet.",
+      "target-forward": "Topu ayakta tutan ve indirmelerle takım arkadaşlarını oyuna katan fizik gücü yüksek oyuncu.",
+      "line-holding-keeper": "FM26 ile gelen geleneksel kaleci rolü — çizgisinde kalır ve derinde durur; geri çekilip ceza sahasını koruyan savunmalar için ideal.",
+      "overlapping-centre-back": "Üçlü savunma sistemleri için FM26 stoper rolü — kanada çıkıp bindirme yapar ve hücum bölgesinde ekstra bir oyuncu oluşturur.",
+      "playmaking-wing-back": "İçeri kayarak oyunu yöneten gelişmiş FM26 kanat beki rolü — geniş forvet sahayı açarken yoğunluk oluşturur.",
+      "channel-midfielder": "Aradaki hatların yarı alanlarına hücum eden, ceza sahasına geç gelen ve orta saha ile hücum arasında birleşen yeni FM26 orta sahası."
+    },
+    "wk": {
+      "sweeper-keeper": [
+        "15+ Refleks ve sakin top dağıtımıyla elit kurtarışlar — yüksek savunma hattı için tam bir süpürücü kaleci.",
+        "Yüksek çizginin gerisini süpürmede ve uzun paslarla hücumları başlatmada üstün modern süpürücü kaleci.",
+        "Üst seviye tepkiler ve birebirlerde gerçek alan hâkimiyeti — şimdiden en üst liglere hazır."
+      ],
+      "goalkeeper": [
+        "Yaşına göre olağanüstü Refleks ve Tutuş — bir on yıl boyunca savunmayı taşıyacak geleneksel kurtarışçı.",
+        "Veritabanındaki en iyi genç saf kaleci — elit refleksler, hava hâkimiyeti ve penaltı kurtarışları."
+      ],
+      "ball-playing-defender": [
+        "Topla elit Önsezi ve Soğukkanlılık — oyundaki en iyi genç top dağıtan stoper.",
+        "6'3 boyunda 16+ İvmelenme ve gerçek pas menzili — topu sürüp çıkarır ve anında toparlar.",
+        "Topu gerçek hızla ilerletir ve ikili mücadelelerde de baskın — makul fiyata tam bir modern defans."
+      ],
+      "central-defender": [
+        "Geri dönme hızıyla 17+ Zıplamayı birleştirir — hem hava oyununu hem de arkaya atılan topu keser.",
+        "6'4, ucuz ve havada baskın — her savunma hattının ekonomik kaya parçası.",
+        "Elit pozisyon alma ve geri dönme hızı onu yüksek savunma hattında parlayan nadir genç stoper yapıyor."
+      ],
+      "full-back": [
+        "15+ Çalışkanlık ve Dayanıklılığa sahip iş atı — whole gün bindirme yapar ve yine de geri döner; tam bir bek.",
+        "Yüksek enerjili, ucuz ve taktik esnek — dar bir sistemin ihtiyaç duyduğu hücum genişliğini sağlar.",
+        "15+ İvmelenmeli doğal sol ayaklı stoper — hücuma katılırken arkasındaki alanı da savunur."
+      ],
+      "wing-back": [
+        "16+ Çalışkanlık ve Dayanıklılık — kanadı 90 dakika boyunca tek başına, iki yönde de yönetir.",
+        "Hücumcu kanat beki profili — bitmek bilmeyen bindirme koşuları ve sonrasında toparlama motoru.",
+        "Çalım atan, orta çıkaran sol kanat beki — elit duran toplar ve kanattan ortalar."
+      ],
+      "deep-lying-playmaker": [
+        "16+ Pas ve İlk Dokunuş — presin üzerinden tek pasla savunmayı hücuma çeviren derin metronom.",
+        "İlk pres aşamasını geçen 18 yaşında bir top taşıyıcı — genç oyun kuruculardaki en derin değer.",
+        "Yaşının çok ötesinde pozisyon olgunluğu ve elit saha taraması — savunma hattını korur ve tempoyu yönetir."
+      ],
+      "box-to-box-midfielder": [
+        "Elit tekniklerle 15+ Çalışkanlık ve Dayanıklılık — 90 dakika pres yapar ve yine de ceza sahasına gelir.",
+        "18+ Çalışkanlık ve prese dayanıklı top taşıma — modern box-to-box motorunun tanımı.",
+        "Elit soğukkanlılıkla orta saha geçişlerinde topu taşır — savunma ile hücum arasındaki bağ."
+      ],
+      "advanced-playmaker": [
+        "16+ Teknik ve hatlar arasında elit ilk dokunuş — numara 10 mevkiinden yarı şansları gole çevirir.",
+        "21 yaşında 16 Pas, 17 Vizyon — elit kulüpler dışındaki en iyi genç oyun kurucu ve uygun fiyatlı.",
+        "Elit Yaratıcılığa sahip 17 yaşında yaratıcı motor — Güney Amerika'dan çıkan en heyecan verici genç 10 numara."
+      ],
+      "inside-forward": [
+        "Nesil ötesi — elit İvmelenme ve çalım, FM26'daki en yüksek potansiyelli oyuncu. İçeri kes ve bitir.",
+        "17+ İvmelenme ve Çalım ile gerçek gol tehdidi — klasik modern içe dönen kanat.",
+        "Güçlü sol ayağıyla içeri kesen ölümcül geniş yetenek — uygun fiyatlı elit seçenek."
+      ],
+      "advanced-forward": [
+        "17+ İvmelenme ve Bitiricilik — ara paslara zamanlaması her genç forvetten daha iyi koşar.",
+        "16+ İvmelenmeli tek dokunuş bitirici — tek şansı gole çeviren tek forvet.",
+        "Güçlü, yeterince hızlı ve doğal bitirici — yolunda olan bir sezon 25 gollük 9 numara."
+      ],
+      "pressing-forward": [
+        "Yaptığı hataları cezalandıracak bitiricilikle önden amansız pres.",
+        "Her kaybedilen topun peşinden koşar ve yine de 20+ gol atar — gegenpress için mükemmel presci forvet profili.",
+        "Gerçek hız ve direkt koşular — top kazanmalarını gole çeviren ekonomik presci forvet."
+      ],
+      "target-forward": [
+        "17 Zıplama ve Kafa Vuruşuyla 6'5 boy — her hava topunu kazanan ve indirmeleri gole çeviren hedef.",
+        "Gerçek hızlı, güçlü 6'4 hedef adam — defansı sıkıştırır, topu tutar ve dokunuşları bitirir.",
+        "Oyuna bağlanmak için geri düşer ve indirmeleri kazanır — yanındaki koşucu için üreten modern hedef forvet."
+      ],
+      "line-holding-keeper": [
+        "Devasa 6'7 boy, elit Hava Topu Erişimi ve 15+ Refleks — düşük blok için hazır bir çizgi duvarı.",
+        "Olağanüstü pozisyon hissi ve birebirler; savunma derinde dururken çizgisini mükemmel tutar.",
+        "Sakin, hakim ve tutarlı — oturmuş beşli savunma için üst seviye Tutuş ve Alan Hâkimiyeti."
+      ],
+      "overlapping-centre-back": [
+        "Hızlı, oyunu mükemmel okur ve topu sürerek çıkarır — üçlü savunma için modern bindirmeci stoper.",
+        "Sol ayaklı, soğukkanlı ve hızlı — üçlü savunmadan çıkıp bindirme yapar ve orta açar.",
+        "Topla ileri adıtmada rahat ve örtüdeki toparlamada üstün."
+      ],
+      "playmaking-wing-back": [
+        "Sol kanatlı ve teknik yetenekli — içeri kayıp oyunu yönetir ve durmaksızın bindirme yapar.",
+        "Mükemmel dayanıklılık ve orta; 3-5-2 için tipik hücumcu oyun kurucu kanat beki.",
+        "Bindirmede patlayıcı ve keskin paslı — hücum bölgesine girer ve geri pasları seçer."
+      ],
+      "channel-midfielder": [
+        "Yarı alanlara patlar, geç gelir ve bitirebilir — kanal koşucusunun tanımı.",
+        "Mükemmel ilk dokunuşla prese dayanıklı; hatlar arasında süzülür ve orta sahayı hücuma bağlar.",
+        "Dar alanlarda olağanüstü denge ve pas — kanallarda yarı dönüşle oynamada usta."
+      ]
+    }
   },
   "best": {
     "title": "FM26 En İyi Taktikler",

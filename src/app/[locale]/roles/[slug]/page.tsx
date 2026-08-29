@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, Check, Sparkles, Target } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
-import { roleWonderkids, roleWonderkidTiers } from "@/lib/role-wonderkids";
+import { roleWonderkids } from "@/lib/role-wonderkids";
 import type { PlayerDuty } from "@/types/tactic";
 
 const RoleRadarChart = dynamic(
@@ -20,7 +21,7 @@ const RoleRadarChart = dynamic(
 );
 
 interface Props {
-  params: { slug: string };
+  params: { locale: string; slug: string };
 }
 
 const dutyColors: Record<PlayerDuty, string> = {
@@ -28,6 +29,17 @@ const dutyColors: Record<PlayerDuty, string> = {
   support: "#FFB300",
   attack: "#FF5252",
 };
+
+const categoryKeys: Record<string, string> = {
+  goalkeeper: "goalkeepers",
+  defender: "defenders",
+  midfielder: "midfielders",
+  forward: "forwards",
+};
+
+// "Aerial Reach" -> "aerialReach" (i18n attr dictionary key)
+const attrKey = (a: string) => a.replace(/ (.)/g, (_m: string, c: string) => c.toUpperCase());
+const dutyKey = (d: string) => `duty${d.charAt(0).toUpperCase()}${d.slice(1)}`;
 
 const tierColors: Record<string, string> = {
   Budget: "#00C853",
@@ -111,26 +123,37 @@ const attributeData: Record<string, Array<{ attribute: string; rating: number }>
   ],
 };
 
-export default function RoleDetailPage({ params }: Props) {
-  const role = playerRoles.find((r) => r.id === params.slug);
+export default async function RoleDetailPage({ params }: Props) {
+  const { locale, slug } = params;
+  const rl = await getTranslations({ locale, namespace: "roles" });
+  const cm = await getTranslations({ locale, namespace: "common" });
+  const nav = await getTranslations({ locale, namespace: "nav" });
+
+  const role = playerRoles.find((r) => r.id === slug);
 
   if (!role) {
     return (
       <div className="min-h-screen bg-background-primary pt-24 pb-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-2xl font-bold mb-4">Role not found</h1>
+          <h1 className="text-2xl font-bold mb-4">{rl("notFound")}</h1>
           <Link href="/roles" className="text-primary hover:underline">
-            Return to Roles Encyclopedia
+            {rl("backToEncyclopedia")}
           </Link>
         </div>
       </div>
     );
   }
 
-  const chartData = attributeData[role.id] || role.keyAttributes.map((attr) => ({
+  const rName = rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name;
+  const wkReasons = (rl.raw(`wk.${role.id}`) as string[] | undefined) ?? [];
+
+  const chartData = (attributeData[role.id] || role.keyAttributes.map((attr) => ({
     attribute: attr,
     rating: 80,
-  }));
+  }))).map((d) => {
+    const k = `attr.${attrKey(d.attribute)}`;
+    return { ...d, attribute: rl.has(k) ? rl(k) : d.attribute };
+  });
 
   const relatedRoles = playerRoles
     .filter((r) => r.category === role.category && r.id !== role.id)
@@ -141,9 +164,9 @@ export default function RoleDetailPage({ params }: Props) {
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <Breadcrumb
           items={[
-            { label: "Home", href: "/" },
-            { label: "Player Roles", href: "/roles" },
-            { label: role.name },
+            { label: cm("home"), href: "/" },
+            { label: nav("playerRoles"), href: "/roles" },
+            { label: rName },
           ]}
           className="mb-6"
         />
@@ -153,7 +176,7 @@ export default function RoleDetailPage({ params }: Props) {
           className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          All Roles
+          {rl("allRoles")}
         </Link>
 
         <div>
@@ -162,16 +185,18 @@ export default function RoleDetailPage({ params }: Props) {
             <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-2">
               <span className="text-xs font-semibold text-text-muted uppercase tracking-wider bg-surface px-2.5 py-1 rounded-md">
-                {role.category}
+                {rl(categoryKeys[role.category])}
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold mb-4">{role.name}</h1>
-            <p className="text-text-primary/80 text-lg leading-relaxed mb-6">{role.description}</p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold mb-4">{rName}</h1>
+            <p className="text-text-primary/80 text-lg leading-relaxed mb-6">
+              {rl.has(`roleDesc.${role.id}`) ? rl(`roleDesc.${role.id}`) : role.description}
+            </p>
 
             {/* Duties */}
             <div className="flex items-center gap-3 mb-8">
-              <span className="text-sm text-text-muted">Available Duties:</span>
+              <span className="text-sm text-text-muted">{rl("availableDuties")}</span>
               {(["defend", "support", "attack"] as PlayerDuty[]).map((duty) => {
                 const available = role.availableDuties.includes(duty);
                 return (
@@ -188,7 +213,7 @@ export default function RoleDetailPage({ params }: Props) {
                       backgroundColor: available ? `${dutyColors[duty]}1a` : "transparent",
                     }}
                   >
-                    {duty.charAt(0).toUpperCase() + duty.slice(1)}
+                    {rl(dutyKey(duty))}
                   </span>
                 );
               })}
@@ -198,27 +223,30 @@ export default function RoleDetailPage({ params }: Props) {
             <div className="glass-panel p-6 mb-8">
               <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Target className="w-4 h-4 text-primary" />
-                Key Attributes
+                {rl("attributes")}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {role.keyAttributes.map((attr) => (
-                  <div
-                    key={attr}
-                    className="flex items-center gap-2 p-2.5 rounded-lg bg-surface border border-surface-border"
-                  >
-                    <Check className="w-3.5 h-3.5 text-primary shrink-0" />
-                    <span className="text-sm text-text-primary">{attr}</span>
-                  </div>
-                ))}
+                {role.keyAttributes.map((attr) => {
+                  const k = `attr.${attrKey(attr)}`;
+                  return (
+                    <div
+                      key={attr}
+                      className="flex items-center gap-2 p-2.5 rounded-lg bg-surface border border-surface-border"
+                    >
+                      <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+                      <span className="text-sm text-text-primary">{rl.has(k) ? rl(k) : attr}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             {/* Radar Chart — lazy-loaded recharts (~250KB deferred from critical path) */}
-            <RoleRadarChart roleName={role.name} data={chartData} />
+            <RoleRadarChart roleName={rName} data={chartData} />
 
             {/* Suitable Formations */}
             <div className="glass-panel p-6">
-              <h2 className="text-lg font-semibold mb-4">Best Formations</h2>
+              <h2 className="text-lg font-semibold mb-4">{rl("bestFormations")}</h2>
               <div className="flex flex-wrap gap-2">
                 {role.bestFormations.map((formation) => (
                   <Link
@@ -240,13 +268,11 @@ export default function RoleDetailPage({ params }: Props) {
                 <div className="glass-panel p-6 mt-8">
                   <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-primary" />
-                    Top Wonderkids for This Role
+                    {rl("wkTitle")}
                   </h2>
-                  <p className="text-xs text-text-muted mb-4">
-                    FM26 mid-season database · fees vary with your save
-                  </p>
+                  <p className="text-xs text-text-muted mb-4">{rl("wkNote")}</p>
                   <div className="space-y-3">
-                    {picks.map((p) => (
+                    {picks.map((p, i) => (
                       <div
                         key={p.name}
                         className="flex items-start gap-3 p-3 rounded-lg bg-surface border border-surface-border"
@@ -267,10 +293,10 @@ export default function RoleDetailPage({ params }: Props) {
                                 backgroundColor: `${tierColors[p.tier]}1a`,
                               }}
                             >
-                              {p.tier} · {roleWonderkidTiers[p.tier]}
+                              {rl(`tier${p.tier}`)} · {rl(`price${p.tier}`)}
                             </span>
                           </div>
-                          <p className="text-xs mt-1.5 text-text-secondary">{p.reason}</p>
+                          <p className="text-xs mt-1.5 text-text-secondary">{wkReasons[i] ?? p.reason}</p>
                         </div>
                         <span className="shrink-0 text-[11px] font-mono px-2 py-1 rounded-md bg-surface border border-surface-border text-text-secondary">
                           {p.duty}
@@ -279,14 +305,14 @@ export default function RoleDetailPage({ params }: Props) {
                     ))}
                   </div>
                   <p className="text-xs text-text-muted mt-4">
-                    Full role-by-role list →{" "}
+                    {rl("wkMoreList")} →{" "}
                     <Link
                       href="/blog/fm26-wonderkids-by-role"
                       className="text-primary hover:underline"
                     >
                       FM26 Wonderkids by Role
                     </Link>{" "}
-                    · Picks for every formation →{" "}
+                    · {rl("wkMorePicks")} →{" "}
                     <Link
                       href="/blog/fm26-wonderkids-by-formation"
                       className="text-primary hover:underline"
@@ -303,22 +329,22 @@ export default function RoleDetailPage({ params }: Props) {
           <div className="space-y-6">
             {/* FM26 Tactic Builder CTA */}
             <div className="glass-panel p-5 sticky top-24">
-              <h3 className="text-sm font-semibold mb-3">Try This Role</h3>
+              <h3 className="text-sm font-semibold mb-3">{rl("tryThisRole")}</h3>
               <p className="text-xs text-text-secondary mb-4">
-                Add {role.name} to your custom tactic using our interactive builder.
+                {rl("tryThisRoleDesc", { role: rName })}
               </p>
               <Link
                 href="/builder"
                 className="block w-full py-2.5 text-center rounded-lg bg-primary text-background-primary text-sm font-semibold hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
               >
-                Open Tactic Builder
+                {rl("openBuilder")}
               </Link>
             </div>
 
             {/* Related Roles */}
             {relatedRoles.length > 0 && (
               <div className="glass-panel p-5">
-                <h3 className="text-sm font-semibold mb-3">Related Roles</h3>
+                <h3 className="text-sm font-semibold mb-3">{rl("relatedRoles")}</h3>
                 <div className="space-y-2">
                   {relatedRoles.map((r) => (
                     <Link
@@ -326,9 +352,11 @@ export default function RoleDetailPage({ params }: Props) {
                       href={`/roles/${r.id}`}
                       className="block p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/20 transition-all"
                     >
-                      <p className="text-sm font-medium text-text-primary mb-0.5">{r.name}</p>
+                      <p className="text-sm font-medium text-text-primary mb-0.5">
+                        {rl.has(`roleName.${r.id}`) ? rl(`roleName.${r.id}`) : r.name}
+                      </p>
                       <p className="text-[10px] text-text-muted line-clamp-1">
-                        {r.availableDuties.map((d) => d.charAt(0).toUpperCase() + d.slice(1)).join(" · ")}
+                        {r.availableDuties.map((d) => rl(dutyKey(d))).join(" · ")}
                       </p>
                     </Link>
                   ))}
