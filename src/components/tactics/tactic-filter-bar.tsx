@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "@/i18n/routing"
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,12 +22,17 @@ interface TacticFilterBarProps {
 }
 
 export function TacticFilterBar({ onFilterChange, currentFilters }: TacticFilterBarProps) {
+  const ft = useTranslations("filter");
+  const t = useTranslations("tactics");
   const formations = formationPresets.map((f) => f.formation);
-  const styles = Object.entries(styleLabels);
+  const styles = Object.keys(styleLabels).map((key) => ({
+    value: key,
+    label: t.has(`styles.${key}`) ? t(`styles.${key}`) : styleLabels[key],
+  }));
   const difficulties = [
-    { value: "beginner", label: "Beginner" },
-    { value: "intermediate", label: "Intermediate" },
-    { value: "advanced", label: "Advanced" },
+    { value: "beginner", label: ft("beginner") },
+    { value: "intermediate", label: ft("intermediate") },
+    { value: "advanced", label: ft("advanced") },
   ];
 
   return (
@@ -45,7 +51,7 @@ export function TacticFilterBar({ onFilterChange, currentFilters }: TacticFilter
           }
           className="bg-surface border border-surface-border text-text-primary text-sm rounded-lg px-3 py-2 outline-none focus:border-primary/50 transition-colors"
         >
-          <option value="">All Formations</option>
+          <option value="">{ft("allFormations")}</option>
           {formations.map((f) => (
             <option key={f} value={f}>
               {f}
@@ -64,8 +70,8 @@ export function TacticFilterBar({ onFilterChange, currentFilters }: TacticFilter
           }
           className="bg-surface border border-surface-border text-text-primary text-sm rounded-lg px-3 py-2 outline-none focus:border-primary/50 transition-colors"
         >
-          <option value="">All Styles</option>
-          {styles.map(([value, label]) => (
+          <option value="">{ft("allStyles")}</option>
+          {styles.map(({ value, label }) => (
             <option key={value} value={value}>
               {label}
             </option>
@@ -83,7 +89,7 @@ export function TacticFilterBar({ onFilterChange, currentFilters }: TacticFilter
           }
           className="bg-surface border border-surface-border text-text-primary text-sm rounded-lg px-3 py-2 outline-none focus:border-primary/50 transition-colors"
         >
-          <option value="">All Levels</option>
+          <option value="">{ft("allLevels")}</option>
           {difficulties.map((d) => (
             <option key={d.value} value={d.value}>
               {d.label}
@@ -97,7 +103,7 @@ export function TacticFilterBar({ onFilterChange, currentFilters }: TacticFilter
             onClick={() => onFilterChange({})}
             className="text-xs text-primary hover:underline ml-auto"
           >
-            Clear all filters
+            {ft("clearAll")}
           </button>
         )}
       </div>

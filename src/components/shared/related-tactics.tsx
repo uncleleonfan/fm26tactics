@@ -1,6 +1,9 @@
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
-import { allTactics } from "contentlayer/generated";
+import { allTactics, allTacticTrs } from "contentlayer/generated";
 
 interface RelatedTacticsProps {
   currentSlug: string;
@@ -9,21 +12,28 @@ interface RelatedTacticsProps {
 }
 
 export function RelatedTactics({ currentSlug, tags, formation }: RelatedTacticsProps) {
+  const locale = useLocale();
+  const nav = useTranslations("nav");
+  const t = useTranslations("tactics");
+
+  // Turkish pages link to translated tactic content when available
+  const pool = locale === "tr" ? allTacticTrs : allTactics;
+
   // Find related tactics by matching tags and formation styles
-  const related = allTactics
-    .filter((t) => t.slug !== currentSlug)
-    .map((t) => {
+  const related = pool
+    .filter((tactic) => tactic.slug !== currentSlug)
+    .map((tactic) => {
       let score = 0;
       // Same formation = high relevance
-      if (t.formation === formation) score += 3;
+      if (tactic.formation === formation) score += 3;
       // Shared tags
-      if (t.tags) {
-        const sharedTags = t.tags.filter((tag) => tags.includes(tag));
+      if (tactic.tags) {
+        const sharedTags = tactic.tags.filter((tag) => tags.includes(tag));
         score += sharedTags.length * 2;
       }
       // Same style = complementary
-      if (t.style) score += 1;
-      return { tactic: t, score };
+      if (tactic.style) score += 1;
+      return { tactic, score };
     })
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
@@ -34,7 +44,7 @@ export function RelatedTactics({ currentSlug, tags, formation }: RelatedTacticsP
   return (
     <section className="mt-16 pt-8 border-t border-[#1C2436]/50">
       <h2 className="text-lg font-bold text-text-primary mb-5">
-        Related Tactics
+        {nav("relatedTactics")}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {related.map(({ tactic }) => (
@@ -55,7 +65,7 @@ export function RelatedTactics({ currentSlug, tags, formation }: RelatedTacticsP
               {tactic.description}
             </p>
             <span className="inline-flex items-center gap-1 text-xs text-primary font-medium group-hover:gap-1.5 transition-all">
-              Read guide
+              {t("readGuide")}
               <ArrowRight className="w-3 h-3" />
             </span>
           </Link>

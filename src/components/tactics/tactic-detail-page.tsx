@@ -1,6 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
+import { useFormatter, useTranslations } from "next-intl";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { ArrowLeft, Clock, Calendar, Tag, BarChart3, Copy, Check, LayoutTemplate } from "lucide-react";
 import { useState } from "react";
@@ -10,7 +11,6 @@ import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedTactics } from "@/components/shared/related-tactics";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
-import { formatDate } from "@/lib/utils";
 import type { Tactic } from "contentlayer/generated";
 
 const mdxComponents = {
@@ -55,10 +55,10 @@ const mdxComponents = {
   ),
 };
 
-const difficultyConfig: Record<string, { label: string; className: string }> = {
-  beginner: { label: "Beginner", className: "bg-green-500/20 text-green-400 border-green-500/30" },
-  intermediate: { label: "Intermediate", className: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
-  advanced: { label: "Advanced", className: "bg-red-500/20 text-red-400 border-red-500/30" },
+const difficultyConfig: Record<string, { className: string }> = {
+  beginner: { className: "bg-green-500/20 text-green-400 border-green-500/30" },
+  intermediate: { className: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
+  advanced: { className: "bg-red-500/20 text-red-400 border-red-500/30" },
 };
 
 interface TacticDetailPageProps {
@@ -70,6 +70,19 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
   const diff = difficultyConfig[tactic.difficulty];
   const [copied, setCopied] = useState(false);
   const copyText = tacticCopyTexts[tactic.slug];
+
+  const t = useTranslations("tactics");
+  const ft = useTranslations("filter");
+  const nav = useTranslations("nav");
+  const cm = useTranslations("common");
+  const format = useFormatter();
+
+  const localDate = (date: string) =>
+    format.dateTime(new Date(date), { year: "numeric", month: "long", day: "numeric" });
+  const styleLabel = t.has(`styles.${tactic.style}`)
+    ? t(`styles.${tactic.style}`)
+    : styleLabels[tactic.style];
+  const tagLabel = (tag: string) => (t.has(`tags.${tag}`) ? t(`tags.${tag}`) : tag);
 
   const handleCopy = async () => {
     if (!copyText) return;
@@ -87,8 +100,8 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Breadcrumb
           items={[
-            { label: "Home", href: "/" },
-            { label: "Tactics", href: "/tactics" },
+            { label: cm("home"), href: "/" },
+            { label: nav("tactics"), href: "/tactics" },
             { label: tactic.title },
           ]}
           className="mb-8"
@@ -104,7 +117,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                 className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-6 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Tactics
+                {t("backToTactics")}
               </Link>
 
               {/* Header */}
@@ -114,10 +127,10 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                     {tactic.formation}
                   </span>
                   <span className={`text-[10px] font-medium px-2.5 py-0.5 rounded-full border ${diff.className}`}>
-                    {diff.label}
+                    {ft(tactic.difficulty)}
                   </span>
                   <span className={`text-[10px] font-medium px-2.5 py-0.5 rounded-full border ${styleColors[tactic.style]}`}>
-                    {styleLabels[tactic.style]}
+                    {styleLabel}
                   </span>
                 </div>
 
@@ -137,12 +150,12 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                       {copied ? (
                         <>
                           <Check className="w-4 h-4" />
-                          Setup Copied!
+                          {t("setupCopied")}
                         </>
                       ) : (
                         <>
                           <Copy className="w-4 h-4" />
-                          Copy Full Setup
+                          {t("copySetup")}
                         </>
                       )}
                     </button>
@@ -152,7 +165,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-surface-border text-text-secondary text-sm font-semibold hover:border-primary/40 hover:text-text-primary transition-colors"
                     >
                       <LayoutTemplate className="w-4 h-4" />
-                      Open in Tactic Builder
+                      {t("openInBuilder")}
                     </Link>
                   </div>
                 )}
@@ -161,12 +174,12 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                 <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pb-6 border-b border-[#1C2436]/50">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5" />
-                    Published {formatDate(tactic.publishedAt)}
+                    {t("published", { date: localDate(tactic.publishedAt) })}
                   </span>
                   {tactic.updatedAt && (
                     <span className="flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
-                      Updated {formatDate(tactic.updatedAt)}
+                      {t("updated", { date: localDate(tactic.updatedAt) })}
                     </span>
                   )}
                 </div>
@@ -180,7 +193,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                         key={tag}
                         className="text-xs px-2.5 py-0.5 rounded-full bg-surface border border-surface-border text-text-secondary"
                       >
-                        {tag}
+                        {tagLabel(tag)}
                       </span>
                     ))}
                   </div>

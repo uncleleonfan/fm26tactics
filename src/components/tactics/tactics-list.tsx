@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { TacticCard } from "@/components/tactics/tactic-card";
 import { TacticFilterBar } from "@/components/tactics/tactic-filter-bar";
 import type { FormationType, PlayStyle } from "@/types/tactic";
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export function TacticsList({ tactics }: Props) {
+  const t = useTranslations("tactics");
+  const ft = useTranslations("filter");
   const [filters, setFilters] = useState<{
     formation?: FormationType;
     style?: PlayStyle;
@@ -65,16 +68,16 @@ export function TacticsList({ tactics }: Props) {
         ) : (
           <div className="glass-panel p-12 text-center">
             <p className="text-text-secondary text-lg mb-2">
-              No tactics match your filters
+              {t("noTactics")}
             </p>
             <p className="text-text-muted text-sm mb-4">
-              Try adjusting or clearing your filter criteria
+              {t("noTacticsHint")}
             </p>
             <button
               onClick={() => setFilters({})}
               className="text-primary text-sm hover:underline"
             >
-              Clear all filters
+              {ft("clearAll")}
             </button>
           </div>
         )}
