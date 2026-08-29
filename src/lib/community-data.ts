@@ -297,7 +297,7 @@ export const communityConsensus = {
 export const dualFormationTips = [
   {
     style: "Gegenpress / High Press",
-    inPossession: "4-2-3-1 或 4-3-3",
+    inPossession: "4-2-3-1 or 4-3-3",
     outOfPossession: "4-4-2 Compact Block",
     tip: "In possession, link play through the #10. Out of possession, wide players tuck in to form a compact 4-4-2 defensive block"
   },

@@ -1,7 +1,8 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, TrendingUp, Shield, Zap, Star, AlertTriangle, CheckCircle, Download, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
+import { ArrowLeft, Zap, AlertTriangle, CheckCircle, Download, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import {
   topTestedTactics,
@@ -12,6 +13,14 @@ import {
   dualFormationTips,
   commonMistakes,
 } from "@/lib/community-data";
+import {
+  formationInsightsTr,
+  metaRolesTr,
+  bestRoleCombosTr,
+  communityConsensusTr,
+  dualFormationTipsTr,
+  commonMistakesTr,
+} from "@/lib/community-data-tr";
 
 const tierColors: Record<string, { bg: string; text: string; border: string; badge: string }> = {
   S: { bg: "bg-primary/10", text: "text-primary", border: "border-primary/30", badge: "bg-primary text-background-primary" },
@@ -26,6 +35,19 @@ const opLevelColors: Record<string, string> = {
 };
 
 export function MetaPage() {
+  const locale = useLocale();
+  const isTr = locale === "tr";
+  const t = useTranslations("meta");
+  const cm = useTranslations("common");
+
+  // Turkish pilot L1: analytical texts localized, in-game terms kept in English
+  const insights = isTr ? formationInsightsTr : formationInsights;
+  const roles = isTr ? metaRolesTr : metaRoles;
+  const combos = isTr ? bestRoleCombosTr : bestRoleCombos;
+  const consensus = isTr ? communityConsensusTr : communityConsensus;
+  const dualTips = isTr ? dualFormationTipsTr : dualFormationTips;
+  const mistakes = isTr ? commonMistakesTr : commonMistakes;
+
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -34,22 +56,21 @@ export function MetaPage() {
           className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Home
+          {cm("backToHome")}
         </Link>
 
         {/* Header */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-green-500/20 text-green-400 border border-green-500/30 uppercase tracking-wider">
-              Updated Aug 2026 · Patch 26.3
+              {t("updatedBadge")}
             </span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">
-            FM26 <span className="gradient-text">Meta</span> Analysis
+            {t("h1Pre")} <span className="gradient-text">{t("h1Highlight")}</span> {t("h1Post")}
           </h1>
           <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-            Aggregated from FM-Arena community testing (2,700+ match simulations), Passion4FM role analysis, 
-            FM Scout tactical guides, and community consensus from Reddit, Sortitoutsi, and FM Blog.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -57,12 +78,12 @@ export function MetaPage() {
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-2">
             <BarChart3 className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-bold">Community-Tested Tactics — FM-Arena Rankings</h2>
+            <h2 className="text-xl font-bold">{t("rankingsTitle")}</h2>
           </div>
           <p className="text-text-muted text-xs mb-5">
-            Patch 26.3.0 · 38-game season projection · 2,700-match tests (±1.8 PTS accuracy) ·{" "}
+            {t("rankingsMeta")}{" "}
             <a href="https://fm-arena.com/table/fm26-the-best-plug-and-play-tactics/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-              Source <ExternalLink className="w-3 h-3 inline" />
+              {t("source")} <ExternalLink className="w-3 h-3 inline" />
             </a>
           </p>
 
@@ -71,64 +92,64 @@ export function MetaPage() {
               <thead>
                 <tr className="border-b border-[#1C2436]">
                   <th className="text-left p-3 text-text-muted font-medium text-xs w-10">#</th>
-                  <th className="text-left p-3 text-text-primary font-semibold">Tactic</th>
-                  <th className="text-left p-3 text-text-primary font-semibold">Formation</th>
+                  <th className="text-left p-3 text-text-primary font-semibold">{t("thTactic")}</th>
+                  <th className="text-left p-3 text-text-primary font-semibold">{t("thFormation")}</th>
                   <th className="text-center p-3 text-text-primary font-semibold">PTS</th>
                   <th className="text-center p-3 text-text-primary font-semibold">GD</th>
                   <th className="text-center p-3 text-text-primary font-semibold">GF</th>
                   <th className="text-center p-3 text-text-primary font-semibold">GA</th>
-                  <th className="text-center p-3 text-text-primary font-semibold hidden sm:table-cell">Eff.</th>
+                  <th className="text-center p-3 text-text-primary font-semibold hidden sm:table-cell">{t("thEff")}</th>
                 </tr>
               </thead>
               <tbody>
-                {topTestedTactics.map((t) => (
-                  <tr key={t.rank} className="border-b border-[#1C2436]/30 hover:bg-surface/50 transition-colors">
+                {topTestedTactics.map((t2) => (
+                  <tr key={t2.rank} className="border-b border-[#1C2436]/30 hover:bg-surface/50 transition-colors">
                     <td className="p-3">
-                      {t.rank <= 3 ? (
+                      {t2.rank <= 3 ? (
                         <span className={`text-xs font-bold w-6 h-6 rounded flex items-center justify-center ${
-                          t.rank === 1 ? "bg-amber-500 text-background-primary" :
-                          t.rank === 2 ? "bg-slate-400 text-background-primary" :
+                          t2.rank === 1 ? "bg-amber-500 text-background-primary" :
+                          t2.rank === 2 ? "bg-slate-400 text-background-primary" :
                           "bg-amber-700 text-background-primary"
-                        }`}>{t.rank}</span>
+                        }`}>{t2.rank}</span>
                       ) : (
-                        <span className="text-xs text-text-muted pl-1">{t.rank}</span>
+                        <span className="text-xs text-text-muted pl-1">{t2.rank}</span>
                       )}
                     </td>
                     <td className="p-3">
-                      <div className="font-medium text-text-primary text-xs">{t.name}</div>
-                      <div className="text-[10px] text-text-muted">{t.author}</div>
+                      <div className="font-medium text-text-primary text-xs">{t2.name}</div>
+                      <div className="text-[10px] text-text-muted">{t2.author}</div>
                       <div className="flex items-center gap-2 mt-1.5">
                         <a
-                          href={t.arenaUrl}
+                          href={t2.arenaUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          title="Download from FM-Arena"
-                          onClick={() => trackEvent("meta_download", { label: t.name })}
+                          title={t("downloadTitle")}
+                          onClick={() => trackEvent("meta_download", { label: t2.name })}
                           className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded bg-primary text-background-primary hover:opacity-90 transition-opacity"
                         >
                           <Download className="w-3 h-3" />
-                          Download
+                          {t("download")}
                         </a>
                       </div>
                     </td>
                     <td className="p-3">
                       <span className="text-xs px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono">
-                        {t.formation}
+                        {t2.formation}
                       </span>
                     </td>
                     <td className="p-3 text-center">
-                      <span className="text-sm font-bold text-text-primary">{t.pts.toFixed(1)}</span>
+                      <span className="text-sm font-bold text-text-primary">{t2.pts.toFixed(1)}</span>
                       <span className="text-[10px] text-text-muted">/114</span>
                     </td>
                     <td className="p-3 text-center">
-                      <span className={`text-xs font-medium ${t.gd > 0 ? "text-green-400" : "text-red-400"}`}>
-                        {t.gd > 0 ? "+" : ""}{t.gd}
+                      <span className={`text-xs font-medium ${t2.gd > 0 ? "text-green-400" : "text-red-400"}`}>
+                        {t2.gd > 0 ? "+" : ""}{t2.gd}
                       </span>
                     </td>
-                    <td className="p-3 text-center text-xs text-text-secondary">{t.gf}</td>
-                    <td className="p-3 text-center text-xs text-text-secondary">{t.ga}</td>
+                    <td className="p-3 text-center text-xs text-text-secondary">{t2.gf}</td>
+                    <td className="p-3 text-center text-xs text-text-secondary">{t2.ga}</td>
                     <td className="p-3 text-center hidden sm:table-cell">
-                      <span className="text-xs text-text-muted">{t.efficiency}</span>
+                      <span className="text-xs text-text-muted">{t2.efficiency}</span>
                     </td>
                   </tr>
                 ))}
@@ -138,9 +159,9 @@ export function MetaPage() {
 
           {/* Formation Insights */}
           <div className="mt-6">
-            <h3 className="text-sm font-semibold text-text-primary mb-3">Formation Verdicts from Test Data</h3>
+            <h3 className="text-sm font-semibold text-text-primary mb-3">{t("formationVerdictsTitle")}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {formationInsights.map((f) => {
+              {insights.map((f) => {
                 const tc = tierColors[f.tier];
                 return (
                   <div key={f.formation} className={`glass-panel p-4 border-l-2 ${tc.border}`}>
@@ -148,7 +169,9 @@ export function MetaPage() {
                       <span className="text-xs font-mono font-bold text-text-primary">{f.formation}</span>
                       <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${tc.badge}`}>{f.tier}</span>
                     </div>
-                    <p className="text-[11px] text-text-muted mb-2">Avg: {f.avgPts.toFixed(1)} PTS · +{f.avgGD} GD · {f.appearances} in top 10</p>
+                    <p className="text-[11px] text-text-muted mb-2">
+                      {t("formationAvg", { pts: f.avgPts.toFixed(1), gd: f.avgGD, count: f.appearances })}
+                    </p>
                     <p className="text-xs text-text-secondary leading-relaxed">{f.verdict}</p>
                   </div>
                 );
@@ -161,17 +184,17 @@ export function MetaPage() {
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-2">
             <Award className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-bold">OP / Meta Player Roles</h2>
+            <h2 className="text-xl font-bold">{t("opRolesTitle")}</h2>
           </div>
           <p className="text-text-muted text-xs mb-5">
-            Community-identified overpowered roles for FM26. Source:{" "}
+            {t("opRolesSource")}{" "}
             <a href="https://www.passion4fm.com/football-manager-26-overpowered-player-roles/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
               Passion4FM <ExternalLink className="w-3 h-3 inline" />
             </a>
           </p>
 
           <div className="space-y-4">
-            {metaRoles.map((role) => (
+            {roles.map((role) => (
               <div key={role.name} className="glass-panel p-5">
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -181,7 +204,7 @@ export function MetaPage() {
                         {role.opLevel}
                       </span>
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
-                        {role.category === "in-possession" ? "In Possession" : "Out of Possession"}
+                        {role.category === "in-possession" ? t("inPossession") : t("outOfPossession")}
                       </span>
                     </div>
                     <p className="text-xs text-text-secondary leading-relaxed">{role.overview}</p>
@@ -190,7 +213,7 @@ export function MetaPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                   <div>
-                    <h4 className="text-[11px] font-semibold text-green-400 uppercase tracking-wider mb-2">Why It&apos;s OP</h4>
+                    <h4 className="text-[11px] font-semibold text-green-400 uppercase tracking-wider mb-2">{t("whyOpTitle")}</h4>
                     <ul className="space-y-1.5">
                       {role.whyOp.map((reason, i) => (
                         <li key={i} className="flex gap-2 text-xs text-text-secondary">
@@ -201,9 +224,9 @@ export function MetaPage() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-[11px] font-semibold text-amber-400 uppercase tracking-wider mb-2">Weakness & Fix</h4>
+                    <h4 className="text-[11px] font-semibold text-amber-400 uppercase tracking-wider mb-2">{t("weaknessTitle")}</h4>
                     <p className="text-xs text-text-secondary mb-3">{role.weakness}</p>
-                    <h4 className="text-[11px] font-semibold text-text-primary uppercase tracking-wider mb-1.5">Key Instructions</h4>
+                    <h4 className="text-[11px] font-semibold text-text-primary uppercase tracking-wider mb-1.5">{t("keyInstructionsTitle")}</h4>
                     <div className="flex flex-wrap gap-1 mb-3">
                       {role.keyInstructions.map((inst, i) => (
                         <span key={i} className="text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
@@ -211,7 +234,7 @@ export function MetaPage() {
                         </span>
                       ))}
                     </div>
-                    <h4 className="text-[11px] font-semibold text-text-primary uppercase tracking-wider mb-1.5">Best Partners</h4>
+                    <h4 className="text-[11px] font-semibold text-text-primary uppercase tracking-wider mb-1.5">{t("bestPartnersTitle")}</h4>
                     <div className="flex flex-wrap gap-1">
                       {role.bestPartners.map((p, i) => (
                         <span key={i} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
@@ -230,11 +253,11 @@ export function MetaPage() {
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-5">
             <Target className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-bold">Dual Formation System — What the Community Uses</h2>
+            <h2 className="text-xl font-bold">{t("dualFormationTitle")}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {dualFormationTips.map((tip, i) => (
+            {dualTips.map((tip, i) => (
               <div key={i} className="glass-panel p-5">
                 <h3 className="text-sm font-bold text-text-primary mb-3">{tip.style}</h3>
                 <div className="flex items-center gap-2 mb-2">
@@ -255,17 +278,17 @@ export function MetaPage() {
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-2">
             <Users className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-bold">Best Role Combinations</h2>
+            <h2 className="text-xl font-bold">{t("combosTitle")}</h2>
           </div>
           <p className="text-text-muted text-xs mb-5">
-            Proven synergies from community testing. Source:{" "}
+            {t("combosSource")}{" "}
             <a href="https://www.footballmanagerblog.org/2026/03/fm26-role-synergy-best-player-role-combinations.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
               FM Blog <ExternalLink className="w-3 h-3 inline" />
             </a>
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {bestRoleCombos.map((combo, i) => (
+            {combos.map((combo, i) => (
               <div key={i} className="glass-panel p-4 flex items-start gap-3">
                 <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
                   <span className="text-[10px] font-mono font-bold text-primary">{i + 1}</span>
@@ -291,17 +314,17 @@ export function MetaPage() {
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
             <Zap className="w-5 h-5 text-primary" />
-            What FM26&apos;s Match Engine Actually Rewards
+            {t("engineTitle")}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="glass-panel p-5">
               <div className="flex items-center gap-2 mb-4">
                 <CheckCircle className="w-4 h-4 text-green-400" />
-                <h3 className="text-sm font-semibold text-text-primary">Rewarded (Community Consensus)</h3>
+                <h3 className="text-sm font-semibold text-text-primary">{t("rewardedTitle")}</h3>
               </div>
               <ul className="space-y-3 text-sm text-text-secondary">
-                {communityConsensus.engineRewards.map((item, i) => (
+                {consensus.engineRewards.map((item, i) => (
                   <li key={i} className="flex gap-2.5">
                     <span className="text-green-400 shrink-0 mt-0.5">+</span>
                     <span className="leading-relaxed">{item}</span>
@@ -313,10 +336,10 @@ export function MetaPage() {
             <div className="glass-panel p-5">
               <div className="flex items-center gap-2 mb-4">
                 <AlertTriangle className="w-4 h-4 text-amber-400" />
-                <h3 className="text-sm font-semibold text-text-primary">Punished (Community Consensus)</h3>
+                <h3 className="text-sm font-semibold text-text-primary">{t("punishedTitle")}</h3>
               </div>
               <ul className="space-y-3 text-sm text-text-secondary">
-                {communityConsensus.enginePunishes.map((item, i) => (
+                {consensus.enginePunishes.map((item, i) => (
                   <li key={i} className="flex gap-2.5">
                     <span className="text-amber-400 shrink-0 mt-0.5">−</span>
                     <span className="leading-relaxed">{item}</span>
@@ -331,11 +354,11 @@ export function MetaPage() {
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-5">
             <Lightbulb className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-bold">Common Mistakes & Fixes</h2>
+            <h2 className="text-xl font-bold">{t("mistakesTitle")}</h2>
           </div>
 
           <div className="space-y-3">
-            {commonMistakes.map((item, i) => (
+            {mistakes.map((item, i) => (
               <div key={i} className="glass-panel p-4 flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center shrink-0 mt-0.5">
                   <AlertTriangle className="w-3 h-3 text-red-400" />
@@ -353,20 +376,20 @@ export function MetaPage() {
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-5">
             <Users className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-bold">Community Top Creators</h2>
+            <h2 className="text-xl font-bold">{t("creatorsTitle")}</h2>
           </div>
 
           <div className="glass-panel p-5">
             <div className="flex flex-wrap gap-2 mb-4">
-              {communityConsensus.topCreators.map((creator) => (
+              {consensus.topCreators.map((creator) => (
                 <span key={creator} className="text-sm font-medium px-3 py-1.5 rounded-lg bg-primary/10 text-primary border border-primary/20">
                   {creator}
                 </span>
               ))}
             </div>
-            <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">Key Data Sources</h4>
+            <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">{t("keySourcesTitle")}</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-              {communityConsensus.keySources.map((src, i) => (
+              {consensus.keySources.map((src, i) => (
                 <div key={i} className="flex items-center gap-2 text-xs text-text-secondary">
                   <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
                   {src}
@@ -379,15 +402,14 @@ export function MetaPage() {
         {/* Footer */}
         <div className="text-center pt-8 border-t border-[#1C2436]/50">
           <p className="text-text-muted text-xs mb-3">
-            Data sourced from FM-Arena, Passion4FM, FM Scout, FM Blog, Sortitoutsi, and Reddit community.
-            Updated for Patch 26.3.0 — August 2026.
+            {t("footerNote")}
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link href="/tactics" className="text-primary text-sm hover:underline">
-              Browse all 8 tactics →
+              {t("browseTacticsCta")}
             </Link>
             <Link href="/guides" className="text-primary text-sm hover:underline">
-              Read tactical guides →
+              {t("browseGuidesCta")}
             </Link>
           </div>
         </div>
