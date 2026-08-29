@@ -1,0 +1,5 @@
+# Contentlayer's YAML frontmatter parser breaks on CRLF files;
+# keep content sources strictly LF on all platforms.
+*.mdx text eol=lf
+*.md text eol=lf
+*.json text eol=lf
