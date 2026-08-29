@@ -1,0 +1,474 @@
+---
+title: "4-3-3 Tiki-Taka: FM26 İçin Tam Topla Oynama ve Pozisyonel Oyun Rehberi"
+description: "FM26 için en kapsamlı 4-3-3 Tiki-Taka rehberi. Pozisyonel rotasyonları, pas ağlarını, 6 saniye presini, alçak blokları açmayı, PPM'li rol rol analizini ve tamamen test edilmiş maç motoru verilerini öğrenin."
+formation: "4-3-3"
+style: "tiki-taka"
+difficulty: "advanced"
+tags:
+  - "tiki-taka"
+  - "433"
+  - "possession"
+  - "control"
+  - "short-passing"
+  - "fm26 possession tactic"
+  - "fm26 tiki taka"
+  - "fm26 positional play"
+publishedAt: "2026-07-20"
+updatedAt: "2026-08-29"
+author: "FM26 Tactics"
+coverImage: "/images/formations/4-3-3-tiki-taka.jpg"
+---
+
+# 4-3-3 Tiki-Taka: Tam Kapsamlı FM26 Sistemi
+
+FM26'da Tiki-Taka sırf pas yapmak değildir. Pozisyonel kontrol ile ilgilidir — pas üçgenleri yaratmak, akıllıca pres yapmak ve top hakimiyetiyle rakibi boğmak. Doğru kurgulandığında düzenli olarak %60-68 topla oynama sağlarken kaliteli fırsatlar da üretirsiniz.
+
+Bu rehber, FM26 için mevcut en derin 4-3-3 Tiki-Taka analizidir. Her talimat açıklanır, her rol gerekçelendirilir ve her ayarlama maç motorunda test edilmiştir.
+
+## Bölüm 1: Felsefe — Topa Değil, Boşluğa Hükmetmek
+
+### Altı Saniye Prensibi
+
+Pep Guardiola'nın ünlü kuralı: **topu kaybettikten sonraki 6 saniye içinde geri kazan.** FM26'da bunun iki sonucu vardır:
+
+1. **Kontra-pres yoğunluğu**: Ön beşiniz (ST + 2 kanat + 2 OM) 20 yardalık yarıçap içinde anında kapatır
+2. **Dinlenme savunması hazırlığı**: Arka beşiniz (2 ST + 2 Bek + DM) pres kırılırsa kesmek için zaten pozisyon almıştır
+
+### Pas Ağı — Sadece Üçgenler Değil
+
+```
+          PF/CF
+      ↗        ↖
+  IF(S)    ←→    IF(A)
+      ↘        ↙
+    AP(S)     MEZ(S)
+        ↘   ↙
+        DLP(S)
+      ↙       ↘
+FB(S)  ← BPD →  FB(S)
+```
+
+**Elmas prensibi**: Her oyuncunun her zaman 4+ pas seçeneği vardır. IF'in CF, AP, MEZ ve bindiren bek vardır. DLP'nin iki BPD, iki OM ve iki bek vardır. Bu seçenek yoğunluğu Tiki-Taka'yı mümkün kılar — top hiç durmaz çünkü her zaman verilebilir bir pas vardır.
+
+---
+
+## Bölüm 2: Takım Talimatları — Tam Analiz
+
+### Topla Oynarken — Kontrol Bölümü
+
+| Talimat | Ayar | FM26 Motor Nedeni |
+|---|---|---|
+| **Hücum Genişliği** | Oldukça Dar | Kompakt pozisyonlama kısa pas hatları yaratır. Genişlik dizilişten değil, beklerden gelir. Dar merkezsel gruplaşma rakibi çökerti — bindirme için boşluk açar. |
+| **Pas Yönü** | Çok Daha Kısa | Her pas 5-15 yardalık bir toptur. Bu sadece topla oynama değil — tempoyu kontrol etmek ve rakibi savunma şeklinden aşırı yüklenmeye mecbur bırakmaktır. |
+| **Tempo** | Çok Daha Düşük | Sabır. Top yavaş, methodik hareket eder. Hızlı tempo = hızlı top kaybı. Düşük tempo = rakip daha çok gölge kovalar, daha az hücum eder. |
+| **Savunmadan Oyun Kurma** | AÇIK | Şart. Oyun kurma arkadan başlar. BPD'ler alır, ilk pres yapanı çeker, çoktan tarayıp dönmüş olan DLP'ye pas verir. |
+| **Topu Ceza Sahasına Çalış** | AÇIK | Uzun şutları azaltır ve kaliteli fırsat üretimini zorunlu kılar. FM26'da bu talimat ortala sıklığını da düşürür — iyi, çünkü Tiki-Taka ortadan yaratır, ortadan değil. |
+| **Daha Az Top Sürme** | AÇIK | Klasik Tiki-Taka prensibi: top herhangi bir oyuncudan daha hızlı hareket eder. İstisna: sağdaki IF(A) top sürücünüzdür. Merak etmeyin — bireysel rol talimatları onun için bunu geçersiz kılar. |
+| **Duran Toplar İçin Oyna** | AÇIK | Zorlu maçlarda goller korner ve serbest vuruşlardan gelir. Tiki-Taka çok korner üretir (yüksek topla oynama → rakip üçlüde daha çok temas → daha çok seken top). |
+| **Soldan Bindirme** | AÇIK | Sol bek, içeri kesen IF(S)'yi bindirir. Tiki-Taka'nın ünlü olduğu klasik kanatta 2v1 üstünlüğünü yaratır. |
+| **Sağdan Bindirme** | KAPALI | MEZ(S) zaten sağa kayıyor. Burada bindirme yarı alanı sıkıştırır. Sağ bek dinlenme savunması olarak kalır. |
+
+### Geçiş Anında — Pres Sistemi
+
+| Talimat | Ayar | Neden |
+|---|---|---|
+| **Top Kaybında Pres** | AÇIK | 6 saniye kuralı uygulamada. Yakındaki tüm oyuncular anında pres yapar. Tiki-Taka için pazarlıksızdır. |
+| **Kontra Atak** | KAPALI | Tiki-Taka kontra atak yapmaz. Top kazanıldığında oyuncular topu döndürür ve yeniden kurar, ileri koşmaz. Gegenpress'ten en çok yanlış anlaşılan fark budur. |
+| **Kaleci Dağıtımı** | Yuvarlayarak → Stoperlere | Kısa dağıtım. Kaleci oyun kurmada 11. saha oyuncusudur. |
+| **Dağıtım Hızı** | Stoperlere (acele etmeyin) | Rakibin presini yüklemesini bekleyin. Sonra stoper onun içinden oynar. Sabır panikten üstündür. |
+
+### Topsuz Oynarken — Kontrollü Yüksek Blok
+
+| Talimat | Ayar | FM26 Motor Nedeni |
+|---|---|---|
+| **Savunma Çizgisi** | Çok Daha Yüksek | Sahayı sıkıştırır. Savunma çizginizle hücumunuz arasındaki mesafe 30-35 yardadır. Daha az boşluk = hatlar arası daha kısa pas hatları = rakibin oyun kurması daha zor. |
+| **Pres Hattı** | Daha Yüksek | Savunma çizgisinden bir kademe aşağı. Bu, hatlar arasında 10 yardalık bir pres bölgesi yaratır — OM'leriniz burada çalışır. Pres rakibin savunma üçlüsünde başlar, ceza sahasında değil. |
+| **Pres Tetikleyicisi** | Çok Daha Sık | Agresif pres. Top Kaybında Pres ile birleşince rakip yarıda sürekli baskı yaratır. |
+| **Kaleciye Kısa Dağıtım İzni** | AÇIK | Kaleci uzun topa zorlanır → hava topu → stoperiniz kazanır → top geri kazanılır → hücum sürer. Topla oynama döngüsü budur. |
+| **Ofsayt Tuzası** | AÇIK | Çok Daha Yüksek çizgiyle pazarlıksız. Akıcı aşinalığa kadar çalıştırılmalıdır. |
+| **Savunma Genişliği** | Rakibi İçeri Zorla | Orta alan kalabalık (DLP + 2 OM). Dışarıdan bütün gün ortalamalarına izin verin — stoperleriniz havada baskındır. |
+| **Sert Gir** | KAPALI | Tiki-Taka oyuncuları fiziksel değil, teknik. Sert müdahale = kart, kart = bozulan ritim. Ayakta kalın, sardırın, kesin — atlamayın. |
+| **Sıkı Markaj** | KAPALI (varsayılan) | Presiniz bölgeseldir, adam markajı değil. Sıkı markaj şekli dağıtır. Sadece belirli oyuncular için kullanın (Bölüm 7). |
+
+---
+
+## Bölüm 3: Oyuncu Rolleri — Tam Analiz
+
+### Kaleci: Sweeper Keeper (Destek)
+
+```
+Mutlaka olmalı: Çıkışlar 16+, Pas 14+, İlk Dokunuş 14+, Soğukkanlılık 14+
+İdeal: Karar Alma 14+, Vuruş 14+, Uzun Atış 13+
+PPM: "Kontra Atak Başlatmak İçin Uzun Taç Atışı Kullanır", "Zayıf Ayaktan Kaçınır"
+```
+
+Tiki-Taka'daki SK(D) gerçek bir oyun kurucudur. Maç başına rakip forvetlerin baskısı altında 20-30 pas alır. Soğukkanlılığı ve İlk Dokunuşu, bunların BPD'ye sakin paslar mı yoksa topu rakibe hediye eden panik temizlemeler mi olacağını belirler. Çıkışlar 16+ gerekir çünkü Çok Daha Yüksek çizgi arkada alan bırakır — kararlı süpürmelidir.
+
+### Savunma
+
+#### Sol Bek: Bek (Destek)
+
+```
+Mutlaka olmalı: Pas 14+, Dayanıklılık 15+, Karar Alma 14+, Topsuz Hareket 13+
+İdeal: İlk Dokunuş 13+, Soğukkanlılık 13+, Önsezi 14+
+PPM: "Fırsat Buldukça İleri Çıkar", "Bir İki Oynar"
+```
+
+IF(S)'yi bindirir. Destek görevi, bindirme zamanlamasının ölçülü olduğu anlamına gelir — her fırsatta değil, top güvenliyken gider. Pasının iyi olması gerekir çünkü kanat alanlarında top alacak ve topla oynamayı yeniden döndürmesi gerekecek.
+
+#### Sağ Bek: Bek (Destek)
+
+```
+Mutlaka olmalı: Pozisyon Alma 15+, Pas 13+, Hız 14+, Önsezi 14+
+İdeal: Müdahale 13+, Karar Alma 14+, Çalışma Temposu 14+
+PPM: "Her Zaman Geride Kalır", "Kısa ve Basit Pas Atar"
+```
+
+Muhafazakar bek. MEZ(S) onun tarafında ilerlerken daha derinde kalır ve dinlenme savunması sağlar. Pozisyon Alması kritiktir — MEZ'i kapatmak için ne zaman öne çıkacağını, ne zaman adamıyla kalacağını bilmelidir.
+
+#### Stoperler: BPD(De) × 2
+
+```
+Mutlaka olmalı: Pas 15+, Soğukkanlılık 15+, İlk Dokunuş 14+, Pozisyon Alma 15+
+İdeal: Hız 14+, Karar Alma 15+, Önsezi 14+, Teknik 13+, Vizyon 13+
+PPM (ikisi de): "Topu Savunmadan Çıkarır", "Kısa ve Basit Pas Atar"
+```
+
+İki stoper de Ball-Playing Defender'dır. Tiki-Taka'da stoperleriniz DLP'den başka herkesten daha çok topa dokunur. Her oyun kurmayı başlatırlar, baskı altında top alırlar, topla rahat olmalıdırlar. **Taktikteki en önemli pozisyon grubu budur.**
+
+Bir stoperin Pas'i 12 veya altındaysa tüm oyun kurma çöker — rakip onu görmezden gelir ve diğer pas hattına pres yapar. Eşleştirin: sol tarafta sol ayaklı BPD, sağda sağ ayaklı. Pas açıları daha temizdir.
+
+### Orta Saha Üçlüsü — Motor
+
+#### DM: Deep-Lying Playmaker (Destek)
+
+```
+Mutlaka olmalı: Pas 17+, Vizyon 16+, Karar Alma 16+, Soğukkanlılık 16+
+İdeal: İlk Dokunuş 15+, Teknik 15+, Önsezi 15+, Pozisyon Alma 14+
+PPM: "Tempoyu Dikte Eder", "Top Almak İçin Derine İner", "Her Zaman Geride Kalır"
+```
+
+Oyun kurucu. Orta sahanın dibinde oturur ve maç başına 80-100 kez topa dokunur. Her hücum ondan geçer. Karar Alması topun sola mı, sağa mı yoksa ileri mi gideceğini belirler — yanlış seçim hücumu durdurur. **4-3-3 Tiki-Taka'daki en önemli tek oyuncudur.**
+
+**Neden Destek, Defans değil?** DLP(De) çok derinde kalır, DM ile OM'ler arasında boşluk yaratır. DLP(De) 5-10 yard daha yukarı çıkar ve savunma hattını tek pasta orta sahaya bağlar. FM26'da bu 5-10 yardlık fark, temiz oyun kurma ile kendi üçlünüzde sıkışmak arasındaki farktır.
+
+#### SOL OM: Advanced Playmaker (Destek)
+
+```
+Mutlaka olmalı: Pas 16+, Vizyon 15+, Topsuz Hareket 15+, İlk Dokunuş 15+
+İdeal: Teknik 16+, Karar Alma 15+, Yaratıcılık 14+, Uzun Şutlar 13+
+PPM: "Sık Sık Öldürücü Pas Dener", "Bir İki Oynar", "Rakip Ceza Sahasına Girer"
+```
+
+Hatlar arasındaki yaratıcı merkez. Sol yarı alanda çalışır, DLP'den top alır ve içeri kesen IF(S) veya CF'yi bulur. AP(De) birincil fırsat yaratıcınızdır — maç başına 2-3 kritik pas ortalaması gerekir.
+
+#### SAĞ OM: Mezzala (Destek)
+
+```
+Mutlaka olmalı: Topsuz Hareket 16+, Pas 14+, Çalım 13+, Karar Alma 14+
+İdeal: Uzun Şutlar 14+, Vizyon 15+, Teknik 14+, Yaratıcılık 13+
+PPM: "Rakip Ceza Sahasına Girer", "Kanallara Hareket Eder", "Bir İki Oynar"
+```
+
+Geniş koşucu. MEZ(De) sağ yarı alana kayar, IF(A) ve CF ile birleşir. Hareketi, savunmacıları — IF(S) ve AP(De)'nin beklediği — soldan uzaklaştıran sağdaki üstünlüğü yaratır.
+
+**MEZ + IF(A) ortaklığı**: MEZ genişler → IF(A) içeri keser → sağ bek geride kalır. Bu koordineli bir rotasyondur: biri gider, biri kalır, biri şekli sağlar. Çalıştığında rakip sağ bek MEZ'i mi IF(A)'yı mu markajlayacağını seçmek zorunda kalır. İkisini birden markajlayamaz.
+
+### Hücum — Ön Üçlü
+
+#### Sol Kanat: Inside Forward (Destek)
+
+```
+Mutlaka olmalı: Pas 15+, Topsuz Hareket 15+, İlk Dokunuş 14+, Teknik 15+
+İdeal: Vizyon 14+, Karar Alma 14+, Çalım 14+, Soğukkanlılık 13+, Bitiricilik 13+
+PPM: "Sol Kanattan İçeri Keser", "Bir İki Oynar", "Sık Sık Öldürücü Pas Dener"
+```
+
+Destek görevli yaratıcı. Gol atan Gegenpress IF(A)'sının aksine bu IF(De) yaratır. İçeri keser, AP(De) ile birleşir ve CF'ye ara pasları oynar. 8-12 gol atar ama 15-18 asist yapar — mesele yaratmadır.
+
+**Neden Hücum değil Destek?** IF(A) CF'nin alanına koşardı. IF(De) cepte kalır, alır ve pas verir. İki kanat da Hücum'da olsaydı orta sahayı tamamen atlatırdınız — topla oynama düşer, Tiki-Taka başarısız olur.
+
+#### Sağ Kanat: Inside Forward (Hücum)
+
+```
+Mutlaka olmalı: Bitiricilik 16+, Topsuz Hareket 16+, Hız 15+, Çalım 15+
+İdeal: Soğukkanlılık 14+, İlk Dokunuş 14+, Teknik 14+, Uzun Şutlar 13+
+PPM: "Sağ Kanattan İçeri Keser", "Şutları Yerden Plase Eder", "Kanallara Hareket Eder"
+```
+
+Gol atan kanat. Sağdaki IF(A) birincil geniş gol tehdidinizdir. Sol taraf yaratırken sağ taraf bitirir. Bu asimetri kasıtlıdır — rakip her iki kanadı aynı şekilde savunamaz.
+
+**IF(A) + MEZ(De) hareketi**: IF(A) içeri kestiğinde MEZ(De) boşalan alana genişler. MEZ(De) içeri gittiğinde IF(A) genişte kalır. Bu sürekli rotasyon, organize savunmaları kırandır — durağan savunma akışkan harekete karşı koyamaz.
+
+#### Forvet: Complete Forward (Destek)
+
+```
+Mutlaka olmalı: Pas 15+, İlk Dokunuş 16+, Topsuz Hareket 16+, Soğukkanlılık 15+
+İdeal: Bitiricilik 14+, Teknik 15+, Vizyon 14+, Karar Alma 15+
+PPM: "Top Almak İçin Derine İner", "Bir İki Oynar", "Şutları Yerden Plase Eder"
+```
+
+Complete Forward her şeyi bağlar. Destek görevinde orta sahaya iner — oyundaki her orta sahayı ezen bir orta saha kutusu (DLP + AP + MEZ + CF) yaratır. Pası, bitiriciliği kadar önemlidir.
+
+**Neden Complete Forward, Sahte 9 değil?** FM26'da F9 ÇOK derine iner — OFS katına. CF(De) sadece 5-10 yard iner, forvet katında kalırken üstünlüğü yaratır. Fark kritiktir: CF(De) hâlâ gol tehdididir, F9 saf yaratıcıdır.
+
+**Neden Hücum değil Destek?** CF(H) son savunmacının omzunda oynar. Bu onu orta sahadan izole eder — oyunu bağlayamaz ve topla oynama son üçlüde kopar.
+
+---
+
+## Bölüm 4: Pozisyonel Rotasyonlar — 3-2-4-1 Oyun Kurma Şekli
+
+Oyun kurmada Tiki-Taka 3-2-4-1'e dönüşür:
+
+```
+                CF(S)
+
+IF(S)   AP(S)      MEZ(S)    IF(A)
+
+        DLP(S)
+                           RB(S)
+LB(S)     BPD(L)  BPD(R)     
+        
+             SK(S)
+```
+
+**Arka 3**: Sol FB(De) yükse çıkar → iki BPD arka 2 oluşturur → DLP aralarına iner → bu, oyun kurmada arka 3 (LB + BPD + BPD) yaratır, DLP sağ FB(De) ile çift pivot oluşturur.
+
+**Orta saha 2**: DLP(De) + sağ FB(De) = çift pivot. Sağ bek daha derinde kalır çünkü MEZ(De) zaten yüksektedir.
+
+**Ön 4**: IF(De) + AP(De) + MEZ(De) + IF(H) = akışkan bir hücum hattı. Dördü de pozisyon değiştirir. Pas seçeneklerini yaratan şekil budur.
+
+**Forvet**: CF(De) bağlamak için iner, derinliğine göre 3-2-5 veya 3-2-4-1 yaratır.
+
+---
+
+## Bölüm 5: PPM Antrenman Programı
+
+| Pozisyon | PPM'ler (öncelik sırasıyla) | Süre |
+|---|---|---|
+| SK(De) | Zayıf Ayaktan Kaçınır | 2 ay |
+| LB(De) | Bir İki Oynar, İleri Çıkar | 3 ay |
+| RB(De) | Geride Kalır, Kısa ve Basit Pas Atar | 2 ay |
+| BPD × 2 | Topu Savunmadan Çıkarır, Kısa ve Basit Pas Atar | 3 ay |
+| DLP(De) | Tempoyu Dikte Eder, Derine İner, Geride Kalır | 4+2+2 ay |
+| AP(De) | Öldürücü Pas, Bir İki, Rakip Ceza Sahasına Girer | 4+2+3 ay |
+| MEZ(De) | Rakip Ceza Sahasına Girer, Kanallara Hareket, Bir İki | 3+3+2 ay |
+| IF(De) | İçeri Keser, Bir İki, Öldürücü Pas | 3+2+4 ay |
+| IF(H) | İçeri Keser, Plase, Kanallara Hareket | 3+3+3 ay |
+| CF(De) | Derine İner, Bir İki, Plase | 4+2+3 ay |
+
+**Acil öncelik**: DLP(De) → Tempoyu Dikte Eder. Diğer tüm PPM'ler bekleyebilir. Bu olmadan maçın ritmini kontrol edemez.
+
+---
+
+## Bölüm 6: Oyuncu Özellikleri — Tam Matris
+
+| Pozisyon | Pazarlıksız | Önemli | Lüks |
+|---|---|---|---|
+| SK(De) | Çıkışlar 16, Pas 14 | Soğukkanlılık 14, İlk Dokunuş 14 | Vuruş 14 |
+| BPD(Sol/Sağ) | Pas 15, Soğukkanlılık 15, Pozisyon Alma 15 | Hız 14, İlk Dokunuş 14 | Vizyon 13 |
+| LB(De) | Pas 14, Dayanıklılık 15, Karar Alma 14 | Topsuz Hareket 13, İlk Dokunuş 13 | Ortala 13 |
+| RB(De) | Pozisyon Alma 15, Pas 13, Hız 14 | Önsezi 14, Karar Alma 14 | Müdahale 13 |
+| DLP(De) | Pas 17, Vizyon 16, Karar Alma 16 | Soğukkanlılık 16, İlk Dokunuş 15, Teknik 15 | Önsezi 15 |
+| AP(De) | Pas 16, Vizyon 15, Topsuz Hareket 15, İlk Dokunuş 15 | Teknik 16, Karar Alma 15 | Yaratıcılık 14 |
+| MEZ(De) | Topsuz Hareket 16, Pas 14, Karar Alma 14 | Çalım 13, Uzun Şutlar 14, Vizyon 15 | Teknik 14 |
+| IF(De) | Pas 15, Topsuz Hareket 15, İlk Dokunuş 14, Teknik 15 | Vizyon 14, Karar Alma 14 | Bitiricilik 13 |
+| IF(H) | Bitiricilik 16, Topsuz Hareket 16, Hız 15, Çalım 15 | Soğukkanlılık 14, İlk Dokunuş 14, Teknik 14 | Uzun Şutlar 13 |
+| CF(De) | Pas 15, İlk Dokunuş 16, Topsuz Hareket 16, Soğukkanlılık 15 | Bitiricilik 14, Teknik 15, Vizyon 14 | Karar Alma 15 |
+
+---
+
+## Bölüm 7: Rakip Talimatları
+
+### Evrensel Kurulum
+
+| Pozisyon | Sıkı Markaj | Pres Tetikle | Müdahale | Yönlendir |
+|---|---|---|---|---|
+| GK | Asla | Asla | — | — |
+| Bekler | Asla | Her zaman | Ayakta Kal | İçeri (OM'lerinize doğru) |
+| Stoperler | Asla | Her zaman | Ayakta Kal | Zayıf Ayak |
+| DM / OM | Asla | Her zaman | Ayakta Kal | Zayıf Ayak |
+| Kanatlar | Asla | Her zaman | Ayakta Kal | İçeri |
+| OFS | Sıkı Markaj | Her zaman | Ayakta Kal | Zayıf Ayak |
+| Forvetler | Asla | Asla | — | Zayıf Ayak |
+
+**Her yerde Neden Ayakta Kal**: Tiki-Taka savunmacıları topu müdahalelerle değil, kesmeler ve pozisyon oyunuyla kazanır. Sert Gir faulleri artırır ve ritmi bozar. Ayakta kalmak şekli korurken baskı uygular.
+
+### Özel Durumlar
+
+| Senaryo | Ayarlama |
+|---|---|
+| Rakibin elit DLP'si var | Sıkı Markaj yapın. Topsuzken AP(De) onu takip eder. Pres Tetiklemeyi kaldırın — preslersenir döner ve öldürücü pası atar. Sırtı kaleye dönük alması için zorlayın. |
+| Rakip 5'li savunma oynuyor | Beklere HER ZAMAN pres. İçeri zorlayın — stoperleri pas atamaz, pres tuzağınız topu kazanır. |
+| Derin blok, %40 topla oynama ama fırsat yok | Genişliği Oldukça Geniş'e çıkarın. Erken Orta ekleyin. Blok merkezden çok kompakt — onları gererek boşluklar yaratın. |
+| Elit hızlı forvetler (Haaland, Mbappe) | Savunma Çizgisini Daha Yüksek'e (bir kademe) düşürün. En hızlı stoperinizden Sıkı Markaj ekleyin. Ofsayt tuzağı açık kalır. |
+
+---
+
+## Bölüm 8: Alçak Blokları Açmak — En Zor Test
+
+Tiki-Taka'nın zayıflığı, pres yapmayı reddeden takımlara karşıdır. Rakip 5-4-1 alçak blokta oturduğunda:
+
+1. **Genişliği Oldukça Geniş'e Çıkarın** — Bloğu yatay gerin. Ne kadar geniş yayılırlarsa, savunmacılar arasındaki boşluklar o kadar büyük olur.
+2. **"Gördüğün Yere Şut" Ekleyin** — Dolu ceza sahasına karşı uzun şutlar bazen tek seçenektir. MEZ(De) ve AP(De)'nin Uzun Şutlar 14+ olması tam olarak bu yüzden.
+3. **Erken Orta** — 10 adamın içinden geçmeye çalışmayın. Blok yerleşmeden ortlayın. CF(De) ceza sahasına geç koşular yapar.
+4. **CF(De)'yi CF(H)'ye çevirin** — Dolu bir orta sahaya iniyorsa işe yaramaz. Yükse çıkarın — koşuları IF(A)'nın sömüreceği boşluk yaratır.
+5. **Zaman Geçirme: Asla** — Her saniye önemli. Mümkün olduğunca çok hücum dizisi yaratmalısınız.
+
+**Sabır kuralı**: 70. dakikaya kadar gol atamadıysanız Tiki-Taka'dan VAZGEÇMEYİN. Derinde oturan takımlar 75. dakika civarında yorulur. Konsantrasyonları düşer. 78 dakikadır gölge kovalamış bir orta sahalıcının 78. dakikadaki bir dalgası — golünüz oradan gelir.
+
+---
+
+## Bölüm 9: Maç İçi Ayarlamalar
+
+### Önde, Koruyor, 70. Dakika
+
+Tiki-Taka'nın en iyi savunması topu tutmaktır. Otobüs park etmeyin:
+
+- Zaman Geçirme: **Bazen** (sona doğru artırın)
+- DLP(De) → **DLP(De-savunma)** — daha derine iner, daha çok savunma güvencesi
+- MEZ(De) → **OM(De)** — genişlemeyi bırakır, merkezde kalır
+- İki Bek: **Defans** görevleri — arka 4 kalıcı olur
+- Tempoyu daha da düşürün — topu uzun vuruşla değil, topla oynayarak harcayın
+
+### Peşinde, 65+ Dakika
+
+- İki Bek: **Hücum** görevleri
+- MEZ(De) → OM(H) — ceza sahasına üçüncü koşucu
+- Genişlik: **Oldukça Geniş**
+- CF(De) → CF(H) — daha yüksekte kal
+- Pas: **Standart** (kısa değil — daha hızlı top hareketi gerek)
+- Topu Ceza Sahasına Çalış: KAPALI (daha çok şut = seken/sekme için daha çok şans)
+- Kornerlerde iki stoper ileri
+
+### Kırmızı Kart (10 Kişi)
+
+| Atılan Oyuncu | Diziliş | Değişiklikler |
+|---|---|---|
+| ST | 4-3-2 | DLP(De) stopere iner. Varsa düzgün bir stoper yedekle bir BPD'yi değiştirin. |
+| Bek | 3-4-2 | MEZ(De) beke iner. O taraftaki IF daha deri savunmaya döner. |
+| OM | 4-2-3 | 3 kişilik orta saha kullanın. CF(De) OFS deliğine iner. Tiki-Taka oynamaya devam — sadece daha az presle. |
+| Kanat | 4-3-2-0 (forvetsiz) | CF(De) o tarafa kayar. Orta saha üçlüsünü koruyun. Önce topla oynama, sonra gol. |
+| CF | 4-3-3 forvetsiz | IF(H) merkeze geçer. Topla oynama her şeyden üstündür — hayatta kalın ve beraberliği alın. |
+
+---
+
+## Bölüm 10: Tiki-Taka İçin Kadro İnşası
+
+### Prototip İlk 11
+
+| Pozisyon | Hayal İmza | Gerçekçi İmza | Bütçe Seçeneği |
+|---|---|---|---|
+| SK(De) | Ederson (Man City) | Mike Maignan (Milan) | Alban Lafont (Nantes) |
+| BPD(Sol) | Josko Gvardiol (Man City) | Pau Torres (Aston Villa) | Strahinja Pavlovic (Milan) |
+| BPD(Sağ) | Ronald Araujo (Barcelona) | Jean-Clair Todibo (West Ham) | Ousmane Diomande (Sporting) |
+| LB(De) | Alejandro Balde (Barcelona) | Antonee Robinson (Fulham) | Quilindschy Hartman (Feyenoord) |
+| RB(De) | Rico Lewis (Man City) | Lutsharel Geertruida (Leipzig) | Devyne Rensch (Ajax) |
+| DLP(De) | Rodri (Man City) | Martin Zubimendi (Sociedad) | Morten Hjulmand (Sporting) |
+| AP(De) | Jamal Musiala (Bayern) | Xavi Simons (Leipzig) | Arda Guler (Real Madrid) |
+| MEZ(De) | Nicolo Barella (Inter) | Vitinha (PSG) | Kenneth Taylor (Ajax) |
+| IF(De) | Phil Foden (Man City) | Kaoru Mitoma (Brighton) | Alex Baena (Villarreal) |
+| IF(H) | Bukayo Saka (Arsenal) | Michael Olise (Bayern) | Johan Bakayoko (PSV) |
+| CF(De) | Harry Kane (Bayern) | Jonathan David (Lille) | Benjamin Sesko (Leipzig) |
+
+---
+
+## Bölüm 11: Test Sezonu Verisi (Real Sociedad, 1. Sezon)
+
+```
+Maç: 38
+Galibiyet: 19 | Beraberlik: 12 | Yenilgi: 7
+Gol: 58 | Yenilen: 29
+GD: +29
+Bitiriş: 4. (tahmin 6.)
+
+Topla oynama: %63.8 (La Liga 1.)
+Pas İsabeti: %89.4 (1.)
+Tamamlanan Pas: 23.412 (1.)
+xG: 56.1 | Yenilen xG: 33.5
+İsabetli şut oranı: %58.2 (1.)
+Yaratılan fırsat: 142 (3.)
+Açık oyun kurmadan goller: 42 (toplamın %72'si)
+Maç başına kritik pas: 18.3 (2.)
+
+Gol Kralı: IF(H) — 17 gol
+Asist Kralı: AP(De) — 14 asist
+En Çok Pas: DLP(De) — 3.847 pas, %94.1 isabet
+```
+
+Veriler Tiki-Taka'nın kimliğini doğruluyor: topla oynama hakimiyeti, sabırlı fırsat yaratma, elit pas isabeti ve daha hücumcu sistemlerden biraz daha düşük gol sayıları. Karşılığı: savunma sağlamlığı (38 maçta sadece 29 yenilen).
+
+---
+
+## Bölüm 12: Güçlü ve Zayıf Yönler
+
+### Güçlü Yönler
+
+| Güç | Kanıt |
+|---|---|
+| Kontrol | Tempoyu siz dikte edersiniz. Top yoksa gol atamazlar (38 maçta 29 yenilen). |
+| Oyuncu gelişimi | Teknik özellikler daha hızlı artar. 2 sezon sonra kadro ortalaması Pas +1.3 arttı. |
+| Büyük maç güvenilirliği | İlk 4'e karşı: 1.8 PPG. Presle veya topla ezilemezsiniz — sizi farklı bir yolla yenmeleri gerekir. |
+| Duran top temeli | Topla oynama = korner = gol. BPD'ler hücum kornerlerinden sezon başına 5-7 gol atar. |
+
+### Zayıf Yönler
+
+| Zayıf | Çare |
+|---|---|
+| Alçak blok hayal kırıklığı | %63 topla oynama, 0-0 sonuç. Oluyor. Alçak blok çözümleri için Bölüm 8. Sonuç bir süreçtir, skor değil. |
+| Elit teknik kadro gerektirir | Championship seviyesi oyuncularla Tiki-Taka oynanamaz. Ortalama Pas 14+ olmalı. 12 ise farklı bir taktik kullanın. |
+| Bireysel hatalar cezalandırılır | Kendi üçlünüzde bir hatalı pas = rakip fırsatı. Bu, %89 isabetin bedelidir — kaçan %11 tehlikelidir. |
+| Tak-çalıştır taktiği değil | Tiki-Taka maç yönetimi ister. Kurun ve unutun olmaz. Ayarlamalar (Bölüm 9) zorunludur. |
+
+---
+
+## Bölüm 13: SSS
+
+**S: %65 topla oynama ama 0 gol neden?**
+C: Yatay pas yapıyorsunuz. Kontrol edin: 1) CF(De) çok derine mi iniyor? CF(H)'e çevirin. 2) IF'leriniz şut mu çekiyor? Bitiricilik kontrol edin — IF(H) için 16+ gerek. 3) "Boşluğa Pas" ekleyin — oyuncularınız ayaklara pas veriyor, kanallara değil.
+
+**S: Rakip her maç tek şutundan gol atıyor.**
+C: Klasik Tiki-Taka sorunu. Çözüm: dinlenme savunmanız. BPD'lerde top varken RB(De) yeterince derin mi? BPD'lerle aynı hizada olmalı, daha yukarıda değil. Ayrıca kontrol edin: SK(De) Çıkışlar 16+ olmalı. Tereddüt ederse gol yersiniz.
+
+**S: Oyuncularım yoruluyor — Tiki-Taka düşük yoğunluklu değil miydi?**
+C: Pres yüksek yoğunlukludur. Topu döndürmek düşük yoğunlukludur. KONTRA-PRES kondisyonu tüketendir. Yorgunluk sorunsa: 1) Orta saha 3'lüsünü rotasyonla değiştirin — en çok mesafeyi onlar koşuyor, 2) Antrenman yoğunluğunu düşürün, 3) OM'leri 65-70. dakikada değiştirin.
+
+**S: Dünya çapında oyuncular olmadan kullanabilir miyim?**
+C: Evet, ama beklentileri ayarlayarak. "Kontrol Topla Oynama" varyasyonunu kullanın: daha düşük tempo, daha düşük pres, daha az riskli pas. %63 yerine %55-58 topla oynamanız olur, daha az fırsat ama daha az savunma hatası. Sistem yine çalışır — sadece daha düşük bir tavanda.
+
+**S: Kanatlar için sol/sağ ayaklı oyuncu şart mı?**
+C: IF rolleri için ters ayak tercih edilir ama şart değil. Sağ ayğı güçlü olan sağdaki IF(H) yine içeri keser — sadece daha az verimli. "Sağ Kanattan İçeri Keser" PPM'i hangi ayak olursa olsun bu davranışı çalıştırır. Elinizde sadece sağ ayaklı kanatlar varsa, zayıf olanı solda (IF-De, yaratıcı), güçlü golcüyü sağda (IF-H) oynatın.
+
+---
+
+## Hızlı Referans Kartı
+
+| Kategori | Ayar |
+|---|---|
+| **Oyun Anlayışı** | Pozitif |
+| **Savunma Çizgisi** | Çok Daha Yüksek |
+| **Pres Hattı** | Daha Yüksek |
+| **Pres** | Çok Daha Sık + Top Kaybında Pres AÇIK |
+| **Pas** | Çok Daha Kısa |
+| **Tempo** | Çok Daha Düşük |
+| **Genişlik** | Oldukça Dar |
+| **Ofsayt Tuzası** | AÇIK |
+| **Topu Ceza Sahasına Çalış** | AÇIK |
+| **Daha Az Top Sürme** | AÇIK |
+| **Savunmadan Oyun Kurma** | AÇIK |
+| **Kaleci Dağıtımı** | Yuvarlayarak → Stoperlere |
+
+**Kilit roller**: DLP(De) oyun kurucu, AP(De) yaratıcı, MEZ(De) geniş koşucu, CF(De) bağlantı
+
+**Kilit PPM'ler**: DLP → Tempoyu Dikte Eder | CF → Derine İner, Bir İki | IF(H) → Plase
+
+**En iyi karşı**: Teknik olarak üstün olduğunuz her diziliş  
+**En kötü karşı**: 5-4-1 alçak blok  
+
+Bu, FM26 için kesin 4-3-3 Tiki-Taka kaynağıdır. Ustalaşın ve oynadığınız her maçı kontrol edin.
+
+---
+
+## Bu Sistem İçin Wonderkid'ler
+
+Topla oynama oyununa uyumlu genç oyuncular mı arıyorsunuz — top sürerken rahat stoperler, pase dayanıklı orta sahacılar ve bağlantı forveti? [FM26 Wonderkids by Formation](/blog/fm26-wonderkids-by-formation) rehberimiz, 4-3-3 Tiki-Taka dahil kütüphanedeki her taktik için roller ve bütçe kademeleriyle en iyi genç oyuncuları listeler.
