@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Clock, Tag } from "lucide-react";
 import type { Blog } from "contentlayer/generated";
@@ -12,14 +15,14 @@ const categoryColors: Record<string, string> = {
   wonderkids: "bg-rose-500/10 text-rose-400 border-rose-500/20",
 };
 
-const categoryLabels: Record<string, string> = {
-  tactics: "Tactics",
-  formations: "Formations",
-  "player-roles": "Player Roles",
-  "set-pieces": "Set Pieces",
-  meta: "Meta",
-  beginner: "Beginner",
-  wonderkids: "Wonderkids",
+const catKeyMap: Record<string, string> = {
+  tactics: "tactics",
+  formations: "formations",
+  "player-roles": "playerRoles",
+  "set-pieces": "setPieces",
+  meta: "meta",
+  beginner: "beginner",
+  wonderkids: "wonderkids",
 };
 
 interface BlogListProps {
@@ -27,6 +30,7 @@ interface BlogListProps {
 }
 
 export function BlogList({ posts }: BlogListProps) {
+  const t = useTranslations();
   const sorted = [...posts].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
@@ -34,7 +38,7 @@ export function BlogList({ posts }: BlogListProps) {
   if (sorted.length === 0) {
     return (
       <div className="text-center py-20">
-        <p className="text-text-muted">No blog posts yet. Stay tuned!</p>
+        <p className="text-text-muted">{t("blog.noPosts")}</p>
       </div>
     );
   }
@@ -56,7 +60,7 @@ export function BlogList({ posts }: BlogListProps) {
                 categoryColors[post.category ?? ""] || "bg-surface text-text-muted border-surface-border"
               }`}
             >
-              {categoryLabels[post.category ?? ""] || post.category}
+              {post.category ? t(`blog.cat.${catKeyMap[post.category] ?? "tactics"}`) : ""}
             </span>
             {post.tags?.slice(0, 3).map((tag: string) => (
               <span
@@ -92,7 +96,7 @@ export function BlogList({ posts }: BlogListProps) {
             <div className="flex items-center gap-3 text-xs text-text-muted">
               <span className="flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5" />
-                {post.readTime} min read
+                {post.readTime} {t("common.minRead")}
               </span>
               <span>
                 {new Date(post.publishedAt).toLocaleDateString("en-US", {
@@ -103,7 +107,7 @@ export function BlogList({ posts }: BlogListProps) {
               </span>
             </div>
             <span className="inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-1.5 transition-all">
-              Read more
+              {t("common.readMore")}
               <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </div>

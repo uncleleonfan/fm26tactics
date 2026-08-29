@@ -113,7 +113,7 @@ export function Header() {
                 trackEvent("nav_mobile_menu");
               }}
               className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary"
-              aria-label="Toggle menu"
+              aria-label={t("toggleMenu")}
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>

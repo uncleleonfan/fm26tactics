@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { playerRoles } from "@/lib/tactics-data";
 import { trackEvent } from "@/lib/analytics";
 import type { PlayerDuty, PlayerRoleCategory } from "@/types/tactic";
@@ -11,12 +12,12 @@ interface RoleSelectorProps {
   onChangeDuty: (duty: PlayerDuty) => void;
 }
 
-const categories: { key: PlayerRoleCategory; label: string }[] = [
-  { key: "goalkeeper", label: "Goalkeeper" },
-  { key: "defender", label: "Defenders" },
-  { key: "midfielder", label: "Midfielders" },
-  { key: "forward", label: "Forwards" },
-];
+const categories: PlayerRoleCategory[] = ["goalkeeper", "defender", "midfielder", "forward"];
+
+// "Aerial Reach" -> "aerialReach" (i18n attr dictionary key)
+const attrKey = (a: string) =>
+  a.replace(/ (.)/g, (_m: string, c: string) => c.toUpperCase()).replace(/^./, (c: string) => c.toLowerCase());
+const dutyKey = (d: string) => `duty${d.charAt(0).toUpperCase()}${d.slice(1)}`;
 
 export function RoleSelector({
   selectedRoleId,
@@ -24,11 +25,13 @@ export function RoleSelector({
   onChangeRole,
   onChangeDuty,
 }: RoleSelectorProps) {
-  const selectedRole = playerRoles.find((r) => r.id === selectedRoleId);
+  const b = useTranslations("builder");
+  const r = useTranslations("roles");
+  const selectedRole = playerRoles.find((role) => role.id === selectedRoleId);
 
   return (
     <div>
-      <h3 className="text-sm font-semibold text-text-primary mb-3">Player Role</h3>
+      <h3 className="text-sm font-semibold text-text-primary mb-3">{b("playerRole")}</h3>
 
       {/* Role Select */}
       <select
@@ -40,12 +43,12 @@ export function RoleSelector({
         className="w-full bg-surface border border-surface-border text-text-primary text-sm rounded-lg px-3 py-2.5 mb-3 outline-none focus:border-primary/50 transition-colors"
       >
         {categories.map((cat) => (
-          <optgroup key={cat.key} label={cat.label}>
+          <optgroup key={cat} label={r(cat === "goalkeeper" ? "goalkeepers" : `${cat}s`)}>
             {playerRoles
-              .filter((r) => r.category === cat.key)
-              .map((r) => (
-                <option key={r.id} value={r.id}>
-                  {r.name}
+              .filter((role) => role.category === cat)
+              .map((role) => (
+                <option key={role.id} value={role.id}>
+                  {r.has(`roleName.${role.id}`) ? r(`roleName.${role.id}`) : role.name}
                 </option>
               ))}
           </optgroup>
@@ -55,7 +58,7 @@ export function RoleSelector({
       {/* Duty Select */}
       {selectedRole && (
         <div>
-          <label className="text-xs text-text-muted mb-1.5 block">Duty</label>
+          <label className="text-xs text-text-muted mb-1.5 block">{r("duty")}</label>
           <div className="flex gap-2">
             {(["defend", "support", "attack"] as PlayerDuty[]).map((duty) => {
               const available = selectedRole.availableDuties.includes(duty);
@@ -79,7 +82,7 @@ export function RoleSelector({
                       : "bg-surface/50 border-surface-border text-text-muted/50 cursor-not-allowed"
                   }`}
                 >
-                  {duty.charAt(0).toUpperCase() + duty.slice(1)}
+                  {r(dutyKey(duty))}
                 </button>
               );
             })}
@@ -91,21 +94,24 @@ export function RoleSelector({
       {selectedRole && (
         <div className="mt-4 glass-card p-4">
           <p className="text-xs text-text-secondary leading-relaxed mb-3">
-            {selectedRole.description}
+            {r.has(`roleDesc.${selectedRole.id}`) ? r(`roleDesc.${selectedRole.id}`) : selectedRole.description}
           </p>
           <div>
             <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider mb-1.5">
-              Key Attributes
+              {r("attributes")}
             </p>
             <div className="flex flex-wrap gap-1">
-              {selectedRole.keyAttributes.slice(0, 6).map((attr) => (
-                <span
-                  key={attr}
-                  className="text-[10px] px-2 py-0.5 rounded bg-primary/5 border border-primary/10 text-primary"
-                >
-                  {attr}
-                </span>
-              ))}
+              {selectedRole.keyAttributes.slice(0, 6).map((attr) => {
+                const k = `attr.${attrKey(attr)}`;
+                return (
+                  <span
+                    key={attr}
+                    className="text-[10px] px-2 py-0.5 rounded bg-primary/5 border border-primary/10 text-primary"
+                  >
+                    {r.has(k) ? r(k) : attr}
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>

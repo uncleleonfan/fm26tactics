@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
@@ -16,14 +19,14 @@ const categoryColors: Record<string, string> = {
   wonderkids: "bg-rose-500/10 text-rose-400 border-rose-500/20",
 };
 
-const categoryLabels: Record<string, string> = {
-  tactics: "Tactics",
-  formations: "Formations",
-  "player-roles": "Player Roles",
-  "set-pieces": "Set Pieces",
-  meta: "Meta",
-  beginner: "Beginner",
-  wonderkids: "Wonderkids",
+const catKeyMap: Record<string, string> = {
+  tactics: "tactics",
+  formations: "formations",
+  "player-roles": "playerRoles",
+  "set-pieces": "setPieces",
+  meta: "meta",
+  beginner: "beginner",
+  wonderkids: "wonderkids",
 };
 
 const mdxComponents = {
@@ -79,6 +82,7 @@ interface BlogDetailProps {
 }
 
 export function BlogDetail({ post }: BlogDetailProps) {
+  const t = useTranslations();
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
@@ -87,8 +91,8 @@ export function BlogDetail({ post }: BlogDetailProps) {
       <Breadcrumb
         className="mb-8"
         items={[
-          { label: "Home", href: "/" },
-          { label: "Blog", href: "/blog" },
+          { label: t("common.home"), href: "/" },
+          { label: t("nav.blog"), href: "/blog" },
           { label: post.title },
         ]}
       />
@@ -100,7 +104,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
             categoryColors[post.category ?? ""] || "bg-surface text-text-muted border-surface-border"
           }`}
         >
-          {categoryLabels[post.category ?? ""] || post.category}
+          {post.category ? t(`blog.cat.${catKeyMap[post.category] ?? "tactics"}`) : ""}
         </span>
         {post.tags?.slice(0, 3).map((tag: string) => (
           <span key={tag} className="text-xs text-text-muted flex items-center gap-1">
@@ -124,7 +128,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
       <div className="flex items-center gap-4 pb-8 mb-8 border-b border-[#1C2436]/50">
         <span className="flex items-center gap-1.5 text-sm text-text-muted">
           <Clock className="w-4 h-4" />
-          {post.readTime} min read
+          {post.readTime} {t("common.minRead")}
         </span>
         <span className="text-sm text-text-muted">
           {new Date(post.publishedAt).toLocaleDateString("en-US", {
@@ -134,7 +138,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
           })}
         </span>
         {post.author && (
-          <span className="text-sm text-text-muted">by {post.author}</span>
+          <span className="text-sm text-text-muted">{t("common.by")} {post.author}</span>
         )}
       </div>
 
@@ -147,7 +151,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
       {(post.relatedTactic || post.relatedGuide) && (
         <div className="mt-12 pt-8 border-t border-[#1C2436]/50">
           <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">
-            Continue Reading
+            {t("common.continueReading")}
           </h3>
           <div className="space-y-3">
             {post.relatedTactic && (
@@ -156,10 +160,10 @@ export function BlogDetail({ post }: BlogDetailProps) {
                 className="block glass-card p-4 group hover:border-primary/30 transition-all"
               >
                 <span className="text-sm font-medium text-primary group-hover:text-primary/80">
-                  📋 Tactical Guide →
+                  {t("common.tacticalGuide")} →
                 </span>
                 <span className="ml-2 text-text-secondary text-sm">
-                  View the full {post.relatedTactic.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} breakdown
+                  {t("blog.viewTacticBreakdown", { name: post.relatedTactic.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) })}
                 </span>
               </Link>
             )}
@@ -169,9 +173,9 @@ export function BlogDetail({ post }: BlogDetailProps) {
                 className="block glass-card p-4 group hover:border-primary/30 transition-all"
               >
                 <span className="text-sm font-medium text-primary group-hover:text-primary/80">
-                  📖 Related Guide →
+                  {t("common.relatedGuide")} →
                 </span>
-                <span className="ml-2 text-text-secondary text-sm">Read the companion strategy guide</span>
+                <span className="ml-2 text-text-secondary text-sm">{t("common.readCompanionGuide")}</span>
               </Link>
             )}
           </div>
@@ -187,16 +191,14 @@ export function BlogDetail({ post }: BlogDetailProps) {
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1">
               <h3 className="text-lg font-bold text-text-primary mb-1">
-                Build Your Own FM26 Tactic
+                {t("blog.builderCtaTitle")}
               </h3>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Want to create a custom system? Use our free FM26 Tactic Builder —
-                drag players onto the pitch, assign any player role, and export
-                your formation for Football Manager 2026.
+                {t("blog.builderCtaText")}
               </p>
             </div>
             <span className="inline-flex shrink-0 items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-background-primary text-sm font-semibold hover:shadow-[0_0_30px_rgba(0,230,118,0.3)] transition-all duration-300">
-              Open Tactic Builder
+              {t("blog.builderCtaButton")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </div>
@@ -210,7 +212,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
           className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to all articles
+          {t("blog.backToBlog")}
         </Link>
       </div>
     </article>

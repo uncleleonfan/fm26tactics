@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { mentalityDescriptions } from "@/lib/tactics-data";
 import { trackEvent } from "@/lib/analytics";
@@ -62,15 +63,16 @@ export function InstructionPanel({
   onSetMentality,
   onToggleInstruction,
 }: InstructionPanelProps) {
+  const b = useTranslations("builder");
   const [activeTab, setActiveTab] = useState<
     "mentality" | "inPossession" | "inTransition" | "outOfPossession"
   >("mentality");
 
   const tabs = [
-    { key: "mentality" as const, label: "Mentality" },
-    { key: "inPossession" as const, label: "In Possession" },
-    { key: "inTransition" as const, label: "Transition" },
-    { key: "outOfPossession" as const, label: "Out of Possession" },
+    { key: "mentality" as const, label: b("mentality") },
+    { key: "inPossession" as const, label: b("inPossession") },
+    { key: "inTransition" as const, label: b("inTransition") },
+    { key: "outOfPossession" as const, label: b("outOfPossession") },
   ];
 
   return (
@@ -99,7 +101,7 @@ export function InstructionPanel({
       {activeTab === "mentality" && (
         <div className="space-y-2">
           <p className="text-xs text-text-muted mb-3">
-            Set your team's overall approach to the game
+            {b("mentalityHint")}
           </p>
           {mentalities.map((m) => {
             const isSelected = instructions.mentality === m;

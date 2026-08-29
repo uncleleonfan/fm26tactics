@@ -28,8 +28,7 @@ export default async function ContactPage({ params }: { params: { locale: string
         </div>
 
         <p className="text-text-secondary text-sm leading-relaxed mb-8">
-          Have a tactic to share? Found a bug? Just want to say hi? Reach out
-          through any of the channels below.
+          {ct("intro")}
         </p>
 
         <div className="space-y-4">
@@ -49,19 +48,19 @@ export default async function ContactPage({ params }: { params: { locale: string
             </div>
             <div>
               <h3 className="text-sm font-semibold text-text-primary">{ct("github")}</h3>
-              <p className="text-xs text-text-secondary">Open an issue or submit a pull request</p>
+              <p className="text-xs text-text-secondary">{ct("githubDesc")}</p>
             </div>
           </a>
 
           <div className="glass-panel p-5">
             <h3 className="text-sm font-semibold text-text-primary mb-2">
-              What to include when contacting us
+              {ct("includeTitle")}
             </h3>
             <ul className="text-text-secondary text-xs space-y-1.5">
-              <li className="list-disc ml-4 marker:text-text-muted">Tactic-related: formation, roles, instructions, and what&apos;s not working</li>
-              <li className="list-disc ml-4 marker:text-text-muted">Bug reports: browser, device, steps to reproduce</li>
-              <li className="list-disc ml-4 marker:text-text-muted">Guide suggestions: topic you&apos;d like covered</li>
-              <li className="list-disc ml-4 marker:text-text-muted">Community data: links to proven tactics or test results</li>
+              <li className="list-disc ml-4 marker:text-text-muted">{ct("includeTactic")}</li>
+              <li className="list-disc ml-4 marker:text-text-muted">{ct("includeBug")}</li>
+              <li className="list-disc ml-4 marker:text-text-muted">{ct("includeGuide")}</li>
+              <li className="list-disc ml-4 marker:text-text-muted">{ct("includeData")}</li>
             </ul>
           </div>
         </div>

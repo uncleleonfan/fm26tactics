@@ -8,7 +8,8 @@
     "meta": "Meta",
     "tacticBuilder": "Taktik Oluşturucu",
     "search": "Ara",
-    "toggleMenu": "Menüyü aç/kapat"
+    "toggleMenu": "Menüyü aç/kapat",
+    "switchLanguage": "Dili değiştir"
   },
   "common": {
     "home": "Ana Sayfa",
@@ -142,7 +143,13 @@
     "tacticsAnalyzed": "Analiz Edilen Taktik",
     "tacticsDesc": "Topluluk tarafından kanıtlanmış dizilişlerin derin incelemeleri",
     "guides": "Rehber",
-    "guidesDesc": "FM26'da seviye atlamak için derinlemesine rehberler"
+    "guidesDesc": "FM26'da seviye atlamak için derinlemesine rehberler",
+    "noResultsFor": "“{query}” için sonuç bulunamadı",
+    "search": {
+      "navigate": "Gezin",
+      "open": "Aç",
+      "close": "Kapat"
+    }
   },
   "blog": {
     "title": "FM26 Tactics Blog",
@@ -151,6 +158,16 @@
     "ctaText": "Yeni rehberler, meta güncellemeleri ve taktik analizleri düzenli olarak yayımlanır.",
     "browseAll": "Tüm Taktiklere Göz At",
     "noPosts": "Henüz blog yazısı yok. Bizi takip edin!",
+    "viewTacticBreakdown": "{name} analizinin tamamını gör",
+    "cat": {
+      "tactics": "Taktikler",
+      "formations": "Dizilişler",
+      "playerRoles": "Oyuncu Rolleri",
+      "setPieces": "Duran Toplar",
+      "meta": "Meta",
+      "beginner": "Yeni Başlayanlar",
+      "wonderkids": "Genç Yetenekler"
+    },
     "backToBlog": "Tüm yazılara dön",
     "builderCtaTitle": "Kendi FM26 Taktiğini Kur",
     "builderCtaText": "Özel bir sistem mi istiyorsunuz? Ücretsiz FM26 Taktik Oluşturucumuzu kullanın — oyuncuları sahaya sürükleyin, istediğiniz rolü atayın ve Football Manager 2026 için dizilişinizi dışa aktarın.",
@@ -223,6 +240,7 @@
     "title": "FM26 Rehberleri",
     "description": "Antrenman, duran toplar, kadro yönetimi ve maç hazırlığını kapsayan kapsamlı rehberler — FM26'da ustalaşmak için ihtiyacınız olan her şey.",
     "backToGuides": "Rehberlere Dön",
+    "faqTitle": "Sıkça Sorulan Sorular",
     "comingSoon": "Bu kategori için rehberler yakında.",
     "training": "Antrenman Rehberleri",
     "setPieces": "Duran Toplar",
@@ -233,7 +251,21 @@
     "tactics": "Taktikler & Sistemler",
     "read": "Rehberi oku",
     "guidesCount_one": "rehber",
-    "guidesCount_other": "rehber"
+    "guidesCount_other": "rehber",
+    "cat": {
+      "training": "Antrenman",
+      "setPieces": "Dura Top",
+      "scouting": "Gözlemcilik",
+      "teamManagement": "Takım Yönetimi",
+      "matchDay": "Maç Günü",
+      "youthDevelopment": "Altyapı Gelişimi",
+      "tactics": "Taktik"
+    },
+    "diff": {
+      "beginner": "Başlangıç",
+      "intermediate": "Orta",
+      "advanced": "İleri"
+    }
   },
   "roles": {
     "title": "Oyuncu Rolleri Ansiklopedisi",
@@ -477,7 +509,63 @@
     "share": "Taktiği Paylaş",
     "export": "Dışa Aktar & İndir",
     "exportNudge": "Kurulumu bitirdiniz mi? Taktiğinizi görsel, metin veya yedek olarak kaydetmek için Dışa Aktar'a basın.",
-    "configNudge": "Dolu bir on bir henüz taktik değildir — sisteminiz gerçekten çalışsın diye oyuncu rollerini ve takım mentalitesini ayarlayın."
+    "configNudge": "Dolu bir on bir henüz taktik değildir — sisteminiz gerçekten çalışsın diye oyuncu rollerini ve takım mentalitesini ayarlayın.",
+    "playerRole": "Oyuncu Rolü",
+    "playerRoleNumber": "Oyuncu Rolü — #{num}",
+    "selectPlayer": "Bir oyuncu seç",
+    "tapPlayerHint": "Rol ve görevini ayarlamak için sahada bir oyuncuya dokun",
+    "sharedLoaded": "Paylaşılan taktik yüklendi — düzenle ve kendi versiyonunu dışa aktar",
+    "dismiss": "Kapat",
+    "openSettings": "Ayarları aç",
+    "close": "Kapat",
+    "metaTemplates": "Meta Şablonları",
+    "oneClickApply": "Tek tıkla uygula",
+    "chooseFormation": "Diziliş Seç",
+    "formationsCount": "{count} diziliş",
+    "inPossession": "Topla Oynarken",
+    "inTransition": "Geçiş",
+    "outOfPossession": "Topsuz Oynarken",
+    "mentalityHint": "Takımının maçtaki genel yaklaşımını belirle",
+    "exportTitle": "Taktiği Dışa Aktar",
+    "exportNote": "Not: SI, .fmf formatını üçüncü taraf araçlara sunmuyor — bu taktiği oyunda ~5 dakikada kurmak için .txt taktik kartını kullan.",
+    "exportFailed": "Dışa aktarma başarısız — lütfen tekrar deneyin",
+    "images": "Görseller",
+    "files": "Dosyalar",
+    "downloadSvg": "SVG olarak indir",
+    "downloadSvgDesc": "Taktik dizilişini vektör görsel olarak kaydet",
+    "downloadPng": "PNG olarak indir",
+    "downloadPngDesc": "Discord ve forumlar için hazır, paylaşılabilir görsel",
+    "downloadTxt": ".txt indir",
+    "downloadTxtDesc": "Adım adım kopyalama rehberi — oyunda 5 dakikada kur",
+    "downloadJson": ".json indir",
+    "downloadJsonDesc": "Yedekle / paylaş ve tam taktiği yeniden içe aktar",
+    "importJson": ".json içe aktar",
+    "importLoaded": "Yüklendi!",
+    "importInvalid": "Geçersiz dosya",
+    "importJsonDesc": "Kaydedilmiş bir .json dosyasından taktiği geri yükle",
+    "shareTitle": "Paylaş",
+    "copyShareLink": "Paylaşım Linkini Kopyala",
+    "shareCopied": "Link Kopyalandı!",
+    "copyShareLinkDesc": "Linke sahip olan herkes bu taktiğin aynısını açar",
+    "copyAsText": "Metin olarak kopyala",
+    "copied": "Kopyalandı!",
+    "copyTextDesc": "Tüm taktik kartını panoya kopyala",
+    "cancel": "İptal",
+    "txtHeader": "FM26 TAKTİK — {formation}",
+    "txtGenerated": "FM26 Tactics Builder ile oluşturuldu — www.fm26tactics.com",
+    "txtFormation": "DİZİLİŞ",
+    "txtLineup": "KADRO & ROLLER",
+    "txtTeamInstructions": "TAKIM TALİMATLARI",
+    "txtMentalityLabel": "Mentalite",
+    "txtInPossessionLabel": "Topla Oynarken",
+    "txtInTransitionLabel": "Geçiş",
+    "txtOutOfPossessionLabel": "Topsuz Oynarken",
+    "txtNone": "Yok",
+    "txtHowTo": "FM26'DA NASIL UYGULANIR",
+    "txtStep1": "1. FM26'yı aç → Taktik → Yeni Taktik ve {formation} dizilişini seç.",
+    "txtStep2": "2. Yukarıda listelenen rol ve görevi her oyuncuya ata (sıra, sahada arkadan öne doğru).",
+    "txtStep3": "3. Takım mentalitesini ayarla ve yukarıdaki takım talimatlarını işaretle.",
+    "txtStep4": "4. Oyun içi sonucunu www.fm26tactics.com'da paylaş"
   },
   "meta": {
     "pageTitle": "FM26 Meta Analizi",
@@ -536,6 +624,8 @@
   "about": {
     "title": "FM26 Tactics Hakkında",
     "mission": "Misyonumuz",
+    "intro": "FM26 Tactics, taktik kurma sanatında ustalaşmak isteyen Football Manager 2026 oyuncuları için nihai kaynaktır. Derinlemesine rehberler, rol analizleri ve etkileşimli bir taktik oluşturucu sunuyoruz — hepsi sanal teknik direktörlük koltuğuna hükmetmeniz için.",
+    "missionText": "Football Manager karmaşıktır ve taktik sezonunuzu kurtarabilir ya da batırabilir. Misyonumuz FM26'nın taktik sistemini sadeleştirmek ve her oyuncuya başarılı, tutarlı oyun planları kurma araçlarını vermektir.",
     "backToHome": "Ana Sayfaya Dön"
   },
   "contact": {
@@ -543,13 +633,24 @@
     "subtitle": "Sizden haber almak isteriz",
     "email": "E-posta",
     "github": "GitHub",
+    "githubDesc": "Bir sorun bildirin veya pull request gönderin",
+    "intro": "Paylaşacak bir taktiğiniz mi var? Hata mı buldunuz? Sadece selam mı demek istersiniz? Aşağıdaki kanallardan bize ulaşın.",
+    "includeTitle": "Bize ulaşırken nelere yer vermeli",
+    "includeTactic": "Taktikle ilgili: diziliş, roller, talimatlar ve çalışmayan kısım",
+    "includeBug": "Hata bildirimleri: tarayıcı, cihaz, hatayı yeniden oluşturma adımları",
+    "includeGuide": "Rehber önerileri: ele alınmasını istediğiniz konu",
+    "includeData": "Topluluk verileri: kanıtlanmış taktik veya test sonuçlarına giden linkler",
     "backToHome": "Ana Sayfaya Dön"
   },
   "privacy": {
-    "title": "Gizlilik Politikası"
+    "title": "Gizlilik Politikası",
+    "titleA": "Gizlilik",
+    "titleB": "Politikası"
   },
   "terms": {
-    "title": "Kullanım Şartları"
+    "title": "Kullanım Şartları",
+    "titleA": "Kullanım",
+    "titleB": "Şartları"
   },
   "error": {
     "notFound": "Sayfa Bulunamadı",

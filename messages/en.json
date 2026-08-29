@@ -8,7 +8,8 @@
     "meta": "Meta",
     "tacticBuilder": "Tactic Builder",
     "search": "Search",
-    "toggleMenu": "Toggle menu"
+    "toggleMenu": "Toggle menu",
+    "switchLanguage": "Switch language"
   },
   "common": {
     "home": "Home",
@@ -142,7 +143,13 @@
     "tacticsAnalyzed": "Tactics Analyzed",
     "tacticsDesc": "Deep breakdowns of community-proven formations",
     "guides": "Guides",
-    "guidesDesc": "In-depth tutorials to level up in FM26"
+    "guidesDesc": "In-depth tutorials to level up in FM26",
+    "noResultsFor": "No results found for “{query}”",
+    "search": {
+      "navigate": "Navigate",
+      "open": "Open",
+      "close": "Close"
+    }
   },
   "blog": {
     "title": "FM26 Tactics Blog",
@@ -151,6 +158,16 @@
     "ctaText": "New guides, meta updates, and tactical analysis delivered regularly.",
     "browseAll": "Browse All Tactics",
     "noPosts": "No blog posts yet. Stay tuned!",
+    "viewTacticBreakdown": "View the full {name} breakdown",
+    "cat": {
+      "tactics": "Tactics",
+      "formations": "Formations",
+      "playerRoles": "Player Roles",
+      "setPieces": "Set Pieces",
+      "meta": "Meta",
+      "beginner": "Beginner",
+      "wonderkids": "Young Talents"
+    },
     "backToBlog": "Back to all articles",
     "builderCtaTitle": "Build Your Own FM26 Tactic",
     "builderCtaText": "Want to create a custom system? Use our free FM26 Tactic Builder — drag players onto the pitch, assign any player role, and export your formation for Football Manager 2026.",
@@ -223,6 +240,7 @@
     "title": "FM26 Guides",
     "description": "Comprehensive guides covering training, set pieces, squad management, and match preparation — everything you need to master FM26.",
     "backToGuides": "Back to Guides",
+    "faqTitle": "Frequently Asked Questions",
     "comingSoon": "Guides for this category are coming soon.",
     "training": "Training Guides",
     "setPieces": "Set Pieces",
@@ -233,7 +251,21 @@
     "tactics": "Tactics & Systems",
     "read": "Read the guide",
     "guidesCount_one": "guide",
-    "guidesCount_other": "guides"
+    "guidesCount_other": "guides",
+    "cat": {
+      "training": "Training",
+      "setPieces": "Set Pieces",
+      "scouting": "Scouting",
+      "teamManagement": "Team Management",
+      "matchDay": "Match Day",
+      "youthDevelopment": "Youth Development",
+      "tactics": "Tactics"
+    },
+    "diff": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
   },
   "roles": {
     "title": "Player Roles Encyclopedia",
@@ -477,7 +509,63 @@
     "share": "Share Tactic",
     "export": "Export & Download",
     "exportNudge": "Done building? Hit Export to save your tactic as image, text or backup.",
-    "configNudge": "A full XI isn't a tactic yet — set player roles and team mentality to make your setup actually work."
+    "configNudge": "A full XI isn't a tactic yet — set player roles and team mentality to make your setup actually work.",
+    "playerRole": "Player Role",
+    "playerRoleNumber": "Player Role — #{num}",
+    "selectPlayer": "Select a player",
+    "tapPlayerHint": "Tap a player on the pitch to configure their role and duty",
+    "sharedLoaded": "Shared tactic loaded — tweak it and export your own version",
+    "dismiss": "Dismiss",
+    "openSettings": "Open settings",
+    "close": "Close",
+    "metaTemplates": "Meta Templates",
+    "oneClickApply": "One-click apply",
+    "chooseFormation": "Choose Formation",
+    "formationsCount": "{count} formations",
+    "inPossession": "In Possession",
+    "inTransition": "Transition",
+    "outOfPossession": "Out of Possession",
+    "mentalityHint": "Set your team's overall approach to the game",
+    "exportTitle": "Export Tactic",
+    "exportNote": "Note: SI doesn't provide the .fmf format to third-party tools — use the .txt tactic card to replicate this in-game in ~5 min.",
+    "exportFailed": "Export failed — please try again",
+    "images": "Images",
+    "files": "Files",
+    "downloadSvg": "Download as SVG",
+    "downloadSvgDesc": "Save tactic formation as vector image",
+    "downloadPng": "Download as PNG",
+    "downloadPngDesc": "Shareable image, ready for Discord & forums",
+    "downloadTxt": "Download .txt",
+    "downloadTxtDesc": "Step-by-step replica guide — set up in-game in 5 min",
+    "downloadJson": "Download .json",
+    "downloadJsonDesc": "Backup / share & re-import the exact tactic",
+    "importJson": "Import .json",
+    "importLoaded": "Loaded!",
+    "importInvalid": "Invalid file",
+    "importJsonDesc": "Restore a tactic from a saved .json file",
+    "shareTitle": "Share",
+    "copyShareLink": "Copy Share Link",
+    "shareCopied": "Link Copied!",
+    "copyShareLinkDesc": "Anyone with the link opens this exact tactic",
+    "copyAsText": "Copy as Text",
+    "copied": "Copied!",
+    "copyTextDesc": "Copy the full tactic card to clipboard",
+    "cancel": "Cancel",
+    "txtHeader": "FM26 TACTIC — {formation}",
+    "txtGenerated": "Generated with FM26 Tactics Builder — www.fm26tactics.com",
+    "txtFormation": "FORMATION",
+    "txtLineup": "LINEUP & ROLES",
+    "txtTeamInstructions": "TEAM INSTRUCTIONS",
+    "txtMentalityLabel": "Mentality",
+    "txtInPossessionLabel": "In Possession",
+    "txtInTransitionLabel": "In Transition",
+    "txtOutOfPossessionLabel": "Out of Possession",
+    "txtNone": "None",
+    "txtHowTo": "HOW TO REPLICATE IN FM26",
+    "txtStep1": "1. Open FM26 → Tactics → New Tactic and pick the {formation} formation.",
+    "txtStep2": "2. Assign each player the role & duty listed above (order matches the pitch from the back).",
+    "txtStep3": "3. Set team mentality and tick the team instructions above.",
+    "txtStep4": "4. Share your in-game result back at www.fm26tactics.com"
   },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",
@@ -536,6 +624,8 @@
   "about": {
     "title": "About FM26 Tactics",
     "mission": "Our Mission",
+    "intro": "FM26 Tactics is the ultimate resource for Football Manager 2026 players looking to master the art of tactical setup. We provide in-depth guides, role analysis, and an interactive tactic builder — all designed to help you dominate the virtual dugout.",
+    "missionText": "Football Manager is complex, and tactics can make or break your season. Our mission is to demystify FM26's tactical system and give every player the tools to build successful, coherent game plans.",
     "backToHome": "Back to Home"
   },
   "contact": {
@@ -543,13 +633,24 @@
     "subtitle": "We'd love to hear from you",
     "email": "Email",
     "github": "GitHub",
+    "githubDesc": "Open an issue or submit a pull request",
+    "intro": "Have a tactic to share? Found a bug? Just want to say hi? Reach out through any of the channels below.",
+    "includeTitle": "What to include when contacting us",
+    "includeTactic": "Tactic-related: formation, roles, instructions, and what's not working",
+    "includeBug": "Bug reports: browser, device, steps to reproduce",
+    "includeGuide": "Guide suggestions: topic you'd like covered",
+    "includeData": "Community data: links to proven tactics or test results",
     "backToHome": "Back to Home"
   },
   "privacy": {
-    "title": "Privacy Policy"
+    "title": "Privacy Policy",
+    "titleA": "Privacy",
+    "titleB": "Policy"
   },
   "terms": {
-    "title": "Terms of Service"
+    "title": "Terms of Service",
+    "titleA": "Terms of",
+    "titleB": "Service"
   },
   "error": {
     "notFound": "Page Not Found",

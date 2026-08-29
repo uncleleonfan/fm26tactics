@@ -119,7 +119,7 @@ export default function BuilderPage() {
               : "text-text-muted hover:text-text-secondary"
           }`}
         >
-          Player Role
+          {t("playerRole")}
         </button>
         <button
           onClick={() => {
@@ -145,7 +145,7 @@ export default function BuilderPage() {
               : "text-text-muted hover:text-text-secondary"
           }`}
         >
-          Formation
+          {t("formation")}
         </button>
       </div>
 
@@ -161,9 +161,9 @@ export default function BuilderPage() {
           ) : (
             <div className="text-center py-8">
               <Info className="w-8 h-8 text-text-muted mx-auto mb-3" />
-              <p className="text-sm text-text-secondary mb-1">Select a player</p>
+              <p className="text-sm text-text-secondary mb-1">{t("selectPlayer")}</p>
               <p className="text-xs text-text-muted">
-                Tap a player on the pitch to configure their role and duty
+                {t("tapPlayerHint")}
               </p>
             </div>
           )
@@ -198,7 +198,7 @@ export default function BuilderPage() {
             </Link>
             <span className="w-px h-5 bg-[#1C2436] hidden sm:block" />
             <h1 className="text-sm font-semibold hidden sm:block truncate">
-              <span className="gradient-text">Tactic Builder</span>
+              <span className="gradient-text">{t("pageTitle")}</span>
             </h1>
           </div>
 
@@ -212,7 +212,7 @@ export default function BuilderPage() {
           >
             <LayoutGrid className="w-4 h-4 text-text-muted" />
             <span className="hidden sm:inline">{currentFormationLabel}</span>
-            <span className="sm:hidden">Formation</span>
+            <span className="sm:hidden">{t("formation")}</span>
           </button>
 
           <div className="flex items-center gap-1 sm:gap-2">
@@ -245,7 +245,7 @@ export default function BuilderPage() {
         <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
           <Check className="w-3.5 h-3.5 text-primary shrink-0" />
           <span className="text-xs text-text-primary">
-            Shared tactic loaded — tweak it and export your own version
+            {t("sharedLoaded")}
           </span>
         </div>
       )}
@@ -266,7 +266,7 @@ export default function BuilderPage() {
           <button
             onClick={dismissNudge}
             className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
-            aria-label="Dismiss"
+            aria-label={t("dismiss")}
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -292,7 +292,7 @@ export default function BuilderPage() {
           <button
             onClick={dismissConfigNudge}
             className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
-            aria-label="Dismiss"
+            aria-label={t("dismiss")}
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -320,7 +320,7 @@ export default function BuilderPage() {
           trackEvent("builder_open_sidebar");
         }}
         className="lg:hidden fixed bottom-4 right-4 z-30 w-12 h-12 rounded-full bg-primary text-background-primary shadow-lg flex items-center justify-center hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] transition-all active:scale-95"
-        aria-label="Open settings"
+        aria-label={t("openSettings")}
       >
         <Settings className="w-5 h-5" />
       </button>
@@ -333,16 +333,16 @@ export default function BuilderPage() {
               <h3 className="text-sm font-semibold text-text-primary">
                 {sidebarTab === "role"
                   ? selectedPlayer
-                    ? `Player Role — #${state.players.indexOf(selectedPlayer) + 1}`
-                    : "Player Role"
+                    ? t("playerRoleNumber", { num: state.players.indexOf(selectedPlayer) + 1 })
+                    : t("playerRole")
                   : sidebarTab === "formation"
-                    ? "Formation"
+                    ? t("formation")
                     : t("instructions")}
               </h3>
               <button
                 onClick={() => setShowMobileSidebar(false)}
                 className="p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors"
-                aria-label="Close"
+                aria-label={t("close")}
               >
                 <X className="w-5 h-5" />
               </button>

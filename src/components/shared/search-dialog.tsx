@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import { Search, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,8 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
+  const t = useTranslations("common");
+  const s = useTranslations("stats");
 
   const handleSearch = useCallback((q: string) => {
     // Simulated search results - will be replaced with real FlexSearch
@@ -131,7 +134,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
             <Search className="w-4 h-4 text-text-muted shrink-0" />
             <input
               type="text"
-              placeholder="Search tactics, roles, guides..."
+              placeholder={t("searchPlaceholder")}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="flex-1 bg-transparent text-text-primary text-sm placeholder:text-text-muted outline-none"
@@ -149,7 +152,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           <div className="max-h-80 overflow-y-auto">
             {results.length === 0 && query ? (
               <div className="p-8 text-center">
-                <p className="text-text-secondary text-sm">No results found for &ldquo;{query}&rdquo;</p>
+                <p className="text-text-secondary text-sm">{s("noResultsFor", { query })}</p>
               </div>
             ) : (
               results.map((result, i) => (
@@ -185,13 +188,13 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           {/* Footer */}
           <div className="px-4 py-2 border-t border-[#1C2436]/50 flex items-center gap-4 text-xs text-text-muted">
             <span className="flex items-center gap-1">
-              <kbd className="px-1 rounded bg-surface border border-surface-border">↑↓</kbd> Navigate
+              <kbd className="px-1 rounded bg-surface border border-surface-border">↑↓</kbd> {s("search.navigate")}
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="px-1 rounded bg-surface border border-surface-border">↵</kbd> Open
+              <kbd className="px-1 rounded bg-surface border border-surface-border">↵</kbd> {s("search.open")}
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="px-1 rounded bg-surface border border-surface-border">esc</kbd> Close
+              <kbd className="px-1 rounded bg-surface border border-surface-border">esc</kbd> {s("search.close")}
             </span>
           </div>
         </div>

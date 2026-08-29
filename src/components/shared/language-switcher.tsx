@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useTransition, useState, useRef, useEffect } from "react";
 import { routing } from "@/i18n/routing";
@@ -14,6 +14,7 @@ const localeLabels: Record<string, string> = {
 };
 
 export function LanguageSwitcher() {
+  const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -47,7 +48,7 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 px-2 py-1.5 text-sm text-text-secondary hover:text-text-primary rounded-lg hover:bg-background-tertiary transition-colors"
-        aria-label="Switch language"
+        aria-label={t("switchLanguage")}
       >
         <span className="text-xs">{localeLabels[locale] || locale.toUpperCase()}</span>
         <svg

@@ -38,7 +38,8 @@ const categoryKeys: Record<string, string> = {
 };
 
 // "Aerial Reach" -> "aerialReach" (i18n attr dictionary key)
-const attrKey = (a: string) => a.replace(/ (.)/g, (_m: string, c: string) => c.toUpperCase());
+const attrKey = (a: string) =>
+  a.replace(/ (.)/g, (_m: string, c: string) => c.toUpperCase()).replace(/^./, (c: string) => c.toLowerCase());
 const dutyKey = (d: string) => `duty${d.charAt(0).toUpperCase()}${d.slice(1)}`;
 
 const tierColors: Record<string, string> = {

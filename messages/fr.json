@@ -8,7 +8,8 @@
     "meta": "Méta",
     "tacticBuilder": "Créateur de Tactique",
     "search": "Rechercher",
-    "toggleMenu": "Menu"
+    "toggleMenu": "Menu",
+    "switchLanguage": "Changer de langue"
   },
   "common": {
     "home": "Accueil",
@@ -142,7 +143,13 @@
     "tacticsAnalyzed": "Tactiques Analysées",
     "tacticsDesc": "Analyses approfondies de formations testées par la communauté",
     "guides": "Guides",
-    "guidesDesc": "Tutoriels approfondis pour progresser dans FM26"
+    "guidesDesc": "Tutoriels approfondis pour progresser dans FM26",
+    "noResultsFor": "Aucun résultat pour « {query} »",
+    "search": {
+      "navigate": "Naviguer",
+      "open": "Ouvrir",
+      "close": "Fermer"
+    }
   },
   "blog": {
     "title": "Blog Tactiques FM26",
@@ -151,6 +158,16 @@
     "ctaText": "Nouveaux guides, mises à jour méta et analyses tactiques publiés régulièrement.",
     "browseAll": "Parcourir Toutes les Tactiques",
     "noPosts": "Pas encore d'articles. Restez à l'écoute !",
+    "viewTacticBreakdown": "Voir l'analyse complète de {name}",
+    "cat": {
+      "tactics": "Tactiques",
+      "formations": "Formations",
+      "playerRoles": "Rôles des Joueurs",
+      "setPieces": "Coups de Pied Arrêtés",
+      "meta": "Méta",
+      "beginner": "Débutants",
+      "wonderkids": "Jeunes Prodiges"
+    },
     "backToBlog": "Retour à tous les articles",
     "builderCtaTitle": "Build Your Own FM26 Tactic",
     "builderCtaText": "Want to create a custom system? Use our free FM26 Tactic Builder — drag players onto the pitch, assign any player role, and export your formation for Football Manager 2026.",
@@ -223,6 +240,7 @@
     "title": "Guides FM26",
     "description": "Guides complets sur l'entraînement, les coups de pied arrêtés, la gestion d'effectif et la préparation de match.",
     "backToGuides": "Retour aux Guides",
+    "faqTitle": "Questions Fréquentes",
     "comingSoon": "Les guides pour cette catégorie arrivent bientôt.",
     "training": "Guides d'Entraînement",
     "setPieces": "Coups de Pied Arrêtés",
@@ -233,7 +251,21 @@
     "tactics": "Tactiques & Systèmes",
     "read": "Lire le guide",
     "guidesCount_one": "guide",
-    "guidesCount_other": "guides"
+    "guidesCount_other": "guides",
+    "cat": {
+      "training": "Entraînement",
+      "setPieces": "Coups de pied arrêtés",
+      "scouting": "Recrutement",
+      "teamManagement": "Gestion d'équipe",
+      "matchDay": "Jour de match",
+      "youthDevelopment": "Formation des jeunes",
+      "tactics": "Tactiques"
+    },
+    "diff": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    }
   },
   "roles": {
     "title": "Encyclopédie des Rôles",
@@ -477,7 +509,63 @@
     "share": "Partager la Tactique",
     "export": "Exporter & Télécharger",
     "exportNudge": "Terminé ? Cliquez sur Exporter pour enregistrer votre tactique en image, texte ou sauvegarde.",
-    "configNudge": "Une équipe au complet n'est pas encore une tactique — définissez les rôles des joueurs et la mentalité de l'équipe pour que votre système fonctionne vraiment."
+    "configNudge": "Une équipe au complet n'est pas encore une tactique — définissez les rôles des joueurs et la mentalité de l'équipe pour que votre système fonctionne vraiment.",
+    "playerRole": "Rôle du joueur",
+    "playerRoleNumber": "Rôle du joueur — n° {num}",
+    "selectPlayer": "Sélectionner un joueur",
+    "tapPlayerHint": "Touchez un joueur sur le terrain pour configurer son rôle et sa consigne",
+    "sharedLoaded": "Tactique partagée chargée — ajustez-la et exportez votre propre version",
+    "dismiss": "Masquer",
+    "openSettings": "Ouvrir les réglages",
+    "close": "Fermer",
+    "metaTemplates": "Gabarits Méta",
+    "oneClickApply": "Application en un clic",
+    "chooseFormation": "Choisir une Formation",
+    "formationsCount": "{count} formations",
+    "inPossession": "Avec ballon",
+    "inTransition": "Transition",
+    "outOfPossession": "Sans ballon",
+    "mentalityHint": "Définissez l'approche globale de votre équipe pour le match",
+    "exportTitle": "Exporter la Tactique",
+    "exportNote": "Note : SI ne fournit pas le format .fmf aux outils tiers — utilisez la fiche tactique .txt pour la reproduire en jeu en ~5 min.",
+    "exportFailed": "Échec de l'export — veuillez réessayer",
+    "images": "Images",
+    "files": "Fichiers",
+    "downloadSvg": "Télécharger en SVG",
+    "downloadSvgDesc": "Enregistrer la formation en image vectorielle",
+    "downloadPng": "Télécharger en PNG",
+    "downloadPngDesc": "Image partageable, prête pour Discord et les forums",
+    "downloadTxt": "Télécharger .txt",
+    "downloadTxtDesc": "Guide de réplication pas à pas — à configurer en jeu en 5 min",
+    "downloadJson": "Télécharger .json",
+    "downloadJsonDesc": "Sauvegarde / partagez et réimportez la tactique exacte",
+    "importJson": "Importer .json",
+    "importLoaded": "Chargé !",
+    "importInvalid": "Fichier invalide",
+    "importJsonDesc": "Restaurer une tactique depuis un fichier .json enregistré",
+    "shareTitle": "Partager",
+    "copyShareLink": "Copier le Lien de Partage",
+    "shareCopied": "Lien copié !",
+    "copyShareLinkDesc": "Quiconque possède le lien ouvre exactement cette tactique",
+    "copyAsText": "Copier en Texte",
+    "copied": "Copié !",
+    "copyTextDesc": "Copier la fiche tactique complète dans le presse-papiers",
+    "cancel": "Annuler",
+    "txtHeader": "TACTIQUE FM26 — {formation}",
+    "txtGenerated": "Généré avec le Créateur de Tactiques FM26 — www.fm26tactics.com",
+    "txtFormation": "FORMATION",
+    "txtLineup": "EFFECTIF & RÔLES",
+    "txtTeamInstructions": "CONSIGNES D'ÉQUIPE",
+    "txtMentalityLabel": "Mentalité",
+    "txtInPossessionLabel": "Avec ballon",
+    "txtInTransitionLabel": "Transition",
+    "txtOutOfPossessionLabel": "Sans ballon",
+    "txtNone": "Aucune",
+    "txtHowTo": "COMMENT REPRODUIRE DANS FM26",
+    "txtStep1": "1. Ouvrez FM26 → Tactique → Nouvelle tactique et choisissez la formation {formation}.",
+    "txtStep2": "2. Attribuez à chaque joueur le rôle et la consigne ci-dessus (l'ordre correspond au terrain de l'arrière).",
+    "txtStep3": "3. Définissez la mentalité de l'équipe et cochez les consignes d'équipe ci-dessus.",
+    "txtStep4": "4. Partagez votre résultat en jeu sur www.fm26tactics.com"
   },
   "meta": {
     "pageTitle": "Analyse Méta FM26",
@@ -536,6 +624,8 @@
   "about": {
     "title": "À Propos de FM26 Tactics",
     "mission": "Notre Mission",
+    "intro": "FM26 Tactics est la ressource ultime pour les joueurs de Football Manager 2026 qui veulent maîtriser l'art de la tactique. Nous proposons des guides approfondis, des analyses de rôles et un créateur de tactiques interactif — tout pour dominer le banc de touche virtuel.",
+    "missionText": "Football Manager est complexe, et la tactique peut faire ou défaire votre saison. Notre mission est de démystifier le système tactique de FM26 et de donner à chaque joueur les outils pour construire des plans de jeu cohérents et gagnants.",
     "backToHome": "Retour à l'Accueil"
   },
   "contact": {
@@ -543,13 +633,24 @@
     "subtitle": "Nous aimerions vous entendre",
     "email": "Email",
     "github": "GitHub",
+    "githubDesc": "Ouvrez un ticket ou soumettez une pull request",
+    "intro": "Une tactique à partager ? Un bug trouvé ? Envie de dire bonjour ? Contactez-nous via l'un des canaux ci-dessous.",
+    "includeTitle": "À inclure lorsque vous nous contactez",
+    "includeTactic": "Tactique : formation, rôles, consignes et ce qui ne fonctionne pas",
+    "includeBug": "Rapports de bug : navigateur, appareil, étapes pour reproduire",
+    "includeGuide": "Suggestions de guides : sujet que vous aimeriez voir traité",
+    "includeData": "Données communautaires : liens vers des tactiques éprouvées ou des résultats de tests",
     "backToHome": "Retour à l'Accueil"
   },
   "privacy": {
-    "title": "Politique de Confidentialité"
+    "title": "Politique de Confidentialité",
+    "titleA": "Politique de",
+    "titleB": "Confidentialité"
   },
   "terms": {
-    "title": "Conditions d'Utilisation"
+    "title": "Conditions d'Utilisation",
+    "titleA": "Conditions",
+    "titleB": "d'Utilisation"
   },
   "error": {
     "notFound": "Page Introuvable",

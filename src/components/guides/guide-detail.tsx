@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { ArrowLeft, Clock, Calendar, Tag, BookOpen, BarChart3, Flame, Target, Users, ClipboardCheck, Crosshair } from "lucide-react";
@@ -10,20 +11,20 @@ import { RelatedGuides } from "@/components/shared/related-guides";
 import { formatDate } from "@/lib/utils";
 import type { Guide } from "contentlayer/generated";
 
-const categoryConfig: Record<string, { label: string; icon: React.ReactNode; color: string }> = {
-  training: { label: "Training", icon: <ClipboardCheck className="w-3.5 h-3.5" />, color: "text-accent-blue" },
-  "set-pieces": { label: "Set Pieces", icon: <Target className="w-3.5 h-3.5" />, color: "text-primary" },
-  scouting: { label: "Scouting", icon: <Crosshair className="w-3.5 h-3.5" />, color: "text-amber-400" },
-  "team-management": { label: "Team Management", icon: <Users className="w-3.5 h-3.5" />, color: "text-purple-400" },
-  "match-day": { label: "Match Day", icon: <BookOpen className="w-3.5 h-3.5" />, color: "text-red-400" },
-  "youth-development": { label: "Youth Development", icon: <Flame className="w-3.5 h-3.5" />, color: "text-orange-400" },
-  tactics: { label: "Tactics", icon: <BarChart3 className="w-3.5 h-3.5" />, color: "text-primary" },
+const categoryConfig: Record<string, { catKey: string; icon: React.ReactNode; color: string }> = {
+  training: { catKey: "training", icon: <ClipboardCheck className="w-3.5 h-3.5" />, color: "text-accent-blue" },
+  "set-pieces": { catKey: "setPieces", icon: <Target className="w-3.5 h-3.5" />, color: "text-primary" },
+  scouting: { catKey: "scouting", icon: <Crosshair className="w-3.5 h-3.5" />, color: "text-amber-400" },
+  "team-management": { catKey: "teamManagement", icon: <Users className="w-3.5 h-3.5" />, color: "text-purple-400" },
+  "match-day": { catKey: "matchDay", icon: <BookOpen className="w-3.5 h-3.5" />, color: "text-red-400" },
+  "youth-development": { catKey: "youthDevelopment", icon: <Flame className="w-3.5 h-3.5" />, color: "text-orange-400" },
+  tactics: { catKey: "tactics", icon: <BarChart3 className="w-3.5 h-3.5" />, color: "text-primary" },
 };
 
-const difficultyConfig: Record<string, { label: string; className: string }> = {
-  beginner: { label: "Beginner", className: "bg-green-500/20 text-green-400 border-green-500/30" },
-  intermediate: { label: "Intermediate", className: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
-  advanced: { label: "Advanced", className: "bg-red-500/20 text-red-400 border-red-500/30" },
+const difficultyConfig: Record<string, { diffKey: string; className: string }> = {
+  beginner: { diffKey: "beginner", className: "bg-green-500/20 text-green-400 border-green-500/30" },
+  intermediate: { diffKey: "intermediate", className: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
+  advanced: { diffKey: "advanced", className: "bg-red-500/20 text-red-400 border-red-500/30" },
 };
 
 const mdxComponents = {
@@ -85,6 +86,7 @@ interface GuideDetailProps {
 }
 
 export function GuideDetail({ guide }: GuideDetailProps) {
+  const t = useTranslations();
   const MDXContent = useMDXComponent(guide.body.code);
   const cat = categoryConfig[guide.category] || categoryConfig["team-management"];
   const diff = difficultyConfig[guide.difficulty ?? "beginner"] || difficultyConfig["beginner"];
@@ -95,8 +97,8 @@ export function GuideDetail({ guide }: GuideDetailProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Breadcrumb
           items={[
-            { label: "Home", href: "/" },
-            { label: "Guides", href: "/guides" },
+            { label: t("common.home"), href: "/" },
+            { label: t("nav.guides"), href: "/guides" },
             { label: guide.title },
           ]}
           className="mb-8"
@@ -110,7 +112,7 @@ export function GuideDetail({ guide }: GuideDetailProps) {
                 className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-6 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Guides
+                {t("guides.backToGuides")}
               </Link>
 
               {/* Header */}
@@ -118,10 +120,10 @@ export function GuideDetail({ guide }: GuideDetailProps) {
                 <div className="flex flex-wrap items-center gap-2 mb-4">
                   <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md border ${cat.color} bg-surface border-surface-border`}>
                     {cat.icon}
-                    {cat.label}
+                    {t(`guides.cat.${cat.catKey}`)}
                   </span>
                   <span className={`text-[10px] font-medium px-2.5 py-0.5 rounded-full border ${diff.className}`}>
-                    {diff.label}
+                    {t(`guides.diff.${diff.diffKey}`)}
                   </span>
                 </div>
 
@@ -134,16 +136,16 @@ export function GuideDetail({ guide }: GuideDetailProps) {
                 <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pb-6 border-b border-[#1C2436]/50">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5" />
-                    Published {formatDate(guide.publishedAt)}
+                    {t("common.published")} {formatDate(guide.publishedAt)}
                   </span>
                   {guide.updatedAt && (
                     <span className="flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
-                      Updated {formatDate(guide.updatedAt)}
+                      {t("common.updated")} {formatDate(guide.updatedAt)}
                     </span>
                   )}
                   {guide.author && (
-                    <span className="text-text-muted">by {guide.author}</span>
+                    <span className="text-text-muted">{t("common.by")} {guide.author}</span>
                   )}
                 </div>
 
@@ -171,7 +173,7 @@ export function GuideDetail({ guide }: GuideDetailProps) {
               {faqItems.length > 0 && (
                 <section className="mt-12">
                   <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50">
-                    Frequently Asked Questions
+                    {t("guides.faqTitle")}
                   </h2>
                   <div className="space-y-3">
                     {faqItems.map((item) => (

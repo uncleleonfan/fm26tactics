@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { allGuides } from "contentlayer/generated";
@@ -9,6 +12,7 @@ interface RelatedGuidesProps {
 }
 
 export function RelatedGuides({ currentSlug, tags, category }: RelatedGuidesProps) {
+  const t = useTranslations();
   const related = allGuides
     .filter((g) => g.slug !== currentSlug)
     .map((g) => {
@@ -29,7 +33,7 @@ export function RelatedGuides({ currentSlug, tags, category }: RelatedGuidesProp
   return (
     <section className="mt-16 pt-8 border-t border-[#1C2436]/50">
       <h2 className="text-lg font-bold text-text-primary mb-5">
-        Related Guides
+        {t("common.relatedGuides")}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {related.map(({ guide }) => (
@@ -45,7 +49,7 @@ export function RelatedGuides({ currentSlug, tags, category }: RelatedGuidesProp
               {guide.description}
             </p>
             <span className="inline-flex items-center gap-1 text-xs text-primary font-medium group-hover:gap-1.5 transition-all">
-              Read guide
+              {t("common.readGuide")}
               <ArrowRight className="w-3 h-3" />
             </span>
           </Link>

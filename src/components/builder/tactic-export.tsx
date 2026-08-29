@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Download, Share2, Check, Copy, FileText, FileJson, Upload } from "lucide-react";
 import { encodeTacticState } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
@@ -30,20 +31,22 @@ function cap(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+type TFunc = (key: string, values?: Record<string, string | number>) => string;
+
 /** Full human-readable tactic card — formation, every player's role & duty, and all team instructions. */
-function buildTacticText(state: TacticBoardState): string {
+function buildTacticText(state: TacticBoardState, b: TFunc): string {
   const { formation, players, teamInstructions } = state;
   const lines: string[] = [];
 
-  lines.push(`FM26 TACTIC — ${formation}`);
-  lines.push("Generated with FM26 Tactics Builder — www.fm26tactics.com");
+  lines.push(b("txtHeader", { formation }));
+  lines.push(b("txtGenerated"));
   lines.push("");
 
-  lines.push("FORMATION");
+  lines.push(b("txtFormation"));
   lines.push(formation);
   lines.push("");
 
-  lines.push("LINEUP & ROLES");
+  lines.push(b("txtLineup"));
   players.forEach((p, i) => {
     const role = playerRoles.find((r) => r.id === p.roleId);
     const category = CATEGORY_SHORT[role?.category ?? ""] ?? "P";
@@ -52,24 +55,24 @@ function buildTacticText(state: TacticBoardState): string {
   });
   lines.push("");
 
-  lines.push("TEAM INSTRUCTIONS");
-  lines.push(`Mentality: ${cap(teamInstructions.mentality)}`);
+  lines.push(b("txtTeamInstructions"));
+  lines.push(`${b("txtMentalityLabel")}: ${cap(teamInstructions.mentality)}`);
   lines.push(
-    `In Possession: ${teamInstructions.inPossession.join(", ") || "None"}`
+    `${b("txtInPossessionLabel")}: ${teamInstructions.inPossession.join(", ") || b("txtNone")}`
   );
   lines.push(
-    `In Transition: ${teamInstructions.inTransition.join(", ") || "None"}`
+    `${b("txtInTransitionLabel")}: ${teamInstructions.inTransition.join(", ") || b("txtNone")}`
   );
   lines.push(
-    `Out of Possession: ${teamInstructions.outOfPossession.join(", ") || "None"}`
+    `${b("txtOutOfPossessionLabel")}: ${teamInstructions.outOfPossession.join(", ") || b("txtNone")}`
   );
   lines.push("");
 
-  lines.push("HOW TO REPLICATE IN FM26");
-  lines.push(`1. Open FM26 → Tactics → New Tactic and pick the ${formation} formation.`);
-  lines.push("2. Assign each player the role & duty listed above (order matches the pitch from the back).");
-  lines.push("3. Set team mentality and tick the team instructions above.");
-  lines.push("4. Share your in-game result back at www.fm26tactics.com");
+  lines.push(b("txtHowTo"));
+  lines.push(b("txtStep1", { formation }));
+  lines.push(b("txtStep2"));
+  lines.push(b("txtStep3"));
+  lines.push(b("txtStep4"));
 
   return lines.join("\n");
 }
@@ -135,6 +138,7 @@ function triggerDownload(href: string, filename: string) {
 }
 
 export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
+  const b = useTranslations("builder");
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
   const [importMsg, setImportMsg] = useState<"ok" | "fail" | null>(null);
@@ -214,7 +218,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
 
   const exportAsTxt = () => {
     trackEvent("builder_download", { label: "txt", value: dwellTime() });
-    const blob = new Blob([buildTacticText(state)], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([buildTacticText(state, b)], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     triggerDownload(url, `${fileBase}.txt`);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -250,7 +254,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(buildTacticText(state));
+      await navigator.clipboard.writeText(buildTacticText(state, b));
       trackEvent("builder_copy_text", { value: dwellTime() });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -276,22 +280,21 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
       <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
-        <h3 className="text-sm font-semibold text-text-primary mb-2">Export Tactic</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-2">{b("exportTitle")}</h3>
 
         <p className="mb-4 text-[10px] leading-relaxed text-text-muted bg-surface border border-surface-border rounded-md px-3 py-2">
-          Note: SI doesn&apos;t provide the .fmf format to third-party tools — use
-          the .txt tactic card to replicate this in-game in ~5 min.
+          {b("exportNote")}
         </p>
 
         {exportError && (
           <p className="mb-3 text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-3 py-2">
-            Export failed — please try again
+            {b("exportFailed")}
           </p>
         )}
 
         <div className="space-y-3">
           <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold">
-            Images
+            {b("images")}
           </p>
 
           <button
@@ -300,8 +303,8 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
           >
             <Download className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">Download as SVG</p>
-              <p className="text-[10px] text-text-muted">Save tactic formation as vector image</p>
+              <p className="text-sm font-medium text-text-primary">{b("downloadSvg")}</p>
+              <p className="text-[10px] text-text-muted">{b("downloadSvgDesc")}</p>
             </div>
           </button>
 
@@ -311,13 +314,13 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
           >
             <Download className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">Download as PNG</p>
-              <p className="text-[10px] text-text-muted">Shareable image, ready for Discord & forums</p>
+              <p className="text-sm font-medium text-text-primary">{b("downloadPng")}</p>
+              <p className="text-[10px] text-text-muted">{b("downloadPngDesc")}</p>
             </div>
           </button>
 
           <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
-            Files
+            {b("files")}
           </p>
 
           <button
@@ -326,8 +329,8 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
           >
             <FileText className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">Download .txt</p>
-              <p className="text-[10px] text-text-muted">Step-by-step replica guide — set up in-game in 5 min</p>
+              <p className="text-sm font-medium text-text-primary">{b("downloadTxt")}</p>
+              <p className="text-[10px] text-text-muted">{b("downloadTxtDesc")}</p>
             </div>
           </button>
 
@@ -337,8 +340,8 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
           >
             <FileJson className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">Download .json</p>
-              <p className="text-[10px] text-text-muted">Backup / share & re-import the exact tactic</p>
+              <p className="text-sm font-medium text-text-primary">{b("downloadJson")}</p>
+              <p className="text-[10px] text-text-muted">{b("downloadJsonDesc")}</p>
             </div>
           </button>
 
@@ -349,9 +352,9 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
             <Upload className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             <div className="text-left">
               <p className="text-sm font-medium text-text-primary">
-                {importMsg === "ok" ? "Loaded!" : importMsg === "fail" ? "Invalid file" : "Import .json"}
+                {importMsg === "ok" ? b("importLoaded") : importMsg === "fail" ? b("importInvalid") : b("importJson")}
               </p>
-              <p className="text-[10px] text-text-muted">Restore a tactic from a saved .json file</p>
+              <p className="text-[10px] text-text-muted">{b("importJsonDesc")}</p>
             </div>
           </button>
           <input
@@ -367,7 +370,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
           />
 
           <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
-            Share
+            {b("shareTitle")}
           </p>
 
           <button
@@ -381,9 +384,9 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
             )}
             <div className="text-left">
               <p className="text-sm font-medium text-text-primary">
-                {shareCopied ? "Link Copied!" : "Copy Share Link"}
+                {shareCopied ? b("shareCopied") : b("copyShareLink")}
               </p>
-              <p className="text-[10px] text-text-muted">Anyone with the link opens this exact tactic</p>
+              <p className="text-[10px] text-text-muted">{b("copyShareLinkDesc")}</p>
             </div>
           </button>
 
@@ -398,9 +401,9 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
             )}
             <div className="text-left">
               <p className="text-sm font-medium text-text-primary">
-                {copied ? "Copied!" : "Copy as Text"}
+                {copied ? b("copied") : b("copyAsText")}
               </p>
-              <p className="text-[10px] text-text-muted">Copy the full tactic card to clipboard</p>
+              <p className="text-[10px] text-text-muted">{b("copyTextDesc")}</p>
             </div>
           </button>
         </div>
@@ -409,7 +412,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
           onClick={closeWithDwell}
           className="w-full mt-4 py-2 text-xs text-text-muted hover:text-text-secondary transition-colors"
         >
-          Cancel
+          {b("cancel")}
         </button>
       </div>
     </div>

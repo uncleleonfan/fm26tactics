@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Check, ChevronDown, LayoutGrid, Flame } from "lucide-react";
 import { formationPresets } from "@/lib/tactics-data";
 import { trackEvent } from "@/lib/analytics";
@@ -43,14 +44,16 @@ function MiniPitch({ positions }: { positions: { x: number; y: number }[] }) {
  * so it inherits the page-height scroll container — no overflow issues.
  */
 export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: FormationPanelProps) {
+  const b = useTranslations("builder");
+  const st = useTranslations("tactics");
   return (
     <div className="space-y-4">
       {/* Meta templates — one-click apply */}
       <div>
         <div className="flex items-center gap-2 mb-2 px-1">
           <Flame className="w-4 h-4 text-primary" />
-          <h3 className="text-sm font-semibold text-text-primary">Meta Templates</h3>
-          <span className="text-[10px] text-text-muted ml-auto">One-click apply</span>
+          <h3 className="text-sm font-semibold text-text-primary">{b("metaTemplates")}</h3>
+          <span className="text-[10px] text-text-muted ml-auto">{b("oneClickApply")}</span>
         </div>
         <div className="space-y-1.5">
           {tacticTemplates.map((t) => (
@@ -68,7 +71,7 @@ export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: 
                     {t.name}
                   </span>
                   <span className="text-[9px] px-1.5 py-0.5 rounded bg-primary/15 text-primary font-semibold uppercase tracking-wide shrink-0">
-                    {formatStyle(t.style)}
+                    {st.has(`styles.${t.style}`) ? st(`styles.${t.style}`) : formatStyle(t.style)}
                   </span>
                 </div>
                 <p className="text-[10px] text-text-muted mt-0.5 line-clamp-1">{t.description}</p>
@@ -85,9 +88,9 @@ export function FormationPanel({ currentFormation, onSelect, onApplyTemplate }: 
       <div>
         <div className="flex items-center gap-2 mb-2 px-1">
           <LayoutGrid className="w-4 h-4 text-primary" />
-          <h3 className="text-sm font-semibold text-text-primary">Choose Formation</h3>
+          <h3 className="text-sm font-semibold text-text-primary">{b("chooseFormation")}</h3>
           <span className="text-xs text-text-muted ml-auto">
-            {formationPresets.length} formations
+            {b("formationsCount", { count: formationPresets.length })}
           </span>
         </div>
         <div className="space-y-1.5">
