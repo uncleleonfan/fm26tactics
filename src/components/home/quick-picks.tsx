@@ -7,8 +7,8 @@ import { ArrowRight, Clock, Flame } from "lucide-react";
 interface QuickPick {
   slug: string;
   formation: string;
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   readTime: number;
   highlight?: boolean;
   href?: string;
@@ -18,26 +18,23 @@ const quickPicks: QuickPick[] = [
   {
     slug: "3-5-2-catenaccio",
     formation: "3-5-2",
-    title: "Catenaccio — Defensive Masterclass",
-    description:
-      "Build an impregnable fortress. Suffocate attacks, then strike with devastating counter-attacks. Our most in-depth guide.",
+    titleKey: "quickPickCatenaccioTitle",
+    descKey: "quickPickCatenaccioDesc",
     readTime: 11,
     highlight: true,
   },
   {
     slug: "4-3-3-tiki-taka",
     formation: "4-3-3",
-    title: "Tiki-Taka — Possession Domination",
-    description:
-      "Control the game with intricate short passing, intelligent movement, and positional play mastery.",
+    titleKey: "quickPickTikiTakaTitle",
+    descKey: "quickPickTikiTakaDesc",
     readTime: 15,
   },
   {
     slug: "4-2-3-1-gegenpress",
     formation: "4-2-3-1",
-    title: "Gegenpress — High-Pressure Blueprint",
-    description:
-      "Set up an aggressive pressing system that suffocates opponents and creates rapid transitions.",
+    titleKey: "quickPickGegenpressTitle",
+    descKey: "quickPickGegenpressDesc",
     readTime: 12,
   },
 ];
@@ -101,12 +98,12 @@ export function QuickPicks() {
 
             {/* Title */}
             <h3 className="text-lg font-bold text-text-primary mb-3 group-hover:text-primary transition-colors leading-tight">
-              {pick.title}
+              {t(pick.titleKey)}
             </h3>
 
             {/* Description */}
             <p className="text-sm text-text-secondary leading-relaxed mb-5">
-              {pick.description}
+              {t(pick.descKey)}
             </p>
 
             {/* Footer */}
