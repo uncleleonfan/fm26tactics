@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { allTactics, allTacticTrs } from "contentlayer/generated";
 import { TacticDetailPage } from "@/components/tactics/tactic-detail-page";
 import { generateSEO } from "@/lib/metadata";
@@ -92,10 +92,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function TacticPage({ params }: Props) {
   const { locale, slug } = params;
-  const tactic: Tactic | undefined =
-    locale === "tr"
-      ? (allTacticTrs.find((t) => t.slug === slug) as Tactic | undefined)
-      : allTactics.find((t) => t.slug === slug);
+  let tactic: Tactic | undefined;
+  if (locale === "tr") {
+    tactic = allTacticTrs.find((t) => t.slug === slug) as Tactic | undefined;
+    // Turkish pilot: links from home/search/blog may point at untranslated
+    // tactics under /tr — fall back to the English page instead of 404.
+    if (!tactic && allTactics.some((t) => t.slug === slug)) {
+      redirect(`/tactics/${slug}`);
+    }
+  } else {
+    tactic = allTactics.find((t) => t.slug === slug);
+  }
 
   if (!tactic) {
     notFound();
