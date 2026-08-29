@@ -195,7 +195,8 @@
     "reset": "Sıfırla",
     "share": "Taktiği Paylaş",
     "export": "Dışa Aktar & İndir",
-    "exportNudge": "Kurulumu bitirdiniz mi? Taktiğinizi görsel, metin veya yedek olarak kaydetmek için Dışa Aktar'a basın."
+    "exportNudge": "Kurulumu bitirdiniz mi? Taktiğinizi görsel, metin veya yedek olarak kaydetmek için Dışa Aktar'a basın.",
+    "configNudge": "Dolu bir on bir henüz taktik değildir — sisteminiz gerçekten çalışsın diye oyuncu rollerini ve takım mentalitesini ayarlayın."
   },
   "meta": {
     "pageTitle": "FM26 Meta Analizi",

@@ -124,6 +124,8 @@ export const Guide = defineDocumentType(() => ({
       required: false,
     },
     coverImage: { type: "string", required: false },
+    // FAQ array for JSON-LD (list of {question, answer}); stored as raw JSON
+    faq: { type: "json", required: false },
   },
   computedFields: {
     slug: {

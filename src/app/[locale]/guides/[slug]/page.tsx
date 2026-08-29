@@ -45,6 +45,26 @@ export default function GuidePage({ params }: Props) {
     notFound();
   }
 
+  const faqItems = (guide.faq ?? []) as Array<{
+    question: string;
+    answer: string;
+  }>;
+
+  const faqJsonLd = faqItems.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
   return (
     <>
       <JsonLd
@@ -55,7 +75,7 @@ export default function GuidePage({ params }: Props) {
           description: guide.description,
           url: `https://www.fm26tactics.com/guides/${guide.slug}`,
           datePublished: guide.publishedAt,
-          dateModified: guide.publishedAt,
+          dateModified: guide.updatedAt || guide.publishedAt,
           author: {
             "@type": "Person",
             name: guide.author || "FM26 Tactics",
@@ -69,8 +89,12 @@ export default function GuidePage({ params }: Props) {
             "@type": "WebPage",
             "@id": `https://www.fm26tactics.com/guides/${guide.slug}`,
           },
+          image: "https://www.fm26tactics.com/images/og/default.jpg",
+          articleSection: guide.category,
+          keywords: guide.tags?.join(", "),
         }}
       />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <GuideDetail guide={guide} />
     </>
   );

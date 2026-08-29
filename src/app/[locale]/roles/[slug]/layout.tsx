@@ -16,7 +16,7 @@ export function generateMetadata({ params }: LayoutProps): Metadata {
     };
   }
   return generateSEO({
-    title: `${role.name} — FM26 Player Role Guide`,
+    title: `${role.name} in FM26: Key Attributes, Duties & Best Partner Roles`,
     description: `Complete guide to the ${role.name} role in Football Manager 2026. Learn when to use it, key attributes, best partner roles, and player instructions.`,
     path: `/roles/${role.id}`,
     type: "article",

@@ -55,6 +55,35 @@ export default function BuilderPage() {
     trackEvent("builder_nudge_dismiss");
   };
 
+  const [showConfigNudge, setShowConfigNudge] = useState(false);
+
+  // The board is always "full" (formation presets auto-fill the XI), so the real
+  // signal for E-7 is a pristine default config: balanced mentality + no team
+  // instructions. Nudge those users once to set roles & mentality.
+  const isPristineConfig =
+    state.teamInstructions.mentality === "balanced" &&
+    state.teamInstructions.inPossession.length === 0 &&
+    state.teamInstructions.inTransition.length === 0 &&
+    state.teamInstructions.outOfPossession.length === 0;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (showNudge) return; // let the export nudge run first
+    if (!isPristineConfig) return;
+    const dismissed = window.localStorage.getItem("fm26-builder-config-nudge-dismissed");
+    if (dismissed) return;
+    setShowConfigNudge(true);
+    trackEvent("builder_config_nudge_shown");
+  }, [showNudge, isPristineConfig]);
+
+  const dismissConfigNudge = () => {
+    setShowConfigNudge(false);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("fm26-builder-config-nudge-dismissed", "1");
+    }
+    trackEvent("builder_config_nudge_dismiss");
+  };
+
   const selectedPlayer = state.players.find((p) => p.id === selectedPlayerId);
   const currentFormationLabel =
     formationPresets.find((f) => f.formation === state.formation)?.label ?? state.formation;
@@ -236,6 +265,32 @@ export default function BuilderPage() {
           </button>
           <button
             onClick={dismissNudge}
+            className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
+            aria-label="Dismiss"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
+      {showConfigNudge && (
+        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-amber-500/10 border-b border-amber-500/20">
+          <button
+            onClick={() => {
+              const firstOutfield = state.players[1];
+              if (firstOutfield) setSelectedPlayerId(firstOutfield.id);
+              setSidebarTab("role");
+              setShowMobileSidebar(true);
+              dismissConfigNudge();
+              trackEvent("builder_config_nudge_click");
+            }}
+            className="flex items-center gap-2 flex-1 min-w-0 text-left text-xs text-text-primary hover:text-amber-400 transition-colors"
+          >
+            <Settings className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span className="truncate">{t("configNudge")}</span>
+          </button>
+          <button
+            onClick={dismissConfigNudge}
             className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
             aria-label="Dismiss"
           >

@@ -195,7 +195,8 @@
     "reset": "Réinitialiser",
     "share": "Partager la Tactique",
     "export": "Exporter & Télécharger",
-    "exportNudge": "Terminé ? Cliquez sur Exporter pour enregistrer votre tactique en image, texte ou sauvegarde."
+    "exportNudge": "Terminé ? Cliquez sur Exporter pour enregistrer votre tactique en image, texte ou sauvegarde.",
+    "configNudge": "Une équipe au complet n'est pas encore une tactique — définissez les rôles des joueurs et la mentalité de l'équipe pour que votre système fonctionne vraiment."
   },
   "meta": {
     "pageTitle": "Analyse Méta FM26",

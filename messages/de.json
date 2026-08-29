@@ -195,7 +195,8 @@
     "reset": "Zurücksetzen",
     "share": "Taktik teilen",
     "export": "Exportieren & Herunterladen",
-    "exportNudge": "Fertig gebaut? Klicke auf Export, um deine Taktik als Bild, Text oder Backup zu speichern."
+    "exportNudge": "Fertig gebaut? Klicke auf Export, um deine Taktik als Bild, Text oder Backup zu speichern.",
+    "configNudge": "Eine volle Elf ist noch keine Taktik – stelle Spielerrollen und Team-Mentalität ein, damit dein Setup wirklich funktioniert."
   },
   "meta": {
     "pageTitle": "FM26 Meta-Analyse",

@@ -88,6 +88,7 @@ export function GuideDetail({ guide }: GuideDetailProps) {
   const MDXContent = useMDXComponent(guide.body.code);
   const cat = categoryConfig[guide.category] || categoryConfig["team-management"];
   const diff = difficultyConfig[guide.difficulty ?? "beginner"] || difficultyConfig["beginner"];
+  const faqItems = (guide.faq ?? []) as Array<{ question: string; answer: string }>;
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
@@ -165,6 +166,29 @@ export function GuideDetail({ guide }: GuideDetailProps) {
               <article className="prose-custom">
                 <MDXContent components={mdxComponents} />
               </article>
+
+              {/* FAQ — visible rendering matching the FAQPage JSON-LD */}
+              {faqItems.length > 0 && (
+                <section className="mt-12">
+                  <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50">
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="space-y-3">
+                    {faqItems.map((item) => (
+                      <details
+                        key={item.question}
+                        className="group rounded-lg border border-surface-border bg-surface"
+                      >
+                        <summary className="flex cursor-pointer items-center justify-between gap-3 p-4 text-base font-semibold text-text-primary select-none">
+                          {item.question}
+                          <span className="text-text-muted transition-transform group-open:rotate-45">+</span>
+                        </summary>
+                        <p className="px-4 pb-4 text-base text-text-primary/90 leading-7">{item.answer}</p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* Related Guides — internal linking for SEO */}
               <RelatedGuides

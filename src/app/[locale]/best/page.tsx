@@ -4,32 +4,34 @@ import { Link } from "@/i18n/routing";
 import { allTactics } from "contentlayer/generated";
 import { ArrowRight, Trophy, Star, Zap, Shield } from "lucide-react";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
+import { generateLocaleSEO } from "@/lib/metadata";
 import Script from "next/script";
 
-export const metadata: Metadata = {
-  title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
-  description:
-    "Discover the best FM26 tactics ranked and tested. From gegenpress to tiki-taka, find the top meta formations that dominate Football Manager 2026 — best fm26 tactics for every playstyle.",
-  keywords: [
-    "fm26 best tactics", "best fm26 tactics", "fm26 top tactics",
-    "fm26 meta formations", "best formations fm26", "top fm26 tactics 2026",
-  ],
-  alternates: { canonical: "https://www.fm26tactics.com/best" },
-  openGraph: {
-    title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
-    description: "Discover the best FM26 tactics ranked and tested. Top meta formations that dominate Football Manager 2026.",
-    url: "https://www.fm26tactics.com/best",
-    type: "website", siteName: "FM26 Tactics", locale: "en_US",
-    images: [{ url: "/images/og/default.jpg", width: 1200, height: 630, alt: "FM26 Best Tactics 2026" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
-    description: "The best FM26 tactics ranked. Top meta formations that dominate Football Manager 2026.",
-    images: ["https://www.fm26tactics.com/images/og/default.jpg"],
-  },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
-};
+// Turkish pilot L1: core list page is part of the minimal indexable set (§2b)
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  return generateLocaleSEO({
+    locale: params.locale,
+    path: "/best",
+    en: {
+      title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
+      description:
+        "Discover the best FM26 tactics ranked and tested. From gegenpress to tiki-taka, find the top meta formations that dominate Football Manager 2026 — best fm26 tactics for every playstyle.",
+      keywords: [
+        "fm26 best tactics", "best fm26 tactics", "fm26 top tactics",
+        "fm26 meta formations", "best formations fm26", "top fm26 tactics 2026",
+      ],
+    },
+    tr: {
+      title: "FM26 En İyi Taktikler 2026: En İyi 8 Meta Diziliş Sıralaması",
+      description:
+        "Test edilmiş ve sıralanmış en iyi FM26 taktiklerini keşfedin. Gegenpress'ten tiki-taka'ya, Football Manager 2026'da öne çıkan meta dizilişleri — her oyun tarzı için en iyi FM26 taktikleri.",
+      keywords: [
+        "en iyi fm26 taktikleri", "fm26 meta dizilişleri",
+        "fm26 en iyi dizilişler", "football manager 2026 taktikleri",
+      ],
+    },
+  });
+}
 
 const rankingOrder = [
   "4-2-3-1-gegenpress", "3-5-2-catenaccio", "4-3-3-tiki-taka", "4-4-2-wing-play",

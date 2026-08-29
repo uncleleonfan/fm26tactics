@@ -6,15 +6,26 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { allTactics, allTacticTrs } from "contentlayer/generated";
 import type { Tactic } from "contentlayer/generated";
 import { ArrowRight, BookOpen, Globe, LayoutGrid, Sparkles } from "lucide-react";
-import { generateSEO } from "@/lib/metadata";
+import { generateLocaleSEO } from "@/lib/metadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = generateSEO({
-  title: "FM26 Tactics Library — Best FM26 Tactics & Formations",
-  description:
-    "Explore the complete FM26 tactics library — every formation with player roles, team instructions, and performance breakdowns. Find the best FM26 tactics for your squad in Football Manager 2026.",
-  path: "/tactics",
-});
+// Turkish pilot L1: core list page is part of the minimal indexable set (§2b)
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  return generateLocaleSEO({
+    locale: params.locale,
+    path: "/tactics",
+    en: {
+      title: "FM26 Tactics Library — Best FM26 Tactics & Formations",
+      description:
+        "Explore the complete FM26 tactics library — every formation with player roles, team instructions, and performance breakdowns. Find the best FM26 tactics for your squad in Football Manager 2026.",
+    },
+    tr: {
+      title: "FM26 Taktik Kütüphanesi — En İyi FM26 Taktikleri ve Dizilişleri",
+      description:
+        "Tam FM26 taktik kütüphanesini keşfedin — her diziliş oyuncu rolleri, takım talimatları ve performans analizleriyle. Football Manager 2026'da kadronuz için en iyi FM26 taktiklerini bulun.",
+    },
+  });
+}
 
 // Turkish pilot: only translated tactics are exposed under /tr (see docs/optimization-plan-2026-09.md §2b)
 const trSlugs = new Set(allTacticTrs.map((t) => t.slug));

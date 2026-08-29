@@ -10,15 +10,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Turkish pilot: hreflang pairs only for FULLY translated tactics (§2b)
   const trSlugs = new Set(allTacticTrs.map((t) => t.slug));
 
+  // Turkish pilot L1: home + core list pages get en↔tr hreflang pairs (§2b)
+  const localeAwarePaths = [
+    { path: "", changeFrequency: "daily" as const, priority: 1 },
+    { path: "/tactics", changeFrequency: "weekly" as const, priority: 0.9 },
+    { path: "/best", changeFrequency: "weekly" as const, priority: 0.9 },
+    { path: "/meta", changeFrequency: "weekly" as const, priority: 0.8 },
+  ];
+
+  const localeAwareRoutes = localeAwarePaths.flatMap((r) => {
+    const languages = { en: `${base}${r.path}`, tr: `${base}/tr${r.path}` };
+    return (["en", "tr"] as const).map((lang) => ({
+      url: languages[lang],
+      lastModified: now,
+      changeFrequency: r.changeFrequency,
+      priority: r.priority,
+      alternates: { languages },
+    }));
+  });
+
   const staticRoutes = [
-    { url: base, lastModified: now, changeFrequency: "daily" as const, priority: 1 },
-    { url: `${base}/tactics`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
-    { url: `${base}/best`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
+    ...localeAwareRoutes,
     { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${base}/roles`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/guides`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/builder`, lastModified: fixedDate, changeFrequency: "monthly" as const, priority: 0.9 },
-    { url: `${base}/meta`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/about`, lastModified: fixedDate, changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${base}/contact`, lastModified: fixedDate, changeFrequency: "monthly" as const, priority: 0.4 },
     { url: `${base}/privacy`, lastModified: fixedDate, changeFrequency: "yearly" as const, priority: 0.3 },

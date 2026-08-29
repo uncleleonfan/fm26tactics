@@ -130,6 +130,8 @@ alternates: {
 
 ### Batch 2：转化与内容收尾（第 2-3 周）
 
+> **状态（2026-08-29）**：N8 ✓（4 处 title 已重写）｜N9 ✓（Guide 类型 + faq 字段、Article 补 dateModified/image/keywords、FAQPage JSON-LD + 页面可见 FAQ 区块、10 篇指南全量 faq frontmatter）｜N10 ✓（因 Builder 阵型自动满员，触发信号改为"pristine 默认配置"（balanced + 零指令）时一次性引导，埋点 `builder_config_nudge_*`）｜N11 → **跳过**（FM-Arena 26.3.0 榜单前 100 无 CHM 系战术，按规则不补文）｜N12 → 观察（N1 部署后 4 周复查 GSC）｜N20 ✓（架构 + 8 篇 tr 战术 + `messages/tr.json` 213 键全量 + 首页//tactics//best//meta locale 感知 metadata（en↔tr hreflang + tr 自指 canonical）+ sitemap alternates，已本地验证）
+
 | # | 任务 | 说明 | 工作量 |
 |---|---|---|---|
 | N8 | 剩余 3 页 title 重写（原 P0-2 余量） | best-set-piece（676i×3.4%）、match-day-shouts（523i×2.1%）、youth-development（311i×0.64%）+ roles 模板 title（~100i×0%） | M |
@@ -196,4 +198,4 @@ alternates: {
 
 ---
 
-*v2.1 更新：2026-08-29（新增 §2b 多语言策略评估，D2 改为渐进式方案）｜ 状态：待评估 ｜ 决策后按 Batch 1（快修批，约半天）→ Batch 2 → Batch 3 实施*
+*v2.1 更新：2026-08-29（新增 §2b 多语言策略评估，D2 改为渐进式方案）｜ 状态：Batch 1 ✓ + Batch 2 ✓（2026-08-29，N11 按规则跳过、N12 观察中）｜ Batch 3 待启动*

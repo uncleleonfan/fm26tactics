@@ -195,7 +195,8 @@
     "reset": "Reset",
     "share": "Share Tactic",
     "export": "Export & Download",
-    "exportNudge": "Done building? Hit Export to save your tactic as image, text or backup."
+    "exportNudge": "Done building? Hit Export to save your tactic as image, text or backup.",
+    "configNudge": "A full XI isn't a tactic yet — set player roles and team mentality to make your setup actually work."
   },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",

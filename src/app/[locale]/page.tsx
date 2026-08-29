@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/hero";
 import { QuickPicks } from "@/components/home/quick-picks";
 import { JsonLd } from "@/components/shared/json-ld";
+import { generateLocaleSEO } from "@/lib/metadata";
 
 // ssr: false — eliminates preload links for chunks, preventing bandwidth competition
 // on mobile. Content loads instantly after hydration via local JS chunks.
@@ -35,41 +36,31 @@ function SectionPlaceholderTall() {
   return <div className="py-24" />;
 }
 
-export const metadata: Metadata = {
-  title: "Best FM26 Tactics & Formations",
-  description:
-    "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides for Football Manager 2026.",
-  keywords: [
-    "fm 26 tactics", "fm26 best tactics", "fm 26 formations",
-    "football manager 2026", "fm26 gegenpress",
-  ],
-  alternates: {
-    canonical: "https://www.fm26tactics.com",
-  },
-  openGraph: {
-    title: "Best FM26 Tactics & Formations",
-    description:
-      "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides.",
-    url: "https://www.fm26tactics.com",
-    type: "website",
-    siteName: "FM26 Tactics",
-    locale: "en_US",
-    images: [
-      {
-        url: "/images/og/default.jpg",
-        width: 1200,
-        height: 630,
-        alt: "FM26 Tactics — Football Manager 2026 Tactics Hub",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Best FM26 Tactics & Formations",
-    description: "Best FM 26 tactics, meta formations & interactive builder for Football Manager 2026.",
-    images: ["https://www.fm26tactics.com/images/og/default.jpg"],
-  },
-};
+// Turkish pilot L1: home is part of the minimal indexable set (§2b)
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  return generateLocaleSEO({
+    locale: params.locale,
+    path: "/",
+    en: {
+      title: "Best FM26 Tactics & Formations",
+      description:
+        "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides for Football Manager 2026.",
+      keywords: [
+        "fm 26 tactics", "fm26 best tactics", "fm 26 formations",
+        "football manager 2026", "fm26 gegenpress",
+      ],
+    },
+    tr: {
+      title: "En İyi FM26 Taktikleri ve Dizilişleri",
+      description:
+        "En iyi FM 26 taktiklerini ve meta dizilişlerini keşfedin. Topluluk tarafından test edilen stratejiler, interaktif taktik kurucu ve Football Manager 2026 için kapsamlı rehberler.",
+      keywords: [
+        "fm 26 taktikleri", "en iyi fm26 taktikleri", "fm 26 dizilişleri",
+        "football manager 2026 taktikleri",
+      ],
+    },
+  });
+}
 
 export default function HomePage() {
   return (
