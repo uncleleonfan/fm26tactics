@@ -9,8 +9,8 @@ import { trackEvent } from "@/lib/analytics";
 const localeLabels: Record<string, string> = {
   en: "🇬🇧 EN",
   de: "🇩🇪 DE",
-  it: "🇮🇹 IT",
   fr: "🇫🇷 FR",
+  tr: "🇹🇷 TR",
 };
 
 export function LanguageSwitcher() {
@@ -73,7 +73,7 @@ export function LanguageSwitcher() {
                   : "text-text-secondary hover:text-text-primary hover:bg-background-tertiary"
               }`}
             >
-              {localeLabels[l]}
+              {localeLabels[l] || l.toUpperCase()}
             </button>
           ))}
         </div>
