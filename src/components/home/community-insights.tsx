@@ -1,9 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { TrendingUp, Award, BarChart3, ExternalLink } from "lucide-react";
 import { topTestedTactics, metaRoles } from "@/lib/community-data";
+import { metaRolesTr, topTestedNotesTr } from "@/lib/community-data-tr";
 
 const tierColorMap: Record<string, string> = {
   "S+": "bg-red-500/20 text-red-400 border-red-500/30",
@@ -13,6 +14,8 @@ const tierColorMap: Record<string, string> = {
 
 export function CommunityInsights() {
   const t = useTranslations("home");
+  const isTr = useLocale() === "tr";
+  const roles = isTr ? metaRolesTr : metaRoles;
 
   return (
     <section className="py-16 sm:py-24 bg-background-primary">
@@ -67,7 +70,9 @@ export function CommunityInsights() {
                   <span className="text-[10px] text-text-muted"> GF</span>
                 </div>
               </div>
-              <p className="text-xs text-text-secondary leading-relaxed">{tactic.notes}</p>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                {isTr ? topTestedNotesTr[i] : tactic.notes}
+              </p>
             </div>
           ))}
         </div>
@@ -75,10 +80,10 @@ export function CommunityInsights() {
         {/* Quick Meta Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {[
-            { label: t("bestFormation"), value: "3-4-3", sub: "81.1 PTS · Atonement", icon: BarChart3 },
-            { label: t("bestDefense"), value: "3-3-3-1", sub: "41 GA · Bielsa Style", icon: BarChart3 },
-            { label: t("opRole"), value: "Advanced WB", sub: "S+ Tier · Elite Width", icon: Award },
-            { label: t("testedTactics"), value: "2,700", sub: "matches per tactic", icon: TrendingUp },
+            { label: t("bestFormation"), value: "3-4-3", sub: t("statBestFormationSub"), icon: BarChart3 },
+            { label: t("bestDefense"), value: "3-3-3-1", sub: t("statBestDefenseSub"), icon: BarChart3 },
+            { label: t("opRole"), value: "Advanced WB", sub: t("statOpRoleSub"), icon: Award },
+            { label: t("testedTactics"), value: "2,700", sub: t("statMatchesSub"), icon: TrendingUp },
           ].map((stat, i) => (
             <div key={i} className="glass-panel p-4 text-center">
               <stat.icon className="w-4 h-4 text-text-muted mx-auto mb-2" />
@@ -96,7 +101,7 @@ export function CommunityInsights() {
             {t("communityRoles")}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {metaRoles.map((role) => (
+            {roles.map((role) => (
               <div key={role.name} className="glass-panel p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <h4 className="text-sm font-bold text-text-primary">{role.name}</h4>

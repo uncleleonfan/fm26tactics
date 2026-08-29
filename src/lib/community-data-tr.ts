@@ -161,3 +161,11 @@ export const commonMistakesTr: CommonMistakeTr[] = [
   { mistake: "Bir yenilgiden sonra her şeyi çöpe atmak", fix: "Bir seferde 1-2 talimat değiştirin. Bir taktiğe yerleşmesi için 5-10 maç verin." },
   { mistake: "Dayanıklılık yönetimini ihmal etmek", fix: "Yüksek yoğunluklu taktikler maç başına 3-4 oyuncu rotasyonu gerektirir. 60. dakikadan sonra oyuncu değiştirmemek = garantili çöküş." },
 ];
+
+// === Top Tested Tactics — notes for the first 3 ranks (TR, home page) ===
+// Index-aligned with topTestedTactics.slice(0, 3) in community-data.ts
+export const topTestedNotesTr: string[] = [
+  "Yeni 1. sıra — sabırlı topa sahip olma + yüksek presli 3-4-3. Sahnede en iyi xG farkı (+36,4) ve elit iç saha/deplasman dengesi.",
+  "Zirvedeki taktikler arasında en iyi defansif derece. Yalnızca 45 gol yedi. Favori olmayan kulüp kariyerleri için mükemmel.",
+  "Daha hücumcu 4-5-1 varyantı. Genişlik için Gelişmiş Kanat Bekleri (AWB) kullanıyor. 87 gol attı.",
+];
