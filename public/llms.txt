@@ -2,25 +2,37 @@
 > The ultimate Football Manager 2026 tactics hub — community-tested tactics, formations, player roles, interactive builder, and in-depth guides.
 
 ## Docs
-- [Tactics](https://fm26tactics.com/tactics): Browse all FM26 meta tactics
-- [Guides](https://fm26tactics.com/guides): Training, scouting & tactical guides
-- [Player Roles](https://fm26tactics.com/roles): Complete FM26 role analysis
-- [Tactic Builder](https://fm26tactics.com/builder): Interactive tactic designer
+- [Tactics](https://www.fm26tactics.com/tactics): Browse all FM26 meta tactics
+- [Guides](https://www.fm26tactics.com/guides): Training, scouting & tactical guides
+- [Player Roles](https://www.fm26tactics.com/roles): Complete FM26 role analysis
+- [Tactic Builder](https://www.fm26tactics.com/builder): Interactive tactic designer
+- [Meta Rankings](https://www.fm26tactics.com/meta): FM-Arena patch 26.3 tested tactic rankings
+- [Best Tactics](https://www.fm26tactics.com/best): Editor-selected best FM26 tactics by playstyle
 
 ## Discover
-- [Formations](https://fm26tactics.com/tactics): 14+ formations from 4-2-3-1 to 3-4-2-1
-- [Meta Tactics](https://fm26tactics.com/tactics): Community-tested & ranked by performance
-- [FAQs](https://fm26tactics.com/guides): Answer-first guides for common FM questions
+- [Formations](https://www.fm26tactics.com/tactics): 14+ formations from 4-2-3-1 to 3-4-2-1
+- [Meta Tactics](https://www.fm26tactics.com/tactics): Community-tested & ranked by performance
+- [FAQs](https://www.fm26tactics.com/guides): Answer-first guides for common FM questions
+- [How to Load Tactics](https://www.fm26tactics.com/blog/how-to-load-tactics-fm26): Import .fmf files into FM26 step by step
+
+## Guides
+- [Dual-Phase Tactics](https://www.fm26tactics.com/guides/dual-phase-tactics-fm26): Attack & defend with different formations
+- [Set-Piece Masterclass](https://www.fm26tactics.com/guides/set-piece-masterclass): Corner, free-kick & throw-in routines
+- [Gegenpress Masterclass](https://www.fm26tactics.com/guides/gegenpress-masterclass): Full gegenpress system setup
+- [FM26 Beginner Guide](https://www.fm26tactics.com/guides/fm26-tactics-beginner-guide): First tactic from scratch
+- [Scouting Wonderkids](https://www.fm26tactics.com/guides/scouting-wonderkids-guide): Filters & criteria that work
 
 ## Blog
-- [FM26 Blog](https://fm26tactics.com/blog): In-depth guides, meta analysis & tips
-- [Beginner Tactics](https://fm26tactics.com/blog/fm26-best-tactics-beginners): FM26 best tactics for beginners
-- [Gegenpress Setup](https://fm26tactics.com/blog/gegenpress-setup-guide): Complete gegenpress setup guide
-- [Player Roles](https://fm26tactics.com/blog/player-roles-explained): FM26 player roles explained
-- [Corner Tactics](https://fm26tactics.com/blog/corner-tactics-guide): FM26 corner tactics guide
-- [Meta Analysis](https://fm26tactics.com/blog/meta-tactics-community): FM26 meta tactics community analysis
+- [FM26 Blog](https://www.fm26tactics.com/blog): In-depth guides, meta analysis & tips
+- [Beginner Tactics](https://www.fm26tactics.com/blog/fm26-best-tactics-beginners): FM26 best tactics for beginners
+- [Gegenpress Setup](https://www.fm26tactics.com/blog/gegenpress-setup-guide): Complete gegenpress setup guide
+- [Player Roles](https://www.fm26tactics.com/blog/player-roles-explained): FM26 player roles explained
+- [Corner Tactics](https://www.fm26tactics.com/blog/corner-tactics-guide): FM26 corner tactics guide
+- [Meta Analysis](https://www.fm26tactics.com/blog/meta-tactics-community): FM26 meta tactics community analysis
+- [ZAZ Autumn 4-5](https://www.fm26tactics.com/blog/zaz-autumn-4-5-fm26): Top-ranked ZAZ 4-5 breakdown
+- [How to Build a Tactic](https://www.fm26tactics.com/blog/how-to-build-a-tactic): Tactic design principles
 
 ## Optional
-- [About](https://fm26tactics.com/about)
-- [Privacy](https://fm26tactics.com/privacy)
-- [Terms](https://fm26tactics.com/terms)
+- [About](https://www.fm26tactics.com/about)
+- [Privacy](https://www.fm26tactics.com/privacy)
+- [Terms](https://www.fm26tactics.com/terms)
