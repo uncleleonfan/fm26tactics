@@ -276,7 +276,12 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
       <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
-        <h3 className="text-sm font-semibold text-text-primary mb-4">Export Tactic</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-2">Export Tactic</h3>
+
+        <p className="mb-4 text-[10px] leading-relaxed text-text-muted bg-surface border border-surface-border rounded-md px-3 py-2">
+          Note: SI doesn&apos;t provide the .fmf format to third-party tools — use
+          the .txt tactic card to replicate this in-game in ~5 min.
+        </p>
 
         {exportError && (
           <p className="mb-3 text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-3 py-2">
@@ -322,7 +327,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
             <FileText className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             <div className="text-left">
               <p className="text-sm font-medium text-text-primary">Download .txt</p>
-              <p className="text-[10px] text-text-muted">Full tactic card — follow it in-game</p>
+              <p className="text-[10px] text-text-muted">Step-by-step replica guide — set up in-game in 5 min</p>
             </div>
           </button>
 
