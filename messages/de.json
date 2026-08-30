@@ -677,6 +677,96 @@
     "goHome": "Zur Startseite",
     "browseTactics": "Taktiken durchsuchen"
   },
+  "formations": {
+    "heroTitle": "FM26 Formations",
+    "heroSubtitle": "Complete guide to Football Manager 2026 formations. Each formation is broken down with strengths, weaknesses, recommended roles, and the best tactical styles — so you can pick the right shape for your squad.",
+    "bestForLabel": "Best for:",
+    "strengthsLabel": "Strengths",
+    "weaknessesLabel": "Weaknesses",
+    "recommendedRolesLabel": "Recommended FM26 Roles",
+    "tryInBuilder": "Try in Builder",
+    "tacticsLibrary": "FM26 Tactics Library",
+    "bestTactics": "FM26 Best Tactics 2026",
+    "playerRoles": "FM26 Player Roles",
+    "faqQ1": "What is the best formation in FM26?",
+    "faqA1": "The best FM26 formation depends on your play style. The 4-2-3-1 is the most balanced and great for gegenpress, the 4-3-3 is ideal for tiki-taka and possession, the 4-4-2 is excellent for counter-attacking and wing play, and the 3-5-2 is perfect for defensive/counter-attacking teams.",
+    "faqQ2": "How do I choose the right formation in Football Manager 2026?",
+    "faqA2": "Consider your squad's strengths: if you have strong wingers, use 4-3-3 or 4-2-3-1; if you have dominant CBs and athletic wing-backs, try 3-5-2; for counter-attacking with limited players, 4-4-2 or 5-3-2 work best. Always match the formation to your players' attributes.",
+    "faqQ3": "What formation is best for underdogs in FM26?",
+    "faqA3": "The 4-4-2 and 5-3-2 are the best formations for underdogs and smaller clubs in FM26. They provide solid defensive structures with two banks of players, making them hard to break down while still offering counter-attacking threat through two strikers.",
+    "data": {
+      "4-2-3-1": {
+        "description": "The modern classic. Two holding midfielders support a creative attacking midfielder with wingers providing width.",
+        "bestFor": "Balanced attacking play with a strong defensive shield",
+        "strengths": ["Two DMs provide defensive stability", "AM #10 creates between the lines", "Wingers stretch the pitch", "Great for gegenpress"],
+        "weaknesses": ["Can be overrun in midfield against 4-3-3", "Wingers can be isolated defensively", "Requires a creative #10"],
+        "recommendedRoles": ["Deep-Lying Playmaker", "Ball-Winning Midfielder", "Advanced Playmaker (AM)", "Inside Forward", "Advanced Forward"]
+      },
+      "4-3-3": {
+        "description": "Wide forwards stretch the opposition. Three midfielders offer balance between defense and attack.",
+        "bestFor": "Possession and high-pressing football (Tiki-Taka, Gegenpress)",
+        "strengths": ["Three midfielders dominate possession", "Wide forwards stretch defense", "Natural pressing shape", "Very flexible tactically"],
+        "weaknesses": ["Can be exposed on the counter", "Requires athletic midfielders", "Wide forwards must track back"],
+        "recommendedRoles": ["Deep-Lying Playmaker", "Box-to-Box Midfielder", "Mezzala", "Winger", "Pressing Forward"]
+      },
+      "4-4-2": {
+        "description": "The traditional English setup. Two banks of four with a classic strike partnership.",
+        "bestFor": "Direct, counter-attacking and wing play",
+        "strengths": ["Two banks of four = solid defense", "Two strikers press CBs", "Simple and easy to organize", "Excellent for underdogs"],
+        "weaknesses": ["Lacks a #10 creator", "Midfield can be outnumbered", "Less possession control"],
+        "recommendedRoles": ["Ball-Winning Midfielder", "Box-to-Box Midfielder", "Winger", "Target Forward", "Pressing Forward"]
+      },
+      "3-5-2": {
+        "description": "Wing-backs provide width as three center-backs form a solid defensive base with two strikers.",
+        "bestFor": "Counter-attacking with defensive solidity (Catenaccio, Low Block)",
+        "strengths": ["Three CBs dominate the box", "Wing-backs provide width", "Two strikers for counter-attacks", "Great for defensive teams"],
+        "weaknesses": ["Vulnerable out wide if wing-backs caught up", "Requires athletic wing-backs", "Can struggle in possession"],
+        "recommendedRoles": ["Ball-Playing Defender", "Ball-Winning Midfielder", "Deep-Lying Playmaker", "Carrilero", "Target Forward"]
+      },
+      "5-3-2": {
+        "description": "Ultra-defensive shape with wing-backs. Counter-attack specialist formation.",
+        "bestFor": "Ultra-defensive counter-attack strategies",
+        "strengths": ["Five defenders = very hard to break down", "Compact shape", "Counter-attack specialist", "Great for minnows"],
+        "weaknesses": ["Very limited going forward", "No natural width", "Can invite too much pressure"],
+        "recommendedRoles": ["Ball-Playing Defender", "No-Nonsense Centre-Back", "Ball-Winning Midfielder", "Target Forward"]
+      },
+      "3-4-3": {
+        "description": "Attacking formation with wing-backs pushing high. Three forwards apply constant pressure on opposing defenders.",
+        "bestFor": "Aggressive attacking football with high wing-backs",
+        "strengths": ["Three forwards press relentlessly", "Wing-backs provide width", "Overloads in attack", "Modern pressing shape"],
+        "weaknesses": ["Very vulnerable on counter", "Requires elite wing-backs", "High risk, high reward"],
+        "recommendedRoles": ["Ball-Playing Defender", "Mezzala", "Winger", "Advanced Forward", "Pressing Forward"]
+      },
+      "4-2-2-2": {
+        "description": "Brazilian Box. Two DMs and two AMs create a compact midfield box, with two strikers leading the line.",
+        "bestFor": "Box midfield control and attacking flair",
+        "strengths": ["Compact midfield box", "Two strikers and two AMs", "Great for vertical tiki-taka", "Attacking overloads"],
+        "weaknesses": ["No natural wide players", "Vulnerable out wide", "Can be predictable through the middle"],
+        "recommendedRoles": ["Deep-Lying Playmaker", "Ball-Winning Midfielder", "Advanced Playmaker", "Advanced Forward"]
+      },
+      "4-1-4-1": {
+        "description": "A solid DM shields the back four. Four midfielders offer width and numbers in the middle third.",
+        "bestFor": "Defensive stability with a dedicated DM shield",
+        "strengths": ["DM protects the back four", "Four midfielders offer width", "Solid defensive shape", "Good for possession"],
+        "weaknesses": ["Lone striker can be isolated", "Gap between DM and AM", "Requires a dominant striker"],
+        "recommendedRoles": ["Deep-Lying Playmaker (DM)", "Box-to-Box Midfielder", "Winger", "Target Forward"]
+      },
+      "4-4-1-1": {
+        "description": "The Mourinho special. A second striker or #10 operates between the lines behind a lone target man.",
+        "bestFor": "Counter-attacking with a #10 behind a target man",
+        "strengths": ["Second striker creates between lines", "Solid two banks of four", "Great for Mourinho-style football", "Defensive solidity"],
+        "weaknesses": ["Limited width in attack", "#10 needs to be elite", "Can be too conservative"],
+        "recommendedRoles": ["Ball-Winning Midfielder", "Advanced Playmaker (#10)", "Winger", "Target Forward"]
+      },
+      "5-2-3": {
+        "description": "Three center-backs with attacking wing-backs. Wide forwards stretch play and create overloads in the final third.",
+        "bestFor": "Defensive solidity with attacking wing-backs",
+        "strengths": ["Three CBs for defensive stability", "Wing-backs provide width", "Wide forwards stretch defense", "Flexible shape"],
+        "weaknesses": ["Can be overrun in midfield", "Requires athletic wing-backs", "Gap between midfield and attack"],
+        "recommendedRoles": ["Ball-Playing Defender", "Ball-Winning Midfielder", "Winger", "Advanced Forward"]
+      }
+    }
+  },
   "lang": {
     "switch": "Sprache wechseln",
     "en": "English",

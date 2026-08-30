@@ -677,6 +677,96 @@
     "goHome": "Ana Sayfaya Git",
     "browseTactics": "Taktiklere Göz At"
   },
+  "formations": {
+    "heroTitle": "FM26 Formasyonları",
+    "heroSubtitle": "Football Manager 2026 formasyonları için eksiksiz rehber. Her formasyon güçlü yönleri, zayıf yönleri, önerilen roller ve en iyi taktik stilleriyle açıklanır — kadronuz için doğru dizilişi seçebilirsiniz.",
+    "bestForLabel": "En uygun:",
+    "strengthsLabel": "Güçlü Yönler",
+    "weaknessesLabel": "Zayıf Yönler",
+    "recommendedRolesLabel": "Önerilen FM26 Rolleri",
+    "tryInBuilder": "Builder'da Dene",
+    "tacticsLibrary": "FM26 Taktik Kütüphanesi",
+    "bestTactics": "FM26 En İyi Taktikler 2026",
+    "playerRoles": "FM26 Oyuncu Rolleri",
+    "faqQ1": "FM26'da en iyi formasyon hangisi?",
+    "faqA1": "En iyi FM26 formasyonu oyun tarzınıza bağlıdır. 4-2-3-1 en dengeli formasyondur ve gegenpress için harikadır, 4-3-3 tiki-taka ve topa sahip olmak için idealdir, 4-4-2 kontra atak ve kanat oyunu için mükemmeldir, 3-5-2 ise defansif/kontra atak yapan takımlar için harikadır.",
+    "faqQ2": "Football Manager 2026'da doğru formasyonu nasıl seçerim?",
+    "faqA2": "Kadronuzun güçlü yönlerini düşünün: güçlü kanat oyuncularınız varsa 4-3-3 veya 4-2-3-1 kullanın; dominant stoperler ve atletik kanat bekleriniz varsa 3-5-2 deneyin; sınırlı oyuncularla kontra atak için 4-4-2 veya 5-3-2 en iyisidir. Formasyonu her zaman oyuncularınızın özelliklerine göre seçin.",
+    "faqQ3": "FM26'da alt takımlar için en iyi formasyon hangısıdır?",
+    "faqA3": "4-4-2 ve 5-3-2, FM26'da alt takımlar ve küçük kulüpler için en iyi formasyonlardır. İki katmanlı oyuncu yapısıyla sağlam defansif yapı sunar ve kırılması zorlarken iki forvetle kontra atak tehdidi sağlarlar.",
+    "data": {
+      "4-2-3-1": {
+        "description": "Modern klasik. İki yedek orta saha, yaratıcı ofansif orta sahayı destekler ve kanat oyuncuları genişlik sağlar.",
+        "bestFor": "Güçlü defansif kalkanla dengeli ofansif oyun",
+        "strengths": ["İki DM defansif istikrar sağlar", "AM #10 çizgiler arasında yaratır", "Kanat oyuncuları sahayı açar", "Gegenpress için harika"],
+        "weaknesses": ["4-3-3'e karşı orta sahada ezilebilir", "Kanat oyuncuları defansif olarak izole kalabilir", "Yaratıcı bir #10 gerektirir"],
+        "recommendedRoles": ["Derin Oyun Kurucu", "Top Kazanan Orta Saha", "Gelişmiş Oyun Kurucu (OS)", "İçe Dönen Kanat", "Gelişmiş Forvet"]
+      },
+      "4-3-3": {
+        "description": "Geniş forvetler rakip savunmayı açar. Üç orta saha, defans ve hücum arasında denge sağlar.",
+        "bestFor": "Topla oynama ve yüksek pres (Tiki-Taka, Gegenpress)",
+        "strengths": ["Üç orta saha topa sahip olmayı domine eder", "Geniş forvetler defansı açar", "Doğal pres şekli", "Taktiksel olarak çok esnek"],
+        "weaknesses": ["Kontra atakta açığa düşebilir", "Atletik orta saha oyuncuları gerektirir", "Geniş forvetler geri koşmalı"],
+        "recommendedRoles": ["Derin Oyun Kurucu", "Box-to-Box Orta Saha", "Mezzala", "Kanat", "Pres Yapan Forvet"]
+      },
+      "4-4-2": {
+        "description": "Geleneksel İngiliz dizilişi. İki katmanlı dörtlü ve klasik forvet ortaklığı.",
+        "bestFor": "Direkt, kontra atak ve kanat oyunu",
+        "strengths": ["İki dörtlü katman = sağlam defans", "İki forvet stoperleri presler", "Basit ve organize kolay", "Alt takımlar için mükemmel"],
+        "weaknesses": ["#10 yaratıcısı yok", "Orta saha sayıca az kalabilir", "Topla oynama kontrolü az"],
+        "recommendedRoles": ["Top Kazanan Orta Saha", "Box-to-Box Orta Saha", "Kanat", "Hedef Forvet", "Pres Yapan Forvet"]
+      },
+      "3-5-2": {
+        "description": "Kanat bekler genişlik sağlarken üç stoper sağlam defansif taban oluşturur ve iki forvet hücum eder.",
+        "bestFor": "Defansif dayanıklılıkla kontra atak (Catenaccio, Düşük Blok)",
+        "strengths": ["Üç stoper cezayı domine eder", "Kanat bekler genişlik sağlar", "Kontra atak için iki forvet", "Defansif takımlar için harika"],
+        "weaknesses": ["Kanat bekler ilerideysek kanatlardan yenebilir", "Atletik kanat bekler gerektirir", "Topla oynamada zorlanabilir"],
+        "recommendedRoles": ["Top Dağıtan Stoper", "Top Kazanan Orta Saha", "Derin Oyun Kurucu", "Carrilero", "Hedef Forvet"]
+      },
+      "5-3-2": {
+        "description": "Kanat beklerle aşırı defansif diziliş. Kontra atak uzmanı formasyon.",
+        "bestFor": "Aşırı defansif kontra atak stratejileri",
+        "strengths": ["Beş defans = kırılması çok zor", "Sıkışık şekil", "Kontra atak uzmanı", "Zayıf takımlar için harika"],
+        "weaknesses": ["İleriye çok sınırlı", "Doğal genişlik yok", "Çok fazla baskı çekebilir"],
+        "recommendedRoles": ["Top Dağıtan Stoper", "Sade Stoper", "Top Kazanan Orta Saha", "Hedef Forvet"]
+      },
+      "3-4-3": {
+        "description": "Kanat beklerin yüksek oynadığı ofansif formasyon. Üç forvet rakip defanslara sürekli baskı uygular.",
+        "bestFor": "Yüksek kanat beklerle agresif ofansif futbol",
+        "strengths": ["Üç forvet amansız presler", "Kanat bekler genişlik sağlar", "Hücumda yoğunluk", "Modern pres şekli"],
+        "weaknesses": ["Kontra atakta çok açığa düşebilir", "Elit kanat bekler gerektirir", "Yüksek risk, yüksek ödül"],
+        "recommendedRoles": ["Top Dağıtan Stoper", "Mezzala", "Kanat", "Gelişmiş Forvet", "Pres Yapan Forvet"]
+      },
+      "4-2-2-2": {
+        "description": "Brezilya Kutusu. İki DM ve iki AM sıkışık bir orta saha kutusu oluşturur, iki forvet önde oynar.",
+        "bestFor": "Kutu orta saha kontrolü ve ofansif yaratıcılık",
+        "strengths": ["Sıkışık orta saha kutusu", "İki forvet ve iki OS", "Dikey tiki-taka için harika", "Ofansif yoğunluk"],
+        "weaknesses": ["Doğal geniş oyuncu yok", "Kanatlardan savunmasız", "Orta sahada tahmin edilebilir olabilir"],
+        "recommendedRoles": ["Derin Oyun Kurucu", "Top Kazanan Orta Saha", "Gelişmiş Oyun Kurucu", "Gelişmiş Forvet"]
+      },
+      "4-1-4-1": {
+        "description": "Sağlam bir DM defansı korur. Dört orta saha genişlik ve sayısal üstünlük sağlar.",
+        "bestFor": "Adanmış DM kalkanıyla defansif istikrar",
+        "strengths": ["DM defansı korur", "Dört orta saha genişlik sağlar", "Sağlam defansif şekil", "Topla oynama için iyi"],
+        "weaknesses": ["Tek forvet izole kalabilir", "DM ve AM arası boşluk", "Dominant forvet gerektirir"],
+        "recommendedRoles": ["Derin Oyun Kurucu (DM)", "Box-to-Box Orta Saha", "Kanat", "Hedef Forvet"]
+      },
+      "4-4-1-1": {
+        "description": "Mourinho özel. İkinci forvet veya #10, tek hedef adamın arkasında çizgiler arasında oynar.",
+        "bestFor": "Hedef adam arkasında #10 ile kontra atak",
+        "strengths": ["İkinci forvet çizgiler arasında yaratır", "İki sağlam dörtlü katman", "Mourinho tarzı futbol için harika", "Defansif dayanıklılık"],
+        "weaknesses": ["Hücumda sınırlı genişlik", "#10 elit olmalı", "Çok konservatif olabilir"],
+        "recommendedRoles": ["Top Kazanan Orta Saha", "Gelişmiş Oyun Kurucu (#10)", "Kanat", "Hedef Forvet"]
+      },
+      "5-2-3": {
+        "description": "Üç stoper ve atak kanat bekler. Geniş forvetler oyunu yayar ve son bölgede yoğunluk yaratır.",
+        "bestFor": "Atak kanat beklerle defansif dayanıklılık",
+        "strengths": ["Defansif istikrar için üç stoper", "Kanat bekler genişlik sağlar", "Geniş forvetler defansı açar", "Esnek şekil"],
+        "weaknesses": ["Orta sahada sayıca az kalabilir", "Atletik kanat bekler gerektirir", "Orta saha ve hücum arası boşluk"],
+        "recommendedRoles": ["Top Dağıtan Stoper", "Top Kazanan Orta Saha", "Kanat", "Gelişmiş Forvet"]
+      }
+    }
+  },
   "lang": {
     "switch": "Dili değiştir",
     "en": "English",

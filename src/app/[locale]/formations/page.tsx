@@ -1,142 +1,108 @@
 import type { Metadata } from "next";
-import { generateSEO } from "@/lib/metadata";
+import { generateLocaleSEO } from "@/lib/metadata";
 import { formationPresets } from "@/lib/tactics-data";
 import { allTactics } from "contentlayer/generated";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, LayoutGrid, Wrench } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-export const metadata: Metadata = generateSEO({
-  title: "FM26 Formations — Complete Football Manager 2026 Formation Guide",
-  description:
-    "Complete guide to Football Manager 2026 formations. Each formation includes strengths, weaknesses, recommended roles, tactical styles, and when to use it. Browse 4-3-3, 4-2-3-1, 4-4-2, 3-5-2, 3-4-3 and more.",
-  path: "/formations",
-  keywords: [
-    "fm26 formations",
-    "football manager 2026 formations",
-    "fm 26 formations",
-    "best fm26 formation",
-    "4-3-3 fm26",
-    "4-2-3-1 fm26",
-    "4-4-2 fm26",
-    "3-5-2 fm26",
-    "3-4-3 fm26",
-    "football manager 2026 best formation",
-  ],
-});
-
-// SEO enrichment data per formation
-const formationSeoData: Record<
-  string,
-  { bestFor: string; strengths: string[]; weaknesses: string[]; recommendedRoles: string[] }
-> = {
-  "4-2-3-1": {
-    bestFor: "Balanced attacking play with a strong defensive shield",
-    strengths: ["Two DMs provide defensive stability", "AM #10 creates between the lines", "Wingers stretch the pitch", "Great for gegenpress"],
-    weaknesses: ["Can be overrun in midfield against 4-3-3", "Wingers can be isolated defensively", "Requires a creative #10"],
-    recommendedRoles: ["Deep-Lying Playmaker", "Ball-Winning Midfielder", "Advanced Playmaker (AM)", "Inside Forward", "Advanced Forward"],
-  },
-  "4-3-3": {
-    bestFor: "Possession and high-pressing football (Tiki-Taka, Gegenpress)",
-    strengths: ["Three midfielders dominate possession", "Wide forwards stretch defense", "Natural pressing shape", "Very flexible tactically"],
-    weaknesses: ["Can be exposed on the counter", "Requires athletic midfielders", "Wide forwards must track back"],
-    recommendedRoles: ["Deep-Lying Playmaker", "Box-to-Box Midfielder", "Mezzala", "Winger", "Pressing Forward"],
-  },
-  "4-4-2": {
-    bestFor: "Direct, counter-attacking and wing play",
-    strengths: ["Two banks of four = solid defense", "Two strikers press CBs", "Simple and easy to organize", "Excellent for underdogs"],
-    weaknesses: ["Lacks a #10 creator", "Midfield can be outnumbered", "Less possession control"],
-    recommendedRoles: ["Ball-Winning Midfielder", "Box-to-Box Midfielder", "Winger", "Target Forward", "Pressing Forward"],
-  },
-  "3-5-2": {
-    bestFor: "Counter-attacking with defensive solidity (Catenaccio, Low Block)",
-    strengths: ["Three CBs dominate the box", "Wing-backs provide width", "Two strikers for counter-attacks", "Great for defensive teams"],
-    weaknesses: ["Vulnerable out wide if wing-backs caught up", "Requires athletic wing-backs", "Can struggle in possession"],
-    recommendedRoles: ["Ball-Playing Defender", "Ball-Winning Midfielder", "Deep-Lying Playmaker", "Carrilero", "Target Forward"],
-  },
-  "5-3-2": {
-    bestFor: "Ultra-defensive counter-attack strategies",
-    strengths: ["Five defenders = very hard to break down", "Compact shape", "Counter-attack specialist", "Great for minnows"],
-    weaknesses: ["Very limited going forward", "No natural width", "Can invite too much pressure"],
-    recommendedRoles: ["Ball-Playing Defender", "No-Nonsense Centre-Back", "Ball-Winning Midfielder", "Target Forward"],
-  },
-  "3-4-3": {
-    bestFor: "Aggressive attacking football with high wing-backs",
-    strengths: ["Three forwards press relentlessly", "Wing-backs provide width", "Overloads in attack", "Modern pressing shape"],
-    weaknesses: ["Very vulnerable on counter", "Requires elite wing-backs", "High risk, high reward"],
-    recommendedRoles: ["Ball-Playing Defender", "Mezzala", "Winger", "Advanced Forward", "Pressing Forward"],
-  },
-  "4-2-2-2": {
-    bestFor: "Box midfield control and attacking flair",
-    strengths: ["Compact midfield box", "Two strikers and two AMs", "Great for vertical tiki-taka", "Attacking overloads"],
-    weaknesses: ["No natural wide players", "Vulnerable out wide", "Can be predictable through the middle"],
-    recommendedRoles: ["Deep-Lying Playmaker", "Ball-Winning Midfielder", "Advanced Playmaker", "Advanced Forward"],
-  },
-  "4-1-4-1": {
-    bestFor: "Defensive stability with a dedicated DM shield",
-    strengths: ["DM protects the back four", "Four midfielders offer width", "Solid defensive shape", "Good for possession"],
-    weaknesses: ["Lone striker can be isolated", "Gap between DM and AM", "Requires a dominant striker"],
-    recommendedRoles: ["Deep-Lying Playmaker (DM)", "Box-to-Box Midfielder", "Winger", "Target Forward"],
-  },
-  "4-4-1-1": {
-    bestFor: "Counter-attacking with a #10 behind a target man",
-    strengths: ["Second striker creates between lines", "Solid two banks of four", "Great for Mourinho-style football", "Defensive solidity"],
-    weaknesses: ["Limited width in attack", "#10 needs to be elite", "Can be too conservative"],
-    recommendedRoles: ["Ball-Winning Midfielder", "Advanced Playmaker (#10)", "Winger", "Target Forward"],
-  },
-};
-
-const faqData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What is the best formation in FM26?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "The best FM26 formation depends on your play style. The 4-2-3-1 is the most balanced and great for gegenpress, the 4-3-3 is ideal for tiki-taka and possession, the 4-4-2 is excellent for counter-attacking and wing play, and the 3-5-2 is perfect for defensive/counter-attacking teams.",
-      },
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  return generateLocaleSEO({
+    locale: params.locale,
+    path: "/formations",
+    en: {
+      title: "FM26 Formations — Complete Football Manager 2026 Formation Guide",
+      description:
+        "Complete guide to Football Manager 2026 formations. Each formation includes strengths, weaknesses, recommended roles, tactical styles, and when to use it. Browse 4-3-3, 4-2-3-1, 4-4-2, 3-5-2, 3-4-3 and more.",
+      keywords: [
+        "fm26 formations",
+        "football manager 2026 formations",
+        "fm 26 formations",
+        "best fm26 formation",
+        "4-3-3 fm26",
+        "4-2-3-1 fm26",
+        "4-4-2 fm26",
+        "3-5-2 fm26",
+        "3-4-3 fm26",
+        "football manager 2026 best formation",
+      ],
     },
-    {
-      "@type": "Question",
-      name: "How do I choose the right formation in Football Manager 2026?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Consider your squad's strengths: if you have strong wingers, use 4-3-3 or 4-2-3-1; if you have dominant CBs and athletic wing-backs, try 3-5-2; for counter-attacking with limited players, 4-4-2 or 5-3-2 work best. Always match the formation to your players' attributes.",
-      },
+    tr: {
+      title: "FM26 Formasyonları — Football Manager 2026 Formasyon Rehberi",
+      description:
+        "Football Manager 2026 formasyonları için eksiksiz rehber. Her formasyon güçlü yönleri, zayıf yönleri, önerilen roller ve taktik stilleriyle açıklanır. 4-3-3, 4-2-3-1, 4-4-2, 3-5-2, 3-4-3 ve daha fazlası.",
+      keywords: [
+        "fm26 formasyonları",
+        "football manager 2026 formasyonları",
+        "fm 26 formasyon",
+        "en iyi fm26 formasyon",
+        "4-3-3 fm26",
+        "4-2-3-1 fm26",
+        "4-4-2 fm26",
+        "3-5-2 fm26",
+        "3-4-3 fm26",
+        "football manager 2026 en iyi formasyon",
+      ],
     },
-    {
-      "@type": "Question",
-      name: "What formation is best for underdogs in FM26?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "The 4-4-2 and 5-3-2 are the best formations for underdogs and smaller clubs in FM26. They provide solid defensive structures with two banks of players, making them hard to break down while still offering counter-attacking threat through two strikers.",
-      },
-    },
-  ],
-};
+  });
+}
 
 export default function FormationsPage() {
+  const t = useTranslations("formations");
+
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: t("faqQ1"),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faqA1"),
+        },
+      },
+      {
+        "@type": "Question",
+        name: t("faqQ2"),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faqA2"),
+        },
+      },
+      {
+        "@type": "Question",
+        name: t("faqQ3"),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faqA3"),
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen -mt-16 pt-16">
       <div className="max-w-5xl mx-auto px-4 py-12 space-y-8">
         {/* Hero */}
         <section className="text-center space-y-3">
-          <h1 className="text-3xl sm:text-4xl font-bold">FM26 Formations</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold">{t("heroTitle")}</h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Complete guide to Football Manager 2026 formations. Each formation is broken down with
-            strengths, weaknesses, recommended roles, and the best tactical styles — so you can pick
-            the right shape for your squad.
+            {t("heroSubtitle")}
           </p>
         </section>
 
         {/* Formation Cards */}
         <section className="space-y-6">
           {formationPresets.map((formation) => {
-            const seo = formationSeoData[formation.formation];
+            const formationKey = `data.${formation.formation}`;
+            const hasSeo = t.raw(`${formationKey}.bestFor`) !== undefined;
+            const strengths = t.raw(`${formationKey}.strengths`) as string[];
+            const weaknesses = t.raw(`${formationKey}.weaknesses`) as string[];
+            const recommendedRoles = t.raw(`${formationKey}.recommendedRoles`) as string[];
             const relatedTactics = allTactics.filter(
-              (t) => t.formation === formation.formation
+              (tc) => tc.formation === formation.formation
             );
 
             return (
@@ -151,24 +117,24 @@ export default function FormationsPage() {
                     {formation.label}
                   </span>
                   <span className="text-text-secondary text-sm">
-                    {formation.description}
+                    {t(`${formationKey}.description`)}
                   </span>
                 </div>
 
-                {seo && (
+                {hasSeo && (
                   <>
                     {/* Best For */}
                     <div className="text-sm">
-                      <span className="font-semibold text-primary">Best for:</span>{" "}
-                      <span className="text-text-secondary">{seo.bestFor}</span>
+                      <span className="font-semibold text-primary">{t("bestForLabel")}</span>{" "}
+                      <span className="text-text-secondary">{t(`${formationKey}.bestFor`)}</span>
                     </div>
 
                     {/* Strengths & Weaknesses */}
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <h3 className="text-sm font-semibold mb-2 text-green-500">Strengths</h3>
+                        <h3 className="text-sm font-semibold mb-2 text-green-500">{t("strengthsLabel")}</h3>
                         <ul className="space-y-1">
-                          {seo.strengths.map((s) => (
+                          {strengths.map((s) => (
                             <li key={s} className="text-xs text-text-secondary flex gap-2">
                               <span className="text-green-500 shrink-0">+</span>
                               {s}
@@ -177,9 +143,9 @@ export default function FormationsPage() {
                         </ul>
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold mb-2 text-red-400">Weaknesses</h3>
+                        <h3 className="text-sm font-semibold mb-2 text-red-400">{t("weaknessesLabel")}</h3>
                         <ul className="space-y-1">
-                          {seo.weaknesses.map((w) => (
+                          {weaknesses.map((w) => (
                             <li key={w} className="text-xs text-text-secondary flex gap-2">
                               <span className="text-red-400 shrink-0">-</span>
                               {w}
@@ -191,9 +157,9 @@ export default function FormationsPage() {
 
                     {/* Recommended Roles */}
                     <div>
-                      <h3 className="text-sm font-semibold mb-2">Recommended FM26 Roles</h3>
+                      <h3 className="text-sm font-semibold mb-2">{t("recommendedRolesLabel")}</h3>
                       <div className="flex flex-wrap gap-2">
-                        {seo.recommendedRoles.map((role) => (
+                        {recommendedRoles.map((role) => (
                           <Link
                             key={role}
                             href="/roles"
@@ -228,7 +194,7 @@ export default function FormationsPage() {
                     className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors ml-auto"
                   >
                     <Wrench className="w-3 h-3" />
-                    Try in Builder
+                    {t("tryInBuilder")}
                   </Link>
                 </div>
               </div>
@@ -239,9 +205,9 @@ export default function FormationsPage() {
         {/* Tactics Guide Links */}
         <section className="grid sm:grid-cols-3 gap-3 pt-4">
           {[
-            { label: "FM26 Tactics Library", href: "/tactics", icon: LayoutGrid },
-            { label: "FM26 Best Tactics 2026", href: "/best", icon: ArrowRight },
-            { label: "FM26 Player Roles", href: "/roles", icon: ArrowRight },
+            { label: t("tacticsLibrary"), href: "/tactics", icon: LayoutGrid },
+            { label: t("bestTactics"), href: "/best", icon: ArrowRight },
+            { label: t("playerRoles"), href: "/roles", icon: ArrowRight },
           ].map((link) => {
             const Icon = link.icon;
             return (
