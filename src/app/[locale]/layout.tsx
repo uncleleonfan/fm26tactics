@@ -102,6 +102,9 @@ export async function generateMetadata({
     alternates: {
       canonical: "https://www.fm26tactics.com",
     },
+    other: {
+      "google-adsense-account": "ca-pub-2798522702383698",
+    },
   };
 }
 
