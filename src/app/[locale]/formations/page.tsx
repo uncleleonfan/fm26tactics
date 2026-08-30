@@ -97,10 +97,26 @@ export default function FormationsPage() {
         <section className="space-y-6">
           {formationPresets.map((formation) => {
             const formationKey = `data.${formation.formation}`;
-            const hasSeo = t.raw(`${formationKey}.bestFor`) !== undefined;
-            const strengths = t.raw(`${formationKey}.strengths`) as string[];
-            const weaknesses = t.raw(`${formationKey}.weaknesses`) as string[];
-            const recommendedRoles = t.raw(`${formationKey}.recommendedRoles`) as string[];
+
+            let hasSeo = false;
+            let strengths: string[] = [];
+            let weaknesses: string[] = [];
+            let recommendedRoles: string[] = [];
+            let description = formation.description;
+
+            try {
+              const bestFor = t.raw(`${formationKey}.bestFor`);
+              hasSeo = bestFor !== undefined && bestFor !== null;
+              if (hasSeo) {
+                strengths = t.raw(`${formationKey}.strengths`) as string[];
+                weaknesses = t.raw(`${formationKey}.weaknesses`) as string[];
+                recommendedRoles = t.raw(`${formationKey}.recommendedRoles`) as string[];
+                description = t(`${formationKey}.description`);
+              }
+            } catch {
+              hasSeo = false;
+            }
+
             const relatedTactics = allTactics.filter(
               (tc) => tc.formation === formation.formation
             );
@@ -117,7 +133,7 @@ export default function FormationsPage() {
                     {formation.label}
                   </span>
                   <span className="text-text-secondary text-sm">
-                    {t(`${formationKey}.description`)}
+                    {description}
                   </span>
                 </div>
 

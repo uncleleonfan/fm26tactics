@@ -764,6 +764,34 @@
         "strengths": ["Three CBs for defensive stability", "Wing-backs provide width", "Wide forwards stretch defense", "Flexible shape"],
         "weaknesses": ["Can be overrun in midfield", "Requires athletic wing-backs", "Gap between midfield and attack"],
         "recommendedRoles": ["Ball-Playing Defender", "Ball-Winning Midfielder", "Winger", "Advanced Forward"]
+      },
+      "4-2-4": {
+        "description": "Ultra-attacking shape with four forwards. Risky but devastating — the FM26 community's top-scoring formation in tests.",
+        "bestFor": "All-out attack when you need goals",
+        "strengths": ["Four forwards for maximum attack", "Overloads opposition defense", "Highest scoring potential"],
+        "weaknesses": ["Very vulnerable to counters", "Minimal midfield cover", "Requires elite finishers"],
+        "recommendedRoles": ["Advanced Forward", "Pressing Forward", "Advanced Playmaker", "Ball-Winning Midfielder"]
+      },
+      "3-4-2-1": {
+        "description": "Conte's trademark. Two #10s behind a lone striker with wing-backs providing width. Extremely solid through the middle.",
+        "bestFor": "Defensive solidity with two playmakers behind a striker",
+        "strengths": ["Three CBs for defensive stability", "Two #10s create between lines", "Wing-backs provide width", "Compact through the middle"],
+        "weaknesses": ["Vulnerable out wide", "Requires athletic wing-backs", "Lone striker can be isolated"],
+        "recommendedRoles": ["Ball-Playing Defender", "Wing-Back", "Advanced Playmaker", "Advanced Forward"]
+      },
+      "4-3-2-1": {
+        "description": "Christmas Tree. Narrow and compact. Two advanced playmakers operate behind a solo striker, overwhelming the opponent's midfield.",
+        "bestFor": "Midfield overload with narrow playmakers",
+        "strengths": ["Midfield overload", "Two playmakers behind striker", "Compact defensive shape", "Dominates possession"],
+        "weaknesses": ["No natural width", "Vulnerable to wide attacks", "Striker can be isolated"],
+        "recommendedRoles": ["Deep-Lying Playmaker", "Advanced Playmaker", "Advanced Forward", "Full-Back"]
+      },
+      "4-1-2-1-2": {
+        "description": "Diamond midfield. A DM anchors, two CMs shuttle, and a #10 creates. Two strikers give you vertical threat against any back line.",
+        "bestFor": "Vertical attacking threat with two strikers",
+        "strengths": ["Two strikers for vertical threat", "Diamond controls midfield", "#10 creates chances", "DM provides defensive cover"],
+        "weaknesses": ["No natural width", "Vulnerable to wide attacks", "Requires athletic full-backs"],
+        "recommendedRoles": ["Ball-Winning Midfielder", "Box-to-Box Midfielder", "Advanced Playmaker", "Advanced Forward"]
       }
     }
   },

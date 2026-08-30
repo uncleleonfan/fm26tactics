@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description:
     "Expert FM26 tactics blog covering gegenpress setups, player roles, set piece routines, meta analysis, and beginner guides. Updated weekly with community-tested strategies.",
   keywords: [
-    "fm26 blog", "football manager 2026 guides", "fm26 tactics blog",
-    "fm26 meta", "gegenpress guide", "player roles explained",
+    "fm26 blog", "fm26 tactics blog", "football manager 2026 blog",
+    "fm26 strategy blog", "fm26 tips", "fm26 match analysis",
   ],
   alternates: { canonical: "https://www.fm26tactics.com/blog" },
   openGraph: {

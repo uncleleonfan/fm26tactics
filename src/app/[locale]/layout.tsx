@@ -55,8 +55,8 @@ export async function generateMetadata({
     description:
       "Master Football Manager 2026 with expert tactics, proven formations, player roles analysis, and an interactive builder to craft winning strategies.",
     keywords: [
-      "fm 26 tactics", "fm26 tactics", "fm26 best tactics", "best fm26 tactics",
-      "football manager 2026", "fm26 formations", "tiki-taka", "player roles",
+      "fm 26 tactics", "fm26 tactics", "football manager 2026",
+      "fm26 formations", "tiki-taka", "player roles",
     ],
     authors: [{ name: "FM26 Tactics", url: "https://www.fm26tactics.com" }],
     metadataBase: new URL("https://www.fm26tactics.com"),

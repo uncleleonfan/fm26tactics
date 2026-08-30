@@ -764,6 +764,34 @@
         "strengths": ["Defansif istikrar için üç stoper", "Kanat bekler genişlik sağlar", "Geniş forvetler defansı açar", "Esnek şekil"],
         "weaknesses": ["Orta sahada sayıca az kalabilir", "Atletik kanat bekler gerektirir", "Orta saha ve hücum arası boşluk"],
         "recommendedRoles": ["Top Dağıtan Stoper", "Top Kazanan Orta Saha", "Kanat", "Gelişmiş Forvet"]
+      },
+      "4-2-4": {
+        "description": "Dört forvetli ultra hücumlu diziliş. Riskli ama yıkıcı — FM26 topluluğunun testlerde en çok gol atan dizilişi.",
+        "bestFor": "Gole ihtiyaç duyduğunuzda tam hücum",
+        "strengths": ["Maksimum hücum için dört forvet", "Rakip savunmayı aşırı yükler", "En yüksek gol potansiyeli"],
+        "weaknesses": ["Kontra ataklara çok açık", "Minimal orta saha koruması", "Elit forvet gerektirir"],
+        "recommendedRoles": ["Gelişmiş Forvet", "Baskı Forveti", "Gelişmiş Oyun Kurucu", "Top Kazanan Orta Saha"]
+      },
+      "3-4-2-1": {
+        "description": "Conte'nin imzası. Tek forvetin arkasında iki #10, kanat bekler genişlik sağlar. Orta alandan son derece sağlam.",
+        "bestFor": "İki oyun kurucuyla savunma sağlamlığı",
+        "strengths": ["Savunma istikrarı için üç stoper", "İki #10 çizgiler arasında yaratır", "Kanat bekler genişlik sağlar", "Orta alanda kompakt"],
+        "weaknesses": ["Kanatlardan savunmasız", "Atletik kanat bekleri gerektirir", "Tek forvet izole olabilir"],
+        "recommendedRoles": ["Top Dağıtan Stoper", "Kanat Beki", "Gelişmiş Oyun Kurucu", "Gelişmiş Forvet"]
+      },
+      "4-3-2-1": {
+        "description": "Noel Ağacı. Dar ve kompakt. İki gelişmiş oyun kurucu tek forvetin arkasında çalışır, rakibin orta sahasını ezer geçer.",
+        "bestFor": "Dar oyun kurucularla orta saha aşırı yüklemesi",
+        "strengths": ["Orta saha aşırı yüklemesi", "Forvetin arkasında iki oyun kurucu", "Kompakt savunma şekli", "Topa hükmetme"],
+        "weaknesses": ["Doğal genişlik yok", "Kanal ataklarına savunmasız", "Forvet izole olabilir"],
+        "recommendedRoles": ["Derin Oyun Kurucu", "Gelişmiş Oyun Kurucu", "Gelişmiş Forvet", "Bek"]
+      },
+      "4-1-2-1-2": {
+        "description": "Elmas orta saha. Bir DM tutar, iki CM koşturur, #10 yaratır. İki forvet her savunma hattına karşı dikey tehdit sağlar.",
+        "bestFor": "İki forvetle dikey hücum tehdidi",
+        "strengths": ["Dikey tehdit için iki forvet", "Elmas orta sahayı kontrol eder", "#10 şans yaratır", "DM savunma koruması sağlar"],
+        "weaknesses": ["Doğal genişlik yok", "Kanal ataklarına savunmasız", "Atletik bekler gerektirir"],
+        "recommendedRoles": ["Top Kazanan Orta Saha", "Kutu-Kutu Orta Saha", "Gelişmiş Oyun Kurucu", "Gelişmiş Forvet"]
       }
     }
   },

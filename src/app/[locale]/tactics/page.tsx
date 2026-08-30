@@ -15,22 +15,22 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     locale: params.locale,
     path: "/tactics",
     en: {
-      title: "FM26 Tactics – Best Football Manager 2026 Tactics",
+      title: "FM26 Tactics Library – Football Manager 2026 Tactics & Formations",
       description:
-        "Discover the best FM26 tactics and formations for Football Manager 2026. Browse tested tactical styles — gegenpress, tiki-taka, counter-attack, wing play — with complete player roles, team instructions, and performance breakdowns.",
+        "Browse the complete FM26 tactics library for Football Manager 2026. Every tactical style — gegenpress, tiki-taka, counter-attack, wing play — with complete player roles, team instructions, and performance breakdowns.",
       keywords: [
         "fm26 tactics", "fm 26 tactics", "football manager 2026 tactics",
-        "fm26 tactic", "best fm26 tactics", "fm26 gegenpress",
+        "fm26 tactic", "fm26 tactics library", "fm26 gegenpress",
         "fm26 tiki taka", "fm26 counter attack", "fm26 formations",
       ],
     },
     tr: {
-      title: "FM26 Taktik Kütüphanesi — En İyi FM26 Taktikleri ve Dizilişleri",
+      title: "FM26 Taktik Kütüphanesi — Football Manager 2026 Taktikleri ve Dizilişleri",
       description:
-        "Tam FM26 taktik kütüphanesini keşfedin — her diziliş oyuncu rolleri, takım talimatları ve performans analizleriyle. Football Manager 2026'da kadronuz için en iyi FM26 taktiklerini bulun.",
+        "Tam FM26 taktik kütüphanesini keşfedin — her diziliş oyuncu rolleri, takım talimatları ve performans analizleriyle. Football Manager 2026'da kadronuz için FM26 taktiklerini bulun.",
       keywords: [
         "fm26 taktikleri", "fm 26 taktikleri", "football manager 2026 taktikleri",
-        "fm26 taktik", "en iyi fm26 taktikleri", "fm26 gegenpress",
+        "fm26 taktik", "fm26 taktik kütüphanesi", "fm26 gegenpress",
         "fm26 tiki taka", "fm26 kontra atak", "fm26 dizilişleri",
       ],
     },
@@ -61,10 +61,10 @@ const faqData = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What are the best FM26 tactics?",
+      name: "What tactical styles are available for FM26?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The best FM26 tactics depend on your squad and style of play. The 4-2-3-1 gegenpress is a top choice for high pressing, 4-3-3 systems dominate possession and meta play, while the 3-5-2 works brilliantly for counter-attacking teams.",
+        text: "The FM26 tactics library covers every major tactical style: gegenpress, tiki-taka, counter-attack, wing play, catenaccio, and diamond midfield. Each tactic includes complete player roles, team instructions, and formation guides. For our ranked top 8, see the FM26 Best Tactics page.",
       },
     },
     {
@@ -201,12 +201,12 @@ export default async function TacticsListPage({
           <p className="text-text-secondary text-sm mb-4 max-w-2xl">{tc("stylesIntro")}</p>
           <div className="flex flex-wrap gap-2">
             {[
-              { label: "Gegenpress", slug: "gegenpress-4-3-3" },
-              { label: "Tiki-Taka", slug: "possession-tiki-taka" },
-              { label: "Counter Attack", slug: "counter-attack" },
-              { label: "Wing Play", slug: "wing-play-4-4-2" },
-              { label: "Klopp Gegenpress", slug: "klopp-salso-geldpress" },
-              { label: "Vertical Tiki-Taka", slug: "vertical-tiki-taka" },
+              { label: "Gegenpress", slug: "4-2-3-1-gegenpress" },
+              { label: "Tiki-Taka", slug: "4-3-3-tiki-taka" },
+              { label: "Counter Attack", slug: "3-5-2-counter-attack" },
+              { label: "Wing Play", slug: "4-4-2-wing-play" },
+              { label: "Catenaccio", slug: "3-5-2-catenaccio" },
+              { label: "Diamond", slug: "4-1-2-1-2-diamond" },
             ].map((style) => (
               <Link
                 key={style.slug}
@@ -220,7 +220,7 @@ export default async function TacticsListPage({
           </div>
         </section>
 
-        {/* Best FM26 Formations */}
+        {/* Best FM26 Formations — merged with quick nav */}
         <section className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <LayoutGrid className="w-5 h-5 text-primary shrink-0" />
@@ -228,13 +228,16 @@ export default async function TacticsListPage({
           </div>
           <p className="text-text-secondary text-sm mb-4 max-w-2xl">{tc("formationsSectionIntro")}</p>
           <div className="flex flex-wrap gap-2 mb-4">
-            {["4-3-3", "4-2-3-1", "4-4-2", "3-5-2", "4-1-2-1-2", "4-1-4-1"].map((f) => (
+            {anchors.map((anchor) => (
               <Link
-                key={f}
-                href="/formations"
-                className="inline-flex items-center px-4 py-2 rounded-xl glass-card border border-primary/10 hover:border-primary/40 transition-colors"
+                key={anchor.slug}
+                href={`/tactics/${anchor.slug}`}
+                className="inline-flex items-baseline gap-2 px-4 py-2 rounded-xl glass-card border border-primary/10 hover:border-primary/40 transition-colors"
               >
-                <span className="font-mono font-semibold text-primary">{f}</span>
+                <span className="font-mono font-semibold text-primary">
+                  {anchor.label}
+                </span>
+                <span className="text-xs text-text-secondary">{anchor.style}</span>
               </Link>
             ))}
           </div>
@@ -258,7 +261,7 @@ export default async function TacticsListPage({
             {[
               { label: "FM26 Player Roles", href: "/roles", icon: "users" },
               { label: "FM26 Shouts Guide", href: "/guides/match-day-shouts-guide", icon: "book" },
-              { label: "Team Instructions", href: "/guides/team-instructions-guide", icon: "wrench" },
+              { label: "How to Build a Tactic", href: "/guides/how-to-build-a-tactic", icon: "wrench" },
             ].map((guide) => (
               <Link
                 key={guide.href}
@@ -274,30 +277,6 @@ export default async function TacticsListPage({
             ))}
           </div>
         </section>
-
-        {/* 阵型快捷锚点 */}
-        <nav className="mb-8" aria-label="FM26 Formations">
-          <div className="flex items-center gap-2 mb-3">
-            <LayoutGrid className="w-4 h-4 text-primary shrink-0" />
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary">
-              {tc("quickNavTitle")}
-            </h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {anchors.map((anchor) => (
-              <Link
-                key={anchor.slug}
-                href={`/tactics/${anchor.slug}`}
-                className="inline-flex items-baseline gap-2 px-4 py-2 rounded-xl glass-card border border-primary/10 hover:border-primary/40 transition-colors"
-              >
-                <span className="font-mono font-semibold text-primary">
-                  {anchor.label}
-                </span>
-                <span className="text-xs text-text-secondary">{anchor.style}</span>
-              </Link>
-            ))}
-          </div>
-        </nav>
 
         <TacticsList tactics={(isTr ? allTacticTrs : allTactics) as Tactic[]} />
 

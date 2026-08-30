@@ -10,6 +10,11 @@ export const metadata: Metadata = generateSEO({
   title: "FM26 Guides — Training, Tactics & Strategy Tutorials",
   description: "Comprehensive Football Manager 2026 guides. Learn tactics, training, scouting, youth development, and match day preparation.",
   path: "/guides",
+  keywords: [
+    "fm26 guides", "football manager 2026 guides", "fm26 training guide",
+    "fm26 tactics tutorial", "fm26 scouting guide", "fm26 youth development",
+    "fm26 match preparation", "fm26 strategy tutorial",
+  ],
 });
 
 const categoryIcons: Record<string, React.ReactNode> = {
