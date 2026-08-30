@@ -5,7 +5,7 @@ import { TacticsList } from "@/components/tactics/tactics-list";
 import { JsonLd } from "@/components/shared/json-ld";
 import { allTactics, allTacticTrs } from "contentlayer/generated";
 import type { Tactic } from "contentlayer/generated";
-import { ArrowRight, BookOpen, Globe, LayoutGrid, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Globe, LayoutGrid, Shield, Sparkles, Users, Wrench } from "lucide-react";
 import { generateLocaleSEO } from "@/lib/metadata";
 import type { Metadata } from "next";
 
@@ -15,9 +15,9 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     locale: params.locale,
     path: "/tactics",
     en: {
-      title: "FM26 Tactics Library — Best FM26 Tactics & Formations",
+      title: "FM26 Tactics – Best Football Manager 2026 Tactics",
       description:
-        "Explore the complete FM26 tactics library — every formation with player roles, team instructions, and performance breakdowns. Find the best FM26 tactics for your squad in Football Manager 2026.",
+        "Discover the best FM26 tactics and formations for Football Manager 2026. Browse tested tactical styles — gegenpress, tiki-taka, counter-attack, wing play — with complete player roles, team instructions, and performance breakdowns.",
     },
     tr: {
       title: "FM26 Taktik Kütüphanesi — En İyi FM26 Taktikleri ve Dizilişleri",
@@ -128,6 +128,117 @@ export default async function TacticsListPage({
           <p className="text-text-secondary leading-relaxed">
             {tc("introText2")}
           </p>
+        </section>
+
+        {/* Best FM26 Tactics by Category */}
+        <section className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Shield className="w-5 h-5 text-primary shrink-0" />
+            <h2 className="text-xl font-bold">{tc("bestByCategoryTitle")}</h2>
+          </div>
+          <p className="text-text-secondary text-sm mb-4 max-w-2xl">{tc("bestByCategoryIntro")}</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { label: tc("bestOverall"), href: "/best", desc: "Top-rated FM26 tactics across all play styles" },
+              { label: tc("bestAttacking"), href: "/best", desc: "High-scoring, aggressive tactical setups" },
+              { label: tc("bestDefensive"), href: "/best", desc: "Solid defensive structures and low blocks" },
+              { label: tc("bestPossession"), href: "/best", desc: "Dominate the ball with tiki-taka systems" },
+              { label: tc("bestCounter"), href: "/best", desc: "Hit teams on the break with pace" },
+              { label: tc("bestUnderdog"), href: "/best", desc: "Best tactics for smaller clubs and budgets" },
+            ].map((cat) => (
+              <Link
+                key={cat.label}
+                href={cat.href}
+                className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors group"
+              >
+                <div className="font-semibold text-primary mb-1">{cat.label}</div>
+                <p className="text-xs text-text-secondary">{cat.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* FM26 Tactical Styles */}
+        <section className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Sparkles className="w-5 h-5 text-primary shrink-0" />
+            <h2 className="text-xl font-bold">{tc("stylesTitle")}</h2>
+          </div>
+          <p className="text-text-secondary text-sm mb-4 max-w-2xl">{tc("stylesIntro")}</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: "Gegenpress", slug: "gegenpress-4-3-3" },
+              { label: "Tiki-Taka", slug: "possession-tiki-taka" },
+              { label: "Counter Attack", slug: "counter-attack" },
+              { label: "Wing Play", slug: "wing-play-4-4-2" },
+              { label: "Klopp Gegenpress", slug: "klopp-salso-geldpress" },
+              { label: "Vertical Tiki-Taka", slug: "vertical-tiki-taka" },
+            ].map((style) => (
+              <Link
+                key={style.slug}
+                href={`/tactics/${style.slug}`}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass-card border border-primary/10 hover:border-primary/40 transition-colors"
+              >
+                <span className="text-sm font-medium">{style.label}</span>
+                <ArrowRight className="w-3 h-3 text-primary" />
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Best FM26 Formations */}
+        <section className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <LayoutGrid className="w-5 h-5 text-primary shrink-0" />
+            <h2 className="text-xl font-bold">{tc("formationsSectionTitle")}</h2>
+          </div>
+          <p className="text-text-secondary text-sm mb-4 max-w-2xl">{tc("formationsSectionIntro")}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {["4-3-3", "4-2-3-1", "4-4-2", "3-5-2", "4-1-2-1-2", "4-1-4-1"].map((f) => (
+              <Link
+                key={f}
+                href="/formations"
+                className="inline-flex items-center px-4 py-2 rounded-xl glass-card border border-primary/10 hover:border-primary/40 transition-colors"
+              >
+                <span className="font-mono font-semibold text-primary">{f}</span>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/formations"
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          >
+            {tc("formationsSectionCta")}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </section>
+
+        {/* FM26 Tactics Guides */}
+        <section className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <BookOpen className="w-5 h-5 text-primary shrink-0" />
+            <h2 className="text-xl font-bold">{tc("guidesSectionTitle")}</h2>
+          </div>
+          <p className="text-text-secondary text-sm mb-4 max-w-2xl">{tc("guidesSectionIntro")}</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { label: "FM26 Player Roles", href: "/roles", icon: "users" },
+              { label: "FM26 Shouts Guide", href: "/guides/match-day-shouts-guide", icon: "book" },
+              { label: "Team Instructions", href: "/guides/team-instructions-guide", icon: "wrench" },
+            ].map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
+              >
+                {guide.icon === "users" && <Users className="w-5 h-5 text-primary shrink-0" />}
+                {guide.icon === "book" && <BookOpen className="w-5 h-5 text-primary shrink-0" />}
+                {guide.icon === "wrench" && <Wrench className="w-5 h-5 text-primary shrink-0" />}
+                <span className="text-sm font-medium">{guide.label}</span>
+                <ArrowRight className="w-4 h-4 text-primary shrink-0 ml-auto group-hover:translate-x-1 transition-transform" />
+              </Link>
+            ))}
+          </div>
         </section>
 
         {/* 阵型快捷锚点 */}

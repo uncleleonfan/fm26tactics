@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
-import { Shield, Zap, Swords, Crosshair, ArrowRight } from "lucide-react";
+import { Shield, Zap, Swords, Crosshair, ArrowRight, BookOpen, LayoutGrid, Wrench } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
 import type { PlayerRoleCategory } from "@/types/tactic";
@@ -129,6 +129,28 @@ export default async function RolesPage({ params }: { params: { locale: string }
             })}
           </div>
         </div>
+
+        {/* Internal Links — Topical Graph */}
+        <section className="grid sm:grid-cols-3 gap-4 mt-12">
+          {[
+            { label: "FM26 Formations", href: "/formations", icon: LayoutGrid },
+            { label: "FM26 Tactics Library", href: "/tactics", icon: BookOpen },
+            { label: "FM26 Tactic Builder", href: "/builder", icon: Wrench },
+          ].map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="glass-card p-5 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
+              >
+                <Icon className="w-5 h-5 text-primary shrink-0" />
+                <span className="text-sm font-medium">{link.label}</span>
+                <ArrowRight className="w-4 h-4 text-primary shrink-0 ml-auto group-hover:translate-x-1 transition-transform" />
+              </Link>
+            );
+          })}
+        </section>
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ export function Header() {
 
   const navLinks = [
     { href: "/tactics", label: t("tactics") },
+    { href: "/formations", label: t("formations") },
     { href: "/best", label: t("bestTactics") },
     { href: "/blog", label: t("blog") },
     { href: "/roles", label: t("playerRoles") },

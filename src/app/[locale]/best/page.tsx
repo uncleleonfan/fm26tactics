@@ -172,6 +172,25 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
             <Link href="/builder" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-background-primary font-semibold text-sm hover:bg-primary-hover transition-all hover:shadow-[0_0_20px_rgba(0,230,118,0.3)]">{b("ctaButton")} <ArrowRight className="w-4 h-4" /></Link>
           </div>
         </section>
+
+        {/* Internal Links — Topical Graph */}
+        <section className="pb-20 px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto grid sm:grid-cols-3 gap-3">
+            {[
+              { label: "FM26 Formations", href: "/formations" },
+              { label: "FM26 Tactics Library", href: "/tactics" },
+              { label: "FM26 Player Roles", href: "/roles" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="glass-card p-3 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors text-center"
+              >
+                <span className="text-xs font-medium">{link.label}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
     </>
   );

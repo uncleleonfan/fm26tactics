@@ -3,7 +3,7 @@
 import { Link } from "@/i18n/routing";
 import { useFormatter, useTranslations } from "next-intl";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { ArrowLeft, Clock, Calendar, Tag, BarChart3, Copy, Check, LayoutTemplate } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Tag, BarChart3, Copy, Check, LayoutTemplate, LayoutGrid, Users, Wrench } from "lucide-react";
 import { useState } from "react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
@@ -211,6 +211,31 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                 tags={tactic.tags || []}
                 formation={tactic.formation}
               />
+
+              {/* Topical Graph — Related Guides */}
+              <div className="grid sm:grid-cols-3 gap-3 mt-8">
+                <Link
+                  href={`/formations#${tactic.formation}`}
+                  className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
+                >
+                  <LayoutGrid className="w-5 h-5 text-primary shrink-0" />
+                  <span className="text-sm font-medium">Formation: {tactic.formation}</span>
+                </Link>
+                <Link
+                  href="/roles"
+                  className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
+                >
+                  <Users className="w-5 h-5 text-primary shrink-0" />
+                  <span className="text-sm font-medium">FM26 Player Roles</span>
+                </Link>
+                <Link
+                  href="/builder"
+                  className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
+                >
+                  <Wrench className="w-5 h-5 text-primary shrink-0" />
+                  <span className="text-sm font-medium">Try in Builder</span>
+                </Link>
+              </div>
 
             </div>
           </div>

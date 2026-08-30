@@ -1,10 +1,12 @@
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, Check, Sparkles, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, Target, Wrench } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
 import { roleWonderkids } from "@/lib/role-wonderkids";
+import { generateSEO } from "@/lib/metadata";
 import type { PlayerDuty } from "@/types/tactic";
 
 const RoleRadarChart = dynamic(
@@ -23,6 +25,127 @@ const RoleRadarChart = dynamic(
 interface Props {
   params: { locale: string; slug: string };
 }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const role = playerRoles.find((r) => r.id === params.slug);
+  if (!role) return {};
+  return generateSEO({
+    title: `${role.name} FM26 — Complete Role Guide | FM26 Tactics`,
+    description: role.description,
+    path: `/roles/${role.id}`,
+    type: "article",
+    keywords: [
+      `fm26 ${role.name.toLowerCase()}`,
+      `${role.name.toLowerCase()} fm26`,
+      "fm26 player roles",
+      "football manager 2026 player roles",
+      `fm 26 ${role.name.toLowerCase()}`,
+      "fm26 role guide",
+    ],
+  });
+}
+
+// Best partnerships data per role
+const rolePartnerships: Record<string, Array<{ partner: string; partnerId: string; note: string }>> = {
+  "deep-lying-playmaker": [
+    { partner: "Box-to-Box Midfielder", partnerId: "box-to-box-midfielder", note: "BBM covers the ground DLP can't, creating the perfect defensive shield while DLP orchestrates" },
+    { partner: "Ball-Winning Midfielder", partnerId: "ball-winning-midfielder", note: "BWM wins the ball and gives it to DLP to distribute — classic Serie A pairing" },
+    { partner: "Mezzala", partnerId: "mezzala", note: "Mezzala drifts wide and creates overloads while DLP controls the center" },
+  ],
+  "box-to-box-midfielder": [
+    { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "DLP provides the creativity, BBM provides the engine — the most balanced midfield duo" },
+    { partner: "Ball-Winning Midfielder", partnerId: "ball-winning-midfielder", note: "BWM anchors defensively, allowing BBM to roam box-to-box" },
+    { partner: "Advanced Playmaker", partnerId: "advanced-playmaker", note: "AP creates while BBM carries the ball forward — vertical tiki-taka setup" },
+  ],
+  "ball-playing-defender": [
+    { partner: "No-Nonsense Centre-Back", partnerId: "no-nonsense-centre-back", note: "BPD plays, NN-CB defends — perfect complementary CB pairing" },
+    { partner: "Ball-Winning Midfielder", partnerId: "ball-winning-midfielder", note: "BWM presses high, BPD steps into midfield to build from the back" },
+    { partner: "Sweeper Keeper", partnerId: "sweeper-keeper", note: "SK sweeps behind the BPD, allowing the BPD to push into a high line" },
+  ],
+  "advanced-forward": [
+    { partner: "Deep-Lying Forward", partnerId: "deep-lying-forward", note: "DLF drops deep and creates, AF stretches the defense — classic big-man/little-man" },
+    { partner: "Pressing Forward", partnerId: "pressing-forward", note: "PF creates chaos pressing CBs, AF capitalizes on the space" },
+    { partner: "Inside Forward", partnerId: "inside-forward", note: "IF cuts inside and links with AF in the box — devastating combination" },
+  ],
+};
+
+// When to Use / When to Avoid data per role
+const roleWhenToUse: Record<string, { whenToUse: string[]; whenToAvoid: string[] }> = {
+  "deep-lying-playmaker": {
+    whenToUse: [
+      "You want to control possession and tempo",
+      "You have a technically gifted passer in the DM/CM position",
+      "Your tactic uses a patient build-up from the back",
+      "You play with a deeper defensive line",
+    ],
+    whenToAvoid: [
+      "Your team is slow and gets pressed high — DLP needs time on the ball",
+      "You play a fast counter-attacking style",
+      "Your player has low Composure and Decisions attributes",
+    ],
+  },
+  "box-to-box-midfielder": {
+    whenToUse: [
+      "You want an all-action midfielder who contributes at both ends",
+      "Your tactic requires runners covering large distances",
+      "You have an athletic midfielder with high Stamina and Work Rate",
+      "You play a pressing or high-tempo style",
+    ],
+    whenToAvoid: [
+      "Your player has low Stamina or Natural Fitness",
+      "You already have two attack-minded midfielders",
+      "You need a specialist defensive midfielder instead",
+    ],
+  },
+  "ball-playing-defender": {
+    whenToUse: [
+      "You want to build attacks from the back",
+      "Your CB has excellent Passing, Vision, and Composure",
+      "You play with a high defensive line",
+      "Your tactic uses Gegenpress or Possession styles",
+    ],
+    whenToAvoid: [
+      "Your CB has poor Passing or Technique",
+      "You play a low block / defensive style",
+      "Your CB has low Decisions — risk of costly turnovers",
+    ],
+  },
+  "advanced-forward": {
+    whenToUse: [
+      "You need a pure goalscorer who stays high and finishes chances",
+      "Your striker has elite Finishing, Composure, and Off the Ball",
+      "You play with creative midfielders who can feed the AF",
+      "You want a focal point for crosses and through balls",
+    ],
+    whenToAvoid: [
+      "Your striker has poor Finishing or Composure",
+      "You want a forward who drops deep and creates — use DLF instead",
+      "Your team struggles to create chances — AF won't help in buildup",
+    ],
+  },
+  "sweeper-keeper": {
+    whenToUse: [
+      "You play with a high defensive line",
+      "Your GK is good at rushing out and distribution",
+      "You want your keeper to act as a sweeper behind the defense",
+    ],
+    whenToAvoid: [
+      "Your GK has poor Rushing Out or One-on-Ones",
+      "You play with a deep defensive line",
+    ],
+  },
+  "inside-forward": {
+    whenToUse: [
+      "You have a pacy, skillful winger who can cut inside",
+      "You want goals from wide positions",
+      "Your striker benefits from wide players creating central overloads",
+    ],
+    whenToAvoid: [
+      "Your wide player has poor Dribbling or Finishing",
+      "You want traditional crossing wingers — use Winger role instead",
+    ],
+  },
+};
 
 const dutyColors: Record<PlayerDuty, string> = {
   defend: "#448AFF",
@@ -252,7 +375,7 @@ export default async function RoleDetailPage({ params }: Props) {
                 {role.bestFormations.map((formation) => (
                   <Link
                     key={formation}
-                    href={`/tactics?formation=${formation}`}
+                    href={`/formations#${formation}`}
                     className="px-3 py-2 rounded-lg bg-surface border border-surface-border text-sm font-mono text-text-secondary hover:text-primary hover:border-primary/30 transition-all"
                   >
                     {formation}
@@ -260,6 +383,67 @@ export default async function RoleDetailPage({ params }: Props) {
                 ))}
               </div>
             </div>
+
+            {/* Best Role Partnerships */}
+            {(() => {
+              const partnerships = rolePartnerships[role.id];
+              if (!partnerships?.length) return null;
+              return (
+                <div className="glass-panel p-6 mt-8">
+                  <h2 className="text-lg font-semibold mb-4">Best Role Partnerships</h2>
+                  <div className="space-y-3">
+                    {partnerships.map((p) => (
+                      <Link
+                        key={p.partnerId}
+                        href={`/roles/${p.partnerId}`}
+                        className="block p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-semibold text-primary">{p.partner}</span>
+                          <ArrowRight className="w-3 h-3 text-text-muted" />
+                        </div>
+                        <p className="text-xs text-text-secondary">{p.note}</p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* When to Use / When to Avoid */}
+            {(() => {
+              const guide = roleWhenToUse[role.id];
+              if (!guide) return null;
+              return (
+                <div className="glass-panel p-6 mt-8">
+                  <h2 className="text-lg font-semibold mb-4">When to Use &amp; When to Avoid {rName}</h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <h3 className="text-sm font-semibold mb-2 text-green-500">When to Use</h3>
+                      <ul className="space-y-1.5">
+                        {guide.whenToUse.map((item) => (
+                          <li key={item} className="text-xs text-text-secondary flex gap-2">
+                            <Check className="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold mb-2 text-red-400">When to Avoid</h3>
+                      <ul className="space-y-1.5">
+                        {guide.whenToAvoid.map((item) => (
+                          <li key={item} className="text-xs text-text-secondary flex gap-2">
+                            <span className="text-red-400 shrink-0 mt-0.5">-</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Top Wonderkids for This Role */}
             {(() => {

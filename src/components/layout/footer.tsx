@@ -19,9 +19,10 @@ export function Footer() {
       key: ft("tactics"),
       links: [
         { label: ft("allTactics"), href: "/tactics" },
-        { label: "4-2-3-1", href: "/tactics?formation=4-2-3-1" },
-        { label: "4-3-3", href: "/tactics?formation=4-3-3" },
-        { label: "3-5-2", href: "/tactics?formation=3-5-2" },
+        { label: ft("formations"), href: "/formations" },
+        { label: "4-2-3-1", href: "/formations#4-2-3-1" },
+        { label: "4-3-3", href: "/formations#4-3-3" },
+        { label: "3-5-2", href: "/formations#3-5-2" },
       ],
     },
     {

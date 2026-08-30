@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...localeAwareRoutes,
     { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${base}/roles`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
+    { url: `${base}/formations`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/guides`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/builder`, lastModified: fixedDate, changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${base}/about`, lastModified: fixedDate, changeFrequency: "monthly" as const, priority: 0.5 },
