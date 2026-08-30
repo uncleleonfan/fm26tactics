@@ -206,7 +206,7 @@ export default function FormationsPage() {
                     </div>
                   )}
                   <Link
-                    href="/builder"
+                    href={`/builder?formation=${formation.formation}`}
                     className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors ml-auto"
                   >
                     <Wrench className="w-3 h-3" />

@@ -160,7 +160,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                       )}
                     </button>
                     <Link
-                      href="/builder"
+                      href={`/builder?formation=${tactic.formation}`}
                       data-track="tactic_open_builder"
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-surface-border text-text-secondary text-sm font-semibold hover:border-primary/40 hover:text-text-primary transition-colors"
                     >
@@ -229,7 +229,7 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                   <span className="text-sm font-medium">FM26 Player Roles</span>
                 </Link>
                 <Link
-                  href="/builder"
+                  href={`/builder?formation=${tactic.formation}`}
                   className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
                 >
                   <Wrench className="w-5 h-5 text-primary shrink-0" />

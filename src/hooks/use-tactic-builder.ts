@@ -58,7 +58,12 @@ export function decodeTacticState(encoded: string): TacticBoardState | null {
 }
 
 function createDefaultState(): TacticBoardState {
-  const preset = formationPresets[0];
+  return createDefaultStateForFormation(formationPresets[0].formation as FormationType);
+}
+
+function createDefaultStateForFormation(formation: FormationType): TacticBoardState {
+  const preset = formationPresets.find((f) => f.formation === formation);
+  if (!preset) return createDefaultStateForFormation(formationPresets[0].formation as FormationType);
   const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
   return {
     formation: preset.formation,
@@ -92,7 +97,15 @@ function loadInitialState(): TacticBoardState {
       const decoded = decodeTacticState(encoded);
       if (decoded) return decoded;
     }
-    // 2. Last saved draft
+    // 2. Formation preset via URL (?formation=4-2-3-1)
+    const formationParam = new URLSearchParams(window.location.search).get("formation");
+    if (formationParam) {
+      const preset = formationPresets.find((f) => f.formation === formationParam);
+      if (preset) {
+        return createDefaultStateForFormation(preset.formation as FormationType);
+      }
+    }
+    // 3. Last saved draft
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
