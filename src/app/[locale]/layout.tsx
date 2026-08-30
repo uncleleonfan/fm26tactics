@@ -10,6 +10,7 @@ import { MainWrapper } from "@/components/layout/main-wrapper";
 import { JsonLd } from "@/components/shared/json-ld";
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { DeferredSpeedInsights } from "@/components/shared/deferred-speed-insights";
+import { AdSenseScript } from "@/components/ads/adsense-script";
 import { siteConfig } from "@/lib/metadata";
 import { routing } from "@/i18n/routing";
 
@@ -149,6 +150,7 @@ export default async function LocaleLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
         <NextIntlClientProvider messages={messages}>
           <GoogleAnalytics />
+          <AdSenseScript />
           <DeferredSpeedInsights />
           <Header />
           <MainWrapper>{children}</MainWrapper>
