@@ -40,7 +40,7 @@ export default function BuilderPage() {
   // One-time hint nudging users to the Export button (dismissed forever after close)
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const dismissed = window.localStorage.getItem("fm26-builder-nudge-dismissed-v2");
+    const dismissed = window.localStorage.getItem("fm26-builder-nudge-dismissed");
     if (!dismissed) {
       setShowNudge(true);
       trackEvent("builder_nudge_shown");
@@ -50,7 +50,7 @@ export default function BuilderPage() {
   const dismissNudge = () => {
     setShowNudge(false);
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("fm26-builder-nudge-dismissed-v2", "1");
+      window.localStorage.setItem("fm26-builder-nudge-dismissed", "1");
     }
     trackEvent("builder_nudge_dismiss");
   };
