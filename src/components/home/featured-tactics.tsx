@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Star, Clock, ArrowRight } from "lucide-react";
 import { styleColors } from "@/lib/tactics-data";
@@ -59,6 +57,16 @@ const featuredTactics: FeaturedTactic[] = [
     formation: "4-1-2-1-2", style: "control-possession", styleKey: "styleControlPossession", difficulty: "intermediate",
     readTime: 11, rating: 4.3,
   },
+  {
+    slug: "5-2-3-gegenpress", titleKey: "ft523GegenpressTitle", excerptKey: "ft523GegenpressExcerpt",
+    formation: "5-2-3", style: "gegenpress", styleKey: "styleGegenpress", difficulty: "advanced",
+    readTime: 14, rating: 4.5,
+  },
+  {
+    slug: "3-4-2-1-counter-attack", titleKey: "ft3421CounterTitle", excerptKey: "ft3421CounterExcerpt",
+    formation: "3-4-2-1", style: "counter-attack", styleKey: "styleCounterAttack", difficulty: "intermediate",
+    readTime: 12, rating: 4.6,
+  },
 ];
 
 const difficultyColors: Record<string, string> = {
@@ -73,9 +81,13 @@ const difficultyKey: Record<string, string> = {
   advanced: "difficultyAdvanced",
 };
 
-export function FeaturedTactics() {
-  const t = useTranslations("home");
-  const cm = useTranslations("common");
+interface FeaturedTacticsProps {
+  locale: string;
+}
+
+export async function FeaturedTactics({ locale }: FeaturedTacticsProps) {
+  const t = await getTranslations({ locale, namespace: "home" });
+  const cm = await getTranslations({ locale, namespace: "common" });
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">

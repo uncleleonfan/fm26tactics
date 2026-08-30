@@ -36,6 +36,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
 const rankingOrder = [
   "4-2-3-1-gegenpress", "3-5-2-catenaccio", "4-3-3-tiki-taka", "4-4-2-wing-play",
   "3-4-3-control-possession", "4-1-2-1-2-diamond", "4-3-3-fluid-counter", "3-5-2-counter-attack",
+  "3-4-2-1-counter-attack", "5-2-3-gegenpress",
 ];
 
 interface RankMeta {
@@ -51,6 +52,8 @@ const rankMeta: Record<string, RankMeta> = {
   "4-1-2-1-2-diamond": { badgeKey: "badge6", color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30", icon: <Star className="w-4 h-4 text-cyan-400" />, reasonKey: "reason6", titleKey: "ftDiamondTitle", excerptKey: "ftDiamondExcerpt", styleKey: "styleControlPossession" },
   "4-3-3-fluid-counter": { badgeKey: "badge7", color: "text-red-400 bg-red-500/10 border-red-500/30", icon: <Zap className="w-4 h-4 text-red-400" />, reasonKey: "reason7", titleKey: "ftFluidCounterTitle", excerptKey: "ftFluidCounterExcerpt", styleKey: "styleFluidCounter" },
   "3-5-2-counter-attack": { badgeKey: "badge8", color: "text-teal-400 bg-teal-500/10 border-teal-500/30", icon: <Shield className="w-4 h-4 text-teal-400" />, reasonKey: "reason8", titleKey: "ftCounterAttackTitle", excerptKey: "ftCounterAttackExcerpt", styleKey: "styleCounterAttack" },
+  "3-4-2-1-counter-attack": { badgeKey: "badge9", color: "text-pink-400 bg-pink-500/10 border-pink-500/30", icon: <Zap className="w-4 h-4 text-pink-400" />, reasonKey: "reason9", titleKey: "ft3421CounterTitle", excerptKey: "ft3421CounterExcerpt", styleKey: "styleCounterAttack" },
+  "5-2-3-gegenpress": { badgeKey: "badge10", color: "text-indigo-400 bg-indigo-500/10 border-indigo-500/30", icon: <Star className="w-4 h-4 text-indigo-400" />, reasonKey: "reason10", titleKey: "ft523GegenpressTitle", excerptKey: "ft523GegenpressExcerpt", styleKey: "styleGegenpress" },
 };
 
 const difficultyConfig: Record<string, { className: string }> = {

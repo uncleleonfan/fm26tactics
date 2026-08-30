@@ -8,6 +8,7 @@ import type { Tactic } from "contentlayer/generated";
 import { ArrowRight, BookOpen, Globe, LayoutGrid, Shield, Sparkles, Users, Wrench } from "lucide-react";
 import { generateLocaleSEO } from "@/lib/metadata";
 import type { Metadata } from "next";
+import { FaqSection } from "@/components/home/faq-section";
 
 // Turkish pilot L1: core list page is part of the minimal indexable set (§2b)
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -46,6 +47,12 @@ const formationAnchors = [
   { slug: "3-5-2-catenaccio", label: "3-5-2", style: "Catenaccio" },
   { slug: "4-4-2-wing-play", label: "4-4-2", style: "Wing Play" },
   { slug: "4-1-2-1-2-diamond", label: "4-1-2-1-2", style: "Diamond" },
+  { slug: "5-3-2-route-one", label: "5-3-2", style: "Route One" },
+  { slug: "4-2-2-2-fluid-attack", label: "4-2-2-2", style: "Fluid" },
+  { slug: "3-4-2-1-counter-attack", label: "3-4-2-1", style: "Counter" },
+  { slug: "5-2-3-gegenpress", label: "5-2-3", style: "Gegenpress" },
+  { slug: "4-4-1-1-counter-attack", label: "4-4-1-1", style: "Counter" },
+  { slug: "4-2-4-attacking", label: "4-2-4", style: "Route One" },
 ];
 
 const relatedArticles = [
@@ -117,6 +124,41 @@ const faqData = {
     },
   ],
 };
+
+const faqPairsEn: Array<[string, string]> = faqData.mainEntity.map(
+  (item: { name: string; acceptedAnswer: { text: string } }) => [item.name, item.acceptedAnswer.text]
+);
+
+const faqPairsTr: Array<[string, string]> = [
+  [
+    "FM26 için hangi taktik stilleri mevcut?",
+    "FM26 taktik kütüphanesi her büyük taktik stilini kapsar: gegenpress, tiki-taka, kontra atak, kanat oyunu, catenaccio ve elmas orta saha. Her taktik eksiksiz oyuncu rolleri, takım talimatları ve diziliş rehberleri içerir. İlk 8 sıralamamız için FM26 En İyi Taktikler sayfasına bakın.",
+  ],
+  [
+    "Doğru FM26 dizilişini nasıl seçerim?",
+    "Dizilişi kadronuzun güçlü yönlerine uydurun. Güçlü kanatlar? 4-2-3-1 veya 4-4-2 kullanın. Dolu orta saha? 4-3-3 deneyin. Derin savunma hattına sahip alt sınıf? 3-5-2 veya 5-3-2 kontra kanıtlanmış bir seçim.",
+  ],
+  [
+    "Yeni başlayanlar için en iyi FM26 taktiği nedir?",
+    "4-2-3-1 gegenpress veya dengeli 4-4-2 kanat oyunu ile başlayın. İkisi de kurulumu kolay, FM26 maç motorunda affedici ve Football Manager taktiklerinin temel prensiplerini öğretir.",
+  ],
+  [
+    "En iyi FM26 gegenpress taktiği nedir?",
+    "4-2-3-1 gegenpress, FM26'daki en tutarlı yüksek press taktiğidir. Savunma hattını korumak için iki defansif orta saha, şans yaratmak için bir playmaker ve yüksek press yapan inside forward kullanır. Sweeper Keeper ve yüksek savunma hattı ile daha agresif press tetikleyicileri kullanın.",
+  ],
+  [
+    "En iyi FM26 top hakimiyeti taktiği nedir?",
+    "4-3-3 tiki-taka, FM26'daki en iyi top hakimiyeti taktiğidir. Üç orta saha topu domine eder, geniş forvetler savunmayı gerer ve Deep-Lying Playmaker tempoyu kontrol eder. Maksimum top hakimiyeti için daha kısa pas, düşük tempo ve kutuya çalış kullanın.",
+  ],
+  [
+    "Hangi FM26 taktiği zayıf takımlar için en iyisidir?",
+    "3-5-2 kontra atak ve 4-4-2 kanat oyunu, FM26'da alt sınıf takımlar için en iyi taktiklerdir. 3-5-2, savunma sağlamlığı için üç stoper ve hızlı kontra için iki forvet sağlar. 4-4-2, kırılması zor iki sıra dörtlü sunarken hücum tehdidi de taşır.",
+  ],
+  [
+    "Kendi FM26 taktiğimi oluşturabilir miyim?",
+    "Evet — ücretsiz FM26 Taktik Oluşturucu'nu kullanarak oyuncuları yerleştirin, roller ve görevler atayın, takım talimatlarını yapılandırın ve Football Manager 2026 için özel dizilişinizi dışa aktarın veya paylaşın.",
+  ],
+];
 
 export default async function TacticsListPage({
   params,
@@ -207,6 +249,10 @@ export default async function TacticsListPage({
               { label: "Wing Play", slug: "4-4-2-wing-play" },
               { label: "Catenaccio", slug: "3-5-2-catenaccio" },
               { label: "Diamond", slug: "4-1-2-1-2-diamond" },
+              { label: "Route One", slug: "5-3-2-route-one" },
+              { label: "Fluid", slug: "4-2-2-2-fluid-attack" },
+              { label: "Conte 3-4-2-1", slug: "3-4-2-1-counter-attack" },
+              { label: "Mourinho 4-4-1-1", slug: "4-4-1-1-counter-attack" },
             ].map((style) => (
               <Link
                 key={style.slug}
@@ -343,6 +389,12 @@ export default async function TacticsListPage({
             ))}
           </div>
         </section>
+
+        {/* 可见 FAQ 区域 — 与 JSON-LD 对齐 */}
+        <FaqSection
+          faqs={isTr ? faqPairsTr : faqPairsEn}
+          locale={locale}
+        />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export const Tactic = defineDocumentType(() => ({
     formation: { type: "string", required: true },
     style: {
       type: "enum",
-      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid-counter-attack", "park-the-bus", "control-possession"],
+      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid", "fluid-counter-attack", "park-the-bus", "control-possession"],
       required: true,
     },
     difficulty: {
@@ -51,7 +51,7 @@ export const TacticTr = defineDocumentType(() => ({
     formation: { type: "string", required: true },
     style: {
       type: "enum",
-      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid-counter-attack", "park-the-bus", "control-possession"],
+      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid", "fluid-counter-attack", "park-the-bus", "control-possession"],
       required: true,
     },
     difficulty: {

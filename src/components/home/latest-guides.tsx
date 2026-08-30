@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
 import { ArrowRight, BookOpen, FileText, Target, Crosshair, Users, Flame } from "lucide-react";
@@ -20,8 +18,12 @@ const difficultyKey: Record<string, string> = {
   advanced: "difficultyAdvanced",
 };
 
-export function LatestGuides() {
-  const t = useTranslations("home");
+interface LatestGuidesProps {
+  locale: string;
+}
+
+export async function LatestGuides({ locale }: LatestGuidesProps) {
+  const t = await getTranslations({ locale, namespace: "home" });
 
   // Get the 6 most recently published guides
   const guides = allGuides

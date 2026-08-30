@@ -198,4 +198,153 @@ Trigger Press: Standard | Defensive Width: Fairly Narrow
 
 KEY: Two banks of four. Cross types — low vs slow CBs, whipped vs high lines,
 floated only when your TF has a big aerial mismatch.`,
+  "5-3-2-route-one": `FM26 5-3-2 Route One — Full Setup
+
+FORMATION: 5-3-2
+STYLE: Route One | Mentality: Balanced
+
+PLAYER ROLES
+GK: Goalkeeper (De)
+DEF: Centre-Back (De) x4 | Centre-Back (Co)
+MID: Ball-Winning Midfielder (De) x2 | Deep-Lying Playmaker (De)
+ATT: Advanced Forward (At) | Target Forward (At)
+
+IN POSSESSION
+Width: Narrow | Passing: Much More Direct | Tempo: Higher
+Play Out of Defence: OFF | Pass Into Space: ON | Hit Early Crosses: ON
+
+IN TRANSITION
+Counter: ON | Counter-Press: OFF
+GK Distribution: Long Kick to Target Forward | Distribute Quickly: ON
+
+OUT OF POSSESSION
+Defensive Line: Lower | Line of Engagement: Low Block
+Trigger Press: Less Often | Defensive Width: Force Outside
+Get Stuck In: ON | Offside Trap: OFF
+
+KEY: The TF receives 30-40 long balls per match. GK Kicking 15+ is critical.`,
+  "4-2-2-2-fluid-attack": `FM26 4-2-2-2 Fluid Attack — Full Setup
+
+FORMATION: 4-2-2-2
+STYLE: Fluid | Mentality: Positive
+
+PLAYER ROLES
+GK: Sweeper Keeper (Su)
+DEF: Complete Wing-Back (At) | CD (De) | CD (De) | Complete Wing-Back (At)
+MID: Deep-Lying Playmaker (De) | Ball-Winning Midfielder (De)
+AM: Inside Forward (Su) | Inside Forward (Su)
+ATT: Advanced Forward (At) | Advanced Forward (At)
+
+IN POSSESSION
+Width: Fairly Wide | Passing: Slightly Short | Tempo: Normal
+Play Out of Defence: ON | Pass Into Space: ON | Run At Defence: ON | Work Ball Into Box: ON
+Focus Play: Middle
+
+IN TRANSITION
+Counter: ON | Counter-Press: ON | GK Distribution: Roll Out to CBs
+
+OUT OF POSSESSION
+Defensive Line: Higher | Line of Engagement: Mid Block
+Trigger Press: More Often | Offside Trap: ON | Get Stuck In: OFF
+
+KEY: The box midfield (DLP+BWM+2 IFs) rotates constantly. Two-footed players preferred.`,
+  "3-4-2-1-counter-attack": `FM26 3-4-2-1 Counter-Attack — Full Setup
+
+FORMATION: 3-4-2-1
+STYLE: Counter-Attack | Mentality: Balanced
+
+PLAYER ROLES
+GK: Goalkeeper (De)
+DEF: CD (De) | CD (St) | CD (De)
+MID: Wing-Back (At) | Ball-Winning Midfielder (De) | Deep-Lying Playmaker (Su) | Wing-Back (At)
+AM: Inside Forward (Su) | Inside Forward (Su)
+ATT: Advanced Forward (At)
+
+IN POSSESSION
+Width: Fairly Wide | Passing: More Direct | Tempo: Higher
+Play Out of Defence: OFF | Pass Into Space: ON | Hit Early Crosses: ON
+
+IN TRANSITION
+Counter: ON | Counter-Press: OFF
+GK Distribution: Long Kick to AF | Distribute Quickly: ON
+
+OUT OF POSSESSION
+Defensive Line: Lower | Line of Engagement: Low Block
+Trigger Press: Less Often | Defensive Width: Force Outside
+Get Stuck In: ON | Offside Trap: OFF
+
+KEY: WBs provide ALL width — Stamina 16+ required. Sub at 60-65 min.`,
+  "5-2-3-gegenpress": `FM26 5-2-3 Gegenpress — Full Setup
+
+FORMATION: 5-2-3
+STYLE: Gegenpress | Mentality: Positive
+
+PLAYER ROLES
+GK: Sweeper Keeper (Su)
+DEF: Wing-Back (At) | CD (De) | CD (Co) | CD (De) | Wing-Back (At)
+MID: Deep-Lying Playmaker (De) | Ball-Winning Midfielder (De)
+ATT: Inside Forward (At) | Advanced Forward (At) | Inside Forward (At)
+
+IN POSSESSION
+Width: Fairly Wide | Passing: Slightly Short | Tempo: Higher
+Play Out of Defence: ON | Pass Into Space: ON | Run At Defence: ON | Work Ball Into Box: ON
+
+IN TRANSITION
+Counter: ON | Counter-Press: ON | GK Distribution: Roll Out to CBs
+
+OUT OF POSSESSION
+Defensive Line: Much Higher | Line of Engagement: High Block
+Trigger Press: Much More Often | Offside Trap: ON | Get Stuck In: ON
+
+KEY: Five CBs allow the most aggressive press. CBs need Pace 13+ for the high line.`,
+  "4-4-1-1-counter-attack": `FM26 4-4-1-1 Counter-Attack — Full Setup
+
+FORMATION: 4-4-1-1
+STYLE: Counter-Attack | Mentality: Balanced
+
+PLAYER ROLES
+GK: Goalkeeper (De)
+DEF: Full-Back (De) | CD (De) | CD (De) | Full-Back (De)
+MID: Winger (At) | Ball-Winning Midfielder (De) | Deep-Lying Playmaker (De) | Winger (At)
+AM: Trequartista (At)
+ATT: Target Forward (At)
+
+IN POSSESSION
+Width: Fairly Wide | Passing: Much More Direct | Tempo: Higher
+Play Out of Defence: OFF | Pass Into Space: ON | Hit Early Crosses: ON
+
+IN TRANSITION
+Counter: ON | Counter-Press: OFF
+GK Distribution: Long Kick to TF | Distribute Quickly: ON
+
+OUT OF POSSESSION
+Defensive Line: Much Lower | Line of Engagement: Low Block
+Trigger Press: Less Often | Defensive Width: Force Outside
+Get Stuck In: ON | Offside Trap: OFF
+
+KEY: The Trequartista is the shadow striker — drops into the hole and launches counters.`,
+  "4-2-4-attacking": `FM26 4-2-4 Attacking — Full Setup
+
+FORMATION: 4-2-4
+STYLE: Route One | Mentality: Attacking
+
+PLAYER ROLES
+GK: Sweeper Keeper (Su)
+DEF: Full-Back (At) | CD (De) | CD (De) | Full-Back (At)
+MID: Ball-Winning Midfielder (De) | Deep-Lying Playmaker (Su)
+ATT: Winger (At) | Target Forward (At) | Advanced Forward (At) | Winger (At)
+
+IN POSSESSION
+Width: Wide | Passing: Much More Direct | Tempo: Much Higher
+Play Out of Defence: OFF | Pass Into Space: ON | Hit Early Crosses: ON | Shoot on Sight: ON
+
+IN TRANSITION
+Counter: ON | Counter-Press: OFF
+GK Distribution: Long Kick to TF | Distribute Quickly: ON
+
+OUT OF POSSESSION
+Defensive Line: Higher | Line of Engagement: Mid Block
+Trigger Press: Standard | Offside Trap: ON | Get Stuck In: ON
+
+KEY: Nuclear option for last 15 minutes. Four forwards flood the box. Not a 90-min system.`,
 };

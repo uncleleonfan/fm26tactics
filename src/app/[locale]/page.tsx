@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/hero";
 import { QuickPicks } from "@/components/home/quick-picks";
+import { FeaturedTactics } from "@/components/home/featured-tactics";
+import { LatestGuides } from "@/components/home/latest-guides";
+import { FaqSection } from "@/components/home/faq-section";
+import { ExploreSection } from "@/components/home/explore-section";
 import { JsonLd } from "@/components/shared/json-ld";
 import { generateLocaleSEO } from "@/lib/metadata";
 
@@ -11,10 +15,6 @@ const CommunityInsights = dynamic(
   () => import("@/components/home/community-insights").then((m) => ({ default: m.CommunityInsights })),
   { ssr: false, loading: () => <SectionPlaceholder /> }
 );
-const FeaturedTactics = dynamic(
-  () => import("@/components/home/featured-tactics").then((m) => ({ default: m.FeaturedTactics })),
-  { ssr: false, loading: () => <SectionPlaceholder /> }
-);
 const StatsSection = dynamic(
   () => import("@/components/home/stats-section").then((m) => ({ default: m.StatsSection })),
   { ssr: false, loading: () => <SectionPlaceholder /> }
@@ -22,10 +22,6 @@ const StatsSection = dynamic(
 const TacticBuilderCTA = dynamic(
   () => import("@/components/home/cta-section").then((m) => ({ default: m.TacticBuilderCTA })),
   { ssr: false, loading: () => <SectionPlaceholderTall /> }
-);
-const LatestGuides = dynamic(
-  () => import("@/components/home/latest-guides").then((m) => ({ default: m.LatestGuides })),
-  { ssr: false, loading: () => <SectionPlaceholder /> }
 );
 
 // Placeholder skeletons with matching approx height — prevents CLS
@@ -129,10 +125,12 @@ export default function HomePage({ params }: { params: { locale: string } }) {
       <HeroSection />
       <QuickPicks />
       <CommunityInsights />
-      <FeaturedTactics />
+      <FeaturedTactics locale={params.locale} />
       <StatsSection />
       <TacticBuilderCTA />
-      <LatestGuides />
+      <LatestGuides locale={params.locale} />
+      <ExploreSection locale={params.locale} />
+      <FaqSection faqs={faqs} locale={params.locale} />
     </>
   );
 }
