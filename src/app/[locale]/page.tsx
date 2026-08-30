@@ -77,7 +77,7 @@ const faqEn: Array<[string, string]> = [
   ],
   [
     "How does the FM26 Tactic Builder work?",
-    "The FM26 Tactic Builder is a free interactive tool that lets you drag and drop 11 players on a pitch, assign player roles and duties (from all FM26 options), configure team instructions (mentality, passing, pressing, etc.), and export or share your tactic. It works directly in your browser with no download required. Access it at fm26tactics.com/builder.",
+    "The FM26 Tactic Builder is a free interactive tool that lets you drag and drop 11 players on a pitch, assign player roles and duties (from all FM26 options), configure team instructions (mentality, passing, pressing, etc.), and export or share your tactic. It works directly in your browser with no download required. Note: the Builder cannot export .fmf files — Football Manager's proprietary format is not supported by any third-party tool. Use the exported SVG/PNG image or TXT/JSON file as a reference to manually recreate your tactic in-game. Access it at fm26tactics.com/builder.",
   ],
 ];
 
@@ -100,7 +100,7 @@ const faqTr: Array<[string, string]> = [
   ],
   [
     "FM26 Taktik Oluşturucu nasıl çalışır?",
-    "FM26 Taktik Oluşturucu; 11 oyuncuyu sahaya sürükleyip bırakmanıza, oyuncu rolleri ve görevleri atamanıza (tüm FM26 seçeneklerinden), takım talimatlarını yapılandırmanıza (mentalite, pas, pres vb.) ve taktiğinizi dışa aktarmanıza veya paylaşmanıza olanak tanıyan ücretsiz bir interaktif araçtır. İndirme gerektirmeden doğrudan tarayıcınızda çalışır. fm26tactics.com/builder adresinden erişin.",
+    "FM26 Taktik Oluşturucu; 11 oyuncuyu sahaya sürükleyip bırakmanıza, oyuncu rolleri ve görevleri atamanıza (tüm FM26 seçeneklerinden), takım talimatlarını yapılandırmanıza (mentalite, pas, pres vb.) ve taktiğinizi dışa aktarmanıza veya paylaşmanıza olanak tanıyan ücretsiz bir interaktif araçtır. İndirme gerektirmeden doğrudan tarayıcınızda çalışır. Not: Oluşturucu .fmf dosyalarını dışa aktaramaz — Football Manager'ın tescilli formatı hiçbir üçüncü taraf araç tarafından desteklenmez. Dışa aktarılan SVG/PNG görüntüsünü veya TXT/JSON dosyasını oyunda taktiği manuel olarak yeniden oluşturmak için referans olarak kullanın. fm26tactics.com/builder adresinden erişin.",
   ],
 ];
 

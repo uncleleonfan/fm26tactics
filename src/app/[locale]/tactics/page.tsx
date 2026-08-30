@@ -119,7 +119,7 @@ const faqData = {
       name: "Can I create my own FM26 tactic?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes — use the free FM26 Tactic Builder to place players, assign roles and duties, configure team instructions, and export or share your custom formation for Football Manager 2026.",
+        text: "Yes — use the free FM26 Tactic Builder to place players, assign roles and duties, configure team instructions, and export or share your custom formation for Football Manager 2026. Note: the Builder cannot export .fmf files — Football Manager's proprietary format is not supported by any third-party tool. Use the exported image or text as a reference to recreate the tactic in-game.",
       },
     },
   ],
@@ -156,7 +156,7 @@ const faqPairsTr: Array<[string, string]> = [
   ],
   [
     "Kendi FM26 taktiğimi oluşturabilir miyim?",
-    "Evet — ücretsiz FM26 Taktik Oluşturucu'nu kullanarak oyuncuları yerleştirin, roller ve görevler atayın, takım talimatlarını yapılandırın ve Football Manager 2026 için özel dizilişinizi dışa aktarın veya paylaşın.",
+    "Evet — ücretsiz FM26 Taktik Oluşturucu'nu kullanarak oyuncuları yerleştirin, roller ve görevler atayın, takım talimatlarını yapılandırın ve Football Manager 2026 için özel dizilişinizi dışa aktarın veya paylaşın. Not: Oluşturucu .fmf dosyalarını dışa aktaramaz — Football Manager'ın tescilli formatı hiçbir üçüncü taraf araç tarafından desteklenmez. Dışa aktarılan görüntü veya metni oyunda taktiği yeniden oluşturmak için referans olarak kullanın.",
   ],
 ];
 

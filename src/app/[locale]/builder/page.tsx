@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { formationPresets } from "@/lib/tactics-data";
@@ -36,6 +36,25 @@ export default function BuilderPage() {
   const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation">("role");
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
+  const [showFmfAlert, setShowFmfAlert] = useState(false);
+
+  // One-time .fmf export limitation alert — shown once per browser
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const acknowledged = window.localStorage.getItem("fm26-builder-fmf-alert-ack");
+    if (!acknowledged) {
+      setShowFmfAlert(true);
+      trackEvent("builder_fmf_alert_shown");
+    }
+  }, []);
+
+  const dismissFmfAlert = () => {
+    setShowFmfAlert(false);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("fm26-builder-fmf-alert-ack", "1");
+    }
+    trackEvent("builder_fmf_alert_dismiss");
+  };
 
   // One-time hint nudging users to the Export button (dismissed forever after close)
   useEffect(() => {
@@ -350,6 +369,31 @@ export default function BuilderPage() {
             {sidebarContent}
           </div>
         </>
+      )}
+
+      {showFmfAlert && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 animate-fade-in px-4">
+          <div className="max-w-md w-full bg-background-secondary rounded-2xl border border-[#1C2436] shadow-2xl p-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-full bg-amber-500/15 flex items-center justify-center shrink-0">
+                <AlertCircle className="w-5 h-5 text-amber-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-lg font-bold text-text-primary">{t("fmfAlertTitle")}</h2>
+              </div>
+            </div>
+            <div className="space-y-2.5 text-sm text-text-secondary leading-relaxed">
+              <p>{t("fmfAlertBody")}</p>
+              <p>{t("fmfAlertBody2")}</p>
+            </div>
+            <button
+              onClick={dismissFmfAlert}
+              className="w-full py-2.5 rounded-lg bg-primary text-background-primary font-semibold text-sm hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
+            >
+              {t("fmfAlertButton")}
+            </button>
+          </div>
+        </div>
       )}
 
       {showExport && (
