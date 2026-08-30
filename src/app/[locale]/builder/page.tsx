@@ -7,6 +7,7 @@ import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, Al
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { formationPresets } from "@/lib/tactics-data";
+import { useRouter } from "next/navigation";
 import { Pitch } from "@/components/builder/pitch";
 import { RoleSelector } from "@/components/builder/role-selector";
 import { InstructionPanel } from "@/components/builder/instruction-panel";
@@ -17,6 +18,7 @@ import type { FormationType, PlayerDuty } from "@/types/tactic";
 export default function BuilderPage() {
   const t = useTranslations("builder");
   const cm = useTranslations("common");
+  const router = useRouter();
   const {
     state,
     setFormation,
@@ -208,13 +210,13 @@ export default function BuilderPage() {
       <div className="shrink-0 border-b border-[#1C2436]/50 bg-surface/30 px-3 sm:px-4 py-2 sm:py-2.5">
         <div className="max-w-full mx-auto flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
-            <Link
-              href="/"
+            <button
+              onClick={() => router.back()}
               className="flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors shrink-0"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">{cm("backToHome")}</span>
-            </Link>
+            </button>
             <span className="w-px h-5 bg-[#1C2436] hidden sm:block" />
             <h1 className="text-sm font-semibold hidden sm:block truncate">
               <span className="gradient-text">{t("pageTitle")}</span>
