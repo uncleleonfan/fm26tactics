@@ -123,6 +123,21 @@ export function useTacticBuilder() {
   const [state, setState] = useState<TacticBoardState>(loadInitialState);
   const [sharedLoadMsg, setSharedLoadMsg] = useState<"ok" | "fail" | null>(null);
   const sharedTrackedRef = useRef(false);
+  const formationAppliedRef = useRef(false);
+
+  // Apply ?formation= URL param on client mount (useState initializer
+  // runs during SSR where window is unavailable, so we need this effect)
+  useEffect(() => {
+    if (formationAppliedRef.current) return;
+    if (typeof window === "undefined") return;
+    const formationParam = new URLSearchParams(window.location.search).get("formation");
+    if (!formationParam) return;
+    const preset = formationPresets.find((f) => f.formation === formationParam);
+    if (!preset) return;
+    formationAppliedRef.current = true;
+    setState(createDefaultStateForFormation(preset.formation as FormationType));
+    trackEvent("builder_formation_url_load", { label: preset.formation });
+  }, []);
 
   // Fired when the page is opened via a shared link (?tactic=...).
   // The ref guards against StrictMode's double effect run in dev.
