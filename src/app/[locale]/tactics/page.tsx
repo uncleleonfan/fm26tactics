@@ -216,11 +216,11 @@ export default async function TacticsListPage({
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
               { label: tc("bestOverall"), href: "/best", desc: "Top-rated FM26 tactics across all play styles" },
-              { label: tc("bestAttacking"), href: "/best", desc: "High-scoring, aggressive tactical setups" },
-              { label: tc("bestDefensive"), href: "/best", desc: "Solid defensive structures and low blocks" },
-              { label: tc("bestPossession"), href: "/best", desc: "Dominate the ball with tiki-taka systems" },
-              { label: tc("bestCounter"), href: "/best", desc: "Hit teams on the break with pace" },
-              { label: tc("bestUnderdog"), href: "/best", desc: "Best tactics for smaller clubs and budgets" },
+              { label: tc("bestAttacking"), href: "/best#attacking", desc: "High-scoring, aggressive tactical setups" },
+              { label: tc("bestDefensive"), href: "/best#defensive", desc: "Solid defensive structures and low blocks" },
+              { label: tc("bestPossession"), href: "/best#possession", desc: "Dominate the ball with tiki-taka systems" },
+              { label: tc("bestCounter"), href: "/best#counter", desc: "Hit teams on the break with pace" },
+              { label: tc("bestUnderdog"), href: "/best#underdog", desc: "Best tactics for smaller clubs and budgets" },
             ].map((cat) => (
               <Link
                 key={cat.label}

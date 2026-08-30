@@ -532,7 +532,14 @@
     "badge9": "#9 Conte'nin Kontrası",
     "reason9": "Kanat bek aşırı yüklemeleri ve hızlı kontralar — Conte sistemi top hakimiyeti takımlarına karşı parlar.",
     "badge10": "#10 Beşli Press",
-    "reason10": "Beş stoper oyundaki en agresif pressi izin verir — güven ağı ile amansız press buluşması."
+    "reason10": "Beş stoper oyundaki en agresif pressi izin verir — güven ağı ile amansız press buluşması.",
+    "byCategoryTitle": "Kategoriye Göre En İyi FM26 Taktikleri",
+    "byCategoryIntro": "Hangi taktiğin takımınıza uygun olduğundan emin değil misiniz? Oyun tarzına göre göz atın — her kategori, o yaklaşım için en iyi performans gösteren Football Manager 2026 taktiklerini vurgular.",
+    "catAttacking": "En İyi Hücum",
+    "catDefensive": "En İyi Savunma",
+    "catPossession": "En İyi Top Hakimiyeti",
+    "catCounter": "En İyi Kontra Atak",
+    "catUnderdog": "Favori Olmayanlar İçin En İyisi"
   },
   "builder": {
     "pageTitle": "FM26 Taktik Oluşturucu",

@@ -532,7 +532,14 @@
     "badge9": "#9 Conte's Counter",
     "reason9": "Wing-back overloads and lightning counters — the Conte system thrives against possession teams.",
     "badge10": "#10 Five-Back Press",
-    "reason10": "Five CBs allow the most aggressive press in the game — safety net meets relentless pressing."
+    "reason10": "Five CBs allow the most aggressive press in the game — safety net meets relentless pressing.",
+    "byCategoryTitle": "Best FM26 Tactics by Category",
+    "byCategoryIntro": "Not sure which tactic fits your team? Browse by play style — each category highlights the top-performing Football Manager 2026 tactics for that approach.",
+    "catAttacking": "Best Attacking",
+    "catDefensive": "Best Defensive",
+    "catPossession": "Best Possession",
+    "catCounter": "Best Counter-Attacking",
+    "catUnderdog": "Best for Underdogs"
   },
   "builder": {
     "pageTitle": "FM26 Tactic Builder",

@@ -62,6 +62,14 @@ const difficultyConfig: Record<string, { className: string }> = {
   advanced: { className: "bg-red-500/20 text-red-400" },
 };
 
+const categoryGroups = [
+  { id: "attacking", labelKey: "catAttacking", icon: <Zap className="w-4 h-4 text-orange-400" />, slugs: ["4-2-3-1-gegenpress", "4-4-2-wing-play", "4-3-3-fluid-counter", "5-2-3-gegenpress"] },
+  { id: "defensive", labelKey: "catDefensive", icon: <Shield className="w-4 h-4 text-blue-400" />, slugs: ["3-5-2-catenaccio"] },
+  { id: "possession", labelKey: "catPossession", icon: <Star className="w-4 h-4 text-emerald-400" />, slugs: ["4-3-3-tiki-taka", "3-4-3-control-possession", "4-1-2-1-2-diamond"] },
+  { id: "counter", labelKey: "catCounter", icon: <Zap className="w-4 h-4 text-red-400" />, slugs: ["3-5-2-counter-attack", "3-4-2-1-counter-attack", "4-3-3-fluid-counter"] },
+  { id: "underdog", labelKey: "catUnderdog", icon: <Shield className="w-4 h-4 text-teal-400" />, slugs: ["3-5-2-catenaccio", "3-5-2-counter-attack", "3-4-2-1-counter-attack"] },
+];
+
 const faqEn: Array<[string, string]> = [
   ["What are the best FM26 tactics?", "The best FM26 tactics are the 4-2-3-1 Gegenpress (best overall), 3-5-2 Catenaccio (best defensive), and 4-3-3 Tiki-Taka (best possession). The 4-2-3-1 Gegenpress is the most consistent formation, working at every club level with its high-press, quick-transition style."],
   ["What is the strongest formation in FM26?", "The 4-2-3-1 Gegenpress is widely considered the strongest formation in FM26 due to its balance of defensive solidity and attacking threat. It provides two holding midfielders for defensive cover, three attacking midfielders for creativity, and a lone striker who benefits from overloads."],
@@ -140,6 +148,43 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
                 </Link>
               );
             })}
+          </div>
+        </section>
+
+        {/* Best by Category — anchored sections for tactics page category links */}
+        <section className="pb-20 px-4 sm:px-6" id="by-category">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-text-primary mb-4 text-center">{b("byCategoryTitle")}</h2>
+            <p className="text-sm text-text-secondary mb-8 text-center max-w-2xl mx-auto">{b("byCategoryIntro")}</p>
+            <div className="space-y-10">
+              {categoryGroups.map((cat) => {
+                const catTactics = cat.slugs
+                  .map((slug) => ranked.find((t) => t.slug === slug))
+                  .filter((t) => t != null) as NonNullable<(typeof ranked)[number]>[];
+                if (catTactics.length === 0) return null;
+                return (
+                  <div key={cat.id} id={cat.id} className="scroll-mt-20">
+                    <div className="flex items-center gap-2 mb-3">
+                      {cat.icon}
+                      <h3 className="text-lg font-semibold text-text-primary">{b(cat.labelKey)}</h3>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {catTactics.map((tactic) => {
+                        const meta = rankMeta[tactic.slug];
+                        if (!meta) return null;
+                        return (
+                          <Link key={tactic.slug} href={`/tactics/${tactic.slug}`} className="glass-card p-3 rounded-lg group hover:border-primary/30 transition-colors flex items-center gap-3">
+                            <span className="text-xs font-mono font-bold text-primary bg-primary/10 px-2 py-1 rounded-md shrink-0">{tactic.formation}</span>
+                            <span className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors flex-1">{h(meta.titleKey)}</span>
+                            <ArrowRight className="w-3 h-3 text-primary opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
 

@@ -532,7 +532,14 @@
     "badge9": "#9 Le Contre de Conte",
     "reason9": "Surcharges d'ailes et contre-attaques éclair — le système Conte brille contre les équipes de possession.",
     "badge10": "#10 Pressing à Cinq",
-    "reason10": "Cinq DC permettent le pressing le plus agressif du jeu — filet de sécurité et pression implacable."
+    "reason10": "Cinq DC permettent le pressing le plus agressif du jeu — filet de sécurité et pression implacable.",
+    "byCategoryTitle": "Meilleures Tactiques FM26 par Catégorie",
+    "byCategoryIntro": "Pas sûr de la tactique adaptée à votre équipe ? Parcourez par style de jeu — chaque catégorie met en lumière les tactiques Football Manager 2026 les plus performantes pour cette approche.",
+    "catAttacking": "Meilleur Attaque",
+    "catDefensive": "Meilleur Défense",
+    "catPossession": "Meilleur Possession",
+    "catCounter": "Meilleur Contre-Attaque",
+    "catUnderdog": "Meilleur pour Outsiders"
   },
   "builder": {
     "pageTitle": "Créateur de Tactique FM26",

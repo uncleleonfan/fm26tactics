@@ -532,7 +532,14 @@
     "badge9": "#9 Contes Konter",
     "reason9": "Flügel-Überladungen und blitzschnelle Konter — das Conte-System glänzt gegen Ballbesitzteams.",
     "badge10": "#10 Fünfer-Presse",
-    "reason10": "Fünf IVs erlauben das aggressivste Pressen im Spiel — Sicherheitsnetz trifft unerbittlichen Druck."
+    "reason10": "Fünf IVs erlauben das aggressivste Pressen im Spiel — Sicherheitsnetz trifft unerbittlichen Druck.",
+    "byCategoryTitle": "Beste FM26-Taktiken nach Kategorie",
+    "byCategoryIntro": "Nicht sicher, welche Taktik zu deinem Team passt? Durchsuche nach Spielstil — jede Kategorie hebt die am besten performenden Football Manager 2026-Taktiken für diesen Ansatz hervor.",
+    "catAttacking": "Bestes Angriffsspiel",
+    "catDefensive": "Bestes Defensivspiel",
+    "catPossession": "Bestes Ballbesitzspiel",
+    "catCounter": "Bestes Konterfußball",
+    "catUnderdog": "Beste für Außenseiter"
   },
   "builder": {
     "pageTitle": "FM26 Taktik-Builder",
