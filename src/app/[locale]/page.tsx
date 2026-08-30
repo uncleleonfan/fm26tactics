@@ -42,21 +42,21 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     locale: params.locale,
     path: "/",
     en: {
-      title: "Best FM26 Tactics & Formations",
+      title: "FM26Tactics — Football Manager 2026 Tactics, Guides & Builder",
       description:
-        "Discover the best FM 26 tactics and meta formations. Community-tested strategies, interactive builder, and in-depth guides for Football Manager 2026.",
+        "FM26Tactics is your hub for Football Manager 2026: browse community-tested tactics, explore formations, learn player roles, read in-depth guides, and build your own tactics with our free interactive builder.",
       keywords: [
-        "fm 26 tactics", "fm26 best tactics", "fm 26 formations",
-        "football manager 2026", "fm26 gegenpress",
+        "fm26tactics", "football manager 2026 tactics",
+        "fm26 tactics website", "fm26 builder", "fm26 guides",
       ],
     },
     tr: {
-      title: "En İyi FM26 Taktikleri ve Dizilişleri",
+      title: "FM26Tactics — Football Manager 2026 Taktik, Rehber ve Builder",
       description:
-        "En iyi FM 26 taktiklerini ve meta dizilişlerini keşfedin. Topluluk tarafından test edilen stratejiler, interaktif taktik kurucu ve Football Manager 2026 için kapsamlı rehberler.",
+        "FM26Tactics, Football Manager 2026 için merkeziniz: topluluk testli taktikler, formasyon rehberi, oyuncu rolleri, kapsamlı rehberler ve ücretsiz interaktif taktik oluşturucu.",
       keywords: [
-        "fm 26 taktikleri", "en iyi fm26 taktikleri", "fm 26 dizilişleri",
-        "football manager 2026 taktikleri",
+        "fm26tactics", "football manager 2026 taktikleri",
+        "fm26 taktik sitesi", "fm26 builder", "fm26 rehberler",
       ],
     },
   });
@@ -64,8 +64,8 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
 
 const faqEn: Array<[string, string]> = [
   [
-    "What are the best FM 26 tactics?",
-    "The best FM 26 tactics include gegenpress (4-2-3-1), tiki-taka (4-3-3), and wing play (4-4-2). Community-tested meta tactics from FM-Arena and FM Scout show gegenpress as the most consistent performer across multiple game saves, with 4-2-3-1 and 4-3-3 formations leading the meta rankings.",
+    "What is FM26Tactics?",
+    "FM26Tactics is a free resource hub for Football Manager 2026 players. It offers a community-tested tactics library, an interactive tactic builder, formation guides, player role breakdowns, and in-depth strategy guides — all designed to help you win more matches. Browse the full tactics library at fm26tactics.com/tactics.",
   ],
   [
     "Which formation is most effective in Football Manager 2026?",
@@ -87,8 +87,8 @@ const faqEn: Array<[string, string]> = [
 
 const faqTr: Array<[string, string]> = [
   [
-    "En iyi FM 26 taktikleri neler?",
-    "En iyi FM 26 taktikleri arasında gegenpress (4-2-3-1), tiki-taka (4-3-3) ve kanat oyunu (4-4-2) yer alıyor. FM-Arena ve FM Scout'tan topluluk testli meta taktikler, gegenpress'i birden fazla kariyerde en tutarlı performans gösteren taktik olarak işaretliyor; 4-2-3-1 ve 4-3-3 dizilişleri meta sıralamalarına öncülük ediyor.",
+    "FM26Tactics nedir?",
+    "FM26Tactics, Football Manager 2026 oyuncuları için ücretsiz bir kaynak platformudur. Topluluk testli taktik kütüphanesi, interaktif taktik oluşturucu, formasyon rehberleri, oyuncu rol analizleri ve kapsamlı strateji rehberleri sunar. Tüm taktik kütüphanesine fm26tactics.com/tactics adresinden erişebilirsiniz.",
   ],
   [
     "Football Manager 2026'da hangi diziliş en etkili?",

@@ -1,23 +1,36 @@
 import type { Metadata } from "next";
-import { generateSEO } from "@/lib/metadata";
+import { generateLocaleSEO } from "@/lib/metadata";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = generateSEO({
-  title: "FM26 Tactic Builder – Create Football Manager 2026 Tactics",
-  description:
-    "Build custom Football Manager 2026 tactics with our free interactive FM26 tactic builder. Drag players onto the pitch, assign roles and duties, configure team instructions, and export your formation — no download required.",
-  path: "/builder",
-  keywords: [
-    "fm26 tactic builder",
-    "football manager 2026 tactic builder",
-    "fm 26 formation creator",
-    "fm26 formation builder",
-    "football manager 2026 formation maker",
-    "fm26 custom tactics",
-  ],
-});
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  return generateLocaleSEO({
+    locale: params.locale,
+    path: "/builder",
+    en: {
+      title: "FM26 Tactic Builder – Create Football Manager 2026 Tactics",
+      description:
+        "Build custom Football Manager 2026 tactics with our free interactive FM26 tactic builder. Drag players onto the pitch, assign roles and duties, configure team instructions, and export your formation — no download required.",
+      keywords: [
+        "fm26 tactic builder", "fm26 tactics builder", "fm tactic builder",
+        "fm26 tactic creator", "football manager 2026 tactic builder",
+        "fm 26 formation creator", "fm26 formation builder",
+        "fm26 custom tactics", "football manager 2026 formation maker",
+      ],
+    },
+    tr: {
+      title: "FM26 Taktik Oluşturucu — Football Manager 2026 Taktikleri Yap",
+      description:
+        "Ücretsiz interaktif FM26 taktik oluşturucu ile kendi Football Manager 2026 taktiklerinizi tasarlayın. Oyuncuları sahayla sürükleyin, roller atayın, takım talimatlarını ayarlayın ve dizilişinizi dışa aktarın — indirme gerekmez.",
+      keywords: [
+        "fm26 taktik oluşturucu", "fm26 taktik kurucu", "fm taktik oluşturucu",
+        "fm26 taktik yapıcı", "football manager 2026 taktik oluşturucu",
+        "fm26 diziliş oluşturucu", "fm26 özel taktikler",
+      ],
+    },
+  });
+}
 
 const faqData = {
   "@context": "https://schema.org",

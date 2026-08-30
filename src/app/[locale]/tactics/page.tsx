@@ -18,11 +18,21 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       title: "FM26 Tactics – Best Football Manager 2026 Tactics",
       description:
         "Discover the best FM26 tactics and formations for Football Manager 2026. Browse tested tactical styles — gegenpress, tiki-taka, counter-attack, wing play — with complete player roles, team instructions, and performance breakdowns.",
+      keywords: [
+        "fm26 tactics", "fm 26 tactics", "football manager 2026 tactics",
+        "fm26 tactic", "best fm26 tactics", "fm26 gegenpress",
+        "fm26 tiki taka", "fm26 counter attack", "fm26 formations",
+      ],
     },
     tr: {
       title: "FM26 Taktik Kütüphanesi — En İyi FM26 Taktikleri ve Dizilişleri",
       description:
         "Tam FM26 taktik kütüphanesini keşfedin — her diziliş oyuncu rolleri, takım talimatları ve performans analizleriyle. Football Manager 2026'da kadronuz için en iyi FM26 taktiklerini bulun.",
+      keywords: [
+        "fm26 taktikleri", "fm 26 taktikleri", "football manager 2026 taktikleri",
+        "fm26 taktik", "en iyi fm26 taktikleri", "fm26 gegenpress",
+        "fm26 tiki taka", "fm26 kontra atak", "fm26 dizilişleri",
+      ],
     },
   });
 }
@@ -71,6 +81,30 @@ const faqData = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Start with the 4-2-3-1 gegenpress or the balanced 4-4-2 wing play. Both are straightforward to set up, forgiving in the FM26 match engine, and teach the core principles of Football Manager tactics.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the best FM26 gegenpress tactic?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "The 4-2-3-1 gegenpress is the most consistent high-pressing tactic in FM26. It uses two defensive midfielders to shield the back line, an advanced playmaker to create chances, and inside forwards who press high. Use a Sweeper Keeper on Attack and high defensive line with more aggressive pressing triggers.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the best FM26 possession tactic?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "The 4-3-3 tiki-taka is the best possession tactic in FM26. Three midfielders dominate the ball, wide forwards stretch the defense, and a Deep-Lying Playmaker controls the tempo. Use shorter passing, lower tempo, and work ball into box for maximum possession control.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Which FM26 tactic is best for weaker teams?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "The 3-5-2 counter-attack and 4-4-2 wing play are the best tactics for underdogs in FM26. The 3-5-2 provides three center-backs for defensive solidity and two strikers for quick counter-attacks. The 4-4-2 offers two banks of four that are hard to break down while still posing an attacking threat.",
       },
     },
     {
