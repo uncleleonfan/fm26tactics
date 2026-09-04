@@ -10,7 +10,8 @@
     "tacticBuilder": "Tactic Builder",
     "search": "Search",
     "toggleMenu": "Toggle menu",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "relatedTactics": "Related Tactics"
   },
   "common": {
     "home": "Home",
