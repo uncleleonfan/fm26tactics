@@ -20,7 +20,8 @@ function isValidTacticState(value: unknown): value is TacticBoardState {
   if (!value || typeof value !== "object") return false;
   const v = value as Partial<TacticBoardState>;
   if (typeof v.formation !== "string") return false;
-  if (!Array.isArray(v.players) || v.players.length === 0) return false;
+  // Football is 11-a-side; reject legacy drafts/links/imports with wrong counts
+  if (!Array.isArray(v.players) || v.players.length !== 11) return false;
   const playersOk = v.players.every(
     (p) =>
       p &&
