@@ -37,46 +37,6 @@ export const Tactic = defineDocumentType(() => ({
   },
 }));
 
-// Turkish translation of tactics. Same fields as Tactic; files live in
-// content/tr/tactics/ and keep the SAME slug as the English original so the
-// two can be cross-linked via hreflang. Only translated tactics generate
-// /tr/tactics/[slug] routes (see src/app/[locale]/tactics/[slug]/page.tsx).
-export const TacticTr = defineDocumentType(() => ({
-  name: "TacticTr",
-  filePathPattern: "tr/tactics/**/*.mdx",
-  contentType: "mdx",
-  fields: {
-    title: { type: "string", required: true },
-    description: { type: "string", required: true },
-    formation: { type: "string", required: true },
-    style: {
-      type: "enum",
-      options: ["gegenpress", "tiki-taka", "counter-attack", "wing-play", "route-one", "fluid", "fluid-counter-attack", "park-the-bus", "control-possession"],
-      required: true,
-    },
-    difficulty: {
-      type: "enum",
-      options: ["beginner", "intermediate", "advanced"],
-      required: true,
-    },
-    tags: { type: "list", of: { type: "string" }, required: true },
-    publishedAt: { type: "date", required: true },
-    updatedAt: { type: "date", required: false },
-    coverImage: { type: "string", required: false },
-    author: { type: "string", required: true },
-  },
-  computedFields: {
-    slug: {
-      type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.replace("tr/tactics/", ""),
-    },
-    url: {
-      type: "string",
-      resolve: (doc) => `/tr/tactics/${doc._raw.flattenedPath.replace("tr/tactics/", "")}`,
-    },
-  },
-}));
-
 export const Role = defineDocumentType(() => ({
   name: "Role",
   filePathPattern: "roles/**/*.mdx",
@@ -167,7 +127,7 @@ export const Blog = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Tactic, TacticTr, Role, Guide, Blog],
+  documentTypes: [Tactic, Role, Guide, Blog],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [],

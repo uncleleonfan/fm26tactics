@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, Zap, AlertTriangle, CheckCircle, Download, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
@@ -13,14 +13,6 @@ import {
   dualFormationTips,
   commonMistakes,
 } from "@/lib/community-data";
-import {
-  formationInsightsTr,
-  metaRolesTr,
-  bestRoleCombosTr,
-  communityConsensusTr,
-  dualFormationTipsTr,
-  commonMistakesTr,
-} from "@/lib/community-data-tr";
 
 const tierColors: Record<string, { bg: string; text: string; border: string; badge: string }> = {
   S: { bg: "bg-primary/10", text: "text-primary", border: "border-primary/30", badge: "bg-primary text-background-primary" },
@@ -35,18 +27,15 @@ const opLevelColors: Record<string, string> = {
 };
 
 export function MetaPage() {
-  const locale = useLocale();
-  const isTr = locale === "tr";
   const t = useTranslations("meta");
   const cm = useTranslations("common");
 
-  // Turkish pilot L1: analytical texts localized, in-game terms kept in English
-  const insights = isTr ? formationInsightsTr : formationInsights;
-  const roles = isTr ? metaRolesTr : metaRoles;
-  const combos = isTr ? bestRoleCombosTr : bestRoleCombos;
-  const consensus = isTr ? communityConsensusTr : communityConsensus;
-  const dualTips = isTr ? dualFormationTipsTr : dualFormationTips;
-  const mistakes = isTr ? commonMistakesTr : commonMistakes;
+  const insights = formationInsights;
+  const roles = metaRoles;
+  const combos = bestRoleCombos;
+  const consensus = communityConsensus;
+  const dualTips = dualFormationTips;
+  const mistakes = commonMistakes;
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">

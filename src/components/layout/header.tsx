@@ -8,7 +8,6 @@ import { usePathname } from "@/i18n/routing";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
-import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
 const SearchDialog = dynamic(
   () => import("@/components/shared/search-dialog").then((m) => ({ default: m.SearchDialog })),
@@ -90,7 +89,6 @@ export function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
-            <LanguageSwitcher />
             <button
               onClick={() => {
                 setSearchOpen(true);

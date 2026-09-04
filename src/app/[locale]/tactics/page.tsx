@@ -3,14 +3,13 @@ import { Link } from "@/i18n/routing";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { TacticsList } from "@/components/tactics/tactics-list";
 import { JsonLd } from "@/components/shared/json-ld";
-import { allTactics, allTacticTrs } from "contentlayer/generated";
+import { allTactics } from "contentlayer/generated";
 import type { Tactic } from "contentlayer/generated";
-import { ArrowRight, BookOpen, Globe, LayoutGrid, Shield, Sparkles, Users, Wrench } from "lucide-react";
+import { ArrowRight, BookOpen, LayoutGrid, Shield, Sparkles, Users, Wrench } from "lucide-react";
 import { generateLocaleSEO } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { FaqSection } from "@/components/home/faq-section";
 
-// Turkish pilot L1: core list page is part of the minimal indexable set (§2b)
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   return generateLocaleSEO({
     locale: params.locale,
@@ -25,21 +24,8 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
         "fm26 tiki taka", "fm26 counter attack", "fm26 formations",
       ],
     },
-    tr: {
-      title: "FM26 Taktik Kütüphanesi — Football Manager 2026 Taktikleri ve Dizilişleri",
-      description:
-        "Tam FM26 taktik kütüphanesini keşfedin — her diziliş oyuncu rolleri, takım talimatları ve performans analizleriyle. Football Manager 2026'da kadronuz için FM26 taktiklerini bulun.",
-      keywords: [
-        "fm26 taktikleri", "fm 26 taktikleri", "football manager 2026 taktikleri",
-        "fm26 taktik", "fm26 taktik kütüphanesi", "fm26 gegenpress",
-        "fm26 tiki taka", "fm26 kontra atak", "fm26 dizilişleri",
-      ],
-    },
   });
 }
-
-// Turkish pilot: only translated tactics are exposed under /tr (see docs/optimization-plan-2026-09.md §2b)
-const trSlugs = new Set(allTacticTrs.map((t) => t.slug));
 
 const formationAnchors = [
   { slug: "4-3-3-tiki-taka", label: "4-3-3", style: "Tiki-Taka" },
@@ -129,47 +115,13 @@ const faqPairsEn: Array<[string, string]> = faqData.mainEntity.map(
   (item: { name: string; acceptedAnswer: { text: string } }) => [item.name, item.acceptedAnswer.text]
 );
 
-const faqPairsTr: Array<[string, string]> = [
-  [
-    "FM26 için hangi taktik stilleri mevcut?",
-    "FM26 taktik kütüphanesi her büyük taktik stilini kapsar: gegenpress, tiki-taka, kontra atak, kanat oyunu, catenaccio ve elmas orta saha. Her taktik eksiksiz oyuncu rolleri, takım talimatları ve diziliş rehberleri içerir. İlk 8 sıralamamız için FM26 En İyi Taktikler sayfasına bakın.",
-  ],
-  [
-    "Doğru FM26 dizilişini nasıl seçerim?",
-    "Dizilişi kadronuzun güçlü yönlerine uydurun. Güçlü kanatlar? 4-2-3-1 veya 4-4-2 kullanın. Dolu orta saha? 4-3-3 deneyin. Derin savunma hattına sahip alt sınıf? 3-5-2 veya 5-3-2 kontra kanıtlanmış bir seçim.",
-  ],
-  [
-    "Yeni başlayanlar için en iyi FM26 taktiği nedir?",
-    "4-2-3-1 gegenpress veya dengeli 4-4-2 kanat oyunu ile başlayın. İkisi de kurulumu kolay, FM26 maç motorunda affedici ve Football Manager taktiklerinin temel prensiplerini öğretir.",
-  ],
-  [
-    "En iyi FM26 gegenpress taktiği nedir?",
-    "4-2-3-1 gegenpress, FM26'daki en tutarlı yüksek press taktiğidir. Savunma hattını korumak için iki defansif orta saha, şans yaratmak için bir playmaker ve yüksek press yapan inside forward kullanır. Sweeper Keeper ve yüksek savunma hattı ile daha agresif press tetikleyicileri kullanın.",
-  ],
-  [
-    "En iyi FM26 top hakimiyeti taktiği nedir?",
-    "4-3-3 tiki-taka, FM26'daki en iyi top hakimiyeti taktiğidir. Üç orta saha topu domine eder, geniş forvetler savunmayı gerer ve Deep-Lying Playmaker tempoyu kontrol eder. Maksimum top hakimiyeti için daha kısa pas, düşük tempo ve kutuya çalış kullanın.",
-  ],
-  [
-    "Hangi FM26 taktiği zayıf takımlar için en iyisidir?",
-    "3-5-2 kontra atak ve 4-4-2 kanat oyunu, FM26'da alt sınıf takımlar için en iyi taktiklerdir. 3-5-2, savunma sağlamlığı için üç stoper ve hızlı kontra için iki forvet sağlar. 4-4-2, kırılması zor iki sıra dörtlü sunarken hücum tehdidi de taşır.",
-  ],
-  [
-    "Kendi FM26 taktiğimi oluşturabilir miyim?",
-    "Evet — ücretsiz FM26 Taktik Oluşturucu'nu kullanarak oyuncuları yerleştirin, roller ve görevler atayın, takım talimatlarını yapılandırın ve Football Manager 2026 için özel dizilişinizi dışa aktarın veya paylaşın. Not: Oluşturucu .fmf dosyalarını dışa aktaramaz — Football Manager'ın tescilli formatı hiçbir üçüncü taraf araç tarafından desteklenmez. Dışa aktarılan görüntü veya metni oyunda taktiği yeniden oluşturmak için referans olarak kullanın.",
-  ],
-];
-
 export default async function TacticsListPage({
   params,
 }: {
   params: { locale: string };
 }) {
   const { locale } = params;
-  const isTr = locale === "tr";
-  const anchors = isTr
-    ? formationAnchors.filter((a) => trSlugs.has(a.slug))
-    : formationAnchors;
+  const anchors = formationAnchors;
   const tc = await getTranslations({ locale, namespace: "tactics" });
   const cm = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
@@ -324,26 +276,7 @@ export default async function TacticsListPage({
           </div>
         </section>
 
-        <TacticsList tactics={(isTr ? allTacticTrs : allTactics) as Tactic[]} />
-
-        {/* Turkish pilot: remaining tactics live in the English library */}
-        {isTr && (
-          <div className="mt-6 glass-panel border border-primary/10 rounded-xl p-4 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2 min-w-0">
-              <Globe className="w-4 h-4 text-primary shrink-0" />
-              <p className="text-sm text-text-secondary">
-                Diğer taktikler İngilizce kütüphanede — çeviriler yolda.
-              </p>
-            </div>
-            <a
-              href="/tactics"
-              className="shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-            >
-              Tam kütüphane
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        )}
+        <TacticsList tactics={allTactics as Tactic[]} />
 
         {/* Builder CTA */}
         <section className="mt-12">
@@ -392,7 +325,7 @@ export default async function TacticsListPage({
 
         {/* 可见 FAQ 区域 — 与 JSON-LD 对齐 */}
         <FaqSection
-          faqs={isTr ? faqPairsTr : faqPairsEn}
+          faqs={faqPairsEn}
           locale={locale}
         />
       </div>

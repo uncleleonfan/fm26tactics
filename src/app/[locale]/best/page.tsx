@@ -77,13 +77,6 @@ const faqEn: Array<[string, string]> = [
   ["How do I choose the best FM26 tactic for my team?", "Match your tactic to your squad strength: strong wingers → 4-2-3-1 or 4-4-2, strong midfield → 4-1-2-1-2 Diamond or 4-3-3, strong defense → 3-5-2, underdog team → 3-5-2 Counter-Attack."],
 ];
 
-const faqTr: Array<[string, string]> = [
-  ["En iyi FM26 taktikleri neler?", "En iyi FM26 taktikleri: 4-2-3-1 Gegenpress (genel en iyi), 3-5-2 Catenaccio (en iyi savunma) ve 4-3-3 Tiki-Taka (en iyi topa sahip olma). 4-2-3-1 Gegenpress, yüksek pres ve hızlı geçiş tarzıyla her kulüp seviyesinde işe yarayan en tutarlı diziliştir."],
-  ["FM26'da en güçlü diziliş hangisi?", "4-2-3-1 Gegenpress, defansif sağlamlık ile hücum tehdidi dengesi sayesinde FM26'da yaygın olarak en güçlü diziliş kabul ediliyor. Defansif koruma için iki ön libero, yaratıcılık için üç ofansif orta saha ve yoğunlaşmalardan yararlanan tek forvet sağlıyor."],
-  ["Hangi FM26 taktiği yeni başlayanlar için en iyisi?", "4-4-2 Kanat Oyunu ve 3-5-2 Catenaccio, yeni başlayanlar için en iyi FM26 taktikleri. İkisi de basit rol atamaları ve net taktik talimatları içerir; karmaşık oyuncu talimatları gerektirmez."],
-  ["Takımım için en iyi FM26 taktiğini nasıl seçerim?", "Taktiğinizi kadro gücünüze göre eşleştirin: güçlü kanat oyuncuları → 4-2-3-1 veya 4-4-2, güçlü orta saha → 4-1-2-1-2 Elmas veya 4-3-3, güçlü savunma → 3-5-2, favori olmayan takım → 3-5-2 Kontra Atak."],
-];
-
 export default async function BestTacticsPage({ params }: { params: { locale: string } }) {
   const { locale } = params;
   const b = await getTranslations({ locale, namespace: "best" });
@@ -94,7 +87,7 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
     .map((slug) => allTactics.find((t) => t.slug === slug))
     .filter((t) => t != null) as NonNullable<(typeof allTactics)[number]>[];
 
-  const faqs = locale === "tr" ? faqTr : faqEn;
+  const faqs = faqEn;
   const faqJsonLd = {
     "@context": "https://schema.org", "@type": "FAQPage",
     mainEntity: faqs.map(([question, answer]) => ({

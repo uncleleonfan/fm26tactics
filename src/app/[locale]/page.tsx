@@ -32,7 +32,6 @@ function SectionPlaceholderTall() {
   return <div className="py-24" />;
 }
 
-// Turkish pilot L1: home is part of the minimal indexable set (§2b)
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   return generateLocaleSEO({
     locale: params.locale,
@@ -44,15 +43,6 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       keywords: [
         "fm26tactics", "football manager 2026 tactics",
         "fm26 tactics website", "fm26 builder", "fm26 guides",
-      ],
-    },
-    tr: {
-      title: "FM26Tactics — Football Manager 2026 Taktik, Rehber ve Builder",
-      description:
-        "FM26Tactics, Football Manager 2026 için merkeziniz: topluluk testli taktikler, formasyon rehberi, oyuncu rolleri, kapsamlı rehberler ve ücretsiz interaktif taktik oluşturucu.",
-      keywords: [
-        "fm26tactics", "football manager 2026 taktikleri",
-        "fm26 taktik sitesi", "fm26 builder", "fm26 rehberler",
       ],
     },
   });
@@ -81,31 +71,8 @@ const faqEn: Array<[string, string]> = [
   ],
 ];
 
-const faqTr: Array<[string, string]> = [
-  [
-    "FM26Tactics nedir?",
-    "FM26Tactics, Football Manager 2026 oyuncuları için ücretsiz bir kaynak platformudur. Topluluk testli taktik kütüphanesi, interaktif taktik oluşturucu, formasyon rehberleri, oyuncu rol analizleri ve kapsamlı strateji rehberleri sunar. Tüm taktik kütüphanesine fm26tactics.com/tactics adresinden erişebilirsiniz.",
-  ],
-  [
-    "Football Manager 2026'da hangi diziliş en etkili?",
-    "4-2-3-1, Football Manager 2026'da en popüler ve en etkili diziliş. Çift pivot korumasıyla dengeli bir yapı, yaratıcılık için hücumcu bir orta saha ve topa dayanıklı ile kontra atak tarzları arasında geçiş esnekliği sunuyor. Diğer güçlü dizilişler: 4-3-3, 4-4-2, 5-2-3 ve 3-4-2-1.",
-  ],
-  [
-    "FM26'da başarılı bir taktik nasıl oluşturulur?",
-    "FM26'da başarılı bir taktik oluşturmak için: 1) Kadronuzun güçlü yönlerine uygun bir diziliş seçin, 2) Pas üçgenleri oluşturan roller ve görevler atayın, 3) Oyun felsefenize uygun takım talimatları (mentalite, pas stili, pres yoğunluğu) belirleyin, 4) Maç performansına göre test edip ayarlayın. Oyunda uygulamadan önce görselleştirmek ve denemek için interaktif Taktik Oluşturucumuzu kullanın.",
-  ],
-  [
-    "FM26'da gegenpress için en iyi oyuncu rolleri neler?",
-    "Etkili bir gegenpress için: kalede Süpürücü Kaleci (Hücum), Topla Oynayan Stoperler, Kanat Bekleri (Destek), orta sahada Derin Playmaker ile eşleşmiş bir Segundo Volante veya Top Kaplanı Orta Saha, kanatlarda İç Forvet veya Ters Kanat ve forvette Presçi Forvet kullanın. Yüksek Dayanıklılık, Çalışkanlık ve Kararlılık temel özelliklerdir.",
-  ],
-  [
-    "FM26 Taktik Oluşturucu nasıl çalışır?",
-    "FM26 Taktik Oluşturucu; 11 oyuncuyu sahaya sürükleyip bırakmanıza, oyuncu rolleri ve görevleri atamanıza (tüm FM26 seçeneklerinden), takım talimatlarını yapılandırmanıza (mentalite, pas, pres vb.) ve taktiğinizi dışa aktarmanıza veya paylaşmanıza olanak tanıyan ücretsiz bir interaktif araçtır. İndirme gerektirmeden doğrudan tarayıcınızda çalışır. Not: Oluşturucu .fmf dosyalarını dışa aktaramaz — Football Manager'ın tescilli formatı hiçbir üçüncü taraf araç tarafından desteklenmez. Dışa aktarılan SVG/PNG görüntüsünü veya TXT/JSON dosyasını oyunda taktiği manuel olarak yeniden oluşturmak için referans olarak kullanın. fm26tactics.com/builder adresinden erişin.",
-  ],
-];
-
 export default function HomePage({ params }: { params: { locale: string } }) {
-  const faqs = params.locale === "tr" ? faqTr : faqEn;
+  const faqs = faqEn;
   return (
     <>
       <JsonLd

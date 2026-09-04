@@ -1,9 +1,9 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
-import { allTactics, allTacticTrs } from "contentlayer/generated";
+import { allTactics } from "contentlayer/generated";
 
 interface RelatedTacticsProps {
   currentSlug: string;
@@ -12,12 +12,10 @@ interface RelatedTacticsProps {
 }
 
 export function RelatedTactics({ currentSlug, tags, formation }: RelatedTacticsProps) {
-  const locale = useLocale();
   const nav = useTranslations("nav");
   const t = useTranslations("tactics");
 
-  // Turkish pages link to translated tactic content when available
-  const pool = locale === "tr" ? allTacticTrs : allTactics;
+  const pool = allTactics;
 
   // Find related tactics by matching tags and formation styles
   const related = pool

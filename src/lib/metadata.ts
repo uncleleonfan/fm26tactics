@@ -12,9 +12,9 @@ interface SEOProps {
   author?: string;
   ogLocale?: string;
   /**
-   * hreflang alternates for FULLY translated pages only, e.g.
-   * { en: "https://.../tactics/x", tr: "https://.../tr/tactics/x", "x-default": "https://.../tactics/x" }
-   * Omit for untranslated locale shells (they stay plain self-canonical).
+   * hreflang alternates for fully translated pages, e.g.
+   * { en: "https://.../tactics/x", "x-default": "https://.../tactics/x" }
+   * Currently unused — English-only site (LOCALE_REMOVAL_AUDIT.md).
    */
   languageAlternates?: Record<string, string>;
 }
@@ -102,29 +102,20 @@ interface LocaleSEOProps {
   /** Canonical en path, e.g. "/" or "/tactics" */
   path: string;
   en: LocaleSEOContent;
-  tr: LocaleSEOContent;
+  /** Unused since the tr locale was removed — kept so existing callers type-check. */
+  tr?: LocaleSEOContent;
 }
 
 /**
- * Locale-aware SEO for the Turkish pilot's minimal indexable set
- * (home + core list pages — docs/optimization-plan-2026-09.md §2b L1).
- * en → canonical at `path`; tr → canonical at the /tr prefix. Both declare
- * the en↔tr hreflang pair. Other locales (de/fr shells) keep the en canonical.
+ * English-only SEO. The site dropped its /tr /fr /de locales; old URLs
+ * permanently redirect (next.config.mjs), so pages emit a plain English
+ * canonical with no hreflang alternates (LOCALE_REMOVAL_AUDIT.md §7).
  */
-export function generateLocaleSEO({ locale, path, en, tr }: LocaleSEOProps): Metadata {
-  const isTr = locale === "tr";
-  const suffix = path === "/" ? "" : path;
-  const content = isTr ? tr : en;
+export function generateLocaleSEO({ en, path }: LocaleSEOProps): Metadata {
   return generateSEO({
-    title: content.title,
-    description: content.description,
-    keywords: content.keywords,
-    path: isTr ? `/tr${suffix}` : path,
-    ogLocale: isTr ? "tr_TR" : "en_US",
-    languageAlternates: {
-      en: `https://www.fm26tactics.com${suffix}`,
-      tr: `https://www.fm26tactics.com/tr${suffix}`,
-      "x-default": `https://www.fm26tactics.com${suffix}`,
-    },
+    title: en.title,
+    description: en.description,
+    keywords: en.keywords,
+    path,
   });
 }

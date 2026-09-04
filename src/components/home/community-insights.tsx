@@ -1,10 +1,9 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { TrendingUp, Award, BarChart3, ExternalLink } from "lucide-react";
 import { topTestedTactics, metaRoles } from "@/lib/community-data";
-import { metaRolesTr, topTestedNotesTr } from "@/lib/community-data-tr";
 
 const tierColorMap: Record<string, string> = {
   "S+": "bg-red-500/20 text-red-400 border-red-500/30",
@@ -14,8 +13,7 @@ const tierColorMap: Record<string, string> = {
 
 export function CommunityInsights() {
   const t = useTranslations("home");
-  const isTr = useLocale() === "tr";
-  const roles = isTr ? metaRolesTr : metaRoles;
+  const roles = metaRoles;
 
   return (
     <section className="py-16 sm:py-24 bg-background-primary">
@@ -71,7 +69,7 @@ export function CommunityInsights() {
                 </div>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                {isTr ? topTestedNotesTr[i] : tactic.notes}
+                {tactic.notes}
               </p>
             </div>
           ))}

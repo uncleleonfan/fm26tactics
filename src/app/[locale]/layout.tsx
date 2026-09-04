@@ -35,8 +35,6 @@ export function generateStaticParams() {
 
 const localeOgMap: Record<string, string> = {
   en: "en_US",
-  de: "de_DE",
-  fr: "fr_FR",
 };
 
 export async function generateMetadata({
