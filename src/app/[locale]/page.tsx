@@ -37,9 +37,9 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     locale: params.locale,
     path: "/",
     en: {
-      title: "FM26Tactics — Football Manager 2026 Tactics, Guides & Builder",
+      title: "FM26Tactics: Football Manager 2026 Tactics, Guides & Builder",
       description:
-        "FM26Tactics is your hub for Football Manager 2026: browse community-tested tactics, explore formations, learn player roles, read in-depth guides, and build your own tactics with our free interactive builder.",
+        "FM26Tactics: community-tested Football Manager 2026 tactics, formation guides, player role breakdowns, and a free interactive tactic builder. Win more in FM26.",
       keywords: [
         "fm26tactics", "football manager 2026 tactics",
         "fm26 tactics website", "fm26 builder", "fm26 guides",
