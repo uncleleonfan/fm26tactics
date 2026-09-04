@@ -100,6 +100,9 @@ export async function generateMetadata({
     alternates: {
       canonical: "https://www.fm26tactics.com",
     },
+    verification: {
+      yandex: "16267262cb56dd27",
+    },
     other: {
       "google-adsense-account": "ca-pub-2798522702383698",
     },
