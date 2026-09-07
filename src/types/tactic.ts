@@ -19,6 +19,8 @@ export type PlayerRoleCategory = "goalkeeper" | "defender" | "midfielder" | "for
 export interface PlayerRoleData {
   id: string;
   name: string;
+  /** Standard FM-style abbreviation shown on pitch tokens (GK, BPD, DLP...). */
+  abbr: string;
   category: PlayerRoleCategory;
   availableDuties: PlayerDuty[];
   keyAttributes: string[];

@@ -32,14 +32,7 @@ export function PlayerNode({
   const color = dutyColors[player.duty] || "#00E676";
   const radius = isGoalkeeper ? 3.6 : 3.2;
 
-  const abbr = role
-    ? role.name
-        .split(" ")
-        .map((w) => w[0])
-        .join("")
-        .slice(0, 3)
-        .toUpperCase()
-    : "";
+  const abbr = role?.abbr ?? "";
   const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
   // Label always above for GK (top of pitch), auto-flip for outfield players
   const labelAbove = isGoalkeeper || player.y >= 12;

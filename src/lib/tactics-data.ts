@@ -170,6 +170,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "sweeper-keeper",
     name: "Sweeper Keeper",
+    abbr: "SK",
     category: "goalkeeper",
     availableDuties: ["defend", "support", "attack"],
     keyAttributes: ["Rushing Out", "First Touch", "Passing", "Composure", "Acceleration", "Decisions"],
@@ -179,6 +180,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "goalkeeper",
     name: "Goalkeeper",
+    abbr: "GK",
     category: "goalkeeper",
     availableDuties: ["defend"],
     keyAttributes: ["Aerial Reach", "Command of Area", "Handling", "Reflexes", "Positioning", "Decisions"],
@@ -188,6 +190,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "ball-playing-defender",
     name: "Ball-Playing Defender",
+    abbr: "BPD",
     category: "defender",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Passing", "Composure", "Vision", "First Touch", "Technique", "Decisions"],
@@ -197,6 +200,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "central-defender",
     name: "Central Defender",
+    abbr: "CD",
     category: "defender",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Tackling", "Marking", "Heading", "Positioning", "Strength", "Jumping Reach"],
@@ -206,6 +210,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "full-back",
     name: "Full-Back",
+    abbr: "FB",
     category: "defender",
     availableDuties: ["defend", "support", "attack"],
     keyAttributes: ["Tackling", "Stamina", "Acceleration", "Crossing", "Work Rate", "Positioning"],
@@ -215,6 +220,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "wing-back",
     name: "Wing-Back",
+    abbr: "WB",
     category: "defender",
     availableDuties: ["defend", "support", "attack"],
     keyAttributes: ["Stamina", "Crossing", "Dribbling", "Acceleration", "Work Rate", "Off the Ball"],
@@ -224,6 +230,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "deep-lying-playmaker",
     name: "Deep-Lying Playmaker",
+    abbr: "DLP",
     category: "midfielder",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Passing", "Vision", "Technique", "Decisions", "Composure", "First Touch"],
@@ -233,6 +240,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "box-to-box-midfielder",
     name: "Box-to-Box Midfielder",
+    abbr: "BBM",
     category: "midfielder",
     availableDuties: ["support"],
     keyAttributes: ["Stamina", "Work Rate", "Passing", "Tackling", "Long Shots", "Off the Ball"],
@@ -242,6 +250,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "advanced-playmaker",
     name: "Advanced Playmaker",
+    abbr: "AP",
     category: "midfielder",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Vision", "Passing", "Technique", "Decisions", "Flair", "First Touch"],
@@ -251,6 +260,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "inside-forward",
     name: "Inside Forward",
+    abbr: "IF",
     category: "forward",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Dribbling", "Finishing", "Acceleration", "Off the Ball", "Composure", "Technique"],
@@ -260,6 +270,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "advanced-forward",
     name: "Advanced Forward",
+    abbr: "AF",
     category: "forward",
     availableDuties: ["attack"],
     keyAttributes: ["Finishing", "Acceleration", "Off the Ball", "Composure", "Anticipation", "Dribbling"],
@@ -269,6 +280,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "pressing-forward",
     name: "Pressing Forward",
+    abbr: "PF",
     category: "forward",
     availableDuties: ["defend", "support", "attack"],
     keyAttributes: ["Work Rate", "Aggression", "Stamina", "Bravery", "Tackling", "Acceleration"],
@@ -278,6 +290,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "target-forward",
     name: "Target Forward",
+    abbr: "TF",
     category: "forward",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Strength", "Heading", "Jumping Reach", "First Touch", "Bravery", "Balance"],
@@ -288,6 +301,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "line-holding-keeper",
     name: "Line-Holding Keeper",
+    abbr: "LHK",
     category: "goalkeeper",
     availableDuties: ["defend"],
     keyAttributes: ["Aerial Reach", "Reflexes", "Handling", "Positioning", "Command of Area", "Decisions"],
@@ -297,6 +311,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "overlapping-centre-back",
     name: "Overlapping Centre-Back",
+    abbr: "OCB",
     category: "defender",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Pace", "Off the Ball", "Passing", "Work Rate", "Acceleration", "Positioning"],
@@ -306,6 +321,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "playmaking-wing-back",
     name: "Playmaking Wing-Back",
+    abbr: "PWB",
     category: "defender",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Passing", "Crossing", "Vision", "Dribbling", "Work Rate", "Stamina"],
@@ -315,6 +331,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "channel-midfielder",
     name: "Channel Midfielder",
+    abbr: "CM",
     category: "midfielder",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Off the Ball", "Acceleration", "Passing", "First Touch", "Decisions", "Teamwork"],
