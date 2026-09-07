@@ -45,16 +45,15 @@ export const RATING_THRESHOLDS = {
 export const RISK_LEVELS = {
   low: 0.35,
   medium: 0.55,
+  /** At or above → "very-high". */
   high: 0.75,
-  /** Above high threshold → "very-high". */
-  veryHigh: 0.75,
 } as const;
 
 /** Transition risk scoring weights (spec §16 — tuned, not blindly applied). */
 export const RISK_WEIGHTS = {
   /** Weight per attack-duty outfield player (normalized). */
   attackDuty: 1.6,
-  /** Extra weight for attack-duty wide defenders (WB/FB/PWB-A). */
+  /** Extra weight for attacking-behavior wide defenders/midfielders (possession.attacking > 0.45, not duty-based). */
   aggressiveWide: 2.2,
   /** Weight for low-rest-defence shapes (few players behind the ball line). */
   poorRestDefence: 1.5,
