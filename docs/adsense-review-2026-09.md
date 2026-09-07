@@ -8,7 +8,7 @@
 | 日期 | 事件 |
 |---|---|
 | 08-30 | 接入 AdSense：script loader（`src/components/ads/adsense-script.tsx`）、`AdSlot` 组件、`ads.txt`、`google-adsense-account` 验证 meta → 提交申请 |
-| 08-30 ~ 09-04 | **Google 审核窗口期**。审核爬虫抓到的版本：4 locale（en/de/fr/tr）并存、~150 个「英文正文 + 本地化 UI」重复页、首页 5 个内容区块 `ssr: false`（抓取 HTML 仅 Hero + QuickPicks + 空占位 div） |
+| 08-30 ~ 09-07 | **审核窗口期（推断，非确证）**。申请与拒批相隔 8 天，AdSense 首次抓取通常在提交后数日内，大概率落在 9-4 部署前——若如此，审核爬虫看到的版本为：4 locale（en/de/fr/tr）并存、~150 个「英文正文 + 本地化 UI」重复页、首页 5 个内容区块 `ssr: false`（抓取 HTML 仅 Hero + QuickPicks + 空占位 div）。验证途径见 §2 末尾 |
 | 09-04 | 上线大清理版本：移除全部非英语 locale（301 单跳无链）、sitemap/middleware 纯净化、新增 6 篇战术（共 14 篇）、SEO Week 1（www 跳转、首页重定位、pillar 页、内链）、favicon/404 噪音修复、FeaturedTactics/LatestGuides 恢复 SSR 并新增 Faq/Explore 区块 |
 | 09-07 | 收到拒批通知。同日完成剩余整改（见 §3） |
 
@@ -22,6 +22,13 @@
 | Minimum content requirements | 内容量本身达标（14 战术 + 10 guides + 23 blog 均为深度长文）；站点年轻（7 月上线，~700 clicks/月）为固有减分项 | 非内容量问题 |
 
 另有一处**合规矛盾**：Privacy Policy 声明 "We do not use advertising networks"，但站点已实际加载 adsbygoogle——对广告审核是直接负面信号（已于 09-07 修正）。
+
+> **关于「抓取旧版」判定的不确定性**：§2 主因判定基于时间线推断（8-30 申请 → 9-4 部署 → 9-7 拒批，首抓大概率在部署前），并非确证。且即使爬虫在 9-4 后抓取，Google 判重复/低价值依据的是其**索引**，索引更新滞后于部署，旧 locale 页面在窗口期内大概率仍在索引中。验证途径：
+> 1. 拒批邮件是否注明审核/复核日期；
+> 2. AdSense 后台 → 网站 → 状态历史中的上次评估时间；
+> 3. GSC → 页面索引 → 「重复网页」报告是否仍列旧 locale URL——若在，则无论抓取时间如何均支持同一整改方向。
+> （Vercel 请求日志保留期约 1 天，无法回溯窗口期爬虫访问记录。）
+> **两种情形下本次整改方向均成立**，但预期不同：若审核基于旧版，技术整改后重申请通过率较高；若基于新版仍拒，则需叠加站点信任度/流量积累（≥30 天）再重提。§4 步骤 3 的 GSC 复查即为此推断的验证环节。
 
 ## 3. 整改清单
 
