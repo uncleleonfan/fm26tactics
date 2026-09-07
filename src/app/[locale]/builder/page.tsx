@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity, Eye } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
 import { trackEvent } from "@/lib/analytics";
@@ -23,6 +23,7 @@ import type { Recommendation } from "@/types/analysis";
 export default function BuilderPage() {
   const t = useTranslations("builder");
   const cm = useTranslations("common");
+  const tVis = useTranslations("visualize");
   const router = useRouter();
   const {
     state,
@@ -45,8 +46,10 @@ export default function BuilderPage() {
   const [showNudge, setShowNudge] = useState(false);
   const [showFmfAlert, setShowFmfAlert] = useState(false);
   const [appliedChange, setAppliedChange] = useState<AppliedChange | null>(null);
+  const [visualize, setVisualize] = useState(false);
 
-  const { analysis, lockedCategories, toggleCategoryLock } = useTacticalAnalysis(state);
+  const { analysis, ballZone, setBallZone, lockedCategories, toggleCategoryLock } =
+    useTacticalAnalysis(state);
 
   const applyRecommendation = useCallback(
     (rec: Recommendation) => {
@@ -293,6 +296,22 @@ export default function BuilderPage() {
           <div className="flex items-center gap-1 sm:gap-2">
             <button
               onClick={() => {
+                setVisualize((v) => !v);
+                trackEvent("builder_toggle_visualize", { label: visualize ? "off" : "on" });
+              }}
+              className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                visualize
+                  ? "bg-primary/15 border border-primary/50 text-primary shadow-[0_0_12px_rgba(0,230,118,0.2)]"
+                  : "border border-transparent text-text-muted hover:text-text-primary hover:bg-surface-hover"
+              }`}
+              aria-label={tVis("toggle")}
+              aria-pressed={visualize}
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{tVis("toggle")}</span>
+            </button>
+            <button
+              onClick={() => {
                 resetTactic();
                 trackEvent("builder_reset");
               }}
@@ -383,6 +402,11 @@ export default function BuilderPage() {
           selectedPlayerId={selectedPlayerId}
           onChangeRole={setPlayerRole}
           onChangeDuty={setPlayerDuty}
+          visualize={visualize}
+          analysis={analysis}
+          ballZone={ballZone}
+          onBallZoneChange={setBallZone}
+          playerLabelById={playerLabelById}
         />
         <aside className="hidden lg:flex lg:flex-col w-[300px] shrink-0 border-l border-[#1C2436]/50 bg-surface/30">
           {sidebarContent}

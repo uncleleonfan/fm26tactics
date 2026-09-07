@@ -60,6 +60,7 @@ export function PlayerNode({
         e.stopPropagation();
         onTouchStart(e);
       }}
+      onClick={(e) => e.stopPropagation()}
     >
       {/* Invisible touch target — larger hit area */}
       <circle r={touchRadius} fill="transparent" stroke="none" pointerEvents="all" />

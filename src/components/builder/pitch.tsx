@@ -2,6 +2,10 @@
 
 import { useRef, useState } from "react";
 import { PlayerNode } from "./player-node";
+import { VisualizeLayer } from "./visualize-layer";
+import { BallPositionControl } from "./ball-position-control";
+import { zoneAtPoint } from "@/tactics/data/zones";
+import type { AnalysisResult, BallZoneId } from "@/types/analysis";
 import type { TacticBoardState } from "@/types/tactic";
 
 interface PitchProps {
@@ -12,6 +16,13 @@ interface PitchProps {
   selectedPlayerId: string | null;
   onChangeRole: (playerId: string, roleId: string) => void;
   onChangeDuty: (playerId: string, duty: "defend" | "support" | "attack") => void;
+  /** Visualize overlay mode: expected positions, arrows, zone density, ball. */
+  visualize?: boolean;
+  analysis?: AnalysisResult | null;
+  ballZone?: BallZoneId;
+  onBallZoneChange?: (zone: BallZoneId) => void;
+  /** Resolves player ids to role labels for tooltips. */
+  playerLabelById?: (playerId: string) => string | undefined;
 }
 
 const TAP_THRESHOLD_PX = 8; // Max screen-pixel movement to count as a tap
@@ -24,6 +35,11 @@ export function Pitch({
   selectedPlayerId,
   onChangeRole,
   onChangeDuty,
+  visualize = false,
+  analysis = null,
+  ballZone,
+  onBallZoneChange,
+  playerLabelById,
 }: PitchProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [draggingId, setDraggingId] = useState<string | null>(null);
@@ -117,8 +133,15 @@ export function Pitch({
     if (touch) endDrag(touch.clientX, touch.clientY);
   };
 
+  // Visualize mode: clicking open grass moves the ball to that zone.
+  const handleSvgClick = (e: React.MouseEvent) => {
+    if (!visualize || !onBallZoneChange) return;
+    const coords = toSvgCoords(e.clientX, e.clientY);
+    onBallZoneChange(zoneAtPoint(coords.x, coords.y));
+  };
+
   return (
-    <div className="flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
+    <div className="relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
       <svg
         id="tactic-pitch-svg"
         ref={svgRef}
@@ -130,6 +153,7 @@ export function Pitch({
         onMouseLeave={handleMouseUp}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onClick={handleSvgClick}
       >
         {/* Pitch outline */}
         <rect
@@ -224,6 +248,15 @@ export function Pitch({
           />
         ))}
 
+        {/* Visualize overlay: zones, ghosts, arrows, ball */}
+        {visualize && analysis && ballZone && (
+          <VisualizeLayer
+            analysis={analysis}
+            ballZone={ballZone}
+            playerLabelById={playerLabelById}
+          />
+        )}
+
         {/* Player nodes */}
         {state.players.map((player, index) => {
           const isGk = index === 0;
@@ -241,6 +274,10 @@ export function Pitch({
           );
         })}
       </svg>
+
+      {visualize && ballZone && onBallZoneChange && (
+        <BallPositionControl ballZone={ballZone} onChange={onBallZoneChange} />
+      )}
     </div>
   );
 }

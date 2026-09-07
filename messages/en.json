@@ -700,6 +700,27 @@
     "appliedTitle": "Change Applied",
     "dismiss": "Dismiss comparison"
   },
+  "visualize": {
+    "toggle": "Visualize",
+    "ballHint": "Tap the pitch or a zone button to move the ball",
+    "scenes": {
+      "buildUp": "Build-up",
+      "midfield": "Midfield",
+      "finalThird": "Final 3rd",
+      "defensive": "Defensive"
+    },
+    "movements": {
+      "forward": "forward run",
+      "overlap": "overlap run",
+      "underlap": "underlap run",
+      "inside": "inside movement",
+      "outside": "outside movement",
+      "support": "support movement",
+      "cover": "covering movement",
+      "backward": "recovery run",
+      "press": "press trigger"
+    }
+  },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",
     "pageDescription": "Community-sourced FM26 meta analysis — track the most effective formations, player roles, and tactical trends.",
