@@ -60,7 +60,7 @@ export function analyzeTransition(
 
   const playersAheadOfBall = movements.filter((m) => m.expectedPosition.y < zone.y - 4).length;
 
-  const weakCentralCoverPlayers = outfield.filter(
+  const strongCentralCoverPlayers = outfield.filter(
     (p) =>
       horizontalBand(posById.get(p.id)!.x) === "central" &&
       posById.get(p.id)!.y > 50 &&
@@ -79,7 +79,7 @@ export function analyzeTransition(
     (attackDutyCount / 5) * W.attackDuty +
     (aggressiveWide / 3) * W.aggressiveWide +
     (playersAheadOfBall / 7) * W.poorRestDefence * (1 - recoveryStructure) +
-    (weakCentralCoverPlayers === 0 ? 1 : 0) * W.weakCentralCover * 0.55 +
+    (strongCentralCoverPlayers === 0 ? 1 : 0) * W.weakCentralCover * 0.55 +
     (1 - counterPressing) * W.weakCounterPress +
     (overloadedZones / 3) * W.zoneOverload +
     mf * W.mentalityExposure;

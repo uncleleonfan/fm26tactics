@@ -52,6 +52,16 @@ describe("balance engine", () => {
     expect(dR.defence.coverage).toBeGreaterThan(aR.defence.coverage);
     expect(aR.attack.penetration).toBeGreaterThan(dR.attack.penetration);
   });
+
+  it("support.central and defensiveDepth ignore the goalkeeper's duty", () => {
+    // SK(defend) vs SK(attack): support .4→.6, defensiveDepth 1.0→.85.
+    // Both metrics only cover outfield players, so flipping the keeper's
+    // duty must not move either score.
+    const withSKd = analyzeTactic(state433({ 0: { roleId: "sweeper-keeper", duty: "defend" } }), "central-midfield");
+    const withSKa = analyzeTactic(state433({ 0: { roleId: "sweeper-keeper", duty: "attack" } }), "central-midfield");
+    expect(withSKd.support.central).toBe(withSKa.support.central);
+    expect(withSKd.defence.defensiveDepth).toBe(withSKa.defence.defensiveDepth);
+  });
 });
 
 describe("risk engine & warnings", () => {

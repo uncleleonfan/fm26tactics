@@ -68,8 +68,7 @@ export function analyzeAttack(
   const finishing = avg(fwds.slice(0, 2));
 
   // Central presence in attack: central players advanced past midfield.
-  const centralAdvanced = outfield.filter((p, i) => {
-    void i;
+  const centralAdvanced = outfield.filter((p) => {
     const pos = posById.get(p.id)!;
     return horizontalBand(pos.x) === "central" && pos.y < 45;
   });
@@ -144,7 +143,9 @@ export function analyzeSupport(
     : avg(nearBall.map((p) => p.behavior.possession.support));
   const central = avg(
     players
-      .filter((p) => horizontalBand(posById.get(p.id)!.x) === "central")
+      .filter(
+        (p) => horizontalBand(posById.get(p.id)!.x) === "central" && p.roleCategory !== "goalkeeper"
+      )
       .map((p) => p.behavior.possession.support)
   );
 
@@ -208,7 +209,9 @@ export function analyseDefence(
         ? 0.6
         : Math.max(0, restDefenders.length / REST_DEFENCE.moderate) * 0.5;
 
-  const defensiveDepth = avg(players.map((p) => p.behavior.outOfPossession.defensiveDepth));
+  // Defensive depth: outfield recovery inclination only — the keeper's
+  // line-height attribute is a different concept and must not inflate it.
+  const defensiveDepth = avg(outfield.map((p) => p.behavior.outOfPossession.defensiveDepth));
 
   const score = weighted([
     [coverage, BALANCE_WEIGHTS.defence.coverage],
