@@ -56,10 +56,17 @@ export interface ArrowGeometry {
   angleDeg: number;
 }
 
+/** Movements shorter than this are treated as holding position (no visual). */
+export const MIN_MOVEMENT_DIST = 3;
+/** Minimum visible arrow shaft kept between the node edge and ghost marker. */
+const MIN_SHAFT = 1.5;
+
 /**
  * Clip an arrow from `from` to `to` so it starts outside the player node
  * (startPad) and ends just before the expected position (endPad).
- * Returns null when the movement is too short to visualize.
+ * For shorter movements both pads shrink proportionally so the arrow keeps a
+ * visible shaft instead of vanishing between node and ghost marker.
+ * Returns null when the movement is a hold (dist < MIN_MOVEMENT_DIST).
  */
 export function arrowGeometry(
   from: Point,
@@ -70,15 +77,19 @@ export function arrowGeometry(
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const dist = Math.hypot(dx, dy);
-  if (dist < startPad + endPad + 0.8) return null;
+  if (dist < MIN_MOVEMENT_DIST) return null;
+
+  const padScale = Math.min(1, (dist - MIN_SHAFT) / (startPad + endPad));
+  const sPad = startPad * padScale;
+  const ePad = endPad * padScale;
 
   const ux = dx / dist;
   const uy = dy / dist;
   return {
-    x1: from.x + ux * startPad,
-    y1: from.y + uy * startPad,
-    x2: to.x - ux * endPad,
-    y2: to.y - uy * endPad,
+    x1: from.x + ux * sPad,
+    y1: from.y + uy * sPad,
+    x2: to.x - ux * ePad,
+    y2: to.y - uy * ePad,
     angleDeg: (Math.atan2(dy, dx) * 180) / Math.PI,
   };
 }

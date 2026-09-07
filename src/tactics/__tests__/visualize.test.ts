@@ -21,6 +21,16 @@ describe("arrow visualization geometry", () => {
     expect(arrowGeometry({ x: 50, y: 50 }, { x: 50, y: 50 })).toBeNull();
   });
 
+  it("keeps a visible shaft for short movements instead of dropping the arrow", () => {
+    const geo = arrowGeometry({ x: 50, y: 50 }, { x: 53, y: 50 });
+    expect(geo).not.toBeNull();
+    expect(geo!.x2 - geo!.x1).toBeGreaterThan(1);
+  });
+
+  it("treats movements below the hold threshold as holding position", () => {
+    expect(arrowGeometry({ x: 50, y: 50 }, { x: 52.5, y: 50 })).toBeNull();
+  });
+
   it("keeps every movement type renderable with distinct semantics", () => {
     const expected: MovementType[] = [
       "forward",

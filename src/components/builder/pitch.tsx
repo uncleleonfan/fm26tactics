@@ -6,6 +6,7 @@ import { VisualizeLayer } from "./visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
 import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
+import { MIN_MOVEMENT_DIST } from "@/tactics/visualization/arrows";
 import type { AnalysisResult, BallZoneId } from "@/types/analysis";
 import type { TacticBoardState } from "@/types/tactic";
 
@@ -145,10 +146,17 @@ export function Pitch({
   };
 
   // Visualize mode: flip a player's label below the node when the movement
-  // arrow points up (toward the opponent goal) so the label box never covers it.
+  // arrow points up (toward the opponent goal) so the label box never covers
+  // it. Holds (no rendered arrow) keep the default label side.
   const arrowUpById =
     visualize && analysis
-      ? new Map(analysis.movements.map((m) => [m.playerId, m.movementVector.dy < 0]))
+      ? new Map(
+          analysis.movements.map((m) => [
+            m.playerId,
+            Math.hypot(m.movementVector.dx, m.movementVector.dy) >=
+              MIN_MOVEMENT_DIST && m.movementVector.dy < 0,
+          ])
+        )
       : undefined;
 
   return (

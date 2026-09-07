@@ -181,54 +181,56 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
 
         return (
           <g key={`mv-${m.playerId}`} pointerEvents="none">
-            {/* Ghost marker at expected position */}
-            <circle
-              cx={m.expectedPosition.x}
-              cy={m.expectedPosition.y}
-              r="2.2"
-              fill="none"
-              stroke={style.stroke}
-              strokeWidth="0.3"
-              strokeDasharray="1,0.8"
-              opacity="0.65"
-            />
-
-            {/* Movement arrow */}
             {geo && (
-              <g className="animate-fade-in">
-                <line
-                  x1={geo.x1}
-                  y1={geo.y1}
-                  x2={geo.x2}
-                  y2={geo.y2}
+              <>
+                {/* Ghost marker at expected position */}
+                <circle
+                  cx={m.expectedPosition.x}
+                  cy={m.expectedPosition.y}
+                  r="2.2"
+                  fill="none"
                   stroke={style.stroke}
-                  strokeWidth="0.55"
-                  strokeDasharray={style.dash || undefined}
-                  strokeLinecap="round"
-                  opacity="0.9"
+                  strokeWidth="0.3"
+                  strokeDasharray="1,0.8"
+                  opacity="0.65"
                 />
-                {/* Arrowhead */}
-                <polygon
-                  points="0,-1.1 2.2,0 0,1.1"
-                  fill={style.stroke}
-                  transform={`translate(${geo.x2}, ${geo.y2}) rotate(${geo.angleDeg})`}
-                  opacity="0.9"
-                >
-                  <title>{`${label} — ${t(style.labelKey)}`}</title>
-                </polygon>
-                <line
-                  x1={geo.x1}
-                  y1={geo.y1}
-                  x2={geo.x2}
-                  y2={geo.y2}
-                  stroke="transparent"
-                  strokeWidth="2.5"
-                  style={{ pointerEvents: "stroke" }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <title>{`${label} — ${t(style.labelKey)}`}</title>
-                </line>
-              </g>
+
+                {/* Movement arrow */}
+                <g className="animate-fade-in">
+                  <line
+                    x1={geo.x1}
+                    y1={geo.y1}
+                    x2={geo.x2}
+                    y2={geo.y2}
+                    stroke={style.stroke}
+                    strokeWidth="0.55"
+                    strokeDasharray={style.dash || undefined}
+                    strokeLinecap="round"
+                    opacity="0.9"
+                  />
+                  {/* Arrowhead */}
+                  <polygon
+                    points="0,-1.1 2.2,0 0,1.1"
+                    fill={style.stroke}
+                    transform={`translate(${geo.x2}, ${geo.y2}) rotate(${geo.angleDeg})`}
+                    opacity="0.9"
+                  >
+                    <title>{`${label} — ${t(style.labelKey)}`}</title>
+                  </polygon>
+                  <line
+                    x1={geo.x1}
+                    y1={geo.y1}
+                    x2={geo.x2}
+                    y2={geo.y2}
+                    stroke="transparent"
+                    strokeWidth="2.5"
+                    style={{ pointerEvents: "stroke" }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <title>{`${label} — ${t(style.labelKey)}`}</title>
+                  </line>
+                </g>
+              </>
             )}
           </g>
         );
