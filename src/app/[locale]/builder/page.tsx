@@ -15,7 +15,10 @@ import { InstructionPanel } from "@/components/builder/instruction-panel";
 import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
+import type { AppliedChange } from "@/components/builder/recommendation-panel";
+import { dimensionScores } from "@/lib/tactical-scores";
 import type { FormationType, PlayerDuty } from "@/types/tactic";
+import type { Recommendation } from "@/types/analysis";
 
 export default function BuilderPage() {
   const t = useTranslations("builder");
@@ -41,8 +44,19 @@ export default function BuilderPage() {
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
   const [showFmfAlert, setShowFmfAlert] = useState(false);
+  const [appliedChange, setAppliedChange] = useState<AppliedChange | null>(null);
 
-  const { analysis } = useTacticalAnalysis(state);
+  const { analysis, lockedCategories, toggleCategoryLock } = useTacticalAnalysis(state);
+
+  const applyRecommendation = useCallback(
+    (rec: Recommendation) => {
+      setAppliedChange({ recId: rec.id, label: rec.suggestedChange, scores: dimensionScores(analysis) });
+      setPlayerRole(rec.playerId, rec.newRoleId);
+      setPlayerDuty(rec.playerId, rec.newDuty);
+      trackEvent("recommendation_applied", { label: rec.suggestedChange });
+    },
+    [analysis, setPlayerRole, setPlayerDuty]
+  );
 
   // Short label per player id for warning detail chips, e.g. "Wing Back (S)".
   const playerLabelById = useCallback(
@@ -231,7 +245,15 @@ export default function BuilderPage() {
             onApplyTemplate={applyTemplate}
           />
         ) : (
-          <AnalysisPanel analysis={analysis} playerLabelById={playerLabelById} />
+          <AnalysisPanel
+            analysis={analysis}
+            playerLabelById={playerLabelById}
+            lockedCategories={lockedCategories}
+            onToggleCategoryLock={toggleCategoryLock}
+            onApplyRecommendation={applyRecommendation}
+            appliedChange={appliedChange}
+            onDismissComparison={() => setAppliedChange(null)}
+          />
         )}
       </div>
     </>
@@ -369,7 +391,15 @@ export default function BuilderPage() {
           className="hidden xl:flex flex-col w-[360px] shrink-0 border-l border-[#1C2436]/50"
           aria-label={t("analysisTab")}
         >
-          <AnalysisPanel analysis={analysis} playerLabelById={playerLabelById} />
+          <AnalysisPanel
+            analysis={analysis}
+            playerLabelById={playerLabelById}
+            lockedCategories={lockedCategories}
+            onToggleCategoryLock={toggleCategoryLock}
+            onApplyRecommendation={applyRecommendation}
+            appliedChange={appliedChange}
+            onDismissComparison={() => setAppliedChange(null)}
+          />
         </aside>
       </div>
 

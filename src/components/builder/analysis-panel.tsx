@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import {
   ChevronDown,
@@ -14,15 +14,28 @@ import {
 import type {
   AnalysisResult,
   Rating,
+  Recommendation,
   RiskLevel,
 } from "@/types/analysis";
+import type { PlayerRoleCategory } from "@/types/tactic";
 import { RATING_THRESHOLDS } from "@/tactics/data/analysis-config";
+import { dimensionScores } from "@/lib/tactical-scores";
 import { WarningList } from "./warning-list";
+import {
+  RecommendationPanel,
+  type AppliedChange,
+} from "./recommendation-panel";
 
 interface AnalysisPanelProps {
   analysis: AnalysisResult;
   /** Resolves player ids to short labels for warning detail chips. */
   playerLabelById?: (playerId: string) => string | undefined;
+  /** Intent-lock state and callbacks for the recommendation section. */
+  lockedCategories: PlayerRoleCategory[];
+  onToggleCategoryLock: (category: PlayerRoleCategory) => void;
+  onApplyRecommendation: (rec: Recommendation) => void;
+  appliedChange: AppliedChange | null;
+  onDismissComparison: () => void;
 }
 
 const RATING_BAR: Record<Rating, string> = {
@@ -152,9 +165,18 @@ function Section({
   );
 }
 
-export function AnalysisPanel({ analysis, playerLabelById }: AnalysisPanelProps) {
+export function AnalysisPanel({
+  analysis,
+  playerLabelById,
+  lockedCategories,
+  onToggleCategoryLock,
+  onApplyRecommendation,
+  appliedChange,
+  onDismissComparison,
+}: AnalysisPanelProps) {
   const t = useTranslations("analysis");
   const { attack, support, defence, transition } = analysis;
+  const currentScores = useMemo(() => dimensionScores(analysis), [analysis]);
 
   const sections: SectionDef[] = [
     {
@@ -287,6 +309,17 @@ export function AnalysisPanel({ analysis, playerLabelById }: AnalysisPanelProps)
             <WarningList warnings={analysis.warnings} playerLabelById={playerLabelById} />
           </div>
         </div>
+
+        {/* Recommendations */}
+        <RecommendationPanel
+          recommendations={analysis.recommendations}
+          lockedCategories={lockedCategories}
+          onToggleCategoryLock={onToggleCategoryLock}
+          onApply={onApplyRecommendation}
+          appliedChange={appliedChange}
+          onDismissComparison={onDismissComparison}
+          currentScores={currentScores}
+        />
       </div>
     </div>
   );

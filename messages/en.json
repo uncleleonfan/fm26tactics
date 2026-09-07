@@ -671,6 +671,35 @@
       "transitionRiskLow": "Transition risk is low"
     }
   },
+  "recommendations": {
+    "title": "Recommendations",
+    "lockTitle": "Intent Locks",
+    "lockHint": "locked lines stay untouched",
+    "categories": {
+      "goalkeeper": "GK",
+      "defender": "DEF",
+      "midfielder": "MID",
+      "forward": "FWD"
+    },
+    "empty": "No clear upgrades found for this setup",
+    "emptyAllLocked": "Every line is locked — unlock one to get suggestions",
+    "problems": {
+      "defence": "Defensive balance is weak",
+      "risk": "Transition risk is too high",
+      "support": "Support structure is thin",
+      "attack": "Attacking structure lacks threat"
+    },
+    "reasonTemplate": "Switching to {change} addresses this while keeping the rest of your setup intact.",
+    "impactLabels": {
+      "attack": "ATT",
+      "support": "SUP",
+      "defence": "DEF",
+      "risk": "RISK"
+    },
+    "apply": "Apply",
+    "appliedTitle": "Change Applied",
+    "dismiss": "Dismiss comparison"
+  },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",
     "pageDescription": "Community-sourced FM26 meta analysis — track the most effective formations, player roles, and tactical trends.",
