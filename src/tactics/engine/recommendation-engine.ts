@@ -139,7 +139,7 @@ export function generateRecommendations(
     const existing = bestPerPlayer.get(c.playerIndex);
     if (!existing || c.delta > existing.delta) bestPerPlayer.set(c.playerIndex, c);
   }
-  const top = [...bestPerPlayer.values()].sort((a, b) => b.delta - a.delta).slice(0, 3);
+  const top = Array.from(bestPerPlayer.values()).sort((a, b) => b.delta - a.delta).slice(0, 3);
 
   return top.map((c, rank) => {
     const player = state.players[c.playerIndex];
@@ -147,7 +147,7 @@ export function generateRecommendations(
     const newRoleName = playerRoles.find((r) => r.id === c.newRoleId)?.name ?? c.newRoleId;
     const newAcronym = newRoleName
       .split(/[\s-]+/)
-      .map((w) => w[0])
+      .map((w: string) => w[0])
       .join("")
       .toUpperCase();
     const newLabel = `${newAcronym}(${c.newDuty[0].toUpperCase()})`;

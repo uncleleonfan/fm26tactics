@@ -1,18 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
 import { useTacticBuilder } from "@/hooks/use-tactic-builder";
+import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
 import { trackEvent } from "@/lib/analytics";
-import { formationPresets } from "@/lib/tactics-data";
+import { formationPresets, playerRoles } from "@/lib/tactics-data";
 import { useRouter } from "next/navigation";
 import { Pitch } from "@/components/builder/pitch";
 import { RoleSelector } from "@/components/builder/role-selector";
 import { InstructionPanel } from "@/components/builder/instruction-panel";
 import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
+import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { FormationType, PlayerDuty } from "@/types/tactic";
 
 export default function BuilderPage() {
@@ -35,10 +37,25 @@ export default function BuilderPage() {
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [showExport, setShowExport] = useState(false);
-  const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation">("role");
+  const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation" | "analysis">("role");
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
   const [showFmfAlert, setShowFmfAlert] = useState(false);
+
+  const { analysis } = useTacticalAnalysis(state);
+
+  // Short label per player id for warning detail chips, e.g. "Wing Back (S)".
+  const playerLabelById = useCallback(
+    (playerId: string) => {
+      const p = state.players.find((pl) => pl.id === playerId);
+      if (!p) return undefined;
+      const role = playerRoles.find((r) => r.id === p.roleId);
+      if (!role) return undefined;
+      const dutyAbbr = p.duty === "defend" ? "D" : p.duty === "support" ? "S" : "A";
+      return `${role.name} (${dutyAbbr})`;
+    },
+    [state.players]
+  );
 
   // One-time .fmf export limitation alert — shown once per browser
   useEffect(() => {
@@ -168,6 +185,19 @@ export default function BuilderPage() {
         >
           {t("formation")}
         </button>
+        <button
+          onClick={() => {
+            setSidebarTab("analysis");
+            trackEvent("builder_tab", { label: "analysis" });
+          }}
+          className={`flex-1 py-3 text-xs font-medium transition-colors ${
+            sidebarTab === "analysis"
+              ? "text-primary border-b-2 border-primary bg-primary/5"
+              : "text-text-muted hover:text-text-secondary"
+          }`}
+        >
+          {t("analysisTab")}
+        </button>
       </div>
 
       <div className="p-4 overflow-y-auto flex-1">
@@ -194,12 +224,14 @@ export default function BuilderPage() {
             onSetMentality={setTeamMentality}
             onToggleInstruction={toggleInstruction}
           />
-        ) : (
+        ) : sidebarTab === "formation" ? (
           <FormationPanel
             currentFormation={state.formation}
             onSelect={setFormation}
             onApplyTemplate={applyTemplate}
           />
+        ) : (
+          <AnalysisPanel analysis={analysis} playerLabelById={playerLabelById} />
         )}
       </div>
     </>
@@ -330,8 +362,14 @@ export default function BuilderPage() {
           onChangeRole={setPlayerRole}
           onChangeDuty={setPlayerDuty}
         />
-        <aside className="hidden lg:flex lg:flex-col w-[320px] shrink-0 border-l border-[#1C2436]/50 bg-surface/30">
+        <aside className="hidden lg:flex lg:flex-col w-[300px] shrink-0 border-l border-[#1C2436]/50 bg-surface/30">
           {sidebarContent}
+        </aside>
+        <aside
+          className="hidden xl:flex flex-col w-[360px] shrink-0 border-l border-[#1C2436]/50"
+          aria-label={t("analysisTab")}
+        >
+          <AnalysisPanel analysis={analysis} playerLabelById={playerLabelById} />
         </aside>
       </div>
 
@@ -340,7 +378,7 @@ export default function BuilderPage() {
           setShowMobileSidebar(true);
           trackEvent("builder_open_sidebar");
         }}
-        className="lg:hidden fixed bottom-4 right-4 z-30 w-12 h-12 rounded-full bg-primary text-background-primary shadow-lg flex items-center justify-center hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] transition-all active:scale-95"
+        className="xl:hidden fixed bottom-4 right-4 z-30 w-12 h-12 rounded-full bg-primary text-background-primary shadow-lg flex items-center justify-center hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] transition-all active:scale-95"
         aria-label={t("openSettings")}
       >
         <Settings className="w-5 h-5" />
@@ -348,17 +386,20 @@ export default function BuilderPage() {
 
       {showMobileSidebar && (
         <>
-          <div className="lg:hidden fixed inset-0 z-40 bg-black/60 animate-fade-in" onClick={() => setShowMobileSidebar(false)} />
-          <div className="lg:hidden fixed inset-x-0 bottom-0 z-50 max-h-[65vh] bg-background-secondary rounded-t-2xl shadow-[0_-8px_32px_rgba(0,0,0,0.5)] flex flex-col animate-slide-up">
+          <div className="xl:hidden fixed inset-0 z-40 bg-black/60 animate-fade-in" onClick={() => setShowMobileSidebar(false)} />
+          <div className="xl:hidden fixed inset-x-0 bottom-0 z-50 max-h-[65vh] bg-background-secondary rounded-t-2xl shadow-[0_-8px_32px_rgba(0,0,0,0.5)] flex flex-col animate-slide-up">
             <div className="flex items-center justify-between px-4 py-3 border-b border-[#1C2436]/50 shrink-0">
-              <h3 className="text-sm font-semibold text-text-primary">
+              <h3 className="text-sm font-semibold text-text-primary flex items-center gap-2">
+                {sidebarTab === "analysis" && <Activity className="w-4 h-4 text-primary" />}
                 {sidebarTab === "role"
                   ? selectedPlayer
                     ? t("playerRoleNumber", { num: state.players.indexOf(selectedPlayer) + 1 })
                     : t("playerRole")
                   : sidebarTab === "formation"
                     ? t("formation")
-                    : t("instructions")}
+                    : sidebarTab === "analysis"
+                      ? t("analysisTab")
+                      : t("instructions")}
               </h3>
               <button
                 onClick={() => setShowMobileSidebar(false)}

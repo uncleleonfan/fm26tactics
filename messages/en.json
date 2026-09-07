@@ -612,7 +612,64 @@
     "txtStep1": "1. Open FM26 → Tactics → New Tactic and pick the {formation} formation.",
     "txtStep2": "2. Assign each player the role & duty listed above (order matches the pitch from the back).",
     "txtStep3": "3. Set team mentality and tick the team instructions above.",
-    "txtStep4": "4. Share your in-game result back at www.fm26tactics.com"
+    "txtStep4": "4. Share your in-game result back at www.fm26tactics.com",
+    "analysisTab": "Analysis"
+  },
+  "analysis": {
+    "panelTitle": "Tactical Analysis",
+    "liveBadge": "Live",
+    "riskTitle": "Transition Risk",
+    "riskLevel": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "very-high": "Very High"
+    },
+    "riskSummary": {
+      "low": "Shape recovers well after losing possession — counters are contained.",
+      "medium": "Some exposure on turnovers — manageable, but worth watching.",
+      "high": "Counter-attacks would hurt this setup in its current shape.",
+      "very-high": "Serious transition vulnerability — opponents will punish every turnover."
+    },
+    "sections": {
+      "attack": "Attack",
+      "support": "Support",
+      "defence": "Defence",
+      "transition": "Transition"
+    },
+    "metrics": {
+      "width": "Width",
+      "penetration": "Penetration",
+      "chanceCreation": "Chance Creation",
+      "finishing": "Finishing",
+      "centralPresence": "Central Presence",
+      "finalThirdPresence": "Final Third Presence",
+      "buildUp": "Build-up",
+      "midfield": "Midfield Support",
+      "wideSupport": "Wide Support",
+      "centralSupport": "Central Support",
+      "coverage": "Coverage",
+      "centralProtection": "Central Protection",
+      "wideProtection": "Wide Protection",
+      "restDefence": "Rest Defence",
+      "defensiveDepth": "Defensive Depth",
+      "counterPressing": "Counter-pressing",
+      "recoveryStructure": "Recovery Shape",
+      "riskScore": "Risk Score"
+    },
+    "warningsTitle": "Warnings & Findings",
+    "warningsEmpty": "No issues detected for this scenario",
+    "implicatedPlayers": "Involved",
+    "warnings": {
+      "wideCoverageWeak": "{side} flank lacks defensive cover",
+      "centralProtectionWeak": "Weak central protection",
+      "restDefenceWeak": "Rest defence is thin",
+      "transitionRiskHigh": "High transition risk",
+      "zoneOverload": "{zone} is overloaded ({count} players)",
+      "attackWidthWeak": "Attacking width is weak",
+      "centralSupportStrong": "Strong central support",
+      "transitionRiskLow": "Transition risk is low"
+    }
   },
   "meta": {
     "pageTitle": "FM26 Meta Analysis",
