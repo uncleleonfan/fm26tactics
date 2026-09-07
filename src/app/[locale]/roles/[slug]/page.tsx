@@ -1,10 +1,23 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { getTranslations } from "next-intl/server";
+import { allTactics } from "contentlayer/generated";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, ArrowRight, Check, Sparkles, Target, Wrench } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Check,
+  MessageCircleQuestion,
+  Sparkles,
+  Star,
+  Target,
+  Wrench,
+} from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
-import { playerRoles } from "@/lib/tactics-data";
+import { playerRoles, styleColors, styleLabels } from "@/lib/tactics-data";
+import { roleDepth } from "@/lib/role-depth";
 import { roleWonderkids } from "@/lib/role-wonderkids";
 import { generateSEO } from "@/lib/metadata";
 import type { PlayerDuty } from "@/types/tactic";
@@ -45,108 +58,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-// Best partnerships data per role
-const rolePartnerships: Record<string, Array<{ partner: string; partnerId: string; note: string }>> = {
-  "deep-lying-playmaker": [
-    { partner: "Box-to-Box Midfielder", partnerId: "box-to-box-midfielder", note: "BBM covers the ground DLP can't, creating the perfect defensive shield while DLP orchestrates" },
-    { partner: "Ball-Winning Midfielder", partnerId: "ball-winning-midfielder", note: "BWM wins the ball and gives it to DLP to distribute — classic Serie A pairing" },
-    { partner: "Mezzala", partnerId: "mezzala", note: "Mezzala drifts wide and creates overloads while DLP controls the center" },
-  ],
-  "box-to-box-midfielder": [
-    { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "DLP provides the creativity, BBM provides the engine — the most balanced midfield duo" },
-    { partner: "Ball-Winning Midfielder", partnerId: "ball-winning-midfielder", note: "BWM anchors defensively, allowing BBM to roam box-to-box" },
-    { partner: "Advanced Playmaker", partnerId: "advanced-playmaker", note: "AP creates while BBM carries the ball forward — vertical tiki-taka setup" },
-  ],
-  "ball-playing-defender": [
-    { partner: "No-Nonsense Centre-Back", partnerId: "no-nonsense-centre-back", note: "BPD plays, NN-CB defends — perfect complementary CB pairing" },
-    { partner: "Ball-Winning Midfielder", partnerId: "ball-winning-midfielder", note: "BWM presses high, BPD steps into midfield to build from the back" },
-    { partner: "Sweeper Keeper", partnerId: "sweeper-keeper", note: "SK sweeps behind the BPD, allowing the BPD to push into a high line" },
-  ],
-  "advanced-forward": [
-    { partner: "Deep-Lying Forward", partnerId: "deep-lying-forward", note: "DLF drops deep and creates, AF stretches the defense — classic big-man/little-man" },
-    { partner: "Pressing Forward", partnerId: "pressing-forward", note: "PF creates chaos pressing CBs, AF capitalizes on the space" },
-    { partner: "Inside Forward", partnerId: "inside-forward", note: "IF cuts inside and links with AF in the box — devastating combination" },
-  ],
-};
-
-// When to Use / When to Avoid data per role
-const roleWhenToUse: Record<string, { whenToUse: string[]; whenToAvoid: string[] }> = {
-  "deep-lying-playmaker": {
-    whenToUse: [
-      "You want to control possession and tempo",
-      "You have a technically gifted passer in the DM/CM position",
-      "Your tactic uses a patient build-up from the back",
-      "You play with a deeper defensive line",
-    ],
-    whenToAvoid: [
-      "Your team is slow and gets pressed high — DLP needs time on the ball",
-      "You play a fast counter-attacking style",
-      "Your player has low Composure and Decisions attributes",
-    ],
-  },
-  "box-to-box-midfielder": {
-    whenToUse: [
-      "You want an all-action midfielder who contributes at both ends",
-      "Your tactic requires runners covering large distances",
-      "You have an athletic midfielder with high Stamina and Work Rate",
-      "You play a pressing or high-tempo style",
-    ],
-    whenToAvoid: [
-      "Your player has low Stamina or Natural Fitness",
-      "You already have two attack-minded midfielders",
-      "You need a specialist defensive midfielder instead",
-    ],
-  },
-  "ball-playing-defender": {
-    whenToUse: [
-      "You want to build attacks from the back",
-      "Your CB has excellent Passing, Vision, and Composure",
-      "You play with a high defensive line",
-      "Your tactic uses Gegenpress or Possession styles",
-    ],
-    whenToAvoid: [
-      "Your CB has poor Passing or Technique",
-      "You play a low block / defensive style",
-      "Your CB has low Decisions — risk of costly turnovers",
-    ],
-  },
-  "advanced-forward": {
-    whenToUse: [
-      "You need a pure goalscorer who stays high and finishes chances",
-      "Your striker has elite Finishing, Composure, and Off the Ball",
-      "You play with creative midfielders who can feed the AF",
-      "You want a focal point for crosses and through balls",
-    ],
-    whenToAvoid: [
-      "Your striker has poor Finishing or Composure",
-      "You want a forward who drops deep and creates — use DLF instead",
-      "Your team struggles to create chances — AF won't help in buildup",
-    ],
-  },
-  "sweeper-keeper": {
-    whenToUse: [
-      "You play with a high defensive line",
-      "Your GK is good at rushing out and distribution",
-      "You want your keeper to act as a sweeper behind the defense",
-    ],
-    whenToAvoid: [
-      "Your GK has poor Rushing Out or One-on-Ones",
-      "You play with a deep defensive line",
-    ],
-  },
-  "inside-forward": {
-    whenToUse: [
-      "You have a pacy, skillful winger who can cut inside",
-      "You want goals from wide positions",
-      "Your striker benefits from wide players creating central overloads",
-    ],
-    whenToAvoid: [
-      "Your wide player has poor Dribbling or Finishing",
-      "You want traditional crossing wingers — use Winger role instead",
-    ],
-  },
-};
-
 const dutyColors: Record<PlayerDuty, string> = {
   defend: "#448AFF",
   support: "#FFB300",
@@ -171,82 +82,6 @@ const tierColors: Record<string, string> = {
   Marquee: "#FF5252",
 };
 
-// Simulated attribute ratings for the radar chart
-const attributeData: Record<string, Array<{ attribute: string; rating: number }>> = {
-  "sweeper-keeper": [
-    { attribute: "Rushing Out", rating: 95 },
-    { attribute: "Passing", rating: 80 },
-    { attribute: "First Touch", rating: 75 },
-    { attribute: "Composure", rating: 85 },
-    { attribute: "Acceleration", rating: 70 },
-    { attribute: "Decisions", rating: 90 },
-  ],
-  "ball-playing-defender": [
-    { attribute: "Passing", rating: 85 },
-    { attribute: "Composure", rating: 90 },
-    { attribute: "Vision", rating: 80 },
-    { attribute: "First Touch", rating: 75 },
-    { attribute: "Technique", rating: 70 },
-    { attribute: "Decisions", rating: 85 },
-  ],
-  "deep-lying-playmaker": [
-    { attribute: "Passing", rating: 95 },
-    { attribute: "Vision", rating: 90 },
-    { attribute: "Technique", rating: 85 },
-    { attribute: "Decisions", rating: 90 },
-    { attribute: "Composure", rating: 80 },
-    { attribute: "First Touch", rating: 85 },
-  ],
-  "box-to-box-midfielder": [
-    { attribute: "Stamina", rating: 95 },
-    { attribute: "Work Rate", rating: 90 },
-    { attribute: "Passing", rating: 75 },
-    { attribute: "Tackling", rating: 70 },
-    { attribute: "Long Shots", rating: 65 },
-    { attribute: "Off the Ball", rating: 75 },
-  ],
-  "inside-forward": [
-    { attribute: "Dribbling", rating: 90 },
-    { attribute: "Finishing", rating: 85 },
-    { attribute: "Acceleration", rating: 85 },
-    { attribute: "Off the Ball", rating: 80 },
-    { attribute: "Composure", rating: 75 },
-    { attribute: "Technique", rating: 85 },
-  ],
-  "line-holding-keeper": [
-    { attribute: "Aerial Reach", rating: 90 },
-    { attribute: "Reflexes", rating: 90 },
-    { attribute: "Handling", rating: 85 },
-    { attribute: "Positioning", rating: 85 },
-    { attribute: "Command of Area", rating: 80 },
-    { attribute: "Decisions", rating: 80 },
-  ],
-  "overlapping-centre-back": [
-    { attribute: "Pace", rating: 85 },
-    { attribute: "Off the Ball", rating: 85 },
-    { attribute: "Passing", rating: 75 },
-    { attribute: "Work Rate", rating: 80 },
-    { attribute: "Acceleration", rating: 85 },
-    { attribute: "Positioning", rating: 80 },
-  ],
-  "playmaking-wing-back": [
-    { attribute: "Passing", rating: 90 },
-    { attribute: "Crossing", rating: 85 },
-    { attribute: "Vision", rating: 85 },
-    { attribute: "Dribbling", rating: 80 },
-    { attribute: "Work Rate", rating: 85 },
-    { attribute: "Stamina", rating: 85 },
-  ],
-  "channel-midfielder": [
-    { attribute: "Off the Ball", rating: 90 },
-    { attribute: "Acceleration", rating: 85 },
-    { attribute: "Passing", rating: 80 },
-    { attribute: "First Touch", rating: 80 },
-    { attribute: "Decisions", rating: 85 },
-    { attribute: "Teamwork", rating: 85 },
-  ],
-};
-
 export default async function RoleDetailPage({ params }: Props) {
   const { locale, slug } = params;
   const rl = await getTranslations({ locale, namespace: "roles" });
@@ -269,9 +104,10 @@ export default async function RoleDetailPage({ params }: Props) {
   }
 
   const rName = rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name;
+  const depth = roleDepth[role.id];
   const wkReasons = (rl.raw(`wk.${role.id}`) as string[] | undefined) ?? [];
 
-  const chartData = (attributeData[role.id] || role.keyAttributes.map((attr) => ({
+  const chartData = (depth?.radar ?? role.keyAttributes.map((attr) => ({
     attribute: attr,
     rating: 80,
   }))).map((d) => {
@@ -282,6 +118,46 @@ export default async function RoleDetailPage({ params }: Props) {
   const relatedRoles = playerRoles
     .filter((r) => r.category === role.category && r.id !== role.id)
     .slice(0, 4);
+
+  // Tactics whose formation matches the role's best formations
+  const roleFormations = role.bestFormations as string[];
+  const relatedTactics = allTactics
+    .filter((t) => roleFormations.includes(t.formation))
+    .slice(0, 3);
+
+  // FAQ — visible content mirrors the FAQPage JSON-LD exactly (Google guideline)
+  const topAttrs = role.keyAttributes.slice(0, 3);
+  const restAttrs = role.keyAttributes.slice(3);
+  const faqs: Array<[string, string]> = depth
+    ? [
+        [
+          `What is the ${role.name} role in FM26?`,
+          depth.overview[0],
+        ],
+        [
+          `What attributes does a ${role.name} need in Football Manager 2026?`,
+          `The core attributes for a ${role.name} are ${topAttrs.join(", ")}${restAttrs.length ? `, supported by ${restAttrs.join(", ")}` : ""}. Prioritise the first three when scouting — they define whether the player can actually perform the role's core actions.`,
+        ],
+        [
+          `What are the best formations for a ${role.name} in FM26?`,
+          `The ${role.name} performs best in ${role.bestFormations.join(", ")} systems. ${relatedTactics.length ? `Try our ${relatedTactics[0].title} tactic to see the role working in a complete setup.` : "Check the formations page for full positional breakdowns."}`,
+        ],
+        [
+          `When should I use a ${role.name} in Football Manager 2026?`,
+          `Use the ${role.name} when: ${depth.whenToUse.whenToUse.slice(0, 3).map((s) => s.charAt(0).toLowerCase() + s.slice(1)).join("; ")}. Reconsider if ${depth.whenToUse.whenToAvoid[0].charAt(0).toLowerCase() + depth.whenToUse.whenToAvoid[0].slice(1)}.`,
+        ],
+      ]
+    : [];
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
@@ -302,6 +178,14 @@ export default async function RoleDetailPage({ params }: Props) {
           <ArrowLeft className="w-4 h-4" />
           {rl("allRoles")}
         </Link>
+
+        {faqJsonLd.mainEntity.length > 0 && (
+          <Script
+            id={`role-faq-jsonld-${role.id}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          />
+        )}
 
         <div>
           <div className="grid lg:grid-cols-3 gap-8">
@@ -343,28 +227,95 @@ export default async function RoleDetailPage({ params }: Props) {
               })}
             </div>
 
-            {/* Key Attributes */}
+            {/* Deep Overview */}
+            {depth?.overview?.length ? (
+              <div className="mb-8 space-y-4">
+                {depth.overview.map((para, i) => (
+                  <p
+                    key={i}
+                    className={`text-sm leading-relaxed text-text-secondary ${
+                      i === 0 ? "border-l-2 border-primary pl-4 text-text-primary/85" : ""
+                    }`}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+
+            {/* Duty Guide */}
+            {depth?.dutyGuide && Object.keys(depth.dutyGuide).length > 0 ? (
+              <div className="glass-panel p-6 mb-8">
+                <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                  <Wrench className="w-4 h-4 text-primary" />
+                  {rName} Duty Guide
+                </h2>
+                <p className="text-xs text-text-muted mb-4">
+                  How the role behaves on each available duty in FM26.
+                </p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {role.availableDuties.map((duty) => {
+                    const guide = depth.dutyGuide[duty as PlayerDuty];
+                    if (!guide) return null;
+                    const color = dutyColors[duty as PlayerDuty];
+                    return (
+                      <div
+                        key={duty}
+                        className="p-4 rounded-lg bg-surface border border-surface-border hover:border-primary/25 transition-colors"
+                      >
+                        <span
+                          className="inline-block text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border mb-3"
+                          style={{
+                            color,
+                            borderColor: `${color}40`,
+                            backgroundColor: `${color}1a`,
+                          }}
+                        >
+                          {rl(dutyKey(duty))}
+                        </span>
+                        <p className="text-xs text-text-primary/85 leading-relaxed mb-2">{guide.behavior}</p>
+                        <p className="text-[11px] text-text-muted leading-relaxed">
+                          <span className="text-primary font-medium">Best when: </span>
+                          {guide.bestWhen}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
+
+            {/* Key Attributes — tiered */}
             <div className="glass-panel p-6 mb-8">
               <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Target className="w-4 h-4 text-primary" />
                 {rl("attributes")}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {role.keyAttributes.map((attr) => {
+                {role.keyAttributes.map((attr, idx) => {
                   const k = `attr.${attrKey(attr)}`;
+                  const core = idx < 3;
                   return (
                     <div
                       key={attr}
-                      className="flex items-center gap-2 p-2.5 rounded-lg bg-surface border border-surface-border"
+                      className={`flex items-center gap-2 p-2.5 rounded-lg border transition-colors ${
+                        core
+                          ? "bg-primary/5 border-primary/30 shadow-[0_0_12px_rgba(0,230,118,0.08)]"
+                          : "bg-surface border-surface-border"
+                      }`}
                     >
-                      <Check className="w-3.5 h-3.5 text-primary shrink-0" />
-                      <span className="text-sm text-text-primary">{rl.has(k) ? rl(k) : attr}</span>
+                      <Check className={`w-3.5 h-3.5 shrink-0 ${core ? "text-primary" : "text-text-muted"}`} />
+                      <span className={`text-sm ${core ? "text-text-primary font-medium" : "text-text-secondary"}`}>
+                        {rl.has(k) ? rl(k) : attr}
+                      </span>
                     </div>
                   );
                 })}
               </div>
+              <p className="text-[11px] text-text-muted mt-3">
+                Highlighted attributes are the non-negotiables for this role.
+              </p>
             </div>
-
             {/* Radar Chart — lazy-loaded recharts (~250KB deferred from critical path) */}
             <RoleRadarChart roleName={rName} data={chartData} />
 
@@ -384,66 +335,153 @@ export default async function RoleDetailPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Best Role Partnerships */}
-            {(() => {
-              const partnerships = rolePartnerships[role.id];
-              if (!partnerships?.length) return null;
-              return (
-                <div className="glass-panel p-6 mt-8">
-                  <h2 className="text-lg font-semibold mb-4">Best Role Partnerships</h2>
-                  <div className="space-y-3">
-                    {partnerships.map((p) => (
-                      <Link
-                        key={p.partnerId}
-                        href={`/roles/${p.partnerId}`}
-                        className="block p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all"
-                      >
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-semibold text-primary">{p.partner}</span>
-                          <ArrowRight className="w-3 h-3 text-text-muted" />
-                        </div>
-                        <p className="text-xs text-text-secondary">{p.note}</p>
-                      </Link>
-                    ))}
-                  </div>
+            {/* Recommended Player Preferred Moves (PPMs) */}
+            {depth?.ppms?.length ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                  <Wrench className="w-4 h-4 text-primary" />
+                  Recommended Player Traits (PPMs)
+                </h2>
+                <p className="text-xs text-text-muted mb-4">
+                  Train these preferred moves to get the most out of a {rName}.
+                </p>
+                <div className="space-y-3">
+                  {depth.ppms.map((ppm) => (
+                    <div
+                      key={ppm.name}
+                      className="flex items-start gap-3 p-3 rounded-lg bg-surface border border-surface-border"
+                    >
+                      <Check className="w-3.5 h-3.5 text-primary shrink-0 mt-1" />
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-text-primary mb-0.5">{ppm.name}</p>
+                        <p className="text-xs text-text-secondary leading-relaxed">{ppm.reason}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              );
-            })()}
+              </div>
+            ) : null}
+
+            {/* Related Tactics — derived from formation match */}
+            {relatedTactics.length > 0 ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-primary" />
+                  FM26 Tactics for the {rName}
+                </h2>
+                <p className="text-xs text-text-muted mb-4">
+                  Complete tactics built in formations where this role thrives.
+                </p>
+                <div className="space-y-3">
+                  {relatedTactics.map((t) => (
+                    <Link
+                      key={t.slug}
+                      href={`/tactics/${t.slug}`}
+                      className="block p-4 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
+                    >
+                      <div className="flex items-center gap-2 flex-wrap mb-1.5">
+                        <span className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">
+                          {t.title}
+                        </span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                          {t.formation}
+                        </span>
+                        <span
+                          className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${styleColors[t.style] ?? ""}`}
+                        >
+                          {styleLabels[t.style] ?? t.style}
+                        </span>
+                      </div>
+                      <p className="text-xs text-text-secondary line-clamp-2 leading-relaxed">{t.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            {/* Best Role Partnerships */}
+            {depth?.partnerships?.length ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-4">Best Role Partnerships</h2>
+                <div className="space-y-3">
+                  {depth.partnerships.map((p) => (
+                    <Link
+                      key={p.partnerId}
+                      href={`/roles/${p.partnerId}`}
+                      className="block p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all"
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-semibold text-primary">{p.partner}</span>
+                        <ArrowRight className="w-3 h-3 text-text-muted" />
+                      </div>
+                      <p className="text-xs text-text-secondary">{p.note}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             {/* When to Use / When to Avoid */}
-            {(() => {
-              const guide = roleWhenToUse[role.id];
-              if (!guide) return null;
-              return (
-                <div className="glass-panel p-6 mt-8">
-                  <h2 className="text-lg font-semibold mb-4">When to Use &amp; When to Avoid {rName}</h2>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <h3 className="text-sm font-semibold mb-2 text-green-500">When to Use</h3>
-                      <ul className="space-y-1.5">
-                        {guide.whenToUse.map((item) => (
-                          <li key={item} className="text-xs text-text-secondary flex gap-2">
-                            <Check className="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold mb-2 text-red-400">When to Avoid</h3>
-                      <ul className="space-y-1.5">
-                        {guide.whenToAvoid.map((item) => (
-                          <li key={item} className="text-xs text-text-secondary flex gap-2">
-                            <span className="text-red-400 shrink-0 mt-0.5">-</span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+            {depth?.whenToUse ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-4">When to Use &amp; When to Avoid {rName}</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2 text-green-500">When to Use</h3>
+                    <ul className="space-y-1.5">
+                      {depth.whenToUse.whenToUse.map((item) => (
+                        <li key={item} className="text-xs text-text-secondary flex gap-2">
+                          <Check className="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2 text-red-400">When to Avoid</h3>
+                    <ul className="space-y-1.5">
+                      {depth.whenToUse.whenToAvoid.map((item) => (
+                        <li key={item} className="text-xs text-text-secondary flex gap-2">
+                          <span className="text-red-400 shrink-0 mt-0.5">-</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              );
-            })()}
+              </div>
+            ) : null}
+
+            {/* Star Player Examples */}
+            {depth?.starPlayers?.length ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                  <Star className="w-4 h-4 text-primary" />
+                  Star Players for This Role
+                </h2>
+                <p className="text-xs text-text-muted mb-4">
+                  Real-world reference points to scout against in FM26.
+                </p>
+                <div className="space-y-3">
+                  {depth.starPlayers.map((sp) => (
+                    <div
+                      key={sp.name}
+                      className="flex items-start gap-3 p-3 rounded-lg bg-surface border border-surface-border"
+                    >
+                      <Star className="w-3.5 h-3.5 text-primary shrink-0 mt-1" />
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                          <span className="text-sm font-semibold text-text-primary">{sp.name}</span>
+                          <span className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary">
+                            {sp.club}
+                          </span>
+                        </div>
+                        <p className="text-xs text-text-secondary leading-relaxed">{sp.why}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             {/* Top Wonderkids for This Role */}
             {(() => {
@@ -508,6 +546,24 @@ export default async function RoleDetailPage({ params }: Props) {
                 </div>
               );
             })()}
+
+            {/* FAQ — content mirrors FAQPage JSON-LD */}
+            {faqs.length > 0 ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <MessageCircleQuestion className="w-4 h-4 text-primary" />
+                  {rName} FM26 FAQ
+                </h2>
+                <div className="divide-y divide-[#1C2436]/50">
+                  {faqs.map(([q, a]) => (
+                    <div key={q} className="py-4 first:pt-0 last:pb-0">
+                      <h3 className="text-sm font-semibold text-text-primary mb-1.5">{q}</h3>
+                      <p className="text-xs text-text-secondary leading-relaxed">{a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
 
           {/* Sidebar */}
