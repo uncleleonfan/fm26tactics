@@ -3,7 +3,6 @@ import type {
   AttackAnalysis,
   BallZoneId,
   DefenceAnalysis,
-  PlayerMovement,
   Recommendation,
   SupportAnalysis,
   TransitionAnalysis,
@@ -11,6 +10,7 @@ import type {
 import type { TacticBoardState, PlayerDuty } from "@/types/tactic";
 import { playerRoles } from "@/lib/tactics-data";
 import { buildTacticalModel } from "@/tactics/engine/tactical-model";
+import { computeSpatial } from "@/tactics/engine/spatial-engine";
 import { analyzeAttack, analyzeSupport, analyseDefence } from "@/tactics/engine/balance-engine";
 import { analyzeTransition } from "@/tactics/engine/risk-engine";
 
@@ -32,20 +32,6 @@ interface ScoreSnapshot {
   risk: number;
 }
 
-/** Ball-independent static movements used for fast candidate re-scoring. */
-function staticMovements(players: ReturnType<typeof buildTacticalModel>["players"]): PlayerMovement[] {
-  return players.map((p) => ({
-    playerId: p.id,
-    roleId: p.roleId,
-    duty: p.duty,
-    basePosition: { x: p.x, y: p.y },
-    expectedPosition: { x: p.x, y: p.y },
-    movementVector: { dx: 0, dy: 0 },
-    movementType: "support" as const,
-    occupiedZones: [],
-  }));
-}
-
 function meanScore(a: AttackAnalysis | DefenceAnalysis | SupportAnalysis): number {
   const values = Object.entries(a)
     .filter(([k, v]) => typeof v === "number" && k !== "rating")
@@ -53,9 +39,14 @@ function meanScore(a: AttackAnalysis | DefenceAnalysis | SupportAnalysis): numbe
   return values.reduce((s, v) => s + v, 0) / Math.max(1, values.length);
 }
 
+/**
+ * Re-score a candidate state through the same spatial pipeline as the main
+ * analysis, so candidate deltas and reported impact match a full re-analysis
+ * (including ball-zone displacement and mentality effects).
+ */
 function scoreOf(state: TacticBoardState, ballZone: BallZoneId): ScoreSnapshot {
   const model = buildTacticalModel(state);
-  const movements = staticMovements(model.players);
+  const { movements } = computeSpatial(model, ballZone);
   return {
     attack: meanScore(analyzeAttack(model.players, movements, ballZone)),
     support: meanScore(analyzeSupport(model.players, movements, ballZone)),

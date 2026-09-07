@@ -100,11 +100,24 @@ describe("recommendation engine", () => {
     };
     const after = analyzeTactic(afterState, "central-midfield");
 
-    // Reported impact must never regress, and full re-analysis confirms the
-    // static re-scoring direction (static snapshots may round risk to 0 delta
-    // when the gain comes purely from the defensive-structure component).
+    // Reported impact must never regress, and — since candidates are scored
+    // through the same spatial pipeline as the main analysis — the deltas must
+    // exactly match a full re-analysis of the applied state.
     expect(rec.impact.risk).toBeGreaterThanOrEqual(0);
     expect(rec.impact.defence).toBeGreaterThan(0);
+    expect(rec.impact.risk).toBeCloseTo(before.transition.riskScore - after.transition.riskScore, 6);
+    expect(rec.impact.attack).toBeCloseTo(
+      dimensionMean(after, "attack") - dimensionMean(before, "attack"),
+      6
+    );
+    expect(rec.impact.support).toBeCloseTo(
+      dimensionMean(after, "support") - dimensionMean(before, "support"),
+      6
+    );
+    expect(rec.impact.defence).toBeCloseTo(
+      dimensionMean(after, "defence") - dimensionMean(before, "defence"),
+      6
+    );
     expect(after.transition.riskScore - before.transition.riskScore).toBeLessThan(0);
   });
 });
