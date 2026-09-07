@@ -1,5 +1,5 @@
 import { playerRoles } from "@/lib/tactics-data";
-import type { PlayerRoleData, TacticBoardState, PlayerDuty } from "@/types/tactic";
+import type { PlayerRoleData, TacticBoardState, PlayerDuty, Mentality } from "@/types/tactic";
 import type { RoleBehavior } from "@/tactics/data/role-behaviors";
 import { getRoleBehavior } from "@/tactics/data/role-behaviors";
 
@@ -27,7 +27,7 @@ export interface TacticalPlayer {
 export interface TacticalModel {
   formation: string;
   players: TacticalPlayer[];
-  mentality: string;
+  mentality: Mentality;
 }
 
 function roleShortName(meta: PlayerRoleData | undefined, roleName: string): string {

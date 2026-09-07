@@ -2,6 +2,36 @@
  * Analysis tuning parameters — all thresholds and weights live here (spec §12/§16).
  * The engines never hardcode these numbers.
  */
+import type { Mentality } from "@/types/tactic";
+
+/**
+ * FM26 mentality ladder: the 7 in-game mindsets mapped to a symmetric push
+ * factor (-1 very-defensive … 0 balanced … +1 very-attacking).
+ */
+export const MENTALITY_FACTORS: Record<Mentality, number> = {
+  "very-defensive": -1,
+  defensive: -0.66,
+  cautious: -0.33,
+  balanced: 0,
+  positive: 0.33,
+  attacking: 0.66,
+  "very-attacking": 1,
+};
+
+/** How strongly mentality scales the spatial engine's vertical adjustments. */
+export const MENTALITY_PUSH = {
+  /** Duty-based attacking push amplification (±40% at the extremes). */
+  attack: 0.4,
+  /** Forward-run amplification when the ball is advanced. */
+  runs: 0.25,
+  /** Defensive-recovery amplification (defensive mindsets recover harder). */
+  recovery: 0.2,
+} as const;
+
+/** Resolve a mentality string to its factor; unknown values degrade to balanced. */
+export function mentalityFactor(mentality: string): number {
+  return MENTALITY_FACTORS[mentality as Mentality] ?? 0;
+}
 
 export const RATING_THRESHOLDS = {
   /** Aggregate score below this → "weak". */
@@ -34,6 +64,8 @@ export const RISK_WEIGHTS = {
   weakCounterPress: 0.8,
   /** Attacking overload in one zone amplifies turnover exposure. */
   zoneOverload: 0.6,
+  /** Symmetric mindset exposure: attacking mentalities add risk, defensive reduce it. */
+  mentalityExposure: 1.2,
   /** Divisor normalizing the 11-player aggregate to 0-1. */
   normalizer: 10,
 } as const;

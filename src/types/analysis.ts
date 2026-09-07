@@ -1,7 +1,7 @@
 import type { PlayerDuty, PlayerNode, TacticBoardState } from "@/types/tactic";
 
 /** Version of the rule-based tactical model. Bump when data/rules change semantics. */
-export const TACTICAL_MODEL_VERSION = "fm26-v1";
+export const TACTICAL_MODEL_VERSION = "fm26-v2";
 
 // ---------------------------------------------------------------------------
 // Ball zones — 10 tactical zones the user can move the ball to

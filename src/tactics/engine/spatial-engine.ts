@@ -1,5 +1,6 @@
 import type { BallZoneId, MovementType, PlayerMovement, Point } from "@/types/analysis";
 import { zoneById, zoneAtPoint, BAND_EDGES, THIRD_EDGES } from "@/tactics/data/zones";
+import { MENTALITY_PUSH, mentalityFactor } from "@/tactics/data/analysis-config";
 import type { TacticalPlayer } from "@/tactics/engine/tactical-model";
 import { horizontalBand } from "@/tactics/engine/tactical-model";
 
@@ -16,6 +17,8 @@ interface SpatialContext {
   ball: Point;
   ballSide: "left" | "central" | "right";
   ballThird: "defensive" | "middle" | "attacking";
+  /** Team mindset push factor, -1 (very defensive) … 0 (balanced) … +1 (very attacking). */
+  mentalityFactor: number;
 }
 
 function clamp(v: number, min: number, max: number): number {
@@ -26,23 +29,25 @@ function clamp(v: number, min: number, max: number): number {
 function computeExpectedPosition(player: TacticalPlayer, ctx: SpatialContext): Point {
   const b = player.behavior;
   let { x, y } = player;
+  const mf = ctx.mentalityFactor;
 
   const ballDistance = Math.hypot(x - ctx.ball.x, y - ctx.ball.y);
   const sameSide = horizontalBand(x) === ctx.ballSide;
 
   // --- Vertical (attacking/defending) adjustments ---
   // Base duty push: attacking players push up, defensive players hold.
-  y -= (b.possession.attacking - 0.35) * 22;
+  // Mindset amplifies the whole team's push (very-attacking ≈ +40%).
+  y -= (b.possession.attacking - 0.35) * 22 * (1 + mf * MENTALITY_PUSH.attack);
 
   // Ball third shifts the whole shape.
   if (ctx.ballThird === "attacking") y -= 5;
   if (ctx.ballThird === "defensive") y += 5;
 
   // Forward runners go when the ball reaches midfield/final third.
-  if (ctx.ballThird !== "defensive") y -= b.movement.forward * 12;
+  if (ctx.ballThird !== "defensive") y -= b.movement.forward * 12 * (1 + mf * MENTALITY_PUSH.runs);
 
   // Defensive recovery when the ball is deep in our half.
-  if (ctx.ballThird === "defensive") y += b.movement.backward * 10;
+  if (ctx.ballThird === "defensive") y += b.movement.backward * 10 * (1 - mf * MENTALITY_PUSH.recovery);
 
   // Overlap: attacking width run past the winger on the ball side.
   if (b.movement.overlap > 0.4 && sameSide && ctx.ballThird !== "defensive") {
@@ -135,13 +140,17 @@ export interface SpatialResult {
   zoneOccupancy: Partial<Record<BallZoneId, number>>;
 }
 
-export function computeSpatial(model: { players: TacticalPlayer[] }, ballZone: BallZoneId): SpatialResult {
+export function computeSpatial(
+  model: { players: TacticalPlayer[]; mentality?: string },
+  ballZone: BallZoneId
+): SpatialResult {
   const zone = zoneById[ballZone];
   const ctx: SpatialContext = {
     ballZone,
     ball: { x: zone.x, y: zone.y },
     ballSide: zone.band === "central" ? "central" : zone.band,
     ballThird: zone.third,
+    mentalityFactor: mentalityFactor(model.mentality ?? "balanced"),
   };
 
   const movements: PlayerMovement[] = model.players.map((player) => {
@@ -183,13 +192,14 @@ export function counterPressScore(players: TacticalPlayer[], movements: PlayerMo
   return clamp(score / 3.2, 0, 1); // ~3 active pressers at full intensity = 1.0
 }
 
-export function spatialContextFor(ballZone: BallZoneId): SpatialContext {
+export function spatialContextFor(ballZone: BallZoneId, mentality: string = "balanced"): SpatialContext {
   const zone = zoneById[ballZone];
   return {
     ballZone,
     ball: { x: zone.x, y: zone.y },
     ballSide: zone.band === "central" ? "central" : zone.band,
     ballThird: zone.third,
+    mentalityFactor: mentalityFactor(mentality),
   };
 }
 

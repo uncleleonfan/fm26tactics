@@ -60,7 +60,7 @@ function scoreOf(state: TacticBoardState, ballZone: BallZoneId): ScoreSnapshot {
     attack: meanScore(analyzeAttack(model.players, movements, ballZone)),
     support: meanScore(analyzeSupport(model.players, movements, ballZone)),
     defence: meanScore(analyseDefence(model.players, movements, ballZone)),
-    risk: analyzeTransition(model.players, movements, ballZone).riskScore,
+    risk: analyzeTransition(model.players, movements, ballZone, model.mentality).riskScore,
   };
 }
 

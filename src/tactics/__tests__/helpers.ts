@@ -1,4 +1,4 @@
-import type { TacticBoardState, PlayerDuty, FormationType } from "@/types/tactic";
+import type { TacticBoardState, PlayerDuty, FormationType, Mentality } from "@/types/tactic";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
 
 export interface PlayerSpec {
@@ -21,7 +21,11 @@ function sortSlots(positions: Array<{ x: number; y: number }>) {
 }
 
 /** Build a tactic state with explicit role/duty assignments in line order. */
-export function buildState(formation: string, specs: PlayerSpec[]): TacticBoardState {
+export function buildState(
+  formation: string,
+  specs: PlayerSpec[],
+  mentality: Mentality = "balanced"
+): TacticBoardState {
   const preset = formationPresets.find((f) => f.formation === formation)!;
   const positions = sortSlots(preset.positions);
   const gk = playerRoles.find((r) => r.id === "sweeper-keeper")!;
@@ -39,7 +43,7 @@ export function buildState(formation: string, specs: PlayerSpec[]): TacticBoardS
         individualInstructions: [],
       };
     }),
-    teamInstructions: { mentality: "balanced", inPossession: [], inTransition: [], outOfPossession: [] },
+    teamInstructions: { mentality, inPossession: [], inTransition: [], outOfPossession: [] },
   };
 }
 
@@ -47,8 +51,10 @@ export function buildState(formation: string, specs: PlayerSpec[]): TacticBoardS
  * Balanced 4-3-3 in line order:
  * GK | CB CB | LM CM DM CM RM | LW ST RW
  */
-export const state433 = (overrides: Partial<Record<number, PlayerSpec>> = {}) =>
-  buildState("4-3-3", default433Specs(overrides));
+export const state433 = (
+  overrides: Partial<Record<number, PlayerSpec>> = {},
+  mentality: Mentality = "balanced"
+) => buildState("4-3-3", default433Specs(overrides), mentality);
 
 function default433Specs(overrides: Partial<Record<number, PlayerSpec>>): PlayerSpec[] {
   const base: PlayerSpec[] = [

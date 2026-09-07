@@ -38,7 +38,7 @@ export function analyzeTactic(
   const attack = analyzeAttack(model.players, movements, ballZone);
   const support = analyzeSupport(model.players, movements, ballZone);
   const defence = analyseDefence(model.players, movements, ballZone);
-  const transition = analyzeTransition(model.players, movements, ballZone);
+  const transition = analyzeTransition(model.players, movements, ballZone, model.mentality);
 
   const warnings = generateWarnings(
     model.players,

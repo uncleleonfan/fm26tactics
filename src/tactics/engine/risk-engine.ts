@@ -8,7 +8,7 @@ import type {
   DefenceAnalysis,
   SupportAnalysis,
 } from "@/types/analysis";
-import { RISK_LEVELS, RISK_WEIGHTS as W } from "@/tactics/data/analysis-config";
+import { RISK_LEVELS, RISK_WEIGHTS as W, mentalityFactor } from "@/tactics/data/analysis-config";
 import { zoneById, ZONE_OCCUPANCY_THRESHOLDS } from "@/tactics/data/zones";
 import type { TacticalPlayer } from "@/tactics/engine/tactical-model";
 import { horizontalBand } from "@/tactics/engine/tactical-model";
@@ -29,9 +29,11 @@ function riskLevel(score: number): RiskLevel {
 export function analyzeTransition(
   players: TacticalPlayer[],
   movements: PlayerMovement[],
-  ballZone: BallZoneId
+  ballZone: BallZoneId,
+  mentality: string = "balanced"
 ): TransitionAnalysis {
   const zone = zoneById[ballZone];
+  const mf = mentalityFactor(mentality);
   const ctx = spatialContextFor(ballZone);
   const outfield = players.filter((p) => p.roleCategory !== "goalkeeper");
   const posById = new Map(movements.map((m) => [m.playerId, m.expectedPosition]));
@@ -79,7 +81,8 @@ export function analyzeTransition(
     (playersAheadOfBall / 7) * W.poorRestDefence * (1 - recoveryStructure) +
     (weakCentralCoverPlayers === 0 ? 1 : 0) * W.weakCentralCover * 0.55 +
     (1 - counterPressing) * W.weakCounterPress +
-    (overloadedZones / 3) * W.zoneOverload;
+    (overloadedZones / 3) * W.zoneOverload +
+    mf * W.mentalityExposure;
 
   const riskScore = Math.max(0, Math.min(1, raw / W.normalizer));
 
