@@ -1,36 +1,15 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/hero";
 import { QuickPicks } from "@/components/home/quick-picks";
+import { CommunityInsights } from "@/components/home/community-insights";
 import { FeaturedTactics } from "@/components/home/featured-tactics";
+import { StatsSection } from "@/components/home/stats-section";
+import { TacticBuilderCTA } from "@/components/home/cta-section";
 import { LatestGuides } from "@/components/home/latest-guides";
 import { FaqSection } from "@/components/home/faq-section";
 import { ExploreSection } from "@/components/home/explore-section";
 import { JsonLd } from "@/components/shared/json-ld";
 import { generateLocaleSEO } from "@/lib/metadata";
-
-// ssr: false — eliminates preload links for chunks, preventing bandwidth competition
-// on mobile. Content loads instantly after hydration via local JS chunks.
-const CommunityInsights = dynamic(
-  () => import("@/components/home/community-insights").then((m) => ({ default: m.CommunityInsights })),
-  { ssr: false, loading: () => <SectionPlaceholder /> }
-);
-const StatsSection = dynamic(
-  () => import("@/components/home/stats-section").then((m) => ({ default: m.StatsSection })),
-  { ssr: false, loading: () => <SectionPlaceholder /> }
-);
-const TacticBuilderCTA = dynamic(
-  () => import("@/components/home/cta-section").then((m) => ({ default: m.TacticBuilderCTA })),
-  { ssr: false, loading: () => <SectionPlaceholderTall /> }
-);
-
-// Placeholder skeletons with matching approx height — prevents CLS
-function SectionPlaceholder() {
-  return <div className="py-16" />;
-}
-function SectionPlaceholderTall() {
-  return <div className="py-24" />;
-}
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   return generateLocaleSEO({

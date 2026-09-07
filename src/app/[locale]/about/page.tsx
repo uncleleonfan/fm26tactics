@@ -36,6 +36,54 @@ export default async function AboutPage({ params }: { params: { locale: string }
           </p>
         </div>
 
+        <div className="glass-panel p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-3">Who We Are</h2>
+          <p className="text-text-secondary text-sm leading-relaxed">
+            FM26 Tactics is run by a small independent team of long-time Football
+            Manager players with thousands of combined hours across the series
+            (FM12 through FM26). We are not affiliated with Sports Interactive or
+            SEGA — we are fans building the resource we always wished existed.
+            Every tactic, guide, and role breakdown on this site is written and
+            tested by people who play the game daily.
+          </p>
+        </div>
+
+        <div className="glass-panel p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-3">How We Test Tactics</h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            Recommendations on this site follow a consistent testing methodology:
+          </p>
+          <ul className="text-text-secondary text-sm leading-relaxed space-y-2 pl-5">
+            <li className="list-disc marker:text-primary">
+              <span className="text-text-primary font-medium">Community data first</span> — we track FM-Arena tactic testing tables and large-sample community results as a baseline for what actually performs.
+            </li>
+            <li className="list-disc marker:text-primary">
+              <span className="text-text-primary font-medium">Multiple saves</span> — tactics are validated across at least three different clubs and leagues before we rank or recommend them, to filter out squad-specific luck.
+            </li>
+            <li className="list-disc marker:text-primary">
+              <span className="text-text-primary font-medium">Full-season runs</span> — we look at 30+ match samples, not 5-game streaks, before drawing conclusions about a tactic&apos;s strengths and weaknesses.
+            </li>
+            <li className="list-disc marker:text-primary">
+              <span className="text-text-primary font-medium">Patch awareness</span> — when Sports Interactive ships match-engine patches, we re-test top tactics and update affected pages.
+            </li>
+          </ul>
+        </div>
+
+        <div className="glass-panel p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-3">Editorial &amp; Updates</h2>
+          <p className="text-text-secondary text-sm leading-relaxed">
+            Content is reviewed and updated continuously as the FM26 meta evolves.
+            Every guide and tactic page shows its own update history, and we clearly
+            mark advice that changes after game patches. Spotted something outdated
+            or disagree with a ranking? Reach out via the{" "}
+            <Link href="/contact" className="text-primary hover:underline">
+              contact page
+            </Link>{" "}
+            or open an issue on our GitHub — community feedback directly shapes our
+            re-tests.
+          </p>
+        </div>
+
         <Link href="/" className="text-primary text-sm hover:underline">
           &larr; {a("backToHome")}
         </Link>

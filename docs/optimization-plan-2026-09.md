@@ -5,6 +5,10 @@
 > **依据**：`docs/analytics-report-2026-08.md`（P0/P1/P2 + §3.3 地理分布）+ `docs/events-analysis-report-2026-08.md`（E 系列）
 > **工作量**：S ≤ 2h ｜ M = 半天~1 天 ｜ L = 2 天+
 
+> **⚠️ 2026-09-07 状态注记（AdSense 整改）**：
+> §2b 多语言策略已被 9-4 版本**整体作废**——站点转为 English-only，/tr /fr /de 全部移除并 301（`959a6e7`，背景见 `LOCALE_REMOVAL_AUDIT.md` 与 `docs/adsense-review-2026-09.md`）。
+> 9-7 完成 AdSense「Low value content」拒批整改批次：首页剩余 3 个 `ssr:false` 区块恢复 SSR、About 补 E-E-A-T、Privacy 补广告条款并修正矛盾声明。重申请操作清单见 `docs/adsense-review-2026-09.md` §4。
+
 ---
 
 ## 1. 复核结论：v1 计划执行情况
