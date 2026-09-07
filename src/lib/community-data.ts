@@ -181,6 +181,8 @@ export const formationInsights: FormationInsight[] = [
 // === Community OP/Meta Player Roles (Source: Passion4FM, FM Blog) ===
 export interface MetaRole {
   name: string;
+  /** Links the card title to the /roles/{id} deep guide when this role exists in our library. */
+  roleId?: string;
   category: "in-possession" | "out-of-possession";
   opLevel: "S+" | "S" | "A";
   overview: string;
@@ -188,12 +190,13 @@ export interface MetaRole {
   weakness: string;
   keyInstructions: string[];
   keyAttributes: string[];
-  bestPartners: string[];
+  bestPartners: { name: string; roleId?: string }[];
 }
 
 export const metaRoles: MetaRole[] = [
   {
     name: "Advanced Wing-Back (AWB)",
+    roleId: "wing-back", // AWB = Wing-Back on attack duty — deep guide lives under Wing-Back
     category: "in-possession",
     opLevel: "S+",
     overview: "Extremely attacking wide role. Positions like a winger in possession — effectively your 5th or 6th attacker. Think Dani Alves, Nuno Mendes. Tested and validated on Match Engine 26.1.",
@@ -206,10 +209,16 @@ export const metaRoles: MetaRole[] = [
     weakness: "Massive space left behind. Defensive position is completely vacated on counters. Must have a DM covering, or use a back-three system to cover the half-space.",
     keyInstructions: ["Stay Wider — hug the touchline as an always-available passing option", "Cross from Byline — exploit the engine's crossing bias", "Team instruction: Focus play down their flank + Overlap"],
     keyAttributes: ["Crossing", "Stamina", "Off the Ball", "Acceleration", "Pace", "Technique", "Decisions"],
-    bestPartners: ["Inverted Winger (IW)", "Inside Forward (IF)", "Defensive Midfielder (DM)", "Stopper Centre-Back (SCB)"],
+    bestPartners: [
+      { name: "Inside Forward (IF)", roleId: "inside-forward" },
+      { name: "Advanced Forward (AF)", roleId: "advanced-forward" },
+      { name: "Deep-Lying Playmaker (DLP)", roleId: "deep-lying-playmaker" },
+      { name: "Central Defender", roleId: "central-defender" },
+    ],
   },
   {
     name: "Channel Midfielder (CHM)",
+    roleId: "channel-midfielder",
     category: "in-possession",
     opLevel: "S",
     overview: "Half-space midfielder. Makes diagonal runs between full-back and centre-back, precisely targeting the seams in the opponent's defensive line.",
@@ -222,10 +231,15 @@ export const metaRoles: MetaRole[] = [
     weakness: "Requires precise service. If midfield passing quality is poor, CHM runs are wasted. High physical demand.",
     keyInstructions: ["Get Further Forward", "Move Into Channels", "Roam From Position"],
     keyAttributes: ["Off the Ball", "Decisions", "Anticipation", "Stamina", "Finishing", "First Touch", "Passing"],
-    bestPartners: ["Winger (W)", "Deep-Lying Playmaker (DLP)", "False Nine (F9)"],
+    bestPartners: [
+      { name: "Inside Forward (IF)", roleId: "inside-forward" },
+      { name: "Deep-Lying Playmaker (DLP)", roleId: "deep-lying-playmaker" },
+      { name: "Advanced Forward (AF)", roleId: "advanced-forward" },
+    ],
   },
   {
     name: "Overlapping Centre-Back (OCB)",
+    roleId: "overlapping-centre-back",
     category: "in-possession",
     opLevel: "S",
     overview: "Centre-back who overlaps into wide areas in possession, attacking like a full-back from the defensive line.",
@@ -238,7 +252,11 @@ export const metaRoles: MetaRole[] = [
     weakness: "Gaps left behind require DM or adjacent CB to cover. Slow OCBs can't recover in time. Only viable in back-three systems.",
     keyInstructions: ["Stay Wider", "Run Wide With Ball", "Cross More Often"],
     keyAttributes: ["Crossing", "Pace", "Stamina", "Dribbling", "Tackling", "Positioning"],
-    bestPartners: ["Defensive Drop Midfielder (DDM)", "Cover Centre-Back (CCB)", "Inverted Wing-Back (IWB)"],
+    bestPartners: [
+      { name: "Playmaking Wing-Back (PWB)", roleId: "playmaking-wing-back" },
+      { name: "Deep-Lying Playmaker (DLP)", roleId: "deep-lying-playmaker" },
+      { name: "Central Defender", roleId: "central-defender" },
+    ],
   },
 ];
 

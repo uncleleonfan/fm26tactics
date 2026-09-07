@@ -188,7 +188,15 @@ export function MetaPage() {
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-base font-bold text-text-primary">{role.name}</h3>
+                      <h3 className="text-base font-bold text-text-primary">
+                        {role.roleId ? (
+                          <Link href={`/roles/${role.roleId}`} className="hover:text-primary transition-colors">
+                            {role.name}
+                          </Link>
+                        ) : (
+                          role.name
+                        )}
+                      </h3>
                       <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${opLevelColors[role.opLevel]}`}>
                         {role.opLevel}
                       </span>
@@ -225,11 +233,21 @@ export function MetaPage() {
                     </div>
                     <h4 className="text-[11px] font-semibold text-text-primary uppercase tracking-wider mb-1.5">{t("bestPartnersTitle")}</h4>
                     <div className="flex flex-wrap gap-1">
-                      {role.bestPartners.map((p, i) => (
-                        <span key={i} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
-                          {p}
-                        </span>
-                      ))}
+                      {role.bestPartners.map((p, i) =>
+                        p.roleId ? (
+                          <Link
+                            key={i}
+                            href={`/roles/${p.roleId}`}
+                            className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted hover:text-primary hover:border-primary/30 transition-colors"
+                          >
+                            {p.name}
+                          </Link>
+                        ) : (
+                          <span key={i} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                            {p.name}
+                          </span>
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
