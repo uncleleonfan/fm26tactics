@@ -207,7 +207,7 @@ export default function BuilderPage() {
             setSidebarTab("analysis");
             trackEvent("builder_tab", { label: "analysis" });
           }}
-          className={`flex-1 py-3 text-xs font-medium transition-colors ${
+          className={`flex-1 py-3 text-xs font-medium transition-colors xl:hidden ${
             sidebarTab === "analysis"
               ? "text-primary border-b-2 border-primary bg-primary/5"
               : "text-text-muted hover:text-text-secondary"
@@ -248,15 +248,25 @@ export default function BuilderPage() {
             onApplyTemplate={applyTemplate}
           />
         ) : (
-          <AnalysisPanel
-            analysis={analysis}
-            playerLabelById={playerLabelById}
-            lockedCategories={lockedCategories}
-            onToggleCategoryLock={toggleCategoryLock}
-            onApplyRecommendation={applyRecommendation}
-            appliedChange={appliedChange}
-            onDismissComparison={() => setAppliedChange(null)}
-          />
+          <>
+            <div className="xl:hidden h-full">
+              <AnalysisPanel
+                analysis={analysis}
+                playerLabelById={playerLabelById}
+                lockedCategories={lockedCategories}
+                onToggleCategoryLock={toggleCategoryLock}
+                onApplyRecommendation={applyRecommendation}
+                appliedChange={appliedChange}
+                onDismissComparison={() => setAppliedChange(null)}
+              />
+            </div>
+            <div className="hidden xl:flex flex-col items-center justify-center py-8 gap-2 text-center">
+              <Activity className="w-6 h-6 text-primary" />
+              <p className="text-xs text-text-secondary max-w-[180px] leading-relaxed">
+                {t("analysisMovedPanel")}
+              </p>
+            </div>
+          </>
         )}
       </div>
     </>

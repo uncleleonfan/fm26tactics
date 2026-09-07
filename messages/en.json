@@ -613,7 +613,8 @@
     "txtStep2": "2. Assign each player the role & duty listed above (order matches the pitch from the back).",
     "txtStep3": "3. Set team mentality and tick the team instructions above.",
     "txtStep4": "4. Share your in-game result back at www.fm26tactics.com",
-    "analysisTab": "Analysis"
+    "analysisTab": "Analysis",
+    "analysisMovedPanel": "Tactical Analysis now lives in the dedicated right-hand panel"
   },
   "analysis": {
     "panelTitle": "Tactical Analysis",
