@@ -48,7 +48,8 @@ export function analyzeTactic(
     attack,
     support,
     defence,
-    transition
+    transition,
+    model.mentality
   );
 
   const recommendations = generateRecommendations(state, ballZone, {

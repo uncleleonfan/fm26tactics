@@ -102,7 +102,8 @@ export function generateWarnings(
   attack: AttackAnalysis,
   support: SupportAnalysis,
   defence: DefenceAnalysis,
-  transition: TransitionAnalysis
+  transition: TransitionAnalysis,
+  mentality: string = "balanced"
 ): TacticalWarning[] {
   const warnings: TacticalWarning[] = [];
   const posById = new Map(movements.map((m) => [m.playerId, m.expectedPosition]));
@@ -168,13 +169,23 @@ export function generateWarnings(
   // --- Transition risk ---
   if (transition.riskLevel === "high" || transition.riskLevel === "very-high") {
     const attackDuties = outfield.filter((p) => p.duty === "attack").map((p) => p.id);
+    // Attribute the risk to its actual drivers instead of a fixed narrative
+    // (e.g. pure mentality-driven risk must not blame "0 attack duties").
+    const mf = mentalityFactor(mentality);
+    const drivers: string[] = [];
+    if (attackDuties.length > 0) drivers.push(`${attackDuties.length} players carry the attack duty`);
+    if (transition.recoveryStructure < 0.5) drivers.push("the recovery shape is stretched");
+    if (transition.counterPressing < 0.4) drivers.push("counter-pressing is weak");
+    if (mf >= 0.66) drivers.push("a very attacking mentality leaves space in behind");
+    else if (mf >= 0.33) drivers.push("an attacking mentality adds exposure");
+    const narrative = drivers.length > 0 ? drivers.join(", and ") : "the out-of-possession shape is stretched";
     warnings.push({
       id: "transition-risk-high",
       severity: transition.riskLevel === "very-high" ? "critical" : "warning",
       key: "transitionRiskHigh",
       params: { level: transition.riskLevel },
       dimension: "transition",
-      reason: `Transition risk is ${transition.riskLevel.replace("-", " ")}: ${attackDuties.length} players carry the attack duty while defensive cover and rest defence are stretched.`,
+      reason: `Transition risk is ${transition.riskLevel.replace("-", " ")}: ${narrative}.`,
       playerIds: attackDuties,
     });
   }

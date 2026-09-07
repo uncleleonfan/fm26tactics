@@ -86,6 +86,39 @@ describe("mentality — balance engine (via expected positions)", () => {
     );
     const r = analyzeTactic(reckless, "central-final-third");
     expect(r.transition.riskLevel).toBe("very-high");
-    expect(r.warnings.some((w) => w.id === "transition-risk-high" && w.severity === "critical")).toBe(true);
+    const w = r.warnings.find((x) => x.id === "transition-risk-high");
+    expect(w?.severity).toBe("critical");
+    // The reason must attribute to the real drivers: 8 attack duties AND
+    // the very-attacking mindset, not a fixed narrative.
+    expect(w?.reason).toContain("8 players carry the attack duty");
+    expect(w?.reason).toContain("mentality");
+  });
+
+  it("mentality-driven risk without attack duties never blames '0 players'", () => {
+    // Same 4-2-4 shape, every duty relaxed to support: any remaining risk is
+    // driven by aggressive roles + mindset, not by attack duties.
+    const noAttackDuties = buildState(
+      "4-2-4",
+      [
+        { roleId: "sweeper-keeper", duty: "defend" },
+        { roleId: "ball-playing-defender", duty: "support" },
+        { roleId: "ball-playing-defender", duty: "support" },
+        { roleId: "wing-back", duty: "support" },
+        { roleId: "wing-back", duty: "support" },
+        { roleId: "advanced-playmaker", duty: "support" },
+        { roleId: "channel-midfielder", duty: "support" },
+        { roleId: "inside-forward", duty: "support" },
+        { roleId: "advanced-forward", duty: "support" },
+        { roleId: "advanced-forward", duty: "support" },
+        { roleId: "inside-forward", duty: "support" },
+      ],
+      "very-attacking"
+    );
+    const r = analyzeTactic(noAttackDuties, "central-final-third");
+    const w = r.warnings.find((x) => x.id === "transition-risk-high");
+    if (w) {
+      expect(w.reason).not.toContain("0 players");
+      expect(w.reason).toContain("mentality");
+    }
   });
 });
