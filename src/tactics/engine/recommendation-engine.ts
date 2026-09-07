@@ -144,13 +144,8 @@ export function generateRecommendations(
   return top.map((c, rank) => {
     const player = state.players[c.playerIndex];
     const tactical = model.players[c.playerIndex];
-    const newRoleName = playerRoles.find((r) => r.id === c.newRoleId)?.name ?? c.newRoleId;
-    const newAcronym = newRoleName
-      .split(/[\s-]+/)
-      .map((w: string) => w[0])
-      .join("")
-      .toUpperCase();
-    const newLabel = `${newAcronym}(${c.newDuty[0].toUpperCase()})`;
+    const newRole = playerRoles.find((r) => r.id === c.newRoleId);
+    const newLabel = `${newRole?.abbr ?? c.newRoleId}(${c.newDuty[0].toUpperCase()})`;
     const problemText: Record<string, string> = {
       defence: "defensive balance is weak",
       risk: `transition risk is ${analysis.transition.riskLevel.replace("-", " ")}`,

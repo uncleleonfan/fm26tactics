@@ -30,14 +30,16 @@ export interface TacticalModel {
   mentality: string;
 }
 
-function roleShortName(name: string): string {
-  // "Wing-Back" → "WB", "Ball-Playing Defender" → "BPD", "Sweeper Keeper" → "SK"
-  const acronym = name
+function roleShortName(meta: PlayerRoleData | undefined, roleName: string): string {
+  // Prefer the explicit FM-standard abbreviation (GK, BPD, BBM...).
+  if (meta?.abbr) return meta.abbr;
+  // Fallback acronym for roles outside the database.
+  const acronym = roleName
     .split(/[\s-]+/)
     .map((w) => w[0])
     .join("")
     .toUpperCase();
-  return acronym.length <= 3 ? acronym : name;
+  return acronym.length <= 3 ? acronym : roleName;
 }
 
 const dutyShort: Record<PlayerDuty, string> = { defend: "D", support: "S", attack: "A" };
@@ -61,7 +63,7 @@ export function buildTacticalModel(state: TacticBoardState): TacticalModel {
       availableDuties: meta?.availableDuties ?? ["support"],
       duty: node.duty,
       behavior: getRoleBehavior(node.roleId, node.duty),
-      label: `${roleShortName(roleName)}(${dutyShort[node.duty]})`,
+      label: `${roleShortName(meta, roleName)}(${dutyShort[node.duty]})`,
     };
   });
 
