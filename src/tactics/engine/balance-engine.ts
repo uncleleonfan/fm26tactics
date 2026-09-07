@@ -171,8 +171,12 @@ export function analyseDefence(
     avg(outfield.map((p) => p.behavior.outOfPossession.defensiveResponsibility)) *
     Math.min(1, outfield.length / 10);
 
-  // Central protection: central-lane players' centralProtection aggregate.
-  const centralDefenders = outfield.filter((p) => horizontalBand(posById.get(p.id)!.x) === "central");
+  // Central protection: central-lane defenders/midfielders' aggregate.
+  // Forwards in the central lane are NOT counted — a twin-striker pair
+  // shields nothing in front of the back line and must not inflate this.
+  const centralDefenders = outfield.filter(
+    (p) => horizontalBand(posById.get(p.id)!.x) === "central" && p.roleCategory !== "forward"
+  );
   const centralProtection = Math.min(
     1,
     centralDefenders.reduce((s, p) => s + p.behavior.outOfPossession.centralProtection, 0) / 2.6

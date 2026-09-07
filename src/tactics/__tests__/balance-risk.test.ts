@@ -97,6 +97,75 @@ describe("risk engine & warnings", () => {
       expect(order[r.warnings[i].severity]).toBeGreaterThanOrEqual(order[r.warnings[i - 1].severity]);
     }
   });
+
+  it("twin strikers do not inflate central protection (forwards are not shields)", () => {
+    // 4-4-2 line order: GK | LB CB CB RB | LM CM CM RM | ST ST
+    const strikePair = (fwd: { roleId: string; duty: "defend" | "support" | "attack" }) =>
+      buildState("4-4-2", [
+        { roleId: "sweeper-keeper", duty: "defend" },
+        { roleId: "wing-back", duty: "defend" },
+        { roleId: "central-defender", duty: "defend" },
+        { roleId: "central-defender", duty: "defend" },
+        { roleId: "wing-back", duty: "defend" },
+        { roleId: "wing-back", duty: "support" }, // LM
+        { roleId: "deep-lying-playmaker", duty: "defend" },
+        { roleId: "box-to-box-midfielder", duty: "support" },
+        { roleId: "wing-back", duty: "support" }, // RM
+        fwd,
+        fwd,
+      ]);
+    // AF(attack) has centralProtection .25 vs pressing-forward(defend) .40 —
+    // if forwards were counted these two XIs would score differently.
+    const withAF = analyzeTactic(strikePair({ roleId: "advanced-forward", duty: "attack" }), "central-midfield");
+    const withPF = analyzeTactic(strikePair({ roleId: "pressing-forward", duty: "defend" }), "central-midfield");
+    expect(withAF.defence.centralProtection).toBe(withPF.defence.centralProtection);
+  });
+
+  it("a narrow diamond surfaces one aggregated empty-zones finding", () => {
+    // 4-1-2-1-2 sorted line order: GK | CB CB | LB CM DM CM RB | AM ST ST —
+    // every advanced player ends up in the central final-third corridor.
+    const narrow = buildState("4-1-2-1-2", [
+      { roleId: "sweeper-keeper", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "wing-back", duty: "defend" }, // LB slot sits in midfield row
+      { roleId: "box-to-box-midfielder", duty: "support" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "box-to-box-midfielder", duty: "support" },
+      { roleId: "wing-back", duty: "defend" }, // RB slot sits in midfield row
+      { roleId: "advanced-playmaker", duty: "attack" },
+      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "advanced-forward", duty: "attack" },
+    ]);
+    const r = analyzeTactic(narrow, "central-midfield");
+    const w = r.warnings.find((x) => x.id === "attacking-zones-empty");
+    expect(w).toBeDefined();
+    expect(w!.params?.count).toBeGreaterThanOrEqual(2);
+    expect(String(w!.params?.zones)).toContain("Left Final Third");
+    expect(String(w!.params?.zones)).toContain("Right Final Third");
+    // Exactly one aggregated finding, not one per zone.
+    expect(r.warnings.filter((x) => x.id === "attacking-zones-empty").length).toBe(1);
+  });
+
+  it("a deep 5-3-2 block earns a positive rest-defence finding", () => {
+    // 5-3-2 line order: GK | CB CB CB | WB WB | CM CM CM | ST ST
+    const defensive = buildState("5-3-2", [
+      { roleId: "sweeper-keeper", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "wing-back", duty: "defend" },
+      { roleId: "wing-back", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "box-to-box-midfielder", duty: "support" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "pressing-forward", duty: "defend" },
+      { roleId: "target-forward", duty: "support" },
+    ]);
+    const r = analyzeTactic(defensive, "central-midfield");
+    expect(r.defence.restDefence).toBe(1);
+    expect(r.warnings.some((w) => w.id === "rest-defence-strong")).toBe(true);
+  });
 });
 
 describe("recommendation engine (spec §17-18)", () => {

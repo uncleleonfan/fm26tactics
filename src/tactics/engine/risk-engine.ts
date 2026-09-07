@@ -9,7 +9,7 @@ import type {
   SupportAnalysis,
 } from "@/types/analysis";
 import { RISK_LEVELS, RISK_WEIGHTS as W, mentalityFactor } from "@/tactics/data/analysis-config";
-import { zoneById, ZONE_OCCUPANCY_THRESHOLDS } from "@/tactics/data/zones";
+import { ballZones, zoneById, ZONE_OCCUPANCY_THRESHOLDS } from "@/tactics/data/zones";
 import type { TacticalPlayer } from "@/tactics/engine/tactical-model";
 import { horizontalBand } from "@/tactics/engine/tactical-model";
 import { counterPressScore, spatialContextFor } from "@/tactics/engine/spatial-engine";
@@ -131,7 +131,7 @@ export function generateWarnings(
         id: `wide-coverage-${side}`,
         severity: "warning",
         key: "wideCoverageWeak",
-        params: { side: sideLabel, players: aggressiveIds.map((id) => nameById.get(id)).join(", ") },
+        params: { side: sideLabel },
         dimension: "defence",
         reason: `${sideLabel} side has limited defensive coverage because ${aggressiveIds
           .map((id) => nameById.get(id))
@@ -209,6 +209,29 @@ export function generateWarnings(
     }
   }
 
+  // --- Attacking zones left empty (spec §12 empty-zone detection) ---
+  // Aggregated into ONE finding: once the ball is advanced enough to matter,
+  // two or more vacant final-third zones mean the front line concentrates
+  // into a single corridor and surrenders half of the final third.
+  if (zoneById[ballZone].third !== "defensive") {
+    const emptyZones = ballZones
+      .filter(
+        (z) => z.third === "attacking" && (zoneOccupancy[z.id] ?? 0) <= ZONE_OCCUPANCY_THRESHOLDS.empty
+      )
+      .map((z) => z.label);
+    if (emptyZones.length >= 2) {
+      warnings.push({
+        id: "attacking-zones-empty",
+        severity: "warning",
+        key: "attackingZonesEmpty",
+        params: { zones: emptyZones.join(", "), count: emptyZones.length },
+        dimension: "attack",
+        reason: `${emptyZones.join(" and ")} are expected to stay vacant — the attacking presence concentrates in a single corridor, making play predictable and easy to defend.`,
+        playerIds: [],
+      });
+    }
+  }
+
   // --- Attacking width imbalance ---
   if (attack.width < 0.4) {
     warnings.push({
@@ -239,6 +262,26 @@ export function generateWarnings(
       key: "transitionRiskLow",
       dimension: "transition",
       reason: "Transition risk is low — the shape keeps enough responsible defenders behind the ball.",
+      playerIds: [],
+    });
+  }
+  if (defence.restDefence >= 1) {
+    warnings.push({
+      id: "rest-defence-strong",
+      severity: "positive",
+      key: "restDefenceStrong",
+      dimension: "transition",
+      reason: "Rest defence is solid — enough responsible defenders stay goal-side of the ball to absorb counter-attacks.",
+      playerIds: [],
+    });
+  }
+  if (attack.width > 0.65) {
+    warnings.push({
+      id: "attack-width-strong",
+      severity: "positive",
+      key: "attackWidthStrong",
+      dimension: "attack",
+      reason: "Attacking width is strong — both flanks stretch the opposition block and open central passing lanes.",
       playerIds: [],
     });
   }

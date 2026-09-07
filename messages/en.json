@@ -667,9 +667,12 @@
       "restDefenceWeak": "Rest defence is thin",
       "transitionRiskHigh": "High transition risk",
       "zoneOverload": "{zone} is overloaded ({count} players)",
+      "attackingZonesEmpty": "{count} final-third zones unoccupied ({zones})",
       "attackWidthWeak": "Attacking width is weak",
       "centralSupportStrong": "Strong central support",
-      "transitionRiskLow": "Transition risk is low"
+      "transitionRiskLow": "Transition risk is low",
+      "restDefenceStrong": "Rest defence is solid",
+      "attackWidthStrong": "Attacking width is strong"
     }
   },
   "recommendations": {
