@@ -1,4 +1,4 @@
-import type { MovementType, Point } from "@/types/analysis";
+import type { MovementType, Point, RelationshipType } from "@/types/analysis";
 
 /**
  * Movement arrow visualization mapping (spec §9/§15).
@@ -25,6 +25,27 @@ export const MOVEMENT_STYLES: Record<MovementType, ArrowStyle> = {
   backward: { stroke: "#448AFF", dash: "1.6,1.2", labelKey: "movements.backward" },
   press: { stroke: "#FF5252", dash: "0.6,1", labelKey: "movements.press" },
 };
+
+/**
+ * Relationship link visualization (spec §11/§17).
+ * Color = combination phase, dash = solidity of the partnership;
+ * space-sharing is the only hostile (red) link type.
+ */
+export const RELATION_STYLES: Record<
+  RelationshipType,
+  { stroke: string; dash: string; labelKey: string }
+> = {
+  support: { stroke: "#FFB300", dash: "0.8,1.2", labelKey: "relations.support" },
+  complementary: { stroke: "#FFB300", dash: "0.8,1.2", labelKey: "relations.complementary" },
+  overlap: { stroke: "#00E676", dash: "", labelKey: "relations.overlap" },
+  underlap: { stroke: "#00E676", dash: "", labelKey: "relations.underlap" },
+  "creator-runner": { stroke: "#00E676", dash: "", labelKey: "relations.creatorRunner" },
+  cover: { stroke: "#448AFF", dash: "0.8,1.2", labelKey: "relations.cover" },
+  "space-sharing": { stroke: "#FF5252", dash: "0.5,0.9", labelKey: "relations.spaceSharing" },
+};
+
+/** Relations weaker than this stay hidden to keep the overlay readable. */
+export const RELATION_VISIBILITY_THRESHOLD = 0.45;
 
 export interface ArrowGeometry {
   x1: number;

@@ -3,7 +3,12 @@
 import { useTranslations } from "next-intl";
 import type { AnalysisResult, BallZoneId } from "@/types/analysis";
 import { zoneById, ZONE_OCCUPANCY_THRESHOLDS } from "@/tactics/data/zones";
-import { arrowGeometry, MOVEMENT_STYLES } from "@/tactics/visualization/arrows";
+import {
+  arrowGeometry,
+  MOVEMENT_STYLES,
+  RELATION_STYLES,
+  RELATION_VISIBILITY_THRESHOLD,
+} from "@/tactics/visualization/arrows";
 
 interface VisualizeLayerProps {
   analysis: AnalysisResult;
@@ -123,6 +128,48 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
           </g>
         );
       })}
+
+      {/* Relationship links — drawn under movement arrows */}
+      {analysis.relationships
+        .filter((rel) => rel.strength >= RELATION_VISIBILITY_THRESHOLD)
+        .map((rel, i) => {
+          const a = movements.find((m) => m.playerId === rel.playerA);
+          const b = movements.find((m) => m.playerId === rel.playerB);
+          if (!a || !b) return null;
+          const style = RELATION_STYLES[rel.type];
+          const labelA = playerLabelById?.(rel.playerA) ?? rel.playerA;
+          const labelB = playerLabelById?.(rel.playerB) ?? rel.playerB;
+          const hostile = rel.type === "space-sharing";
+
+          return (
+            <g key={`rel-${i}`} pointerEvents="none">
+              <line
+                x1={a.basePosition.x}
+                y1={a.basePosition.y}
+                x2={b.basePosition.x}
+                y2={b.basePosition.y}
+                stroke={style.stroke}
+                strokeWidth={hostile ? 0.5 : 0.35}
+                strokeDasharray={style.dash || undefined}
+                opacity={hostile ? 0.8 : 0.4}
+              />
+              <line
+                x1={a.basePosition.x}
+                y1={a.basePosition.y}
+                x2={b.basePosition.x}
+                y2={b.basePosition.y}
+                stroke="transparent"
+                strokeWidth="2"
+                style={{ pointerEvents: "stroke" }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <title>
+                  {`${labelA} — ${labelB}: ${t(style.labelKey)} (${Math.round(rel.strength * 100)}%)`}
+                </title>
+              </line>
+            </g>
+          );
+        })}
 
       {/* Expected position ghosts + movement arrows */}
       {movements.map((m) => {

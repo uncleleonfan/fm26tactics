@@ -719,6 +719,15 @@
       "cover": "covering movement",
       "backward": "recovery run",
       "press": "press trigger"
+    },
+    "relations": {
+      "support": "support partnership",
+      "complementary": "complementary pairing",
+      "overlap": "overlap combination",
+      "underlap": "underlap combination",
+      "creatorRunner": "creator–runner link",
+      "cover": "covering partnership",
+      "spaceSharing": "shared space — potential conflict"
     }
   },
   "meta": {
