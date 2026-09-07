@@ -9,6 +9,8 @@ interface PlayerNodeProps {
   isGoalkeeper: boolean;
   isSelected: boolean;
   isDragging: boolean;
+  /** Visualize mode: movement arrow points up — render the label below the node so its opaque box never covers the arrow. */
+  labelFlip?: boolean;
   onMouseDown: (e: React.MouseEvent) => void;
   onTouchStart: (e: React.TouchEvent) => void;
 }
@@ -25,6 +27,7 @@ export function PlayerNode({
   isGoalkeeper,
   isSelected,
   isDragging,
+  labelFlip,
   onMouseDown,
   onTouchStart,
 }: PlayerNodeProps) {
@@ -34,8 +37,10 @@ export function PlayerNode({
 
   const abbr = role?.abbr ?? "";
   const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
-  // Label always above for GK (top of pitch), auto-flip for outfield players
-  const labelAbove = isGoalkeeper || player.y >= 12;
+  // Label always above for GK (top of pitch), auto-flip for outfield players.
+  // labelFlip: visualize mode passes true when the movement arrow points up
+  // (toward the opponent goal), forcing the label below the node.
+  const labelAbove = isGoalkeeper || (player.y >= 12 && labelFlip !== true);
   const labelOffsetY = labelAbove ? -(radius + 3.5) : radius + 3.5;
 
   // Larger touch target on mobile

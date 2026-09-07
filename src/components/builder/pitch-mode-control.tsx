@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Pencil, Radar, X } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
@@ -20,15 +20,16 @@ interface PitchModeControlProps {
 export function PitchModeControl({ visualize, onChange }: PitchModeControlProps) {
   const t = useTranslations("visualize");
   const [showNudge, setShowNudge] = useState(false);
+  const nudgeTimerRef = useRef<number | undefined>(undefined);
 
   // One-time nudge: pulse + tooltip until the user interacts (dismissed forever).
   useEffect(() => {
     if (window.localStorage.getItem(NUDGE_KEY)) return;
-    const timer = window.setTimeout(() => {
+    nudgeTimerRef.current = window.setTimeout(() => {
       setShowNudge(true);
       trackEvent("visualize_nudge_shown");
     }, 800);
-    return () => window.clearTimeout(timer);
+    return () => window.clearTimeout(nudgeTimerRef.current);
   }, []);
 
   const dismissNudge = () => {
@@ -38,7 +39,15 @@ export function PitchModeControl({ visualize, onChange }: PitchModeControlProps)
   };
 
   const select = (next: boolean) => {
-    if (showNudge) dismissNudge();
+    if (showNudge) {
+      dismissNudge();
+    } else if (!window.localStorage.getItem(NUDGE_KEY)) {
+      // Clicked within the 800ms delay — the feature is already discovered:
+      // cancel the pending nudge and persist the dismissal silently so it
+      // never shows again (and is not double-counted in analytics).
+      window.clearTimeout(nudgeTimerRef.current);
+      window.localStorage.setItem(NUDGE_KEY, "1");
+    }
     if (next !== visualize) onChange(next);
   };
 

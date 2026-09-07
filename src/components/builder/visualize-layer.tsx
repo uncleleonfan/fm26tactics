@@ -48,8 +48,11 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
         const count = zoneOccupancy[rect.id] ?? 0;
         const isOverloaded = count >= ZONE_OCCUPANCY_THRESHOLDS.overload;
         const isEmpty = count === ZONE_OCCUPANCY_THRESHOLDS.empty;
-        const isBallZone = rect.id === ballZone;
-        const zone = zoneById[rect.id];
+        // central-build-up shares the defensive-third rect (ZONE_RECTS has no
+        // entry for it), so map it onto the shared rect for the highlight.
+        const isBallZone =
+          rect.id === ballZone ||
+          (rect.id === "defensive-third" && ballZone === "central-build-up");
 
         return (
           <g key={rect.id} pointerEvents="none">
@@ -124,7 +127,6 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
                 </text>
               </g>
             )}
-            <title>{`${zone.label}${count > 0 ? ` — ${count}` : ""}`}</title>
           </g>
         );
       })}
@@ -189,7 +191,6 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
               strokeWidth="0.3"
               strokeDasharray="1,0.8"
               opacity="0.65"
-              style={{ transition: "cx 200ms ease-out, cy 200ms ease-out" }}
             />
 
             {/* Movement arrow */}
@@ -205,10 +206,6 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
                   strokeDasharray={style.dash || undefined}
                   strokeLinecap="round"
                   opacity="0.9"
-                  style={{
-                    transition:
-                      "x1 200ms ease-out, y1 200ms ease-out, x2 200ms ease-out, y2 200ms ease-out",
-                  }}
                 />
                 {/* Arrowhead */}
                 <polygon
@@ -216,7 +213,6 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
                   fill={style.stroke}
                   transform={`translate(${geo.x2}, ${geo.y2}) rotate(${geo.angleDeg})`}
                   opacity="0.9"
-                  style={{ transition: "transform 200ms ease-out" }}
                 >
                   <title>{`${label} — ${t(style.labelKey)}`}</title>
                 </polygon>

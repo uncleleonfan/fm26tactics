@@ -144,6 +144,13 @@ export function Pitch({
     onBallZoneChange(zoneAtPoint(coords.x, coords.y));
   };
 
+  // Visualize mode: flip a player's label below the node when the movement
+  // arrow points up (toward the opponent goal) so the label box never covers it.
+  const arrowUpById =
+    visualize && analysis
+      ? new Map(analysis.movements.map((m) => [m.playerId, m.movementVector.dy < 0]))
+      : undefined;
+
   return (
     <div className="relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
       <svg
@@ -272,6 +279,7 @@ export function Pitch({
               isGoalkeeper={isGk}
               isSelected={player.id === selectedPlayerId}
               isDragging={player.id === draggingId}
+              labelFlip={arrowUpById?.get(player.id)}
               onMouseDown={(e) => handlePlayerMouseDown(player.id, e)}
               onTouchStart={(e) => handlePlayerTouchStart(player.id, e)}
             />
