@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { PlayerNode } from "./player-node";
 import { VisualizeLayer } from "./visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
+import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
 import type { AnalysisResult, BallZoneId } from "@/types/analysis";
 import type { TacticBoardState } from "@/types/tactic";
@@ -18,6 +19,8 @@ interface PitchProps {
   onChangeDuty: (playerId: string, duty: "defend" | "support" | "attack") => void;
   /** Visualize overlay mode: expected positions, arrows, zone density, ball. */
   visualize?: boolean;
+  /** Toggles pitch mode via the floating Edit/Visualize switch. */
+  onToggleVisualize?: (visualize: boolean) => void;
   analysis?: AnalysisResult | null;
   ballZone?: BallZoneId;
   onBallZoneChange?: (zone: BallZoneId) => void;
@@ -36,6 +39,7 @@ export function Pitch({
   onChangeRole,
   onChangeDuty,
   visualize = false,
+  onToggleVisualize,
   analysis = null,
   ballZone,
   onBallZoneChange,
@@ -274,6 +278,10 @@ export function Pitch({
           );
         })}
       </svg>
+
+      {onToggleVisualize && (
+        <PitchModeControl visualize={visualize} onChange={onToggleVisualize} />
+      )}
 
       {visualize && ballZone && onBallZoneChange && (
         <BallPositionControl ballZone={ballZone} onChange={onBallZoneChange} />

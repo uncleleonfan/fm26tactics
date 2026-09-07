@@ -705,7 +705,11 @@
     "dismiss": "Dismiss comparison"
   },
   "visualize": {
-    "toggle": "Visualize",
+    "modeGroup": "Pitch mode",
+    "modeEdit": "Edit",
+    "modeVisualize": "Visualize",
+    "modeNudge": "Switch to Visualize to preview expected positions and runs for any ball zone",
+    "nudgeDismiss": "Dismiss hint",
     "ballHint": "Tap the pitch or a zone button to move the ball",
     "scenes": {
       "buildUp": "Build-up",
