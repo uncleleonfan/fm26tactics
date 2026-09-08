@@ -711,6 +711,8 @@
     "modeNudge": "Switch to Visualize to preview expected positions and runs for any ball zone",
     "nudgeDismiss": "Dismiss hint",
     "ballHint": "Tap the pitch or a zone button to move the ball",
+    "occupancyHint": "Zone corner number = players expected in that zone · amber = overload (3+)",
+    "occupancyTooltip": "{count, plural, =1 {# player expected in this zone} other {# players expected in this zone}}",
     "scenes": {
       "buildUp": "Build-up",
       "midfield": "Midfield",

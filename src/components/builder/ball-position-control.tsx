@@ -77,6 +77,7 @@ export function BallPositionControl({ ballZone, onChange }: BallPositionControlP
         </div>
 
         <p className="mt-1 text-[9px] text-text-muted text-center">{t("ballHint")}</p>
+        <p className="mt-0.5 text-[9px] text-text-muted text-center">{t("occupancyHint")}</p>
       </div>
     </div>
   );

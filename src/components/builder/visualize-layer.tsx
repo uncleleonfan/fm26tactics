@@ -104,12 +104,14 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
                 strokeOpacity="0.7"
               />
             )}
-            {/* Occupancy count chip */}
+            {/* Occupancy count chip — hover shows what the number means */}
             {count > 0 && (
               <g
                 transform={`translate(${rect.x + rect.w - 2.4}, ${rect.y + 2.4})`}
                 opacity="0.85"
+                pointerEvents="all"
               >
+                <title>{t("occupancyTooltip", { count })}</title>
                 <circle
                   r="1.6"
                   fill={isOverloaded ? "#FFB300" : "#1C2436"}
