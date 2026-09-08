@@ -242,8 +242,17 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
           <animate attributeName="r" from="3.2" to="5" dur="2s" repeatCount="indefinite" />
           <animate attributeName="opacity" from="0.25" to="0" dur="2s" repeatCount="indefinite" />
         </circle>
-        <circle r="1.9" fill="#F1F5F9" stroke="#0A0E17" strokeWidth="0.3" />
-        <circle r="0.7" fill="#0A0E17" opacity="0.4" />
+        <circle r="1.9" fill="#F8FAFC" stroke="#0A0E17" strokeWidth="0.3" />
+        {/* Central pentagon */}
+        <path d="M0,-0.85 L0.81,-0.26 L0.5,0.69 L-0.5,0.69 L-0.81,-0.26 Z" fill="#0A0E17" />
+        {/* Radial seams from pentagon vertices to ball edge */}
+        <g stroke="#0A0E17" strokeWidth="0.22" strokeLinecap="round">
+          <line x1="0" y1="-0.85" x2="0" y2="-1.9" />
+          <line x1="0.81" y1="-0.26" x2="1.81" y2="-0.59" />
+          <line x1="0.5" y1="0.69" x2="1.12" y2="1.54" />
+          <line x1="-0.5" y1="0.69" x2="-1.12" y2="1.54" />
+          <line x1="-0.81" y1="-0.26" x2="-1.81" y2="-0.59" />
+        </g>
       </g>
     </g>
   );
