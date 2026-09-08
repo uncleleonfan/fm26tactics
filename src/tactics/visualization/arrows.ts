@@ -54,6 +54,8 @@ export interface ArrowGeometry {
   y2: number;
   /** Head rotation in degrees for a marker pointing along +x. */
   angleDeg: number;
+  /** Actual arrowhead length for this arrow (shrinks on short movements). */
+  headLen: number;
 }
 
 /** Movements shorter than this are treated as holding position (no visual). */
@@ -61,35 +63,53 @@ export const MIN_MOVEMENT_DIST = 3;
 /** Minimum visible arrow shaft kept between the node edge and ghost marker. */
 const MIN_SHAFT = 1.5;
 
+/** Dashed ghost marker radius at the expected position (see visualize-layer). */
+export const GHOST_RADIUS = 2.2;
+/** Gap kept between the arrowhead tip and the ghost marker edge. */
+export const ARROW_GAP = 0.4;
+/** Inviolable distance between the arrowhead tip and the target center. */
+const TIP_CLEARANCE = GHOST_RADIUS + ARROW_GAP;
+/** Arrowhead length bounds — the head shrinks before anything else gives way. */
+export const HEAD_MAX = 2.2;
+export const HEAD_MIN = 1.4;
+
 /**
- * Clip an arrow from `from` to `to` so it starts outside the player node
- * (startPad) and ends just before the expected position (endPad).
- * For shorter movements both pads shrink proportionally so the arrow keeps a
- * visible shaft instead of vanishing between node and ghost marker.
- * Returns null when the movement is a hold (dist < MIN_MOVEMENT_DIST).
+ * Clip an arrow from `from` to `to` so that the whole arrow — shaft plus
+ * head — starts outside the player node and stops outside the ghost marker
+ * (the tip never enters it). On short movements we degrade in priority
+ * order: head length (HEAD_MAX → HEAD_MIN), start pad (→ 0), then shaft
+ * length; if even the smallest head cannot clear the ghost marker the
+ * movement is treated as a hold and null is returned.
  */
 export function arrowGeometry(
   from: Point,
   to: Point,
-  startPad = 4.2,
-  endPad = 3
+  startPad = 4.2
 ): ArrowGeometry | null {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const dist = Math.hypot(dx, dy);
   if (dist < MIN_MOVEMENT_DIST) return null;
+  if (dist < TIP_CLEARANCE + HEAD_MIN) return null;
 
-  const padScale = Math.min(1, (dist - MIN_SHAFT) / (startPad + endPad));
-  const sPad = startPad * padScale;
-  const ePad = endPad * padScale;
+  let headLen = HEAD_MAX;
+  let sPad = startPad;
+  if (dist < TIP_CLEARANCE + headLen + MIN_SHAFT + sPad) {
+    headLen = Math.max(HEAD_MIN, dist - TIP_CLEARANCE - MIN_SHAFT - sPad);
+  }
+  if (dist < TIP_CLEARANCE + headLen + MIN_SHAFT + sPad) {
+    sPad = Math.max(0, dist - TIP_CLEARANCE - headLen - MIN_SHAFT);
+  }
 
   const ux = dx / dist;
   const uy = dy / dist;
+  const endPad = TIP_CLEARANCE + headLen;
   return {
     x1: from.x + ux * sPad,
     y1: from.y + uy * sPad,
-    x2: to.x - ux * ePad,
-    y2: to.y - uy * ePad,
+    x2: to.x - ux * endPad,
+    y2: to.y - uy * endPad,
     angleDeg: (Math.atan2(dy, dx) * 180) / Math.PI,
+    headLen,
   };
 }

@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { PlayerNode } from "./player-node";
 import { VisualizeLayer } from "./visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
 import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
 import { MIN_MOVEMENT_DIST } from "@/tactics/visualization/arrows";
+import { computeLabelPlacements, roleLabelWidth } from "@/tactics/visualization/label-placement";
+import { playerRoles } from "@/lib/tactics-data";
 import type { AnalysisResult, BallZoneId } from "@/types/analysis";
 import type { TacticBoardState } from "@/types/tactic";
 
@@ -145,19 +147,43 @@ export function Pitch({
     onBallZoneChange(zoneAtPoint(coords.x, coords.y));
   };
 
-  // Visualize mode: flip a player's label below the node when the movement
-  // arrow points up (toward the opponent goal) so the label box never covers
-  // it. Holds (no rendered arrow) keep the default label side.
-  const arrowUpById =
-    visualize && analysis
-      ? new Map(
-          analysis.movements.map((m) => [
-            m.playerId,
-            Math.hypot(m.movementVector.dx, m.movementVector.dy) >=
-              MIN_MOVEMENT_DIST && m.movementVector.dy < 0,
-          ])
-        )
-      : undefined;
+  // Visualize mode: prefer the label below the node when the movement arrow
+  // points up (toward the opponent goal) so its opaque box never covers the
+  // arrow. Holds (no rendered arrow) keep the default preference.
+  const arrowUpById = useMemo(
+    () =>
+      visualize && analysis
+        ? new Map(
+            analysis.movements.map((m) => [
+              m.playerId,
+              Math.hypot(m.movementVector.dx, m.movementVector.dy) >=
+                MIN_MOVEMENT_DIST &&
+                m.movementVector.dy < 0,
+            ])
+          )
+        : undefined,
+    [visualize, analysis]
+  );
+
+  // Auto label placement: default above; dodge other player nodes and label
+  // boxes via below → left → right. Pure layout math, re-runs as players move.
+  const labelPlacements = useMemo(
+    () =>
+      computeLabelPlacements(
+        state.players.map((player, index) => {
+          const role = playerRoles.find((r) => r.id === player.roleId);
+          return {
+            id: player.id,
+            x: player.x,
+            y: player.y,
+            radius: index === 0 ? 3.6 : 3.2,
+            labelWidth: roleLabelWidth(role?.abbr ?? ""),
+            preferBelow: arrowUpById?.get(player.id) ?? false,
+          };
+        })
+      ),
+    [state.players, arrowUpById]
+  );
 
   return (
     <div className="relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
@@ -287,7 +313,7 @@ export function Pitch({
               isGoalkeeper={isGk}
               isSelected={player.id === selectedPlayerId}
               isDragging={player.id === draggingId}
-              labelFlip={arrowUpById?.get(player.id)}
+              labelPlacement={labelPlacements.get(player.id)}
               onMouseDown={(e) => handlePlayerMouseDown(player.id, e)}
               onTouchStart={(e) => handlePlayerTouchStart(player.id, e)}
             />

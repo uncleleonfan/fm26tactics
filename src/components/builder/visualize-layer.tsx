@@ -5,6 +5,7 @@ import type { AnalysisResult, BallZoneId } from "@/types/analysis";
 import { zoneById, ZONE_OCCUPANCY_THRESHOLDS } from "@/tactics/data/zones";
 import {
   arrowGeometry,
+  GHOST_RADIUS,
   MOVEMENT_STYLES,
   RELATION_STYLES,
   RELATION_VISIBILITY_THRESHOLD,
@@ -187,7 +188,7 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
                 <circle
                   cx={m.expectedPosition.x}
                   cy={m.expectedPosition.y}
-                  r="2.2"
+                  r={GHOST_RADIUS}
                   fill="none"
                   stroke={style.stroke}
                   strokeWidth="0.3"
@@ -210,7 +211,7 @@ export function VisualizeLayer({ analysis, ballZone, playerLabelById }: Visualiz
                   />
                   {/* Arrowhead */}
                   <polygon
-                    points="0,-1.1 2.2,0 0,1.1"
+                    points={`0,${-geo.headLen / 2} ${geo.headLen},0 0,${geo.headLen / 2}`}
                     fill={style.stroke}
                     transform={`translate(${geo.x2}, ${geo.y2}) rotate(${geo.angleDeg})`}
                     opacity="0.9"

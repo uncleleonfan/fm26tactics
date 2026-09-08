@@ -2,6 +2,13 @@
 
 import { playerRoles } from "@/lib/tactics-data";
 import type { PlayerNode as PlayerNodeType } from "@/types/tactic";
+import {
+  LABEL_H_GAP,
+  LABEL_HEIGHT,
+  LABEL_V_GAP,
+  roleLabelWidth,
+  type LabelPlacement,
+} from "@/tactics/visualization/label-placement";
 
 interface PlayerNodeProps {
   player: PlayerNodeType;
@@ -9,8 +16,8 @@ interface PlayerNodeProps {
   isGoalkeeper: boolean;
   isSelected: boolean;
   isDragging: boolean;
-  /** Visualize mode: movement arrow points up — render the label below the node so its opaque box never covers the arrow. */
-  labelFlip?: boolean;
+  /** Auto-computed label position (collision-avoided by pitch.tsx); defaults to "above". */
+  labelPlacement?: LabelPlacement;
   onMouseDown: (e: React.MouseEvent) => void;
   onTouchStart: (e: React.TouchEvent) => void;
 }
@@ -27,7 +34,7 @@ export function PlayerNode({
   isGoalkeeper,
   isSelected,
   isDragging,
-  labelFlip,
+  labelPlacement,
   onMouseDown,
   onTouchStart,
 }: PlayerNodeProps) {
@@ -36,12 +43,18 @@ export function PlayerNode({
   const radius = isGoalkeeper ? 3.6 : 3.2;
 
   const abbr = role?.abbr ?? "";
-  const labelWidth = Math.max(abbr.length * 1.5 + 2, 5);
-  // Label always above for GK (top of pitch), auto-flip for outfield players.
-  // labelFlip: visualize mode passes true when the movement arrow points up
-  // (toward the opponent goal), forcing the label below the node.
-  const labelAbove = isGoalkeeper || (player.y >= 12 && labelFlip !== true);
-  const labelOffsetY = labelAbove ? -(radius + 3.5) : radius + 3.5;
+  const labelWidth = roleLabelWidth(abbr);
+  // Label offset per placement — computed by the auto-avoidance layout in pitch.tsx.
+  const halfW = labelWidth / 2;
+  const placement: LabelPlacement = labelPlacement ?? "above";
+  const labelTransform =
+    placement === "above"
+      ? `translate(0, ${-(radius + LABEL_V_GAP)})`
+      : placement === "below"
+        ? `translate(0, ${radius + LABEL_V_GAP})`
+        : placement === "left"
+          ? `translate(${-(radius + LABEL_H_GAP + halfW)}, 0)`
+          : `translate(${radius + LABEL_H_GAP + halfW}, 0)`;
 
   // Larger touch target on mobile
   const touchRadius = radius + 2.5;
@@ -122,12 +135,12 @@ export function PlayerNode({
 
       {/* Role label — always visible */}
       {role && (
-        <g transform={`translate(0, ${labelOffsetY})`} pointerEvents="none">
+        <g transform={labelTransform} pointerEvents="none">
           <rect
-            x={-labelWidth / 2}
-            y={-2.2}
+            x={-halfW}
+            y={-LABEL_HEIGHT / 2}
             width={labelWidth}
-            height={4.4}
+            height={LABEL_HEIGHT}
             rx={1}
             fill="#141A26"
             stroke={color}

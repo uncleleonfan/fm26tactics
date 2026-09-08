@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { arrowGeometry, MOVEMENT_STYLES } from "@/tactics/visualization/arrows";
+import {
+  arrowGeometry,
+  MOVEMENT_STYLES,
+  GHOST_RADIUS,
+  ARROW_GAP,
+  HEAD_MAX,
+  HEAD_MIN,
+} from "@/tactics/visualization/arrows";
 import type { MovementType } from "@/types/analysis";
 
 describe("arrow visualization geometry", () => {
@@ -21,14 +28,32 @@ describe("arrow visualization geometry", () => {
     expect(arrowGeometry({ x: 50, y: 50 }, { x: 50, y: 50 })).toBeNull();
   });
 
-  it("keeps a visible shaft for short movements instead of dropping the arrow", () => {
-    const geo = arrowGeometry({ x: 50, y: 50 }, { x: 53, y: 50 });
-    expect(geo).not.toBeNull();
-    expect(geo!.x2 - geo!.x1).toBeGreaterThan(1);
-  });
-
   it("treats movements below the hold threshold as holding position", () => {
     expect(arrowGeometry({ x: 50, y: 50 }, { x: 52.5, y: 50 })).toBeNull();
+  });
+
+  it("drops movements where even the smallest head cannot clear the ghost marker", () => {
+    expect(arrowGeometry({ x: 50, y: 50 }, { x: 53, y: 50 })).toBeNull();
+  });
+
+  it("keeps the arrowhead tip outside the ghost marker", () => {
+    const geo = arrowGeometry({ x: 50, y: 50 }, { x: 60, y: 40 })!;
+    const rad = (geo.angleDeg * Math.PI) / 180;
+    const tipX = geo.x2 + Math.cos(rad) * geo.headLen;
+    const tipY = geo.y2 + Math.sin(rad) * geo.headLen;
+    expect(Math.hypot(60 - tipX, 40 - tipY)).toBeGreaterThanOrEqual(
+      GHOST_RADIUS + ARROW_GAP - 1e-9
+    );
+  });
+
+  it("degrades gracefully on short movements: smaller head, visible shaft, tip still outside", () => {
+    const geo = arrowGeometry({ x: 50, y: 50 }, { x: 56, y: 50 })!;
+    expect(geo.headLen).toBeLessThan(HEAD_MAX);
+    expect(geo.headLen).toBeGreaterThanOrEqual(HEAD_MIN);
+    expect(geo.x2 - geo.x1).toBeGreaterThan(1);
+    expect(56 - (geo.x2 + geo.headLen)).toBeGreaterThanOrEqual(
+      GHOST_RADIUS + ARROW_GAP - 1e-9
+    );
   });
 
   it("keeps every movement type renderable with distinct semantics", () => {
