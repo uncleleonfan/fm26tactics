@@ -17,10 +17,12 @@ import type {
   Recommendation,
   RiskLevel,
 } from "@/types/analysis";
-import type { PlayerRoleCategory } from "@/types/tactic";
+import type { PhaseType, PlayerRoleCategory } from "@/types/tactic";
 import { RATING_THRESHOLDS } from "@/tactics/data/analysis-config";
 import { dimensionScores } from "@/lib/tactical-scores";
+import type { PhaseAnalysisResult } from "@/hooks/use-phase-analysis";
 import { WarningList } from "./warning-list";
+import { PhaseAnalysisSection } from "./phase-analysis-section";
 import {
   RecommendationPanel,
   type AppliedChange,
@@ -36,6 +38,9 @@ interface AnalysisPanelProps {
   onApplyRecommendation: (rec: Recommendation) => void;
   appliedChange: AppliedChange | null;
   onDismissComparison: () => void;
+  /** Dual-phase analysis (shapes, findings, transition). */
+  phaseAnalysis: PhaseAnalysisResult;
+  onViewPhase: (phase: PhaseType, playerIds: string[]) => void;
 }
 
 const RATING_BAR: Record<Rating, string> = {
@@ -173,6 +178,8 @@ export function AnalysisPanel({
   onApplyRecommendation,
   appliedChange,
   onDismissComparison,
+  phaseAnalysis,
+  onViewPhase,
 }: AnalysisPanelProps) {
   const t = useTranslations("analysis");
   const { attack, support, defence, transition } = analysis;
@@ -291,6 +298,13 @@ export function AnalysisPanel({
             ))}
           </Section>
         ))}
+
+        {/* Phase analysis: designed shapes, findings, transition risk */}
+        <PhaseAnalysisSection
+          phaseAnalysis={phaseAnalysis}
+          playerLabelById={playerLabelById}
+          onViewPhase={onViewPhase}
+        />
 
         {/* Warnings */}
         <div className="rounded-lg border border-[#1C2436]/60 bg-surface/30 overflow-hidden">

@@ -9,12 +9,16 @@ import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
 import { MIN_MOVEMENT_DIST } from "@/tactics/visualization/arrows";
 import { computeLabelPlacements, roleLabelWidth } from "@/tactics/visualization/label-placement";
+import { resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { playerRoles } from "@/lib/tactics-data";
+import { MovementArrow } from "./movement-arrow";
 import type { AnalysisResult, BallZoneId } from "@/types/analysis";
-import type { TacticBoardState } from "@/types/tactic";
+import type { PhaseType, TacticBoardState } from "@/types/tactic";
 
 interface PitchProps {
   state: TacticBoardState;
+  /** Phase whose positions are displayed & edited (defaults to in-possession). */
+  phase?: PhaseType;
   onMovePlayer: (playerId: string, x: number, y: number, snap?: boolean) => void;
   onSelectPlayer: (playerId: string | null) => void;
   onTapPlayer: (playerId: string) => void;
@@ -36,6 +40,7 @@ const TAP_THRESHOLD_PX = 8; // Max screen-pixel movement to count as a tap
 
 export function Pitch({
   state,
+  phase = "in-possession",
   onMovePlayer,
   onSelectPlayer,
   onTapPlayer,
@@ -54,6 +59,13 @@ export function Pitch({
   const dragOffsetRef = useRef<{ dx: number; dy: number }>({ dx: 0, dy: 0 });
   const touchStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  // Players as displayed in the current phase — phase coordinates override
+  // the base formation positions; identities/roles come from the base XI.
+  const players = useMemo(
+    () => resolvePhasePlayers(state, phase),
+    [state, phase]
+  );
+
   // Shared coordinate conversion — works for both mouse and touch
   const toSvgCoords = (clientX: number, clientY: number) => {
     if (!svgRef.current) return { x: 0, y: 0 };
@@ -65,7 +77,7 @@ export function Pitch({
   };
 
   const startDrag = (playerId: string, clientX: number, clientY: number) => {
-    const player = state.players.find((p) => p.id === playerId);
+    const player = players.find((p) => p.id === playerId);
     if (!player) return;
     const coords = toSvgCoords(clientX, clientY);
     dragOffsetRef.current = { dx: player.x - coords.x, dy: player.y - coords.y };
@@ -171,7 +183,7 @@ export function Pitch({
   const labelPlacements = useMemo(
     () =>
       computeLabelPlacements(
-        state.players.map((player, index) => {
+        players.map((player, index) => {
           const role = playerRoles.find((r) => r.id === player.roleId);
           return {
             id: player.id,
@@ -183,8 +195,11 @@ export function Pitch({
           };
         })
       ),
-    [state.players, arrowUpById]
+    [players, arrowUpById]
   );
+
+  // Tactical-intent arrows for the current phase
+  const phaseMap = state.phases?.[phase];
 
   return (
     <div className="relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
@@ -213,8 +228,23 @@ export function Pitch({
           />
         )}
 
+        {/* Tactical-intent movement arrows for the active phase */}
+        {players.map((player) => {
+          const movement = phaseMap?.[player.id]?.movement;
+          if (!movement) return null;
+          return (
+            <MovementArrow
+              key={`arrow-${player.id}`}
+              x={player.x}
+              y={player.y}
+              movement={movement}
+              phase={phase}
+            />
+          );
+        })}
+
         {/* Player nodes */}
-        {state.players.map((player, index) => {
+        {players.map((player, index) => {
           const isGk = index === 0;
           return (
             <InteractivePlayerNode

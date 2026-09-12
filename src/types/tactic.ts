@@ -44,10 +44,49 @@ export interface TeamInstruction {
   outOfPossession: string[];
 }
 
+/** The two phases of play a tactic can be designed in. */
+export type PhaseType = "in-possession" | "out-of-possession";
+
+/** Tactical-intent movement markers for a player within a phase. */
+export type MovementType =
+  | "forward"
+  | "backward"
+  | "inside"
+  | "outside"
+  | "press"
+  | "cover";
+
+export interface PlayerMovement {
+  type: MovementType;
+  /** Optional explicit arrow endpoint; defaults to a direction-derived offset. */
+  targetX?: number;
+  targetY?: number;
+}
+
+/** Per-phase position (and intent arrow) of a single player. */
+export interface PhasePlayer {
+  x: number;
+  y: number;
+  movement?: PlayerMovement;
+}
+
+export type PhasePlayerMap = Record<string, PhasePlayer>;
+
+export interface TacticPhases {
+  "in-possession": PhasePlayerMap;
+  "out-of-possession": PhasePlayerMap;
+}
+
 export interface TacticBoardState {
   formation: FormationType;
   players: PlayerNode[];
   teamInstructions: TeamInstruction;
+  /**
+   * Per-phase player positions & movement arrows. Optional so legacy tactic
+   * data (shared links, drafts, JSON imports) stays valid — it is migrated
+   * on load by duplicating the base positions into both phases.
+   */
+  phases?: TacticPhases;
 }
 
 export interface FormationPreset {

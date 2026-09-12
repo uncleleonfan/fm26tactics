@@ -2,10 +2,13 @@
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Download, Share2, Check, Copy, FileText, FileJson, Upload } from "lucide-react";
-import { encodeTacticState } from "@/hooks/use-tactic-builder";
+import { Download, Share2, Check, Copy, FileText, FileJson, Upload, Columns2 } from "lucide-react";
+import { encodeTacticState, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { playerRoles } from "@/lib/tactics-data";
+import { computePhaseMetrics } from "@/tactics/phases/phase-analysis";
+import { MOVEMENT_LABELS } from "./movement-arrow";
+import { StaticPhasePitch } from "./static-phase-pitch";
 import type { TacticBoardState } from "@/types/tactic";
 
 interface TacticExportProps {
@@ -55,6 +58,34 @@ function buildTacticText(state: TacticBoardState, b: TFunc): string {
   });
   lines.push("");
 
+  // Designed phase shapes & key movement arrows
+  if (state.phases) {
+    const inMetrics = computePhaseMetrics(players, state.phases["in-possession"]);
+    const outMetrics = computePhaseMetrics(players, state.phases["out-of-possession"]);
+    lines.push(b("txtPhaseShapes"));
+    lines.push(b("txtInPossessionShape", { shape: inMetrics.shape.label }));
+    lines.push(b("txtOutOfPossessionShape", { shape: outMetrics.shape.label }));
+    lines.push("");
+
+    const movements = players.flatMap((p) => {
+      const inM = state.phases!["in-possession"][p.id]?.movement;
+      const outM = state.phases!["out-of-possession"][p.id]?.movement;
+      const role = playerRoles.find((r) => r.id === p.roleId);
+      const parts: string[] = [];
+      if (inM) parts.push(`${b("phaseInPossession")}: ${MOVEMENT_LABELS[inM.type]}`);
+      if (outM) parts.push(`${b("phaseOutOfPossession")}: ${MOVEMENT_LABELS[outM.type]}`);
+      if (parts.length === 0) return [];
+      return [`${role?.abbr ?? p.roleId} — ${parts.join(", ")}`];
+    });
+    lines.push(b("txtKeyMovements"));
+    if (movements.length > 0) {
+      lines.push(...movements);
+    } else {
+      lines.push(b("txtNoMovements"));
+    }
+    lines.push("");
+  }
+
   lines.push(b("txtTeamInstructions"));
   lines.push(`${b("txtMentalityLabel")}: ${cap(teamInstructions.mentality)}`);
   lines.push(
@@ -77,6 +108,37 @@ function buildTacticText(state: TacticBoardState, b: TFunc): string {
   return lines.join("\n");
 }
 
+/** Inline computed styles into a clone so exported SVGs are self-contained. */
+function inlineStyles(source: Element, target: Element) {
+  const computed = window.getComputedStyle(source);
+  const styles: string[] = [];
+  // Only inline styles that actually affect rendering
+  const relevant = [
+    "fill", "stroke", "stroke-width", "stroke-dasharray", "stroke-linecap",
+    "stroke-linejoin", "opacity", "font-size", "font-family", "font-weight",
+    "text-anchor", "dominant-baseline", "rx", "ry",
+  ];
+  for (const prop of relevant) {
+    const val = computed.getPropertyValue(prop);
+    if (val && val !== "rgba(0, 0, 0, 0)" && val !== "auto") {
+      styles.push(`${prop}:${val}`);
+    }
+  }
+  if (styles.length) {
+    (target as HTMLElement).style.cssText = styles.join(";");
+  }
+}
+
+/** Walk source & clone trees in sync, inlining styles as we go. */
+function walkAndInline(src: Element, dst: Element) {
+  inlineStyles(src, dst);
+  const srcChildren = Array.from(src.children);
+  const dstChildren = Array.from(dst.children);
+  for (let i = 0; i < Math.min(srcChildren.length, dstChildren.length); i++) {
+    walkAndInline(srcChildren[i], dstChildren[i]);
+  }
+}
+
 function buildSvgString(state: TacticBoardState): SvgOutput | null {
   const svgEl = document.getElementById("tactic-pitch-svg") as SVGSVGElement | null;
   if (!svgEl) return null;
@@ -87,37 +149,6 @@ function buildSvgString(state: TacticBoardState): SvgOutput | null {
 
   clone.setAttribute("width", String(originalWidth));
   clone.setAttribute("height", String(originalHeight));
-
-  // Inline computed styles into the clone so the exported SVG is self-contained
-  const inlineStyles = (source: Element, target: Element) => {
-    const computed = window.getComputedStyle(source);
-    const styles: string[] = [];
-    // Only inline styles that actually affect rendering
-    const relevant = [
-      "fill", "stroke", "stroke-width", "stroke-dasharray", "stroke-linecap",
-      "stroke-linejoin", "opacity", "font-size", "font-family", "font-weight",
-      "text-anchor", "dominant-baseline", "rx", "ry",
-    ];
-    for (const prop of relevant) {
-      const val = computed.getPropertyValue(prop);
-      if (val && val !== "rgba(0, 0, 0, 0)" && val !== "auto") {
-        styles.push(`${prop}:${val}`);
-      }
-    }
-    if (styles.length) {
-      (target as HTMLElement).style.cssText = styles.join(";");
-    }
-  };
-
-  // Walk both trees in sync and inline styles
-  const walkAndInline = (src: Element, dst: Element) => {
-    inlineStyles(src, dst);
-    const srcChildren = Array.from(src.children);
-    const dstChildren = Array.from(dst.children);
-    for (let i = 0; i < Math.min(srcChildren.length, dstChildren.length); i++) {
-      walkAndInline(srcChildren[i], dstChildren[i]);
-    }
-  };
   walkAndInline(svgEl, clone);
 
   const serializer = new XMLSerializer();
@@ -125,6 +156,75 @@ function buildSvgString(state: TacticBoardState): SvgOutput | null {
     svgString: serializer.serializeToString(clone),
     width: originalWidth,
     height: originalHeight,
+  };
+}
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+/**
+ * Both-phases export: wraps the two hidden static pitches into one
+ * side-by-side SVG with phase titles and a solid background.
+ */
+function buildPhasesSvgString(
+  state: TacticBoardState,
+  b: TFunc
+): SvgOutput | null {
+  const inSvg = document.getElementById("tactic-phase-in-svg") as SVGSVGElement | null;
+  const outSvg = document.getElementById("tactic-phase-out-svg") as SVGSVGElement | null;
+  if (!inSvg || !outSvg) return null;
+
+  const embed = (src: SVGSVGElement, x: number) => {
+    const clone = src.cloneNode(true) as SVGSVGElement;
+    clone.removeAttribute("id");
+    clone.removeAttribute("class");
+    clone.setAttribute("x", String(x));
+    clone.setAttribute("y", "10");
+    clone.setAttribute("width", "100");
+    clone.setAttribute("height", "100");
+    clone.setAttribute("viewBox", "0 0 100 100");
+    walkAndInline(src, clone);
+    return clone;
+  };
+
+  // Layout: 1px margin | pitch | 2px gap | pitch | 1px margin, 10px header
+  const W = 204;
+  const H = 111;
+
+  const wrapper = document.createElementNS(SVG_NS, "svg");
+  wrapper.setAttribute("xmlns", SVG_NS);
+  wrapper.setAttribute("width", String(W * 3));
+  wrapper.setAttribute("height", String(H * 3));
+  wrapper.setAttribute("viewBox", `0 0 ${W} ${H}`);
+
+  const bg = document.createElementNS(SVG_NS, "rect");
+  bg.setAttribute("width", String(W));
+  bg.setAttribute("height", String(H));
+  bg.setAttribute("fill", "#0A0E17");
+  wrapper.appendChild(bg);
+
+  const addTitle = (text: string, x: number, color: string) => {
+    const title = document.createElementNS(SVG_NS, "text");
+    title.setAttribute("x", String(x));
+    title.setAttribute("y", "6.5");
+    title.setAttribute("fill", color);
+    title.setAttribute("font-size", "4.5");
+    title.setAttribute("font-weight", "700");
+    title.setAttribute("font-family", "ui-sans-serif, system-ui, sans-serif");
+    title.setAttribute("text-anchor", "middle");
+    title.textContent = text;
+    wrapper.appendChild(title);
+  };
+  addTitle(b("phaseInPossession").toUpperCase(), 51, "#00E676");
+  addTitle(b("phaseOutOfPossession").toUpperCase(), 153, "#448AFF");
+
+  wrapper.appendChild(embed(inSvg, 1));
+  wrapper.appendChild(embed(outSvg, 103));
+
+  const serializer = new XMLSerializer();
+  return {
+    svgString: serializer.serializeToString(wrapper),
+    width: W * 3,
+    height: H * 3,
   };
 }
 
@@ -216,6 +316,55 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     img.src = svgUrl;
   };
 
+  const exportBothPhasesAsSvg = () => {
+    const output = buildPhasesSvgString(state, b);
+    if (!output) {
+      exportFail("svg-both");
+      return;
+    }
+    trackEvent("builder_download", { label: "svg-both-phases", value: dwellTime() });
+    const blob = new Blob([output.svgString], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    triggerDownload(url, `${fileBase}-phases.svg`);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const exportBothPhasesAsPng = () => {
+    const output = buildPhasesSvgString(state, b);
+    if (!output) {
+      exportFail("png-both");
+      return;
+    }
+    trackEvent("builder_download", { label: "png-both-phases", value: dwellTime() });
+
+    const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(output.svgString)}`;
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = output.width;
+      canvas.height = output.height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        exportFail("png-both");
+        return;
+      }
+      ctx.fillStyle = "#0A0E17";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          exportFail("png-both");
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        triggerDownload(url, `${fileBase}-phases.png`);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }, "image/png");
+    };
+    img.onerror = () => exportFail("png-both");
+    img.src = svgUrl;
+  };
+
   const exportAsTxt = () => {
     trackEvent("builder_download", { label: "txt", value: dwellTime() });
     const blob = new Blob([buildTacticText(state, b)], { type: "text/plain;charset=utf-8" });
@@ -278,6 +427,21 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Hidden render targets for the both-phases export (styled DOM → SVG clone) */}
+      <div aria-hidden className="fixed left-[-9999px] top-0 w-[300px] pointer-events-none opacity-0">
+        <StaticPhasePitch
+          svgId="tactic-phase-in-svg"
+          players={resolvePhasePlayers(state, "in-possession")}
+          phase="in-possession"
+          phaseMap={state.phases?.["in-possession"]}
+        />
+        <StaticPhasePitch
+          svgId="tactic-phase-out-svg"
+          players={resolvePhasePlayers(state, "out-of-possession")}
+          phase="out-of-possession"
+          phaseMap={state.phases?.["out-of-possession"]}
+        />
+      </div>
       <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
       <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
         <h3 className="text-sm font-semibold text-text-primary mb-2">{b("exportTitle")}</h3>
@@ -316,6 +480,28 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
             <div className="text-left">
               <p className="text-sm font-medium text-text-primary">{b("downloadPng")}</p>
               <p className="text-[10px] text-text-muted">{b("downloadPngDesc")}</p>
+            </div>
+          </button>
+
+          <button
+            onClick={exportBothPhasesAsSvg}
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
+          >
+            <Columns2 className="w-4 h-4 text-text-secondary group-hover:text-primary" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-text-primary">{b("downloadBothSvg")}</p>
+              <p className="text-[10px] text-text-muted">{b("downloadBothSvgDesc")}</p>
+            </div>
+          </button>
+
+          <button
+            onClick={exportBothPhasesAsPng}
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
+          >
+            <Columns2 className="w-4 h-4 text-text-secondary group-hover:text-primary" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-text-primary">{b("downloadBothPng")}</p>
+              <p className="text-[10px] text-text-muted">{b("downloadBothPngDesc")}</p>
             </div>
           </button>
 

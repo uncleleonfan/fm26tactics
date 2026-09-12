@@ -1,15 +1,19 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
-import { useTacticBuilder } from "@/hooks/use-tactic-builder";
+import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
+import { usePhaseAnalysis } from "@/hooks/use-phase-analysis";
 import { trackEvent } from "@/lib/analytics";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
 import { useRouter } from "next/navigation";
 import { Pitch } from "@/components/builder/pitch";
+import { PhaseTab, type PhaseView } from "@/components/builder/phase-tab";
+import { PhasePositionEditor } from "@/components/builder/phase-position-editor";
+import { CompareView } from "@/components/builder/compare-view";
 import { RoleSelector } from "@/components/builder/role-selector";
 import { InstructionPanel } from "@/components/builder/instruction-panel";
 import { FormationPanel } from "@/components/builder/formation-panel";
@@ -17,7 +21,7 @@ import { TacticExport } from "@/components/builder/tactic-export";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
-import type { FormationType, PlayerDuty } from "@/types/tactic";
+import type { FormationType, PhaseType, PlayerDuty } from "@/types/tactic";
 import type { Recommendation } from "@/types/analysis";
 
 export default function BuilderPage() {
@@ -26,8 +30,12 @@ export default function BuilderPage() {
   const router = useRouter();
   const {
     state,
+    activePhase,
+    setActivePhase,
     setFormation,
     movePlayer,
+    setPlayerMovement,
+    resetPhasePositions,
     setPlayerRole,
     setPlayerDuty,
     setTeamMentality,
@@ -46,6 +54,18 @@ export default function BuilderPage() {
   const [showFmfAlert, setShowFmfAlert] = useState(false);
   const [appliedChange, setAppliedChange] = useState<AppliedChange | null>(null);
   const [visualize, setVisualize] = useState(false);
+  const [showCompare, setShowCompare] = useState(false);
+
+  // Phase view switch — keeps roles/duties/instructions/selection untouched
+  const handlePhaseChange = useCallback((view: PhaseView) => {
+    if (view === "compare") {
+      setShowCompare(true);
+      trackEvent("builder_phase_switch", { label: "compare" });
+      return;
+    }
+    setShowCompare(false);
+    if (view !== activePhase) setActivePhase(view);
+  }, [activePhase, setActivePhase]);
 
   // Pitch mode switch handler — the floating Edit/Visualize control lives on the pitch.
   const toggleVisualize = useCallback((next: boolean) => {
@@ -53,8 +73,30 @@ export default function BuilderPage() {
     trackEvent("builder_toggle_visualize", { label: next ? "on" : "off" });
   }, []);
 
+  // Existing analysis engine follows the phase being viewed & edited, so
+  // scores/warnings update as the user reshapes the active phase structure.
+  const stateForAnalysis = useMemo(
+    () => ({ ...state, players: resolvePhasePlayers(state, activePhase) }),
+    [state, activePhase]
+  );
   const { analysis, ballZone, setBallZone, lockedCategories, toggleCategoryLock } =
-    useTacticalAnalysis(state);
+    useTacticalAnalysis(stateForAnalysis);
+
+  // Phase-specific analysis: designed shapes, per-phase findings, transition risk
+  const phaseAnalysis = usePhaseAnalysis(state);
+
+  // Finding "View" action: jump to the relevant phase and highlight players
+  const handleViewPhase = useCallback(
+    (phase: PhaseType, playerIds: string[]) => {
+      setShowCompare(false);
+      if (phase !== activePhase) setActivePhase(phase);
+      if (playerIds.length > 0) {
+        setSelectedPlayerId(playerIds[0]);
+        setSidebarTab("role");
+      }
+    },
+    [activePhase, setActivePhase]
+  );
 
   const applyRecommendation = useCallback(
     (rec: Recommendation) => {
@@ -225,12 +267,21 @@ export default function BuilderPage() {
       <div className="p-4 overflow-y-auto flex-1">
         {sidebarTab === "role" ? (
           selectedPlayer ? (
-            <RoleSelector
-              selectedRoleId={selectedPlayer.roleId}
-              selectedDuty={selectedPlayer.duty}
-              onChangeRole={(roleId) => setPlayerRole(selectedPlayer.id, roleId)}
-              onChangeDuty={(duty) => setPlayerDuty(selectedPlayer.id, duty)}
-            />
+            <div className="space-y-4">
+              <RoleSelector
+                selectedRoleId={selectedPlayer.roleId}
+                selectedDuty={selectedPlayer.duty}
+                onChangeRole={(roleId) => setPlayerRole(selectedPlayer.id, roleId)}
+                onChangeDuty={(duty) => setPlayerDuty(selectedPlayer.id, duty)}
+              />
+              <PhasePositionEditor
+                phase={activePhase}
+                playerId={selectedPlayer.id}
+                movement={state.phases?.[activePhase]?.[selectedPlayer.id]?.movement}
+                onSetMovement={setPlayerMovement}
+                onResetPositions={resetPhasePositions}
+              />
+            </div>
           ) : (
             <div className="text-center py-8">
               <Info className="w-8 h-8 text-text-muted mx-auto mb-3" />
@@ -263,6 +314,8 @@ export default function BuilderPage() {
                 onApplyRecommendation={applyRecommendation}
                 appliedChange={appliedChange}
                 onDismissComparison={() => setAppliedChange(null)}
+                phaseAnalysis={phaseAnalysis}
+                onViewPhase={handleViewPhase}
               />
             </div>
             <div className="hidden xl:flex flex-col items-center justify-center py-8 gap-2 text-center">
@@ -393,9 +446,47 @@ export default function BuilderPage() {
       )}
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
-        <Pitch
-          state={state}
-          onMovePlayer={movePlayer}
+        <div className="flex-1 flex flex-col min-h-0 min-w-0">
+          <div className="shrink-0 flex items-center gap-2 px-3 pt-3 sm:px-4">
+            <PhaseTab
+              value={showCompare ? "compare" : activePhase}
+              onChange={handlePhaseChange}
+            />
+            {showCompare ? (
+              <div className="shrink-0 hidden sm:flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-[#1C2436] bg-surface/60 text-[11px] font-semibold whitespace-nowrap">
+                <span className="text-emerald-300 tabular-nums">
+                  {phaseAnalysis.transition.possessionShapeLabel}
+                </span>
+                <span className="text-text-muted font-normal">→</span>
+                <span className="text-blue-300 tabular-nums">
+                  {phaseAnalysis.transition.defensiveShapeLabel}
+                </span>
+              </div>
+            ) : (
+              <div className="shrink-0 hidden sm:flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-[#1C2436] bg-surface/60 text-[11px] whitespace-nowrap">
+                <span
+                  className={`font-semibold tabular-nums ${
+                    activePhase === "in-possession" ? "text-emerald-300" : "text-blue-300"
+                  }`}
+                >
+                  {phaseAnalysis[activePhase].metrics.shape.label}
+                </span>
+                <span className="text-text-muted">·</span>
+                <span className="text-text-muted">{t("phaseShapeBadge")}</span>
+              </div>
+            )}
+          </div>
+          {showCompare ? (
+            <CompareView
+              state={state}
+              phaseAnalysis={phaseAnalysis}
+              playerLabelById={playerLabelById}
+            />
+          ) : (
+          <Pitch
+            state={state}
+            phase={activePhase}
+            onMovePlayer={movePlayer}
           onSelectPlayer={handleSelectPlayer}
           onTapPlayer={handleTapPlayer}
           selectedPlayerId={selectedPlayerId}
@@ -408,6 +499,8 @@ export default function BuilderPage() {
           onBallZoneChange={setBallZone}
           playerLabelById={playerLabelById}
         />
+          )}
+        </div>
         <aside className="hidden lg:flex lg:flex-col w-[300px] shrink-0 border-l border-[#1C2436]/50 bg-surface/30">
           {sidebarContent}
         </aside>
@@ -423,6 +516,8 @@ export default function BuilderPage() {
             onApplyRecommendation={applyRecommendation}
             appliedChange={appliedChange}
             onDismissComparison={() => setAppliedChange(null)}
+            phaseAnalysis={phaseAnalysis}
+            onViewPhase={handleViewPhase}
           />
         </aside>
       </div>
