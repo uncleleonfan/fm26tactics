@@ -48,17 +48,45 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
 
 ### The Passing Network — Not Just Triangles
 
-```
-          PF/CF
-      ↗        ↖
-  IF(S)    ←→    IF(A)
-      ↘        ↙
-    AP(S)     MEZ(S)
-        ↘   ↙
-        DLP(S)
-      ↙       ↘
-FB(S)  ← BPD →  FB(S)
-```
+**In possession — the passing network positions:**
+
+<FormationDiagram
+  formation="4-3-3"
+  caption="In possession — every player has 4+ passing options"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
+    { roleId: "full-back", duty: "support", x: 12, y: 74 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 78 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 62, y: 78 },
+    { roleId: "full-back", duty: "support", x: 88, y: 74 },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 58 },
+    { roleId: "advanced-playmaker", duty: "support", x: 32, y: 42 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 68, y: 42, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "inside-forward", duty: "support", x: 20, y: 26 },
+    { roleId: "target-forward", duty: "support", x: 50, y: 13, abbr: "CF", name: "Complete Forward" },
+    { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
+  ]}
+/>
+
+**Out of possession — the six-second press block:**
+
+<FormationDiagram
+  formation="4-3-3"
+  caption="Out of possession — the high block with a five-man press"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 90 },
+    { roleId: "full-back", duty: "support", x: 14, y: 82 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 84 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 62, y: 84 },
+    { roleId: "full-back", duty: "support", x: 86, y: 82 },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 68 },
+    { roleId: "inside-forward", duty: "support", x: 20, y: 52 },
+    { roleId: "advanced-playmaker", duty: "support", x: 36, y: 54 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 64, y: 54, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "inside-forward", duty: "attack", x: 80, y: 52 },
+    { roleId: "target-forward", duty: "support", x: 50, y: 40, abbr: "CF", name: "Complete Forward" },
+  ]}
+/>
 
 **The diamond principle**: Every player always has 4+ passing options. The IF has the CF, AP, MEZ, and overlapping FB. The DLP has the BPDs, both CMs, and both FBs. This density of options is what makes Tiki-Taka possible — the ball never stops because there's always a pass on.
 
@@ -232,17 +260,23 @@ The Complete Forward links everything. On Support duty, he drops into midfield �
 
 In build-up, Tiki-Taka morphs into a 3-2-4-1:
 
-```
-                CF(S)
-
-IF(S)   AP(S)      MEZ(S)    IF(A)
-
-        DLP(S)
-                           RB(S)
-LB(S)     BPD(L)  BPD(R)     
-        
-             SK(S)
-```
+<FormationDiagram
+  formation="4-3-3"
+  caption="Build-up — the 3-2-4-1 positional shape"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
+    { roleId: "full-back", duty: "support", x: 14, y: 76, abbr: "LB", name: "Left Full-Back" },
+    { roleId: "ball-playing-defender", duty: "defend", x: 40, y: 78, abbr: "BPD", name: "Ball-Playing Defender (L)" },
+    { roleId: "ball-playing-defender", duty: "defend", x: 64, y: 78, abbr: "BPD", name: "Ball-Playing Defender (R)" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 36, y: 58 },
+    { roleId: "full-back", duty: "support", x: 66, y: 62, abbr: "RB", name: "Right Full-Back" },
+    { roleId: "inside-forward", duty: "support", x: 14, y: 24 },
+    { roleId: "advanced-playmaker", duty: "support", x: 38, y: 28 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 28, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "inside-forward", duty: "attack", x: 86, y: 24 },
+    { roleId: "target-forward", duty: "support", x: 50, y: 10, abbr: "CF", name: "Complete Forward" },
+  ]}
+/>
 
 **The back 3**: Left FB(S) pushes high → the two BPDs form a back 2 → the DLP drops between them → this creates a back 3 (LB + BPD + BPD) in build-up, with the DLP forming a double pivot with the right FB(S).
 

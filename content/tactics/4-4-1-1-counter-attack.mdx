@@ -47,16 +47,45 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
 
 ### Formation Shape
 
-```
-                    TF(A)
-               T(A)
+**Out of possession — the wall (two banks of four):**
 
-   W(A)    BWM(D)    DLP(D)    W(A)
+<FormationDiagram
+  formation="4-4-1-1"
+  caption="Out of possession — the deep block with the Trequartista between lines"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 91 },
+    { roleId: "full-back", duty: "defend", x: 14, y: 84 },
+    { roleId: "central-defender", duty: "defend", x: 38, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 86 },
+    { roleId: "full-back", duty: "defend", x: 86, y: 84 },
+    { roleId: "inside-forward", duty: "attack", x: 14, y: 64, abbr: "W", name: "Winger" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 62, y: 66 },
+    { roleId: "inside-forward", duty: "attack", x: 86, y: 64, abbr: "W", name: "Winger" },
+    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 46, abbr: "T", name: "Trequartista" },
+    { roleId: "target-forward", duty: "attack", x: 50, y: 30 },
+  ]}
+/>
 
-   FB(D)    CD(D)    CD(D)    FB(D)
+**In possession — the break:**
 
-                    GK(D)
-```
+<FormationDiagram
+  formation="4-4-1-1"
+  caption="In possession — wingers sprint wide, the counter launches in seconds"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 86 },
+    { roleId: "full-back", duty: "defend", x: 14, y: 76 },
+    { roleId: "central-defender", duty: "defend", x: 38, y: 80 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 80 },
+    { roleId: "full-back", duty: "defend", x: 86, y: 76 },
+    { roleId: "inside-forward", duty: "attack", x: 8, y: 44, abbr: "W", name: "Winger" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 54, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 62, y: 54 },
+    { roleId: "inside-forward", duty: "attack", x: 92, y: 44, abbr: "W", name: "Winger" },
+    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 26, abbr: "T", name: "Trequartista" },
+    { roleId: "target-forward", duty: "attack", x: 50, y: 10 },
+  ]}
+/>
 
 > **Key**: The Trequartista is the "shadow striker" — he drops into the hole between the opposition midfield and defence, linking the defensive block to the TF.
 

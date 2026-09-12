@@ -62,28 +62,45 @@ Gegenpress accepts defensive vulnerability in exchange for offensive dominance. 
 
 ### In Possession (Attacking Shape)
 
-```
-          PF(A)
-
-IF(A)         AM(A)         W(S)
-
-      DLP(D)       BBM(S)
-
-FB(S)   BPD(D)    CD(D)   FB(A)
-
-          SK(S)
-```
+<FormationDiagram
+  formation="4-2-3-1"
+  caption="In possession — the 4-2-3-1 attacking shape"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
+    { roleId: "full-back", duty: "attack", x: 10, y: 64 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 76 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
+    { roleId: "full-back", duty: "support", x: 90, y: 74 },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 52 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 52 },
+    { roleId: "inside-forward", duty: "attack", x: 20, y: 28 },
+    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 30, abbr: "AM", name: "Attacking Midfielder" },
+    { roleId: "inside-forward", duty: "support", x: 80, y: 30, abbr: "W", name: "Winger" },
+    { roleId: "pressing-forward", duty: "attack", x: 50, y: 12 },
+  ]}
+/>
 
 **Width providers**: Left FB(A) overlaps, Right W(S) stays wide. This creates a diagonal attacking pattern — heavy left-side underlaps, right-side natural width.
 
 ### Out of Possession (Defensive Shape) — The 4-4-2 Press
 
-```
-       PF(A)              ← first pressing line
-IF(A)  AM(A)  BBM(S)  W(S)  ← second pressing line
-FB(S)  DLP(D)  CD(D)  CD(D)  FB(A)  ← rest defense
-           SK(S)              ← sweeps behind
-```
+<FormationDiagram
+  formation="4-2-3-1"
+  caption="Out of possession — the press with a five-man rest defense"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 90 },
+    { roleId: "full-back", duty: "attack", x: 12, y: 84 },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 32, y: 85 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 50, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 68, y: 85 },
+    { roleId: "full-back", duty: "support", x: 88, y: 84 },
+    { roleId: "inside-forward", duty: "attack", x: 18, y: 62 },
+    { roleId: "advanced-playmaker", duty: "attack", x: 40, y: 58, abbr: "AM", name: "Attacking Midfielder" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 60, y: 58 },
+    { roleId: "inside-forward", duty: "support", x: 82, y: 62, abbr: "W", name: "Winger" },
+    { roleId: "pressing-forward", duty: "attack", x: 50, y: 36 },
+  ]}
+/>
 
 **The press trap**: The PF(A) presses the ball-carrying CB. The AM(A) covers the DM passing lane. Wingers angle their press to force the pass into the middle — where the BBM(S) and DLP(D) are waiting.
 

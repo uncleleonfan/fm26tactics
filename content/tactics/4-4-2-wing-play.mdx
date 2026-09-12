@@ -67,30 +67,45 @@ The 4-4-2 doesn't try to be clever. It gets the ball wide, gets it into the box,
 
 ### In Possession — Wide and Direct
 
-```
-       TF(S)     AF(A)
-
-W(A)                       W(A)
-      CM(D)    BBM(S)
-
-FB(S)  CD(De)   CD(De)   FB(S)
-
-          GK(D)
-```
+<FormationDiagram
+  formation="4-4-2"
+  caption="In possession — wide and direct"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 88 },
+    { roleId: "full-back", duty: "support", x: 12, y: 72 },
+    { roleId: "central-defender", duty: "defend", x: 38, y: 76 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
+    { roleId: "full-back", duty: "support", x: 88, y: 72 },
+    { roleId: "inside-forward", duty: "attack", x: 10, y: 34, abbr: "W", name: "Winger" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 52, abbr: "CM", name: "Central Midfielder" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 52 },
+    { roleId: "inside-forward", duty: "attack", x: 90, y: 34, abbr: "W", name: "Winger" },
+    { roleId: "target-forward", duty: "support", x: 38, y: 13 },
+    { roleId: "advanced-forward", duty: "attack", x: 62, y: 13 },
+  ]}
+/>
 
 **The wide overload pattern**: Winger(A) stays wide → drags opposition FB to the touchline → your FB(S) underlaps into the vacated space → receives → crosses from a deeper angle → harder to defend.
 
 ### Out of Possession — Two Banks of Four
 
-```
-    TF(S)   AF(A)        ← pressing line
-
-W(A)  CM(D)  BBM(S)  W(A)  ← midfield block
-
-FB(S)  CD  CD  FB(S)      ← defensive line
-
-       GK(D)
-```
+<FormationDiagram
+  formation="4-4-2"
+  caption="Out of possession — two banks of four, ~15 yards between lines"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 89 },
+    { roleId: "full-back", duty: "support", x: 12, y: 80 },
+    { roleId: "central-defender", duty: "defend", x: 38, y: 82 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 82 },
+    { roleId: "full-back", duty: "support", x: 88, y: 80 },
+    { roleId: "inside-forward", duty: "attack", x: 12, y: 60, abbr: "W", name: "Winger" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 62, abbr: "CM", name: "Central Midfielder" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 62 },
+    { roleId: "inside-forward", duty: "attack", x: 88, y: 60, abbr: "W", name: "Winger" },
+    { roleId: "target-forward", duty: "support", x: 40, y: 36 },
+    { roleId: "advanced-forward", duty: "attack", x: 60, y: 36 },
+  ]}
+/>
 
 **The two banks of four**: Wingers drop alongside CMs, forming a flat midfield four. Strikers occupy the CBs. The distance between lines is ~15 yards — compact enough to prevent through balls, wide enough that crosses from deep don't bypass multiple lines.
 

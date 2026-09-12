@@ -50,27 +50,45 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
 
 ### Formation Shape Visualization
 
-```
-               AF(A)     TF(A)
+**In possession — the 3-5-2 with wing-backs pushed high:**
 
-WB(S)    BWM(D)   DLP(S)    BWM(D)    WB(S)
+<FormationDiagram
+  formation="3-5-2"
+  caption="In possession — wing-backs high, three-man midfield, front two"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 88 },
+    { roleId: "central-defender", duty: "defend", x: 22, y: 80, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 84, name: "Central Defender (Cover)" },
+    { roleId: "central-defender", duty: "defend", x: 78, y: 80, name: "Central Defender (Stopper)" },
+    { roleId: "wing-back", duty: "support", x: 6, y: 44, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 35, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 62 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "wing-back", duty: "support", x: 94, y: 44, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "target-forward", duty: "attack", x: 38, y: 16 },
+    { roleId: "advanced-forward", duty: "attack", x: 62, y: 13 },
+  ]}
+/>
 
-         CD(St)    CD(Co)    CD(St)
+**Out of Possession (OOP) — the 5-3-2 deep block:**
 
-                   GK(D)
-```
-
-**Out of Possession (OOP):**
-
-```
-AF(A)  TF(A)                  ← Two pressing triggers on CBs
-                                
-WB(S) CD(St) CD(Co) CD(St) WB(S)  ← Flat back 5
-                                
-     BWM(D)  DLP(S)  BWM(D)   ← Three-man shield
-                                
-            GK(D)
-```
+<FormationDiagram
+  formation="3-5-2"
+  caption="Out of possession — flat back five with the three-man shield"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 91 },
+    { roleId: "wing-back", duty: "support", x: 10, y: 84, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "central-defender", duty: "defend", x: 30, y: 85, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 86, name: "Central Defender (Cover)" },
+    { roleId: "central-defender", duty: "defend", x: 70, y: 85, name: "Central Defender (Stopper)" },
+    { roleId: "wing-back", duty: "support", x: 90, y: 84, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 35, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 70 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "target-forward", duty: "attack", x: 58, y: 38 },
+    { roleId: "advanced-forward", duty: "attack", x: 42, y: 38 },
+  ]}
+/>
 
 > **Key**: The transition from 5-3-2 OOP to 3-5-2 in possession happens through the wing-backs. When they push up, the outside CDs shift wide to cover — this is why Wide Centre-Back is NOT the right role (see below).
 

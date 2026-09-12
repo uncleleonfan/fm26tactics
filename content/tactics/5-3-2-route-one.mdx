@@ -49,15 +49,45 @@ Route One is not "kick and hope." It's a deliberate, structured direct style wit
 
 ### Formation Shape
 
-```
-               AF(A)     TF(A)
+**Out of possession — the flat 5-3-2 wall:**
 
-         BWM(D)   DLP(D)   BWM(D)
+<FormationDiagram
+  formation="5-3-2"
+  caption="Out of possession — the flat back five, midfield shield"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 91 },
+    { roleId: "central-defender", duty: "defend", x: 10, y: 86, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 30, y: 87, name: "Central Defender (Cover)" },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 88 },
+    { roleId: "central-defender", duty: "defend", x: 70, y: 87, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 90, y: 86, name: "Central Defender (Stopper)" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 36, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 70 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 64, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "target-forward", duty: "attack", x: 42, y: 42 },
+    { roleId: "advanced-forward", duty: "attack", x: 58, y: 42 },
+  ]}
+/>
 
-   CD(St)   CD(Co)   CD(St)   CD(St)   CD(St)
+**In possession — direct to the front two:**
 
-                   GK(D)
-```
+<FormationDiagram
+  formation="5-3-2"
+  caption="In possession — the back five holds, the front two attack"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 12, y: 78, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 31, y: 80, name: "Central Defender (Cover)" },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 79 },
+    { roleId: "central-defender", duty: "defend", x: 69, y: 80, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 88, y: 78, name: "Central Defender (Stopper)" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 35, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 52 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "target-forward", duty: "attack", x: 38, y: 15 },
+    { roleId: "advanced-forward", duty: "attack", x: 62, y: 12 },
+  ]}
+/>
 
 > **Key**: The back five stays flat at all times. The wing-backs do NOT push up — they're auxiliary defenders providing width in the defensive phase only.
 

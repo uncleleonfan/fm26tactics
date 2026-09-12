@@ -47,17 +47,45 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
 
 ### Formation Shape
 
-```
-                    AF(A)
+**Out of possession — the compact 5-4-1 block:**
 
-     IF(S)                IF(S)
+<FormationDiagram
+  formation="3-4-2-1"
+  caption="Out of possession — the 5-4-1 low block"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 90 },
+    { roleId: "wing-back", duty: "attack", x: 8, y: 82 },
+    { roleId: "central-defender", duty: "defend", x: 25, y: 84, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 85 },
+    { roleId: "central-defender", duty: "defend", x: 75, y: 84, name: "Central Defender (Stopper)" },
+    { roleId: "wing-back", duty: "attack", x: 92, y: 82 },
+    { roleId: "inside-forward", duty: "support", x: 30, y: 62 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 40, y: 60, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 60, y: 60 },
+    { roleId: "inside-forward", duty: "support", x: 70, y: 62 },
+    { roleId: "advanced-forward", duty: "attack", x: 50, y: 38 },
+  ]}
+/>
 
-         BWM(D)    DLP(S)
+**In possession — the 3-2-4-1 overload:**
 
-WB(A)    CD(D)    CD(St)    CD(D)    WB(A)
-
-                    GK(D)
-```
+<FormationDiagram
+  formation="3-4-2-1"
+  caption="In possession — the 3-2-4-1 attacking shape"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 25, y: 80, name: "Central Defender (Stopper)" },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 81 },
+    { roleId: "central-defender", duty: "defend", x: 75, y: 80, name: "Central Defender (Stopper)" },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 52, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 62, y: 52 },
+    { roleId: "wing-back", duty: "attack", x: 8, y: 28 },
+    { roleId: "inside-forward", duty: "support", x: 34, y: 24 },
+    { roleId: "inside-forward", duty: "support", x: 66, y: 24 },
+    { roleId: "wing-back", duty: "attack", x: 92, y: 28 },
+    { roleId: "advanced-forward", duty: "attack", x: 50, y: 10 },
+  ]}
+/>
 
 > **Key**: The two IFs pinch inside to create a narrow attacking quartet with the AF. The WBs provide all the width — they must have elite Stamina.
 

@@ -49,17 +49,45 @@ Fluid is not a single instruction — it's a philosophy of positional interchang
 
 ### Formation Shape
 
-```
-               AF(A)     AF(A)
+**In possession — the box midfield with overlapping full-backs:**
 
-     IF(S)               IF(S)
+<FormationDiagram
+  formation="4-2-2-2"
+  caption="In possession — the box midfield (DLP + BWM base, dual IFs)"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
+    { roleId: "wing-back", duty: "attack", x: 10, y: 62, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "central-defender", duty: "defend", x: 38, y: 76 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
+    { roleId: "wing-back", duty: "attack", x: 90, y: 62, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 54 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 62, y: 54, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "inside-forward", duty: "support", x: 28, y: 28 },
+    { roleId: "inside-forward", duty: "support", x: 72, y: 28 },
+    { roleId: "advanced-forward", duty: "attack", x: 38, y: 12 },
+    { roleId: "advanced-forward", duty: "attack", x: 62, y: 12 },
+  ]}
+/>
 
-         DLP(D)   BWM(D)
+**Out of possession — the compact mid block:**
 
-   FB(A)   CD(D)   CD(D)   FB(A)
-
-                   SK(S)
-```
+<FormationDiagram
+  formation="4-2-2-2"
+  caption="Out of possession — the box collapses into a mid block"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 90 },
+    { roleId: "wing-back", duty: "attack", x: 14, y: 80, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "central-defender", duty: "defend", x: 38, y: 84 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 84 },
+    { roleId: "wing-back", duty: "attack", x: 86, y: 80, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 66 },
+    { roleId: "box-to-box-midfielder", duty: "defend", x: 62, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "inside-forward", duty: "support", x: 32, y: 52 },
+    { roleId: "inside-forward", duty: "support", x: 68, y: 52 },
+    { roleId: "advanced-forward", duty: "attack", x: 40, y: 36 },
+    { roleId: "advanced-forward", duty: "attack", x: 60, y: 36 },
+  ]}
+/>
 
 > **Key**: The "box" is DLP + BWM (bottom) and two IFs (top). The box shifts as players rotate — a DM might end up in an AM position and vice versa.
 

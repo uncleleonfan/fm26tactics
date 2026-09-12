@@ -9,12 +9,14 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedTactics } from "@/components/shared/related-tactics";
+import { FormationDiagram } from "@/components/tactics/formation-diagram";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
 import type { Tactic } from "contentlayer/generated";
 
 const mdxComponents = {
   Callout,
+  FormationDiagram,
   a: MdxLink,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50" {...props} />

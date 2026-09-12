@@ -94,15 +94,45 @@ In FM26, central overloads are particularly effective because the match engine n
 
 ## The Diamond Shape in Practice
 
-```
-              AF(A)   DLF(S)
-                 AM(A)
-          BBM(S)       CAR(S)
-                 DM(D)
-          BPD(D)       CD(D)
-       FB(A)              FB(A)
-              SK(D)
-```
+**The diamond — width from the full-backs, overload through the middle:**
+
+<FormationDiagram
+  formation="4-1-2-1-2"
+  caption="In possession — the diamond with attacking full-backs"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "defend", x: 50, y: 88 },
+    { roleId: "full-back", duty: "attack", x: 12, y: 70 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 76 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
+    { roleId: "full-back", duty: "attack", x: 88, y: 70 },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 58, abbr: "DM", name: "Defensive Midfielder" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 32, y: 46, abbr: "CAR", name: "Carrilero" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 68, y: 46 },
+    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 30, abbr: "AM", name: "Attacking Midfielder" },
+    { roleId: "advanced-forward", duty: "attack", x: 38, y: 13 },
+    { roleId: "target-forward", duty: "support", x: 62, y: 13, abbr: "DLF", name: "Deep-Lying Forward" },
+  ]}
+/>
+
+**Out of possession — the compact diamond block:**
+
+<FormationDiagram
+  formation="4-1-2-1-2"
+  caption="Out of possession — the high, narrow block"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "defend", x: 50, y: 90 },
+    { roleId: "full-back", duty: "attack", x: 16, y: 82 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 84 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 84 },
+    { roleId: "full-back", duty: "attack", x: 84, y: 82 },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 70, abbr: "DM", name: "Defensive Midfielder" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 36, y: 60, abbr: "CAR", name: "Carrilero" },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 64, y: 60 },
+    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 48, abbr: "AM", name: "Attacking Midfielder" },
+    { roleId: "advanced-forward", duty: "attack", x: 42, y: 32 },
+    { roleId: "target-forward", duty: "support", x: 58, y: 32, abbr: "DLF", name: "Deep-Lying Forward" },
+  ]}
+/>
 
 This shape creates a permanent 4v2 or 4v3 advantage through the middle against 4-4-2 and 4-2-3-1 formations. The full-backs provide wide outlets when central play becomes congested.
 
