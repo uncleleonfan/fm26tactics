@@ -1,5 +1,3 @@
-"use client";
-
 import { playerRoles } from "@/lib/tactics-data";
 import type { PlayerNode as PlayerNodeType } from "@/types/tactic";
 import {
@@ -18,8 +16,8 @@ interface PlayerNodeProps {
   isDragging: boolean;
   /** Auto-computed label position (collision-avoided by pitch.tsx); defaults to "above". */
   labelPlacement?: LabelPlacement;
-  onMouseDown: (e: React.MouseEvent) => void;
-  onTouchStart: (e: React.TouchEvent) => void;
+  /** Overrides the role abbreviation looked up from roleId (static diagrams on article pages). */
+  labelAbbr?: string;
 }
 
 const dutyColors: Record<string, string> = {
@@ -28,6 +26,12 @@ const dutyColors: Record<string, string> = {
   attack: "#FF5252",
 };
 
+/**
+ * Purely visual player token (circle, number, role label). No event
+ * handlers, no "use client" — renders as RSC inside static article
+ * diagrams and as a client component under the builder's interactive
+ * wrapper (see interactive-player-node.tsx).
+ */
 export function PlayerNode({
   player,
   number,
@@ -35,14 +39,13 @@ export function PlayerNode({
   isSelected,
   isDragging,
   labelPlacement,
-  onMouseDown,
-  onTouchStart,
+  labelAbbr,
 }: PlayerNodeProps) {
   const role = playerRoles.find((r) => r.id === player.roleId);
   const color = dutyColors[player.duty] || "#00E676";
   const radius = isGoalkeeper ? 3.6 : 3.2;
 
-  const abbr = role?.abbr ?? "";
+  const abbr = labelAbbr ?? role?.abbr ?? "";
   const labelWidth = roleLabelWidth(abbr);
   // Label offset per placement — computed by the auto-avoidance layout in pitch.tsx.
   const halfW = labelWidth / 2;
@@ -60,19 +63,7 @@ export function PlayerNode({
   const touchRadius = radius + 2.5;
 
   return (
-    <g
-      transform={`translate(${player.x}, ${player.y})`}
-      style={{ cursor: isDragging ? "grabbing" : "pointer" }}
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        onMouseDown(e);
-      }}
-      onTouchStart={(e) => {
-        e.stopPropagation();
-        onTouchStart(e);
-      }}
-      onClick={(e) => e.stopPropagation()}
-    >
+    <g transform={`translate(${player.x}, ${player.y})`}>
       {/* Invisible touch target — larger hit area */}
       <circle r={touchRadius} fill="transparent" stroke="none" pointerEvents="all" />
 
@@ -134,7 +125,7 @@ export function PlayerNode({
       </text>
 
       {/* Role label — always visible */}
-      {role && (
+      {abbr && (
         <g transform={labelTransform} pointerEvents="none">
           <rect
             x={-halfW}

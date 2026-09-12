@@ -24,6 +24,10 @@ export const Tactic = defineDocumentType(() => ({
     updatedAt: { type: "date", required: false },
     coverImage: { type: "string", required: false },
     author: { type: "string", required: true },
+    // Starting XI for the static formation diagram: 11 items
+    // { roleId, duty, x?, y? } — index 0 = GK; x/y optionally override the
+    // formation preset coordinates (y: 88 = own goal, 10 = attack direction).
+    setup: { type: "json", required: false },
   },
   computedFields: {
     slug: {

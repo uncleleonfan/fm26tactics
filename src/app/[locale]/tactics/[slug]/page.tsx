@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { allTactics } from "contentlayer/generated";
 import { TacticDetailPage } from "@/components/tactics/tactic-detail-page";
+import { FormationDiagram } from "@/components/tactics/formation-diagram";
 import { generateSEO } from "@/lib/metadata";
 import { JsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
@@ -53,6 +54,12 @@ export default function TacticPage({ params }: Props) {
 
   const pageUrl = `${BASE}/tactics/${tactic.slug}`;
 
+  // Server-rendered static formation diagram (RSC slot — keeps the SVG
+  // out of the client bundle and in the initial HTML for crawlers).
+  const formationDiagram = tactic.setup ? (
+    <FormationDiagram formation={tactic.formation} setup={tactic.setup} />
+  ) : null;
+
   return (
     <>
       <JsonLd
@@ -79,7 +86,7 @@ export default function TacticPage({ params }: Props) {
           },
         }}
       />
-      <TacticDetailPage tactic={tactic} />
+      <TacticDetailPage tactic={tactic} formationDiagram={formationDiagram} />
     </>
   );
 }

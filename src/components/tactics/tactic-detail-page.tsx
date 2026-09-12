@@ -63,9 +63,11 @@ const difficultyConfig: Record<string, { className: string }> = {
 
 interface TacticDetailPageProps {
   tactic: Tactic;
+  /** Server-rendered static formation diagram (RSC slot). */
+  formationDiagram?: React.ReactNode;
 }
 
-export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
+export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageProps) {
   const MDXContent = useMDXComponent(tactic.body.code);
   const diff = difficultyConfig[tactic.difficulty];
   const [copied, setCopied] = useState(false);
@@ -199,6 +201,9 @@ export function TacticDetailPage({ tactic }: TacticDetailPageProps) {
                   </div>
                 )}
               </div>
+
+              {/* Static formation diagram — server-rendered RSC slot */}
+              {formationDiagram}
 
               {/* MDX Content */}
               <article className="prose-custom">
