@@ -136,6 +136,26 @@ export function FormationDiagram({
     };
   });
 
+  // Keeper separation — out-of-possession shapes in articles often crammed
+  // the deepest defender right on top of the keeper (e.g. GK y=91 vs cover
+  // CD y=88), making the two tokens overlap. Slide the keeper toward his own
+  // goal line until his circle keeps a small gap from every outfield node he
+  // already sits behind; x stays centered, and a high sweeper keeper is never
+  // dragged back into the defensive line.
+  const GK_NODE_RADIUS = 3.6;
+  const OUTFIELD_NODE_RADIUS = 3.2;
+  const GK_CLEARANCE = 2.5;
+  const GK_MAX_Y = 96; // node bottom edge stays inside the pitch (≤ 99.6)
+  let gkY = players[0].y;
+  for (let i = 1; i < players.length; i++) {
+    const p = players[i];
+    const need = GK_NODE_RADIUS + OUTFIELD_NODE_RADIUS + GK_CLEARANCE;
+    const dx = Math.abs(p.x - players[0].x);
+    if (dx >= need || gkY < p.y) continue;
+    gkY = Math.max(gkY, p.y + Math.sqrt(need * need - dx * dx));
+  }
+  players[0].y = Math.min(gkY, GK_MAX_Y);
+
   // Same collision-avoidance layout as the builder pitch.
   const labelPlacements = computeLabelPlacements(
     players.map((p, i) => {
@@ -187,7 +207,7 @@ export function FormationDiagram({
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="xMidYMid meet"
-          className="block w-full aspect-[2/3] select-none"
+          className="block w-full aspect-square select-none"
           role="img"
           aria-label={`${formation} formation starting eleven with player roles and key movement arrows`}
         >
