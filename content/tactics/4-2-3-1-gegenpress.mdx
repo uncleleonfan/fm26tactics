@@ -29,13 +29,6 @@ setup:
   - { roleId: advanced-playmaker, duty: attack, x: 50, y: 30, abbr: "AM", name: "Attacking Midfielder" }
   - { roleId: inside-forward, duty: support, x: 80, y: 30, abbr: "W", name: "Winger" }
   - { roleId: pressing-forward, duty: attack, x: 50, y: 12 }
-movements:
-  - { from: 1, toX: 6, toY: 36, type: overlap }
-  - { from: 4, toX: 88, toY: 44, type: overlap }
-  - { from: 7, toX: 33, toY: 18, type: inside }
-  - { from: 9, toX: 67, toY: 20, type: inside }
-  - { from: 8, toX: 60, toY: 36, type: support }
-  - { from: 10, toX: 42, toY: 6, type: forward }
 ---
 
 # 4-2-3-1 Gegenpress: The Complete FM26 System
@@ -85,6 +78,14 @@ Gegenpress accepts defensive vulnerability in exchange for offensive dominance. 
     { roleId: "inside-forward", duty: "support", x: 80, y: 30, abbr: "W", name: "Winger" },
     { roleId: "pressing-forward", duty: "attack", x: 50, y: 12 },
   ]}
+  movements={[
+    { from: 1, toX: 6, toY: 36, type: "overlap" },
+    { from: 4, toX: 88, toY: 44, type: "overlap" },
+    { from: 7, toX: 33, toY: 18, type: "inside" },
+    { from: 9, toX: 67, toY: 20, type: "inside" },
+    { from: 8, toX: 60, toY: 36, type: "support" },
+    { from: 10, toX: 42, toY: 6, type: "forward" },
+  ]}
 />
 
 **Width providers**: Left FB(A) overlaps, Right W(S) stays wide. This creates a diagonal attacking pattern — heavy left-side underlaps, right-side natural width.
@@ -106,6 +107,12 @@ Gegenpress accepts defensive vulnerability in exchange for offensive dominance. 
     { roleId: "box-to-box-midfielder", duty: "support", x: 60, y: 58 },
     { roleId: "inside-forward", duty: "support", x: 82, y: 62, abbr: "W", name: "Winger" },
     { roleId: "pressing-forward", duty: "attack", x: 50, y: 36 },
+  ]}
+  movements={[
+    { from: 10, toX: 36, toY: 22, type: "press" },
+    { from: 7, toX: 46, toY: 48, type: "press" },
+    { from: 6, toX: 26, toY: 54, type: "cover" },
+    { from: 9, toX: 74, toY: 54, type: "cover" },
   ]}
 />
 

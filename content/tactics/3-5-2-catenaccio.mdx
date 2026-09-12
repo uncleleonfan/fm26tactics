@@ -30,11 +30,6 @@ setup:
   - { roleId: deep-lying-playmaker, duty: support, x: 50, y: 56 }
   - { roleId: target-forward, duty: attack, x: 38, y: 13 }
   - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
-movements:
-  - { from: 4, toX: 8, toY: 74, type: cover }
-  - { from: 5, toX: 92, toY: 74, type: cover }
-  - { from: 9, toX: 30, toY: 8, type: forward }
-  - { from: 10, toX: 72, toY: 8, type: forward }
 ---
 
 # 3-5-2 Catenaccio: The Complete FM26 Guide
@@ -73,6 +68,12 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
     { roleId: "target-forward", duty: "attack", x: 38, y: 16 },
     { roleId: "advanced-forward", duty: "attack", x: 62, y: 13 },
   ]}
+  movements={[
+    { from: 4, toX: 8, toY: 30, type: "overlap" },
+    { from: 8, toX: 92, toY: 30, type: "overlap" },
+    { from: 9, toX: 30, toY: 8, type: "forward" },
+    { from: 10, toX: 72, toY: 8, type: "forward" },
+  ]}
 />
 
 **Out of Possession (OOP) — the 5-3-2 deep block:**
@@ -92,6 +93,12 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
     { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
     { roleId: "target-forward", duty: "attack", x: 58, y: 38 },
     { roleId: "advanced-forward", duty: "attack", x: 42, y: 38 },
+  ]}
+  movements={[
+    { from: 9, toX: 64, toY: 30, type: "press" },
+    { from: 10, toX: 36, toY: 30, type: "press" },
+    { from: 8, toX: 58, toY: 58, type: "cover" },
+    { from: 6, toX: 42, toY: 58, type: "cover" },
   ]}
 />
 

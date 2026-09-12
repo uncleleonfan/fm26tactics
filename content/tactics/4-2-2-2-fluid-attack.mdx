@@ -29,13 +29,6 @@ setup:
   - { roleId: inside-forward, duty: support, x: 72, y: 28 }
   - { roleId: advanced-forward, duty: attack, x: 38, y: 12 }
   - { roleId: advanced-forward, duty: attack, x: 62, y: 12 }
-movements:
-  - { from: 1, toX: 6, toY: 40, type: overlap }
-  - { from: 4, toX: 94, toY: 40, type: overlap }
-  - { from: 7, toX: 40, toY: 20, type: inside }
-  - { from: 8, toX: 60, toY: 20, type: inside }
-  - { from: 9, toX: 30, toY: 6, type: forward }
-  - { from: 10, toX: 70, toY: 6, type: forward }
 ---
 
 # 4-2-2-2 Fluid Attack: The Complete FM26 Guide
@@ -74,6 +67,14 @@ Fluid is not a single instruction — it's a philosophy of positional interchang
     { roleId: "advanced-forward", duty: "attack", x: 38, y: 12 },
     { roleId: "advanced-forward", duty: "attack", x: 62, y: 12 },
   ]}
+  movements={[
+    { from: 1, toX: 6, toY: 40, type: "overlap" },
+    { from: 4, toX: 94, toY: 40, type: "overlap" },
+    { from: 7, toX: 40, toY: 20, type: "inside" },
+    { from: 8, toX: 60, toY: 20, type: "inside" },
+    { from: 9, toX: 30, toY: 6, type: "forward" },
+    { from: 10, toX: 70, toY: 6, type: "forward" },
+  ]}
 />
 
 **Out of possession — the compact mid block:**
@@ -93,6 +94,12 @@ Fluid is not a single instruction — it's a philosophy of positional interchang
     { roleId: "inside-forward", duty: "support", x: 68, y: 52 },
     { roleId: "advanced-forward", duty: "attack", x: 40, y: 36 },
     { roleId: "advanced-forward", duty: "attack", x: 60, y: 36 },
+  ]}
+  movements={[
+    { from: 9, toX: 38, toY: 26, type: "press" },
+    { from: 10, toX: 62, toY: 26, type: "press" },
+    { from: 7, toX: 36, toY: 44, type: "cover" },
+    { from: 8, toX: 64, toY: 44, type: "cover" },
   ]}
 />
 

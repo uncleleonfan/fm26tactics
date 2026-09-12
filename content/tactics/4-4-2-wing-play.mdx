@@ -30,12 +30,6 @@ setup:
   - { roleId: inside-forward, duty: attack, x: 90, y: 34, abbr: "W", name: "Winger" }
   - { roleId: target-forward, duty: support, x: 38, y: 13 }
   - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
-movements:
-  - { from: 1, toX: 10, toY: 48, type: overlap }
-  - { from: 4, toX: 90, toY: 48, type: overlap }
-  - { from: 5, toX: 12, toY: 18, type: forward }
-  - { from: 9, toX: 34, toY: 26, type: support }
-  - { from: 10, toX: 62, toY: 5, type: forward }
 ---
 
 # 4-4-2 Wing Play: The Complete FM26 System
@@ -89,6 +83,13 @@ The 4-4-2 doesn't try to be clever. It gets the ball wide, gets it into the box,
     { roleId: "target-forward", duty: "support", x: 38, y: 13 },
     { roleId: "advanced-forward", duty: "attack", x: 62, y: 13 },
   ]}
+  movements={[
+    { from: 1, toX: 20, toY: 46, type: "underlap" },
+    { from: 4, toX: 80, toY: 46, type: "underlap" },
+    { from: 5, toX: 12, toY: 18, type: "forward" },
+    { from: 9, toX: 34, toY: 26, type: "support" },
+    { from: 10, toX: 62, toY: 5, type: "forward" },
+  ]}
 />
 
 **The wide overload pattern**: Winger(A) stays wide → drags opposition FB to the touchline → your FB(S) underlaps into the vacated space → receives → crosses from a deeper angle → harder to defend.
@@ -110,6 +111,12 @@ The 4-4-2 doesn't try to be clever. It gets the ball wide, gets it into the box,
     { roleId: "inside-forward", duty: "attack", x: 88, y: 60, abbr: "W", name: "Winger" },
     { roleId: "target-forward", duty: "support", x: 40, y: 36 },
     { roleId: "advanced-forward", duty: "attack", x: 60, y: 36 },
+  ]}
+  movements={[
+    { from: 9, toX: 38, toY: 26, type: "press" },
+    { from: 10, toX: 62, toY: 26, type: "press" },
+    { from: 5, toX: 18, toY: 48, type: "cover" },
+    { from: 8, toX: 82, toY: 48, type: "cover" },
   ]}
 />
 

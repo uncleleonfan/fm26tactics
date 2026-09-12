@@ -21,12 +21,6 @@ setup:
   - { roleId: inside-forward, duty: attack, x: 20, y: 24 }
   - { roleId: target-forward, duty: support, x: 50, y: 13, abbr: "CF", name: "Complete Forward" }
   - { roleId: inside-forward, duty: attack, x: 80, y: 24 }
-movements:
-  - { from: 4, toX: 10, toY: 34, type: forward }
-  - { from: 5, toX: 90, toY: 34, type: forward }
-  - { from: 8, toX: 36, toY: 14, type: inside }
-  - { from: 10, toX: 64, toY: 14, type: inside }
-  - { from: 9, toX: 44, toY: 26, type: support }
 ---
 
 ## The Evolution of Possession Football
@@ -64,6 +58,58 @@ In FM26, possession-based systems have been refined to reward intelligent positi
 - Prevent short GK distribution: **Enabled**
 - Offside trap: **Enabled** — essential with three at the back
 - Defensive width: **Fairly narrow** — compact shape, force outside
+
+## Formation Shape
+
+<FormationDiagram
+  formation="3-4-3"
+  caption="In possession — the 3-2-5 build-up shape, wingers inverted into half-spaces"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
+    { roleId: "central-defender", duty: "defend", x: 18, y: 74, abbr: "WCB", name: "Wide Centre-Back" },
+    { roleId: "ball-playing-defender", duty: "defend", x: 50, y: 80, name: "Ball-Playing Defender (Cover)" },
+    { roleId: "central-defender", duty: "defend", x: 82, y: 74, abbr: "WCB", name: "Wide Centre-Back" },
+    { roleId: "inside-forward", duty: "support", x: 8, y: 28, abbr: "DW", name: "Defensive Winger" },
+    { roleId: "inside-forward", duty: "support", x: 92, y: 28, abbr: "DW", name: "Defensive Winger" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 38, y: 54 },
+    { roleId: "advanced-playmaker", duty: "attack", x: 62, y: 54 },
+    { roleId: "inside-forward", duty: "attack", x: 32, y: 24 },
+    { roleId: "target-forward", duty: "support", x: 50, y: 26, abbr: "CF", name: "Complete Forward" },
+    { roleId: "inside-forward", duty: "attack", x: 68, y: 24 },
+  ]}
+  movements={[
+    { from: 4, toX: 6, toY: 16, type: "forward" },
+    { from: 5, toX: 94, toY: 16, type: "forward" },
+    { from: 8, toX: 42, toY: 14, type: "inside" },
+    { from: 10, toX: 58, toY: 14, type: "inside" },
+    { from: 9, toX: 50, toY: 38, type: "support" },
+  ]}
+/>
+
+<FormationDiagram
+  formation="3-4-3"
+  caption="Out of possession — high 5-2-3 press with a compact central block"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 24, y: 66, abbr: "WCB", name: "Wide Centre-Back" },
+    { roleId: "ball-playing-defender", duty: "defend", x: 50, y: 68, name: "Ball-Playing Defender (Cover)" },
+    { roleId: "central-defender", duty: "defend", x: 76, y: 66, abbr: "WCB", name: "Wide Centre-Back" },
+    { roleId: "inside-forward", duty: "support", x: 12, y: 58, abbr: "DW", name: "Defensive Winger" },
+    { roleId: "inside-forward", duty: "support", x: 88, y: 58, abbr: "DW", name: "Defensive Winger" },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 38, y: 54 },
+    { roleId: "advanced-playmaker", duty: "attack", x: 62, y: 54 },
+    { roleId: "inside-forward", duty: "attack", x: 26, y: 40 },
+    { roleId: "target-forward", duty: "support", x: 50, y: 32, abbr: "CF", name: "Complete Forward" },
+    { roleId: "inside-forward", duty: "attack", x: 74, y: 40 },
+  ]}
+  movements={[
+    { from: 9, toX: 50, toY: 24, type: "press" },
+    { from: 8, toX: 34, toY: 32, type: "press" },
+    { from: 10, toX: 66, toY: 32, type: "press" },
+    { from: 6, toX: 44, toY: 48, type: "cover" },
+    { from: 7, toX: 56, toY: 48, type: "cover" },
+  ]}
+/>
 
 ## Player Roles
 

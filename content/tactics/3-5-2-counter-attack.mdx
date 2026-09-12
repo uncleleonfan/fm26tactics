@@ -19,12 +19,6 @@ setup:
   - { roleId: box-to-box-midfielder, duty: support, x: 62, y: 48 }
   - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
   - { roleId: target-forward, duty: support, x: 38, y: 13 }
-movements:
-  - { from: 4, toX: 8, toY: 34, type: overlap }
-  - { from: 5, toX: 90, toY: 68, type: cover }
-  - { from: 7, toX: 60, toY: 30, type: forward }
-  - { from: 8, toX: 76, toY: 6, type: forward }
-  - { from: 9, toX: 34, toY: 24, type: support }
 ---
 
 ## Why Counter-Attack 3-5-2?
@@ -54,6 +48,55 @@ When you're predicted to finish mid-table or below, you need a system that absor
 - Defensive line: **Standard** (don't drop too deep)
 - Trigger press: **Less often**
 - Get stuck in: **Enabled**
+
+## Formation Shape
+
+<FormationDiagram
+  formation="3-5-2"
+  caption="In possession — near-side wing-back overlaps, far-side holds, B2B breaks from deep"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 25, y: 80 },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 82 },
+    { roleId: "central-defender", duty: "defend", x: 75, y: 80 },
+    { roleId: "wing-back", duty: "support", x: 10, y: 56 },
+    { roleId: "wing-back", duty: "support", x: 90, y: 56 },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 38, y: 48 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 48 },
+    { roleId: "advanced-forward", duty: "attack", x: 62, y: 13 },
+    { roleId: "target-forward", duty: "support", x: 38, y: 13 },
+  ]}
+  movements={[
+    { from: 4, toX: 8, toY: 34, type: "overlap" },
+    { from: 5, toX: 90, toY: 68, type: "cover" },
+    { from: 7, toX: 60, toY: 30, type: "forward" },
+    { from: 8, toX: 76, toY: 6, type: "forward" },
+    { from: 10, toX: 34, toY: 26, type: "support" },
+  ]}
+/>
+
+<FormationDiagram
+  formation="3-5-2"
+  caption="Out of possession — wing-backs drop into a back five, compact mid-block, front two screen the pass"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend", x: 50, y: 91 },
+    { roleId: "wing-back", duty: "support", x: 10, y: 82 },
+    { roleId: "central-defender", duty: "defend", x: 30, y: 86 },
+    { roleId: "central-defender", duty: "defend", x: 50, y: 87 },
+    { roleId: "central-defender", duty: "defend", x: 70, y: 86 },
+    { roleId: "wing-back", duty: "support", x: 90, y: 82 },
+    { roleId: "deep-lying-playmaker", duty: "support", x: 38, y: 70 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 70 },
+    { roleId: "advanced-forward", duty: "attack", x: 58, y: 40 },
+    { roleId: "target-forward", duty: "support", x: 42, y: 40 },
+  ]}
+  movements={[
+    { from: 8, toX: 62, toY: 30, type: "press" },
+    { from: 9, toX: 38, toY: 30, type: "press" },
+    { from: 6, toX: 44, toY: 60, type: "cover" },
+    { from: 7, toX: 56, toY: 60, type: "cover" },
+  ]}
+/>
 
 ## Player Roles
 

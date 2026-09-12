@@ -29,12 +29,6 @@ setup:
   - { roleId: inside-forward, duty: support, x: 32, y: 26 }
   - { roleId: inside-forward, duty: support, x: 68, y: 26 }
   - { roleId: advanced-forward, duty: attack, x: 50, y: 12 }
-movements:
-  - { from: 4, toX: 6, toY: 36, type: overlap }
-  - { from: 5, toX: 94, toY: 36, type: overlap }
-  - { from: 8, toX: 44, toY: 16, type: inside }
-  - { from: 9, toX: 56, toY: 16, type: inside }
-  - { from: 10, toX: 40, toY: 5, type: forward }
 ---
 
 # 3-4-2-1 Counter-Attack: The Complete FM26 Guide
@@ -71,6 +65,12 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
     { roleId: "inside-forward", duty: "support", x: 70, y: 62 },
     { roleId: "advanced-forward", duty: "attack", x: 50, y: 38 },
   ]}
+  movements={[
+    { from: 10, toX: 50, toY: 28, type: "press" },
+    { from: 7, toX: 44, toY: 50, type: "press" },
+    { from: 6, toX: 36, toY: 52, type: "cover" },
+    { from: 9, toX: 64, toY: 52, type: "cover" },
+  ]}
 />
 
 **In possession — the 3-2-4-1 overload:**
@@ -90,6 +90,13 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
     { roleId: "inside-forward", duty: "support", x: 66, y: 24 },
     { roleId: "wing-back", duty: "attack", x: 92, y: 28 },
     { roleId: "advanced-forward", duty: "attack", x: 50, y: 10 },
+  ]}
+  movements={[
+    { from: 6, toX: 6, toY: 16, type: "overlap" },
+    { from: 9, toX: 94, toY: 16, type: "overlap" },
+    { from: 7, toX: 44, toY: 16, type: "inside" },
+    { from: 8, toX: 56, toY: 16, type: "inside" },
+    { from: 10, toX: 40, toY: 4, type: "forward" },
   ]}
 />
 

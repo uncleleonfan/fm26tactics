@@ -29,11 +29,6 @@ setup:
   - { roleId: inside-forward, duty: attack, x: 88, y: 50, abbr: "W", name: "Winger" }
   - { roleId: advanced-playmaker, duty: attack, x: 50, y: 29, abbr: "T", name: "Trequartista" }
   - { roleId: target-forward, duty: attack, x: 50, y: 12 }
-movements:
-  - { from: 5, toX: 12, toY: 32, type: forward }
-  - { from: 8, toX: 88, toY: 32, type: forward }
-  - { from: 9, toX: 56, toY: 18, type: support }
-  - { from: 10, toX: 60, toY: 5, type: forward }
 ---
 
 # 4-4-1-1 Counter-Attack: The Complete FM26 Guide
@@ -70,6 +65,12 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
     { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 46, abbr: "T", name: "Trequartista" },
     { roleId: "target-forward", duty: "attack", x: 50, y: 30 },
   ]}
+  movements={[
+    { from: 10, toX: 50, toY: 20, type: "press" },
+    { from: 9, toX: 46, toY: 54, type: "cover" },
+    { from: 5, toX: 20, toY: 54, type: "cover" },
+    { from: 8, toX: 80, toY: 54, type: "cover" },
+  ]}
 />
 
 **In possession — the break:**
@@ -89,6 +90,12 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
     { roleId: "inside-forward", duty: "attack", x: 92, y: 44, abbr: "W", name: "Winger" },
     { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 26, abbr: "T", name: "Trequartista" },
     { roleId: "target-forward", duty: "attack", x: 50, y: 10 },
+  ]}
+  movements={[
+    { from: 5, toX: 12, toY: 32, type: "forward" },
+    { from: 8, toX: 88, toY: 32, type: "forward" },
+    { from: 9, toX: 56, toY: 18, type: "support" },
+    { from: 10, toX: 60, toY: 5, type: "forward" },
   ]}
 />
 

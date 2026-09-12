@@ -21,12 +21,6 @@ setup:
   - { roleId: advanced-playmaker, duty: attack, x: 50, y: 30, abbr: "AM", name: "Attacking Midfielder" }
   - { roleId: advanced-forward, duty: attack, x: 38, y: 13 }
   - { roleId: target-forward, duty: support, x: 62, y: 13, abbr: "DLF", name: "Deep-Lying Forward" }
-movements:
-  - { from: 1, toX: 8, toY: 48, type: overlap }
-  - { from: 4, toX: 92, toY: 48, type: overlap }
-  - { from: 8, toX: 50, toY: 19, type: forward }
-  - { from: 9, toX: 30, toY: 7, type: forward }
-  - { from: 10, toX: 66, toY: 28, type: support }
 ---
 
 ## The Power of Central Overload
@@ -118,6 +112,13 @@ In FM26, central overloads are particularly effective because the match engine n
     { roleId: "advanced-forward", duty: "attack", x: 38, y: 13 },
     { roleId: "target-forward", duty: "support", x: 62, y: 13, abbr: "DLF", name: "Deep-Lying Forward" },
   ]}
+  movements={[
+    { from: 1, toX: 8, toY: 48, type: "overlap" },
+    { from: 4, toX: 92, toY: 48, type: "overlap" },
+    { from: 8, toX: 50, toY: 19, type: "forward" },
+    { from: 9, toX: 30, toY: 7, type: "forward" },
+    { from: 10, toX: 66, toY: 28, type: "support" },
+  ]}
 />
 
 **Out of possession — the compact diamond block:**
@@ -137,6 +138,12 @@ In FM26, central overloads are particularly effective because the match engine n
     { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 48, abbr: "AM", name: "Attacking Midfielder" },
     { roleId: "advanced-forward", duty: "attack", x: 42, y: 32 },
     { roleId: "target-forward", duty: "support", x: 58, y: 32, abbr: "DLF", name: "Deep-Lying Forward" },
+  ]}
+  movements={[
+    { from: 9, toX: 40, toY: 22, type: "press" },
+    { from: 10, toX: 60, toY: 22, type: "press" },
+    { from: 6, toX: 28, toY: 50, type: "cover" },
+    { from: 7, toX: 72, toY: 50, type: "cover" },
   ]}
 />
 

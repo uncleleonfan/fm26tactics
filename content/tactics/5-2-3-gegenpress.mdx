@@ -29,12 +29,6 @@ setup:
   - { roleId: inside-forward, duty: attack, x: 20, y: 24 }
   - { roleId: advanced-forward, duty: attack, x: 50, y: 12 }
   - { roleId: inside-forward, duty: attack, x: 80, y: 24 }
-movements:
-  - { from: 1, toX: 8, toY: 40, type: overlap }
-  - { from: 5, toX: 92, toY: 40, type: overlap }
-  - { from: 8, toX: 34, toY: 16, type: inside }
-  - { from: 10, toX: 66, toY: 16, type: inside }
-  - { from: 9, toX: 44, toY: 5, type: forward }
 ---
 
 # 5-2-3 Gegenpress: The Complete FM26 Guide
@@ -71,6 +65,13 @@ The 5-2-3 Gegenpress combines the defensive solidity of five at the back with th
     { roleId: "wing-back", duty: "attack", x: 92, y: 30 },
     { roleId: "advanced-forward", duty: "attack", x: 50, y: 10 },
   ]}
+  movements={[
+    { from: 6, toX: 6, toY: 18, type: "overlap" },
+    { from: 9, toX: 94, toY: 18, type: "overlap" },
+    { from: 7, toX: 44, toY: 14, type: "inside" },
+    { from: 8, toX: 56, toY: 14, type: "inside" },
+    { from: 10, toX: 44, toY: 4, type: "forward" },
+  ]}
 />
 
 **Out of possession — the high-pressing trap:**
@@ -90,6 +91,12 @@ The 5-2-3 Gegenpress combines the defensive solidity of five at the back with th
     { roleId: "inside-forward", duty: "attack", x: 24, y: 48 },
     { roleId: "advanced-forward", duty: "attack", x: 50, y: 42 },
     { roleId: "inside-forward", duty: "attack", x: 76, y: 48 },
+  ]}
+  movements={[
+    { from: 8, toX: 36, toY: 38, type: "press" },
+    { from: 9, toX: 50, toY: 32, type: "press" },
+    { from: 10, toX: 64, toY: 38, type: "press" },
+    { from: 6, toX: 44, toY: 58, type: "cover" },
   ]}
 />
 

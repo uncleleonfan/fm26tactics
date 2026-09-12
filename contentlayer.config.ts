@@ -28,10 +28,6 @@ export const Tactic = defineDocumentType(() => ({
     // { roleId, duty, x?, y? } — index 0 = GK; x/y optionally override the
     // formation preset coordinates (y: 88 = own goal, 10 = attack direction).
     setup: { type: "json", required: false },
-    // Key movement arrows for the diagram: items of
-    // { from: <setup index>, toX, toY, type } — type reuses the builder
-    // movement vocabulary (overlap / underlap / inside / forward / support / ...).
-    movements: { type: "json", required: false },
   },
   computedFields: {
     slug: {

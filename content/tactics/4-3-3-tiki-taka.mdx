@@ -29,12 +29,6 @@ setup:
   - { roleId: inside-forward, duty: support, x: 20, y: 26 }
   - { roleId: target-forward, duty: support, x: 50, y: 13, abbr: "CF", name: "Complete Forward" }
   - { roleId: inside-forward, duty: attack, x: 80, y: 26 }
-movements:
-  - { from: 1, toX: 10, toY: 52, type: overlap }
-  - { from: 8, toX: 34, toY: 16, type: inside }
-  - { from: 10, toX: 66, toY: 16, type: inside }
-  - { from: 7, toX: 72, toY: 30, type: underlap }
-  - { from: 9, toX: 44, toY: 26, type: support }
 ---
 
 # 4-3-3 Tiki-Taka: The Complete FM26 System
@@ -72,6 +66,13 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
     { roleId: "target-forward", duty: "support", x: 50, y: 13, abbr: "CF", name: "Complete Forward" },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
   ]}
+  movements={[
+    { from: 1, toX: 10, toY: 52, type: "overlap" },
+    { from: 8, toX: 34, toY: 16, type: "inside" },
+    { from: 10, toX: 66, toY: 16, type: "inside" },
+    { from: 7, toX: 74, toY: 28, type: "underlap" },
+    { from: 9, toX: 44, toY: 26, type: "support" },
+  ]}
 />
 
 **Out of possession — the six-second press block:**
@@ -91,6 +92,12 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
     { roleId: "box-to-box-midfielder", duty: "support", x: 64, y: 54, abbr: "MEZ", name: "Mezzala" },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 52 },
     { roleId: "target-forward", duty: "support", x: 50, y: 40, abbr: "CF", name: "Complete Forward" },
+  ]}
+  movements={[
+    { from: 10, toX: 50, toY: 30, type: "press" },
+    { from: 6, toX: 30, toY: 42, type: "press" },
+    { from: 9, toX: 70, toY: 42, type: "press" },
+    { from: 7, toX: 44, toY: 62, type: "cover" },
   ]}
 />
 

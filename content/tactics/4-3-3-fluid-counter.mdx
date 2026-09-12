@@ -21,12 +21,6 @@ setup:
   - { roleId: inside-forward, duty: support, x: 20, y: 26, abbr: "W", name: "Winger" }
   - { roleId: pressing-forward, duty: attack, x: 50, y: 13 }
   - { roleId: inside-forward, duty: attack, x: 80, y: 26 }
-movements:
-  - { from: 1, toX: 10, toY: 56, type: overlap }
-  - { from: 7, toX: 76, toY: 28, type: underlap }
-  - { from: 8, toX: 16, toY: 10, type: forward }
-  - { from: 9, toX: 42, toY: 5, type: forward }
-  - { from: 10, toX: 64, toY: 14, type: inside }
 ---
 
 ## The Philosophy of Fluid Counter-Attacking
@@ -62,6 +56,57 @@ In FM26, teams that commit players forward leave enormous spaces behind. The 4-3
 - Prevent short GK distribution: **Enabled** — force long kicks you can win aerially
 - Get stuck in: **Leave disabled** — stay on feet, avoid cards
 - Defensive width: **Fairly narrow** — compact block invites crosses (where you're strong aerially)
+
+## Formation Shape
+
+<FormationDiagram
+  formation="4-3-3"
+  caption="In possession — near-side overlap, Mezzala underlapping, PF attacking the channel"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
+    { roleId: "full-back", duty: "support", x: 12, y: 74 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 78 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 78 },
+    { roleId: "full-back", duty: "defend", x: 88, y: 74 },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 58 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 32, y: 42 },
+    { roleId: "box-to-box-midfielder", duty: "attack", x: 68, y: 42, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "inside-forward", duty: "support", x: 20, y: 26, abbr: "W", name: "Winger" },
+    { roleId: "pressing-forward", duty: "attack", x: 50, y: 13 },
+    { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
+  ]}
+  movements={[
+    { from: 1, toX: 10, toY: 56, type: "overlap" },
+    { from: 7, toX: 76, toY: 28, type: "underlap" },
+    { from: 8, toX: 16, toY: 10, type: "forward" },
+    { from: 9, toX: 42, toY: 5, type: "forward" },
+    { from: 10, toX: 64, toY: 14, type: "inside" },
+  ]}
+/>
+
+<FormationDiagram
+  formation="4-3-3"
+  caption="Out of possession — narrow 4-1-4-1 mid-block, wingers pinch inside to protect central lanes"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support", x: 50, y: 90 },
+    { roleId: "full-back", duty: "defend", x: 14, y: 82 },
+    { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 84 },
+    { roleId: "central-defender", duty: "defend", x: 62, y: 84 },
+    { roleId: "full-back", duty: "defend", x: 86, y: 82 },
+    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 70 },
+    { roleId: "box-to-box-midfielder", duty: "support", x: 34, y: 62 },
+    { roleId: "box-to-box-midfielder", duty: "attack", x: 66, y: 62, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "inside-forward", duty: "support", x: 24, y: 52, abbr: "W", name: "Winger" },
+    { roleId: "inside-forward", duty: "attack", x: 76, y: 52 },
+    { roleId: "pressing-forward", duty: "attack", x: 50, y: 34 },
+  ]}
+  movements={[
+    { from: 10, toX: 50, toY: 24, type: "press" },
+    { from: 8, toX: 34, toY: 42, type: "press" },
+    { from: 9, toX: 66, toY: 42, type: "press" },
+    { from: 5, toX: 44, toY: 62, type: "cover" },
+  ]}
+/>
 
 ## Player Roles
 

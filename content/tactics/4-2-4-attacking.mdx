@@ -29,12 +29,6 @@ setup:
   - { roleId: inside-forward, duty: attack, x: 88, y: 28, abbr: "W", name: "Winger" }
   - { roleId: target-forward, duty: attack, x: 38, y: 13 }
   - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
-movements:
-  - { from: 1, toX: 8, toY: 44, type: overlap }
-  - { from: 4, toX: 92, toY: 44, type: overlap }
-  - { from: 6, toX: 66, toY: 40, type: support }
-  - { from: 9, toX: 44, toY: 6, type: forward }
-  - { from: 10, toX: 70, toY: 6, type: forward }
 ---
 
 # 4-2-4 Attacking: The Complete FM26 Guide
@@ -71,6 +65,13 @@ The 4-2-4 is the nuclear option in Football Manager 2026 — four forwards, two 
     { roleId: "advanced-forward", duty: "attack", x: 60, y: 10 },
     { roleId: "inside-forward", duty: "attack", x: 94, y: 24, abbr: "W", name: "Winger" },
   ]}
+  movements={[
+    { from: 1, toX: 6, toY: 42, type: "overlap" },
+    { from: 4, toX: 94, toY: 42, type: "overlap" },
+    { from: 6, toX: 66, toY: 40, type: "support" },
+    { from: 8, toX: 44, toY: 6, type: "forward" },
+    { from: 9, toX: 70, toY: 6, type: "forward" },
+  ]}
 />
 
 **Out of possession — the recovery shape:**
@@ -90,6 +91,12 @@ The 4-2-4 is the nuclear option in Football Manager 2026 — four forwards, two 
     { roleId: "inside-forward", duty: "attack", x: 80, y: 56, abbr: "W", name: "Winger" },
     { roleId: "target-forward", duty: "attack", x: 40, y: 34 },
     { roleId: "advanced-forward", duty: "attack", x: 60, y: 34 },
+  ]}
+  movements={[
+    { from: 7, toX: 16, toY: 68, type: "backward" },
+    { from: 8, toX: 84, toY: 68, type: "backward" },
+    { from: 9, toX: 38, toY: 26, type: "press" },
+    { from: 10, toX: 62, toY: 26, type: "press" },
   ]}
 />
 
