@@ -29,6 +29,12 @@ setup:
   - { roleId: inside-forward, duty: support, x: 20, y: 26 }
   - { roleId: target-forward, duty: support, x: 50, y: 13, abbr: "CF", name: "Complete Forward" }
   - { roleId: inside-forward, duty: attack, x: 80, y: 26 }
+movements:
+  - { from: 1, toX: 10, toY: 52, type: overlap }
+  - { from: 8, toX: 34, toY: 16, type: inside }
+  - { from: 10, toX: 66, toY: 16, type: inside }
+  - { from: 7, toX: 72, toY: 30, type: underlap }
+  - { from: 9, toX: 44, toY: 26, type: support }
 ---
 
 # 4-3-3 Tiki-Taka: The Complete FM26 System

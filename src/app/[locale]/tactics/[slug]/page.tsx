@@ -57,7 +57,11 @@ export default function TacticPage({ params }: Props) {
   // Server-rendered static formation diagram (RSC slot — keeps the SVG
   // out of the client bundle and in the initial HTML for crawlers).
   const formationDiagram = tactic.setup ? (
-    <FormationDiagram formation={tactic.formation} setup={tactic.setup} />
+    <FormationDiagram
+      formation={tactic.formation}
+      setup={tactic.setup}
+      movements={tactic.movements}
+    />
   ) : null;
 
   return (

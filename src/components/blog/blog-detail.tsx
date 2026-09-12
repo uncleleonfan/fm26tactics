@@ -5,6 +5,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { FormationDiagram } from "@/components/tactics/formation-diagram";
 import type { Blog } from "contentlayer/generated";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
@@ -31,6 +32,7 @@ const catKeyMap: Record<string, string> = {
 
 const mdxComponents = {
   Callout,
+  FormationDiagram,
   a: MdxLink,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h2

@@ -5,6 +5,12 @@ import {
   computeLabelPlacements,
   roleLabelWidth,
 } from "@/tactics/visualization/label-placement";
+import {
+  arrowGeometry,
+  GHOST_RADIUS,
+  MOVEMENT_STYLES,
+} from "@/tactics/visualization/arrows";
+import type { MovementType } from "@/types/analysis";
 import type { PlayerDuty } from "@/types/tactic";
 
 /**
@@ -24,6 +30,34 @@ export interface FormationSetupSlot {
   name?: string;
 }
 
+/**
+ * One tactical movement arrow for the static diagram: from the setup slot
+ * at index `from` toward (`toX`, `toY`). Types reuse the builder's movement
+ * vocabulary (see MOVEMENT_STYLES) so both visuals speak the same language.
+ */
+export interface DiagramMovement {
+  /** Index into `setup` (0 = GK). */
+  from: number;
+  toX: number;
+  toY: number;
+  type: MovementType;
+}
+
+const MOVEMENT_TYPE_KEYS = new Set<string>(Object.keys(MOVEMENT_STYLES));
+
+/** Short English legend labels — the site is English-only. */
+const LEGEND_LABELS: Record<MovementType, string> = {
+  forward: "Run in behind",
+  overlap: "Overlap",
+  underlap: "Underlap",
+  inside: "Inside channel",
+  outside: "Wide run",
+  support: "Support run",
+  cover: "Cover / recover",
+  backward: "Recover",
+  press: "Press",
+};
+
 const DUTY_LABELS: Record<string, string> = {
   defend: "Defend",
   support: "Support",
@@ -39,22 +73,45 @@ function isSetupSlot(value: unknown): value is FormationSetupSlot {
   );
 }
 
+function isDiagramMovement(value: unknown): value is DiagramMovement {
+  if (!value || typeof value !== "object") return false;
+  const v = value as Partial<DiagramMovement>;
+  return (
+    typeof v.from === "number" &&
+    Number.isInteger(v.from) &&
+    v.from >= 0 &&
+    v.from <= 10 &&
+    typeof v.toX === "number" &&
+    v.toX >= 0 &&
+    v.toX <= 100 &&
+    typeof v.toY === "number" &&
+    v.toY >= 0 &&
+    v.toY <= 100 &&
+    typeof v.type === "string" &&
+    MOVEMENT_TYPE_KEYS.has(v.type)
+  );
+}
+
 interface FormationDiagramProps {
   formation: string;
   /** Raw `setup` frontmatter value — defensively validated, null render on invalid. */
   setup: unknown;
+  /** Raw `movements` frontmatter value — defensively validated, skipped on invalid entries. */
+  movements?: unknown;
   caption?: string;
   className?: string;
 }
 
 /**
  * Static, server-rendered formation diagram reusing the builder's pitch
- * visuals (PitchBackground + PlayerNode). No interaction, no client JS —
- * SVG-native <title> provides free hover tooltips.
+ * visuals (PitchBackground + PlayerNode + the shared arrow geometry from
+ * the visualize layer). No interaction, no client JS — SVG-native <title>
+ * provides free hover tooltips.
  */
 export function FormationDiagram({
   formation,
   setup,
+  movements,
   caption,
   className,
 }: FormationDiagramProps) {
@@ -94,17 +151,82 @@ export function FormationDiagram({
     })
   );
 
+  // Direction arrows — same geometry/semantics as the builder visualize
+  // layer; invalid entries and too-short movements are dropped silently.
+  const arrows = (Array.isArray(movements) ? movements : [])
+    .filter(isDiagramMovement)
+    .map((mv, i) => {
+      const from = players[mv.from];
+      if (!from) return null;
+      const geo = arrowGeometry(
+        { x: from.x, y: from.y },
+        { x: mv.toX, y: mv.toY }
+      );
+      if (!geo) return null;
+      const role = playerRoles.find((r) => r.id === from.roleId);
+      const label = from.name ?? role?.name ?? from.roleId;
+      return {
+        id: `mv-${i}`,
+        geo,
+        style: MOVEMENT_STYLES[mv.type],
+        to: { x: mv.toX, y: mv.toY },
+        type: mv.type,
+        title: `${label} — ${LEGEND_LABELS[mv.type]}`,
+      };
+    })
+    .filter((a): a is NonNullable<typeof a> => a !== null);
+
+  const legendTypes = arrows.reduce<MovementType[]>(
+    (acc, a) => (acc.includes(a.type) ? acc : [...acc, a.type]),
+    []
+  );
+
   return (
     <figure className={className ?? "my-8"} itemScope itemType="https://schema.org/ImageObject">
-      <div className="mx-auto max-w-sm rounded-xl border border-surface-border bg-surface/50 overflow-hidden">
+      <div className="mx-auto max-w-lg rounded-xl border border-surface-border bg-surface/50 overflow-hidden">
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="xMidYMid meet"
           className="block w-full aspect-[2/3] select-none"
           role="img"
-          aria-label={`${formation} formation starting eleven with player roles`}
+          aria-label={`${formation} formation starting eleven with player roles and key movement arrows`}
         >
           <PitchBackground />
+          {/* Movement arrows — under the player nodes, ghost marks the expected position */}
+          {arrows.map((a) => (
+            <g key={a.id} pointerEvents="none">
+              <circle
+                cx={a.to.x}
+                cy={a.to.y}
+                r={GHOST_RADIUS}
+                fill="none"
+                stroke={a.style.stroke}
+                strokeWidth="0.3"
+                strokeDasharray="1,0.8"
+                opacity="0.65"
+              />
+              <g>
+                <title>{a.title}</title>
+                <line
+                  x1={a.geo.x1}
+                  y1={a.geo.y1}
+                  x2={a.geo.x2}
+                  y2={a.geo.y2}
+                  stroke={a.style.stroke}
+                  strokeWidth="0.55"
+                  strokeDasharray={a.style.dash || undefined}
+                  strokeLinecap="round"
+                  opacity="0.9"
+                />
+                <polygon
+                  points={`0,${-a.geo.headLen / 2} ${a.geo.headLen},0 0,${a.geo.headLen / 2}`}
+                  fill={a.style.stroke}
+                  transform={`translate(${a.geo.x2}, ${a.geo.y2}) rotate(${a.geo.angleDeg})`}
+                  opacity="0.9"
+                />
+              </g>
+            </g>
+          ))}
           {players.map((p, i) => {
             const role = playerRoles.find((r) => r.id === p.roleId);
             const abbr = p.abbr ?? role?.abbr ?? "";
@@ -127,8 +249,31 @@ export function FormationDiagram({
           })}
         </svg>
       </div>
-      <figcaption className="mt-3 text-center text-xs text-text-muted">
-        {caption ?? `${formation} starting XI — roles & duties`}
+      {legendTypes.length > 0 && (
+        <ul
+          className="mx-auto mt-3 flex max-w-lg flex-wrap items-center justify-center gap-x-4 gap-y-1.5"
+          aria-label="Movement arrow legend"
+        >
+          {legendTypes.map((type) => {
+            const style = MOVEMENT_STYLES[type];
+            return (
+              <li key={type} className="flex items-center gap-1.5 text-[11px] text-text-muted">
+                <span
+                  className="inline-block h-0 w-5 shrink-0 rounded"
+                  style={{
+                    borderTopWidth: 2,
+                    borderTopColor: style.stroke,
+                    borderTopStyle: style.dash ? "dashed" : "solid",
+                  }}
+                />
+                {LEGEND_LABELS[type]}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <figcaption className="mt-2 text-center text-xs text-text-muted">
+        {caption ?? `${formation} starting XI — roles, duties & key movements`}
       </figcaption>
     </figure>
   );
