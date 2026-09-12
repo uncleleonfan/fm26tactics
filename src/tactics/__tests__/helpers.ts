@@ -49,7 +49,7 @@ export function buildState(
 
 /**
  * Balanced 4-3-3 in line order:
- * GK | CB CB | LM CM DM CM RM | LW ST RW
+ * GK | LB CB CB RB | CM DM CM | LW ST RW
  */
 export const state433 = (
   overrides: Partial<Record<number, PlayerSpec>> = {},
@@ -59,13 +59,13 @@ export const state433 = (
 function default433Specs(overrides: Partial<Record<number, PlayerSpec>>): PlayerSpec[] {
   const base: PlayerSpec[] = [
     { roleId: "sweeper-keeper", duty: "defend" },      // 0 GK
-    { roleId: "central-defender", duty: "defend" },    // 1 CB (x25)
-    { roleId: "central-defender", duty: "defend" },    // 2 CB (x75)
-    { roleId: "wing-back", duty: "support" },          // 3 LM (x10)
-    { roleId: "box-to-box-midfielder", duty: "support" }, // 4 CM (x35)
-    { roleId: "deep-lying-playmaker", duty: "defend" },// 5 DM (x50)
-    { roleId: "advanced-playmaker", duty: "support" }, // 6 CM (x65)
-    { roleId: "wing-back", duty: "support" },          // 7 RM (x90)
+    { roleId: "wing-back", duty: "support" },          // 1 LB (x10)
+    { roleId: "central-defender", duty: "defend" },    // 2 CB (x35)
+    { roleId: "central-defender", duty: "defend" },    // 3 CB (x65)
+    { roleId: "wing-back", duty: "support" },          // 4 RB (x90)
+    { roleId: "box-to-box-midfielder", duty: "support" }, // 5 CM (x35)
+    { roleId: "deep-lying-playmaker", duty: "defend" },// 6 DM (x50)
+    { roleId: "advanced-playmaker", duty: "support" }, // 7 CM (x65)
     { roleId: "inside-forward", duty: "support" },     // 8 LW
     { roleId: "advanced-forward", duty: "attack" },    // 9 ST
     { roleId: "inside-forward", duty: "support" },     // 10 RW

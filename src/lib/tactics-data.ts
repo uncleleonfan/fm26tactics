@@ -23,11 +23,12 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-3-3",
     label: "4-3-3",
     description: "Wide forwards stretch the opposition. Three midfielders offer balance between defense and attack.",
+    // Order: GK | LB CB CB RB | CM DM CM | LW ST RW
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 50, y: 55 }, { x: 10, y: 40 }, { x: 35, y: 48 },
-      { x: 65, y: 48 }, { x: 90, y: 40 }, { x: 25, y: 18 },
-      { x: 50, y: 10 }, { x: 75, y: 18 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 35, y: 44 }, { x: 50, y: 56 }, { x: 65, y: 44 },
+      { x: 20, y: 18 }, { x: 50, y: 10 }, { x: 80, y: 18 },
     ],
   },
   {
@@ -78,10 +79,11 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-2-2-2",
     label: "4-2-2-2",
     description: "Brazilian Box. Two DMs and two AMs create a compact midfield box, with two strikers leading the line.",
+    // Order: GK | LB CB CB RB | DM DM | AM AM | ST ST
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 10, y: 40 }, { x: 90, y: 40 },
-      { x: 35, y: 50 }, { x: 65, y: 50 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 35, y: 52 }, { x: 65, y: 52 },
       { x: 35, y: 34 }, { x: 65, y: 34 },
       { x: 35, y: 16 }, { x: 65, y: 16 },
     ],
@@ -90,22 +92,26 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-1-4-1",
     label: "4-1-4-1",
     description: "A solid DM shields the back four. Four midfielders offer width and numbers in the middle third.",
+    // Order: GK | LB CB CB RB | DM | LM CM CM RM | ST
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 10, y: 40 }, { x: 90, y: 40 },
-      { x: 50, y: 58 }, { x: 20, y: 40 }, { x: 40, y: 42 },
-      { x: 60, y: 42 }, { x: 80, y: 40 }, { x: 50, y: 12 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 50, y: 58 },
+      { x: 15, y: 42 }, { x: 38, y: 46 }, { x: 62, y: 46 }, { x: 85, y: 42 },
+      { x: 50, y: 12 },
     ],
   },
   {
     formation: "4-4-1-1",
     label: "4-4-1-1",
     description: "The Mourinho special. A second striker or #10 operates between the lines behind a lone target man.",
+    // Order: GK | LB CB CB RB | LM CM CM RM | SS | ST
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 10, y: 40 }, { x: 90, y: 40 },
-      { x: 20, y: 40 }, { x: 40, y: 42 }, { x: 60, y: 42 }, { x: 80, y: 40 },
-      { x: 50, y: 28 }, { x: 50, y: 12 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 12, y: 46 }, { x: 38, y: 48 }, { x: 62, y: 48 }, { x: 88, y: 46 },
+      { x: 50, y: 28 },
+      { x: 50, y: 12 },
     ],
   },
   {
@@ -123,10 +129,11 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-2-4",
     label: "4-2-4",
     description: "Ultra-attacking shape with four forwards. Risky but devastating — the FM26 community's top-scoring formation in tests.",
+    // Order: GK | LB CB CB RB | DM DM (half-spaces) | LW ST ST RW (flat front four)
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 10, y: 40 }, { x: 90, y: 40 },
-      { x: 35, y: 48 }, { x: 65, y: 48 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 30, y: 50 }, { x: 70, y: 50 },
       { x: 15, y: 18 }, { x: 40, y: 14 }, { x: 60, y: 14 }, { x: 85, y: 18 },
     ],
   },
@@ -146,11 +153,12 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-3-2-1",
     label: "4-3-2-1",
     description: "Christmas Tree. Narrow and compact. Two advanced playmakers operate behind a solo striker, overwhelming the opponent's midfield.",
+    // Order: GK | LB CB CB RB | CM CM CM | AM AM | ST (Christmas Tree)
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 10, y: 40 }, { x: 90, y: 40 },
-      { x: 30, y: 48 }, { x: 50, y: 44 }, { x: 70, y: 48 },
-      { x: 35, y: 28 }, { x: 65, y: 28 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 30, y: 52 }, { x: 50, y: 48 }, { x: 70, y: 52 },
+      { x: 35, y: 30 }, { x: 65, y: 30 },
       { x: 50, y: 12 },
     ],
   },
@@ -158,10 +166,12 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-1-2-1-2",
     label: "4-1-2-1-2",
     description: "Diamond midfield. A DM anchors, two CMs shuttle, and a #10 creates. Two strikers give you vertical threat against any back line.",
+    // Order: GK | LB CB CB RB | DM | CM CM | AM | ST ST (Diamond)
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 10, y: 40 }, { x: 90, y: 40 },
-      { x: 50, y: 60 }, { x: 30, y: 46 }, { x: 70, y: 46 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 50, y: 58 },
+      { x: 30, y: 44 }, { x: 70, y: 44 },
       { x: 50, y: 30 },
       { x: 35, y: 14 }, { x: 65, y: 14 },
     ],

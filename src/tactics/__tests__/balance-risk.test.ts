@@ -32,12 +32,12 @@ describe("balance engine", () => {
       { roleId: "pressing-forward", duty: "defend" },
       { roleId: "target-forward", duty: "support" },
     ]);
-    // 4-2-4 line order: GK | CB CB | LM RM | CM CM | LW STL STR RW
+    // 4-2-4 line order: GK | LB CB CB RB | DM DM | LW STL STR RW
     const reckless = buildState("4-2-4", [
       { roleId: "sweeper-keeper", duty: "defend" },
-      { roleId: "ball-playing-defender", duty: "support" },
-      { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "wing-back", duty: "attack" },
+      { roleId: "ball-playing-defender", duty: "support" },
+      { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "wing-back", duty: "attack" },
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
@@ -66,12 +66,12 @@ describe("balance engine", () => {
 
 describe("risk engine & warnings", () => {
   it("attacking overload triggers transition warning with an explainable reason", () => {
-    // 4-2-4 line order: GK | CB CB | LM RM | CM CM | LW STL STR RW
+    // 4-2-4 line order: GK | LB CB CB RB | DM DM | LW STL STR RW
     const reckless = buildState("4-2-4", [
       { roleId: "sweeper-keeper", duty: "defend" },
-      { roleId: "ball-playing-defender", duty: "support" },
-      { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "wing-back", duty: "attack" },
+      { roleId: "ball-playing-defender", duty: "support" },
+      { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "wing-back", duty: "attack" },
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
@@ -87,10 +87,10 @@ describe("risk engine & warnings", () => {
   });
 
   it("wide defensive weakness warning fires for aggressive full-back setups", () => {
-    // Both wide players (index 3 LM, index 7 RM) on attack duty → weak flanks.
+    // Both full-backs (index 1 LB, index 4 RB) on attack duty → weak flanks.
     const state = state433({
-      3: { roleId: "wing-back", duty: "attack" },
-      7: { roleId: "wing-back", duty: "attack" },
+      1: { roleId: "wing-back", duty: "attack" },
+      4: { roleId: "wing-back", duty: "attack" },
     });
     const r = analyzeTactic(state, "central-midfield");
     const wideWarnings = r.warnings.filter((w) => w.id.startsWith("wide-coverage"));
@@ -179,17 +179,17 @@ describe("risk engine & warnings", () => {
 });
 
 describe("recommendation engine (spec §17-18)", () => {
-  // 4-3-3 line order: GK | CB CB | LM CM DM CM RM | LW ST RW
+  // 4-3-3 line order: GK | LB CB CB RB | CM DM CM | LW ST RW
   const reckless = () =>
     buildState("4-3-3", [
       { roleId: "sweeper-keeper", duty: "defend" },
+      { roleId: "full-back", duty: "attack" },
       { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "ball-playing-defender", duty: "support" },
-      { roleId: "wing-back", duty: "attack" },
-      { roleId: "advanced-playmaker", duty: "attack" },
+      { roleId: "full-back", duty: "attack" },
       { roleId: "box-to-box-midfielder", duty: "support" },
       { roleId: "advanced-playmaker", duty: "attack" },
-      { roleId: "wing-back", duty: "attack" },
+      { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
       { roleId: "advanced-forward", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },

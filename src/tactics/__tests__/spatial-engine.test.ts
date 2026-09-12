@@ -72,12 +72,12 @@ describe("known tactical patterns (spec §23)", () => {
   });
 
   it("multiple attack duties + weak DM cover → high transition risk", () => {
-    // 4-2-4 line order: GK | CB CB | LM RM | CM CM | LW STL STR RW
+    // 4-2-4 line order: GK | LB CB CB RB | DM DM | LW STL STR RW
     const reckless = buildState("4-2-4", [
       { roleId: "sweeper-keeper", duty: "defend" },
-      { roleId: "ball-playing-defender", duty: "support" },
-      { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "wing-back", duty: "attack" },
+      { roleId: "ball-playing-defender", duty: "support" },
+      { roleId: "ball-playing-defender", duty: "support" },
       { roleId: "wing-back", duty: "attack" },
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
