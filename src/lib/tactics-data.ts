@@ -10,11 +10,13 @@ export const formationPresets: FormationPreset[] = [
     formation: "4-2-3-1",
     label: "4-2-3-1",
     description: "The modern classic. Two holding midfielders support a creative attacking midfielder with wingers providing width.",
+    // Order: GK | LB CB CB RB | DM DM | AML AMC AMR | ST
     positions: [
-      { x: 50, y: 88 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 50, y: 55 }, { x: 10, y: 40 }, { x: 35, y: 52 },
-      { x: 65, y: 52 }, { x: 90, y: 40 }, { x: 25, y: 22 },
-      { x: 75, y: 22 }, { x: 50, y: 10 },
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
+      { x: 35, y: 52 }, { x: 65, y: 52 },
+      { x: 15, y: 34 }, { x: 50, y: 34 }, { x: 85, y: 34 },
+      { x: 50, y: 12 },
     ],
   },
   {
