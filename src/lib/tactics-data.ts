@@ -343,7 +343,7 @@ export const playerRoles: PlayerRoleData[] = [
   {
     id: "channel-midfielder",
     name: "Channel Midfielder",
-    abbr: "CM",
+    abbr: "CHM",
     category: "midfielder",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Off the Ball", "Acceleration", "Passing", "First Touch", "Decisions", "Teamwork"],

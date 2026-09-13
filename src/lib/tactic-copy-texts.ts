@@ -8,7 +8,7 @@ STYLE: Control Possession | Mentality: Positive
 
 PLAYER ROLES
 GK: Sweeper Keeper (Su)
-DEF: Wide Centre-Back (De) | Ball-Playing Defender (Co) | Wide Centre-Back (De)
+DEF: Overlapping Centre-Back (De) | Ball-Playing Defender (Co) | Overlapping Centre-Back (De)
 MID: Defensive Winger (Su) | Deep-Lying Playmaker (Su) | Advanced Playmaker (At) | Defensive Winger (Su)
 ATT: Inside Forward (At) | Complete Forward (Su) | Inside Forward (At)
 
@@ -24,14 +24,14 @@ Line of Engagement: Much Higher | Defensive Line: Higher
 Trigger Press: Much More Often | Prevent Short GK Distribution: ON
 Offside Trap: ON | Defensive Width: Fairly Narrow
 
-KEY PLAYERS: Wide CBs must be comfortable on the ball AND defend 1v1. DLP 15+ Passing.`,
+KEY PLAYERS: OCBs must be comfortable on the ball AND defend 1v1. DLP 15+ Passing.`,
   "3-5-2-catenaccio": `FM26 3-5-2 Catenaccio — Full Setup
 
 FORMATION: 3-5-2
 STYLE: Catenaccio | Mentality: Defensive
 
 PLAYER ROLES
-GK: Goalkeeper (De)
+GK: Line-Holding Keeper (De)
 DEF: Centre-Back (St) | Centre-Back (Co) | Centre-Back (St)
 MID: Wing-Back (Su) | Ball-Winning Midfielder (De) | Deep-Lying Playmaker (Su) | Ball-Winning Midfielder (De) | Wing-Back (Su)
 ATT: Advanced Forward (At) | Target Forward (At)
@@ -131,7 +131,7 @@ STYLE: Fluid Counter-Attack | Mentality: Balanced
 PLAYER ROLES
 GK: Sweeper Keeper (Su)
 DEF: Full-Back (De) | Ball-Playing Defender (De) | Central Defender (De) | Full-Back (Su)
-MID: Deep-Lying Playmaker (De) | Box-to-Box Midfielder (Su) | Mezzala (At)
+MID: Deep-Lying Playmaker (De) | Box-to-Box Midfielder (Su) | Channel Midfielder (At)
 ATT: Inside Forward (At) | Pressing Forward (At) | Winger (Su)
 
 IN POSSESSION
@@ -146,7 +146,7 @@ Line of Engagement: Mid Block | Defensive Line: Standard
 Trigger Press: More Often | Prevent Short GK Distribution: ON
 Defensive Width: Fairly Narrow
 
-KEY: Mezzala drifts into the half-space unmarked. Full-backs stay home on counters.`,
+KEY: Channel Midfielder drifts into the half-space unmarked. Full-backs stay home on counters.`,
   "4-3-3-tiki-taka": `FM26 4-3-3 Tiki-Taka — Full Setup
 
 FORMATION: 4-3-3
@@ -155,7 +155,7 @@ STYLE: Tiki-Taka | Mentality: Positive
 PLAYER ROLES
 GK: Sweeper Keeper (Su)
 DEF: Full-Back (Su) | Ball-Playing Defender (De) | Central Defender (De) | Full-Back (Su)
-MID: Deep-Lying Playmaker (Su) | Advanced Playmaker (Su) | Mezzala (Su)
+MID: Deep-Lying Playmaker (Su) | Advanced Playmaker (Su) | Channel Midfielder (Su)
 ATT: Inside Forward (Su) | Pressing Forward (At) | Inside Forward (At)
 
 IN POSSESSION

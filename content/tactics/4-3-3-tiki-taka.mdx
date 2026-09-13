@@ -25,7 +25,7 @@ setup:
   - { roleId: full-back, duty: support, x: 88, y: 74 }
   - { roleId: deep-lying-playmaker, duty: support, x: 50, y: 58 }
   - { roleId: advanced-playmaker, duty: support, x: 32, y: 42 }
-  - { roleId: box-to-box-midfielder, duty: support, x: 68, y: 42, abbr: "MEZ", name: "Mezzala" }
+  - { roleId: channel-midfielder, duty: support, x: 68, y: 42 }
   - { roleId: inside-forward, duty: support, x: 20, y: 26 }
   - { roleId: target-forward, duty: support, x: 50, y: 13, abbr: "CF", name: "Complete Forward" }
   - { roleId: inside-forward, duty: attack, x: 80, y: 26 }
@@ -61,7 +61,7 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
     { roleId: "full-back", duty: "support", x: 88, y: 74 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 58 },
     { roleId: "advanced-playmaker", duty: "support", x: 32, y: 42 },
-    { roleId: "box-to-box-midfielder", duty: "support", x: 68, y: 42, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "channel-midfielder", duty: "support", x: 68, y: 42 },
     { roleId: "inside-forward", duty: "support", x: 20, y: 26 },
     { roleId: "target-forward", duty: "support", x: 50, y: 13, abbr: "CF", name: "Complete Forward" },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
@@ -89,7 +89,7 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
     { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 68 },
     { roleId: "inside-forward", duty: "support", x: 20, y: 52 },
     { roleId: "advanced-playmaker", duty: "support", x: 36, y: 54 },
-    { roleId: "box-to-box-midfielder", duty: "support", x: 64, y: 54, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "channel-midfielder", duty: "support", x: 64, y: 54 },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 52 },
     { roleId: "target-forward", duty: "support", x: 50, y: 40, abbr: "CF", name: "Complete Forward" },
   ]}
@@ -101,7 +101,7 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
   ]}
 />
 
-**The diamond principle**: Every player always has 4+ passing options. The IF has the CF, AP, MEZ, and overlapping FB. The DLP has the BPDs, both CMs, and both FBs. This density of options is what makes Tiki-Taka possible — the ball never stops because there's always a pass on.
+**The diamond principle**: Every player always has 4+ passing options. The IF has the CF, AP, CHM, and overlapping FB. The DLP has the BPDs, both CMs, and both FBs. This density of options is what makes Tiki-Taka possible — the ball never stops because there's always a pass on.
 
 ---
 
@@ -119,7 +119,7 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
 | **Dribble Less** | ON | Standard Tiki-Taka principle: the ball moves faster than any player. Exceptions: your IF(A) on the right is the dribbler. Don't worry — individual role instructions override this for him. |
 | **Play for Set Pieces** | ON | In tight games, corners and free kicks are where the goals come from. Tiki-Taka generates lots of corners (high possession → more touches in opp. third → more deflections). |
 | **Overlap Left** | ON | The left FB overlaps the IF(S) who comes inside. Creates the classic 2v1 wide overload that Tiki-Taka is famous for. |
-| **Overlap Right** | OFF | The MEZ(S) already drifts wide right. Overlapping here would crowd the half-space. The right FB stays as rest defense. |
+| **Overlap Right** | OFF | The CHM(S) already drifts wide right. Overlapping here would crowd the half-space. The right FB stays as rest defense. |
 
 ### In Transition — The Press System
 
@@ -177,7 +177,7 @@ Ideal: Tackling 13+, Decisions 14+, Work Rate 14+
 PPMs: "Stays Back at All Times", "Plays Short Simple Passes"
 ```
 
-The conservative full-back. He stays deeper, providing rest defense while the MEZ(S) roams forward on his side. His Positioning is critical — he needs to know when to step up to cover the MEZ and when to stay with his man.
+The conservative full-back. He stays deeper, providing rest defense while the CHM(S) roams forward on his side. His Positioning is critical — he needs to know when to step up to cover the CHM and when to stay with his man.
 
 #### Centre-Backs: BPD(De) × 2
 
@@ -215,7 +215,7 @@ PPMs: "Tries Killer Balls Often", "Plays One-Twos", "Gets Into Opposition Area"
 
 The creative hub between the lines. He operates in the left half-space, receiving from the DLP and finding the IF(S) or CF cutting inside. The AP(S) is your primary chance creator — he should average 2-3 key passes per match.
 
-#### RCM: Mezzala (Support)
+#### RCM: Channel Midfielder (Support)
 
 ```
 Must-have: Off The Ball 16+, Passing 14+, Dribbling 13+, Decisions 14+
@@ -223,9 +223,9 @@ Ideal: Long Shots 14+, Vision 15+, Technique 14+, Flair 13+
 PPMs: "Gets Into Opposition Area", "Moves Into Channels", "Plays One-Twos"
 ```
 
-The wide runner. The MEZ(S) drifts into the right half-space, combining with the IF(A) and CF. His movement creates the overload on the right that draws defenders away from the left — where the IF(S) and AP(S) are waiting.
+The wide runner. The CHM(S) drifts into the right half-space, combining with the IF(A) and CF. His movement creates the overload on the right that draws defenders away from the left — where the IF(S) and AP(S) are waiting.
 
-**The MEZ + IF(A) partnership:** The MEZ drifts wide → the IF(A) cuts inside → the right FB stays back. This is a coordinated rotation: one goes, one stays, one provides the shape. When it works, the opposition right-back has to choose between marking the MEZ or the IF(A). He can't mark both.
+**The CHM + IF(A) partnership:** The CHM drifts wide → the IF(A) cuts inside → the right FB stays back. This is a coordinated rotation: one goes, one stays, one provides the shape. When it works, the opposition right-back has to choose between marking the CHM or the IF(A). He can't mark both.
 
 ### Attack — The Front Three
 
@@ -251,7 +251,7 @@ PPMs: "Cuts Inside From Right Wing", "Places Shots", "Moves Into Channels"
 
 The goal-scoring winger. The IF(A) on the right is your primary wide goal threat. While the left side creates, the right side finishes. This asymmetry is deliberate — the opposition can't defend both flanks the same way.
 
-**The IF(A) + MEZ(S) motion:** When the IF(A) cuts inside, the MEZ(S) drifts wide to fill the vacated space. When the MEZ(S) goes inside, the IF(A) stays wide. This constant rotation is what breaks organized defenses — static defending can't cope with fluid movement.
+**The IF(A) + CHM(S) motion:** When the IF(A) cuts inside, the CHM(S) drifts wide to fill the vacated space. When the CHM(S) goes inside, the IF(A) stays wide. This constant rotation is what breaks organized defenses — static defending can't cope with fluid movement.
 
 #### Striker: Complete Forward (Support)
 
@@ -261,7 +261,7 @@ Ideal: Finishing 14+, Technique 15+, Vision 14+, Decisions 15+
 PPMs: "Comes Deep to Get Ball", "Plays One-Twos", "Places Shots"
 ```
 
-The Complete Forward links everything. On Support duty, he drops into midfield — creating a midfield box (DLP + AP + MEZ + CF) that outnumbers any midfield in the game. His passing is as important as his finishing.
+The Complete Forward links everything. On Support duty, he drops into midfield — creating a midfield box (DLP + AP + CHM + CF) that outnumbers any midfield in the game. His passing is as important as his finishing.
 
 **Why Complete Forward, not False 9?** In FM26, the F9 drops TOO deep — into the AM strata. The CF(S) drops only 5-10 yards, staying within the striker strata while creating the overload. The difference is crucial: CF(S) is still a goal threat, F9 is a pure creator.
 
@@ -285,7 +285,7 @@ In build-up, Tiki-Taka morphs into a 3-2-4-1:
     { roleId: "full-back", duty: "support", x: 66, y: 62, abbr: "RB", name: "Right Full-Back" },
     { roleId: "inside-forward", duty: "support", x: 14, y: 24 },
     { roleId: "advanced-playmaker", duty: "support", x: 38, y: 28 },
-    { roleId: "box-to-box-midfielder", duty: "support", x: 62, y: 28, abbr: "MEZ", name: "Mezzala" },
+    { roleId: "channel-midfielder", duty: "support", x: 62, y: 28 },
     { roleId: "inside-forward", duty: "attack", x: 86, y: 24 },
     { roleId: "target-forward", duty: "support", x: 50, y: 10, abbr: "CF", name: "Complete Forward" },
   ]}
@@ -293,9 +293,9 @@ In build-up, Tiki-Taka morphs into a 3-2-4-1:
 
 **The back 3**: Left FB(S) pushes high → the two BPDs form a back 2 → the DLP drops between them → this creates a back 3 (LB + BPD + BPD) in build-up, with the DLP forming a double pivot with the right FB(S).
 
-**The midfield 2**: DLP(S) + right FB(S) = double pivot. The right FB stays deeper because the MEZ(S) is already high.
+**The midfield 2**: DLP(S) + right FB(S) = double pivot. The right FB stays deeper because the CHM(S) is already high.
 
-**The front 4**: IF(S) + AP(S) + MEZ(S) + IF(A) = a fluid attacking line. All four interchange positions. This is the shape that creates passing options.
+**The front 4**: IF(S) + AP(S) + CHM(S) + IF(A) = a fluid attacking line. All four interchange positions. This is the shape that creates passing options.
 
 **The striker**: CF(S) drops to link, creating a 3-2-5 or 3-2-4-1 depending on his depth.
 
@@ -311,7 +311,7 @@ In build-up, Tiki-Taka morphs into a 3-2-4-1:
 | BPD × 2 | Brings Ball Out of Defence, Plays Short Simple Passes | 3 mo |
 | DLP(S) | Dictates Tempo, Comes Deep to Get Ball, Stays Back | 4+2+2 mo |
 | AP(S) | Tries Killer Balls, Plays One-Twos, Gets Into Opp. Area | 4+2+3 mo |
-| MEZ(S) | Gets Into Opp. Area, Moves Into Channels, Plays One-Twos | 3+3+2 mo |
+| CHM(S) | Gets Into Opp. Area, Moves Into Channels, Plays One-Twos | 3+3+2 mo |
 | IF(S) | Cuts Inside, Plays One-Twos, Tries Killer Balls | 3+2+4 mo |
 | IF(A) | Cuts Inside, Places Shots, Moves Into Channels | 3+3+3 mo |
 | CF(S) | Comes Deep, Plays One-Twos, Places Shots | 4+2+3 mo |
@@ -330,7 +330,7 @@ In build-up, Tiki-Taka morphs into a 3-2-4-1:
 | RB(S) | Positioning 15, Passing 13, Pace 14 | Anticipation 14, Decisions 14 | Tackling 13 |
 | DLP(S) | Passing 17, Vision 16, Decisions 16 | Composure 16, First Touch 15, Technique 15 | Anticipation 15 |
 | AP(S) | Passing 16, Vision 15, Off The Ball 15, First Touch 15 | Technique 16, Decisions 15 | Flair 14 |
-| MEZ(S) | Off The Ball 16, Passing 14, Decisions 14 | Dribbling 13, Long Shots 14, Vision 15 | Technique 14 |
+| CHM(S) | Off The Ball 16, Passing 14, Decisions 14 | Dribbling 13, Long Shots 14, Vision 15 | Technique 14 |
 | IF(S) | Passing 15, Off The Ball 15, First Touch 14, Technique 15 | Vision 14, Decisions 14 | Finishing 13 |
 | IF(A) | Finishing 16, Off The Ball 16, Pace 15, Dribbling 15 | Composure 14, First Touch 14, Technique 14 | Long Shots 13 |
 | CF(S) | Passing 15, First Touch 16, Off The Ball 16, Composure 15 | Finishing 14, Technique 15, Vision 14 | Decisions 15 |
@@ -369,7 +369,7 @@ In build-up, Tiki-Taka morphs into a 3-2-4-1:
 Tiki-Taka's weakness is facing teams that refuse to press. When the opposition sits in a 5-4-1 low block:
 
 1. **Increase Width to Fairly Wide** — Stretch the block horizontally. The wider they spread, the bigger the gaps between defenders.
-2. **Add "Shoot On Sight"** — Against a packed box, long shots are sometimes the only option. The MEZ(S) and AP(S) should have Long Shots 14+ for exactly this reason.
+2. **Add "Shoot On Sight"** — Against a packed box, long shots are sometimes the only option. The CHM(S) and AP(S) should have Long Shots 14+ for exactly this reason.
 3. **Hit Early Crosses** — Don't try to pass through 10 men. Cross before the block settles. The CF(S) makes late runs into the box.
 4. **Switch CF(S) to CF(A)** — If he's dropping into a packed midfield, he's useless. Push him higher — his runs create space for the IF(A) to exploit.
 5. **Time Wasting: Never** — Every second matters. You need to create as many attacking sequences as possible.
@@ -386,14 +386,14 @@ Tiki-Taka's best defense is keeping the ball. Don't park the bus:
 
 - Time Wasting: **Sometimes** (increase toward the end)
 - DLP(S) → **DLP(D)** — drops deeper, more defensive cover
-- MEZ(S) → **CM(S)** — stops drifting wide, stays central
+- CHM(S) → **CM(S)** — stops drifting wide, stays central
 - Both FBs: **Defend** duties — back 4 becomes permanent
 - Lower Tempo further — waste time through possession, not hoofing it
 
 ### Chasing, Minute 65+
 
 - Both FBs: **Attack** duties
-- MEZ(S) → CM(A) — third runner into the box
+- CHM(S) → CM(A) — third runner into the box
 - Width: **Fairly Wide**
 - CF(S) → CF(A) — stay higher
 - Passing: **Standard** (not short — need faster ball movement)
@@ -405,7 +405,7 @@ Tiki-Taka's best defense is keeping the ball. Don't park the bus:
 | Player sent off | Formation | Changes |
 |---|---|---|
 | CB | 4-3-2 | DLP(S) drops to CB. Swap one BPD with a proper CB sub if available. |
-| FB | 3-4-2 | MEZ(S) drops to WB. IF on that side tracks back deeper. |
+| FB | 3-4-2 | CHM(S) drops to WB. IF on that side tracks back deeper. |
 | CM | 4-2-3 | Use a 3-man midfield. CF(S) drops into the AM hole. Still play Tiki-Taka — just with less pressing. |
 | Winger | 4-3-2-0 (strikerless) | CF(S) shifts to that side. Keep the midfield trio. Possession first, goals second. |
 | CF | 4-3-3 strikerless | IF(A) moves central. Possession trumps everything — survive and take the draw. |
@@ -425,7 +425,7 @@ Tiki-Taka's best defense is keeping the ball. Don't park the bus:
 | RB(S) | Rico Lewis (Man City) | Lutsharel Geertruida (Leipzig) | Devyne Rensch (Ajax) |
 | DLP(S) | Rodri (Man City) | Martin Zubimendi (Sociedad) | Morten Hjulmand (Sporting) |
 | AP(S) | Jamal Musiala (Bayern) | Xavi Simons (Leipzig) | Arda Guler (Real Madrid) |
-| MEZ(S) | Nicolo Barella (Inter) | Vitinha (PSG) | Kenneth Taylor (Ajax) |
+| CHM(S) | Nicolo Barella (Inter) | Vitinha (PSG) | Kenneth Taylor (Ajax) |
 | IF(S) | Phil Foden (Man City) | Kaoru Mitoma (Brighton) | Alex Baena (Villarreal) |
 | IF(A) | Bukayo Saka (Arsenal) | Michael Olise (Bayern) | Johan Bakayoko (PSV) |
 | CF(S) | Harry Kane (Bayern) | Jonathan David (Lille) | Benjamin Sesko (Leipzig) |
@@ -517,7 +517,7 @@ A: For IF roles, opposite foot preferred but not required. IF(A) on the right wi
 | **Play Out** | ON |
 | **GK Dist** | Roll It Out → CBs |
 
-**Key roles**: DLP(S) quarterback, AP(S) creator, MEZ(S) wide runner, CF(S) link
+**Key roles**: DLP(S) quarterback, AP(S) creator, CHM(S) wide runner, CF(S) link
 
 **Key PPMs**: DLP → Dictates Tempo | CF → Comes Deep, Plays One-Twos | IF(A) → Places Shots
 
