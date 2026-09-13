@@ -197,7 +197,12 @@ export default async function RoleDetailPage({ params }: Props) {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold mb-4">{rName}</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 flex flex-wrap items-center gap-3">
+              <span className="text-base font-bold tracking-wide text-primary bg-primary/10 border border-primary/25 px-2 py-1 rounded-md">
+                {role.abbr}
+              </span>
+              {rName}
+            </h1>
             <p className="text-text-primary/80 text-lg leading-relaxed mb-6">
               {rl.has(`roleDesc.${role.id}`) ? rl(`roleDesc.${role.id}`) : role.description}
             </p>
@@ -594,6 +599,9 @@ export default async function RoleDetailPage({ params }: Props) {
                       className="block p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/20 transition-all"
                     >
                       <p className="text-sm font-medium text-text-primary mb-0.5">
+                        <span className="text-[10px] font-bold text-primary bg-primary/10 border border-primary/25 px-1 py-0.5 rounded mr-1.5">
+                          {r.abbr}
+                        </span>
                         {rl.has(`roleName.${r.id}`) ? rl(`roleName.${r.id}`) : r.name}
                       </p>
                       <p className="text-[10px] text-text-muted line-clamp-1">

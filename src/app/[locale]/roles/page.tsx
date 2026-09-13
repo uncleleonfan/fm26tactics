@@ -83,7 +83,12 @@ export default async function RolesPage({ params }: { params: { locale: string }
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">
-                              {rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name}
+                              <span className="inline-flex items-center gap-1.5">
+                                <span className="text-[10px] font-bold tracking-wide text-primary bg-primary/10 border border-primary/25 px-1.5 py-0.5 rounded">
+                                  {role.abbr}
+                                </span>
+                                {rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name}
+                              </span>
                             </h3>
                           </div>
                         </div>
