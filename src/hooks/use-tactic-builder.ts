@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
+import { tacticTemplates } from "@/lib/tactic-templates";
 import type { TacticTemplate } from "@/lib/tactic-templates";
 import type {
   FormationPreset,
@@ -19,6 +20,35 @@ import type {
 
 const STORAGE_KEY = "fm26tactics_builder_draft_v1";
 const SAVE_DELAY_MS = 400;
+
+/** Best-effort draft persistence — storage can be unavailable (private mode). */
+function persistDraft(state: TacticBoardState): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // storage unavailable — ignore
+  }
+}
+
+/**
+ * Drop a URL param once it has been consumed.
+ *
+ * `?tactic=` (shared tactic) and `?formation=` (preset) are read on every mount
+ * and survive the `?tab=` / `?phase=` replaceState updates, so they stayed in
+ * the address bar after being applied. Returning to the builder (e.g. opening a
+ * formation guide from a card and pressing back) re-applied that stale payload
+ * and silently discarded the saved draft — because URL params outrank the draft
+ * in `loadInitialState`. Consuming the param keeps the URL in sync with what the
+ * board actually shows and lets the draft win on the next mount.
+ */
+function consumeUrlParam(key: string): void {
+  if (typeof window === "undefined") return;
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has(key)) return;
+  url.searchParams.delete(key);
+  window.history.replaceState(null, "", url);
+}
 
 export const PHASE_VALUES: PhaseType[] = ["in-possession", "out-of-possession"];
 
@@ -175,8 +205,11 @@ function createDefaultState(): TacticBoardState {
  * `preset.defaultRoles` — transcribed from the formation's deep-dive tactic
  * article (content/tactics/*.mdx `setup`) — with validated duty fallbacks.
  * Existing player ids are reused when provided so draft/phase data stays keyed.
+ *
+ * Exported so the formation cards can compare the live XI against the same
+ * source of truth instead of re-deriving the preset's roles.
  */
-function buildPresetPlayers(preset: FormationPreset, prevPlayers?: PlayerNode[]): PlayerNode[] {
+export function buildPresetPlayers(preset: FormationPreset, prevPlayers?: PlayerNode[]): PlayerNode[] {
   const fallbackPool = playerRoles.filter((r) => r.category !== "goalkeeper");
   return preset.positions.map((pos, i) => {
     const fallbackRole =
@@ -201,6 +234,39 @@ function buildPresetPlayers(preset: FormationPreset, prevPlayers?: PlayerNode[])
       individualInstructions: [],
     };
   });
+}
+
+/**
+ * True when the 11 players are exactly the XI this formation preset ships —
+ * same role and duty in every slot, preset order — i.e. nothing has been
+ * customised since the formation was picked.
+ *
+ * The Builder's formation cards use this to tell "this preset is loaded" apart
+ * from "I'm on this shape, but the XI is mine": a card that shows a plain check
+ * mark just because the formation name matches hides the fact that selecting it
+ * replaces all 11 roles.
+ */
+export function matchesPresetXI(players: PlayerNode[], preset: FormationPreset): boolean {
+  const expected = buildPresetPlayers(preset);
+  return (
+    players.length === expected.length &&
+    players.every((p, i) => p.roleId === expected[i].roleId && p.duty === expected[i].duty)
+  );
+}
+
+/**
+ * The meta template the current XI was built from, matched on the template's
+ * declared role/duty per slot. Lets the UI name the state instead of showing a
+ * vague "customised" badge, and lets the template list mark the applied one.
+ */
+export function findAppliedTemplate(players: PlayerNode[]): TacticTemplate | undefined {
+  return tacticTemplates.find(
+    (t) =>
+      t.roleAssignments.length === players.length &&
+      players.every(
+        (p, i) => p.roleId === t.roleAssignments[i].roleId && p.duty === t.roleAssignments[i].duty
+      )
+  );
 }
 
 function createDefaultStateForFormation(formation: FormationType): TacticBoardState {
@@ -287,6 +353,8 @@ export function useTacticBuilder() {
     formationAppliedRef.current = true;
     setState(createDefaultStateForFormation(preset.formation as FormationType));
     trackEvent("builder_formation_url_load", { label: preset.formation });
+    // Applied → remove it so a later mount falls back to the saved draft.
+    consumeUrlParam("formation");
   }, []);
 
   // Apply ?tactic= URL param on client mount and fire shared-link tracking.
@@ -309,19 +377,26 @@ export function useTacticBuilder() {
       setSharedLoadMsg("ok");
       setTimeout(() => setSharedLoadMsg(null), 5000);
     }
+    // Consumed (or unusable) → drop it so the draft wins on the next mount.
+    consumeUrlParam("tactic");
   }, []);
+
+  // Latest state, readable from the unmount flush below without extra renders.
+  const latestStateRef = useRef(state);
+  useEffect(() => {
+    latestStateRef.current = state;
+  }, [state]);
 
   // Auto-save draft to localStorage (debounced)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch {
-        // storage unavailable — ignore
-      }
-    }, SAVE_DELAY_MS);
+    const timer = setTimeout(() => persistDraft(state), SAVE_DELAY_MS);
     return () => clearTimeout(timer);
   }, [state]);
+
+  // Flush the pending save on unmount: leaving the builder (e.g. opening a
+  // formation guide from a card) within the debounce window used to cancel the
+  // timer and silently drop the user's last change.
+  useEffect(() => () => persistDraft(latestStateRef.current), []);
 
   const setFormation = useCallback((formation: FormationType) => {
     const preset = formationPresets.find((f) => f.formation === formation);

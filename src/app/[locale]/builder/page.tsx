@@ -315,6 +315,7 @@ export default function BuilderPage() {
         ) : sidebarTab === "formation" ? (
           <FormationPanel
             currentFormation={state.formation}
+            players={state.players}
             onSelect={setFormation}
             onApplyTemplate={applyTemplate}
           />
