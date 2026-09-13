@@ -27,7 +27,7 @@ export const formationPresets: FormationPreset[] = [
     positions: [
       { x: 50, y: 88 },
       { x: 10, y: 68 }, { x: 35, y: 74 }, { x: 65, y: 74 }, { x: 90, y: 68 },
-      { x: 35, y: 44 }, { x: 50, y: 56 }, { x: 65, y: 44 },
+      { x: 35, y: 44 }, { x: 50, y: 50 }, { x: 65, y: 44 },
       { x: 20, y: 18 }, { x: 50, y: 10 }, { x: 80, y: 18 },
     ],
   },
@@ -36,8 +36,8 @@ export const formationPresets: FormationPreset[] = [
     label: "4-4-2",
     description: "The traditional English setup. Two banks of four with a classic strike partnership.",
     positions: [
-      { x: 50, y: 88 }, { x: 10, y: 55 }, { x: 25, y: 72 }, { x: 75, y: 72 },
-      { x: 90, y: 55 }, { x: 10, y: 40 }, { x: 35, y: 42 },
+      { x: 50, y: 88 }, { x: 10, y: 68 }, { x: 25, y: 72 }, { x: 75, y: 72 },
+      { x: 90, y: 68 }, { x: 10, y: 40 }, { x: 35, y: 42 },
       { x: 65, y: 42 }, { x: 90, y: 40 }, { x: 35, y: 18 },
       { x: 65, y: 18 },
     ],
@@ -59,8 +59,8 @@ export const formationPresets: FormationPreset[] = [
     description: "Ultra-defensive shape with wing-backs. Counter-attack specialist formation.",
     positions: [
       { x: 50, y: 88 }, { x: 20, y: 74 }, { x: 50, y: 78 },
-      { x: 80, y: 74 }, { x: 10, y: 48 }, { x: 90, y: 48 },
-      { x: 35, y: 52 }, { x: 50, y: 42 }, { x: 65, y: 52 },
+      { x: 80, y: 74 }, { x: 10, y: 67 }, { x: 90, y: 67 },
+      { x: 35, y: 52 }, { x: 50, y: 52 }, { x: 65, y: 52 },
       { x: 35, y: 18 }, { x: 65, y: 18 },
     ],
   },
@@ -120,7 +120,7 @@ export const formationPresets: FormationPreset[] = [
     description: "Three center-backs with attacking wing-backs. Wide forwards stretch play and create overloads in the final third.",
     positions: [
       { x: 50, y: 88 }, { x: 25, y: 74 }, { x: 50, y: 78 },
-      { x: 75, y: 74 }, { x: 10, y: 48 }, { x: 90, y: 48 },
+      { x: 75, y: 74 }, { x: 10, y: 67 }, { x: 90, y: 67 },
       { x: 35, y: 50 }, { x: 65, y: 50 },
       { x: 25, y: 16 }, { x: 50, y: 10 }, { x: 75, y: 16 },
     ],

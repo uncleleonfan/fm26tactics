@@ -263,6 +263,21 @@ describe("recognizeShape", () => {
     expect(r.confidence).toBeGreaterThan(0);
     expect(r.confidence).toBeLessThanOrEqual(1);
   });
+
+  it("recognizes every formation preset as its own label (badge regression)", () => {
+    for (const preset of formationPresets) {
+      const state = stateForFormation(preset.formation);
+      const shape = recognizeShape(
+        state.players.map((p) => ({
+          id: p.id,
+          x: p.x,
+          y: p.y,
+          isGoalkeeper: p.roleId === "sweeper-keeper",
+        }))
+      );
+      expect(shape.label, `${preset.formation} preset shape`).toBe(preset.label);
+    }
+  });
 });
 
 // ---------------------------------------------------------------------------
