@@ -106,7 +106,9 @@ export default async function RoleDetailPage({ params }: Props) {
 
   const rName = rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name;
   const depth = roleDepth[role.id];
-  const wkReasons = (rl.raw(`wk.${role.id}`) as string[] | undefined) ?? [];
+  const wkReasons = rl.has(`wk.${role.id}`)
+    ? ((rl.raw(`wk.${role.id}`) as string[] | undefined) ?? [])
+    : [];
 
   const chartData = (depth?.radar ?? role.keyAttributes.map((attr) => ({
     attribute: attr,
