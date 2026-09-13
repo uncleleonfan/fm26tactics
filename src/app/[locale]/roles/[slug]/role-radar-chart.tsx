@@ -46,7 +46,7 @@ function renderAngleTick(props: {
       x={x + dx}
       y={y + dy}
       textAnchor={textAnchor}
-      verticalAnchor="middle"
+      dominantBaseline="central"
       fill="#A6B4CC"
       fontSize={12}
     >
