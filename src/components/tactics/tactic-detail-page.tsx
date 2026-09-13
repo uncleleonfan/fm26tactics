@@ -151,8 +151,8 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
 
                 <p className="text-lg text-text-secondary mb-6">{tactic.description}</p>
 
-                {copyText && (
-                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                <div className="flex flex-wrap items-center gap-2 mb-6">
+                  {copyText && (
                     <button
                       onClick={handleCopy}
                       data-track="tactic_copy_setup"
@@ -170,16 +170,19 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
                         </>
                       )}
                     </button>
-                    <Link
-                      href={builderHref}
-                      data-track="tactic_open_builder"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-surface-border text-text-secondary text-sm font-semibold hover:border-primary/40 hover:text-text-primary transition-colors"
-                    >
-                      <LayoutTemplate className="w-4 h-4" />
-                      {t("openInBuilder")}
-                    </Link>
-                  </div>
-                )}
+                  )}
+                  {/* Opening the exact XI in the Builder is the payoff of every
+                      tactic article, so it must not hinge on the copy text
+                      having been written for that slug. */}
+                  <Link
+                    href={builderHref}
+                    data-track="tactic_open_builder"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-surface-border text-text-secondary text-sm font-semibold hover:border-primary/40 hover:text-text-primary transition-colors"
+                  >
+                    <LayoutTemplate className="w-4 h-4" />
+                    {t("openInBuilder")}
+                  </Link>
+                </div>
 
                 {/* Meta */}
                 <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pb-6 border-b border-[#1C2436]/50">

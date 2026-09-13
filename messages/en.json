@@ -1031,6 +1031,27 @@
         "strengths": ["Two strikers for vertical threat", "Diamond controls midfield", "#10 creates chances", "DM provides defensive cover"],
         "weaknesses": ["No natural width", "Vulnerable to wide attacks", "Requires athletic full-backs"],
         "recommendedRoles": ["Pressing Central Midfielder", "Box-to-Box Midfielder", "Advanced Playmaker", "Centre Forward"]
+      },
+      "4-5-1": {
+        "description": "Five across the middle and a lone target man. The most defensively solid shape in FM26 testing — concede nothing, then punish the turnover.",
+        "bestFor": "Defensive solidity and low xG conceded on a mid-table squad",
+        "strengths": ["Lowest goals conceded of the tested shapes", "Numerical parity in every midfield battle", "Works at any club level — no elite players required"],
+        "weaknesses": ["One-goal defeats when the plan A goal never comes", "The lone striker needs genuine hold-up quality", "Chasing a game demands an in-match identity change"],
+        "recommendedRoles": ["Sweeper Keeper", "Full-Back", "Centre-Back", "Tracking Winger", "Central Midfielder", "Deep-Lying Playmaker", "Target Forward"]
+      },
+      "5-1-2-2": {
+        "description": "A back five that attacks: one anchor screens the three centre-backs, two free #10s work between the lines and a strike pair splits the defence.",
+        "bestFor": "Counter-attacking with a back five and two strikers",
+        "strengths": ["Becomes a 6-2-2 out of possession once the anchor drops in", "Two #10s isolate every midfield pair", "Top-five attacking numbers from a defensive shape"],
+        "weaknesses": ["Wide deliveries can overload the far post", "Requires two genuine strikers", "Stamina-hungry wing-backs"],
+        "recommendedRoles": ["Sweeper Keeper", "Centre-Back", "Ball-Playing Defender", "Wing-Back", "Deep-Lying Playmaker", "Attacking Midfielder", "Centre Forward", "Target Forward"]
+      },
+      "3-3-3-1": {
+        "description": "Four vertical bands — three centre-backs, three midfielders, three creators and a striker. Layered defence, explosive transitions.",
+        "bestFor": "Advanced managers who can hold every band and rotate around the ball",
+        "strengths": ["Elite transition output — best points-per-game of the tested three-backs", "Layered shape blunts through-ball spam", "Pushes to a 3-2-5 in possession without a personnel change"],
+        "weaknesses": ["One freelancer collapses the bands", "Wide areas behind the back three need fast centre-backs", "A 3v3 against a front three demands pace"],
+        "recommendedRoles": ["Sweeper Keeper", "Centre-Back", "Ball-Playing Defender", "Deep-Lying Playmaker", "Central Midfielder", "Box-to-Box Midfielder", "Winger", "Advanced Playmaker", "Centre Forward"]
       }
     }
   },

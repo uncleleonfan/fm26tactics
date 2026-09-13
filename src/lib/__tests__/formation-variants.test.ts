@@ -66,6 +66,23 @@ describe("formation presets and their variants", () => {
     }
   });
 
+  it("gives every guide a loadable preset, so no article CTA is dead", () => {
+    const loadable = new Set(ALL_PRESETS.map((p) => p.id));
+    for (const [formation, guides] of Object.entries(formationGuides)) {
+      // The shape needs a preset or FormationDiagram has no positions to draw
+      // the article's board from (it renders null without one).
+      expect(
+        formationPresets.some((p) => p.formation === formation),
+        `${formation} has no preset, so its articles render no diagram`
+      ).toBe(true);
+      for (const guide of guides) {
+        // The slug has to be a preset id: it drives both the builder card and
+        // the article's Open in Builder payload.
+        expect(loadable, `${guide.slug} has no preset to load`).toContain(guide.slug);
+      }
+    }
+  });
+
   it("attaches variants to a real shape and names them", () => {
     for (const variant of formationVariants) {
       expect(

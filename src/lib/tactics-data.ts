@@ -386,6 +386,92 @@ export const formationPresets: FormationPreset[] = [
       { roleId: "deep-lying-forward", duty: "support" },
     ],
   },
+  {
+    id: "4-5-1-midfield-wall",
+    formation: "4-5-1",
+    label: "4-5-1",
+    description: "Five across the middle and a lone target man. The most defensively solid shape in FM26 testing — concede nothing, then punish the turnover.",
+    // Order: GK | LB CB CB RB | LM CM DLP CM RM | ST
+    // Coordinates are the article's own board, so the card's mini pitch and the
+    // article's diagram show the same shape.
+    positions: [
+      { x: 50, y: 88 },
+      { x: 10, y: 68 }, { x: 38, y: 76 }, { x: 62, y: 76 }, { x: 90, y: 68 },
+      { x: 15, y: 44 }, { x: 38, y: 46 }, { x: 50, y: 46 }, { x: 62, y: 46 }, { x: 85, y: 44 },
+      { x: 50, y: 12 },
+    ],
+    // Source: content/tactics/4-5-1-midfield-wall.mdx
+    defaultRoles: [
+      { roleId: "sweeper-keeper", duty: "support" },
+      { roleId: "full-back", duty: "attack" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "full-back", duty: "support" },
+      { roleId: "tracking-winger", duty: "defend" },
+      { roleId: "central-midfielder", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "support" },
+      { roleId: "central-midfielder", duty: "support" },
+      { roleId: "winger", duty: "support" },
+      { roleId: "target-forward", duty: "attack" },
+    ],
+  },
+  {
+    id: "5-1-2-2-anchor-strike",
+    formation: "5-1-2-2",
+    label: "5-1-2-2",
+    description: "A back five that attacks: one anchor screens the three centre-backs, two free #10s work between the lines and a strike pair splits the defence.",
+    // Order: GK | LCB CB RCB | WBL WBR | DLP | LAM RAM | LST RST
+    positions: [
+      { x: 50, y: 88 },
+      { x: 20, y: 74 }, { x: 50, y: 78 }, { x: 80, y: 74 },
+      { x: 8, y: 66 }, { x: 92, y: 66 },
+      { x: 50, y: 54 },
+      { x: 35, y: 38 }, { x: 65, y: 38 },
+      { x: 38, y: 14 }, { x: 62, y: 14 },
+    ],
+    // Source: content/tactics/5-1-2-2-anchor-strike.mdx
+    defaultRoles: [
+      { roleId: "sweeper-keeper", duty: "support" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "ball-playing-defender", duty: "defend" },
+      { roleId: "wing-back", duty: "support" },
+      { roleId: "wing-back", duty: "support" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "attacking-midfielder", duty: "attack" },
+      { roleId: "attacking-midfielder", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "target-forward", duty: "attack" },
+    ],
+  },
+  {
+    id: "3-3-3-1-vertical-bands",
+    formation: "3-3-3-1",
+    label: "3-3-3-1",
+    description: "Four vertical bands — three centre-backs, three midfielders, three creators and a striker — that compress deep and break vertically.",
+    // Order: GK | LCB CB RCB | LCM CM RCM | LF AP RF | ST
+    positions: [
+      { x: 50, y: 88 },
+      { x: 25, y: 72 }, { x: 50, y: 76 }, { x: 75, y: 72 },
+      { x: 30, y: 50 }, { x: 50, y: 48 }, { x: 70, y: 50 },
+      { x: 15, y: 26 }, { x: 50, y: 26 }, { x: 85, y: 26 },
+      { x: 50, y: 12 },
+    ],
+    // Source: content/tactics/3-3-3-1-vertical-bands.mdx
+    defaultRoles: [
+      { roleId: "sweeper-keeper", duty: "support" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "ball-playing-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "support" },
+      { roleId: "central-midfielder", duty: "support" },
+      { roleId: "box-to-box-midfielder", duty: "support" },
+      { roleId: "winger", duty: "support" },
+      { roleId: "advanced-playmaker", duty: "attack" },
+      { roleId: "winger", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+    ],
+  },
 ];
 
 /**
