@@ -120,11 +120,24 @@ export default async function RoleDetailPage({ params }: Props) {
     .filter((r) => r.category === role.category && r.id !== role.id)
     .slice(0, 4);
 
-  // Tactics whose formation matches the role's best formations
+  // Tactic recommendations, two tiers:
+  // 1. Tactics whose setup actually fields this role (roleId + a duty the role supports).
+  // 2. Fallback: tactics in formations matching the role's best formations.
+  // Note: some MDX setups reuse another roleId with a custom abbr/name
+  // (e.g. box-to-box-midfielder displayed as "Ball-Winning Midfielder") —
+  // those only count when the duty is genuinely available to the role.
   const roleFormations = role.bestFormations as string[];
-  const relatedTactics = allTactics
-    .filter((t) => roleFormations.includes(t.formation))
-    .slice(0, 3);
+  const fieldsRole = (t: (typeof allTactics)[number]) => {
+    const setup = (t.setup ?? []) as Array<{ roleId?: string; duty?: string }>;
+    return setup.some(
+      (s) => s?.roleId === role.id && (s.duty as PlayerDuty | undefined) != null && role.availableDuties.includes(s.duty as PlayerDuty)
+    );
+  };
+  const usedHere = allTactics.filter(fieldsRole);
+  const formationMatch = allTactics.filter(
+    (t) => !fieldsRole(t) && roleFormations.includes(t.formation)
+  );
+  const relatedTactics = (usedHere.length ? usedHere : formationMatch).slice(0, 3);
 
   // FAQ — visible content mirrors the FAQPage JSON-LD exactly (Google guideline)
   const topAttrs = role.keyAttributes.slice(0, 3);
