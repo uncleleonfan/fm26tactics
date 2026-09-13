@@ -21,6 +21,40 @@ interface Props {
   data: ChartDatum[];
 }
 
+/**
+ * Custom angle-axis tick: pushes labels outward so they don't collide with
+ * the radius-axis numbers (e.g. "Rushing Out" overlapping "100" at the top).
+ */
+const ANGLE_TICK_OFFSET = 14;
+
+function renderAngleTick(props: {
+  x: number;
+  y: number;
+  textAnchor: "start" | "middle" | "end";
+  payload: { value?: string; coordinate?: number };
+}) {
+  const { x, y, textAnchor, payload } = props;
+  const deg = payload.coordinate ?? 0;
+  let dx = 0;
+  let dy = 0;
+  if (deg > 60 && deg < 120) dy = -ANGLE_TICK_OFFSET; // top label
+  else if (deg > 240 && deg < 300) dy = ANGLE_TICK_OFFSET; // bottom label
+  else if (textAnchor === "start") dx = ANGLE_TICK_OFFSET; // right side
+  else if (textAnchor === "end") dx = -ANGLE_TICK_OFFSET; // left side
+  return (
+    <text
+      x={x + dx}
+      y={y + dy}
+      textAnchor={textAnchor}
+      verticalAnchor="middle"
+      fill="#94A3B8"
+      fontSize={11}
+    >
+      {payload.value}
+    </text>
+  );
+}
+
 export function RoleRadarChart({ roleName, data }: Props) {
   const t = useTranslations("roles");
 
@@ -34,10 +68,7 @@ export function RoleRadarChart({ roleName, data }: Props) {
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={data}>
             <PolarGrid stroke="#1C2436" />
-            <PolarAngleAxis
-              dataKey="attribute"
-              tick={{ fill: "#94A3B8", fontSize: 11 }}
-            />
+            <PolarAngleAxis dataKey="attribute" tick={renderAngleTick} tickLine={false} />
             <PolarRadiusAxis
               angle={90}
               domain={[0, 100]}
