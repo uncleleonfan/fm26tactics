@@ -121,6 +121,50 @@ export function decodeTacticState(encoded: string): TacticBoardState | null {
   }
 }
 
+/**
+ * Build a URL-ready `tactic` param from a content tactic's frontmatter setup,
+ * so "Try in Builder" loads the exact 11 roles/duties/positions shown on the
+ * tactic page instead of the formation's default preset.
+ * Returns the encodeURIComponent'd payload, or null when the setup can't form
+ * a valid 11-a-side board (caller should fall back to `?formation=`).
+ */
+export function encodeTacticSetupParam(
+  formation: string,
+  setup: ReadonlyArray<{ roleId: string; duty: string; x: number; y: number }> | undefined
+): string | null {
+  if (!setup || setup.length !== 11) return null;
+  const preset = formationPresets.find((f) => f.formation === formation);
+  if (!preset) return null;
+  const players: PlayerNode[] = [];
+  for (let i = 0; i < setup.length; i++) {
+    const s = setup[i];
+    const role = playerRoles.find((r) => r.id === s.roleId);
+    if (!role || typeof s.x !== "number" || typeof s.y !== "number") return null;
+    const duty = (role.availableDuties as readonly string[]).includes(s.duty)
+      ? (s.duty as PlayerDuty)
+      : role.availableDuties[0] || "support";
+    players.push({
+      id: `player-${i}`,
+      x: s.x,
+      y: s.y,
+      roleId: s.roleId,
+      duty,
+      individualInstructions: [],
+    });
+  }
+  const state: TacticBoardState = {
+    formation: preset.formation,
+    players,
+    teamInstructions: {
+      mentality: "balanced",
+      inPossession: [],
+      inTransition: [],
+      outOfPossession: [],
+    },
+  };
+  return encodeURIComponent(encodeTacticState(ensurePhases(state)));
+}
+
 function createDefaultState(): TacticBoardState {
   return createDefaultStateForFormation(formationPresets[0].formation as FormationType);
 }

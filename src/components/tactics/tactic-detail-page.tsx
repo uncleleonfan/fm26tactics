@@ -12,6 +12,7 @@ import { RelatedTactics } from "@/components/shared/related-tactics";
 import { FormationDiagram } from "@/components/tactics/formation-diagram";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
+import { encodeTacticSetupParam } from "@/hooks/use-tactic-builder";
 import type { Tactic } from "contentlayer/generated";
 
 const mdxComponents = {
@@ -83,6 +84,12 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
 
   const localDate = (date: string) =>
     format.dateTime(new Date(date), { year: "numeric", month: "long", day: "numeric" });
+  // "Try in Builder" carries the tactic's exact 11-man setup via ?tactic=;
+  // falls back to the formation preset when the setup can't be encoded.
+  const tacticParam = encodeTacticSetupParam(tactic.formation, tactic.setup);
+  const builderHref = tacticParam
+    ? `/builder?tactic=${tacticParam}`
+    : `/builder?formation=${tactic.formation}`;
   const styleLabel = t.has(`styles.${tactic.style}`)
     ? t(`styles.${tactic.style}`)
     : styleLabels[tactic.style];
@@ -164,7 +171,7 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
                       )}
                     </button>
                     <Link
-                      href={`/builder?formation=${tactic.formation}`}
+                      href={builderHref}
                       data-track="tactic_open_builder"
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-surface-border text-text-secondary text-sm font-semibold hover:border-primary/40 hover:text-text-primary transition-colors"
                     >
@@ -236,7 +243,7 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
                   <span className="text-sm font-medium">FM26 Player Roles</span>
                 </Link>
                 <Link
-                  href={`/builder?formation=${tactic.formation}`}
+                  href={builderHref}
                   className="glass-card p-4 rounded-xl border border-primary/10 hover:border-primary/40 transition-colors flex items-center gap-3 group"
                 >
                   <Wrench className="w-5 h-5 text-primary shrink-0" />
