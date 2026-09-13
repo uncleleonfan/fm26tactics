@@ -82,8 +82,8 @@ describe("known tactical patterns (spec §23)", () => {
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
     ]);
     const solid = state433({
@@ -119,7 +119,7 @@ describe("movement classification", () => {
 });
 
 describe("relationships", () => {
-  it("detects creator-runner between playmaker and advanced forward", () => {
+  it("detects creator-runner between playmaker and centre forward", () => {
     const result = analyzeTactic(state433(), "central-midfield");
     const hasCreatorRunner = result.relationships.some((r) => r.type === "creator-runner");
     expect(hasCreatorRunner).toBe(true);
@@ -136,8 +136,8 @@ describe("relationships", () => {
       { roleId: "channel-midfielder", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
     ]);
     const result = analyzeTactic(crowded, "central-final-third");

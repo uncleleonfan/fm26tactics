@@ -23,13 +23,13 @@ setup:
   - { roleId: central-defender, duty: defend, x: 25, y: 79, name: "Central Defender (Stopper)" }
   - { roleId: central-defender, duty: defend, x: 50, y: 83, name: "Central Defender (Cover)" }
   - { roleId: central-defender, duty: defend, x: 75, y: 79, name: "Central Defender (Stopper)" }
-  - { roleId: wing-back, duty: support, x: 10, y: 62, abbr: "CWB", name: "Complete Wing-Back" }
-  - { roleId: wing-back, duty: support, x: 90, y: 62, abbr: "CWB", name: "Complete Wing-Back" }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 35, y: 46, abbr: "BWM", name: "Ball-Winning Midfielder" }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 65, y: 46, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: playmaking-wing-back, duty: support, x: 10, y: 62 }
+  - { roleId: playmaking-wing-back, duty: support, x: 90, y: 62 }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 35, y: 46 }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 65, y: 46 }
   - { roleId: deep-lying-playmaker, duty: support, x: 50, y: 56 }
   - { roleId: target-forward, duty: attack, x: 38, y: 13 }
-  - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 62, y: 13 }
 ---
 
 # 3-5-2 Catenaccio: The Complete FM26 Guide
@@ -44,9 +44,9 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
 
 - **Phase 1 — The Block** (out of possession): A compact 5-3-2 shape that denies central progression. Opposition is funneled wide, where crosses must beat three center-backs with 15+ Jumping Reach.
 
-- **Phase 2 — The Trap** (transition trigger): When the ball enters wide areas, the near-side wing-back engages while the BWM slides across to cover the space behind. This creates a 2v1 pressing trap on the touchline.
+- **Phase 2 — The Trap** (transition trigger): When the ball enters wide areas, the near-side wing-back engages while the PCM slides across to cover the space behind. This creates a 2v1 pressing trap on the touchline.
 
-- **Phase 3 — The Striker Exit** (counter launch): Once possession is won, the Target Forward receives a direct pass, holds off the CB, and lays off to the Advanced Forward charging through the channel. Total time from regain to shot: 6-9 seconds.
+- **Phase 3 — The Striker Exit** (counter launch): Once possession is won, the Target Forward receives a direct pass, holds off the CB, and lays off to the Centre Forward charging through the channel. Total time from regain to shot: 6-9 seconds.
 
 ### Formation Shape Visualization
 
@@ -60,13 +60,13 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
     { roleId: "central-defender", duty: "defend", x: 22, y: 80, name: "Central Defender (Stopper)" },
     { roleId: "central-defender", duty: "defend", x: 50, y: 84, name: "Central Defender (Cover)" },
     { roleId: "central-defender", duty: "defend", x: 78, y: 80, name: "Central Defender (Stopper)" },
-    { roleId: "wing-back", duty: "support", x: 6, y: 44, abbr: "CWB", name: "Complete Wing-Back" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 35, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "playmaking-wing-back", duty: "support", x: 6, y: 44 },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 35, y: 56 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 62 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
-    { roleId: "wing-back", duty: "support", x: 94, y: 44, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 65, y: 56 },
+    { roleId: "playmaking-wing-back", duty: "support", x: 94, y: 44 },
     { roleId: "target-forward", duty: "attack", x: 38, y: 16 },
-    { roleId: "advanced-forward", duty: "attack", x: 62, y: 13 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 62, y: 13 },
   ]}
   movements={[
     { from: 4, toX: 8, toY: 30, type: "overlap" },
@@ -83,16 +83,16 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
   caption="Out of possession — flat back five with the three-man shield"
   setup={[
     { roleId: "line-holding-keeper", duty: "defend", x: 50, y: 91 },
-    { roleId: "wing-back", duty: "support", x: 10, y: 84, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "playmaking-wing-back", duty: "support", x: 10, y: 84 },
     { roleId: "central-defender", duty: "defend", x: 30, y: 85, name: "Central Defender (Stopper)" },
     { roleId: "central-defender", duty: "defend", x: 50, y: 86, name: "Central Defender (Cover)" },
     { roleId: "central-defender", duty: "defend", x: 70, y: 85, name: "Central Defender (Stopper)" },
-    { roleId: "wing-back", duty: "support", x: 90, y: 84, abbr: "CWB", name: "Complete Wing-Back" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 35, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "playmaking-wing-back", duty: "support", x: 90, y: 84 },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 35, y: 66 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 70 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 65, y: 66 },
     { roleId: "target-forward", duty: "attack", x: 58, y: 38 },
-    { roleId: "advanced-forward", duty: "attack", x: 42, y: 38 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 42, y: 38 },
   ]}
   movements={[
     { from: 9, toX: 64, toY: 30, type: "press" },
@@ -116,12 +116,12 @@ Forget the stereotype of 10 men behind the ball. Real Catenaccio has three disti
 | **Passing Directness** | More Direct | This is non-negotiable. Short passing in Catenaccio invites the press into your defensive third. Direct passes bypass the first line of pressure and launch the counter immediately. |
 | **Tempo** | Higher | Combined with direct passing, this creates "vertical urgency" — every pass is forward and fast. Low tempo Catenaccio = possession for the sake of it, which is the opposite of the philosophy. |
 | **Play Out of Defence** | OFF | This is the most common mistake. Playing out from the back with a deep block is suicide — you're inviting the press into the exact area you want to clear. |
-| **Pass Into Space** | ON | Your AF's entire purpose. He's making runs into channels, and the DLP needs to find him. |
-| **Run At Defence** | ON | On the counter, isolated 1v1 situations are common. Let your AF and TF drive at retreating defenders. |
+| **Pass Into Space** | ON | Your CF's entire purpose. He's making runs into channels, and the DLP needs to find him. |
+| **Run At Defence** | ON | On the counter, isolated 1v1 situations are common. Let your CF and TF drive at retreating defenders. |
 | **Hit Early Crosses** | ON | Wing-backs should cross from deep, not from the byline. Deep crosses are harder for retreating defenders to deal with. |
 | **Overlap/Underlap** | OFF | You don't want wing-backs waiting for overlaps — you want them crossing early or driving infield. |
 | **Focus Play** | Leave blank | Don't restrict the counter direction — let the DLP find the best option. |
-| **Shoot On Sight** | OPTIONAL | If your BWMs have Long Shots 12+, this creates secondary goals from cleared set pieces. |
+| **Shoot On Sight** | OPTIONAL | If your PCMs have Long Shots 12+, this creates secondary goals from cleared set pieces. |
 
 ### In Transition
 
@@ -189,7 +189,7 @@ These are your destroyers. When the ball enters their zone, they step forward ag
 
 ### Wing-Backs: The Engine Room
 
-#### Complete Wing-Back (Support) × 2
+#### Playmaking Wing-Back (Support) × 2
 
 ```
 Must-have: Stamina 17+, Work Rate 16+, Crossing 14+, Pace 14+
@@ -199,7 +199,7 @@ PPMs: "Gets Forward Whenever Possible", "Knocks Ball Past Opponent", "Hugs Line"
 
 These are the most physically demanding roles in FM26. They're your ONLY width — in possession they push up alongside the strikers, out of possession they drop into the back five. In a single match, expect them to cover 12-13km.
 
-**WhY Complete Wing-Back, not just Wing-Back?** CWB(S) has more creative freedom. A regular WB(S) stays on the flank — a CWB(S) will occasionally drift inside to receive, creating overloads when the counter slows down. This unpredictability is worth the increased stamina drain.
+**WhY Playmaking Wing-Back, not just Wing-Back?** PWB(S) has more creative freedom. A regular WB(S) stays on the flank — a PWB(S) will occasionally drift inside to receive, creating overloads when the counter slows down. This unpredictability is worth the increased stamina drain.
 
 **The Stamina Crisis and How to Solve It:**
 - You need FOUR wing-backs in the squad — two starters, two direct replacements
@@ -209,9 +209,9 @@ These are the most physically demanding roles in FM26. They're your ONLY width �
 
 **Budget wing-back gems**: Djed Spence (Tottenham, loan), Joakim Maehle (Atalanta, £15M), Ridle Baku (Wolfsburg), Pedro Porro in year 2+
 
-### Midfield Destroyers: The Double BWM Shield
+### Midfield Destroyers: The Double PCM Shield
 
-#### Ball-Winning Midfielder (Defend) × 2
+#### Pressing Central Midfielder (Defend) × 2
 
 ```
 Must-have: Tackling 16+, Aggression 15+, Work Rate 16+, Anticipation 14+
@@ -219,11 +219,11 @@ Ideal: Positioning 14+, Bravery 15+, Strength 14+, Determination 14+
 PPMs: "Stays Back at All Times", "Plays Short Simple Passes", "Dives Into Tackles"
 ```
 
-Two BWM(D) side-by-side creates a wall 5 yards in front of the back three. They don't close down wide — they sit centrally, intercepting lateral passes and breaking up combination play.
+Two PCM(D) side-by-side creates a wall 5 yards in front of the back three. They don't close down wide — they sit centrally, intercepting lateral passes and breaking up combination play.
 
-**Why two BWM(D) instead of a more creative partner?** In Catenaccio, the midfield's job is destruction, not creation. The counter-attack is launched by the DLP (deeper) or directly from the GK/TF route. Two BWMs means zero gaps in the central channel. When one steps up, the other covers — they should never both commit.
+**Why two PCM(D) instead of a more creative partner?** In Catenaccio, the midfield's job is destruction, not creation. The counter-attack is launched by the DLP (deeper) or directly from the GK/TF route. Two PCMs means zero gaps in the central channel. When one steps up, the other covers — they should never both commit.
 
-**Critical pair chemistry**: They should complement each other's footedness. Left BWM = left-footed or two-footed. Right BWM = right-footed. This ensures clean tackling angles when facing attackers coming from the flanks.
+**Critical pair chemistry**: They should complement each other's footedness. Left PCM = left-footed or two-footed. Right PCM = right-footed. This ensures clean tackling angles when facing attackers coming from the flanks.
 
 ### The Deep Creator
 
@@ -235,9 +235,9 @@ Ideal: Technique 14+, Composure 15+, Long Shots 13+, Flair 12+
 PPMs: "Tries Killer Balls Often", "Dictates Tempo", "Switches Ball to Other Flank"
 ```
 
-The DLP(S) is your quarterback. He's positioned behind the two BWMs — they win the ball, they lay it off to him, he launches the counter. His role in the defensive block is minimal (the BWMs shield him), so you can get away with lower Work Rate and Tackling here.
+The DLP(S) is your quarterback. He's positioned behind the two PCMs — they win the ball, they lay it off to him, he launches the counter. His role in the defensive block is minimal (the PCMs shield him), so you can get away with lower Work Rate and Tackling here.
 
-**The passing triangle**: BWM wins → DLP receives → DLP scans → DLP launches long ball into the channel for the AF. This triangle should complete in under 2 seconds. If the DLP takes more than 2 touches, the counter opportunity is gone.
+**The passing triangle**: PCM wins → DLP receives → DLP scans → DLP launches long ball into the channel for the CF. This triangle should complete in under 2 seconds. If the DLP takes more than 2 touches, the counter opportunity is gone.
 
 **PPM "Tries Killer Balls Often" is MANDATORY.** Without it, the DLP will recycle possession instead of launching. This transforms the entire tactic from Catenaccio into "possession with no purpose."
 
@@ -253,13 +253,13 @@ Ideal: First Touch 14+, Off The Ball 13+, Balance 15+, Aggression 14+
 PPMs: "Plays With Back to Goal", "Knocks Ball Past Opponent"
 ```
 
-The TF(A) is your first receiver on EVERY long clearance and goalkick. His job is simple: win the aerial duel, hold off the CB, lay off to the AF or onrushing CWB, then crash the box for the cross.
+The TF(A) is your first receiver on EVERY long clearance and goalkick. His job is simple: win the aerial duel, hold off the CB, lay off to the CF or onrushing PWB, then crash the box for the cross.
 
-**The layoff pattern**: Long ball → TF chests down with back to goal → CB tries to go through him → TF holds him off → AF runs past → TF plays short through ball → AF is through. This sequence should happen 8-12 times per match.
+**The layoff pattern**: Long ball → TF chests down with back to goal → CB tries to go through him → TF holds him off → CF runs past → TF plays short through ball → CF is through. This sequence should happen 8-12 times per match.
 
 **Ideal TF profiles**: Gianluca Scamacca (perfect), Yussuf Poulsen, Wout Weghorst (budget), Sasa Kalajdzic, Tammy Abraham. In lower leagues: Kieffer Moore, any striker 6'3"+ with Strength 15+.
 
-#### Advanced Forward (Attack)
+#### Centre Forward (Attack)
 
 ```
 Must-have: Pace 17+, Acceleration 17+, Off The Ball 16+, Finishing 14+
@@ -267,15 +267,15 @@ Ideal: Composure 14+, Dribbling 14+, Anticipation 14+, First Touch 13+
 PPMs: "Likes to Beat Offside Trap", "Moves Into Channels", "Places Shots"
 ```
 
-The AF(A) is your match-winner. He makes 15-20 channel runs per match. Only 3-4 will connect with a pass — but each one is a clear chance. His attributes determine the conversion rate of those chances.
+The CF(A) is your match-winner. He makes 15-20 channel runs per match. Only 3-4 will connect with a pass — but each one is a clear chance. His attributes determine the conversion rate of those chances.
 
-**The channel run**: AF drifts wide into the gap between opposition FB and CB → DLP launches ball into space → AF uses Pace 17 to win the footrace → 1v1 with keeper → Places Shots (PPM) into far corner. Goal.
+**The channel run**: CF drifts wide into the gap between opposition FB and CB → DLP launches ball into space → CF uses Pace 17 to win the footrace → 1v1 with keeper → Places Shots (PPM) into far corner. Goal.
 
 **"Likes to Beat Offside Trap"** PPM is a double-edged sword. It generates more runs but more offsides. Every offside is a counter-attack killed. Use it only if Off The Ball is 16+ AND the opposition plays a high line. Bench it against deep blocks.
 
-**Ideal AF profiles**: Victor Osimhen (the perfect AF), Darwin Nunez, Patson Daka, Benjamin Sesko (year 2+). Budget: Terem Moffi, any Premier League reject with 17 Pace.
+**Ideal CF profiles**: Victor Osimhen (the perfect CF), Darwin Nunez, Patson Daka, Benjamin Sesko (year 2+). Budget: Terem Moffi, any Premier League reject with 17 Pace.
 
-**The strike partnership chemistry**: AF makes runs, TF holds up. This is a symbiotic relationship — neither works without the other. Two AFs = no outlet, possession lost constantly. Two TFs = no threat in behind, easy to defend.
+**The strike partnership chemistry**: CF makes runs, TF holds up. This is a symbiotic relationship — neither works without the other. Two AFs = no outlet, possession lost constantly. Two TFs = no threat in behind, easy to defend.
 
 ---
 
@@ -286,18 +286,18 @@ The AF(A) is your match-winner. He makes 15-20 channel runs per match. Only 3-4 
 | GK | Uses Long Throws to Start Counter Attacks | 3 months | Distributes to specific teammate (if conflicting) |
 | CD(Cover) | Stays Back at All Times | 2 months | Gets Forward Whenever Possible |
 | CD(Stopper) | Marks Opponent Tightly | 2 months | Stays on Feet When Tackling (you WANT the tackle) |
-| CWB | Gets Forward Whenever Possible | 3 months | Stays Back at All Times |
-| CWB | Knocks Ball Past Opponent | 2 months | Runs With Ball Rarely |
-| BWM | Plays Short Simple Passes | 2 months | Tries Killer Balls Often |
-| BWM | Dives Into Tackles | 1 month | Does Not Dive Into Tackles |
+| PWB | Gets Forward Whenever Possible | 3 months | Stays Back at All Times |
+| PWB | Knocks Ball Past Opponent | 2 months | Runs With Ball Rarely |
+| PCM | Plays Short Simple Passes | 2 months | Tries Killer Balls Often |
+| PCM | Dives Into Tackles | 1 month | Does Not Dive Into Tackles |
 | DLP | Tries Killer Balls Often | 4 months | Plays Short Simple Passes |
 | DLP | Dictates Tempo | 4 months | N/A — no conflicting PPM |
 | DLP | Switches Ball to Other Flank | 2 months | N/A |
 | TF | Plays With Back to Goal | 3 months | Likes to Beat Offside Trap |
-| AF | Moves Into Channels | 3 months | Plays With Back to Goal |
-| AF | Places Shots | 3 months | Shoots With Power (unless Finishing 16+) |
+| CF | Moves Into Channels | 3 months | Plays With Back to Goal |
+| CF | Places Shots | 3 months | Shoots With Power (unless Finishing 16+) |
 
-**Training priority order** (if limited by coaching workload): DLP killer balls → AF channels → TF back to goal → CWB gets forward → BWM short passes.
+**Training priority order** (if limited by coaching workload): DLP killer balls → CF channels → TF back to goal → PWB gets forward → PCM short passes.
 
 ---
 
@@ -362,15 +362,15 @@ You MUST preserve condition over training volume. Catenaccio players work HARD d
 ```
 GK(D)                 ← Default position
 
-   Mark Near Post (shorter CWB)
+   Mark Near Post (shorter PWB)
    Zone 6-Yard Box × 2 (your CBs)
-   Mark Tall Player (AF — covers their biggest threat)
-   Man Mark × 3 (TF + 2× BWM)
+   Mark Tall Player (CF — covers their biggest threat)
+   Man Mark × 3 (TF + 2× PCM)
    Edge of Area (DLP — ready to launch counter)
-   Stay Forward (CWB with best Pace — counter threat)
+   Stay Forward (PWB with best Pace — counter threat)
 ```
 
-**Key**: Your three CBs MUST be in the 6-yard box on defensive corners. Don't use "Go Back" — they're your best headers and they need to be where the ball arrives. Put the AF on Mark Tall Player because he won't win defensive headers; he's just a body.
+**Key**: Your three CBs MUST be in the 6-yard box on defensive corners. Don't use "Go Back" — they're your best headers and they need to be where the ball arrives. Put the CF on Mark Tall Player because he won't win defensive headers; he's just a body.
 
 ### Attacking Corners (Near Post Routine)
 
@@ -381,7 +381,7 @@ GK(D)              ← Stay Back
    Attack Near Post (TF — primary target)
    Attack Far Post (CD with best Heading)
    Challenge Keeper (other 2 CBs)
-   Edge of Area (2× BWM — recycle possession)
+   Edge of Area (2× PCM — recycle possession)
    Stay Back (both CWBs — counter-attack prevention)
 ```
 
@@ -389,11 +389,11 @@ Corner Taker: DLP(S) — he already has the Passing/Vision. Aim: Near Post. Deli
 
 ### Defensive Free Kicks (Deep)
 
-All 11 players in the box. Formation wall. TF on the near post, AF stays forward (he's useless defensively and keeps 2 defenders busy).
+All 11 players in the box. Formation wall. TF on the near post, CF stays forward (he's useless defensively and keeps 2 defenders busy).
 
 ### Counter Free Kicks (Won in Own Half)
 
-DLP takes it quickly, short to a CWB, who drives forward and crosses to the TF crashing the box. The AF stays on the shoulder of the last defender.
+DLP takes it quickly, short to a PWB, who drives forward and crosses to the TF crashing the box. The CF stays on the shoulder of the last defender.
 
 ---
 
@@ -418,7 +418,7 @@ DLP takes it quickly, short to a CWB, who drives forward and crosses to the TF c
 | Opposition Formation | Adjustment |
 |---|---|
 | 4-2-3-1 | Tight Mark on AMC — he's their creative hub. If the AMC is a playmaker type, add Hard Tackling. |
-| 4-3-3 | Show wingers inside — your BWMs are waiting. Outside would let them cross (your CBs handle that). |
+| 4-3-3 | Show wingers inside — your PCMs are waiting. Outside would let them cross (your CBs handle that). |
 | 4-4-2 | No changes needed. Catenaccio naturally counters 4-4-2. |
 | 3-4-3 / 3-5-2 | Tight Mark on both WBs — they're their only width. Shut them down and their attack dies. |
 | 4-2-4 | The hardest counter. Drop Defensive Line to "Much Lower" (already set) + add Hard Tackling on ALL attackers. They'll commit 6 forward — you commit 8 back. |
@@ -452,9 +452,9 @@ When facing a player with 17+ Pace, REMOVE Tight Marking and Trigger Press — t
 - Wing-Backs: One to **Attack** duty (usually your best crosser, against their weakest FB)
 - Line of Engagement: Raise to **Lower** (one notch up — not Mid Block, just more pressure)
 - Passing Directness: **Much More Direct** (longest possible — bypass the midfield entirely)
-- AF: Add instruction **Roam From Position** — let him find the spaces
+- CF: Add instruction **Roam From Position** — let him find the spaces
 - Set Pieces: Send both CBs forward on attacking throws/corners near their box
-- Substitutions: Fresh striker with Pace, creative midfielder for a BWM (switch to one BWM + one CM(A) if desperate)
+- Substitutions: Fresh striker with Pace, creative midfielder for a PCM (switch to one PCM + one CM(A) if desperate)
 
 ### Scenario 3: Red Card — Down to 10 Men
 
@@ -465,10 +465,10 @@ When facing a player with 17+ Pace, REMOVE Tight Marking and Trigger Press — t
 | Player | Adjustment |
 |---|---|
 | **CB** | Switch to 4-4-1 (wing-back drops to full-back, two CBs, two strikers become one striker + one wide midfielder tracking back). Park the bus instructions stay the same. |
-| **WB** | Sub on a fresh WB immediately. Replace the AF with a defensive midfielder if protecting a lead. Formation stays 3-4-2 (three CBs, four midfield, two strikers). |
-| **BWM** | Move DLP to BWM position, add a sub or shift a striker to CM. You lose the DLP's passing — go FULL direct. Long balls only. |
-| **Striker** | Switch to 3-5-1. The remaining striker becomes a Complete Forward (Support) — he must do everything. Add "Hold Up Ball" instruction. |
-| **DLP** | The hardest loss. One BWM takes DLP duties (needs Passing 14+). Switch to Very Direct passing — the BWM can't launch like the DLP, so skip the middle. |
+| **WB** | Sub on a fresh WB immediately. Replace the CF with a defensive midfielder if protecting a lead. Formation stays 3-4-2 (three CBs, four midfield, two strikers). |
+| **PCM** | Move DLP to PCM position, add a sub or shift a striker to CM. You lose the DLP's passing — go FULL direct. Long balls only. |
+| **Striker** | Switch to 3-5-1. The remaining striker becomes a Centre Forward (Support) — he must do everything. Add "Hold Up Ball" instruction. |
+| **DLP** | The hardest loss. One PCM takes DLP duties (needs Passing 14+). Switch to Very Direct passing — the PCM can't launch like the DLP, so skip the middle. |
 
 ### Scenario 4: Opposition Parks the Bus Against YOU
 
@@ -485,7 +485,7 @@ When facing a player with 17+ Pace, REMOVE Tight Marking and Trigger Press — t
 | Strength | FM26 ME Evidence |
 |---|---|
 | **Set piece defense** | With three 15+ Jumping CBs, conceding from corners drops to under 1 per 10 matches. Tested across 3 full seasons. |
-| **Counter-attack efficiency** | AF + TF partnership generates 3.2 clear chances per match from counter situations. Average xG per counter: 0.41. |
+| **Counter-attack efficiency** | CF + TF partnership generates 3.2 clear chances per match from counter situations. Average xG per counter: 0.41. |
 | **Fixture congestion handling** | Low-intensity defensive block preserves condition. Players at minute 85 average 72% condition vs 65% in high-press systems. |
 | **Underdog performance** | In test save with newly-promoted Sheffield United (predicted 20th), finished 12th with 44 points. xG against was 5th best in the league. |
 | **Big match reliability** | Against top-6 sides, average score: 1-0 (win) or 0-1 (loss). No blowouts. Point average: 1.2 per game vs top 6. |
@@ -516,7 +516,7 @@ xG for: 44.2 | xG against: 46.1 (+1.9 overperformance)
 Points over expected: +11 (massive overachievement)
 ```
 
-The tactic outperformed its xG because: 1) Counter-attacks produce high-quality chances (AF shoots from 12 yards, not 25), and 2) Set piece routines are optimized.
+The tactic outperformed its xG because: 1) Counter-attacks produce high-quality chances (CF shoots from 12 yards, not 25), and 2) Set piece routines are optimized.
 
 ---
 
@@ -565,7 +565,7 @@ Use when: Protecting a 1-0 lead with 10 minutes left, or away at a top-2 team wh
 
 ### Variation C: 3-4-1-2 Narrow (FM26 Alternate)
 
-**Changes**: One BWM becomes an AM (Shadow Striker). The three-man midfield becomes a midfield diamond (DM + 2 CM + AM). More creative, less defensively solid. Use when you're chasing and have nothing to lose.
+**Changes**: One PCM becomes an AM (Shadow Striker). The three-man midfield becomes a midfield diamond (DM + 2 CM + AM). More creative, less defensively solid. Use when you're chasing and have nothing to lose.
 
 ---
 
@@ -574,7 +574,7 @@ Use when: Protecting a 1-0 lead with 10 minutes left, or away at a top-2 team wh
 **Q: Should I use Catenaccio at home against weaker teams?**
 A: No. You'll dominate possession by accident (they'll sit back), but Catenaccio isn't designed to break down low blocks. Use a 4-2-3-1 or 4-3-3 at home against weaker opposition.
 
-**Q: Why does my AF get caught offside 5+ times per match?**
+**Q: Why does my CF get caught offside 5+ times per match?**
 A: His "Likes to Beat Offside Trap" PPM is too aggressive for a deep opposition line. Train it out, or remove it via coaching. A better solution: use "Moves Into Channels" instead — he drifts wide before running, making offside less likely.
 
 **Q: The opposition scores from crosses despite three CBs. Why?**
@@ -616,8 +616,8 @@ Bookmark this section for quick in-game reference.
 | Offside Trap | **OFF** |
 
 **Shape**: 5-3-2 OOP → 3-5-2 in possession  
-**Key Players**: DLP (quarterback), AF (match-winner), CWBs (engine)  
-**Substitution Priority**: Both CWBs at 60' → DLP at 70' → AF at 75'  
+**Key Players**: DLP (quarterback), CF (match-winner), CWBs (engine)  
+**Substitution Priority**: Both CWBs at 60' → DLP at 70' → CF at 75'  
 **Best Against**: 4-2-3-1, 4-3-3, 4-2-4  
 **Worst Against**: 4-4-2 low block, 5-3-2 defensive  
 

@@ -23,11 +23,11 @@ setup:
   - { roleId: central-defender, duty: defend, x: 38, y: 78 }
   - { roleId: central-defender, duty: defend, x: 62, y: 78 }
   - { roleId: full-back, duty: defend, x: 88, y: 74 }
-  - { roleId: inside-forward, duty: attack, x: 12, y: 50, abbr: "W", name: "Winger" }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 38, y: 52, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: winger, duty: attack, x: 12, y: 50 }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 38, y: 52 }
   - { roleId: deep-lying-playmaker, duty: defend, x: 62, y: 52 }
-  - { roleId: inside-forward, duty: attack, x: 88, y: 50, abbr: "W", name: "Winger" }
-  - { roleId: advanced-playmaker, duty: attack, x: 50, y: 29, abbr: "T", name: "Trequartista" }
+  - { roleId: winger, duty: attack, x: 88, y: 50 }
+  - { roleId: $1free-role$1, duty: $2$3$2, $4 }
   - { roleId: target-forward, duty: attack, x: 50, y: 12 }
 ---
 
@@ -39,11 +39,11 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
 
 ### What the 4-4-1-1 Counter-Attack Does in FM26
 
-- **Phase 1 — The Wall** (out of possession): Two flat banks of four — four defenders and four midfielders — form an impenetrable block. The shadow striker (Trequartista) sits between the lines, ready to launch the counter. The opposition is forced into patient possession around the block with no space to penetrate.
+- **Phase 1 — The Wall** (out of possession): Two flat banks of four — four defenders and four midfielders — form an impenetrable block. The shadow striker (Free Role) sits between the lines, ready to launch the counter. The opposition is forced into patient possession around the block with no space to penetrate.
 
-- **Phase 2 — The Break** (transition): The moment possession is won, the ball goes to the Trequartista or the DLP. The wingers sprint forward to provide width, the TF holds off the CB, and the counter is launched in 3-5 seconds. The opposition's attacking shape is disorganised — perfect for exploitation.
+- **Phase 2 — The Break** (transition): The moment possession is won, the ball goes to the Free Role or the DLP. The wingers sprint forward to provide width, the TF holds off the CB, and the counter is launched in 3-5 seconds. The opposition's attacking shape is disorganised — perfect for exploitation.
 
-- **Phase 3 — The Strike** (attacking): The Trequartista finds the wingers or the TF, and the attack is finished quickly. No prolonged possession — the goal is to score within 5-7 seconds of winning the ball.
+- **Phase 3 — The Strike** (attacking): The Free Role finds the wingers or the TF, and the attack is finished quickly. No prolonged possession — the goal is to score within 5-7 seconds of winning the ball.
 
 ### Formation Shape
 
@@ -51,18 +51,18 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
 
 <FormationDiagram
   formation="4-4-1-1"
-  caption="Out of possession — the deep block with the Trequartista between lines"
+  caption="Out of possession — the deep block with the Free Role between lines"
   setup={[
     { roleId: "goalkeeper", duty: "defend", x: 50, y: 91 },
     { roleId: "full-back", duty: "defend", x: 14, y: 84 },
     { roleId: "central-defender", duty: "defend", x: 38, y: 86 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 86 },
     { roleId: "full-back", duty: "defend", x: 86, y: 84 },
-    { roleId: "inside-forward", duty: "attack", x: 14, y: 64, abbr: "W", name: "Winger" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "winger", duty: "attack", x: 14, y: 64 },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 38, y: 66 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 62, y: 66 },
-    { roleId: "inside-forward", duty: "attack", x: 86, y: 64, abbr: "W", name: "Winger" },
-    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 46, abbr: "T", name: "Trequartista" },
+    { roleId: "winger", duty: "attack", x: 86, y: 64 },
+    { roleId: $1free-role$1, duty: $2$3$2, $4 },
     { roleId: "target-forward", duty: "attack", x: 50, y: 30 },
   ]}
   movements={[
@@ -84,11 +84,11 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
     { roleId: "central-defender", duty: "defend", x: 38, y: 80 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 80 },
     { roleId: "full-back", duty: "defend", x: 86, y: 76 },
-    { roleId: "inside-forward", duty: "attack", x: 8, y: 44, abbr: "W", name: "Winger" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 54, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "winger", duty: "attack", x: 8, y: 44 },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 38, y: 54 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 62, y: 54 },
-    { roleId: "inside-forward", duty: "attack", x: 92, y: 44, abbr: "W", name: "Winger" },
-    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 26, abbr: "T", name: "Trequartista" },
+    { roleId: "winger", duty: "attack", x: 92, y: 44 },
+    { roleId: $1free-role$1, duty: $2$3$2, $4 },
     { roleId: "target-forward", duty: "attack", x: 50, y: 10 },
   ]}
   movements={[
@@ -99,7 +99,7 @@ The 4-4-1-1 is Jose Mourinho's signature formation — a deep block with two ban
   ]}
 />
 
-> **Key**: The Trequartista is the "shadow striker" — he drops into the hole between the opposition midfield and defence, linking the defensive block to the TF.
+> **Key**: The Free Role is the "shadow striker" — he drops into the hole between the opposition midfield and defence, linking the defensive block to the TF.
 
 ---
 
@@ -179,7 +179,7 @@ PPMs: "Runs with Ball Down Left/Right", "Hits Early Crosses"
 
 The wingers are the primary counter-attacking outlets. When the ball is won, they sprint forward with the ball and cross early. On Attack duty to maximize the counter threat — they don't track back deep.
 
-#### Ball-Winning Midfielder (Defend)
+#### Pressing Central Midfielder (Defend)
 
 ```
 Must-have: Tackling 15+, Work Rate 15+, Stamina 15+, Aggression 14+
@@ -195,16 +195,16 @@ Must-have: Passing 15+, Vision 15+, Composure 14+, Decisions 14+
 PPMs: "Tries Killer Balls Often", "Switches Ball to Other Flank"
 ```
 
-The counter-launcher. Receives from the BWM and hits long balls to the wingers or through balls to the T. The DLP is the brain of every counter-attack.
+The counter-launcher. Receives from the PCM and hits long balls to the wingers or through balls to the T. The DLP is the brain of every counter-attack.
 
-### The Shadow Striker: Trequartista (Attack)
+### The Shadow Striker: Free Role (Attack)
 
 ```
 Must-have: Technique 15+, Vision 14+, Dribbling 14+, Off The Ball 14+
 PPMs: "Tries Killer Balls Often", "Runs with Ball Through Centre", "Comes Deep to Get Ball"
 ```
 
-The key player. The Trequartista drops into the hole between midfield and attack, receives the ball from the DLP, and creates chances for the TF and wingers. He's the creative heartbeat of the counter-attack — every transition goes through him.
+The key player. The Free Role drops into the hole between midfield and attack, receives the ball from the DLP, and creates chances for the TF and wingers. He's the creative heartbeat of the counter-attack — every transition goes through him.
 
 ### The Lone Striker: Target Forward (Attack)
 
@@ -221,7 +221,7 @@ The outlet. He receives long balls, holds off the CB, and lays off to the T or w
 
 ### Defensive Corners
 
-Both CBs and the BWM in the 6-yard box. The T marks the edge for counter-launch. The TF stays forward as a counter threat. FBs mark the wide areas.
+Both CBs and the PCM in the 6-yard box. The T marks the edge for counter-launch. The TF stays forward as a counter threat. FBs mark the wide areas.
 
 ### Attacking Corners
 
@@ -250,14 +250,14 @@ Press the CBs to force long balls. Mark the AMC to neutralize the opposition's c
 - Drop mentality to **Defensive**
 - Drop wingers to **Support** duty (more defensive)
 - Time Wasting: **Frequently**
-- Replace the T with a fresh BWM (switch to 4-5-1)
+- Replace the T with a fresh PCM (switch to 4-5-1)
 
 ### Chasing a Goal at Minute 75
 
 - Push mentality to **Attacking**
 - Raise Line of Engagement to **Mid Block**
 - Push FBs to **Support** duty for more width
-- Replace the BWM with a second TF (switch to 4-4-2)
+- Replace the PCM with a second TF (switch to 4-4-2)
 
 ---
 
@@ -299,8 +299,8 @@ Press the CBs to force long balls. Mark the AMC to neutralize the opposition's c
 **Q: How is the 4-4-1-1 different from the 4-4-2?**
 A: The 4-4-2 (see [4-4-2 Wing Play](/tactics/4-4-2-wing-play)) has two strikers side by side. The 4-4-1-1 has one striker (TF) and a shadow striker (T) in the hole — the T creates from deep, the TF finishes. More defensive solidity, less aerial presence in the box.
 
-**Q: Why a Trequartista and not an AMC?**
-A: A Trequartista roams freely and drops deep to receive — perfect for the counter-attack. An AMC stays in a fixed position, which is too predictable. The T's movement makes him harder to mark.
+**Q: Why a Free Role and not an AMC?**
+A: A Free Role roams freely and drops deep to receive — perfect for the counter-attack. An AMC stays in a fixed position, which is too predictable. The T's movement makes him harder to mark.
 
 **Q: Is this the most defensive formation in the game?**
 A: No. The 5-3-2 Route One (see [5-3-2 Route One](/tactics/5-3-2-route-one)) has five CBs. But the 4-4-1-1 is the most defensively solid formation with four at the back — the two banks of four are extremely hard to break down.

@@ -25,9 +25,9 @@ setup:
   - { roleId: central-defender, duty: defend, x: 72, y: 76 }
   - { roleId: wing-back, duty: attack, x: 90, y: 62 }
   - { roleId: deep-lying-playmaker, duty: defend, x: 38, y: 50 }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 62, y: 50, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 62, y: 50 }
   - { roleId: inside-forward, duty: attack, x: 20, y: 24 }
-  - { roleId: advanced-forward, duty: attack, x: 50, y: 12 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 50, y: 12 }
   - { roleId: inside-forward, duty: attack, x: 80, y: 24 }
 ---
 
@@ -43,7 +43,7 @@ The 5-2-3 Gegenpress combines the defensive solidity of five at the back with th
 
 - **Phase 2 — The Press** (transition): The moment the ball is lost, every player sprints to press the nearest opponent. The 5-2-3 shape allows aggressive pressing because five CBs provide a safety net behind the press.
 
-- **Phase 3 — The Overload** (attacking): Wing-backs push up to the winger position, creating a 3-4-3 in attack. The dual 10s (IFs) operate in the half-spaces, and the AF leads the line. Five players attack with width and creativity.
+- **Phase 3 — The Overload** (attacking): Wing-backs push up to the winger position, creating a 3-4-3 in attack. The dual 10s (IFs) operate in the half-spaces, and the CF leads the line. Five players attack with width and creativity.
 
 ### Formation Shape
 
@@ -58,12 +58,12 @@ The 5-2-3 Gegenpress combines the defensive solidity of five at the back with th
     { roleId: "central-defender", duty: "defend", x: 50, y: 82, name: "Central Defender (Cover)" },
     { roleId: "central-defender", duty: "defend", x: 72, y: 78 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 56 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 62, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 62, y: 56 },
     { roleId: "wing-back", duty: "attack", x: 8, y: 30 },
     { roleId: "inside-forward", duty: "attack", x: 34, y: 24 },
     { roleId: "inside-forward", duty: "attack", x: 66, y: 24 },
     { roleId: "wing-back", duty: "attack", x: 92, y: 30 },
-    { roleId: "advanced-forward", duty: "attack", x: 50, y: 10 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 50, y: 10 },
   ]}
   movements={[
     { from: 6, toX: 6, toY: 18, type: "overlap" },
@@ -87,9 +87,9 @@ The 5-2-3 Gegenpress combines the defensive solidity of five at the back with th
     { roleId: "central-defender", duty: "defend", x: 70, y: 84 },
     { roleId: "wing-back", duty: "attack", x: 88, y: 80 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 66 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 62, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 62, y: 66 },
     { roleId: "inside-forward", duty: "attack", x: 24, y: 48 },
-    { roleId: "advanced-forward", duty: "attack", x: 50, y: 42 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 50, y: 42 },
     { roleId: "inside-forward", duty: "attack", x: 76, y: 48 },
   ]}
   movements={[
@@ -114,7 +114,7 @@ The 5-2-3 Gegenpress combines the defensive solidity of five at the back with th
 | **Passing Directness** | Slightly Short | Gegenpress wins the ball high — keep it with short passes. |
 | **Tempo** | Higher | Quick circulation catches the defence unset. |
 | **Play Out of Defence** | ON | The CBs are comfortable on the ball — start from the back. |
-| **Pass Into Space** | ON | The IFs and AF make runs behind the defence. |
+| **Pass Into Space** | ON | The IFs and CF make runs behind the defence. |
 | **Run At Defence** | ON | The IFs should dribble at the CBs after winning the ball high. |
 | **Work Ball Into Box** | ON | Patient build-up after the initial counter chance. |
 
@@ -192,9 +192,9 @@ Must-have: Passing 15+, Vision 15+, Composure 14+, Decisions 14+
 PPMs: "Dictates Tempo", "Tries Killer Balls Often"
 ```
 
-The primary creator. Sits at the base of the midfield, receives from the CBs, and launches through balls to the IFs or AF. The DLP is the brain of the system.
+The primary creator. Sits at the base of the midfield, receives from the CBs, and launches through balls to the IFs or CF. The DLP is the brain of the system.
 
-#### Ball-Winning Midfielder (Defend)
+#### Pressing Central Midfielder (Defend)
 
 ```
 Must-have: Tackling 15+, Work Rate 16+, Stamina 16+, Aggression 15+
@@ -214,14 +214,14 @@ PPMs: "Cuts Inside", "Runs with Ball Through Centre", "Places Shots"
 
 The IFs press the opposition CBs and FBs, then cut inside to create scoring chances. On Attack duty to maximize the counter-attacking threat after winning the ball high.
 
-#### Advanced Forward (Attack)
+#### Centre Forward (Attack)
 
 ```
 Must-have: Pace 15+, Off The Ball 15+, Finishing 14+, Work Rate 14+
 PPMs: "Moves Into Channels", "Places Shots", "Likes to Beat Offside Trap"
 ```
 
-The AF leads the press from the front. He presses the opposition CBs, forces errors, and finishes the chances created by the IFs. Work Rate 14+ is needed for the pressing role.
+The CF leads the press from the front. He presses the opposition CBs, forces errors, and finishes the chances created by the IFs. Work Rate 14+ is needed for the pressing role.
 
 ---
 
@@ -229,11 +229,11 @@ The AF leads the press from the front. He presses the opposition CBs, forces err
 
 ### Defensive Corners
 
-Three CBs in the 6-yard box. The BWM marks the edge for counter-press. One IF stays forward as a counter threat. WBs mark wide areas.
+Three CBs in the 6-yard box. The PCM marks the edge for counter-press. One IF stays forward as a counter threat. WBs mark wide areas.
 
 ### Attacking Corners
 
-The AF attacks near post. One CB attacks far post. The DLP takes the corner — aim near post, in-swinging. WBs stay back for defensive cover.
+The CF attacks near post. One CB attacks far post. The DLP takes the corner — aim near post, in-swinging. WBs stay back for defensive cover.
 
 ---
 
@@ -257,13 +257,13 @@ Press everyone aggressively — the 5-2-3 has enough defensive cover to risk agg
 
 - Push mentality to **Attacking**
 - Switch one IF to **Attack** (already there) and raise WBs to **Attack**
-- Replace the BWM with a second AF (switch to 3-2-4-1 — all-out attack)
+- Replace the PCM with a second CF (switch to 3-2-4-1 — all-out attack)
 
 ### Protecting a Lead at Minute 80
 
 - Drop mentality to **Cautious**
 - Drop WBs to **Support** duty (back five becomes permanent)
-- Replace one IF with a fresh BWM (switch to 5-3-1-1)
+- Replace one IF with a fresh PCM (switch to 5-3-1-1)
 
 ---
 

@@ -265,13 +265,13 @@ export const roleWonderkids: Record<string, RoleWonderKid[]> = {
       reason: "A lethal left-footed wide talent who cuts inside onto his stronger foot — the affordable elite option.",
     },
   ],
-  "advanced-forward": [
+  "centre-forward": [
     {
       name: "Endrick",
       club: "Real Madrid",
       age: 20,
       tier: "Marquee",
-      duty: "AF (At)",
+      duty: "CF (At)",
       reason: "17+ Acceleration and Finishing — times his runs onto through balls better than any young striker.",
     },
     {
@@ -279,7 +279,7 @@ export const roleWonderkids: Record<string, RoleWonderKid[]> = {
       club: "Barcelona",
       age: 21,
       tier: "Mid",
-      duty: "AF (At)",
+      duty: "CF (At)",
       reason: "A one-touch finisher with 16+ Acceleration — the lone striker who turns one chance into a goal.",
     },
     {
@@ -287,17 +287,17 @@ export const roleWonderkids: Record<string, RoleWonderKid[]> = {
       club: "Brighton",
       age: 21,
       tier: "Mid",
-      duty: "AF (At)",
+      duty: "CF (At)",
       reason: "Strong, quick enough and a natural finisher — a 25-goal-a-season number 9 in the making.",
     },
   ],
-  "pressing-forward": [
+  "tracking-centre-forward": [
     {
       name: "Vitor Roque",
       club: "Barcelona",
       age: 21,
       tier: "Mid",
-      duty: "PF (At)",
+      duty: "TCF (Su)",
       reason: "Relentless from-the-front pressure with the finishing to punish the mistakes he forces.",
     },
     {
@@ -305,16 +305,16 @@ export const roleWonderkids: Record<string, RoleWonderKid[]> = {
       club: "Brighton",
       age: 21,
       tier: "Mid",
-      duty: "PF (At)",
-      reason: "Chases every lost cause and still scores 20+ — the perfect pressing-forward profile for a gegenpress.",
+      duty: "TCF (Su)",
+      reason: "Chases every lost cause and still scores 20+ — the perfect tracking forward profile for a gegenpress.",
     },
     {
       name: "Assane Diao",
       club: "Como",
       age: 20,
       tier: "Budget",
-      duty: "PF (At)",
-      reason: "Genuine pace and direct running — the budget pressing forward who turns regains into goals.",
+      duty: "TCF (Su)",
+      reason: "Genuine pace and direct running — the budget tracking forward who turns regains into goals.",
     },
   ],
   "target-forward": [

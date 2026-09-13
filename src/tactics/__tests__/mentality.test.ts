@@ -78,8 +78,8 @@ describe("mentality — balance engine (via expected positions)", () => {
         { roleId: "advanced-playmaker", duty: "attack" },
         { roleId: "channel-midfielder", duty: "attack" },
         { roleId: "inside-forward", duty: "attack" },
-        { roleId: "advanced-forward", duty: "attack" },
-        { roleId: "advanced-forward", duty: "attack" },
+        { roleId: "centre-forward", duty: "attack" },
+        { roleId: "centre-forward", duty: "attack" },
         { roleId: "inside-forward", duty: "attack" },
       ],
       "very-attacking"
@@ -108,8 +108,8 @@ describe("mentality — balance engine (via expected positions)", () => {
         { roleId: "advanced-playmaker", duty: "support" },
         { roleId: "channel-midfielder", duty: "support" },
         { roleId: "inside-forward", duty: "support" },
-        { roleId: "advanced-forward", duty: "support" },
-        { roleId: "advanced-forward", duty: "support" },
+        { roleId: "centre-forward", duty: "support" },
+        { roleId: "centre-forward", duty: "support" },
         { roleId: "inside-forward", duty: "support" },
       ],
       "very-attacking"

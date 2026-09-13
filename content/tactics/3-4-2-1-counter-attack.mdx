@@ -24,11 +24,11 @@ setup:
   - { roleId: central-defender, duty: defend, x: 75, y: 78, name: "Central Defender (Stopper)" }
   - { roleId: wing-back, duty: attack, x: 10, y: 56 }
   - { roleId: wing-back, duty: attack, x: 90, y: 56 }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 38, y: 48, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 38, y: 48 }
   - { roleId: deep-lying-playmaker, duty: support, x: 62, y: 48 }
   - { roleId: inside-forward, duty: support, x: 32, y: 26 }
   - { roleId: inside-forward, duty: support, x: 68, y: 26 }
-  - { roleId: advanced-forward, duty: attack, x: 50, y: 12 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 50, y: 12 }
 ---
 
 # 3-4-2-1 Counter-Attack: The Complete FM26 Guide
@@ -39,9 +39,9 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
 
 ### What the 3-4-2-1 Counter-Attack Does in FM26
 
-- **Phase 1 — The Block** (out of possession): A compact 5-4-1 shape. The wing-backs drop to form a back five, the two IFs screen the midfield, and the AF stays high for the outlet. The opposition is forced wide, where crosses must beat three aerial-dominant CBs.
+- **Phase 1 — The Block** (out of possession): A compact 5-4-1 shape. The wing-backs drop to form a back five, the two IFs screen the midfield, and the CF stays high for the outlet. The opposition is forced wide, where crosses must beat three aerial-dominant CBs.
 
-- **Phase 2 — The Launch** (transition): The moment possession is won, the DLP or BWM hits a direct ball to the AF or a wing-back. The wing-backs sprint forward to provide instant width. The two IFs find space between the lines. The counter is launched in 4-6 seconds.
+- **Phase 2 — The Launch** (transition): The moment possession is won, the DLP or PCM hits a direct ball to the CF or a wing-back. The wing-backs sprint forward to provide instant width. The two IFs find space between the lines. The counter is launched in 4-6 seconds.
 
 - **Phase 3 — The Overload** (attacking): With wing-backs wide and two IFs in the half-spaces, the 3-4-2-1 becomes a 3-2-4-1 or even 3-2-2-3 in attack. Five players surge forward, overwhelming the opposition's defensive structure.
 
@@ -60,10 +60,10 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
     { roleId: "central-defender", duty: "defend", x: 75, y: 84, name: "Central Defender (Stopper)" },
     { roleId: "wing-back", duty: "attack", x: 92, y: 82 },
     { roleId: "inside-forward", duty: "support", x: 30, y: 62 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 40, y: 60, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 40, y: 60 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 60, y: 60 },
     { roleId: "inside-forward", duty: "support", x: 70, y: 62 },
-    { roleId: "advanced-forward", duty: "attack", x: 50, y: 38 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 50, y: 38 },
   ]}
   movements={[
     { from: 10, toX: 50, toY: 28, type: "press" },
@@ -83,13 +83,13 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
     { roleId: "central-defender", duty: "defend", x: 25, y: 80, name: "Central Defender (Stopper)" },
     { roleId: "central-defender", duty: "defend", x: 50, y: 81 },
     { roleId: "central-defender", duty: "defend", x: 75, y: 80, name: "Central Defender (Stopper)" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 52, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 38, y: 52 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 62, y: 52 },
     { roleId: "wing-back", duty: "attack", x: 8, y: 28 },
     { roleId: "inside-forward", duty: "support", x: 34, y: 24 },
     { roleId: "inside-forward", duty: "support", x: 66, y: 24 },
     { roleId: "wing-back", duty: "attack", x: 92, y: 28 },
-    { roleId: "advanced-forward", duty: "attack", x: 50, y: 10 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 50, y: 10 },
   ]}
   movements={[
     { from: 6, toX: 6, toY: 16, type: "overlap" },
@@ -100,7 +100,7 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
   ]}
 />
 
-> **Key**: The two IFs pinch inside to create a narrow attacking quartet with the AF. The WBs provide all the width — they must have elite Stamina.
+> **Key**: The two IFs pinch inside to create a narrow attacking quartet with the CF. The WBs provide all the width — they must have elite Stamina.
 
 ---
 
@@ -114,7 +114,7 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
 | **Passing Directness** | More Direct | Counter-attacks require vertical urgency — get the ball forward fast. |
 | **Tempo** | Higher | Speed catches defences unset after turnovers. |
 | **Play Out of Defence** | OFF | Go direct on the counter. No slow build-up. |
-| **Pass Into Space** | ON | The AF and WBs make runs into space — the DLP finds them. |
+| **Pass Into Space** | ON | The CF and WBs make runs into space — the DLP finds them. |
 | **Hit Early Crosses** | ON | Wing-backs should cross from deep positions before the defence recovers. |
 | **Work Ball Into Box** | OFF | Direct shots and early crosses are encouraged. |
 
@@ -122,9 +122,9 @@ The 3-4-2-1 is the formation that Antonio Conte made famous — and in Football 
 
 | Instruction | Setting | Reason |
 |---|---|---|
-| **Counter** | ON | The AF sprints forward the instant the ball is won. |
+| **Counter** | ON | The CF sprints forward the instant the ball is won. |
 | **Counter-Press** | OFF | Retreat into the 5-4-1 block immediately. |
-| **GK Distribution** | Long Kick to AF | Skip the build-up phase — go direct to the striker. |
+| **GK Distribution** | Long Kick to CF | Skip the build-up phase — go direct to the striker. |
 | **Distribute Quickly** | ON | Release before the opposition resets. |
 
 ### Out of Possession
@@ -184,7 +184,7 @@ The most important players in the system. They provide ALL the width in attack a
 
 ### Midfield: The Double Pivot
 
-#### Ball-Winning Midfielder (Defend)
+#### Pressing Central Midfielder (Defend)
 
 ```
 Must-have: Tackling 15+, Work Rate 15+, Stamina 15+, Aggression 14+
@@ -200,7 +200,7 @@ Must-have: Passing 15+, Vision 15+, Composure 14+, Decisions 14+
 PPMs: "Tries Killer Balls Often", "Switches Ball to Other Flank"
 ```
 
-The counter-launcher. Receives from the BWM and hits long balls to the WBs or through balls to the IFs. The DLP is the brain of every counter-attack.
+The counter-launcher. Receives from the PCM and hits long balls to the WBs or through balls to the IFs. The DLP is the brain of every counter-attack.
 
 ### The AMC Pair: The Creators
 
@@ -211,11 +211,11 @@ Must-have: Dribbling 14+, Pace 14+, Technique 14+, Vision 13+
 PPMs: "Cuts Inside", "Runs with Ball Through Centre"
 ```
 
-The two IFs start wide but pinch inside into the half-spaces. They combine with the AF and each other, creating overloads between the opposition FB and CB. On Support duty to track back and help the midfield.
+The two IFs start wide but pinch inside into the half-spaces. They combine with the CF and each other, creating overloads between the opposition FB and CB. On Support duty to track back and help the midfield.
 
 ### The Lone Striker
 
-#### Advanced Forward (Attack)
+#### Centre Forward (Attack)
 
 ```
 Must-have: Pace 15+, Off The Ball 15+, Finishing 14+, Composure 13+
@@ -230,11 +230,11 @@ The lone striker makes channel runs behind the CBs. He's the finisher — the IF
 
 ### Defensive Corners
 
-Three CBs in the 6-yard box. One IF marks the edge for counter-launch. The AF stays forward as a counter threat. The WBs mark the wide areas.
+Three CBs in the 6-yard box. One IF marks the edge for counter-launch. The CF stays forward as a counter threat. The WBs mark the wide areas.
 
 ### Attacking Corners
 
-The AF attacks near post. One CB attacks far post. The DLP takes the corner — aim near post. Both WBs stay back for defensive cover.
+The CF attacks near post. One CB attacks far post. The DLP takes the corner — aim near post. Both WBs stay back for defensive cover.
 
 ---
 
@@ -259,13 +259,13 @@ Press the CBs to force long balls — your three CBs win aerial duels. Mark the 
 - Drop both WBs to **Support** duty (back five becomes permanent)
 - Mentality: **Defensive**
 - Time Wasting: **Frequently**
-- Replace one IF with a BWM (switch to 5-3-1-1)
+- Replace one IF with a PCM (switch to 5-3-1-1)
 
 ### Chasing a Goal at Minute 75
 
 - Push both WBs to **Attack** duty
 - Raise Line of Engagement to **Mid Block**
-- Replace the BWM with a second AF (switch to 3-2-4-1 — all-out attack)
+- Replace the PCM with a second CF (switch to 3-2-4-1 — all-out attack)
 
 ---
 
@@ -276,7 +276,7 @@ Press the CBs to force long balls — your three CBs win aerial duels. Mark the 
 | Strength | Evidence |
 |---|---|
 | **Defensive solidity** | Three CBs + two screening midfielders = 5+2 behind the ball. |
-| **Counter efficiency** | WBs + IFs + AF create a 5-man attack in 4-6 seconds. |
+| **Counter efficiency** | WBs + IFs + CF create a 5-man attack in 4-6 seconds. |
 | **Wing-back overloads** | The 3-4-2-1 creates 2v1s on the flanks every match. |
 | **Underdog-friendly** | The deep block + counter is perfect for weaker sides. |
 
@@ -286,7 +286,7 @@ Press the CBs to force long balls — your three CBs win aerial duels. Mark the 
 |---|---|
 | **WB stamina** | Sub at 60-65 minutes. Need four WBs in the squad. |
 | **Vulnerable to narrow attacks** | The half-spaces between CBs and WBs can be exploited. Use the IFs to track back. |
-| **Lone striker isolation** | If the IFs don't support, the AF is isolated. Ensure IFs are on Support, not Attack. |
+| **Lone striker isolation** | If the IFs don't support, the CF is isolated. Ensure IFs are on Support, not Attack. |
 | **Width dependency** | If WBs are pinned back, the attack has no width. Keep a backup WB pair fresh. |
 
 ---
@@ -308,7 +308,7 @@ Press the CBs to force long balls — your three CBs win aerial duels. Mark the 
 A: The 3-5-2 (see [3-5-2 Counter-Attack](/tactics/3-5-2-counter-attack)) uses a flat midfield three with two strikers. The 3-4-2-1 has two AMCs (Inside Forwards) supporting a lone striker — more creative but less aerial presence in the box.
 
 **Q: Why Inside Forwards and not Wingers?**
-A: Wingers stay wide and overlap the WBs, creating too much width. Inside Forwards pinch inside into the half-spaces, leaving the flanks for the WBs and creating central overloads with the AF.
+A: Wingers stay wide and overlap the WBs, creating too much width. Inside Forwards pinch inside into the half-spaces, leaving the flanks for the WBs and creating central overloads with the CF.
 
 **Q: Do I need four wing-backs?**
 A: Yes. The WB position is the most physically demanding in the system. You need two starters and two direct replacements. Sub them at 60-65 minutes when condition drops below 70%.
@@ -327,7 +327,7 @@ A: Yes. The WB position is the most physically demanding in the system. You need
 | Tempo | **Higher** |
 | Width | **Fairly Wide** |
 | Counter | **ON** |
-| GK Distribution | **Long Kick → AF** |
+| GK Distribution | **Long Kick → CF** |
 | Get Stuck In | **ON** |
 
 ---

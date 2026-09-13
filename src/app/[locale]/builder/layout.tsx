@@ -112,7 +112,7 @@ export default function BuilderLayout({ children }: { children: React.ReactNode 
           <p className="text-text-secondary leading-relaxed">
             Football Manager 2026 offers incredible tactical depth, but finding the right formation and role
             combination can be overwhelming. The FM26 Tactic Builder simplifies the process: pick a base
-            formation, assign roles like Deep-Lying Playmaker, Ball-Playing Defender, or Advanced Forward,
+            formation, assign roles like Deep-Lying Playmaker, Ball-Playing Defender, or Centre Forward,
             fine-tune where every player stands in each phase of play, then export the finished tactic as an
             image you can recreate in-game.
           </p>

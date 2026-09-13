@@ -19,16 +19,16 @@ author: "FM26 Tactics"
 coverImage: "/images/formations/4-2-2-2-fluid-attack.jpg"
 setup:
   - { roleId: sweeper-keeper, duty: support, x: 50, y: 88 }
-  - { roleId: wing-back, duty: attack, x: 10, y: 62, abbr: "CWB", name: "Complete Wing-Back" }
+  - { roleId: playmaking-wing-back, duty: attack, x: 10, y: 62 }
   - { roleId: central-defender, duty: defend, x: 38, y: 76 }
   - { roleId: central-defender, duty: defend, x: 62, y: 76 }
-  - { roleId: wing-back, duty: attack, x: 90, y: 62, abbr: "CWB", name: "Complete Wing-Back" }
+  - { roleId: playmaking-wing-back, duty: attack, x: 90, y: 62 }
   - { roleId: deep-lying-playmaker, duty: defend, x: 38, y: 54 }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 62, y: 54, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 62, y: 54 }
   - { roleId: inside-forward, duty: support, x: 28, y: 28 }
   - { roleId: inside-forward, duty: support, x: 72, y: 28 }
-  - { roleId: advanced-forward, duty: attack, x: 38, y: 12 }
-  - { roleId: advanced-forward, duty: attack, x: 62, y: 12 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 38, y: 12 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 62, y: 12 }
 ---
 
 # 4-2-2-2 Fluid Attack: The Complete FM26 Guide
@@ -53,19 +53,19 @@ Fluid is not a single instruction — it's a philosophy of positional interchang
 
 <FormationDiagram
   formation="4-2-2-2"
-  caption="In possession — the box midfield (DLP + BWM base, dual IFs)"
+  caption="In possession — the box midfield (DLP + PCM base, dual IFs)"
   setup={[
     { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
-    { roleId: "wing-back", duty: "attack", x: 10, y: 62, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "playmaking-wing-back", duty: "attack", x: 10, y: 62 },
     { roleId: "central-defender", duty: "defend", x: 38, y: 76 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
-    { roleId: "wing-back", duty: "attack", x: 90, y: 62, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "playmaking-wing-back", duty: "attack", x: 90, y: 62 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 54 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 62, y: 54, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 62, y: 54 },
     { roleId: "inside-forward", duty: "support", x: 28, y: 28 },
     { roleId: "inside-forward", duty: "support", x: 72, y: 28 },
-    { roleId: "advanced-forward", duty: "attack", x: 38, y: 12 },
-    { roleId: "advanced-forward", duty: "attack", x: 62, y: 12 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 38, y: 12 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 62, y: 12 },
   ]}
   movements={[
     { from: 1, toX: 6, toY: 40, type: "overlap" },
@@ -84,16 +84,16 @@ Fluid is not a single instruction — it's a philosophy of positional interchang
   caption="Out of possession — the box collapses into a mid block"
   setup={[
     { roleId: "sweeper-keeper", duty: "support", x: 50, y: 90 },
-    { roleId: "wing-back", duty: "attack", x: 14, y: 80, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "playmaking-wing-back", duty: "attack", x: 14, y: 80 },
     { roleId: "central-defender", duty: "defend", x: 38, y: 84 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 84 },
-    { roleId: "wing-back", duty: "attack", x: 86, y: 80, abbr: "CWB", name: "Complete Wing-Back" },
+    { roleId: "playmaking-wing-back", duty: "attack", x: 86, y: 80 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 38, y: 66 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 62, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 62, y: 66 },
     { roleId: "inside-forward", duty: "support", x: 32, y: 52 },
     { roleId: "inside-forward", duty: "support", x: 68, y: 52 },
-    { roleId: "advanced-forward", duty: "attack", x: 40, y: 36 },
-    { roleId: "advanced-forward", duty: "attack", x: 60, y: 36 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 40, y: 36 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 60, y: 36 },
   ]}
   movements={[
     { from: 9, toX: 38, toY: 26, type: "press" },
@@ -103,7 +103,7 @@ Fluid is not a single instruction — it's a philosophy of positional interchang
   ]}
 />
 
-> **Key**: The "box" is DLP + BWM (bottom) and two IFs (top). The box shifts as players rotate — a DM might end up in an AM position and vice versa.
+> **Key**: The "box" is DLP + PCM (bottom) and two IFs (top). The box shifts as players rotate — a DM might end up in an AM position and vice versa.
 
 ---
 
@@ -167,7 +167,7 @@ Ball-Playing Defenders are tempting but risky in the box midfield system — the
 
 ### Full-Backs: The Wide Outlets
 
-#### Complete Wing-Back (Attack) × 2
+#### Playmaking Wing-Back (Attack) × 2
 
 ```
 Must-have: Stamina 16+, Pace 14+, Crossing 14+, Work Rate 15+
@@ -187,14 +187,14 @@ PPMs: "Dictates Tempo", "Tries Killer Balls Often", "Switches Ball to Other Flan
 
 The primary creator. Sits at the base of the box, receives from the CBs, and launches through balls to the IFs or AFs. The DLP is the brain of the system.
 
-#### Ball-Winning Midfielder (Defend)
+#### Pressing Central Midfielder (Defend)
 
 ```
 Must-have: Tackling 15+, Work Rate 15+, Stamina 15+, Anticipation 14+
 PPMs: "Stays Back at All Times", "Dives Into Tackles"
 ```
 
-The destroyer. Sits next to the DLP and wins the ball back. When the DLP pushes forward, the BWM stays to maintain the defensive shield. Never goes forward.
+The destroyer. Sits next to the DLP and wins the ball back. When the DLP pushes forward, the PCM stays to maintain the defensive shield. Never goes forward.
 
 ### The AM Pair: The Box Top
 
@@ -209,7 +209,7 @@ The two IFs are the creative engine. They start wide, cut inside into the half-s
 
 ### The Strike Pair
 
-#### Advanced Forward (Attack) × 2
+#### Centre Forward (Attack) × 2
 
 ```
 Must-have: Pace 15+, Off The Ball 15+, Finishing 14+, Composure 13+
@@ -224,11 +224,11 @@ Two AFs split the CBs, make channel runs, and finish the IFs' through balls. The
 
 ### Defensive Corners
 
-Both CBs and the BWM in the 6-yard box. The DLP marks the edge of the area. One IF stays forward as a counter threat. One AF marks the tallest opposition player.
+Both CBs and the PCM in the 6-yard box. The DLP marks the edge of the area. One IF stays forward as a counter threat. One CF marks the tallest opposition player.
 
 ### Attacking Corners
 
-One AF attacks near post, the other far post. Both CBs challenge the keeper. The DLP takes the corner — aim near post, in-swinging.
+One CF attacks near post, the other far post. Both CBs challenge the keeper. The DLP takes the corner — aim near post, in-swinging.
 
 ---
 
@@ -251,7 +251,7 @@ Pressing the DMs and AMs aggressively forces turnovers in the centre — exactly
 ### Chasing a Goal at Minute 75
 
 - Switch one IF to **Attack** duty
-- Switch one AF to **Complete Forward (Attack)** for more link-up play
+- Switch one CF to **Centre Forward (Attack)** for more link-up play
 - Raise mentality to **Attacking**
 - Add "Run At Defence" instruction
 
@@ -259,8 +259,8 @@ Pressing the DMs and AMs aggressively forces turnovers in the centre — exactly
 
 - Drop mentality to **Cautious**
 - Switch both IFs to **Support** (more defensive)
-- The BWM stays as the anchor — never remove the defensive shield
-- Replace one AF with a fresh CB (switch to 5-2-2-1)
+- The PCM stays as the anchor — never remove the defensive shield
+- Replace one CF with a fresh CB (switch to 5-2-2-1)
 
 ---
 

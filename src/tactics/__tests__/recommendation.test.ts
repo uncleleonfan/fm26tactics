@@ -16,7 +16,7 @@ function dimensionMean(result: AnalysisResult, dim: "attack" | "support" | "defe
 
 /**
  * Attack-heavy 4-2-4 in line order:
- * GK | LB CB CB RB | DM(A) DM(A) | IF(A) AF(A) AF(A) IF(A)
+ * GK | LB CB CB RB | DM(A) DM(A) | IF(A) CF(A) CF(A) IF(A)
  */
 function attacking424(): TacticBoardState {
   return buildState("4-2-4", [
@@ -28,8 +28,8 @@ function attacking424(): TacticBoardState {
     { roleId: "advanced-playmaker", duty: "attack" },
     { roleId: "advanced-playmaker", duty: "attack" },
     { roleId: "inside-forward", duty: "attack" },
-    { roleId: "advanced-forward", duty: "attack" },
-    { roleId: "advanced-forward", duty: "attack" },
+    { roleId: "centre-forward", duty: "attack" },
+    { roleId: "centre-forward", duty: "attack" },
     { roleId: "inside-forward", duty: "attack" },
   ]);
 }

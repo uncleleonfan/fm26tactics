@@ -318,7 +318,7 @@ export const roleDepth: Record<string, RoleDepth> = {
     partnerships: [
       { partner: "Inside Forward", partnerId: "inside-forward", note: "The classic flank marriage: IF cuts inside, FB owns the vacated outside lane" },
       { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "DLP's diagonals release the FB into acres as the opposition shifts across" },
-      { partner: "Advanced Forward", partnerId: "advanced-forward", note: "FB's early crosses find the AF attacking the six-yard box at full sprint" },
+      { partner: "Centre Forward", partnerId: "centre-forward", note: "FB's early crosses find the CF attacking the six-yard box at full sprint" },
     ],
     whenToUse: {
       whenToUse: [
@@ -636,7 +636,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       { name: "Pedri", club: "Barcelona", why: "Press-evading feet with last-line vision — the total creative midfielder." },
     ],
     partnerships: [
-      { partner: "Advanced Forward", partnerId: "advanced-forward", note: "The classic supply line: AP's through balls, AF's diagonal runs — defences pick a poison" },
+      { partner: "Centre Forward", partnerId: "centre-forward", note: "The classic supply line: AP's through balls, CF's diagonal runs — defences pick a poison" },
       { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "Two floors of creation: DLP from the base, AP between the lines" },
       { partner: "Box-to-Box Midfielder", partnerId: "box-to-box-midfielder", note: "BBM does the defending for both — the AP's freedom is purchased with his legs" },
     ],
@@ -691,7 +691,7 @@ export const roleDepth: Record<string, RoleDepth> = {
     ],
     partnerships: [
       { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "DLP's disguised through balls into channels are tailor-made for his timed runs" },
-      { partner: "Advanced Forward", partnerId: "advanced-forward", note: "AF occupies both centre-backs, CM attacks the vacated channel — defender's nightmare geometry" },
+      { partner: "Centre Forward", partnerId: "centre-forward", note: "CF occupies both centre-backs, CM attacks the vacated channel — defender's nightmare geometry" },
       { partner: "Playmaking Wing-Back", partnerId: "playmaking-wing-back", note: "PWB inverting draws markers out, opening the exact half-space lane the CM attacks" },
     ],
     whenToUse: {
@@ -744,7 +744,7 @@ export const roleDepth: Record<string, RoleDepth> = {
     ],
     partnerships: [
       { partner: "Full-Back", partnerId: "full-back", note: "IF cuts inside, FB holds the width — the classic flank exchange that makes both better" },
-      { partner: "Advanced Forward", partnerId: "advanced-forward", note: "IF and AF attack the box from different angles — one target, two untrackable runs" },
+      { partner: "Centre Forward", partnerId: "centre-forward", note: "IF and CF attack the box from different angles — one target, two untrackable runs" },
       { partner: "Playmaking Wing-Back", partnerId: "playmaking-wing-back", note: "PWB holds width while IF inverts — perfect modern flank geometry" },
     ],
     whenToUse: {
@@ -770,12 +770,17 @@ export const roleDepth: Record<string, RoleDepth> = {
     ],
   },
 
-  "advanced-forward": {
+  "centre-forward": {
     overview: [
-      "The Advanced Forward is pure intent: he lives on the shoulder of the last defender, occupies both centre-backs by himself, and converts every through ball, cross and half-chance into a shot on target. No dropping deep, no wide wandering — his 30-metre zone is the most valuable strip of grass in football, and he defends it like a striker should: with goals.",
+      "The Centre Forward is pure intent: he lives on the shoulder of the last defender, occupies both centre-backs by himself, and converts every through ball, cross and half-chance into a shot on target. No dropping deep, no wide wandering — his 30-metre zone is the most valuable strip of grass in football, and he defends it like a striker should: with goals.",
       "In FM26 he remains the centrepiece role of every elite attack — the reference point your inside forwards cut inside for, the target your playmakers aim at, the man defenders plan their entire week around. Give him service and he wins you the league; starve him and he'll still poach a goal from nothing. His only flaw is structural: on his bad days, he offers nothing but the constant threat of everything.",
     ],
     dutyGuide: {
+      support: {
+        behavior: "Leads the line but drops a few metres to link play, bringing runners into the game.",
+        bestWhen: "Lone-striker systems that need the front man involved in build-up.",
+        attributes: ["First Touch", "Off the Ball", "Composure", "Strength"],
+      },
       attack: {
         behavior: "Plays on the last line permanently, attacks the six-yard box, presses defenders when possession is lost.",
         bestWhen: "Any tactic with a single striker and creators behind him — the universal goalscorer.",
@@ -793,21 +798,21 @@ export const roleDepth: Record<string, RoleDepth> = {
       { name: "Alexander Isak", club: "Liverpool", why: "Silk plus sprint: runs the channels and finishes like a No. 10 in a No. 9's body." },
     ],
     partnerships: [
-      { partner: "Deep-Lying Forward", partnerId: "target-forward", note: "TF drops and holds, AF stretches and finishes — classic strike-pairing geometry" },
-      { partner: "Pressing Forward", partnerId: "pressing-forward", note: "PF creates chaos pressing CBs, AF capitalizes on the space" },
-      { partner: "Inside Forward", partnerId: "inside-forward", note: "IF cuts inside and links with AF in the box — devastating combination" },
+      { partner: "Deep-Lying Forward", partnerId: "deep-lying-forward", note: "DLF drops and links, CF stretches and finishes — classic strike-pairing geometry" },
+      { partner: "Tracking Centre Forward", partnerId: "tracking-centre-forward", note: "TCF creates chaos pressing CBs, CF capitalizes on the space" },
+      { partner: "Inside Forward", partnerId: "inside-forward", note: "IF cuts inside and links with the CF in the box — devastating combination" },
     ],
     whenToUse: {
       whenToUse: [
         "You need a pure goalscorer who stays high and finishes chances",
         "Your striker has elite Finishing, Composure and Off the Ball",
-        "You play with creative midfielders who can feed the AF",
+        "You play with creative midfielders who can feed the CF",
         "You want a focal point for crosses and through balls",
       ],
       whenToAvoid: [
         "Your striker has poor Finishing or Composure",
         "You want a forward who drops deep and creates — use a deeper role instead",
-        "Your team struggles to create chances — AF won't help in buildup",
+        "Your team struggles to create chances — the CF won't help in buildup",
       ],
     },
     radar: [
@@ -820,10 +825,10 @@ export const roleDepth: Record<string, RoleDepth> = {
     ],
   },
 
-  "pressing-forward": {
+  "tracking-centre-forward": {
     overview: [
-      "The Pressing Forward is your first defender and loudest agitator. From the opening whistle he harasses centre-backs, blocks passing lanes and forces errors that more glamorous teammates convert. His map of the pitch is simple: wherever the ball is, one opponent is about to have a very bad time. Goals are his bonus; chaos is his contract.",
-      "Modern elite football is unthinkable without him — gegenpress systems begin with the PF's relentless funnel, and counter-attacks begin with his interceptions high up the pitch. In FM26 he is the tactical catalyst that turns possession won into positions advanced. Pair him with a poacher who feeds on the wreckage, and watch defences unravel under 90 minutes of industrial pressure.",
+      "The Tracking Centre Forward is your first defender and loudest agitator. From the opening whistle he harasses centre-backs, blocks passing lanes and forces errors that more glamorous teammates convert. His map of the pitch is simple: wherever the ball is, one opponent is about to have a very bad time. Goals are his bonus; chaos is his contract.",
+      "Modern elite football is unthinkable without him — gegenpress systems begin with the TCF's relentless funnel, and counter-attacks begin with his interceptions high up the pitch. In FM26 he is the tactical catalyst that turns possession won into positions advanced. Pair him with a poacher who feeds on the wreckage, and watch defences unravel under 90 minutes of industrial pressure.",
     ],
     dutyGuide: {
       defend: {
@@ -836,11 +841,6 @@ export const roleDepth: Record<string, RoleDepth> = {
         bestWhen: "The balanced default — chaos with a bit of craft.",
         attributes: ["Work Rate", "Stamina", "Aggression", "Teamwork"],
       },
-      attack: {
-        behavior: "Full-intensity harassment plus genuine penalty-box presence when attacks develop.",
-        bestWhen: "Front twos where the partner poaches the chances the PF's pressure creates.",
-        attributes: ["Work Rate", "Acceleration", "Finishing", "Stamina"],
-      },
     },
     ppms: [
       { name: "Marks Opponent Tightly", reason: "Suffocating the deepest defender turns their build-up into long balls — your plan, executed." },
@@ -852,8 +852,8 @@ export const roleDepth: Record<string, RoleDepth> = {
       { name: "Ollie Watkins", club: "Aston Villa", why: "Channel-running volume striker whose defensive work never stops at either end." },
     ],
     partnerships: [
-      { partner: "Advanced Forward", partnerId: "advanced-forward", note: "PF creates chaos pressing CBs, AF capitalizes on the space — the classic high-press strike pair" },
-      { partner: "Advanced Playmaker", partnerId: "advanced-playmaker", note: "PF's turnovers land at the AP's feet in the final third — creation from destruction" },
+      { partner: "Centre Forward", partnerId: "centre-forward", note: "TCF creates chaos pressing CBs, CF capitalizes on the space — the classic high-press strike pair" },
+      { partner: "Advanced Playmaker", partnerId: "advanced-playmaker", note: "The TCF's turnovers land at the AP's feet in the final third — creation from destruction" },
       { partner: "Box-to-Box Midfielder", partnerId: "box-to-box-midfielder", note: "BBM joins the press from midfield — pressure in numbers, errors guaranteed" },
     ],
     whenToUse: {
@@ -909,7 +909,7 @@ export const roleDepth: Record<string, RoleDepth> = {
     partnerships: [
       { partner: "Inside Forward", partnerId: "inside-forward", note: "TF wins the first ball, IF attacks the second — the classic big-man/quick-man axis" },
       { partner: "Wing-Back", partnerId: "wing-back", note: "WB's byline crosses are custom-built for his aerial dominance" },
-      { partner: "Advanced Forward", partnerId: "advanced-forward", note: "TF holds and lays off, AF runs the channels — strike-pairing yin and yang" },
+      { partner: "Centre Forward", partnerId: "centre-forward", note: "TF holds and lays off, CF runs the channels — strike-pairing yin and yang" },
     ],
     whenToUse: {
       whenToUse: [

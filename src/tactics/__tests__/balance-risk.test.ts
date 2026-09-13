@@ -29,7 +29,7 @@ describe("balance engine", () => {
       { roleId: "deep-lying-playmaker", duty: "defend" },
       { roleId: "box-to-box-midfielder", duty: "support" },
       { roleId: "deep-lying-playmaker", duty: "defend" },
-      { roleId: "pressing-forward", duty: "defend" },
+      { roleId: "tracking-centre-forward", duty: "defend" },
       { roleId: "target-forward", duty: "support" },
     ]);
     // 4-2-4 line order: GK | LB CB CB RB | DM DM | LW STL STR RW
@@ -42,8 +42,8 @@ describe("balance engine", () => {
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
     ]);
 
@@ -76,8 +76,8 @@ describe("risk engine & warnings", () => {
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "channel-midfielder", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
     ]);
     const r = analyzeTactic(reckless, "central-final-third");
@@ -124,10 +124,10 @@ describe("risk engine & warnings", () => {
         fwd,
         fwd,
       ]);
-    // AF(attack) has centralProtection .25 vs pressing-forward(defend) .40 —
+    // centre-forward(attack) has centralProtection .3 vs tracking-centre-forward(defend) .45 —
     // if forwards were counted these two XIs would score differently.
-    const withAF = analyzeTactic(strikePair({ roleId: "advanced-forward", duty: "attack" }), "central-midfield");
-    const withPF = analyzeTactic(strikePair({ roleId: "pressing-forward", duty: "defend" }), "central-midfield");
+    const withAF = analyzeTactic(strikePair({ roleId: "centre-forward", duty: "attack" }), "central-midfield");
+    const withPF = analyzeTactic(strikePair({ roleId: "tracking-centre-forward", duty: "defend" }), "central-midfield");
     expect(withAF.defence.centralProtection).toBe(withPF.defence.centralProtection);
   });
 
@@ -144,8 +144,8 @@ describe("risk engine & warnings", () => {
       { roleId: "box-to-box-midfielder", duty: "support" },
       { roleId: "wing-back", duty: "defend" }, // RB slot sits in midfield row
       { roleId: "advanced-playmaker", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
     ]);
     const r = analyzeTactic(narrow, "central-midfield");
     const w = r.warnings.find((x) => x.id === "attacking-zones-empty");
@@ -169,7 +169,7 @@ describe("risk engine & warnings", () => {
       { roleId: "deep-lying-playmaker", duty: "defend" },
       { roleId: "box-to-box-midfielder", duty: "support" },
       { roleId: "deep-lying-playmaker", duty: "defend" },
-      { roleId: "pressing-forward", duty: "defend" },
+      { roleId: "tracking-centre-forward", duty: "defend" },
       { roleId: "target-forward", duty: "support" },
     ]);
     const r = analyzeTactic(defensive, "central-midfield");
@@ -191,7 +191,7 @@ describe("recommendation engine (spec §17-18)", () => {
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
-      { roleId: "advanced-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
       { roleId: "inside-forward", duty: "attack" },
     ]);
 

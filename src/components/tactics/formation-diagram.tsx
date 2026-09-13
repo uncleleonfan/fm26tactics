@@ -24,7 +24,7 @@ export interface FormationSetupSlot {
   duty: PlayerDuty;
   x?: number;
   y?: number;
-  /** Display abbreviation override (e.g. "DM", "CAR" for roles without a preset entry). */
+  /** Display abbreviation override (e.g. "L"/"R" positional labels for one role split across two slots). */
   abbr?: string;
   /** Full display name override for the hover tooltip. */
   name?: string;

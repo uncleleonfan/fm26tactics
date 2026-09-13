@@ -27,7 +27,7 @@ setup:
   - { roleId: advanced-playmaker, duty: support, x: 32, y: 42 }
   - { roleId: channel-midfielder, duty: support, x: 68, y: 42 }
   - { roleId: inside-forward, duty: support, x: 20, y: 26 }
-  - { roleId: target-forward, duty: support, x: 50, y: 13, abbr: "CF", name: "Complete Forward" }
+  - { roleId: centre-forward, duty: support, x: 50, y: 13 }
   - { roleId: inside-forward, duty: attack, x: 80, y: 26 }
 ---
 
@@ -63,7 +63,7 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
     { roleId: "advanced-playmaker", duty: "support", x: 32, y: 42 },
     { roleId: "channel-midfielder", duty: "support", x: 68, y: 42 },
     { roleId: "inside-forward", duty: "support", x: 20, y: 26 },
-    { roleId: "target-forward", duty: "support", x: 50, y: 13, abbr: "CF", name: "Complete Forward" },
+    { roleId: "centre-forward", duty: "support", x: 50, y: 13 },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
   ]}
   movements={[
@@ -91,7 +91,7 @@ Pep Guardiola's famous rule: **recover the ball within 6 seconds of losing it.**
     { roleId: "advanced-playmaker", duty: "support", x: 36, y: 54 },
     { roleId: "channel-midfielder", duty: "support", x: 64, y: 54 },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 52 },
-    { roleId: "target-forward", duty: "support", x: 50, y: 40, abbr: "CF", name: "Complete Forward" },
+    { roleId: "centre-forward", duty: "support", x: 50, y: 40 },
   ]}
   movements={[
     { from: 10, toX: 50, toY: 30, type: "press" },
@@ -253,7 +253,7 @@ The goal-scoring winger. The IF(A) on the right is your primary wide goal threat
 
 **The IF(A) + CHM(S) motion:** When the IF(A) cuts inside, the CHM(S) drifts wide to fill the vacated space. When the CHM(S) goes inside, the IF(A) stays wide. This constant rotation is what breaks organized defenses — static defending can't cope with fluid movement.
 
-#### Striker: Complete Forward (Support)
+#### Striker: Centre Forward (Support)
 
 ```
 Must-have: Passing 15+, First Touch 16+, Off The Ball 16+, Composure 15+
@@ -261,9 +261,9 @@ Ideal: Finishing 14+, Technique 15+, Vision 14+, Decisions 15+
 PPMs: "Comes Deep to Get Ball", "Plays One-Twos", "Places Shots"
 ```
 
-The Complete Forward links everything. On Support duty, he drops into midfield — creating a midfield box (DLP + AP + CHM + CF) that outnumbers any midfield in the game. His passing is as important as his finishing.
+The Centre Forward links everything. On Support duty, he drops into midfield — creating a midfield box (DLP + AP + CHM + CF) that outnumbers any midfield in the game. His passing is as important as his finishing.
 
-**Why Complete Forward, not False 9?** In FM26, the F9 drops TOO deep — into the AM strata. The CF(S) drops only 5-10 yards, staying within the striker strata while creating the overload. The difference is crucial: CF(S) is still a goal threat, F9 is a pure creator.
+**Why Centre Forward, not False 9?** In FM26, the F9 drops TOO deep — into the AM strata. The CF(S) drops only 5-10 yards, staying within the striker strata while creating the overload. The difference is crucial: CF(S) is still a goal threat, F9 is a pure creator.
 
 **Why Support, not Attack?** CF(A) plays on the shoulder of the last defender. This isolates him from the midfield — he can't link play, and possession breaks down at the final third.
 
@@ -287,7 +287,7 @@ In build-up, Tiki-Taka morphs into a 3-2-4-1:
     { roleId: "advanced-playmaker", duty: "support", x: 38, y: 28 },
     { roleId: "channel-midfielder", duty: "support", x: 62, y: 28 },
     { roleId: "inside-forward", duty: "attack", x: 86, y: 24 },
-    { roleId: "target-forward", duty: "support", x: 50, y: 10, abbr: "CF", name: "Complete Forward" },
+    { roleId: "centre-forward", duty: "support", x: 50, y: 10 },
   ]}
 />
 

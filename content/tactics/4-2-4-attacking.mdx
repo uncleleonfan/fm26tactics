@@ -23,12 +23,12 @@ setup:
   - { roleId: central-defender, duty: defend, x: 38, y: 78 }
   - { roleId: central-defender, duty: defend, x: 62, y: 78 }
   - { roleId: full-back, duty: attack, x: 88, y: 70 }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 38, y: 54, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 38, y: 54 }
   - { roleId: deep-lying-playmaker, duty: support, x: 62, y: 54 }
-  - { roleId: inside-forward, duty: attack, x: 12, y: 28, abbr: "W", name: "Winger" }
-  - { roleId: inside-forward, duty: attack, x: 88, y: 28, abbr: "W", name: "Winger" }
+  - { roleId: winger, duty: attack, x: 12, y: 28 }
+  - { roleId: winger, duty: attack, x: 88, y: 28 }
   - { roleId: target-forward, duty: attack, x: 38, y: 13 }
-  - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 62, y: 13 }
 ---
 
 # 4-2-4 Attacking: The Complete FM26 Guide
@@ -39,7 +39,7 @@ The 4-2-4 is the nuclear option in Football Manager 2026 — four forwards, two 
 
 ### What the 4-2-4 Attacking Does in FM26
 
-- **Phase 1 — The Bombardment** (in possession): Four forwards flood the box. Two wingers stay wide for crosses, a Target Forward attacks the near post, and an Advanced Forward attacks the far post. The two CMs feed the ball forward relentlessly.
+- **Phase 1 — The Bombardment** (in possession): Four forwards flood the box. Two wingers stay wide for crosses, a Target Forward attacks the near post, and an Centre Forward attacks the far post. The two CMs feed the ball forward relentlessly.
 
 - **Phase 2 — The Route** (build-up): The ball goes direct — long passes from the CMs or the GK to the TF. No patient build-up. No sideways passing. Vertical urgency is the entire strategy.
 
@@ -58,12 +58,12 @@ The 4-2-4 is the nuclear option in Football Manager 2026 — four forwards, two 
     { roleId: "central-defender", duty: "defend", x: 38, y: 76 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
     { roleId: "full-back", duty: "attack", x: 92, y: 54 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 38, y: 52, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 38, y: 52 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 62, y: 52 },
-    { roleId: "inside-forward", duty: "attack", x: 6, y: 24, abbr: "W", name: "Winger" },
+    { roleId: "winger", duty: "attack", x: 6, y: 24 },
     { roleId: "target-forward", duty: "attack", x: 40, y: 14 },
-    { roleId: "advanced-forward", duty: "attack", x: 60, y: 10 },
-    { roleId: "inside-forward", duty: "attack", x: 94, y: 24, abbr: "W", name: "Winger" },
+    { roleId: $1centre-forward$1, duty: "attack", x: 60, y: 10 },
+    { roleId: "winger", duty: "attack", x: 94, y: 24 },
   ]}
   movements={[
     { from: 1, toX: 6, toY: 42, type: "overlap" },
@@ -85,12 +85,12 @@ The 4-2-4 is the nuclear option in Football Manager 2026 — four forwards, two 
     { roleId: "central-defender", duty: "defend", x: 38, y: 80 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 80 },
     { roleId: "full-back", duty: "attack", x: 88, y: 78 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 36, y: 60, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 36, y: 60 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 64, y: 60 },
-    { roleId: "inside-forward", duty: "attack", x: 20, y: 56, abbr: "W", name: "Winger" },
-    { roleId: "inside-forward", duty: "attack", x: 80, y: 56, abbr: "W", name: "Winger" },
+    { roleId: "winger", duty: "attack", x: 20, y: 56 },
+    { roleId: "winger", duty: "attack", x: 80, y: 56 },
     { roleId: "target-forward", duty: "attack", x: 40, y: 34 },
-    { roleId: "advanced-forward", duty: "attack", x: 60, y: 34 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 60, y: 34 },
   ]}
   movements={[
     { from: 7, toX: 16, toY: 68, type: "backward" },
@@ -114,7 +114,7 @@ The 4-2-4 is the nuclear option in Football Manager 2026 — four forwards, two 
 | **Passing Directness** | Much More Direct | Every pass goes forward. Route One execution. |
 | **Tempo** | Much Higher | Maximum urgency — the clock is ticking. |
 | **Play Out of Defence** | OFF | Never. The ball goes long immediately. |
-| **Pass Into Space** | ON | The AF and Ws make runs behind the defence. |
+| **Pass Into Space** | ON | The CF and Ws make runs behind the defence. |
 | **Hit Early Crosses** | ON | Wingers cross from deep — don't wait for overlaps. |
 | **Work Ball Into Box** | OFF | Shoot from anywhere. Cross from anywhere. |
 | **Shoot on Sight** | ON | Any shot is a good shot when chasing a goal. |
@@ -172,7 +172,7 @@ The FBs push up to provide width — with four forwards committed, the FBs are t
 
 ### Midfield: The Bare Minimum
 
-#### Ball-Winning Midfielder (Defend)
+#### Pressing Central Midfielder (Defend)
 
 ```
 Must-have: Tackling 15+, Work Rate 16+, Stamina 16+, Aggression 14+
@@ -188,7 +188,7 @@ Must-have: Passing 15+, Vision 15+, Composure 14+, Long Shots 13+
 PPMs: "Tries Killer Balls Often", "Switches Ball to Other Flank"
 ```
 
-The launchpad. Receives from the BWM and hits long balls to the TF or through balls to the wingers. On Support duty to maintain a midfield presence — if the DLP goes forward, there's no one in midfield.
+The launchpad. Receives from the PCM and hits long balls to the TF or through balls to the wingers. On Support duty to maintain a midfield presence — if the DLP goes forward, there's no one in midfield.
 
 ### The Front Four: The Nuclear Arsenal
 
@@ -199,7 +199,7 @@ Must-have: Pace 15+, Crossing 15+, Dribbling 14+, Technique 14+
 PPMs: "Runs with Ball Down Left/Right", "Hits Early Crosses"
 ```
 
-The wingers stay wide, run at the FBs, and cross early. They're the primary supply line for the TF and AF. On Attack duty — no defensive responsibilities.
+The wingers stay wide, run at the FBs, and cross early. They're the primary supply line for the TF and CF. On Attack duty — no defensive responsibilities.
 
 #### Target Forward (Attack)
 
@@ -208,9 +208,9 @@ Must-have: Jumping Reach 16+, Strength 15+, Heading 14+, First Touch 13+
 PPMs: "Plays With Back to Goal", "Knocks Ball Past Opponent"
 ```
 
-The focal point. He receives every long ball, holds off the CB, and lays off to the AF or wingers. His aerial dominance is the key to the 4-2-4 — he wins 30+ headers per match.
+The focal point. He receives every long ball, holds off the CB, and lays off to the CF or wingers. His aerial dominance is the key to the 4-2-4 — he wins 30+ headers per match.
 
-#### Advanced Forward (Attack)
+#### Centre Forward (Attack)
 
 ```
 Must-have: Pace 16+, Off The Ball 15+, Finishing 14+, Composure 13+
@@ -225,11 +225,11 @@ The finisher. He feeds off the TF's knockdowns and the wingers' crosses. His pac
 
 ### Defensive Corners
 
-Both CBs and the BWM in the 6-yard box. The DLP marks the edge for counter-launch. The TF stays forward as a counter threat. One winger stays back.
+Both CBs and the PCM in the 6-yard box. The DLP marks the edge for counter-launch. The TF stays forward as a counter threat. One winger stays back.
 
 ### Attacking Corners
 
-The TF attacks near post, the AF far post. Both CBs attack the keeper. One winger takes the corner — aim near post, in-swinging. The other winger stays back.
+The TF attacks near post, the CF far post. Both CBs attack the keeper. One winger takes the corner — aim near post, in-swinging. The other winger stays back.
 
 ---
 
@@ -261,7 +261,7 @@ The 4-2-4 is typically used as an in-match adjustment, not a starting formation.
 
 **Need MORE goals (minute 85+):**
 - Push mentality to **Very Attacking**
-- Replace the BWM with a third forward (switch to 3-1-6 — all-out attack)
+- Replace the PCM with a third forward (switch to 3-1-6 — all-out attack)
 - Push both FBs to **Attack**
 - Remove all defensive instructions
 

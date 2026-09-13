@@ -14,12 +14,12 @@ setup:
   - { roleId: overlapping-centre-back, duty: defend, x: 20, y: 78 }
   - { roleId: ball-playing-defender, duty: defend, x: 50, y: 81, name: "Ball-Playing Defender (Cover)" }
   - { roleId: overlapping-centre-back, duty: defend, x: 80, y: 78 }
-  - { roleId: inside-forward, duty: support, x: 12, y: 52, abbr: "DW", name: "Defensive Winger" }
-  - { roleId: inside-forward, duty: support, x: 88, y: 52, abbr: "DW", name: "Defensive Winger" }
+  - { roleId: tracking-winger, duty: support, x: 12, y: 52 }
+  - { roleId: tracking-winger, duty: support, x: 88, y: 52 }
   - { roleId: deep-lying-playmaker, duty: support, x: 36, y: 48 }
   - { roleId: advanced-playmaker, duty: attack, x: 64, y: 48 }
   - { roleId: inside-forward, duty: attack, x: 20, y: 24 }
-  - { roleId: target-forward, duty: support, x: 50, y: 13, abbr: "CF", name: "Complete Forward" }
+  - { roleId: centre-forward, duty: support, x: 50, y: 13 }
   - { roleId: inside-forward, duty: attack, x: 80, y: 24 }
 ---
 
@@ -69,12 +69,12 @@ In FM26, possession-based systems have been refined to reward intelligent positi
     { roleId: "overlapping-centre-back", duty: "defend", x: 18, y: 74 },
     { roleId: "ball-playing-defender", duty: "defend", x: 50, y: 80, name: "Ball-Playing Defender (Cover)" },
     { roleId: "overlapping-centre-back", duty: "defend", x: 82, y: 74 },
-    { roleId: "inside-forward", duty: "support", x: 8, y: 28, abbr: "DW", name: "Defensive Winger" },
-    { roleId: "inside-forward", duty: "support", x: 92, y: 28, abbr: "DW", name: "Defensive Winger" },
+    { roleId: "tracking-winger", duty: "support", x: 8, y: 28 },
+    { roleId: "tracking-winger", duty: "support", x: 92, y: 28 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 38, y: 54 },
     { roleId: "advanced-playmaker", duty: "attack", x: 62, y: 54 },
     { roleId: "inside-forward", duty: "attack", x: 32, y: 24 },
-    { roleId: "target-forward", duty: "support", x: 50, y: 26, abbr: "CF", name: "Complete Forward" },
+    { roleId: "centre-forward", duty: "support", x: 50, y: 26 },
     { roleId: "inside-forward", duty: "attack", x: 68, y: 24 },
   ]}
   movements={[
@@ -94,12 +94,12 @@ In FM26, possession-based systems have been refined to reward intelligent positi
     { roleId: "overlapping-centre-back", duty: "defend", x: 24, y: 66 },
     { roleId: "ball-playing-defender", duty: "defend", x: 50, y: 68, name: "Ball-Playing Defender (Cover)" },
     { roleId: "overlapping-centre-back", duty: "defend", x: 76, y: 66 },
-    { roleId: "inside-forward", duty: "support", x: 12, y: 58, abbr: "DW", name: "Defensive Winger" },
-    { roleId: "inside-forward", duty: "support", x: 88, y: 58, abbr: "DW", name: "Defensive Winger" },
+    { roleId: "tracking-winger", duty: "support", x: 12, y: 58 },
+    { roleId: "tracking-winger", duty: "support", x: 88, y: 58 },
     { roleId: "deep-lying-playmaker", duty: "support", x: 38, y: 54 },
     { roleId: "advanced-playmaker", duty: "attack", x: 62, y: 54 },
     { roleId: "inside-forward", duty: "attack", x: 26, y: 40 },
-    { roleId: "target-forward", duty: "support", x: 50, y: 32, abbr: "CF", name: "Complete Forward" },
+    { roleId: "centre-forward", duty: "support", x: 50, y: 32 },
     { roleId: "inside-forward", duty: "attack", x: 74, y: 40 },
   ]}
   movements={[
@@ -122,14 +122,14 @@ In FM26, possession-based systems have been refined to reward intelligent positi
 - **Overlapping Centre-Back (Defend)** — Left side: mirrors the right
 
 ### Midfield
-- **Defensive Winger (Support)** — Right side: disciplined wide player who tucks into midfield
+- **Tracking Winger (Support)** — Right side: disciplined wide player who tucks into midfield
 - **Deep-Lying Playmaker (Support)** — Dictates tempo, recycles possession
 - **Advanced Playmaker (Attack)** — Creates between the lines, finds the forwards
-- **Defensive Winger (Support)** — Left side: mirrors the right
+- **Tracking Winger (Support)** — Left side: mirrors the right
 
 ### Attack
 - **Inside Forward (Attack)** — Right side: primary goal threat cutting inside
-- **Complete Forward (Support)** — Links play, drops deep, creates overloads
+- **Centre Forward (Support)** — Links play, drops deep, creates overloads
 - **Inside Forward (Attack)** — Left side: mirrors the right
 
 > **Pro Tip**: The Overlapping Centre-Back role is crucial. They must be comfortable stepping out with the ball, overlapping the wide channel AND defending 1v1 in space. Look for converted full-backs with decent height or ball-playing center-backs with mobility.
@@ -151,7 +151,7 @@ When fully established in possession, the 3-4-3 transforms:
 
 - **Back 3** → OCBs split wide and overlap, BPD(C) anchors the center
 - **Midfield 2** → DLP(S) and AP(A) form a double pivot
-- **Front 5** → Defensive Wingers push high, Inside Forwards drift inside, Complete Forward drops between lines
+- **Front 5** → Tracking Wingers push high, Inside Forwards drift inside, Centre Forward drops between lines
 
 This creates a 3-2-5 shape that pins the opposition back and creates constant overloads in every zone.
 

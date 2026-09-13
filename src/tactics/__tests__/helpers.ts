@@ -67,7 +67,7 @@ function default433Specs(overrides: Partial<Record<number, PlayerSpec>>): Player
     { roleId: "deep-lying-playmaker", duty: "defend" },// 6 DM (x50)
     { roleId: "advanced-playmaker", duty: "support" }, // 7 CM (x65)
     { roleId: "inside-forward", duty: "support" },     // 8 LW
-    { roleId: "advanced-forward", duty: "attack" },    // 9 ST
+    { roleId: "centre-forward", duty: "attack" },    // 9 ST
     { roleId: "inside-forward", duty: "support" },     // 10 RW
   ];
   return base.map((s, i) => overrides[i] ?? s);

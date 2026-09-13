@@ -15,12 +15,12 @@ setup:
   - { roleId: ball-playing-defender, duty: defend, x: 38, y: 76 }
   - { roleId: central-defender, duty: defend, x: 62, y: 76 }
   - { roleId: full-back, duty: attack, x: 88, y: 70 }
-  - { roleId: deep-lying-playmaker, duty: defend, x: 50, y: 58, abbr: "DM", name: "Defensive Midfielder" }
-  - { roleId: box-to-box-midfielder, duty: support, x: 32, y: 46, abbr: "CAR", name: "Carrilero" }
+  - { roleId: defensive-midfielder, duty: defend, x: 50, y: 58 }
+  - { roleId: wide-covering-central-midfielder, duty: support, x: 32, y: 46 }
   - { roleId: box-to-box-midfielder, duty: support, x: 68, y: 46 }
-  - { roleId: advanced-playmaker, duty: attack, x: 50, y: 30, abbr: "AM", name: "Attacking Midfielder" }
-  - { roleId: advanced-forward, duty: attack, x: 38, y: 13 }
-  - { roleId: target-forward, duty: support, x: 62, y: 13, abbr: "DLF", name: "Deep-Lying Forward" }
+  - { roleId: attacking-midfielder, duty: attack, x: 50, y: 30 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 38, y: 13 }
+  - { roleId: deep-lying-forward, duty: support, x: 62, y: 13 }
 ---
 
 ## The Power of Central Overload
@@ -72,12 +72,12 @@ In FM26, central overloads are particularly effective because the match engine n
 ### Midfield
 - **Defensive Midfielder (Defend)** — Anchors the diamond, shields the defense
 - **Box-to-Box Midfielder (Support)** — Right side: energy and late runs
-- **Carrilero (Support)** — Left side: shuttles and covers wide areas when full-back attacks
+- **Wide Covering Central Midfielder (Support)** — Left side: shuttles and covers wide areas when full-back attacks
 - **Attacking Midfielder (Attack)** — The crown jewel: primary creator and goal threat
 
 ### Attack
-- **Advanced Forward (Attack)** — Stretches the defense, runs channels
-- **Deep-Lying Forward (Support)** — Links midfield and attack, creates for AF
+- **Centre Forward (Attack)** — Stretches the defense, runs channels
+- **Deep-Lying Forward (Support)** — Links midfield and attack, creates for CF
 
 > **Pro Tip**: The Attacking Midfielder (Attack) is the most important player in this system. He receives the ball between the lines of almost every formation because no team can match your central numbers. Invest heavily in this position — it's where matches are won.
 
@@ -89,8 +89,8 @@ In FM26, central overloads are particularly effective because the match engine n
 2. **Stamina** (Minimum 16 for full-backs) — Non-negotiable for the width providers
 3. **Off the Ball** (Minimum 14 for AM) — Finding space between lines
 4. **Positioning** (Minimum 14 for DM) — Must read the game and intercept
-5. **Work Rate** (Minimum 13 for BBM and CAR) — Shuttling in midfield
-6. **Finishing** (Minimum 14 for AM and AF) — Capitalize on central chances
+5. **Work Rate** (Minimum 13 for BBM and WCC) — Shuttling in midfield
+6. **Finishing** (Minimum 14 for AM and CF) — Capitalize on central chances
 
 ## The Diamond Shape in Practice
 
@@ -105,12 +105,12 @@ In FM26, central overloads are particularly effective because the match engine n
     { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 76 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 76 },
     { roleId: "full-back", duty: "attack", x: 88, y: 70 },
-    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 58, abbr: "DM", name: "Defensive Midfielder" },
-    { roleId: "box-to-box-midfielder", duty: "support", x: 32, y: 46, abbr: "CAR", name: "Carrilero" },
+    { roleId: "defensive-midfielder", duty: "defend", x: 50, y: 58 },
+    { roleId: "wide-covering-central-midfielder", duty: "support", x: 32, y: 46 },
     { roleId: "box-to-box-midfielder", duty: "support", x: 68, y: 46 },
-    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 30, abbr: "AM", name: "Attacking Midfielder" },
-    { roleId: "advanced-forward", duty: "attack", x: 38, y: 13 },
-    { roleId: "target-forward", duty: "support", x: 62, y: 13, abbr: "DLF", name: "Deep-Lying Forward" },
+    { roleId: "attacking-midfielder", duty: "attack", x: 50, y: 30 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 38, y: 13 },
+    { roleId: "deep-lying-forward", duty: "support", x: 62, y: 13 },
   ]}
   movements={[
     { from: 1, toX: 8, toY: 48, type: "overlap" },
@@ -132,12 +132,12 @@ In FM26, central overloads are particularly effective because the match engine n
     { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 84 },
     { roleId: "central-defender", duty: "defend", x: 62, y: 84 },
     { roleId: "full-back", duty: "attack", x: 84, y: 82 },
-    { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 70, abbr: "DM", name: "Defensive Midfielder" },
-    { roleId: "box-to-box-midfielder", duty: "support", x: 36, y: 60, abbr: "CAR", name: "Carrilero" },
+    { roleId: "defensive-midfielder", duty: "defend", x: 50, y: 70 },
+    { roleId: "wide-covering-central-midfielder", duty: "support", x: 36, y: 60 },
     { roleId: "box-to-box-midfielder", duty: "support", x: 64, y: 60 },
-    { roleId: "advanced-playmaker", duty: "attack", x: 50, y: 48, abbr: "AM", name: "Attacking Midfielder" },
-    { roleId: "advanced-forward", duty: "attack", x: 42, y: 32 },
-    { roleId: "target-forward", duty: "support", x: 58, y: 32, abbr: "DLF", name: "Deep-Lying Forward" },
+    { roleId: "attacking-midfielder", duty: "attack", x: 50, y: 48 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 42, y: 32 },
+    { roleId: "deep-lying-forward", duty: "support", x: 58, y: 32 },
   ]}
   movements={[
     { from: 9, toX: 40, toY: 22, type: "press" },
@@ -154,10 +154,10 @@ This shape creates a permanent 4v2 or 4v3 advantage through the middle against 4
 ### Full-backs on Defend or Support duty
 Your full-backs ARE your width. If they don't push forward, you have zero wide presence and become painfully predictable. Attack duty is almost mandatory in this system.
 
-### Removing the Carrilero for another BBM
-The Carrilero's specific movement — drifting wide to cover the full-back's space AND tucking inside — is essential to the diamond's balance. Two BBM's will leave you exposed on the flanks.
+### Removing the Wide Covering Central Midfielder for another BBM
+The Wide Covering Central Midfielder's specific movement — drifting wide to cover the full-back's space AND tucking inside — is essential to the diamond's balance. Two BBM's will leave you exposed on the flanks.
 
-### Playing two Advanced Forwards
+### Playing two Centre Forwards
 The DLF(S) dropping deep creates the overload that makes the diamond work. Two AFs isolates your midfield from attack. The DLF is the glue between your shape.
 
 ## Match Adjustments

@@ -18,8 +18,8 @@ setup:
   - { roleId: deep-lying-playmaker, duty: defend, x: 50, y: 58 }
   - { roleId: box-to-box-midfielder, duty: support, x: 32, y: 42 }
   - { roleId: channel-midfielder, duty: attack, x: 68, y: 42 }
-  - { roleId: inside-forward, duty: support, x: 20, y: 26, abbr: "W", name: "Winger" }
-  - { roleId: pressing-forward, duty: attack, x: 50, y: 13 }
+  - { roleId: winger, duty: support, x: 20, y: 26 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 50, y: 13 }
   - { roleId: inside-forward, duty: attack, x: 80, y: 26 }
 ---
 
@@ -61,7 +61,7 @@ In FM26, teams that commit players forward leave enormous spaces behind. The 4-3
 
 <FormationDiagram
   formation="4-3-3"
-  caption="In possession — near-side overlap, Channel Midfielder underlapping, PF attacking the channel"
+  caption="In possession — near-side overlap, Channel Midfielder underlapping, CF attacking the channel"
   setup={[
     { roleId: "sweeper-keeper", duty: "support", x: 50, y: 88 },
     { roleId: "full-back", duty: "support", x: 12, y: 74 },
@@ -71,8 +71,8 @@ In FM26, teams that commit players forward leave enormous spaces behind. The 4-3
     { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 58 },
     { roleId: "box-to-box-midfielder", duty: "support", x: 32, y: 42 },
     { roleId: "channel-midfielder", duty: "attack", x: 68, y: 42 },
-    { roleId: "inside-forward", duty: "support", x: 20, y: 26, abbr: "W", name: "Winger" },
-    { roleId: "pressing-forward", duty: "attack", x: 50, y: 13 },
+    { roleId: "winger", duty: "support", x: 20, y: 26 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 50, y: 13 },
     { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
   ]}
   movements={[
@@ -96,9 +96,9 @@ In FM26, teams that commit players forward leave enormous spaces behind. The 4-3
     { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 70 },
     { roleId: "box-to-box-midfielder", duty: "support", x: 34, y: 62 },
     { roleId: "channel-midfielder", duty: "attack", x: 66, y: 62 },
-    { roleId: "inside-forward", duty: "support", x: 24, y: 52, abbr: "W", name: "Winger" },
+    { roleId: "winger", duty: "support", x: 24, y: 52 },
     { roleId: "inside-forward", duty: "attack", x: 76, y: 52 },
-    { roleId: "pressing-forward", duty: "attack", x: 50, y: 34 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 50, y: 34 },
   ]}
   movements={[
     { from: 10, toX: 50, toY: 24, type: "press" },
@@ -127,7 +127,7 @@ In FM26, teams that commit players forward leave enormous spaces behind. The 4-3
 ### Attack
 - **Inside Forward (Attack)** — Right side: cuts inside onto stronger foot, goal threat on the break
 - **Winger (Support)** — Left side: stays wide for switches, crosses for late runners
-- **Pressing Forward (Attack)** — Presses from the front, runs channels, first receiver on counters
+- **Centre Forward (Attack)** — Presses from the front, runs channels, first receiver on counters
 
 > **Pro Tip**: The Channel Midfielder is the secret weapon here. While the opposition midfield presses your DLP, the Channel Midfielder drifts unmarked into the half-space and receives the progressive pass. Train "Gets Forward Whenever Possible" on this player.
 
@@ -151,7 +151,7 @@ Not every turnover is a counter-attack opportunity. If your forwards are outnumb
 Unlike gegenpress, your full-backs should stay home in the 4-3-3 Fluid Counter. If both go forward on a counter, one intercepted pass leaves you 2v2 at the back. Trust your front four and the Channel Midfielder to finish the break.
 
 ### Playing a False 9
-This system needs a runner at center forward. A False 9 dropping deep eliminates your primary counter-attacking weapon. Use a Pressing Forward, Advanced Forward, or Complete Forward with Attack duty.
+This system needs a runner at center forward. A False 9 dropping deep eliminates your primary counter-attacking weapon. Use a Centre Forward with Attack duty — or a Tracking Centre Forward if you also want the first line of the press.
 
 ## Opposition Analysis
 

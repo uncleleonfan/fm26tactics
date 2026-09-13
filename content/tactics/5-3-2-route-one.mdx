@@ -24,10 +24,10 @@ setup:
   - { roleId: central-defender, duty: defend, x: 50, y: 81, name: "Central Defender (Cover)" }
   - { roleId: central-defender, duty: defend, x: 68, y: 78, name: "Central Defender (Stopper)" }
   - { roleId: central-defender, duty: defend, x: 88, y: 77, name: "Central Defender (Stopper)" }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 35, y: 52, abbr: "BWM", name: "Ball-Winning Midfielder" }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 35, y: 52 }
   - { roleId: deep-lying-playmaker, duty: defend, x: 50, y: 54 }
-  - { roleId: box-to-box-midfielder, duty: defend, x: 65, y: 52, abbr: "BWM", name: "Ball-Winning Midfielder" }
-  - { roleId: advanced-forward, duty: attack, x: 62, y: 13 }
+  - { roleId: pressing-central-midfielder, duty: defend, x: 65, y: 52 }
+  - { roleId: $1centre-forward$1, duty: attack, x: 62, y: 13 }
   - { roleId: target-forward, duty: attack, x: 38, y: 13 }
 ---
 
@@ -43,9 +43,9 @@ Route One is not "kick and hope." It's a deliberate, structured direct style wit
 
 - **Phase 1 — The Wall** (out of possession): A flat back five with three screening midfielders. The opposition is forced wide, where crosses must beat three aerial-dominant centre-backs.
 
-- **Phase 2 — The Launch** (transition): The moment possession is won, the goalkeeper or BWM hits a long, direct ball to the Target Forward. No slow build-up. No sideways passes. Vertical urgency.
+- **Phase 2 — The Launch** (transition): The moment possession is won, the goalkeeper or PCM hits a long, direct ball to the Target Forward. No slow build-up. No sideways passes. Vertical urgency.
 
-- **Phase 3 — The Finish** (attacking): The Target Forward holds off the CB, lays off to the Advanced Forward or a rushing midfielder, and the move is finished in 3-4 seconds.
+- **Phase 3 — The Finish** (attacking): The Target Forward holds off the CB, lays off to the Centre Forward or a rushing midfielder, and the move is finished in 3-4 seconds.
 
 ### Formation Shape
 
@@ -61,11 +61,11 @@ Route One is not "kick and hope." It's a deliberate, structured direct style wit
     { roleId: "central-defender", duty: "defend", x: 50, y: 88 },
     { roleId: "central-defender", duty: "defend", x: 70, y: 87, name: "Central Defender (Stopper)" },
     { roleId: "central-defender", duty: "defend", x: 90, y: 86, name: "Central Defender (Stopper)" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 36, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 36, y: 66 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 70 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 64, y: 66, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 64, y: 66 },
     { roleId: "target-forward", duty: "attack", x: 42, y: 42 },
-    { roleId: "advanced-forward", duty: "attack", x: 58, y: 42 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 58, y: 42 },
   ]}
   movements={[
     { from: 9, toX: 38, toY: 32, type: "press" },
@@ -87,11 +87,11 @@ Route One is not "kick and hope." It's a deliberate, structured direct style wit
     { roleId: "central-defender", duty: "defend", x: 50, y: 79 },
     { roleId: "central-defender", duty: "defend", x: 69, y: 80, name: "Central Defender (Stopper)" },
     { roleId: "central-defender", duty: "defend", x: 88, y: 78, name: "Central Defender (Stopper)" },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 35, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 35, y: 56 },
     { roleId: "deep-lying-playmaker", duty: "defend", x: 50, y: 52 },
-    { roleId: "box-to-box-midfielder", duty: "defend", x: 65, y: 56, abbr: "BWM", name: "Ball-Winning Midfielder" },
+    { roleId: "pressing-central-midfielder", duty: "defend", x: 65, y: 56 },
     { roleId: "target-forward", duty: "attack", x: 38, y: 15 },
-    { roleId: "advanced-forward", duty: "attack", x: 62, y: 12 },
+    { roleId: $1centre-forward$1, duty: "attack", x: 62, y: 12 },
   ]}
   movements={[
     { from: 7, toX: 50, toY: 42, type: "support" },
@@ -114,7 +114,7 @@ Route One is not "kick and hope." It's a deliberate, structured direct style wit
 | **Passing Directness** | Much More Direct | The defining instruction. Every pass should go forward, ideally long to the TF. |
 | **Tempo** | Higher | Speed kills. Quick transitions catch defences unset. |
 | **Play Out of Defence** | OFF | Never. The ball goes long immediately. |
-| **Pass Into Space** | ON | The AF runs into channels behind the CBs. |
+| **Pass Into Space** | ON | The CF runs into channels behind the CBs. |
 | **Hit Early Crosses** | ON | When the ball reaches wide areas, cross immediately — don't wait for overlaps. |
 | **Work Ball Into Box** | OFF | Direct shots and long balls are encouraged. |
 
@@ -122,7 +122,7 @@ Route One is not "kick and hope." It's a deliberate, structured direct style wit
 
 | Instruction | Setting | Reason |
 |---|---|---|
-| **Counter** | ON | The AF sprints forward the instant the ball is won. |
+| **Counter** | ON | The CF sprints forward the instant the ball is won. |
 | **Counter-Press** | OFF | Retreat into the 5-3-2 block immediately. |
 | **GK Distribution** | Long Kick to TF | Skip the entire build-up phase. |
 | **Distribute Quickly** | ON | Release before the opposition resets. |
@@ -174,7 +174,7 @@ Four disciplined defenders. They hold the line, win aerial duels, and clear long
 
 ### Midfield Shield: The Three
 
-#### Ball-Winning Midfielder (Defend) × 2
+#### Pressing Central Midfielder (Defend) × 2
 
 ```
 Must-have: Tackling 15+, Work Rate 15+, Stamina 15+, Aggression 14+
@@ -190,7 +190,7 @@ Must-have: Passing 14+, Vision 14+, Decisions 14+
 PPMs: "Tries Killer Balls Often", "Switches Ball to Other Flank"
 ```
 
-The launchpad. The DLP receives from the BWMs and hits long diagonals to the TF or AF. On Defend duty to maintain the midfield shield.
+The launchpad. The DLP receives from the PCMs and hits long diagonals to the TF or CF. On Defend duty to maintain the midfield shield.
 
 ### Forwards: The Strike Pair
 
@@ -201,9 +201,9 @@ Must-have: Jumping Reach 16+, Strength 15+, Heading 14+, First Touch 13+
 PPMs: "Plays With Back to Goal", "Knocks Ball Past Opponent"
 ```
 
-The focal point of every attack. He receives 30-40 long balls per match. His job: win the aerial duel, hold off the CB, lay off to the AF or onrushing midfielder.
+The focal point of every attack. He receives 30-40 long balls per match. His job: win the aerial duel, hold off the CB, lay off to the CF or onrushing midfielder.
 
-#### Advanced Forward (Attack)
+#### Centre Forward (Attack)
 
 ```
 Must-have: Pace 16+, Acceleration 16+, Off The Ball 15+, Finishing 14+
@@ -218,7 +218,7 @@ The finisher. He feeds off the TF's knockdowns and makes channel runs behind the
 
 ### Defensive Corners
 
-All five CBs in the 6-yard box. The AF marks the tallest opposition player. The DLP lurks on the edge for counter-launch. One BWM stays forward as a counter threat.
+All five CBs in the 6-yard box. The CF marks the tallest opposition player. The DLP lurks on the edge for counter-launch. One PCM stays forward as a counter threat.
 
 ### Attacking Corners
 
@@ -245,12 +245,12 @@ Only press the CBs — force them into long balls which your aerial CBs win.
 
 - Drop mentality to **Defensive**
 - Time Wasting: **Frequently**
-- Replace the AF with a fresh BWM (switch to 5-4-1)
+- Replace the CF with a fresh PCM (switch to 5-4-1)
 - The TF stays as the sole outlet
 
 ### Losing 0-1 at Minute 75
 
-- Push one BWM to **Box-to-Box** for more forward runs
+- Push one PCM to **Box-to-Box** for more forward runs
 - Raise Line of Engagement to **Mid Block**
 - Add "Run At Defence" instruction
 - Sub on a pacey winger for a CB (switch to 4-3-3)
@@ -265,7 +265,7 @@ Only press the CBs — force them into long balls which your aerial CBs win.
 |---|---|
 | **Defensive solidity** | Five CBs + three screening midfielders = 8 players behind the ball at all times. |
 | **Aerial dominance** | Three+ CBs with 14+ Jumping Reach win 70%+ of aerial duels. |
-| **Counter efficiency** | TF → AF partnership converts long balls into 2-3 clear chances per match. |
+| **Counter efficiency** | TF → CF partnership converts long balls into 2-3 clear chances per match. |
 | **Underdog performance** | Ideal for relegation battles — the opposition can't break through 8 defenders. |
 
 ### Weaknesses
@@ -299,8 +299,8 @@ A: No. Catenaccio (see our [3-5-2 Catenaccio guide](/tactics/3-5-2-catenaccio)) 
 **Q: Why 5-3-2 and not 4-4-2 for Route One?**
 A: Five at the back provides the defensive security that allows the midfield to focus on screening rather than covering wide areas. The 5-3-2 is more robust against teams with wide attackers.
 
-**Q: My TF wins headers but the AF is always offside. What's wrong?**
-A: The AF is likely starting his run too early. Use "Hold Position" instruction temporarily, and train the "Moves Into Channels" PPM so he drifts wide before running, reducing offside risk.
+**Q: My TF wins headers but the CF is always offside. What's wrong?**
+A: The CF is likely starting his run too early. Use "Hold Position" instruction temporarily, and train the "Moves Into Channels" PPM so he drifts wide before running, reducing offside risk.
 
 ---
 

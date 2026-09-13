@@ -211,7 +211,7 @@ export const metaRoles: MetaRole[] = [
     keyAttributes: ["Crossing", "Stamina", "Off the Ball", "Acceleration", "Pace", "Technique", "Decisions"],
     bestPartners: [
       { name: "Inside Forward (IF)", roleId: "inside-forward" },
-      { name: "Advanced Forward (AF)", roleId: "advanced-forward" },
+      { name: "Centre Forward (CF)", roleId: "centre-forward" },
       { name: "Deep-Lying Playmaker (DLP)", roleId: "deep-lying-playmaker" },
       { name: "Central Defender", roleId: "central-defender" },
     ],
@@ -234,7 +234,7 @@ export const metaRoles: MetaRole[] = [
     bestPartners: [
       { name: "Inside Forward (IF)", roleId: "inside-forward" },
       { name: "Deep-Lying Playmaker (DLP)", roleId: "deep-lying-playmaker" },
-      { name: "Advanced Forward (AF)", roleId: "advanced-forward" },
+      { name: "Centre Forward (CF)", roleId: "centre-forward" },
     ],
   },
   {

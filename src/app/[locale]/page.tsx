@@ -42,7 +42,7 @@ const faqEn: Array<[string, string]> = [
   ],
   [
     "What are the best player roles for gegenpress in FM26?",
-    "For an effective gegenpress in FM26, use: Sweeper Keeper (Attack) in goal, Ball Playing Defenders, Wing Backs (Support), a Segundo Volante or Ball Winning Midfielder paired with a Deep Lying Playmaker in midfield, Inside Forwards or Inverted Wingers on the flanks, and a Pressing Forward leading the line. High stamina, work rate, and determination are essential attributes.",
+    "For an effective gegenpress in FM26, use: Sweeper Keeper (Attack) in goal, Ball Playing Defenders, Wing Backs (Support), a Box-to-Box Midfielder or Pressing Central Midfielder paired with a Deep Lying Playmaker in midfield, Inside Forwards on the flanks, and a Centre Forward leading the line. High stamina, work rate, and determination are essential attributes.",
   ],
   [
     "How does the FM26 Tactic Builder work?",

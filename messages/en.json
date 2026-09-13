@@ -381,8 +381,8 @@
       "box-to-box-midfielder": "Box-to-Box Midfielder",
       "advanced-playmaker": "Advanced Playmaker",
       "inside-forward": "Inside Forward",
-      "advanced-forward": "Advanced Forward",
-      "pressing-forward": "Pressing Forward",
+      "centre-forward": "Centre Forward",
+      "tracking-centre-forward": "Tracking Centre Forward",
       "target-forward": "Target Forward",
       "line-holding-keeper": "Line-Holding Keeper",
       "overlapping-centre-back": "Overlapping Centre-Back",
@@ -400,8 +400,8 @@
       "box-to-box-midfielder": "An energetic midfielder who contributes at both ends of the pitch with relentless running.",
       "advanced-playmaker": "The creative hub operating between the lines, threading through balls and unlocking defenses.",
       "inside-forward": "Cuts inside from wide positions to score goals, acting more like a striker than a traditional winger.",
-      "advanced-forward": "The primary goal-scoring outlet who plays on the shoulder of the last defender.",
-      "pressing-forward": "A defensive forward who harasses opposition defenders and forces mistakes high up the pitch.",
+      "centre-forward": "FM26's complete striker — leads the line, links play and finishes inside the box.",
+      "tracking-centre-forward": "A new FM26 striker who leads the press from the front and drops back to bolster midfield when defending.",
       "target-forward": "A physical presence who holds up the ball and brings teammates into play with knock-downs and layoffs.",
       "line-holding-keeper": "A traditional goalkeeper introduced in FM26 who holds his line and stays deep — ideal for defences that sit back and protect the box.",
       "overlapping-centre-back": "A FM26 centre-back role for three-at-the-back systems who steps out and overlaps on the flank, adding an extra body in the final third.",
@@ -458,15 +458,15 @@
         "17+ Acceleration and Dribbling with a genuine goal threat — the classic modern inside forward.",
         "A lethal left-footed wide talent who cuts inside onto his stronger foot — the affordable elite option."
       ],
-      "advanced-forward": [
+      "centre-forward": [
         "17+ Acceleration and Finishing — times his runs onto through balls better than any young striker.",
         "A one-touch finisher with 16+ Acceleration — the lone striker who turns one chance into a goal.",
         "Strong, quick enough and a natural finisher — a 25-goal-a-season number 9 in the making."
       ],
-      "pressing-forward": [
+      "tracking-centre-forward": [
         "Relentless from-the-front pressure with the finishing to punish the mistakes he forces.",
-        "Chases every lost cause and still scores 20+ — the perfect pressing-forward profile for a gegenpress.",
-        "Genuine pace and direct running — the budget pressing forward who turns regains into goals."
+        "Chases every lost cause and still scores 20+ — the perfect tracking forward profile for a gegenpress.",
+        "Genuine pace and direct running — the budget tracking forward who turns regains into goals."
       ],
       "target-forward": [
         "6'5 with 17 Jumping Reach and Heading — the delivery target who wins every aerial duel and scores the knockdowns.",
@@ -930,49 +930,49 @@
         "bestFor": "Balanced attacking play with a strong defensive shield",
         "strengths": ["Two DMs provide defensive stability", "AM #10 creates between the lines", "Wingers stretch the pitch", "Great for gegenpress"],
         "weaknesses": ["Can be overrun in midfield against 4-3-3", "Wingers can be isolated defensively", "Requires a creative #10"],
-        "recommendedRoles": ["Deep-Lying Playmaker", "Ball-Winning Midfielder", "Advanced Playmaker (AM)", "Inside Forward", "Advanced Forward"]
+        "recommendedRoles": ["Deep-Lying Playmaker", "Pressing Central Midfielder", "Advanced Playmaker (AM)", "Inside Forward", "Centre Forward"]
       },
       "4-3-3": {
         "description": "Wide forwards stretch the opposition. Three midfielders offer balance between defense and attack.",
         "bestFor": "Possession and high-pressing football (Tiki-Taka, Gegenpress)",
         "strengths": ["Three midfielders dominate possession", "Wide forwards stretch defense", "Natural pressing shape", "Very flexible tactically"],
         "weaknesses": ["Can be exposed on the counter", "Requires athletic midfielders", "Wide forwards must track back"],
-        "recommendedRoles": ["Deep-Lying Playmaker", "Box-to-Box Midfielder", "Mezzala", "Winger", "Pressing Forward"]
+        "recommendedRoles": ["Deep-Lying Playmaker", "Box-to-Box Midfielder", "Mezzala", "Winger", "Tracking Centre Forward"]
       },
       "4-4-2": {
         "description": "The traditional English setup. Two banks of four with a classic strike partnership.",
         "bestFor": "Direct, counter-attacking and wing play",
         "strengths": ["Two banks of four = solid defense", "Two strikers press CBs", "Simple and easy to organize", "Excellent for underdogs"],
         "weaknesses": ["Lacks a #10 creator", "Midfield can be outnumbered", "Less possession control"],
-        "recommendedRoles": ["Ball-Winning Midfielder", "Box-to-Box Midfielder", "Winger", "Target Forward", "Pressing Forward"]
+        "recommendedRoles": ["Pressing Central Midfielder", "Box-to-Box Midfielder", "Winger", "Target Forward", "Tracking Centre Forward"]
       },
       "3-5-2": {
         "description": "Wing-backs provide width as three center-backs form a solid defensive base with two strikers.",
         "bestFor": "Counter-attacking with defensive solidity (Catenaccio, Low Block)",
         "strengths": ["Three CBs dominate the box", "Wing-backs provide width", "Two strikers for counter-attacks", "Great for defensive teams"],
         "weaknesses": ["Vulnerable out wide if wing-backs caught up", "Requires athletic wing-backs", "Can struggle in possession"],
-        "recommendedRoles": ["Ball-Playing Defender", "Ball-Winning Midfielder", "Deep-Lying Playmaker", "Carrilero", "Target Forward"]
+        "recommendedRoles": ["Ball-Playing Defender", "Pressing Central Midfielder", "Deep-Lying Playmaker", "Carrilero", "Target Forward"]
       },
       "5-3-2": {
         "description": "Ultra-defensive shape with wing-backs. Counter-attack specialist formation.",
         "bestFor": "Ultra-defensive counter-attack strategies",
         "strengths": ["Five defenders = very hard to break down", "Compact shape", "Counter-attack specialist", "Great for minnows"],
         "weaknesses": ["Very limited going forward", "No natural width", "Can invite too much pressure"],
-        "recommendedRoles": ["Ball-Playing Defender", "No-Nonsense Centre-Back", "Ball-Winning Midfielder", "Target Forward"]
+        "recommendedRoles": ["Ball-Playing Defender", "No-Nonsense Centre-Back", "Pressing Central Midfielder", "Target Forward"]
       },
       "3-4-3": {
         "description": "Attacking formation with wing-backs pushing high. Three forwards apply constant pressure on opposing defenders.",
         "bestFor": "Aggressive attacking football with high wing-backs",
         "strengths": ["Three forwards press relentlessly", "Wing-backs provide width", "Overloads in attack", "Modern pressing shape"],
         "weaknesses": ["Very vulnerable on counter", "Requires elite wing-backs", "High risk, high reward"],
-        "recommendedRoles": ["Ball-Playing Defender", "Mezzala", "Winger", "Advanced Forward", "Pressing Forward"]
+        "recommendedRoles": ["Ball-Playing Defender", "Mezzala", "Winger", "Centre Forward", "Tracking Centre Forward"]
       },
       "4-2-2-2": {
         "description": "Brazilian Box. Two DMs and two AMs create a compact midfield box, with two strikers leading the line.",
         "bestFor": "Box midfield control and attacking flair",
         "strengths": ["Compact midfield box", "Two strikers and two AMs", "Great for vertical tiki-taka", "Attacking overloads"],
         "weaknesses": ["No natural wide players", "Vulnerable out wide", "Can be predictable through the middle"],
-        "recommendedRoles": ["Deep-Lying Playmaker", "Ball-Winning Midfielder", "Advanced Playmaker", "Advanced Forward"]
+        "recommendedRoles": ["Deep-Lying Playmaker", "Pressing Central Midfielder", "Advanced Playmaker", "Centre Forward"]
       },
       "4-1-4-1": {
         "description": "A solid DM shields the back four. Four midfielders offer width and numbers in the middle third.",
@@ -986,42 +986,42 @@
         "bestFor": "Counter-attacking with a #10 behind a target man",
         "strengths": ["Second striker creates between lines", "Solid two banks of four", "Great for Mourinho-style football", "Defensive solidity"],
         "weaknesses": ["Limited width in attack", "#10 needs to be elite", "Can be too conservative"],
-        "recommendedRoles": ["Ball-Winning Midfielder", "Advanced Playmaker (#10)", "Winger", "Target Forward"]
+        "recommendedRoles": ["Pressing Central Midfielder", "Advanced Playmaker (#10)", "Winger", "Target Forward"]
       },
       "5-2-3": {
         "description": "Three center-backs with attacking wing-backs. Wide forwards stretch play and create overloads in the final third.",
         "bestFor": "Defensive solidity with attacking wing-backs",
         "strengths": ["Three CBs for defensive stability", "Wing-backs provide width", "Wide forwards stretch defense", "Flexible shape"],
         "weaknesses": ["Can be overrun in midfield", "Requires athletic wing-backs", "Gap between midfield and attack"],
-        "recommendedRoles": ["Ball-Playing Defender", "Ball-Winning Midfielder", "Winger", "Advanced Forward"]
+        "recommendedRoles": ["Ball-Playing Defender", "Pressing Central Midfielder", "Winger", "Centre Forward"]
       },
       "4-2-4": {
         "description": "Ultra-attacking shape with four forwards. Risky but devastating — the FM26 community's top-scoring formation in tests.",
         "bestFor": "All-out attack when you need goals",
         "strengths": ["Four forwards for maximum attack", "Overloads opposition defense", "Highest scoring potential"],
         "weaknesses": ["Very vulnerable to counters", "Minimal midfield cover", "Requires elite finishers"],
-        "recommendedRoles": ["Advanced Forward", "Pressing Forward", "Advanced Playmaker", "Ball-Winning Midfielder"]
+        "recommendedRoles": ["Centre Forward", "Tracking Centre Forward", "Advanced Playmaker", "Pressing Central Midfielder"]
       },
       "3-4-2-1": {
         "description": "Conte's trademark. Two #10s behind a lone striker with wing-backs providing width. Extremely solid through the middle.",
         "bestFor": "Defensive solidity with two playmakers behind a striker",
         "strengths": ["Three CBs for defensive stability", "Two #10s create between lines", "Wing-backs provide width", "Compact through the middle"],
         "weaknesses": ["Vulnerable out wide", "Requires athletic wing-backs", "Lone striker can be isolated"],
-        "recommendedRoles": ["Ball-Playing Defender", "Wing-Back", "Advanced Playmaker", "Advanced Forward"]
+        "recommendedRoles": ["Ball-Playing Defender", "Wing-Back", "Advanced Playmaker", "Centre Forward"]
       },
       "4-3-2-1": {
         "description": "Christmas Tree. Narrow and compact. Two advanced playmakers operate behind a solo striker, overwhelming the opponent's midfield.",
         "bestFor": "Midfield overload with narrow playmakers",
         "strengths": ["Midfield overload", "Two playmakers behind striker", "Compact defensive shape", "Dominates possession"],
         "weaknesses": ["No natural width", "Vulnerable to wide attacks", "Striker can be isolated"],
-        "recommendedRoles": ["Deep-Lying Playmaker", "Advanced Playmaker", "Advanced Forward", "Full-Back"]
+        "recommendedRoles": ["Deep-Lying Playmaker", "Advanced Playmaker", "Centre Forward", "Full-Back"]
       },
       "4-1-2-1-2": {
         "description": "Diamond midfield. A DM anchors, two CMs shuttle, and a #10 creates. Two strikers give you vertical threat against any back line.",
         "bestFor": "Vertical attacking threat with two strikers",
         "strengths": ["Two strikers for vertical threat", "Diamond controls midfield", "#10 creates chances", "DM provides defensive cover"],
         "weaknesses": ["No natural width", "Vulnerable to wide attacks", "Requires athletic full-backs"],
-        "recommendedRoles": ["Ball-Winning Midfielder", "Box-to-Box Midfielder", "Advanced Playmaker", "Advanced Forward"]
+        "recommendedRoles": ["Pressing Central Midfielder", "Box-to-Box Midfielder", "Advanced Playmaker", "Centre Forward"]
       }
     }
   },
