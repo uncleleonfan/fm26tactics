@@ -256,7 +256,7 @@ export default async function RoleDetailPage({ params }: Props) {
                   {rName} Duty Guide
                 </h2>
                 <p className="text-xs text-text-muted mb-4">
-                  How the role behaves on each available duty in FM26.
+                  How each duty variant behaves in FM26, and the key attributes it demands.
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {role.availableDuties.map((duty) => {
@@ -276,13 +276,40 @@ export default async function RoleDetailPage({ params }: Props) {
                             backgroundColor: `${color}1a`,
                           }}
                         >
-                          {rl(dutyKey(duty))}
+                          {role.abbr} ({duty.charAt(0).toUpperCase()}){" "}
+                          <span className="font-normal normal-case tracking-normal opacity-70">
+                            {rl(dutyKey(duty))}
+                          </span>
                         </span>
                         <p className="text-xs text-text-primary/85 leading-relaxed mb-2">{guide.behavior}</p>
                         <p className="text-[11px] text-text-muted leading-relaxed">
                           <span className="text-primary font-medium">Best when: </span>
                           {guide.bestWhen}
                         </p>
+                        {guide.attributes?.length ? (
+                          <div className="mt-3 pt-3 border-t border-surface-border">
+                            <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1.5">
+                              Key attributes for {role.abbr} ({duty.charAt(0).toUpperCase()})
+                            </p>
+                            <div className="flex flex-wrap gap-1">
+                              {guide.attributes.map((attr, i) => {
+                                const k = `attr.${attrKey(attr)}`;
+                                return (
+                                  <span
+                                    key={attr}
+                                    className={`text-[10px] px-2 py-0.5 rounded border ${
+                                      i === 0
+                                        ? "bg-primary/10 border-primary/30 text-primary font-medium"
+                                        : "bg-surface border-surface-border text-text-secondary"
+                                    }`}
+                                  >
+                                    {rl.has(k) ? rl(k) : attr}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ) : null}
                       </div>
                     );
                   })}

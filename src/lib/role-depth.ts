@@ -6,6 +6,8 @@ import type { PlayerDuty } from "@/types/tactic";
 export interface RoleDutyGuide {
   behavior: string;
   bestWhen: string;
+  /** Key attributes for this specific duty variant, e.g. FB(A) vs FB(S). */
+  attributes: string[];
 }
 
 export interface RoleDepth {
@@ -28,14 +30,17 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Sweeps conservatively: only leaves the box for clear through-ball situations and distributes short to nearby defenders.",
         bestWhen: "You keep a high line but face direct opponents who target the space behind it.",
+        attributes: ["Rushing Out", "Decisions", "Positioning", "Passing"],
       },
       support: {
         behavior: "Positions at the edge of the penalty area, offers an angle for back-passes and starts attacks with quick, positive distribution.",
         bestWhen: "The standard choice for possession sides — balance between sweeping risk and shot-stopping.",
+        attributes: ["Rushing Out", "Passing", "Composure", "First Touch"],
       },
       attack: {
         behavior: "Pushes well beyond the box almost like a libero, aggressively intercepts loose balls far from goal and plays line-breaking passes immediately.",
         bestWhen: "Full gegenpress systems with a very high line against teams that sit deep and lump balls forward.",
+        attributes: ["Rushing Out", "Acceleration", "Passing", "Decisions"],
       },
     },
     ppms: [
@@ -85,6 +90,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Stays on his line, focuses purely on shot-stopping, claiming crosses and commanding the box.",
         bestWhen: "Any system that keeps defenders between him and the game — the universal default.",
+        attributes: ["Reflexes", "Handling", "Command of Area", "Aerial Reach"],
       },
     },
     ppms: [
@@ -131,6 +137,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Holds his line rigidly, stays inside the six-yard zone, prioritises claiming crosses and blocking near-post shots over any sweeping.",
         bestWhen: "Deep-block systems that concede space in behind and instead defend the box with numbers.",
+        attributes: ["Positioning", "Reflexes", "Handling", "Aerial Reach"],
       },
     },
     ppms: [
@@ -178,10 +185,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Focuses on defensive duties but still looks for progressive passes when safe angles appear.",
         bestWhen: "You want build-up quality without over-committing the last line.",
+        attributes: ["Tackling", "Marking", "Passing", "Composure"],
       },
       support: {
         behavior: "Steps into midfield with the ball at every opportunity, effectively becoming an extra midfielder in possession.",
         bestWhen: "Possession-dominant systems against sides that press man-for-man — his stepping breaks their structure.",
+        attributes: ["Passing", "Vision", "Composure", "First Touch"],
       },
     },
     ppms: [
@@ -231,10 +240,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Manages the line, wins his duels, clears his lines — zero risk, total reliability.",
         bestWhen: "Any defensive setup where conceding nothing is the game plan.",
+        attributes: ["Tackling", "Marking", "Heading", "Positioning"],
       },
       support: {
         behavior: "Holds position but plays simple progressive passes when the safe option is on.",
         bestWhen: "Balanced tactics that still want an outlet ball from the back four.",
+        attributes: ["Tackling", "Positioning", "Passing", "Composure"],
       },
     },
     ppms: [
@@ -282,14 +293,17 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Holds the defensive line, denies crosses, plays simple possession when the ball comes his way.",
         bestWhen: "Facing elite wide threats or protecting a narrow lead.",
+        attributes: ["Tackling", "Positioning", "Marking", "Stamina"],
       },
       support: {
         behavior: "Advances to the halfway line, offers width in the midfield phase, recovers quickly behind his winger.",
         bestWhen: "The balanced default — a presence in both phases without exposing the flank.",
+        attributes: ["Stamina", "Tackling", "Crossing", "Work Rate"],
       },
       attack: {
         behavior: "Overlaps aggressively, hugs the touchline in the final third and delivers early crosses.",
         bestWhen: "You have an Inside Forward ahead of him — one stays wide, one goes inside, the flank is yours.",
+        attributes: ["Crossing", "Acceleration", "Stamina", "Dribbling"],
       },
     },
     ppms: [
@@ -336,14 +350,17 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Sits deeper, forms a temporary back five out of possession, supports rather than leads attacks.",
         bestWhen: "Protecting leads or facing opponents who themselves attack down your flanks.",
+        attributes: ["Tackling", "Positioning", "Work Rate", "Stamina"],
       },
       support: {
         behavior: "Holds an advanced wide position at midfield height, provides an outlet ball and recycles possession.",
         bestWhen: "The standard for 3-5-2 systems — width in possession, compactness without it.",
+        attributes: ["Stamina", "Crossing", "Work Rate", "Positioning"],
       },
       attack: {
         behavior: "Plays as an out-and-out wide attacker, overlapping to the byline and delivering crosses at every opportunity.",
         bestWhen: "Formations with no wingers — 3-5-2 and 3-4-3 — where he IS the wide threat.",
+        attributes: ["Crossing", "Acceleration", "Dribbling", "Stamina"],
       },
     },
     ppms: [
@@ -391,10 +408,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Steps out only on clear triggers, otherwise maintains the back-three structure and defends his channel.",
         bestWhen: "Cautious variants of 3-5-2 where his forays are bonuses, not the plan.",
+        attributes: ["Positioning", "Tackling", "Pace", "Marking"],
       },
       support: {
         behavior: "Carries the ball into midfield regularly and overlaps when the wing-back is double-marked.",
         bestWhen: "The default — controlled aggression from a three-man base that always keeps two covering.",
+        attributes: ["Pace", "Off the Ball", "Passing", "Work Rate"],
       },
     },
     ppms: [
@@ -442,10 +461,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       support: {
         behavior: "Inverts into midfield in possession, becomes an extra passing hub while still tracking his flank diligently.",
         bestWhen: "Possession systems wanting a double pivot without sacrificing a back three.",
+        attributes: ["Passing", "Vision", "Work Rate", "Composure"],
       },
       attack: {
         behavior: "Commits fully to the inverted role, arriving in the final third between the lines as a genuine No. 10 from deep.",
         bestWhen: "Against low blocks that man-mark your creators — an unmarkable extra playmaker.",
+        attributes: ["Passing", "Vision", "Dribbling", "Off the Ball"],
       },
     },
     ppms: [
@@ -494,10 +515,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Holds the base of midfield, screens the back line and plays with maximum safety — tempo control without risk.",
         bestWhen: "Alongside aggressive eights, or when protecting leads in control-possession systems.",
+        attributes: ["Passing", "Decisions", "Positioning", "Tackling"],
       },
       support: {
         behavior: "Roams between the lines to receive, turns and plays vertical passes at every opportunity.",
         bestWhen: "The default — full creative license from the pivot in a two-man midfield.",
+        attributes: ["Passing", "Vision", "Composure", "First Touch"],
       },
     },
     ppms: [
@@ -546,6 +569,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       support: {
         behavior: "Shuttles end-to-end at full intensity: screens the back line out of possession, arrives in the box in it.",
         bestWhen: "The universal midfield glue — pairs with any pivot and any style that runs.",
+        attributes: ["Stamina", "Work Rate", "Passing", "Off the Ball"],
       },
     },
     ppms: [
@@ -594,10 +618,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       support: {
         behavior: "Drifts across the final third finding pockets, creating for others before shooting himself.",
         bestWhen: "Possession-heavy systems — he keeps the ball moving until a lane opens.",
+        attributes: ["Vision", "Passing", "First Touch", "Technique"],
       },
       attack: {
         behavior: "Plays in the last line only, ignores defensive duties entirely and focuses purely on creation and arriving in the box.",
         bestWhen: "Home games against deep blocks where his creativity outweighs the structural risk.",
+        attributes: ["Vision", "Flair", "Technique", "Off the Ball"],
       },
     },
     ppms: [
@@ -646,10 +672,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       support: {
         behavior: "Times channel runs from midfield, combines in half-spaces and balances his box arrivals with defensive work.",
         bestWhen: "The default — a scoring eight in a midfield three without sacrificing structure.",
+        attributes: ["Off the Ball", "Passing", "Teamwork", "First Touch"],
       },
       attack: {
         behavior: "Plays almost as a second striker, permanently hunting channels and arriving in the six-yard box.",
         bestWhen: "Chasing games or against man-marking defences that can't assign him an owner.",
+        attributes: ["Off the Ball", "Acceleration", "Finishing", "First Touch"],
       },
     },
     ppms: [
@@ -697,10 +725,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       support: {
         behavior: "Cuts inside to link play, creates for others and shoots when the lane opens — balanced threat.",
         bestWhen: "With a strike partner or when your full-back overlaps — he plays as an extra creator inside.",
+        attributes: ["Dribbling", "Passing", "Technique", "Vision"],
       },
       attack: {
         behavior: "Beelines for goal at every opportunity: cut inside, shoot, or dribble through the heart of the defence.",
         bestWhen: "The classic wide scorer in a front three — your second-highest shot-taker by design.",
+        attributes: ["Finishing", "Dribbling", "Acceleration", "Composure"],
       },
     },
     ppms: [
@@ -749,6 +779,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       attack: {
         behavior: "Plays on the last line permanently, attacks the six-yard box, presses defenders when possession is lost.",
         bestWhen: "Any tactic with a single striker and creators behind him — the universal goalscorer.",
+        attributes: ["Finishing", "Acceleration", "Off the Ball", "Composure"],
       },
     },
     ppms: [
@@ -798,14 +829,17 @@ export const roleDepth: Record<string, RoleDepth> = {
       defend: {
         behavior: "Man-marking intensity on the opposition's deepest defender, cutting off build-up at the source.",
         bestWhen: "Aggressive high presses where triggering the press is his primary job.",
+        attributes: ["Work Rate", "Aggression", "Tackling", "Stamina"],
       },
       support: {
         behavior: "Presses in triggers rather than constantly, then links play when possession is won high.",
         bestWhen: "The balanced default — chaos with a bit of craft.",
+        attributes: ["Work Rate", "Stamina", "Aggression", "Teamwork"],
       },
       attack: {
         behavior: "Full-intensity harassment plus genuine penalty-box presence when attacks develop.",
         bestWhen: "Front twos where the partner poaches the chances the PF's pressure creates.",
+        attributes: ["Work Rate", "Acceleration", "Finishing", "Stamina"],
       },
     },
     ppms: [
@@ -854,10 +888,12 @@ export const roleDepth: Record<string, RoleDepth> = {
       support: {
         behavior: "Holds up the ball and brings others into play — knock-downs, layoffs and link-up are the priority.",
         bestWhen: "With fast runners around him; as the out-ball in high-pressing systems.",
+        attributes: ["Strength", "Heading", "First Touch", "Teamwork"],
       },
       attack: {
         behavior: "Leads the line into the box, attacks every cross and contests every aerial ball in the final third.",
         bestWhen: "Cross-heavy tactics and wing-play systems — the box is his kingdom.",
+        attributes: ["Heading", "Strength", "Jumping Reach", "Finishing"],
       },
     },
     ppms: [
