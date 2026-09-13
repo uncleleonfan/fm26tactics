@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { allTactics } from "contentlayer/generated";
-import { ArrowRight, Trophy, Star, Zap, Shield } from "lucide-react";
+import { ArrowRight, Trophy, Star, Zap, Shield, Wrench } from "lucide-react";
 import { styleColors } from "@/lib/tactics-data";
 import { generateLocaleSEO } from "@/lib/metadata";
 import Script from "next/script";
@@ -125,8 +125,8 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
               const diff = difficultyConfig[tactic.difficulty];
               if (!meta) return null;
               return (
-                <Link key={tactic.slug} href={`/tactics/${tactic.slug}`} className="block glass-card group hover:border-primary/30 transition-all duration-300">
-                  <div className="p-5 sm:p-6">
+                <div key={tactic.slug} className="glass-card group hover:border-primary/30 transition-all duration-300">
+                  <Link href={`/tactics/${tactic.slug}`} className="block p-5 sm:p-6">
                     <div className="flex items-center gap-3 mb-4 flex-wrap">
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${meta.color}`}>{meta.icon}{b(meta.badgeKey)}</span>
                       <span className="text-xs font-mono font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-md">{tactic.formation}</span>
@@ -137,8 +137,17 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
                     <p className="text-sm text-text-secondary leading-relaxed mb-3">{h(meta.excerptKey)}</p>
                     <p className="text-xs text-text-muted italic mb-3">{b("whyRanks")}{index + 1}: {b(meta.reasonKey)}</p>
                     <div className="flex items-center gap-1 text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity">{b("viewFullTactic")} <ArrowRight className="w-3 h-3" /></div>
+                  </Link>
+                  <div className="flex items-center justify-end gap-3 px-5 sm:px-6 pb-5 sm:pb-6 -mt-2">
+                    <Link
+                      href={`/builder?formation=${tactic.formation}`}
+                      className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl bg-primary text-background-primary hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
+                    >
+                      <Wrench className="w-3 h-3" />
+                      {b("tryInBuilder")}
+                    </Link>
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>
