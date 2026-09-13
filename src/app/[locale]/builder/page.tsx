@@ -32,7 +32,7 @@ export default function BuilderPage() {
     state,
     activePhase,
     setActivePhase,
-    setFormation,
+    applyPreset,
     movePlayer,
     setPlayerMovement,
     resetPhasePositions,
@@ -316,7 +316,7 @@ export default function BuilderPage() {
           <FormationPanel
             currentFormation={state.formation}
             players={state.players}
-            onSelect={setFormation}
+            onSelectPreset={applyPreset}
             onApplyTemplate={applyTemplate}
           />
         ) : (

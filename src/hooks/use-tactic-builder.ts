@@ -398,18 +398,26 @@ export function useTacticBuilder() {
   // timer and silently drop the user's last change.
   useEffect(() => () => persistDraft(latestStateRef.current), []);
 
-  const setFormation = useCallback((formation: FormationType) => {
-    const preset = formationPresets.find((f) => f.formation === formation);
-    if (!preset) return;
-
+  /**
+   * Load a formation preset: the shape's own XI, or one of its variants (3-5-2
+   * Catenaccio next to 3-5-2 Counter-Attack). Roles and phases both come from
+   * the preset, so switching between two takes on one shape is a real reload
+   * rather than a no-op.
+   */
+  const applyPreset = useCallback((preset: FormationPreset) => {
     setState((prev) => {
-      // Roles/duties reset to the formation's default XI (from its deep-dive
-      // tactic article) — each formation ships its own curated role set.
+      // Roles/duties reset to the preset's default XI (transcribed from its
+      // deep-dive tactic article) — each preset ships its own curated role set.
       const players = buildPresetPlayers(preset, prev.players);
-      // New formation → force-regenerate both phases from the fresh preset
-      // positions. ensurePhases alone would keep the old (still-valid)
-      // coordinates because player ids are stable across formations.
-      return { ...prev, formation, players, phases: freshPhases(players) };
+      // Force-regenerate both phases from the fresh preset positions.
+      // ensurePhases alone would keep the old (still-valid) coordinates because
+      // player ids are stable across presets.
+      return {
+        ...prev,
+        formation: preset.formation,
+        players,
+        phases: freshPhases(players),
+      };
     });
   }, []);
 
@@ -589,7 +597,7 @@ export function useTacticBuilder() {
     state,
     activePhase,
     setActivePhase,
-    setFormation,
+    applyPreset,
     movePlayer,
     setPlayerMovement,
     resetPhasePositions,

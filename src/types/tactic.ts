@@ -90,8 +90,20 @@ export interface TacticBoardState {
 }
 
 export interface FormationPreset {
+  /**
+   * Stable identity of this XI — also the slug of the deep-dive guide its roles
+   * were transcribed from (content/tactics/<id>.mdx). Tests assert the two stay
+   * in sync, so a card and the article it links to always describe one eleven.
+   */
+  id: string;
   formation: FormationType;
   label: string;
+  /**
+   * Short name of an alternative take on the same shape ("Catenaccio"), shown on
+   * the builder card. The primary preset of a formation leaves this undefined —
+   * the shape alone names it.
+   */
+  variantLabel?: string;
   positions: Array<{ x: number; y: number }>;
   description: string;
   /**

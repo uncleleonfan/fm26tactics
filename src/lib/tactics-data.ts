@@ -7,6 +7,7 @@ import type {
 
 export const formationPresets: FormationPreset[] = [
   {
+    id: "4-2-3-1-gegenpress",
     formation: "4-2-3-1",
     label: "4-2-3-1",
     description: "The modern classic. Two holding midfielders support a creative attacking midfielder with wingers providing width.",
@@ -34,6 +35,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-3-3-tiki-taka",
     formation: "4-3-3",
     label: "4-3-3",
     description: "Wide forwards stretch the opposition. Three midfielders offer balance between defense and attack.",
@@ -60,6 +62,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-4-2-wing-play",
     formation: "4-4-2",
     label: "4-4-2",
     description: "The traditional English setup. Two banks of four with a classic strike partnership.",
@@ -85,6 +88,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "3-5-2-counter-attack",
     formation: "3-5-2",
     label: "3-5-2",
     description: "Wing-backs provide width as three center-backs form a solid defensive base with two strikers.",
@@ -110,6 +114,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "5-3-2-route-one",
     formation: "5-3-2",
     label: "5-3-2",
     description: "Ultra-defensive shape with wing-backs. Counter-attack specialist formation.",
@@ -135,6 +140,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "3-4-3-control-possession",
     formation: "3-4-3",
     label: "3-4-3",
     description: "Attacking formation with wing-backs pushing high. Three forwards apply constant pressure on opposing defenders.",
@@ -160,6 +166,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-2-2-2-fluid-attack",
     formation: "4-2-2-2",
     label: "4-2-2-2",
     description: "Brazilian Box. Two DMs and two AMs create a compact midfield box, with two strikers leading the line.",
@@ -187,6 +194,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-1-4-1-mid-block",
     formation: "4-1-4-1",
     label: "4-1-4-1",
     description: "A solid DM shields the back four. Four midfielders offer width and numbers in the middle third.",
@@ -214,6 +222,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-4-1-1-counter-attack",
     formation: "4-4-1-1",
     label: "4-4-1-1",
     description: "The Mourinho special. A second striker or #10 operates between the lines behind a lone target man.",
@@ -241,6 +250,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "5-2-3-gegenpress",
     formation: "5-2-3",
     label: "5-2-3",
     description: "Three center-backs with attacking wing-backs. Wide forwards stretch play and create overloads in the final third.",
@@ -266,6 +276,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-2-4-attacking",
     formation: "4-2-4",
     label: "4-2-4",
     description: "Ultra-attacking shape with four forwards. Risky but devastating — the FM26 community's top-scoring formation in tests.",
@@ -292,6 +303,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "3-4-2-1-counter-attack",
     formation: "3-4-2-1",
     label: "3-4-2-1",
     description: "Conte's trademark. Two #10s behind a lone striker with wing-backs providing width. Extremely solid through the middle.",
@@ -318,6 +330,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-3-2-1-christmas-tree",
     formation: "4-3-2-1",
     label: "4-3-2-1",
     description: "Christmas Tree. Narrow and compact. Two advanced playmakers operate behind a solo striker, overwhelming the opponent's midfield.",
@@ -345,6 +358,7 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
   {
+    id: "4-1-2-1-2-diamond",
     formation: "4-1-2-1-2",
     label: "4-1-2-1-2",
     description: "Diamond midfield. A DM anchors, two CMs shuttle, and a #10 creates. Two strikers give you vertical threat against any back line.",
@@ -373,6 +387,91 @@ export const formationPresets: FormationPreset[] = [
     ],
   },
 ];
+
+/**
+ * Alternative XIs for a shape that already has a preset above — a different way
+ * to play the same formation number, transcribed from a second deep-dive guide.
+ *
+ * Kept in its own array so every consumer that assumes one preset per shape
+ * (formation lists, `?formation=`, `createDefaultStateForFormation`) keeps
+ * working untouched: only the builder's Choose Formation panel shows these, via
+ * `presetsForFormation`.
+ *
+ * `id` must be the slug of the guide the roles were transcribed from — the card
+ * and the article it links to have to describe the same eleven.
+ */
+export const formationVariants: FormationPreset[] = [
+  {
+    id: "3-5-2-catenaccio",
+    formation: "3-5-2",
+    label: "3-5-2",
+    variantLabel: "Catenaccio",
+    description: "Deep block, three stoppers and a target man to hold the ball up. Concede little, then strike in six seconds.",
+    // Order: GK | CB CB CB | WBL WBR | CM CM | DLP | ST ST
+    positions: [
+      { x: 50, y: 88 },
+      { x: 25, y: 79 }, { x: 50, y: 83 }, { x: 75, y: 79 },
+      { x: 10, y: 62 }, { x: 90, y: 62 },
+      { x: 35, y: 46 }, { x: 65, y: 46 },
+      { x: 50, y: 54 },
+      { x: 38, y: 13 }, { x: 62, y: 13 },
+    ],
+    // Source: content/tactics/3-5-2-catenaccio.mdx
+    defaultRoles: [
+      { roleId: "line-holding-keeper", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "playmaking-wing-back", duty: "support" },
+      { roleId: "playmaking-wing-back", duty: "support" },
+      { roleId: "pressing-central-midfielder", duty: "defend" },
+      { roleId: "pressing-central-midfielder", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "support" },
+      { roleId: "target-forward", duty: "attack" },
+      { roleId: "centre-forward", duty: "attack" },
+    ],
+  },
+  {
+    id: "4-3-3-fluid-counter",
+    formation: "4-3-3",
+    label: "4-3-3",
+    variantLabel: "Fluid Counter",
+    description: "Invite the press, then break at speed: a sitting holder, a runner in each channel, a direct front three.",
+    // Order: GK | LB CB CB RB | DM CM CM | LW ST RW
+    positions: [
+      { x: 50, y: 88 },
+      { x: 12, y: 74 }, { x: 38, y: 78 }, { x: 62, y: 78 }, { x: 88, y: 74 },
+      { x: 50, y: 50 },
+      { x: 32, y: 42 }, { x: 68, y: 42 },
+      { x: 20, y: 21 }, { x: 50, y: 13 }, { x: 80, y: 21 },
+    ],
+    // Source: content/tactics/4-3-3-fluid-counter.mdx
+    defaultRoles: [
+      { roleId: "sweeper-keeper", duty: "support" },
+      { roleId: "full-back", duty: "support" },
+      { roleId: "ball-playing-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "full-back", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "box-to-box-midfielder", duty: "support" },
+      { roleId: "channel-midfielder", duty: "attack" },
+      { roleId: "winger", duty: "support" },
+      { roleId: "centre-forward", duty: "attack" },
+      { roleId: "inside-forward", duty: "attack" },
+    ],
+  },
+];
+
+/**
+ * Every XI the builder can load for a shape: the primary preset first, then the
+ * alternative takes on it. The panel groups its cards this way, so a formation
+ * number is listed once with its variants nested under it.
+ */
+export function presetsForFormation(formation: FormationType): FormationPreset[] {
+  const primary = formationPresets.find((p) => p.formation === formation);
+  const variants = formationVariants.filter((p) => p.formation === formation);
+  return primary ? [primary, ...variants] : variants;
+}
 
 export const playerRoles: PlayerRoleData[] = [
   {

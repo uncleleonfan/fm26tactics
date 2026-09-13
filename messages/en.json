@@ -585,6 +585,7 @@
     "chooseFormation": "Choose Formation",
     "formationsCount": "{count} formations",
     "formationGuideLink": "Read the full guide",
+    "moreGuides": "Also read:",
     "appliedBadge": "Applied",
     "customBadge": "Custom XI",
     "customNote": "Roles customised — selecting this formation reloads its default XI.",
