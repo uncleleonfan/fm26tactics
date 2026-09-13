@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 import { ArrowLeft, Zap, AlertTriangle, CheckCircle, Download, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { formationGuideSlugs } from "@/lib/formation-guide-slugs";
+import { playerRoles } from "@/lib/tactics-data";
 import {
   topTestedTactics,
   formationInsights,
@@ -26,6 +27,21 @@ const opLevelColors: Record<string, string> = {
   "S": "bg-amber-500 text-background-primary",
   "A": "bg-accent-blue text-background-primary",
 };
+
+/**
+ * Role-abbr → roleId overrides for combo tokens whose intended role differs
+ * from the abbr-exact match (e.g. the source guide's "IWB" means Inverted
+ * Wing-Back, while the abbr-exact role is Inside Wing-Back).
+ */
+const roleAbbrOverrides: Record<string, string> = {
+  IWB: "inverted-wing-back",
+};
+
+/** Resolve a combo token (e.g. "DLP", "F9") to a role id, or null. */
+function resolveComboRole(token: string): string | null {
+  const id = roleAbbrOverrides[token] ?? playerRoles.find((r) => r.abbr === token)?.id;
+  return id ?? null;
+}
 
 export function MetaPage() {
   const t = useTranslations("meta");
@@ -336,8 +352,30 @@ export function MetaPage() {
                   <span className="text-[10px] font-mono font-bold text-primary">{i + 1}</span>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold text-text-primary font-mono">{combo.combo}</span>
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    {combo.combo.split(/(\s*\+\s*|\s*\/\s*)/).map((token, j) => {
+                      const trimmed = token.trim();
+                      if (!trimmed) return null;
+                      // Delimiters ("+", "/") render as-is
+                      if (trimmed === "+" || trimmed === "/") {
+                        return <span key={j} className="text-text-muted">{trimmed}</span>;
+                      }
+                      const roleId = resolveComboRole(trimmed);
+                      const roleName = roleId ? playerRoles.find((r) => r.id === roleId)?.name : undefined;
+                      return roleId ? (
+                        <Link
+                          key={j}
+                          href={`/roles/${roleId}`}
+                          onClick={() => trackEvent("meta_role_combo_click", { label: roleId })}
+                          title={roleName}
+                          className="text-xs font-bold text-text-primary font-mono hover:text-primary transition-colors"
+                        >
+                          {trimmed}
+                        </Link>
+                      ) : (
+                        <span key={j} className="text-xs font-bold text-text-primary font-mono">{trimmed}</span>
+                      );
+                    })}
                     <span className={`text-[10px] px-1.5 py-0.5 rounded ${
                       combo.phase === "possession" ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"
                     }`}>

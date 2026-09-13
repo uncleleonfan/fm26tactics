@@ -196,7 +196,7 @@ export interface MetaRole {
 export const metaRoles: MetaRole[] = [
   {
     name: "Advanced Wing-Back (AWB)",
-    roleId: "wing-back", // AWB = Wing-Back on attack duty — deep guide lives under Wing-Back
+    roleId: "advanced-wing-back",
     category: "in-possession",
     opLevel: "S+",
     overview: "Extremely attacking wide role. Positions like a winger in possession — effectively your 5th or 6th attacker. Think Dani Alves, Nuno Mendes. Tested and validated on Match Engine 26.1.",
