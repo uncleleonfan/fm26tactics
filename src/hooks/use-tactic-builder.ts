@@ -40,6 +40,18 @@ function isValidPhaseMap(map: unknown, players: PlayerNode[]): boolean {
  * Migrate legacy tactic data (no phases) by duplicating the base positions
  * into both phases — roles, duties and team instructions stay untouched.
  */
+/** Always rebuild both phase maps from the given players, discarding phase edits. */
+function freshPhases(players: PlayerNode[]): TacticPhases {
+  return {
+    "in-possession": Object.fromEntries(
+      players.map((p) => [p.id, { x: p.x, y: p.y }])
+    ),
+    "out-of-possession": Object.fromEntries(
+      players.map((p) => [p.id, { x: p.x, y: p.y }])
+    ),
+  };
+}
+
 export function ensurePhases(state: TacticBoardState): TacticBoardState {
   if (
     state.phases &&
@@ -50,14 +62,7 @@ export function ensurePhases(state: TacticBoardState): TacticBoardState {
   }
   return {
     ...state,
-    phases: {
-      "in-possession": Object.fromEntries(
-        state.players.map((p) => [p.id, { x: p.x, y: p.y }])
-      ),
-      "out-of-possession": Object.fromEntries(
-        state.players.map((p) => [p.id, { x: p.x, y: p.y }])
-      ),
-    },
+    phases: freshPhases(state.players),
   };
 }
 
@@ -272,8 +277,10 @@ export function useTacticBuilder() {
           individualInstructions: [],
         };
       });
-      // New formation → regenerate both phases from the fresh preset positions
-      return ensurePhases({ ...prev, formation, players });
+      // New formation → force-regenerate both phases from the fresh preset
+      // positions. ensurePhases alone would keep the old (still-valid)
+      // coordinates because player ids are stable across formations.
+      return { ...prev, formation, players, phases: freshPhases(players) };
     });
   }, []);
 
@@ -401,33 +408,36 @@ export function useTacticBuilder() {
     if (!preset) return;
 
     const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
-    setState(ensurePhases({
+    const players = preset.positions.map((pos, i) => {
+      const assignment = template.roleAssignments[i];
+      const role = assignment
+        ? playerRoles.find((r) => r.id === assignment.roleId)
+        : undefined;
+      const fallback = i === 0
+        ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
+        : roles[i % roles.length] || roles[0];
+      const chosen = role || fallback;
+      return {
+        id: `player-${i}`,
+        x: pos.x,
+        y: pos.y,
+        roleId: chosen.id,
+        duty: assignment?.duty || chosen.availableDuties[0] || "support",
+        individualInstructions: [],
+      };
+    });
+    // One-click apply → reset phase edits to the template's base positions
+    setState({
       formation: template.formation,
-      players: preset.positions.map((pos, i) => {
-        const assignment = template.roleAssignments[i];
-        const role = assignment
-          ? playerRoles.find((r) => r.id === assignment.roleId)
-          : undefined;
-        const fallback = i === 0
-          ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
-          : roles[i % roles.length] || roles[0];
-        const chosen = role || fallback;
-        return {
-          id: `player-${i}`,
-          x: pos.x,
-          y: pos.y,
-          roleId: chosen.id,
-          duty: assignment?.duty || chosen.availableDuties[0] || "support",
-          individualInstructions: [],
-        };
-      }),
+      players,
       teamInstructions: {
         mentality: template.mentality,
         inPossession: [...template.inPossession],
         inTransition: [...template.inTransition],
         outOfPossession: [...template.outOfPossession],
       },
-    }));
+      phases: freshPhases(players),
+    });
   }, []);
 
   const resetTactic = useCallback(() => {
