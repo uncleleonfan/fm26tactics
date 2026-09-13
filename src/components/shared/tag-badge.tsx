@@ -16,7 +16,7 @@ export function TagBadge({ label, variant = "default", className }: TagBadgeProp
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium border transition-colors",
+        "inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium border transition-colors",
         variants[variant],
         className
       )}

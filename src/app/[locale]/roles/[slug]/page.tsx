@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const dutyColors: Record<PlayerDuty, string> = {
-  defend: "#448AFF",
+  defend: "#6FA3FF",
   support: "#FFB300",
   attack: "#FF5252",
 };
@@ -270,7 +270,7 @@ export default async function RoleDetailPage({ params }: Props) {
                         className="p-4 rounded-lg bg-surface border border-surface-border hover:border-primary/25 transition-colors"
                       >
                         <span
-                          className="inline-block text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border mb-3"
+                          className="inline-block text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border mb-3"
                           style={{
                             color,
                             borderColor: `${color}40`,
@@ -283,13 +283,13 @@ export default async function RoleDetailPage({ params }: Props) {
                           </span>
                         </span>
                         <p className="text-xs text-text-primary/85 leading-relaxed mb-2">{guide.behavior}</p>
-                        <p className="text-[11px] text-text-muted leading-relaxed">
+                        <p className="text-xs text-text-muted leading-relaxed">
                           <span className="text-primary font-medium">Best when: </span>
                           {guide.bestWhen}
                         </p>
                         {guide.attributes?.length ? (
                           <div className="mt-3 pt-3 border-t border-surface-border">
-                            <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1.5">
+                            <p className="text-[11px] uppercase tracking-wider text-text-muted mb-1.5">
                               Key attributes for {role.abbr} ({duty.charAt(0).toUpperCase()})
                             </p>
                             <div className="flex flex-wrap gap-1">
@@ -299,7 +299,7 @@ export default async function RoleDetailPage({ params }: Props) {
                                   <span
                                     key={attr}
                                     title={attributeDescriptions[attr] ?? attr}
-                                    className={`text-[10px] px-2 py-0.5 rounded border ${
+                                    className={`text-[11px] px-2 py-0.5 rounded border ${
                                       i === 0
                                         ? "bg-primary/10 border-primary/30 text-primary font-medium"
                                         : "bg-surface border-surface-border text-text-secondary"
@@ -346,13 +346,13 @@ export default async function RoleDetailPage({ params }: Props) {
                         </span>
                       </div>
                       {desc && (
-                        <p className="text-[11px] leading-snug text-text-muted mt-1 pl-[22px]">{desc}</p>
+                        <p className="text-xs leading-snug text-text-muted mt-1 pl-[22px]">{desc}</p>
                       )}
                     </div>
                   );
                 })}
               </div>
-              <p className="text-[11px] text-text-muted mt-3">
+              <p className="text-xs text-text-muted mt-3">
                 Highlighted attributes are the non-negotiables for this role.
               </p>
             </div>
@@ -423,11 +423,11 @@ export default async function RoleDetailPage({ params }: Props) {
                         <span className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">
                           {t.title}
                         </span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
                           {t.formation}
                         </span>
                         <span
-                          className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${styleColors[t.style] ?? ""}`}
+                          className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${styleColors[t.style] ?? ""}`}
                         >
                           {styleLabels[t.style] ?? t.style}
                         </span>
@@ -511,7 +511,7 @@ export default async function RoleDetailPage({ params }: Props) {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap mb-0.5">
                           <span className="text-sm font-semibold text-text-primary">{sp.name}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary">
+                          <span className="text-[11px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary">
                             {sp.club}
                           </span>
                         </div>
@@ -549,7 +549,7 @@ export default async function RoleDetailPage({ params }: Props) {
                               {p.club} · {p.age}
                             </span>
                             <span
-                              className="text-[10px] font-medium px-2 py-0.5 rounded-full border"
+                              className="text-[11px] font-medium px-2 py-0.5 rounded-full border"
                               style={{
                                 color: tierColors[p.tier],
                                 borderColor: `${tierColors[p.tier]}40`,
@@ -561,7 +561,7 @@ export default async function RoleDetailPage({ params }: Props) {
                           </div>
                           <p className="text-xs mt-1.5 text-text-secondary">{wkReasons[i] ?? p.reason}</p>
                         </div>
-                        <span className="shrink-0 text-[11px] font-mono px-2 py-1 rounded-md bg-surface border border-surface-border text-text-secondary">
+                        <span className="shrink-0 text-xs font-mono px-2 py-1 rounded-md bg-surface border border-surface-border text-text-secondary">
                           {p.duty}
                         </span>
                       </div>
@@ -634,12 +634,12 @@ export default async function RoleDetailPage({ params }: Props) {
                       className="block p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/20 transition-all"
                     >
                       <p className="text-sm font-medium text-text-primary mb-0.5">
-                        <span className="text-[10px] font-bold text-primary bg-primary/10 border border-primary/25 px-1 py-0.5 rounded mr-1.5">
+                        <span className="text-[11px] font-bold text-primary bg-primary/10 border border-primary/25 px-1 py-0.5 rounded mr-1.5">
                           {r.abbr}
                         </span>
                         {rl.has(`roleName.${r.id}`) ? rl(`roleName.${r.id}`) : r.name}
                       </p>
-                      <p className="text-[10px] text-text-muted line-clamp-1">
+                      <p className="text-[11px] text-text-muted line-clamp-1">
                         {r.availableDuties.map((d) => rl(dutyKey(d))).join(" · ")}
                       </p>
                     </Link>

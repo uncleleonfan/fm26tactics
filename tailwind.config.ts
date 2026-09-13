@@ -33,12 +33,12 @@ const config: Config = {
         surface: {
           DEFAULT: "rgba(28, 36, 54, 0.6)",
           hover: "rgba(28, 36, 54, 0.8)",
-          border: "rgba(148, 163, 184, 0.1)",
+          border: "rgba(148, 163, 184, 0.22)",
         },
         text: {
           primary: "#F1F5F9",
-          secondary: "#94A3B8",
-          muted: "#7483A0",
+          secondary: "#A6B4CC",
+          muted: "#8B9DBE",
         },
       },
       animation: {

@@ -47,8 +47,8 @@ function renderAngleTick(props: {
       y={y + dy}
       textAnchor={textAnchor}
       verticalAnchor="middle"
-      fill="#94A3B8"
-      fontSize={11}
+      fill="#A6B4CC"
+      fontSize={12}
     >
       {payload.value}
     </text>
@@ -67,12 +67,12 @@ export function RoleRadarChart({ roleName, data }: Props) {
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={data}>
-            <PolarGrid stroke="#1C2436" />
+            <PolarGrid stroke="#2A3750" />
             <PolarAngleAxis dataKey="attribute" tick={renderAngleTick} tickLine={false} />
             <PolarRadiusAxis
               angle={90}
               domain={[0, 100]}
-              tick={{ fill: "#7483A0", fontSize: 10 }}
+              tick={{ fill: "#8B9DBE", fontSize: 11 }}
             />
             <Radar
               name={roleName}

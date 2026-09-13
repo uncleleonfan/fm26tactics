@@ -10,13 +10,13 @@
     --primary-foreground: 0 0% 0%;
     --secondary: 217 33% 17%;
     --muted: 217 33% 12%;
-    --muted-foreground: 215 16% 65%;
-    --border: 217 33% 17%;
+    --muted-foreground: 219 26% 65%;
+    --border: 221 32% 21%;
     --ring: 135 100% 45%;
   }
 
   * {
-    @apply border-[#1C2436];
+    @apply border-[#242E45];
   }
 
   body {
@@ -36,17 +36,17 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-[#1C2436] rounded-full hover:bg-[#2a3348];
+    @apply bg-[#2A3750] rounded-full hover:bg-[#34425F];
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-[#141A26]/60 backdrop-blur-xl border border-[#1C2436]/50 rounded-2xl;
+    @apply bg-[#141A26]/60 backdrop-blur-xl border border-[#2E3D5C]/50 rounded-2xl;
   }
 
   .glass-card {
-    @apply bg-[#1C2436]/40 backdrop-blur-lg border border-[#1C2436]/30 rounded-xl
+    @apply bg-[#1C2436]/40 backdrop-blur-lg border border-[#2E3D5C]/40 rounded-xl
            hover:bg-[#1C2436]/60 hover:border-primary/20 transition-all duration-300;
   }
 
@@ -63,11 +63,11 @@
   }
 
   .pitch-line {
-    @apply stroke-[#1C2436] stroke-[1.5] fill-none;
+    @apply stroke-[#2A3750] stroke-[1.5] fill-none;
   }
 
   .pitch-marker {
-    @apply fill-[#1C2436]/50 stroke-[#1C2436] stroke-[1];
+    @apply fill-[#2A3750]/50 stroke-[#2A3750] stroke-[1];
   }
 }
 

@@ -84,7 +84,7 @@ export default async function RolesPage({ params }: { params: { locale: string }
                           <div>
                             <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">
                               <span className="inline-flex items-center gap-1.5">
-                                <span className="text-[10px] font-bold tracking-wide text-primary bg-primary/10 border border-primary/25 px-1.5 py-0.5 rounded">
+                                <span className="text-[11px] font-bold tracking-wide text-primary bg-primary/10 border border-primary/25 px-1.5 py-0.5 rounded">
                                   {role.abbr}
                                 </span>
                                 {rl.has(`roleName.${role.id}`) ? rl(`roleName.${role.id}`) : role.name}
@@ -99,7 +99,7 @@ export default async function RolesPage({ params }: { params: { locale: string }
                           {role.availableDuties.map((duty) => {
                             const d = dutyColors[duty];
                             return (
-                              <span key={duty} className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${d.bg} ${d.text} ${d.border}`}>
+                              <span key={duty} className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${d.bg} ${d.text} ${d.border}`}>
                                 {rl(dutyKey(duty))}
                               </span>
                             );
@@ -109,19 +109,19 @@ export default async function RolesPage({ params }: { params: { locale: string }
                           {role.keyAttributes.slice(0, 4).map((attr) => {
                             const k = `attr.${attrKey(attr)}`;
                             return (
-                              <span key={attr} className="text-[10px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
+                              <span key={attr} className="text-[11px] px-2 py-0.5 rounded bg-surface border border-surface-border text-text-muted">
                                 {rl.has(k) ? rl(k) : attr}
                               </span>
                             );
                           })}
                           {role.keyAttributes.length > 4 && (
-                            <span className="text-[10px] px-2 py-0.5 rounded text-text-muted">
+                            <span className="text-[11px] px-2 py-0.5 rounded text-text-muted">
                               +{role.keyAttributes.length - 4}
                             </span>
                           )}
                         </div>
                         <div className="mt-4 pt-3 border-t border-[#1C2436]/50 flex items-center justify-between">
-                          <span className="text-[10px] text-text-muted">
+                          <span className="text-[11px] text-text-muted">
                             {role.bestFormations.slice(0, 3).join(" · ")}
                           </span>
                           <ArrowRight className="w-3 h-3 text-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
