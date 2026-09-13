@@ -4,7 +4,7 @@ import { formationPresets } from "@/lib/tactics-data";
 import { allTactics } from "contentlayer/generated";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, LayoutGrid, Wrench } from "lucide-react";
+import { ArrowRight, BookOpen, LayoutGrid, Wrench } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -121,6 +121,11 @@ export default function FormationsPage() {
               (tc) => tc.formation === formation.formation
             );
 
+            // Primary deep-dive guide for this formation (top-right link)
+            const guide = allTactics.find(
+              (tc) => tc.formation === formation.formation
+            );
+
             return (
               <div
                 key={formation.formation}
@@ -135,6 +140,16 @@ export default function FormationsPage() {
                   <span className="text-text-secondary text-sm">
                     {description}
                   </span>
+                  {guide && (
+                    <Link
+                      href={`/tactics/${guide.slug}`}
+                      className="ml-auto inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
+                    >
+                      <BookOpen className="w-3.5 h-3.5" />
+                      {t("readGuideLink")}
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  )}
                 </div>
 
                 {hasSeo && (
