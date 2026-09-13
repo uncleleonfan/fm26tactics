@@ -166,10 +166,31 @@ export function MetaPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {insights.map((f) => {
                 const tc = tierColors[f.tier];
+                const parts = f.formation.split("/").map((s) => s.trim());
                 return (
                   <div key={f.formation} className={`glass-panel p-4 border-l-2 ${tc.border}`}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-mono font-bold text-text-primary">{f.formation}</span>
+                      <span className="text-xs font-mono font-bold text-text-primary">
+                        {parts.map((part, i) => (
+                          <span key={part}>
+                            {i > 0 && <span className="text-text-muted font-normal"> / </span>}
+                            {formationGuideSlugs[part] ? (
+                              <Link
+                                href={`/tactics/${formationGuideSlugs[part]}`}
+                                onClick={() =>
+                                  trackEvent("meta_formation_guide_click", { label: part })
+                                }
+                                title={t("formationGuideLink")}
+                                className="hover:text-primary underline-offset-2 hover:underline transition-colors"
+                              >
+                                {part}
+                              </Link>
+                            ) : (
+                              part
+                            )}
+                          </span>
+                        ))}
+                      </span>
                       <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${tc.badge}`}>{f.tier}</span>
                     </div>
                     <p className="text-[11px] text-text-muted mb-2">
