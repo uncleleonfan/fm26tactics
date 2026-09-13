@@ -268,7 +268,10 @@ export function useTacticBuilder() {
     trackEvent("builder_formation_url_load", { label: preset.formation });
   }, []);
 
-  // Fired when the page is opened via a shared link (?tactic=...).
+  // Apply ?tactic= URL param on client mount and fire shared-link tracking.
+  // The useState initializer runs during SSR where window is unavailable,
+  // so — like the ?formation= effect above — we must re-read the param here
+  // and call setState to ensure the shared tactic actually loads.
   // The ref guards against StrictMode's double effect run in dev.
   useEffect(() => {
     if (sharedTrackedRef.current) return;
@@ -278,9 +281,10 @@ export function useTacticBuilder() {
         : null;
     if (!encoded) return;
     sharedTrackedRef.current = true;
-    const ok = !!decodeTacticState(encoded);
-    trackEvent("builder_shared_load", { label: ok ? "ok" : "fail" });
-    if (ok) {
+    const decoded = decodeTacticState(encoded);
+    trackEvent("builder_shared_load", { label: decoded ? "ok" : "fail" });
+    if (decoded) {
+      setState(decoded);
       setSharedLoadMsg("ok");
       setTimeout(() => setSharedLoadMsg(null), 5000);
     }
