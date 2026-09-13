@@ -153,7 +153,7 @@ export default function BuilderLayout({ children }: { children: React.ReactNode 
               { label: "FM26 Formations Guide", href: "/formations" },
               { label: "FM26 Player Roles", href: "/roles" },
               { label: "FM26 Shouts Guide", href: "/guides/match-day-shouts-guide" },
-              { label: "FM26 Gegenpress Tactics", href: "/tactics/gegenpress-4-3-3" },
+              { label: "FM26 Gegenpress Masterclass", href: "/guides/gegenpress-masterclass" },
             ].map((link) => (
               <Link
                 key={link.href}
