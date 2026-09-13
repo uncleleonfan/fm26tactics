@@ -4,7 +4,7 @@ import { formationPresets } from "@/lib/tactics-data";
 import { allTactics } from "contentlayer/generated";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, BookOpen, LayoutGrid, Wrench } from "lucide-react";
+import { ArrowRight, LayoutGrid, Wrench } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -121,11 +121,6 @@ export default function FormationsPage() {
               (tc) => tc.formation === formation.formation
             );
 
-            // Primary deep-dive guide for this formation (top-right link)
-            const guide = allTactics.find(
-              (tc) => tc.formation === formation.formation
-            );
-
             return (
               <div
                 key={formation.formation}
@@ -140,16 +135,6 @@ export default function FormationsPage() {
                   <span className="text-text-secondary text-sm">
                     {description}
                   </span>
-                  {guide && (
-                    <Link
-                      href={`/tactics/${guide.slug}`}
-                      className="ml-auto inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
-                    >
-                      <BookOpen className="w-3.5 h-3.5" />
-                      {t("readGuideLink")}
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  )}
                 </div>
 
                 {hasSeo && (
@@ -222,7 +207,7 @@ export default function FormationsPage() {
                   )}
                   <Link
                     href={`/builder?formation=${formation.formation}`}
-                    className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors ml-auto"
+                    className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl bg-primary text-background-primary hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all ml-auto"
                   >
                     <Wrench className="w-3 h-3" />
                     {t("tryInBuilder")}
