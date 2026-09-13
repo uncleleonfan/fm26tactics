@@ -48,11 +48,26 @@ export default function BuilderPage() {
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [showExport, setShowExport] = useState(false);
-  const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation" | "analysis">("role");
+  const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation" | "analysis">(() => {
+    // Restore the sidebar tab after external navigation (e.g. opening a
+    // formation guide and coming back) — the tab is mirrored to ?tab= below.
+    if (typeof window === "undefined") return "role";
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    return tab === "instructions" || tab === "formation" || tab === "analysis" ? tab : "role";
+  });
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
   const [showFmfAlert, setShowFmfAlert] = useState(false);
   const [appliedChange, setAppliedChange] = useState<AppliedChange | null>(null);
+
+  // Mirror the sidebar tab into the URL (same pattern as ?phase=) so the tab
+  // survives navigating to an external page and coming back via browser back.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", sidebarTab);
+    window.history.replaceState(null, "", url);
+  }, [sidebarTab]);
   const [visualize, setVisualize] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
 
