@@ -347,4 +347,73 @@ Defensive Line: Higher | Line of Engagement: Mid Block
 Trigger Press: Standard | Offside Trap: ON | Get Stuck In: ON
 
 KEY: Nuclear option for last 15 minutes. Four forwards flood the box. Not a 90-min system.`,
+  "4-5-1-midfield-wall": `FM26 4-5-1 Midfield Wall — Full Setup
+
+FORMATION: 4-5-1
+STYLE: Counter-Attack | Mentality: Cautious
+
+PLAYER ROLES
+GK: Sweeper Keeper (Su)
+DEF: Full-Back (At) | Central Defender (De) | Central Defender (De) | Full-Back (Su)
+MID: Tracking Winger (De) | Central Midfielder (De) | Deep-Lying Playmaker (Su) | Central Midfielder (Su) | Winger (Su)
+ATT: Target Forward (At)
+
+IN POSSESSION
+Passing: Slightly More Direct | Tempo: Slightly Lower
+Work Ball Into Box: ON
+
+IN TRANSITION
+Counter: ON | GK Distribution: Distribute to Full-Backs
+
+OUT OF POSSESSION
+Defensive Line: Standard | Line of Engagement: Mid Block
+Trigger Press: Slightly Less | Cross Pressure: ON | Offside Trap: OFF
+
+KEY: Both wide midfielders are defenders first — 14+ Stamina, 12km a match. The Target Forward's hold-up play is the only route out.`,
+  "5-1-2-2-anchor-strike": `FM26 5-1-2-2 Anchor Strike — Full Setup
+
+FORMATION: 5-1-2-2
+STYLE: Counter-Attack | Mentality: Balanced
+
+PLAYER ROLES
+GK: Sweeper Keeper (Su)
+DEF: Central Defender (De) | Central Defender (De) | Ball-Playing Defender (De) | Wing-Back (Su) | Wing-Back (Su)
+MID: Deep-Lying Playmaker (De)
+AM: Attacking Midfielder (At) | Attacking Midfielder (At)
+ATT: Centre Forward (At) | Target Forward (At)
+
+IN POSSESSION
+Width: Fairly Narrow | Passing: More Direct | Tempo: Higher
+
+IN TRANSITION
+Counter: ON | GK Distribution: Distribute to Target Forward
+
+OUT OF POSSESSION
+Defensive Line: Standard | Line of Engagement: Low Block
+Trigger Press: Standard | Cross Pressure: ON | Get Stuck In: OFF
+
+KEY: The anchor is the whole system — the Deep-Lying Playmaker (De) needs 14+ Positioning, or the five becomes a 4-4-2 with a spare body.`,
+  "3-3-3-1-vertical-bands": `FM26 3-3-3-1 Vertical Bands — Full Setup
+
+FORMATION: 3-3-3-1
+STYLE: Fluid Counter-Attack | Mentality: Positive
+
+PLAYER ROLES
+GK: Sweeper Keeper (Su)
+DEF: Central Defender (De) | Ball-Playing Defender (De) | Central Defender (De)
+MID: Deep-Lying Playmaker (Su) | Central Midfielder (Su) | Box-to-Box Midfielder (Su)
+AM: Winger (Su) | Advanced Playmaker (At) | Winger (At)
+ATT: Centre Forward (At)
+
+IN POSSESSION
+Width: Fairly Wide | Passing: More Direct | Tempo: Higher
+
+IN TRANSITION
+Counter: ON | Counter-Press: ON | GK Distribution: Roll Out to CBs
+
+OUT OF POSSESSION
+Defensive Line: Higher | Line of Engagement: Mid Block
+Trigger Press: Standard | Trap Inside: ON | Offside Trap: ON
+
+KEY: The #10 (Advanced Playmaker, At) is the band-connector — 15+ Off the Ball and Decisions; both wide forwards need 14+ Work Rate.`,
 };
