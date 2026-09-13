@@ -18,6 +18,7 @@ import {
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles, styleColors, styleLabels } from "@/lib/tactics-data";
 import { roleDepth } from "@/lib/role-depth";
+import { attributeDescriptions } from "@/lib/attribute-descriptions";
 import { roleWonderkids } from "@/lib/role-wonderkids";
 import { generateSEO } from "@/lib/metadata";
 import type { PlayerDuty } from "@/types/tactic";
@@ -297,6 +298,7 @@ export default async function RoleDetailPage({ params }: Props) {
                                 return (
                                   <span
                                     key={attr}
+                                    title={attributeDescriptions[attr] ?? attr}
                                     className={`text-[10px] px-2 py-0.5 rounded border ${
                                       i === 0
                                         ? "bg-primary/10 border-primary/30 text-primary font-medium"
@@ -323,23 +325,29 @@ export default async function RoleDetailPage({ params }: Props) {
                 <Target className="w-4 h-4 text-primary" />
                 {rl("attributes")}
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {role.keyAttributes.map((attr, idx) => {
                   const k = `attr.${attrKey(attr)}`;
                   const core = idx < 3;
+                  const desc = attributeDescriptions[attr];
                   return (
                     <div
                       key={attr}
-                      className={`flex items-center gap-2 p-2.5 rounded-lg border transition-colors ${
+                      className={`p-2.5 rounded-lg border transition-colors ${
                         core
                           ? "bg-primary/5 border-primary/30 shadow-[0_0_12px_rgba(0,230,118,0.08)]"
                           : "bg-surface border-surface-border"
                       }`}
                     >
-                      <Check className={`w-3.5 h-3.5 shrink-0 ${core ? "text-primary" : "text-text-muted"}`} />
-                      <span className={`text-sm ${core ? "text-text-primary font-medium" : "text-text-secondary"}`}>
-                        {rl.has(k) ? rl(k) : attr}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <Check className={`w-3.5 h-3.5 shrink-0 ${core ? "text-primary" : "text-text-muted"}`} />
+                        <span className={`text-sm ${core ? "text-text-primary font-medium" : "text-text-secondary"}`}>
+                          {rl.has(k) ? rl(k) : attr}
+                        </span>
+                      </div>
+                      {desc && (
+                        <p className="text-[11px] leading-snug text-text-muted mt-1 pl-[22px]">{desc}</p>
+                      )}
                     </div>
                   );
                 })}
