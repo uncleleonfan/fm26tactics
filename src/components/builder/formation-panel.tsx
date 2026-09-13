@@ -55,6 +55,10 @@ export function FormationPanel({ currentFormation, players, onSelectPreset, onAp
   // The XI decides what the cards may honestly claim: a loaded preset, the meta
   // template it came from, or neither.
   const appliedTemplate = findAppliedTemplate(players);
+  // A template reports itself on its own card above, so Choose Formation stays
+  // neutral while one owns the board: no highlight, no check, no "customised"
+  // badge. Both sections reacting to a single click made it read as if the
+  // shape — not the template — was what had just been applied.
   return (
     <div className="space-y-4">
       {/* Meta templates — one-click apply */}
@@ -118,7 +122,8 @@ export function FormationPanel({ currentFormation, players, onSelectPreset, onAp
         </div>
         <div className="space-y-1.5">
           {formationPresets.map((preset) => {
-            const shapeActive = preset.formation === currentFormation;
+            const shapeActive =
+              !appliedTemplate && preset.formation === currentFormation;
             // A shape can ship more than one XI (3-5-2 Counter-Attack next to
             // Catenaccio). Which one the board holds is decided by the 11 roles
             // themselves, so neither a template nor a manual edit can claim a card.
@@ -127,14 +132,9 @@ export function FormationPanel({ currentFormation, players, onSelectPreset, onAp
               ? shapePresets.find((p) => matchesPresetXI(players, p))
               : undefined;
             const presetLoaded = matched?.id === preset.id;
+            // Only a hand-edited XI can be customised here: a template XI leaves
+            // shapeActive false, so no card ever has to name a template style.
             const customised = shapeActive && !matched;
-            // Name the deviation instead of a vague "custom": the template's style
-            // when the XI is one of them, a plain marker otherwise.
-            const customLabel = appliedTemplate
-              ? st.has(`styles.${appliedTemplate.style}`)
-                ? st(`styles.${appliedTemplate.style}`)
-                : formatStyle(appliedTemplate.style)
-              : b("customBadge");
             // The book icon points at the article this preset's roles came from.
             // Every other guide is either a variant card of its own (below) or a
             // chip, so no article is reachable twice or not at all.
@@ -176,7 +176,7 @@ export function FormationPanel({ currentFormation, players, onSelectPreset, onAp
                         )}
                         {customised && (
                           <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-400/15 text-amber-300 font-semibold uppercase tracking-wide shrink-0">
-                            {customLabel}
+                            {b("customBadge")}
                           </span>
                         )}
                       </div>
