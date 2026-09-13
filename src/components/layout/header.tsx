@@ -1,23 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { usePathname } from "@/i18n/routing";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
-
-const SearchDialog = dynamic(
-  () => import("@/components/shared/search-dialog").then((m) => ({ default: m.SearchDialog })),
-  { ssr: false }
-);
 
 export function Header() {
   const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
 
   const navLinks = [
@@ -89,22 +82,6 @@ export function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                setSearchOpen(true);
-                trackEvent("nav_search_open");
-              }}
-              className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-all"
-              aria-label={t("search")}
-            >
-              <Search className="w-4 h-4" />
-            </button>
-
-            <div className="hidden md:flex items-center gap-1 ml-2 text-xs text-text-muted px-2 py-1 rounded-md bg-surface border border-surface-border">
-              <kbd className="px-1 rounded bg-background-primary">⌘</kbd>
-              <span>K</span>
-            </div>
-
             {/* Mobile menu button */}
             <button
               onClick={() => {
@@ -144,8 +121,6 @@ export function Header() {
           </div>
         )}
       </header>
-
-      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 }
