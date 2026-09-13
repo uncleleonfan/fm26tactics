@@ -84,10 +84,46 @@ export function generateSEO({
 
 export const siteConfig = {
   name: "FM26 Tactics",
+  /**
+   * Alternate spellings of the brand, in order of preference. Google's site
+   * name system falls back to these when the primary `name` is not trusted;
+   * the bare domain is listed last as Google's documented last resort.
+   */
+  alternateNames: ["FM26Tactics", "fm26tactics.com"],
   url: "https://www.fm26tactics.com",
   description: "Master Football Manager 2026 tactics with expert guides, player role analysis, and our interactive tactic builder.",
   links: {
     github: "https://github.com/uncleleonfan/fm26tactics",
+  },
+};
+
+/**
+ * Site-level `WebSite` structured data — the strongest signal Google Search
+ * uses to derive the site name shown above a result's title link.
+ *
+ * Requirements (https://developers.google.com/search/docs/appearance/site-names):
+ * - `name` + `url` are required; `alternateName` is recommended.
+ * - Markup only needs to live on the home page; it must describe the domain's
+ *   canonical home page and must not be blocked by robots.txt or `noindex`.
+ * - `name` must stay consistent with `og:site_name`, `<title>` and the visible
+ *   header logo, otherwise Google keeps showing the bare URL instead.
+ */
+export const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteConfig.url}/#website`,
+  name: siteConfig.name,
+  alternateName: siteConfig.alternateNames,
+  url: `${siteConfig.url}/`,
+  description: siteConfig.description,
+  inLanguage: "en",
+  publisher: {
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+    alternateName: siteConfig.alternateNames,
+    url: `${siteConfig.url}/`,
+    sameAs: [siteConfig.links.github],
   },
 };
 

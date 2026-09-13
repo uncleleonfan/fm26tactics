@@ -11,7 +11,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { DeferredSpeedInsights } from "@/components/shared/deferred-speed-insights";
 import { AdSenseScript } from "@/components/ads/adsense-script";
-import { siteConfig } from "@/lib/metadata";
+import { siteConfig, websiteJsonLd } from "@/lib/metadata";
 import { routing } from "@/i18n/routing";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -48,7 +48,7 @@ export async function generateMetadata({
   return {
     title: {
       default: "Best FM26 Tactics & Formations",
-      template: "%s | FM26 Tactics",
+      template: `%s | ${siteConfig.name}`,
     },
     description:
       "Master Football Manager 2026 with expert tactics, proven formations, player roles analysis, and an interactive builder to craft winning strategies.",
@@ -56,13 +56,13 @@ export async function generateMetadata({
       "fm 26 tactics", "fm26 tactics", "football manager 2026",
       "fm26 formations", "tiki-taka", "player roles",
     ],
-    authors: [{ name: "FM26 Tactics", url: "https://www.fm26tactics.com" }],
-    metadataBase: new URL("https://www.fm26tactics.com"),
+    authors: [{ name: siteConfig.name, url: siteConfig.url }],
+    metadataBase: new URL(siteConfig.url),
     openGraph: {
       type: "website",
       locale: ogLocale,
-      url: "https://www.fm26tactics.com",
-      siteName: "FM26 Tactics",
+      url: siteConfig.url,
+      siteName: siteConfig.name,
       title: "Best FM26 Tactics & Formations",
       description:
         "Master Football Manager 2026 with expert tactics, proven formations, and our interactive builder.",
@@ -77,9 +77,9 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: "FM26 Tactics",
+      title: siteConfig.name,
       description: "Master Football Manager 2026 tactics with expert guides and an interactive builder.",
-      images: ["https://www.fm26tactics.com/images/og/default.jpg"],
+      images: [`${siteConfig.url}/images/og/default.jpg`],
     },
     robots: {
       index: true,
@@ -129,27 +129,7 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            description: siteConfig.description,
-            author: {
-              "@type": "Person",
-              name: "FM26 Tactics",
-              url: siteConfig.url,
-            },
-            publisher: {
-              "@type": "Person",
-              name: "FM26 Tactics",
-              url: siteConfig.url,
-            },
-            sameAs: [siteConfig.links.github],
-            dateModified: "2026-09-13",
-          }}
-        />
+        <JsonLd data={websiteJsonLd} />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-background-primary text-text-primary min-h-screen`}>
         <NextIntlClientProvider messages={messages}>
