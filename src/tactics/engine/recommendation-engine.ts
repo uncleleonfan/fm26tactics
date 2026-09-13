@@ -107,17 +107,19 @@ export function generateRecommendations(
         };
         const after = scoreOf(nextState, ballZone);
 
-        // Improvement function: fix the primary problem without wrecking others.
+        // Improvement function: defensive equilibrium first. Recommendations
+        // may trade creativity and threat, but never the defensive floor.
         const delta =
-          (primaryProblem === "risk"
-            ? (before.risk - after.risk) * 2
-            : (after[primaryProblem] - before[primaryProblem]) * 2) +
-          (after.defence - before.defence) * 0.5 +
-          (before.risk - after.risk) * 0.7 +
-          (after.attack - before.attack) * 0.25 +
-          (after.support - before.support) * 0.25;
+          (after.defence - before.defence) * 1.5 +
+          (before.risk - after.risk) * 1.5 +
+          (after.support - before.support) * 0.3 +
+          (after.attack - before.attack) * 0.2;
 
-        if (delta > 0.01) {
+        // Gate: a recommendation must measurably improve defensive balance
+        // and never raise transition risk. (When the front line is locked,
+        // risk may be untouchable from defence-only changes — flat risk is
+        // still acceptable as long as defence genuinely improves.)
+        if (delta > 0.01 && after.defence > before.defence && after.risk <= before.risk + 1e-9) {
           candidates.push({ playerIndex, newRoleId: role.id, newDuty: duty, after, delta });
         }
       }

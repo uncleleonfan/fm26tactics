@@ -103,7 +103,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       { name: "Unai Simón", club: "Athletic Club", why: "Elite reflexes and command of area behind Athletic's disciplined defensive blocks." },
     ],
     partnerships: [
-      { partner: "Central Defender", partnerId: "central-defender", note: "The traditional axis — aerial dominance in his box doubled by duel dominance in front of it" },
+      { partner: "Centre-Back", partnerId: "central-defender", note: "The traditional axis — aerial dominance in his box doubled by duel dominance in front of it" },
       { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "DLP drops to collect his simple lay-offs, letting the keeper do what he does best: save" },
       { partner: "Target Forward", partnerId: "target-forward", note: "Long clearances become assets — the TF swallows them up and brings runners into play" },
     ],
@@ -150,7 +150,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       { name: "Jan Oblak", club: "Atlético Madrid", why: "The definitive low-block keeper: reflex saves, claimed crosses, zero panic across a decade in Madrid." },
     ],
     partnerships: [
-      { partner: "Central Defender", partnerId: "central-defender", note: "A defensive bunker — deep line, duel-winning CBs and a keeper who owns the box behind them" },
+      { partner: "Centre-Back", partnerId: "central-defender", note: "A defensive bunker — deep line, duel-winning CBs and a keeper who owns the box behind them" },
       { partner: "Target Forward", partnerId: "target-forward", note: "Every claim and punch releases the TF, turning defence into instant counter-attacks" },
       { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "Controls tempo when you finally win the ball, ensuring counters are chosen rather than forced" },
     ],
@@ -204,7 +204,7 @@ export const roleDepth: Record<string, RoleDepth> = {
       { name: "Gabriel Magalhães", club: "Arsenal", why: "Progressive passing machine whose out-balls drive Arsenal's build-up from the left channel." },
     ],
     partnerships: [
-      { partner: "Central Defender", partnerId: "central-defender", note: "BPD plays, CD defends — the perfect complementary centre-back pairing" },
+      { partner: "Centre-Back", partnerId: "central-defender", note: "BPD plays, CD defends — the perfect complementary centre-back pairing" },
       { partner: "Sweeper Keeper", partnerId: "sweeper-keeper", note: "SK sweeps behind the BPD, allowing the BPD to push into a high line" },
       { partner: "Deep-Lying Playmaker", partnerId: "deep-lying-playmaker", note: "Two-line build-up: BPD breaks the first line, DLP threads the second" },
     ],
@@ -233,7 +233,7 @@ export const roleDepth: Record<string, RoleDepth> = {
 
   "central-defender": {
     overview: [
-      "The Central Defender is football stripped to its essentials: win the duel, clear the ball, protect the goal. He marks tightly, tackles cleanly, dominates both boxes in the air and positions himself with the boring excellence that champions are built on. In an era of playing out from the back, his refusal to overplay is a feature — the ball goes forward, the danger dies, the shape survives.",
+      "The Centre-Back is football stripped to its essentials: win the duel, clear the ball, protect the goal. He marks tightly, tackles cleanly, dominates both boxes in the air and positions himself with the boring excellence that champions are built on. In an era of playing out from the back, his refusal to overplay is a feature — the ball goes forward, the danger dies, the shape survives.",
       "This role anchors defensive and counter-attacking tactics where structure beats stardust. Pair him with a Ball-Playing Defender and the division of labour is perfect: one creates, one destroys. In a back five he is the immovable middle of a fortress — exactly the sort of defender who wins relegation battles and title races alike with a header off a corner in the 89th minute.",
     ],
     dutyGuide: {

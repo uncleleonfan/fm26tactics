@@ -57,7 +57,7 @@ STYLE: Counter-Attack | Mentality: Balanced
 
 PLAYER ROLES
 GK: Goalkeeper (De)
-DEF: Central Defender (De) x3
+DEF: Centre-Back (De) x3
 MID: Wing-Back (Su) x2 | Deep-Lying Playmaker (Su) | Box-to-Box Midfielder (Su) | Central Midfielder (Su)
 ATT: Centre Forward (At) | Target Forward (Su)
 
@@ -80,7 +80,7 @@ STYLE: Control Possession | Mentality: Positive
 
 PLAYER ROLES
 GK: Sweeper Keeper (De)
-DEF: Full-Back (At) | Ball-Playing Defender (De) | Central Defender (De) | Full-Back (At)
+DEF: Full-Back (At) | Ball-Playing Defender (De) | Centre-Back (De) | Full-Back (At)
 MID: Defensive Midfielder (De) | Box-to-Box Midfielder (Su) | Wide Covering Central Midfielder (Su)
 AM: Attacking Midfielder (At)
 ATT: Centre Forward (At) | Deep-Lying Forward (Su)
@@ -105,7 +105,7 @@ STYLE: Gegenpress | Mentality: Positive
 
 PLAYER ROLES
 GK: Sweeper Keeper (Su)
-DEF: Full-Back (Su) | Ball-Playing Defender (De) | Central Defender (De) | Full-Back (At)
+DEF: Full-Back (Su) | Ball-Playing Defender (De) | Centre-Back (De) | Full-Back (At)
 MID: Deep-Lying Playmaker (De) | Box-to-Box Midfielder (Su)
 AM: Inside Forward (At) | Attacking Midfielder (At) | Winger (Su)
 ATT: Centre Forward (At)
@@ -130,7 +130,7 @@ STYLE: Fluid Counter-Attack | Mentality: Balanced
 
 PLAYER ROLES
 GK: Sweeper Keeper (Su)
-DEF: Full-Back (De) | Ball-Playing Defender (De) | Central Defender (De) | Full-Back (Su)
+DEF: Full-Back (De) | Ball-Playing Defender (De) | Centre-Back (De) | Full-Back (Su)
 MID: Deep-Lying Playmaker (De) | Box-to-Box Midfielder (Su) | Channel Midfielder (At)
 ATT: Inside Forward (At) | Centre Forward (At) | Winger (Su)
 
@@ -154,7 +154,7 @@ STYLE: Tiki-Taka | Mentality: Positive
 
 PLAYER ROLES
 GK: Sweeper Keeper (Su)
-DEF: Full-Back (Su) | Ball-Playing Defender (De) | Central Defender (De) | Full-Back (Su)
+DEF: Full-Back (Su) | Ball-Playing Defender (De) | Centre-Back (De) | Full-Back (Su)
 MID: Deep-Lying Playmaker (Su) | Advanced Playmaker (Su) | Channel Midfielder (Su)
 ATT: Inside Forward (Su) | Centre Forward (At) | Inside Forward (At)
 
@@ -180,7 +180,7 @@ STYLE: Wing Play | Mentality: Positive
 
 PLAYER ROLES
 GK: Goalkeeper (De)
-DEF: Full-Back (Su) | Central Defender (De) | Central Defender (De) | Full-Back (Su)
+DEF: Full-Back (Su) | Centre-Back (De) | Centre-Back (De) | Full-Back (Su)
 MID: Winger (At) | Central Midfielder (De) | Box-to-Box Midfielder (Su) | Winger (At)
 ATT: Target Forward (Su) | Centre Forward (At)
 
