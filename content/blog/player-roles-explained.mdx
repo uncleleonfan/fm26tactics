@@ -146,13 +146,23 @@ Every successful FM26 tactic has a functional midfield triangle:
 
 ### Example 1: Gegenpress 4-2-3-1
 
-```
-SK(At)
-FB(S) — BPD(De) — CD(De) — FB(S)
-     SV(S)    —    PCM(De)
-W(S)     AM(At)     IF(At)
-          CF(At)
-```
+<TacticBoardCta
+  formation="4-2-3-1"
+  caption="The gegenpress 4-2-3-1"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support" },
+    { roleId: "full-back", duty: "attack" },
+    { roleId: "ball-playing-defender", duty: "defend" },
+    { roleId: "central-defender", duty: "defend" },
+    { roleId: "full-back", duty: "support" },
+    { roleId: "deep-lying-playmaker", duty: "defend" },
+    { roleId: "box-to-box-midfielder", duty: "support" },
+    { roleId: "inside-forward", duty: "attack" },
+    { roleId: "attacking-midfielder", duty: "attack" },
+    { roleId: "winger", duty: "support" },
+    { roleId: "centre-forward", duty: "attack" },
+  ]}
+/>
 
 **Why it works:**
 - CF(At) + AM(At) + IF(At) create a 4-man pressing unit
@@ -162,13 +172,23 @@ W(S)     AM(At)     IF(At)
 
 ### Example 2: Possession 4-3-3
 
-```
-SK(Su)
-FB(Su) — BPD(De) — BPD(De) — FB(Su)
-     DLP(De)
- Mez(At)    AP(At)
-IF(Su) — CF(Su) — W(At)
-```
+<TacticBoardCta
+  formation="4-3-3"
+  caption="The possession 4-3-3"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support" },
+    { roleId: "full-back", duty: "support" },
+    { roleId: "ball-playing-defender", duty: "defend" },
+    { roleId: "ball-playing-defender", duty: "defend" },
+    { roleId: "full-back", duty: "support" },
+    { roleId: "deep-lying-playmaker", duty: "support" },
+    { roleId: "advanced-playmaker", duty: "support" },
+    { roleId: "channel-midfielder", duty: "support" },
+    { roleId: "inside-forward", duty: "support" },
+    { roleId: "centre-forward", duty: "support" },
+    { roleId: "inside-forward", duty: "attack" },
+  ]}
+/>
 
 **Why it works:**
 - DLP(De) holds, Mez(At) + AP(At) overload the left half-space
@@ -177,12 +197,23 @@ IF(Su) — CF(Su) — W(At)
 
 ### Example 3: Counter-Attack 3-5-2
 
-```
-SK(De)
-CD(De) — CD(Co) — CD(De)
-PWB(At) — PCM(De) — DLP(Su) — PWB(At)
-     CF(At) — TF(Su)
-```
+<TacticBoardCta
+  formation="3-5-2"
+  caption="The counter-attack 3-5-2"
+  setup={[
+    { roleId: "goalkeeper", duty: "defend" },
+    { roleId: "central-defender", duty: "defend" },
+    { roleId: "central-defender", duty: "defend" },
+    { roleId: "central-defender", duty: "defend" },
+    { roleId: "wing-back", duty: "support" },
+    { roleId: "wing-back", duty: "support" },
+    { roleId: "deep-lying-playmaker", duty: "support" },
+    { roleId: "central-midfielder", duty: "support" },
+    { roleId: "box-to-box-midfielder", duty: "support" },
+    { roleId: "centre-forward", duty: "attack" },
+    { roleId: "target-forward", duty: "support" },
+  ]}
+/>
 
 **Why it works:**
 - Three CBs provide defensive security

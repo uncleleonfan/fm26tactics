@@ -125,9 +125,9 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
               const diff = difficultyConfig[tactic.difficulty];
               if (!meta) return null;
               return (
-                <div key={tactic.slug} className="glass-card group hover:border-primary/30 transition-all duration-300">
+                <div key={tactic.slug} className="glass-card group hover:border-primary/30 transition-all duration-300 relative">
                   <Link href={`/tactics/${tactic.slug}`} className="block p-5 sm:p-6">
-                    <div className="flex items-center gap-3 mb-4 flex-wrap">
+                    <div className="flex items-center gap-3 mb-4 flex-wrap pr-28 sm:pr-36">
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${meta.color}`}>{meta.icon}{b(meta.badgeKey)}</span>
                       <span className="text-xs font-mono font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-md">{tactic.formation}</span>
                       <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${diff.className}`}>{f(tactic.difficulty)}</span>
@@ -138,15 +138,13 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
                     <p className="text-xs text-text-muted italic mb-3">{b("whyRanks")}{index + 1}: {b(meta.reasonKey)}</p>
                     <div className="flex items-center gap-1 text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity">{b("viewFullTactic")} <ArrowRight className="w-3 h-3" /></div>
                   </Link>
-                  <div className="flex items-center justify-end gap-3 px-5 sm:px-6 pb-5 sm:pb-6 -mt-2">
-                    <Link
-                      href={`/builder?formation=${tactic.formation}`}
-                      className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl bg-primary text-background-primary hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
-                    >
-                      <Wrench className="w-3 h-3" />
-                      {b("tryInBuilder")}
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/builder?formation=${tactic.formation}`}
+                    className="absolute top-4 right-4 sm:top-5 sm:right-5 z-10 inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-primary text-background-primary hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
+                  >
+                    <Wrench className="w-3 h-3" />
+                    {b("tryInBuilder")}
+                  </Link>
                 </div>
               );
             })}

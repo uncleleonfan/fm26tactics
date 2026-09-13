@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
+import { TryInBuilderButton } from "@/components/shared/try-in-builder-button";
+import { TacticBoardCta } from "@/components/shared/tactic-board-cta";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { FormationDiagram } from "@/components/tactics/formation-diagram";
 import type { Blog } from "contentlayer/generated";
@@ -33,6 +35,8 @@ const catKeyMap: Record<string, string> = {
 const mdxComponents = {
   Callout,
   FormationDiagram,
+  TryInBuilderButton,
+  TacticBoardCta,
   a: MdxLink,
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h2

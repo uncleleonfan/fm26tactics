@@ -38,32 +38,43 @@ The core principles:
 
 ## The Klopp Formation in FM26
 
-```
-              SK (Su)
-
-FB(S)   BPD(D)   CD(D)   FB(A)
-
-       DLP(D)   BBM(S)
-
-IF(A)          W(S)
-       CF(A)
-
-```
+<TacticBoardCta
+  formation="4-2-3-1"
+  caption="The Klopp 4-2-3-1 gegenpress base shape"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support" },
+    { roleId: "full-back", duty: "attack" },
+    { roleId: "ball-playing-defender", duty: "defend" },
+    { roleId: "central-defender", duty: "defend" },
+    { roleId: "full-back", duty: "support" },
+    { roleId: "deep-lying-playmaker", duty: "defend" },
+    { roleId: "box-to-box-midfielder", duty: "support" },
+    { roleId: "inside-forward", duty: "attack" },
+    { roleId: "attacking-midfielder", duty: "attack" },
+    { roleId: "winger", duty: "support" },
+    { roleId: "centre-forward", duty: "attack" },
+  ]}
+/>
 
 **Wait — that's a 4-2-3-1, not a 4-3-3.** Klopp used both at Liverpool, and the 4-2-3-1 is the shape his 2018-2022 teams rotated into against deep blocks. For the pure 4-3-3 "heavy metal" version, drop the attacking midfielder and play a third midfielder — the structure below is what you want for the classic Liverpool midfield press:
 
-```
-              SK (Su)
-
-FB(S)   BPD(D)   CD(D)   FB(A)
-
-       DLP(D)   BBM(S)
-       BBM(S)
-
-IF(A)          IF(A)
-       CF(A)
-
-```
+<TacticBoardCta
+  formation="4-3-3"
+  caption="The classic 4-3-3 'heavy metal' version"
+  setup={[
+    { roleId: "sweeper-keeper", duty: "support" },
+    { roleId: "full-back", duty: "support" },
+    { roleId: "ball-playing-defender", duty: "defend" },
+    { roleId: "central-defender", duty: "defend" },
+    { roleId: "full-back", duty: "defend" },
+    { roleId: "deep-lying-playmaker", duty: "defend" },
+    { roleId: "box-to-box-midfielder", duty: "support" },
+    { roleId: "channel-midfielder", duty: "attack" },
+    { roleId: "winger", duty: "support" },
+    { roleId: "centre-forward", duty: "attack" },
+    { roleId: "inside-forward", duty: "attack" },
+  ]}
+/>
 
 | Position | Role | Klopp Logic |
 |---|---|---|
