@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, Zap, AlertTriangle, CheckCircle, Download, ExternalLink, Users, Award, BarChart3, Target, Lightbulb } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { formationGuideSlugs } from "@/lib/formation-guide-slugs";
 import {
   topTestedTactics,
   formationInsights,
@@ -122,9 +123,22 @@ export function MetaPage() {
                       </div>
                     </td>
                     <td className="p-3">
-                      <span className="text-xs px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono">
-                        {t2.formation}
-                      </span>
+                      {formationGuideSlugs[t2.formation] ? (
+                        <Link
+                          href={`/tactics/${formationGuideSlugs[t2.formation]}`}
+                          onClick={() =>
+                            trackEvent("meta_formation_guide_click", { label: t2.formation })
+                          }
+                          title={t("formationGuideLink")}
+                          className="inline-flex text-xs px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono hover:bg-primary/20 hover:border-primary/40 transition-colors"
+                        >
+                          {t2.formation}
+                        </Link>
+                      ) : (
+                        <span className="text-xs px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono">
+                          {t2.formation}
+                        </span>
+                      )}
                     </td>
                     <td className="p-3 text-center">
                       <span className="text-sm font-bold text-text-primary">{t2.pts.toFixed(1)}</span>
