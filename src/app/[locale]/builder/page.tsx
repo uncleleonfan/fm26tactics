@@ -402,14 +402,18 @@ export default function BuilderPage() {
         </div>
       </div>
 
-      {sharedLoadMsg === "ok" && (
-        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
-          <Check className="w-3.5 h-3.5 text-primary shrink-0" />
-          <span className="text-xs text-text-primary">
-            {t("sharedLoaded")}
-          </span>
-        </div>
-      )}
+      {/* Reserved slot: the shared-tactic notice mounts/unmounts without
+          shifting the layout below (fixed-height container, always present). */}
+      <div className="shrink-0 h-8" aria-hidden={sharedLoadMsg !== "ok"}>
+        {sharedLoadMsg === "ok" && (
+          <div className="h-full flex items-center gap-2 px-3 sm:px-4 bg-primary/10 border-b border-primary/20">
+            <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+            <span className="text-xs text-text-primary">
+              {t("sharedLoaded")}
+            </span>
+          </div>
+        )}
+      </div>
 
       {showNudge && (
         <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
