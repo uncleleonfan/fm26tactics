@@ -94,6 +94,12 @@ export interface FormationPreset {
   label: string;
   positions: Array<{ x: number; y: number }>;
   description: string;
+  /**
+   * Default XI roles/duties, same order as `positions` — transcribed from the
+   * formation's deep-dive tactic article (content/tactics/*.mdx `setup`) so
+   * the builder opens with the exact roles the article documents.
+   */
+  defaultRoles?: Array<{ roleId: string; duty: PlayerDuty }>;
 }
 
 export interface TacticMeta {

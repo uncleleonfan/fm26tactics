@@ -5,6 +5,7 @@ import { trackEvent } from "@/lib/analytics";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
 import type { TacticTemplate } from "@/lib/tactic-templates";
 import type {
+  FormationPreset,
   FormationType,
   PlayerNode,
   TeamInstruction,
@@ -169,25 +170,45 @@ function createDefaultState(): TacticBoardState {
   return createDefaultStateForFormation(formationPresets[0].formation as FormationType);
 }
 
+/**
+ * Build the 11 starting players for a formation preset. Roles/duties come from
+ * `preset.defaultRoles` — transcribed from the formation's deep-dive tactic
+ * article (content/tactics/*.mdx `setup`) — with validated duty fallbacks.
+ * Existing player ids are reused when provided so draft/phase data stays keyed.
+ */
+function buildPresetPlayers(preset: FormationPreset, prevPlayers?: PlayerNode[]): PlayerNode[] {
+  const fallbackPool = playerRoles.filter((r) => r.category !== "goalkeeper");
+  return preset.positions.map((pos, i) => {
+    const fallbackRole =
+      i === 0
+        ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
+        : fallbackPool[i % fallbackPool.length] || fallbackPool[0];
+    const assignment = preset.defaultRoles?.[i];
+    const role = assignment
+      ? playerRoles.find((r) => r.id === assignment.roleId)
+      : undefined;
+    const resolved = role ?? fallbackRole;
+    const duty =
+      assignment && resolved.availableDuties.includes(assignment.duty)
+        ? assignment.duty
+        : resolved.availableDuties[0] || "support";
+    return {
+      id: prevPlayers?.[i]?.id ?? `player-${i}`,
+      x: pos.x,
+      y: pos.y,
+      roleId: resolved.id,
+      duty,
+      individualInstructions: [],
+    };
+  });
+}
+
 function createDefaultStateForFormation(formation: FormationType): TacticBoardState {
   const preset = formationPresets.find((f) => f.formation === formation);
   if (!preset) return createDefaultStateForFormation(formationPresets[0].formation as FormationType);
-  const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
   const base: TacticBoardState = {
     formation: preset.formation,
-    players: preset.positions.map((pos, i) => {
-      const role = i === 0
-        ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
-        : roles[i % roles.length] || roles[0];
-      return {
-        id: `player-${i}`,
-        x: pos.x,
-        y: pos.y,
-        roleId: role.id,
-        duty: role.availableDuties[0] || "support",
-        individualInstructions: [],
-      };
-    }),
+    players: buildPresetPlayers(preset),
     teamInstructions: {
       mentality: "balanced",
       inPossession: [],
@@ -306,25 +327,10 @@ export function useTacticBuilder() {
     const preset = formationPresets.find((f) => f.formation === formation);
     if (!preset) return;
 
-    const roles = playerRoles.filter((r) => r.category !== "goalkeeper");
     setState((prev) => {
-      const players = preset.positions.map((pos, i) => {
-        const existing = prev.players[i];
-        if (existing) {
-          return { ...existing, x: pos.x, y: pos.y };
-        }
-        const role = i === 0
-          ? playerRoles.find((r) => r.id === "sweeper-keeper") || playerRoles[0]
-          : roles[i % roles.length] || roles[0];
-        return {
-          id: `player-${Date.now()}-${i}`,
-          x: pos.x,
-          y: pos.y,
-          roleId: role.id,
-          duty: role.availableDuties[0] || "support",
-          individualInstructions: [],
-        };
-      });
+      // Roles/duties reset to the formation's default XI (from its deep-dive
+      // tactic article) — each formation ships its own curated role set.
+      const players = buildPresetPlayers(preset, prev.players);
       // New formation → force-regenerate both phases from the fresh preset
       // positions. ensurePhases alone would keep the old (still-valid)
       // coordinates because player ids are stable across formations.
