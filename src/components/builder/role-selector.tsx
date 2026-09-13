@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { BookOpen } from "lucide-react";
+import { Link } from "@/i18n/routing";
 import { playerRoles } from "@/lib/tactics-data";
 import { trackEvent } from "@/lib/analytics";
 import type { PlayerDuty, PlayerRoleCategory } from "@/types/tactic";
@@ -114,6 +116,23 @@ export function RoleSelector({
               })}
             </div>
           </div>
+
+          {/* Link to the role's full guide article */}
+          <Link
+            href={`/roles/${selectedRole.id}`}
+            onClick={() => trackEvent("builder_role_guide_click", { label: selectedRole.id })}
+            className="mt-4 flex items-start gap-2.5 p-3 rounded-lg bg-primary/5 border border-primary/20 hover:border-primary/40 hover:bg-primary/10 transition-all group"
+          >
+            <BookOpen className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+            <span className="min-w-0">
+              <span className="block text-xs font-semibold text-text-primary group-hover:text-primary transition-colors">
+                {r("roleGuideLink", { role: r.has(`roleName.${selectedRole.id}`) ? r(`roleName.${selectedRole.id}`) : selectedRole.name })}
+              </span>
+              <span className="block text-[11px] text-text-muted leading-snug mt-0.5">
+                {r("roleGuideHint")}
+              </span>
+            </span>
+          </Link>
         </div>
       )}
     </div>

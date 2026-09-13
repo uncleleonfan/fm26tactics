@@ -336,6 +336,8 @@
     "tryThisRoleDesc": "Add {role} to your custom tactic using our interactive builder.",
     "openBuilder": "Open Tactic Builder",
     "relatedRoles": "Related Roles",
+    "roleGuideLink": "{role} — Full Role Guide",
+    "roleGuideHint": "In-depth breakdown: duties, attributes, PPMs & wonderkids",
     "attr": {
       "acceleration": "Acceleration",
       "aerialReach": "Aerial Reach",
