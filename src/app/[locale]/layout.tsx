@@ -147,7 +147,7 @@ export default async function LocaleLayout({
               url: siteConfig.url,
             },
             sameAs: [siteConfig.links.github],
-            dateModified: "2026-08-08",
+            dateModified: "2026-09-13",
           }}
         />
       </head>
