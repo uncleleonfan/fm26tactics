@@ -11,12 +11,12 @@ const TIKI_TAKA_SETUP = [
   { roleId: "ball-playing-defender", duty: "defend", x: 38, y: 78 },
   { roleId: "ball-playing-defender", duty: "defend", x: 62, y: 78 },
   { roleId: "full-back", duty: "support", x: 88, y: 74 },
-  { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 58 },
+  { roleId: "deep-lying-playmaker", duty: "support", x: 50, y: 50 },
   { roleId: "advanced-playmaker", duty: "support", x: 32, y: 42 },
   { roleId: "channel-midfielder", duty: "support", x: 68, y: 42 },
-  { roleId: "inside-forward", duty: "support", x: 20, y: 26 },
+  { roleId: "inside-forward", duty: "support", x: 20, y: 21 },
   { roleId: "centre-forward", duty: "support", x: 50, y: 13 },
-  { roleId: "inside-forward", duty: "attack", x: 80, y: 26 },
+  { roleId: "inside-forward", duty: "attack", x: 80, y: 21 },
 ];
 
 describe("encodeTacticSetupParam", () => {
@@ -35,7 +35,7 @@ describe("encodeTacticSetupParam", () => {
       TIKI_TAKA_SETUP.map((s) => [s.roleId, s.duty, s.x, s.y])
     );
     // Both phases start at the tactic's base positions
-    expect(decoded!.phases!["in-possession"]["player-5"]).toEqual({ x: 50, y: 58 });
+    expect(decoded!.phases!["in-possession"]["player-5"]).toEqual({ x: 50, y: 50 });
     expect(decoded!.phases!["out-of-possession"]["player-9"]).toEqual({ x: 50, y: 13 });
   });
 
