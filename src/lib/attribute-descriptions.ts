@@ -21,6 +21,7 @@ export const attributeDescriptions: Record<string, string> = {
   "Long Shots": "The accuracy of strikes from outside the box.",
   Heading: "The quality of headers, both attacking and defending.",
   Tackling: "Winning the ball cleanly in challenges without fouling.",
+  Marking: "Staying close to an opponent and shutting down their space and options.",
   Technique: "The ability to pull off difficult technical actions — volleys, curlers, weighted passes.",
 
   // Mental
