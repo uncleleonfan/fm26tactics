@@ -50,7 +50,9 @@ export function RoleSelector({
               .filter((role) => role.category === cat)
               .map((role) => (
                 <option key={role.id} value={role.id}>
-                  {`${role.abbr} ${r.has(`roleName.${role.id}`) ? r(`roleName.${role.id}`) : role.name}`}
+                  {/* NBSP padding aligns the separator column (abbrs run 1-4 chars);
+                      native options are plain text, so this is the clearest split. */}
+                  {`${role.abbr.padEnd(4, "\u00A0")} — ${r.has(`roleName.${role.id}`) ? r(`roleName.${role.id}`) : role.name}`}
                 </option>
               ))}
           </optgroup>
