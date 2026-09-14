@@ -205,15 +205,17 @@ export default function BuilderPage() {
   const currentFormationLabel =
     formationPresets.find((f) => f.formation === state.formation)?.label ?? state.formation;
 
+  // Single selection funnel: fires for both plain taps and drag-starts, so a
+  // player chosen by dragging still counts (previously only the tap path did).
   const handleSelectPlayer = (playerId: string | null) => {
     setSelectedPlayerId(playerId);
+    if (playerId) trackEvent("builder_select_player", { label: playerId });
   };
 
   const handleTapPlayer = (playerId: string) => {
     setSelectedPlayerId(playerId);
     setSidebarTab("role");
     setShowMobileSidebar(true);
-    trackEvent("builder_select_player", { label: playerId });
   };
 
   const openFormationPanel = () => {

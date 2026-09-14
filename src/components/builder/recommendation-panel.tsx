@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Lightbulb, Lock, Unlock, ArrowRight, X, TrendingUp, TrendingDown } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import type { Recommendation } from "@/types/analysis";
 import type { PlayerRoleCategory } from "@/types/tactic";
 import type { DimensionScores } from "@/lib/tactical-scores";
@@ -142,7 +143,13 @@ export function RecommendationPanel({
               return (
                 <button
                   key={category}
-                  onClick={() => onToggleCategoryLock(category)}
+                  onClick={() => {
+                    // Label the state the click switches TO.
+                    trackEvent("builder_toggle_category_lock", {
+                      label: `${category}:${locked ? "unlock" : "lock"}`,
+                    });
+                    onToggleCategoryLock(category);
+                  }}
                   className={`flex items-center justify-center gap-1 py-1.5 rounded-md border text-[10px] font-semibold transition-all cursor-pointer ${
                     locked
                       ? "bg-primary/10 border-primary/40 text-primary shadow-[0_0_8px_rgba(0,230,118,0.15)]"

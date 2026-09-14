@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/analytics";
 import {
   AlertTriangle,
   AlertCircle,
@@ -55,7 +56,11 @@ export function WarningList({ warnings, playerLabelById }: WarningListProps) {
             }`}
           >
             <button
-              onClick={() => setExpandedId(isExpanded ? null : warning.id)}
+              onClick={() => {
+                // Only the expand side: collapses would double-count the same warning.
+                if (!isExpanded) trackEvent("builder_warning_expand", { label: warning.key });
+                setExpandedId(isExpanded ? null : warning.id);
+              }}
               className="w-full flex items-start gap-2.5 px-3 py-2.5 text-left cursor-pointer"
             >
               <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${className}`} />

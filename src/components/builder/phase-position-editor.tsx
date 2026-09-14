@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { RotateCcw, ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import type { MovementType, PhaseType, PlayerMovement } from "@/types/tactic";
 import { MOVEMENT_LABELS } from "./movement-arrow";
 
@@ -74,7 +75,10 @@ export function PhasePositionEditor({
         </span>
         <div className="mt-1.5 grid grid-cols-2 gap-1">
           <button
-            onClick={() => onSetMovement(playerId, null)}
+            onClick={() => {
+              onSetMovement(playerId, null);
+              trackEvent("builder_set_movement", { label: "none" });
+            }}
             className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-md border text-[11px] transition-colors cursor-pointer ${
               !movement
                 ? "bg-primary/10 border-primary/50 text-text-primary"
@@ -88,7 +92,10 @@ export function PhasePositionEditor({
             return (
               <button
                 key={type}
-                onClick={() => onSetMovement(playerId, { type })}
+                onClick={() => {
+                  onSetMovement(playerId, { type });
+                  trackEvent("builder_set_movement", { label: type });
+                }}
                 title={MOVEMENT_LABELS[type]}
                 className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-md border text-[11px] transition-colors cursor-pointer ${
                   isActive

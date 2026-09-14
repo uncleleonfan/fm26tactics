@@ -7,6 +7,7 @@ import { VisualizeLayer } from "./visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
 import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
+import { trackEvent } from "@/lib/analytics";
 import { MIN_MOVEMENT_DIST } from "@/tactics/visualization/arrows";
 import { computeLabelPlacements, roleLabelWidth } from "@/tactics/visualization/label-placement";
 import { resolvePhasePlayers } from "@/hooks/use-tactic-builder";
@@ -111,6 +112,8 @@ export function Pitch({
     } else {
       // Significant movement → snap to nearest grid position
       const coords = toSvgCoords(clientX, clientY);
+      // Fire once per completed drag — onMovePlayer itself runs per pixel.
+      trackEvent("builder_move_player", { label: draggingId });
       onMovePlayer(
         draggingId,
         coords.x + dragOffsetRef.current.dx,
@@ -157,6 +160,8 @@ export function Pitch({
   const handleSvgClick = (e: React.MouseEvent) => {
     if (!visualize || !onBallZoneChange) return;
     const coords = toSvgCoords(e.clientX, e.clientY);
+    // Distinguish pitch-tap moves from the shortcut control in the analytics labels.
+    trackEvent("builder_ball_zone", { label: "pitch-click" });
     onBallZoneChange(zoneAtPoint(coords.x, coords.y));
   };
 

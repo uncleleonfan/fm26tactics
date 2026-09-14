@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Swords, Shield, Zap, AlertTriangle, Info, Locate } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import type { PhaseType } from "@/types/tactic";
 import type { PhaseAnalysisResult } from "@/hooks/use-phase-analysis";
 import type { PhaseFinding } from "@/tactics/phases/phase-analysis";
@@ -67,7 +68,11 @@ function FindingRow({
         )}
       </p>
       <button
-        onClick={() => onViewPhase(finding.phase, finding.playerIds)}
+        onClick={() => {
+          // Separate signal from the plain tab-switch phase events the jump also triggers.
+          trackEvent("builder_view_phase_finding", { label: `${finding.phase}:${finding.id}` });
+          onViewPhase(finding.phase, finding.playerIds);
+        }}
         className="shrink-0 flex items-center gap-1 px-1.5 py-0.5 rounded-md border border-[#1C2436] text-[10px] text-text-muted hover:text-text-primary hover:border-primary/40 hover:bg-primary/5 transition-colors cursor-pointer"
       >
         <Locate className="w-2.5 h-2.5" />

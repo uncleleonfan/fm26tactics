@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Circle } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import type { BallZoneId } from "@/types/analysis";
 import { ballZones } from "@/tactics/data/zones";
 
@@ -45,7 +46,10 @@ export function BallPositionControl({ ballZone, onChange }: BallPositionControlP
           {SCENES.map((scene) => (
             <button
               key={scene.key}
-              onClick={() => onChange(scene.zone)}
+              onClick={() => {
+                onChange(scene.zone);
+                trackEvent("builder_ball_zone", { label: `scene:${scene.key}` });
+              }}
               className="px-2 py-0.5 rounded-md text-[9px] font-semibold uppercase tracking-wide text-text-muted hover:text-primary hover:bg-primary/10 transition-colors cursor-pointer"
             >
               {t(`scenes.${scene.key}`)}
@@ -61,7 +65,10 @@ export function BallPositionControl({ ballZone, onChange }: BallPositionControlP
             return (
               <button
                 key={zone.id}
-                onClick={() => onChange(zone.id)}
+                onClick={() => {
+                  onChange(zone.id);
+                  trackEvent("builder_ball_zone", { label: `zone:${zone.id}` });
+                }}
                 title={zone.label}
                 aria-pressed={active}
                 className={`px-1.5 py-1 rounded-md font-mono text-[10px] font-bold border transition-all cursor-pointer active:scale-95 ${
