@@ -27,6 +27,21 @@
     @apply bg-[#00E676]/30 text-[#00E676];
   }
 
+  /* Native select popups use OS defaults (white) — force the dark theme.
+     Chromium/Firefox honour these; macOS Safari stays native (acceptable). */
+  select option,
+  select optgroup {
+    @apply bg-[#141A26] text-[#F1F5F9];
+  }
+
+  select optgroup {
+    @apply font-semibold text-[#94A3B8];
+  }
+
+  select option:checked {
+    @apply bg-[#1C2436];
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
   }
