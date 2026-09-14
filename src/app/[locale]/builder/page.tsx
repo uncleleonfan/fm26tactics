@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
 import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
 import { usePhaseAnalysis } from "@/hooks/use-phase-analysis";
@@ -18,6 +18,7 @@ import { RoleSelector } from "@/components/builder/role-selector";
 import { InstructionPanel } from "@/components/builder/instruction-panel";
 import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
+import { ShareDialog } from "@/components/builder/share-dialog";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
@@ -48,6 +49,7 @@ export default function BuilderPage() {
 
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [showExport, setShowExport] = useState(false);
+  const [showShare, setShowShare] = useState(false);
   const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation" | "analysis">(() => {
     // Restore the sidebar tab after external navigation (e.g. opening a
     // formation guide and coming back) — the tab is mirrored to ?tab= below.
@@ -392,6 +394,14 @@ export default function BuilderPage() {
               <span className="hidden sm:inline">{t("reset")}</span>
             </button>
             <button
+              onClick={() => setShowShare(true)}
+              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-[#0E1625] border border-[#1C2436] text-text-primary text-xs font-semibold hover:border-primary/40 transition-all"
+              aria-label={t("shareButton")}
+            >
+              <Share2 className="w-3.5 h-3.5 text-text-muted" />
+              <span className="hidden sm:inline">{t("shareButton")}</span>
+            </button>
+            <button
               onClick={() => {
                 setShowExport(true);
                 trackEvent("builder_open_export");
@@ -615,6 +625,14 @@ export default function BuilderPage() {
           state={state}
           onClose={() => setShowExport(false)}
           onImport={loadTactic}
+        />
+      )}
+
+      {showShare && (
+        <ShareDialog
+          state={state}
+          formationLabel={currentFormationLabel}
+          onClose={() => setShowShare(false)}
         />
       )}
     </div>

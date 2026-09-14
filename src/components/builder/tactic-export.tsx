@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Download, Share2, Check, Copy, FileText, FileJson, Upload, Columns2 } from "lucide-react";
-import { encodeTacticState, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
+import { Download, Check, Copy, FileText, FileJson, Upload, Columns2 } from "lucide-react";
+import { resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { playerRoles } from "@/lib/tactics-data";
 import { computePhaseMetrics } from "@/tactics/phases/phase-analysis";
@@ -240,7 +240,6 @@ function triggerDownload(href: string, filename: string) {
 export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const b = useTranslations("builder");
   const [copied, setCopied] = useState(false);
-  const [shareCopied, setShareCopied] = useState(false);
   const [importMsg, setImportMsg] = useState<"ok" | "fail" | null>(null);
   const [exportError, setExportError] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -412,19 +411,6 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     }
   };
 
-  const copyShareLink = async () => {
-    const encoded = encodeTacticState(state);
-    const url = `${window.location.origin}${window.location.pathname}?tactic=${encodeURIComponent(encoded)}`;
-    try {
-      await navigator.clipboard.writeText(url);
-      trackEvent("builder_copy_share_link", { value: dwellTime() });
-      setShareCopied(true);
-      setTimeout(() => setShareCopied(false), 2000);
-    } catch {
-      exportFail("share");
-    }
-  };
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Hidden render targets for the both-phases export (styled DOM → SVG clone) */}
@@ -554,27 +540,6 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
               e.target.value = "";
             }}
           />
-
-          <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
-            {b("shareTitle")}
-          </p>
-
-          <button
-            onClick={copyShareLink}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            {shareCopied ? (
-              <Check className="w-4 h-4 text-primary" />
-            ) : (
-              <Share2 className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            )}
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">
-                {shareCopied ? b("shareCopied") : b("copyShareLink")}
-              </p>
-              <p className="text-[10px] text-text-muted">{b("copyShareLinkDesc")}</p>
-            </div>
-          </button>
 
           <button
             onClick={copyToClipboard}

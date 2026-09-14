@@ -619,6 +619,15 @@
     "importInvalid": "Invalid file",
     "importJsonDesc": "Restore a tactic from a saved .json file",
     "shareTitle": "Share",
+    "shareButton": "Share",
+    "shareDialogTitle": "Share your tactic",
+    "shareDialogDesc": "Sends a link that loads this exact tactic in the builder — the preview card shows your shape.",
+    "shareX": "Share on X",
+    "shareFacebook": "Share on Facebook",
+    "shareReddit": "Post to Reddit",
+    "shareDiscord": "Send to Discord",
+    "shareDiscordHint": "Link copied — paste it into any Discord channel.",
+    "shareDiscordCopyFail": "Couldn't copy automatically — use Copy Link below.",
     "copyShareLink": "Copy Share Link",
     "shareCopied": "Link Copied!",
     "copyShareLinkDesc": "Anyone with the link opens this exact tactic",
@@ -648,6 +657,14 @@
     "txtStep4": "4. Share your in-game result back at www.fm26tactics.com",
     "analysisTab": "Analysis",
     "analysisMovedPanel": "Tactical Analysis now lives in the dedicated right-hand panel"
+  },
+  "shareView": {
+    "subheading": "A tactic built with the FM26 Tactic Builder",
+    "openInBuilder": "Open in Builder",
+    "openHint": "Loads this exact XI, roles and instructions — then edit anything you like.",
+    "invalidTitle": "This tactic link is invalid",
+    "invalidBody": "The tactic data in this link couldn't be read — it may be truncated or from an older version. Build a fresh tactic instead.",
+    "buildYourOwn": "Build your own tactic"
   },
   "phaseAnalysis": {
     "panelTitle": "Phase Analysis",
