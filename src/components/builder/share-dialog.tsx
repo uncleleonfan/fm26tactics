@@ -73,7 +73,10 @@ const PLATFORMS: Array<{
  */
 export function ShareDialog({ state, formationLabel, onClose }: ShareDialogProps) {
   const b = useTranslations("builder");
-  const [copied, setCopied] = useState<"none" | "ok" | "fail">("none");
+  // Discord and the Copy Link row are independent controls with their own
+  // feedback states — copying via one must not light up the other.
+  const [discordCopied, setDiscordCopied] = useState<"none" | "ok" | "fail">("none");
+  const [linkCopied, setLinkCopied] = useState(false);
 
   useEffect(() => {
     trackEvent("builder_share_open");
@@ -100,14 +103,15 @@ export function ShareDialog({ state, formationLabel, onClose }: ShareDialogProps
     trackEvent("builder_share_click", { label: target });
   };
 
-  // Discord has no web intent: copy the link, then open Discord. Clipboard
-  // write resolves fast enough to stay inside the click's transient activation.
+  // Discord has no web intent: copying IS the share — clipboard, then open
+  // Discord for the user to paste. Clipboard write resolves fast enough to
+  // stay inside the click's transient activation.
   const shareToDiscord = async () => {
     trackEvent("builder_share_click", { label: "discord" });
     const ok = await copyLink();
-    setCopied(ok ? "ok" : "fail");
+    setDiscordCopied(ok ? "ok" : "fail");
     window.open("https://discord.com/channels/@me", "_blank", "noopener,noreferrer");
-    setTimeout(() => setCopied("none"), 2500);
+    setTimeout(() => setDiscordCopied("none"), 2500);
   };
 
   return (
@@ -135,40 +139,39 @@ export function ShareDialog({ state, formationLabel, onClose }: ShareDialogProps
               <BrandMark platform={target} />
               {/* No explicit color — the button's hover:text-* paints both icon and label. */}
               <span className="text-sm font-medium">{b(labelKey)}</span>
-              {target === "discord" && copied === "ok" && (
+              {target === "discord" && discordCopied === "ok" && (
                 <Check className="w-3.5 h-3.5 text-primary ml-auto shrink-0" />
               )}
             </button>
           ))}
         </div>
 
-        {copied !== "none" && (
+        {discordCopied !== "none" && (
           <p
             className={`mt-2.5 text-[10px] leading-snug rounded-md px-3 py-2 border animate-fade-in ${
-              copied === "ok"
+              discordCopied === "ok"
                 ? "text-primary bg-primary/5 border-primary/20"
                 : "text-red-400 bg-red-500/10 border-red-500/20"
             }`}
           >
-            {copied === "ok" ? b("shareDiscordHint") : b("shareDiscordCopyFail")}
+            {discordCopied === "ok" ? b("shareDiscordHint") : b("shareDiscordCopyFail")}
           </p>
         )}
 
         <button
           onClick={async () => {
-            const ok = await copyLink();
-            setCopied(ok ? "ok" : "fail");
-            setTimeout(() => setCopied("none"), 2500);
+            setLinkCopied(await copyLink());
+            setTimeout(() => setLinkCopied(false), 2000);
           }}
           className="mt-3 w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group cursor-pointer"
         >
-          {copied === "ok" ? (
+          {linkCopied ? (
             <Check className="w-4 h-4 text-primary shrink-0" />
           ) : (
             <Link2 className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
           )}
           <span className="text-sm font-medium text-text-primary">
-            {copied === "ok" ? b("shareCopied") : b("copyShareLink")}
+            {linkCopied ? b("shareCopied") : b("copyShareLink")}
           </span>
         </button>
       </div>

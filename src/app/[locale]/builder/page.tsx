@@ -395,10 +395,10 @@ export default function BuilderPage() {
             </button>
             <button
               onClick={() => setShowShare(true)}
-              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-[#0E1625] border border-[#1C2436] text-text-primary text-xs font-semibold hover:border-primary/40 transition-all"
+              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg bg-primary text-background-primary text-xs font-semibold hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
               aria-label={t("shareButton")}
             >
-              <Share2 className="w-3.5 h-3.5 text-text-muted" />
+              <Share2 className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{t("shareButton")}</span>
             </button>
             <button

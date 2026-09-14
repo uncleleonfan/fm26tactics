@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Download, Check, Copy, FileText, FileJson, Upload, Columns2 } from "lucide-react";
+import { Download, Check, Copy, FileText, FileJson, Upload, Columns2, X } from "lucide-react";
 import { resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { playerRoles } from "@/lib/tactics-data";
@@ -430,6 +430,13 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
       </div>
       <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
       <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
+        <button
+          onClick={closeWithDwell}
+          aria-label={b("close")}
+          className="absolute top-3 right-3 p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors"
+        >
+          <X className="w-4 h-4" />
+        </button>
         <h3 className="text-sm font-semibold text-text-primary mb-2">{b("exportTitle")}</h3>
 
         <p className="mb-4 text-[10px] leading-relaxed text-text-muted bg-surface border border-surface-border rounded-md px-3 py-2">
