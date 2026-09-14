@@ -8,7 +8,7 @@ import {
   type PhaseMetrics,
   type PhaseFinding,
 } from "@/tactics/phases/phase-analysis";
-import { analyzeTransition, type TransitionResult } from "@/tactics/phases/transition-analysis";
+import { analyzePhaseTransition, type TransitionResult } from "@/tactics/phases/transition-analysis";
 
 /**
  * Aggregated phase analysis with a debounce: dragging players updates the
@@ -51,7 +51,7 @@ export function usePhaseAnalysis(state: TacticBoardState): PhaseAnalysisResult {
         metrics: outMetrics,
         findings: computePhaseFindings(outMetrics, "out-of-possession", players, phases["out-of-possession"]),
       },
-      transition: analyzeTransition(players, {
+      transition: analyzePhaseTransition(players, {
         "in-possession": phases["in-possession"],
         "out-of-possession": phases["out-of-possession"],
       }),

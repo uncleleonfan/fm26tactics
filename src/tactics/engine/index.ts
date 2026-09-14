@@ -25,10 +25,21 @@ export { ballZones, zoneById, DEFAULT_BALL_ZONE, zoneAtPoint } from "@/tactics/d
  * analyzeTactic — the single orchestration entry point (spec §5).
  * Pure, deterministic, framework-independent: same input → same output.
  */
+export interface AnalyzeTacticOptions {
+  /**
+   * Skip the recommendation candidate search (~40ms — it re-scores ~200
+   * role/duty alternatives through the full pipeline). Callers that
+   * re-analyze on every pointer event (e.g. while dragging) run with this
+   * flag and defer recommendations separately.
+   */
+  skipRecommendations?: boolean;
+}
+
 export function analyzeTactic(
   state: TacticBoardState,
   ballZone: BallZoneId = "central-midfield",
-  constraints?: AnalysisConstraints
+  constraints?: AnalysisConstraints,
+  options?: AnalyzeTacticOptions
 ): AnalysisResult {
   const model = buildTacticalModel(state);
 
@@ -52,12 +63,14 @@ export function analyzeTactic(
     model.mentality
   );
 
-  const recommendations = generateRecommendations(state, ballZone, {
-    attack,
-    support,
-    defence,
-    transition,
-  }, constraints);
+  const recommendations = options?.skipRecommendations
+    ? []
+    : generateRecommendations(
+        state,
+        ballZone,
+        { attack, support, defence, transition },
+        constraints
+      );
 
   return {
     modelVersion: TACTICAL_MODEL_VERSION,

@@ -55,6 +55,24 @@ function scoreOf(state: TacticBoardState, ballZone: BallZoneId): ScoreSnapshot {
   };
 }
 
+type ProblemKey = "defence" | "risk" | "support" | "attack";
+
+/**
+ * Delta weights per primary problem. The gate below always protects the
+ * defensive floor, but the RANKED improvement targets the weakest
+ * dimension instead of a fixed defensive bias — a tactic whose real
+ * problem is blunt attacking threat must not be told to park the bus.
+ */
+const DELTA_WEIGHTS: Record<ProblemKey, { attack: number; support: number; defence: number; risk: number }> = {
+  defence: { attack: 0.2, support: 0.3, defence: 1.5, risk: 1.5 },
+  risk: { attack: 0.2, support: 0.3, defence: 1.0, risk: 1.5 },
+  support: { attack: 0.3, support: 1.2, defence: 0.5, risk: 1.0 },
+  attack: { attack: 1.5, support: 0.3, defence: 0.5, risk: 1.0 },
+};
+
+/** How much defensive decline a non-defensive problem is allowed to cost. */
+const DEFENCE_SLACK = 0.02;
+
 export function generateRecommendations(
   state: TacticBoardState,
   ballZone: BallZoneId,
@@ -66,7 +84,14 @@ export function generateRecommendations(
   },
   constraints?: AnalysisConstraints
 ): Recommendation[] {
-  const before = scoreOf(state, ballZone);
+  // `analysis` comes from the main pipeline for THIS state and ball zone —
+  // reuse it instead of re-scoring the whole tactic just for the baseline.
+  const before: ScoreSnapshot = {
+    attack: meanScore(analysis.attack),
+    support: meanScore(analysis.support),
+    defence: meanScore(analysis.defence),
+    risk: analysis.transition.riskScore,
+  };
   const model = buildTacticalModel(state);
   const lockedIds = new Set(constraints?.lockedPlayerIds ?? []);
   const lockedCats = new Set(constraints?.lockedCategories ?? []);
@@ -78,7 +103,7 @@ export function generateRecommendations(
     { key: "support" as const, value: before.support, weight: 0.6 },
     { key: "attack" as const, value: before.attack, weight: 0.5 },
   ].sort((a, b) => a.value * a.weight - b.value * b.weight);
-  const primaryProblem = problemPriority[0].key;
+  const primaryProblem: ProblemKey = problemPriority[0].key;
 
   interface Candidate {
     playerIndex: number;
@@ -107,32 +132,55 @@ export function generateRecommendations(
         };
         const after = scoreOf(nextState, ballZone);
 
-        // Improvement function: defensive equilibrium first. Recommendations
-        // may trade creativity and threat, but never the defensive floor.
+        const w = DELTA_WEIGHTS[primaryProblem];
         const delta =
-          (after.defence - before.defence) * 1.5 +
-          (before.risk - after.risk) * 1.5 +
-          (after.support - before.support) * 0.3 +
-          (after.attack - before.attack) * 0.2;
+          (after.attack - before.attack) * w.attack +
+          (after.support - before.support) * w.support +
+          (after.defence - before.defence) * w.defence +
+          (before.risk - after.risk) * w.risk;
 
-        // Gate: a recommendation must measurably improve defensive balance
-        // and never raise transition risk. (When the front line is locked,
-        // risk may be untouchable from defence-only changes — flat risk is
-        // still acceptable as long as defence genuinely improves.)
-        if (delta > 0.01 && after.defence > before.defence && after.risk <= before.risk + 1e-9) {
+        // Gate: the recommendation must measurably improve the dimension
+        // the tactic is actually weakest in, while never raising transition
+        // risk. Defensive problems additionally require a strict defensive
+        // gain; attack/support problems may trade at most DEFENCE_SLACK of
+        // defensive balance for their improvement (when the front line is
+        // locked, flat risk is still acceptable).
+        if (delta <= 0.01 || after.risk > before.risk + 1e-9) continue;
+        const improvesTarget =
+          primaryProblem === "defence"
+            ? after.defence > before.defence
+            : primaryProblem === "risk"
+              ? after.risk < before.risk - 1e-9
+              : primaryProblem === "support"
+                ? after.support > before.support
+                : after.attack > before.attack;
+        const defenceFloorOk =
+          primaryProblem === "defence" || primaryProblem === "risk"
+            ? after.defence >= before.defence - 1e-9
+            : after.defence >= before.defence - DEFENCE_SLACK;
+        if (improvesTarget && defenceFloorOk) {
           candidates.push({ playerIndex, newRoleId: role.id, newDuty: duty, after, delta });
         }
       }
     }
   });
 
-  // Best candidate per player, then global top-3.
+  // Best candidate per player, then global top-3 with distinct changes —
+  // two players converting to the same role is one suggestion, not two.
   const bestPerPlayer = new Map<number, Candidate>();
   for (const c of candidates) {
     const existing = bestPerPlayer.get(c.playerIndex);
     if (!existing || c.delta > existing.delta) bestPerPlayer.set(c.playerIndex, c);
   }
-  const top = Array.from(bestPerPlayer.values()).sort((a, b) => b.delta - a.delta).slice(0, 3);
+  const top: Candidate[] = [];
+  const seenChanges = new Set<string>();
+  for (const c of Array.from(bestPerPlayer.values()).sort((a, b) => b.delta - a.delta)) {
+    const key = `${c.newRoleId}:${c.newDuty}`;
+    if (seenChanges.has(key)) continue;
+    seenChanges.add(key);
+    top.push(c);
+    if (top.length >= 3) break;
+  }
 
   return top.map((c, rank) => {
     const player = state.players[c.playerIndex];

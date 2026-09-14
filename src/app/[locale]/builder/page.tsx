@@ -81,7 +81,14 @@ export default function BuilderPage() {
       return;
     }
     setShowCompare(false);
-    if (view !== activePhase) setActivePhase(view);
+    if (view !== activePhase) {
+      setActivePhase(view);
+      // The visualize overlay models the in-possession scenario (expected
+      // positions from role behaviors + ball zone). Rendered over the
+      // out-of-possession board it would mislabel the designed defensive
+      // shape — defensive-phase analysis is the phase module's job.
+      if (view === "out-of-possession") setVisualize(false);
+    }
   }, [activePhase, setActivePhase]);
 
   // Pitch mode switch handler — the floating Edit/Visualize control lives on the pitch.
@@ -90,11 +97,14 @@ export default function BuilderPage() {
     trackEvent("builder_toggle_visualize", { label: next ? "on" : "off" });
   }, []);
 
-  // Existing analysis engine follows the phase being viewed & edited, so
-  // scores/warnings update as the user reshapes the active phase structure.
+  // The ball-zone engine models OUR possession scenario; the defensive phase
+  // is analyzed by the dual-phase module (phaseAnalysis below). Feeding the
+  // out-of-possession standings into this engine would mislabel attack
+  // metrics and swing recommendations with the view toggle, so the analysis
+  // always follows the in-possession XI.
   const stateForAnalysis = useMemo(
-    () => ({ ...state, players: resolvePhasePlayers(state, activePhase) }),
-    [state, activePhase]
+    () => ({ ...state, players: resolvePhasePlayers(state, "in-possession") }),
+    [state]
   );
   const { analysis, ballZone, setBallZone, lockedCategories, toggleCategoryLock } =
     useTacticalAnalysis(stateForAnalysis);

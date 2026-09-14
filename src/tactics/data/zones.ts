@@ -48,8 +48,13 @@ export function zoneAtPoint(x: number, y: number): BallZoneId {
 
 /** Occupancy thresholds — configurable per spec §12. */
 export const ZONE_OCCUPANCY_THRESHOLDS = {
-  /** Players expected in one zone before it counts as overloaded. */
-  overload: 3,
+  /**
+   * Players expected in one zone before it counts as overloaded. 4 (not 3):
+   * standard structures like a 4-3-3 midfield triangle legitimately put three
+   * players in the central-midfield zone — flagging that as an overload is a
+   * false positive. Only genuine pile-ups (4+) need attention.
+   */
+  overload: 4,
   /** Zones with zero expected attacking presence are flagged as empty. */
   empty: 0,
 } as const;

@@ -158,19 +158,26 @@ export function Pitch({
 
   // Visualize mode: clicking open grass moves the ball to that zone.
   const handleSvgClick = (e: React.MouseEvent) => {
-    if (!visualize || !onBallZoneChange) return;
+    if (!canVisualize || !visualize || !onBallZoneChange) return;
     const coords = toSvgCoords(e.clientX, e.clientY);
     // Distinguish pitch-tap moves from the shortcut control in the analytics labels.
     trackEvent("builder_ball_zone", { label: "pitch-click" });
     onBallZoneChange(zoneAtPoint(coords.x, coords.y));
   };
 
+  // The visualize overlay models the in-possession scenario (expected
+  // positions derived from role behaviors + ball zone). On the
+  // out-of-possession board the players shown come from the defensive phase
+  // map — a different concept, analyzed by the phase module — so the
+  // overlay and its controls stay hidden there.
+  const canVisualize = phase === "in-possession";
+
   // Visualize mode: prefer the label below the node when the movement arrow
   // points up (toward the opponent goal) so its opaque box never covers the
   // arrow. Holds (no rendered arrow) keep the default preference.
   const arrowUpById = useMemo(
     () =>
-      visualize && analysis
+      canVisualize && visualize && analysis
         ? new Map(
             analysis.movements.map((m) => [
               m.playerId,
@@ -180,7 +187,7 @@ export function Pitch({
             ])
           )
         : undefined,
-    [visualize, analysis]
+    [canVisualize, visualize, analysis]
   );
 
   // Auto label placement: default above; dodge other player nodes and label
@@ -225,7 +232,7 @@ export function Pitch({
         <PitchBackground />
 
         {/* Visualize overlay: zones, ghosts, arrows, ball */}
-        {visualize && analysis && ballZone && (
+        {canVisualize && visualize && analysis && ballZone && (
           <VisualizeLayer
             analysis={analysis}
             ballZone={ballZone}
@@ -250,7 +257,11 @@ export function Pitch({
 
         {/* Player nodes */}
         {players.map((player, index) => {
-          const isGk = index === 0;
+          // Goalkeeper status follows the role, not the slot index — the same
+          // rule the analysis engines use, so swapping roles between slots
+          // renders consistently everywhere.
+          const isGk =
+            playerRoles.find((r) => r.id === player.roleId)?.category === "goalkeeper";
           return (
             <InteractivePlayerNode
               key={player.id}
@@ -267,11 +278,11 @@ export function Pitch({
         })}
       </svg>
 
-      {onToggleVisualize && (
+      {onToggleVisualize && canVisualize && (
         <PitchModeControl visualize={visualize} onChange={onToggleVisualize} />
       )}
 
-      {visualize && ballZone && onBallZoneChange && (
+      {canVisualize && visualize && ballZone && onBallZoneChange && (
         <BallPositionControl ballZone={ballZone} onChange={onBallZoneChange} />
       )}
     </div>

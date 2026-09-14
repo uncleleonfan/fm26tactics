@@ -126,23 +126,24 @@ describe("relationships", () => {
   });
 
   it("flags space-sharing when attackers crowd one zone", () => {
-    // 4-2-4 line order: GK | CB CB | LM RM | CM CM | LW STL STR RW
-    const crowded = buildState("4-2-4", [
+    // Narrow diamond: both channel midfielders attack through the middle,
+    // stacking 4 players into the central final-third corridor.
+    const crowded = buildState("4-1-2-1-2", [
       { roleId: "sweeper-keeper", duty: "defend" },
       { roleId: "central-defender", duty: "defend" },
       { roleId: "central-defender", duty: "defend" },
-      { roleId: "full-back", duty: "support" },
-      { roleId: "full-back", duty: "support" },
+      { roleId: "wing-back", duty: "defend" },
       { roleId: "channel-midfielder", duty: "attack" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
       { roleId: "channel-midfielder", duty: "attack" },
-      { roleId: "inside-forward", duty: "attack" },
+      { roleId: "wing-back", duty: "defend" },
+      { roleId: "advanced-playmaker", duty: "attack" },
       { roleId: "centre-forward", duty: "attack" },
       { roleId: "centre-forward", duty: "attack" },
-      { roleId: "inside-forward", duty: "attack" },
     ]);
     const result = analyzeTactic(crowded, "central-final-third");
     const conflicts = result.relationships.filter((r) => r.type === "space-sharing");
     expect(conflicts.length).toBeGreaterThan(0);
-    expect(result.warnings.some((w) => w.id.startsWith("zone-overload"))).toBe(true);
+    expect(result.warnings.some((w) => w.id === "zone-overload-central-final-third")).toBe(true);
   });
 });

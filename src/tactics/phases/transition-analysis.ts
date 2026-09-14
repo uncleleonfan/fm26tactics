@@ -137,8 +137,12 @@ export function computeTransition(
   };
 }
 
-/** Full transition result including shape labels for both phases. */
-export function analyzeTransition(
+/**
+ * Full transition result including shape labels for both phases.
+ * (Named with the "phase" prefix to disambiguate from the ball-zone
+ * transition risk in tactics/engine/risk-engine.ts.)
+ */
+export function analyzePhaseTransition(
   players: PlayerNode[],
   phases: { "in-possession": PhasePlayerMap; "out-of-possession": PhasePlayerMap }
 ): TransitionResult {

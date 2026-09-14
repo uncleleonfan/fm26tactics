@@ -8,7 +8,7 @@ import {
 } from "@/hooks/use-tactic-builder";
 import { recognizeShape, type ShapePoint } from "@/tactics/phases/shape-recognition";
 import { computePhaseMetrics } from "@/tactics/phases/phase-analysis";
-import { analyzeTransition } from "@/tactics/phases/transition-analysis";
+import { analyzePhaseTransition } from "@/tactics/phases/transition-analysis";
 import type {
   PhasePlayerMap,
   PlayerNode,
@@ -316,7 +316,7 @@ describe("computePhaseMetrics", () => {
 // Transition analysis
 // ---------------------------------------------------------------------------
 
-describe("analyzeTransition", () => {
+describe("analyzePhaseTransition", () => {
   it("rates identical conservative phases as low risk with no findings", () => {
     const identity = LOW_RISK_PLAYERS.map((p) => [p.x, p.y] as [number, number]);
     const phases = {
@@ -324,7 +324,7 @@ describe("analyzeTransition", () => {
       "out-of-possession": phaseMapFor(LOW_RISK_PLAYERS, identity),
     };
 
-    const result = analyzeTransition(LOW_RISK_PLAYERS, phases);
+    const result = analyzePhaseTransition(LOW_RISK_PLAYERS, phases);
     expect(result.riskLevel).toBe("low");
     expect(result.riskScore).toBeLessThan(0.35);
     expect(result.findings).toEqual([]);
@@ -336,7 +336,7 @@ describe("analyzeTransition", () => {
   it("flags exposure, long recovery and thin cover on a reckless split", () => {
     const inMap = phaseMapFor(HIGH_RISK_IN, HIGH_RISK_IN.map((p) => [p.x, p.y] as [number, number]));
     const outMap = phaseMapFor(HIGH_RISK_IN, HIGH_RISK_OUT);
-    const result = analyzeTransition(HIGH_RISK_IN, {
+    const result = analyzePhaseTransition(HIGH_RISK_IN, {
       "in-possession": inMap,
       "out-of-possession": outMap,
     });
@@ -360,7 +360,7 @@ describe("analyzeTransition", () => {
   it("keeps the goalkeeper out of the recovery burden", () => {
     const inMap = phaseMapFor(HIGH_RISK_IN, HIGH_RISK_IN.map((p) => [p.x, p.y] as [number, number]));
     const outMap = phaseMapFor(HIGH_RISK_IN, HIGH_RISK_OUT);
-    const result = analyzeTransition(HIGH_RISK_IN, {
+    const result = analyzePhaseTransition(HIGH_RISK_IN, {
       "in-possession": inMap,
       "out-of-possession": outMap,
     });

@@ -100,6 +100,13 @@ describe("risk engine & warnings", () => {
     }
   });
 
+  it("a standard 4-3-3 midfield triangle is not flagged as a zone overload", () => {
+    // Three central midfielders in the central-midfield zone are normal
+    // structure — the overload threshold must sit above that (4+).
+    const r = analyzeTactic(state433(), "central-midfield");
+    expect(r.warnings.some((w) => w.id === "zone-overload-central-midfield")).toBe(false);
+  });
+
   it("warnings are sorted by severity (critical first)", () => {
     const r = analyzeTactic(state433(), "central-midfield");
     const order = { critical: 0, warning: 1, positive: 2 };
@@ -201,8 +208,47 @@ describe("recommendation engine (spec §17-18)", () => {
     expect(recs.length).toBeLessThanOrEqual(3);
     for (const rec of recs) {
       expect(rec.suggestedChange).toMatch(/→/);
-      expect(rec.impact.defence + rec.impact.risk).toBeGreaterThan(0);
+      // The targeted dimension must genuinely improve, and risk may never rise.
+      const targetGain =
+        rec.problemKey === "attack"
+          ? rec.impact.attack
+          : rec.problemKey === "support"
+            ? rec.impact.support
+            : rec.problemKey === "defence"
+              ? rec.impact.defence
+              : rec.impact.risk;
+      expect(targetGain).toBeGreaterThan(0);
+      expect(rec.impact.risk).toBeGreaterThanOrEqual(-1e-9);
     }
+  });
+
+  it("never suggests the same role/duty change twice in the top-3", () => {
+    const recs = generateRecommendations(reckless(), "central-midfield", analyzeTactic(reckless(), "central-midfield"));
+    const changes = recs.map((r) => `${r.newRoleId}:${r.newDuty}`);
+    expect(new Set(changes).size).toBe(changes.length);
+  });
+
+  it("gate follows the primary problem: attack-weak tactics get attack-improving suggestions", () => {
+    // A deep, conservative 5-3-2 block: defence is solid, attack is the
+    // weakest weighted dimension — suggestions must improve attack, not
+    // recommend yet more defensive solidity.
+    const blunt = buildState("5-3-2", [
+      { roleId: "sweeper-keeper", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "central-defender", duty: "defend" },
+      { roleId: "wing-back", duty: "defend" },
+      { roleId: "wing-back", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "deep-lying-playmaker", duty: "defend" },
+      { roleId: "target-forward", duty: "support" },
+      { roleId: "target-forward", duty: "support" },
+    ]);
+    const recs = generateRecommendations(blunt, "central-midfield", analyzeTactic(blunt, "central-midfield"));
+    expect(recs.length).toBeGreaterThan(0);
+    expect(recs[0].problemKey).toBe("attack");
+    expect(recs[0].impact.attack).toBeGreaterThan(0);
   });
 
   it("locked attacking roles force defensive-side suggestions only", () => {
