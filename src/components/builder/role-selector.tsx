@@ -50,7 +50,7 @@ export function RoleSelector({
               .filter((role) => role.category === cat)
               .map((role) => (
                 <option key={role.id} value={role.id}>
-                  {r.has(`roleName.${role.id}`) ? r(`roleName.${role.id}`) : role.name}
+                  {`${role.abbr} ${r.has(`roleName.${role.id}`) ? r(`roleName.${role.id}`) : role.name}`}
                 </option>
               ))}
           </optgroup>
