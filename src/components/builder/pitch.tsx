@@ -236,7 +236,14 @@ export function Pitch({
   const phaseMap = state.phases?.[phase];
 
   return (
-    <div className="relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0">
+    // In visualize mode the ball-zone panel floats over the bottom of the
+    // board. Reserving space below the board keeps the pitch (and anything
+    // drawn in our defensive third) clear of it.
+    <div
+      className={`relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0 ${
+        visualize ? "pb-24 sm:pb-32" : ""
+      }`}
+    >
       <svg
         id="tactic-pitch-svg"
         ref={svgRef}

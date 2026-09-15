@@ -81,7 +81,7 @@ export function BallPositionControl({
     // `transform`, which would override the Tailwind -translate-x-1/2
     // centering on the same element while the animation runs.
     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 w-max max-w-[calc(100%-1.5rem)]">
-      <div className="rounded-xl border border-[#1C2436] bg-background-secondary/95 backdrop-blur-xs shadow-[0_4px_24px_rgba(0,0,0,0.5)] px-2.5 py-2 animate-slide-up">
+      <div className="rounded-xl border border-[#1C2436] bg-background-secondary/95 backdrop-blur-xs shadow-[0_4px_24px_rgba(0,0,0,0.5)] px-2.5 py-2 sm:px-4 sm:py-3 animate-slide-up">
         {/* Scenario shortcuts */}
         <div className="flex items-center gap-1 mb-1.5">
           {scenes.map((scene) => (
@@ -91,7 +91,7 @@ export function BallPositionControl({
                 onChange(scene.zone);
                 trackEvent("builder_ball_zone", { label: `${labelPrefix}scene:${scene.key}` });
               }}
-              className={`px-2 py-0.5 rounded-md text-[9px] font-semibold uppercase tracking-wide transition-colors cursor-pointer ${
+              className={`px-2 py-0.5 rounded-md text-[9px] sm:px-2.5 sm:py-1 sm:text-[11px] font-semibold uppercase tracking-wide transition-colors cursor-pointer ${
                 opponent
                   ? "text-text-muted hover:text-[#FF5252] hover:bg-[#FF5252]/10"
                   : "text-text-muted hover:text-primary hover:bg-primary/10"
@@ -105,7 +105,7 @@ export function BallPositionControl({
         {/* Zone buttons — grouped by third, matching pitch layout */}
         <div className="flex items-center gap-1">
           <Circle
-            className={`w-2.5 h-2.5 shrink-0 mr-0.5 ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0 mr-0.5 ${
               opponent ? "text-[#FF5252]" : "text-primary"
             }`}
             fill="currentColor"
@@ -121,7 +121,7 @@ export function BallPositionControl({
                 }}
                 title={zone.label}
                 aria-pressed={active}
-                className={`px-1.5 py-1 rounded-md font-mono text-[10px] font-bold border transition-all cursor-pointer active:scale-95 ${
+                className={`px-1.5 py-1 rounded-md font-mono text-[10px] sm:px-2 sm:py-1.5 sm:text-[12px] font-bold border transition-all cursor-pointer active:scale-95 ${
                   active
                     ? ACTIVE_CLASS[variant]
                     : "bg-[#0E1625] border-[#1C2436] text-text-muted hover:border-[#2A3550] hover:text-text-secondary"
@@ -133,16 +133,18 @@ export function BallPositionControl({
           })}
         </div>
 
-        <p className="mt-1 text-[9px] text-text-muted text-center">
+        <p className="mt-1 text-[9px] sm:text-[11px] text-text-muted text-center">
           {t(opponent ? "defensiveBallHint" : "ballHint")}
         </p>
         {!opponent && (
-          <p className="mt-0.5 text-[9px] text-text-muted text-center">{t("occupancyHint")}</p>
+          <p className="mt-0.5 text-[9px] sm:text-[11px] text-text-muted text-center">
+            {t("occupancyHint")}
+          </p>
         )}
         {opponent && findings && findings.length > 0 && (
           <ul className="mt-1 space-y-0.5 border-t border-[#1C2436] pt-1">
             {findings.slice(0, MAX_FINDINGS).map((f) => (
-              <li key={f.id} className="flex items-start gap-1 text-[9px] leading-snug">
+              <li key={f.id} className="flex items-start gap-1 text-[9px] sm:text-[11px] leading-snug">
                 <span
                   aria-hidden
                   className="mt-[3px] w-1 h-1 rounded-full shrink-0"
