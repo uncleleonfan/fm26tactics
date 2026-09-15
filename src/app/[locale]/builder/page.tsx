@@ -390,32 +390,35 @@ export default function BuilderPage() {
             </h1>
           </div>
 
-          <button
-            onClick={openFormationPanel}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border font-mono text-xs font-bold tracking-wider transition-all ${
-              sidebarTab === "formation"
-                ? "bg-primary/10 border-primary/30 text-primary"
-                : "bg-[#0E1625] border-[#1C2436] text-text-primary hover:border-primary/40"
-            }`}
-          >
-            <LayoutGrid className="w-4 h-4 text-text-muted" />
-            <span className="hidden sm:inline">{currentFormationLabel}</span>
-            <span className="sm:hidden">{t("formation")}</span>
-          </button>
+          {/* The formation badge and Reset act on the same thing (board shape
+              + XI), so they belong in one group. As separate children of the
+              space-between bar they were pushed apart by the auto spacing. */}
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+            <button
+              onClick={openFormationPanel}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border font-mono text-xs font-bold tracking-wider transition-all ${
+                sidebarTab === "formation"
+                  ? "bg-primary/10 border-primary/30 text-primary"
+                  : "bg-[#0E1625] border-[#1C2436] text-text-primary hover:border-primary/40"
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4 text-text-muted" />
+              <span className="hidden sm:inline">{currentFormationLabel}</span>
+              <span className="sm:hidden">{t("formation")}</span>
+            </button>
 
-          {/* Reset sits right next to the formation badge — it acts on the
-              board (shape + XI), so it belongs with the board controls. */}
-          <button
-            onClick={() => {
-              resetTactic();
-              trackEvent("builder_reset");
-            }}
-            className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
-            aria-label={t("reset")}
-          >
-            <RotateCw className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">{t("reset")}</span>
-          </button>
+            <button
+              onClick={() => {
+                resetTactic();
+                trackEvent("builder_reset");
+              }}
+              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
+              aria-label={t("reset")}
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{t("reset")}</span>
+            </button>
+          </div>
 
           <div className="flex items-center gap-1 sm:gap-2">
             <button
