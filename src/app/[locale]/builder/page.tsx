@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity, BookmarkPlus } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity, BookmarkPlus, FolderOpen } from "lucide-react";
 import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
@@ -21,7 +21,7 @@ import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
 import { ShareDialog } from "@/components/builder/share-dialog";
 import { SavedTacticsDialog } from "@/components/builder/saved-tactics-dialog";
-import { loadSavedTactics } from "@/lib/saved-tactics";
+import { loadSavedTactics, quickSaveTactic } from "@/lib/saved-tactics";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
@@ -205,6 +205,18 @@ export default function BuilderPage() {
   const currentFormationLabel =
     formationPresets.find((f) => f.formation === state.formation)?.label ?? state.formation;
 
+  // One-click quick save (E-9): upserts under the formation label so repeated
+  // saves refresh the same entry instead of piling duplicates.
+  const [justSaved, setJustSaved] = useState(false);
+  const handleQuickSave = () => {
+    const saved = quickSaveTactic(state, currentFormationLabel);
+    if (!saved) return;
+    setSavedCount(loadSavedTactics().length);
+    setJustSaved(true);
+    trackEvent("builder_save_tactic", { label: state.formation });
+    setTimeout(() => setJustSaved(false), 2000);
+  };
+
   // Single selection funnel: fires for both plain taps and drag-starts, so a
   // player chosen by dragging still counts (previously only the tap path did).
   const handleSelectPlayer = (playerId: string | null) => {
@@ -379,30 +391,45 @@ export default function BuilderPage() {
             <span className="sm:hidden">{t("formation")}</span>
           </button>
 
+          {/* Reset sits right next to the formation badge — it acts on the
+              board (shape + XI), so it belongs with the board controls. */}
+          <button
+            onClick={() => {
+              resetTactic();
+              trackEvent("builder_reset");
+            }}
+            className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
+            aria-label={t("reset")}
+          >
+            <RotateCw className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">{t("reset")}</span>
+          </button>
+
           <div className="flex items-center gap-1 sm:gap-2">
+            <button
+              onClick={handleQuickSave}
+              className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs transition-all ${
+                justSaved
+                  ? "text-primary bg-primary/10"
+                  : "text-text-muted hover:text-text-primary hover:bg-surface-hover"
+              }`}
+              aria-label={t("save")}
+            >
+              {justSaved ? <Check className="w-3.5 h-3.5" /> : <BookmarkPlus className="w-3.5 h-3.5" />}
+              <span className="hidden sm:inline">{justSaved ? t("savedSaved") : t("save")}</span>
+            </button>
             <button
               onClick={() => setShowSaved(true)}
               className="relative flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
               aria-label={t("savedTitle")}
             >
-              <BookmarkPlus className="w-3.5 h-3.5" />
+              <FolderOpen className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{t("savedTitle")}</span>
               {savedCount > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-primary text-background-primary text-[9px] font-bold flex items-center justify-center tabular-nums">
                   {savedCount > 30 ? "30" : savedCount}
                 </span>
               )}
-            </button>
-            <button
-              onClick={() => {
-                resetTactic();
-                trackEvent("builder_reset");
-              }}
-              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
-              aria-label={t("reset")}
-            >
-              <RotateCw className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">{t("reset")}</span>
             </button>
             <button
               onClick={() => setShowShare(true)}

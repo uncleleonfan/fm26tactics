@@ -73,6 +73,26 @@ export function saveTactic(state: TacticBoardState, name: string): SavedTactic |
   return persist(next) ? entry : null;
 }
 
+/**
+ * One-click save used by the topbar button: upserts by name so repeated quick
+ * saves of the same build refresh the entry instead of piling duplicates.
+ * Falls back to the formation label when the caller passes no name.
+ */
+export function quickSaveTactic(state: TacticBoardState, name?: string): SavedTactic | null {
+  const trimmed = (name ?? "").trim().slice(0, 60) || state.formation;
+  const list = loadSavedTactics();
+  const existing = list.find((t) => t.name === trimmed);
+  if (!existing) return saveTactic(state, trimmed);
+  const updated: SavedTactic = {
+    ...existing,
+    formation: state.formation,
+    savedAt: Date.now(),
+    state,
+  };
+  const next = [updated, ...list.filter((t) => t.id !== existing.id)];
+  return persist(next) ? updated : null;
+}
+
 export function deleteSavedTactic(id: string): void {
   persist(loadSavedTactics().filter((t) => t.id !== id));
 }
