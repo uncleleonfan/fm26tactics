@@ -13,12 +13,13 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     locale: params.locale,
     path: "/best",
     en: {
-      title: "FM26 Best Tactics 2026: Top 8 Meta Formations Ranked",
+      title: "Best FM26 Tactics 2026: Top Meta Formations, Tested & Ranked",
       description:
-        "Discover the best FM26 tactics ranked and tested. From gegenpress to tiki-taka, find the top meta formations that dominate Football Manager 2026 — best fm26 tactics for every playstyle.",
+        "The best FM26 tactics and best Football Manager tactics, ranked and community-tested. From gegenpress to tiki-taka — the top meta formations that dominate Football Manager 2026.",
       keywords: [
-        "fm26 best tactics", "best fm26 tactics", "fm26 top tactics",
-        "fm26 meta formations", "best formations fm26", "top fm26 tactics 2026",
+        "best fm26 tactics", "best football manager tactics", "fm26 best tactics",
+        "best tactics fm26", "fm26 meta formations", "best formations fm26",
+        "top fm26 tactics 2026",
       ],
     },
     tr: {

@@ -18,6 +18,12 @@ export interface RoleDepth {
   partnerships: Array<{ partner: string; partnerId: string; note: string }>;
   whenToUse: { whenToUse: string[]; whenToAvoid: string[] };
   radar: Array<{ attribute: string; rating: number }>;
+  /**
+   * Head-to-head comparisons with other roles ("Inside Forward vs Wide
+   * Forward"). vsRoleId links to an on-site role page; omit it when the
+   * compared role (e.g. Mezzala) has no page of its own.
+   */
+  comparisons?: Array<{ vsName: string; vsRoleId?: string; text: string }>;
 }
 
 export const roleDepth: Record<string, RoleDepth> = {
@@ -653,6 +659,14 @@ export const roleDepth: Record<string, RoleDepth> = {
         "Fast counter-attacking systems that bypass his zone entirely",
       ],
     },
+    comparisons: [
+      {
+        // No on-site page for the Mezzala (not a selectable FM26 role in
+        // this encyclopedia) — text-only comparison targeting the search intent.
+        vsName: "Mezzala",
+        text: "The Mezzala — the Italian 'half-winger' — is what FM players call a lateral shuttler: a central midfielder who drifts wide of the ball carrier into the half-space, arriving late in the final third. The Advanced Playmaker occupies the same left/right half-space corridor but does so between the lines rather than wide of the ball: he is a fixed hub that others rotate around, not a roamer. Practical difference in FM26: the closest native equivalents to a Mezzala are the Channel Midfielder (late half-space arrivals, high underlap movement) or a Box-to-Box Playmaker with inside movement instructions, while the AP remains the purest through-ball creator. Use the AP when your attack needs a brain in tight central pockets; the mezzala-style profiles suit sides that want wide overloads without deploying a natural winger.",
+      },
+    ],
     radar: [
       { attribute: "Vision", rating: 93 },
       { attribute: "Passing", rating: 90 },
@@ -767,6 +781,18 @@ export const roleDepth: Record<string, RoleDepth> = {
       { attribute: "Off the Ball", rating: 80 },
       { attribute: "Composure", rating: 75 },
       { attribute: "Technique", rating: 85 },
+    ],
+    comparisons: [
+      {
+        vsName: "Wide Forward",
+        vsRoleId: "wide-forward",
+        text: "The Inside Forward starts wide and finishes centrally: his first move is the cut inside, and his output is measured in goals. The Wide Forward is the opposite compromise — he stays higher and wider for longer, holding the last line and attacking the box from the flank rather than through it. Choose the Inside Forward when your system provides width from behind (overlapping full-backs or wing-backs) and you need a second scorer; choose the Wide Forward when you want the wide lane occupied at all times and your central striker needs a partner rather than a rival for the half-space. In FM26 terms, IF(A) is one of the highest xG wide roles in the match engine, while WF sacrifices personal shot volume for stretching the block.",
+      },
+      {
+        vsName: "Inside Winger",
+        vsRoleId: "inside-winger",
+        text: "Both roles invert from the flank, but their destination differs. The Inside Winger drifts inside to create — he operates between the lines as an extra playmaker, looking for through balls and cutbacks, and is happy to end a move with an assist. The Inside Forward attacks inside to finish — he runs beyond the last line into the box, and his first thought is the shot. In practice: pair an Inside Winger with a penalty-box striker, or an Inside Forward with a target man or drop-forward who feeds off the space he clears. If your creator is central (Advanced Playmaker, attacking midfield trio), the IF's directness balances the buildup; if you lack creation entirely, the Inside Winger carries more of it.",
+      },
     ],
   },
 

@@ -10,6 +10,7 @@ import {
   BookOpen,
   Check,
   MessageCircleQuestion,
+  Scale,
   Sparkles,
   Star,
   Target,
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const role = playerRoles.find((r) => r.id === params.slug);
   if (!role) return {};
   return generateSEO({
-    title: `${role.name} FM26 — Complete Role Guide | FM26 Tactics`,
+    title: `${role.name} FM26: Role Guide, Best Duties & Attributes`,
     description: role.description,
     path: `/roles/${role.id}`,
     type: "article",
@@ -502,6 +503,41 @@ export default async function RoleDetailPage({ params }: Props) {
                       ))}
                     </ul>
                   </div>
+                </div>
+              </div>
+            ) : null}
+
+            {/* Role vs Role comparisons — targets "X vs Y fm26" search intent */}
+            {depth?.comparisons?.length ? (
+              <div className="glass-panel p-6 mt-8">
+                <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                  <Scale className="w-4 h-4 text-primary" />
+                  {rName} vs Other FM26 Roles
+                </h2>
+                <p className="text-xs text-text-muted mb-4">
+                  Head-to-head breakdowns against the roles this one is most often confused with.
+                </p>
+                <div className="space-y-3">
+                  {depth.comparisons.map((c) => (
+                    <div
+                      key={c.vsName}
+                      className="p-4 rounded-lg bg-surface border border-surface-border"
+                    >
+                      <p className="text-sm font-semibold text-text-primary mb-1.5">
+                        {rName} vs {c.vsName} in FM26
+                      </p>
+                      <p className="text-xs text-text-secondary leading-relaxed">{c.text}</p>
+                      {c.vsRoleId && (
+                        <Link
+                          href={`/roles/${c.vsRoleId}`}
+                          className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
+                        >
+                          Full {c.vsName} guide
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             ) : null}

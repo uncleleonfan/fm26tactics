@@ -15,9 +15,9 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     locale: params.locale,
     path: "/tactics",
     en: {
-      title: "FM26 Tactics Library – Football Manager 2026 Tactics & Formations",
+      title: "FM26 Tactics: Every Football Manager 2026 Tactic & Formation",
       description:
-        "Browse the complete FM26 tactics library for Football Manager 2026. Every tactical style — gegenpress, tiki-taka, counter-attack, wing play — with complete player roles, team instructions, and performance breakdowns.",
+        "All the best FM26 tactics in one library: gegenpress, tiki-taka, counter-attack and wing play — each with full player roles, team instructions and performance breakdowns.",
       keywords: [
         "fm26 tactics", "fm 26 tactics", "football manager 2026 tactics",
         "fm26 tactic", "fm26 tactics library", "fm26 gegenpress",
