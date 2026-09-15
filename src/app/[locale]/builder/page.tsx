@@ -22,7 +22,8 @@ import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
 import { ShareDialog } from "@/components/builder/share-dialog";
 import { SavedTacticsDialog } from "@/components/builder/saved-tactics-dialog";
-import { loadSavedTactics, quickSaveTactic } from "@/lib/saved-tactics";
+import { SaveTacticDialog } from "@/components/builder/save-tactic-dialog";
+import { loadSavedTactics } from "@/lib/saved-tactics";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
@@ -217,15 +218,14 @@ export default function BuilderPage() {
   const currentFormationLabel =
     formationPresets.find((f) => f.formation === state.formation)?.label ?? state.formation;
 
-  // One-click quick save (E-9): upserts under the formation label so repeated
-  // saves refresh the same entry instead of piling duplicates.
+  // Save (E-9): the topbar button opens a naming dialog, so one formation can
+  // have several named versions. The saved entry is always a new copy —
+  // duplicates are de-duplicated by name suffix, never overwritten.
   const [justSaved, setJustSaved] = useState(false);
-  const handleQuickSave = () => {
-    const saved = quickSaveTactic(state, currentFormationLabel);
-    if (!saved) return;
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const handleTacticSaved = () => {
     setSavedCount(loadSavedTactics().length);
     setJustSaved(true);
-    trackEvent("builder_save_tactic", { label: state.formation });
     setTimeout(() => setJustSaved(false), 2000);
   };
 
@@ -422,7 +422,7 @@ export default function BuilderPage() {
 
           <div className="flex items-center gap-1 sm:gap-2">
             <button
-              onClick={handleQuickSave}
+              onClick={() => setShowSaveDialog(true)}
               className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs transition-all ${
                 justSaved
                   ? "text-primary bg-primary/10"
@@ -692,10 +692,17 @@ export default function BuilderPage() {
         />
       )}
 
+      {showSaveDialog && (
+        <SaveTacticDialog
+          state={state}
+          defaultName={currentFormationLabel}
+          onSaved={handleTacticSaved}
+          onClose={() => setShowSaveDialog(false)}
+        />
+      )}
+
       {showSaved && (
         <SavedTacticsDialog
-          state={state}
-          formationLabel={currentFormationLabel}
           onLoad={loadTactic}
           onCountChange={setSavedCount}
           onClose={() => setShowSaved(false)}
