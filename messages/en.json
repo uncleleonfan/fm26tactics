@@ -829,6 +829,35 @@
       "finalThird": "Final 3rd",
       "defensive": "Defensive"
     },
+    "defensiveBallHint": "Tap the pitch or a zone button to move the opponent's ball",
+    "defensiveScenes": {
+      "highPress": "High press",
+      "midBlock": "Mid block",
+      "lowBlock": "Low block",
+      "wideRight": "Wide right"
+    },
+    "defensiveActions": {
+      "press": "pressing the ball",
+      "press-support": "covering behind the press",
+      "cover": "holding the line",
+      "hold": "holding position",
+      "drop": "dropping into shape"
+    },
+    "defensiveMetrics": {
+      "pressure": "Press",
+      "compact": "Compact",
+      "ballSide": "Ball side",
+      "behind": "In behind"
+    },
+    "defensiveFindings": {
+      "noPressure": "No press on the ball — only {pressure}% weighted pressure nearby",
+      "exposedLine": "Space in behind the line (depth y={lineY}) — runs in behind will hurt",
+      "stretchedBlock": "Defensive block is stretched — compactness {compactness}%",
+      "weakBallSideCover": "Ball side is under-covered — cover {cover}%",
+      "offsideTrapActive": "Offside trap active — the line steps up to catch through balls",
+      "solidShape": "Solid defensive shape — pressure {pressure}% · compactness {compactness}%"
+    },
+    "defensiveLineTooltip": "Defensive line (depth y={y}) — adjusted by line instructions",
     "movements": {
       "forward": "forward run",
       "overlap": "overlap run",

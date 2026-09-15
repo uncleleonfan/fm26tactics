@@ -19,7 +19,7 @@ interface VisualizeLayerProps {
 }
 
 /** Visible zone rectangles — central-build-up shares space with defensive-third. */
-const ZONE_RECTS: Array<{
+export const ZONE_RECTS: Array<{
   id: BallZoneId;
   x: number;
   y: number;

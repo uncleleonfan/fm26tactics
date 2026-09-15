@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import { InteractivePlayerNode } from "./interactive-player-node";
 import { PitchBackground } from "./pitch-background";
 import { VisualizeLayer } from "./visualize-layer";
+import { DefensiveVisualizeLayer, DefensiveMetricsPanel } from "./defensive-visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
 import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
@@ -14,6 +15,7 @@ import { resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { playerRoles } from "@/lib/tactics-data";
 import { MovementArrow } from "./movement-arrow";
 import type { AnalysisResult, BallZoneId } from "@/types/analysis";
+import type { DefensiveResult } from "@/tactics/engine/defensive-engine";
 import type { PhaseType, TacticBoardState } from "@/types/tactic";
 
 interface PitchProps {
@@ -33,6 +35,11 @@ interface PitchProps {
   analysis?: AnalysisResult | null;
   ballZone?: BallZoneId;
   onBallZoneChange?: (zone: BallZoneId) => void;
+  /** Defensive scenario result for the out-of-possession visualize overlay. */
+  defensiveAnalysis?: DefensiveResult | null;
+  /** Where the OPPONENT has the ball (out-of-possession visualize). */
+  oppBallZone?: BallZoneId;
+  onOppBallZoneChange?: (zone: BallZoneId) => void;
   /** Resolves player ids to role labels for tooltips. */
   playerLabelById?: (playerId: string) => string | undefined;
 }
@@ -53,6 +60,9 @@ export function Pitch({
   analysis = null,
   ballZone,
   onBallZoneChange,
+  defensiveAnalysis = null,
+  oppBallZone,
+  onOppBallZoneChange,
   playerLabelById,
 }: PitchProps) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -156,39 +166,51 @@ export function Pitch({
     if (touch) endDrag(touch.clientX, touch.clientY);
   };
 
-  // Visualize mode: clicking open grass moves the ball to that zone.
+  // Visualize mode: clicking open grass moves the ball to that zone. The
+  // phase decides WHICH ball moves — ours (in-possession) or the
+  // opponent's (out-of-possession defensive scenario).
   const handleSvgClick = (e: React.MouseEvent) => {
-    if (!canVisualize || !visualize || !onBallZoneChange) return;
+    if (!visualize) return;
     const coords = toSvgCoords(e.clientX, e.clientY);
-    // Distinguish pitch-tap moves from the shortcut control in the analytics labels.
-    trackEvent("builder_ball_zone", { label: "pitch-click" });
-    onBallZoneChange(zoneAtPoint(coords.x, coords.y));
+    const zone = zoneAtPoint(coords.x, coords.y);
+    if (phase === "in-possession") {
+      if (!onBallZoneChange) return;
+      // Distinguish pitch-tap moves from the shortcut control in the analytics labels.
+      trackEvent("builder_ball_zone", { label: "pitch-click" });
+      onBallZoneChange(zone);
+    } else {
+      if (!onOppBallZoneChange) return;
+      trackEvent("builder_ball_zone", { label: "oop:pitch-click" });
+      onOppBallZoneChange(zone);
+    }
   };
-
-  // The visualize overlay models the in-possession scenario (expected
-  // positions derived from role behaviors + ball zone). On the
-  // out-of-possession board the players shown come from the defensive phase
-  // map — a different concept, analyzed by the phase module — so the
-  // overlay and its controls stay hidden there.
-  const canVisualize = phase === "in-possession";
 
   // Visualize mode: prefer the label below the node when the movement arrow
   // points up (toward the opponent goal) so its opaque box never covers the
-  // arrow. Holds (no rendered arrow) keep the default preference.
-  const arrowUpById = useMemo(
-    () =>
-      canVisualize && visualize && analysis
-        ? new Map(
-            analysis.movements.map((m) => [
-              m.playerId,
-              Math.hypot(m.movementVector.dx, m.movementVector.dy) >=
-                MIN_MOVEMENT_DIST &&
-                m.movementVector.dy < 0,
-            ])
-          )
-        : undefined,
-    [canVisualize, visualize, analysis]
-  );
+  // arrow. Holds (no rendered arrow) keep the default preference. Works for
+  // both overlays — possession movement vectors and defensive ghost deltas.
+  const arrowUpById = useMemo(() => {
+    if (!visualize) return undefined;
+    if (phase === "in-possession") {
+      if (!analysis) return undefined;
+      return new Map(
+        analysis.movements.map((m) => [
+          m.playerId,
+          Math.hypot(m.movementVector.dx, m.movementVector.dy) >=
+            MIN_MOVEMENT_DIST &&
+            m.movementVector.dy < 0,
+        ])
+      );
+    }
+    if (!defensiveAnalysis) return undefined;
+    return new Map(
+      defensiveAnalysis.movements.map((m) => {
+        const dx = m.expectedPosition.x - m.basePosition.x;
+        const dy = m.expectedPosition.y - m.basePosition.y;
+        return [m.playerId, Math.hypot(dx, dy) >= MIN_MOVEMENT_DIST && dy < 0];
+      })
+    );
+  }, [visualize, phase, analysis, defensiveAnalysis]);
 
   // Auto label placement: default above; dodge other player nodes and label
   // boxes via below → left → right. Pure layout math, re-runs as players move.
@@ -231,11 +253,20 @@ export function Pitch({
         {/* Static pitch markings — shared with article formation diagrams */}
         <PitchBackground />
 
-        {/* Visualize overlay: zones, ghosts, arrows, ball */}
-        {canVisualize && visualize && analysis && ballZone && (
+        {/* Visualize overlays — one per phase, mirroring each other:
+            in-possession = our ball scenario, out-of-possession =
+            defensive response to the opponent's ball. */}
+        {phase === "in-possession" && visualize && analysis && ballZone && (
           <VisualizeLayer
             analysis={analysis}
             ballZone={ballZone}
+            playerLabelById={playerLabelById}
+          />
+        )}
+        {phase === "out-of-possession" && visualize && defensiveAnalysis && oppBallZone && (
+          <DefensiveVisualizeLayer
+            result={defensiveAnalysis}
+            oppBallZone={oppBallZone}
             playerLabelById={playerLabelById}
           />
         )}
@@ -278,12 +309,22 @@ export function Pitch({
         })}
       </svg>
 
-      {onToggleVisualize && canVisualize && (
+      {onToggleVisualize && (
         <PitchModeControl visualize={visualize} onChange={onToggleVisualize} />
       )}
 
-      {canVisualize && visualize && ballZone && onBallZoneChange && (
+      {phase === "in-possession" && visualize && ballZone && onBallZoneChange && (
         <BallPositionControl ballZone={ballZone} onChange={onBallZoneChange} />
+      )}
+      {phase === "out-of-possession" && visualize && defensiveAnalysis && oppBallZone && onOppBallZoneChange && (
+        <>
+          <DefensiveMetricsPanel result={defensiveAnalysis} />
+          <BallPositionControl
+            ballZone={oppBallZone}
+            onChange={onOppBallZoneChange}
+            variant="opponent"
+          />
+        </>
       )}
     </div>
   );

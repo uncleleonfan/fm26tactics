@@ -8,6 +8,7 @@ import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builde
 import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
 import { usePhaseAnalysis } from "@/hooks/use-phase-analysis";
+import { useDefensiveAnalysis } from "@/hooks/use-defensive-analysis";
 import { trackEvent } from "@/lib/analytics";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
 import { useRouter } from "next/navigation";
@@ -26,7 +27,7 @@ import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
 import type { FormationType, PhaseType, PlayerDuty } from "@/types/tactic";
-import type { Recommendation } from "@/types/analysis";
+import type { BallZoneId, Recommendation } from "@/types/analysis";
 
 export default function BuilderPage() {
   const t = useTranslations("builder");
@@ -81,7 +82,10 @@ export default function BuilderPage() {
   const [visualize, setVisualize] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
 
-  // Phase view switch — keeps roles/duties/instructions/selection untouched
+  // Phase view switch — keeps roles/duties/instructions/selection untouched.
+  // The Edit/Visualize switch intentionally survives the phase change: each
+  // phase renders its own overlay (possession scenario vs defensive
+  // response), so visualize is a mode, not a one-phase feature.
   const handlePhaseChange = useCallback((view: PhaseView) => {
     if (view === "compare") {
       setShowCompare(true);
@@ -91,19 +95,21 @@ export default function BuilderPage() {
     setShowCompare(false);
     if (view !== activePhase) {
       setActivePhase(view);
-      // The visualize overlay models the in-possession scenario (expected
-      // positions from role behaviors + ball zone). Rendered over the
-      // out-of-possession board it would mislabel the designed defensive
-      // shape — defensive-phase analysis is the phase module's job.
-      if (view === "out-of-possession") setVisualize(false);
     }
   }, [activePhase, setActivePhase]);
 
-  // Pitch mode switch handler — the floating Edit/Visualize control lives on the pitch.
-  const toggleVisualize = useCallback((next: boolean) => {
-    setVisualize(next);
-    trackEvent("builder_toggle_visualize", { label: next ? "on" : "off" });
-  }, []);
+  // Pitch mode switch handler — the floating Edit/Visualize control lives on
+  // the pitch. The label carries the phase so OOP visualize sessions are
+  // distinguishable in analytics.
+  const toggleVisualize = useCallback(
+    (next: boolean) => {
+      setVisualize(next);
+      trackEvent("builder_toggle_visualize", {
+        label: `${activePhase === "out-of-possession" ? "oop:" : ""}${next ? "on" : "off"}`,
+      });
+    },
+    [activePhase]
+  );
 
   // The ball-zone engine models OUR possession scenario; the defensive phase
   // is analyzed by the dual-phase module (phaseAnalysis below). Feeding the
@@ -116,6 +122,12 @@ export default function BuilderPage() {
   );
   const { analysis, ballZone, setBallZone, lockedCategories, toggleCategoryLock } =
     useTacticalAnalysis(stateForAnalysis);
+
+  // Opponent-ball scenario for the OOP visualize overlay. Results render on
+  // the pitch overlay only — the analysis panel keeps following the
+  // in-possession XI (see stateForAnalysis above).
+  const [oppBallZone, setOppBallZone] = useState<BallZoneId>("central-midfield");
+  const defensiveAnalysis = useDefensiveAnalysis(state, oppBallZone);
 
   // Phase-specific analysis: designed shapes, per-phase findings, transition risk
   const phaseAnalysis = usePhaseAnalysis(state);
@@ -567,6 +579,9 @@ export default function BuilderPage() {
           analysis={analysis}
           ballZone={ballZone}
           onBallZoneChange={setBallZone}
+          defensiveAnalysis={defensiveAnalysis}
+          oppBallZone={oppBallZone}
+          onOppBallZoneChange={setOppBallZone}
           playerLabelById={playerLabelById}
         />
           )}
