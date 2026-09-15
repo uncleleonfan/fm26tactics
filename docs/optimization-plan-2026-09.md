@@ -147,7 +147,7 @@ alternates: {
 
 ### Batch 3：增长与后续（第 2 月起，按数据排序）
 
-> **状态（2026-08-29）**：N13 ✓（llms.txt 修正 www 规范 + 补 /meta、/best、guides 亮点链接）｜N14 → 观察（9 月跳出率）｜N15 ✓（调研完成 → `docs/fmf-research-2026-08.md`：程序化生成不可行（无规范/只读逆向/零写入先例）；**决策（2026-08-29）：`.fmf` 导出不处理**，维持现状 HOW TO REPLICATE 卡片，预打包库方案搁置）｜N16 ✓（dual-phase 指南全文验证**零 Builder 承诺**（IP/OOP 指游戏内 Tactics 屏幕），与 revert 功能无脱节，无需改动）｜N17 ✓（代码体检无硬伤：recharts 已 dynamic+ssr:false、无裸 img、字体自托管、GA 延迟加载；已清理 2 个死广告域名 preconnect；**无需立项**，桌面排名更可能是内容/外链因素）｜N18 → 观察（9 月数据）｜N19 → 暂缓（Q4）
+> **状态（2026-08-29）**：N13 ✓（llms.txt 修正 www 规范 + 补 /meta、/best、guides 亮点链接）｜N14 → 观察（9 月跳出率）｜N15 ✓（调研完成 → `docs/fmf-research-2026-08.md`：程序化生成不可行（无规范/只读逆向/零写入先例）；**决策（2026-08-29）：`.fmf` 导出不处理**，维持现状 HOW TO REPLICATE 卡片，预打包库方案搁置）｜N16 ✓（dual-phase 指南全文验证**零 Builder 承诺**（IP/OOP 指游戏内 Tactics 屏幕），与 revert 功能无脱节，无需改动）｜N17 ✓（代码体检无硬伤：recharts 已 dynamic+ssr:false、无裸 img、字体自托管、GA 延迟加载；已清理 2 个死广告域名 preconnect；**无需立项**，桌面排名更可能是内容/外链因素）｜N18 → 观察（9 月数据）｜**E-9 一期 ✓（2026-09-15：本地"我的战术"库上线——`src/lib/saved-tactics.ts` + `saved-tactics-dialog.tsx`，localStorage 命名保存/加载/删除，埋点 `builder_save_tactic` / `builder_saved_load` / `builder_saved_delete` / `builder_saved_open`；云保存/账户仍按 N19 Q4 再议）**｜N19 → 暂缓（Q4）
 
 | # | 任务 | 说明 | 工作量 |
 |---|---|---|---|

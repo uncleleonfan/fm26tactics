@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity, BookmarkPlus } from "lucide-react";
 import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
@@ -20,6 +20,8 @@ import { InstructionPanel } from "@/components/builder/instruction-panel";
 import { FormationPanel } from "@/components/builder/formation-panel";
 import { TacticExport } from "@/components/builder/tactic-export";
 import { ShareDialog } from "@/components/builder/share-dialog";
+import { SavedTacticsDialog } from "@/components/builder/saved-tactics-dialog";
+import { loadSavedTactics } from "@/lib/saved-tactics";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
@@ -51,6 +53,8 @@ export default function BuilderPage() {
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [showExport, setShowExport] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const [showSaved, setShowSaved] = useState(false);
+  const [savedCount, setSavedCount] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<"role" | "instructions" | "formation" | "analysis">(() => {
     // Restore the sidebar tab after external navigation (e.g. opening a
     // formation guide and coming back) — the tab is mirrored to ?tab= below.
@@ -69,6 +73,11 @@ export default function BuilderPage() {
     url.searchParams.set("tab", sidebarTab);
     window.history.replaceState(null, "", url);
   }, [sidebarTab]);
+
+  // Topbar badge for the local "My Tactics" library (E-9 phase 1).
+  useEffect(() => {
+    setSavedCount(loadSavedTactics().length);
+  }, []);
   const [visualize, setVisualize] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
 
@@ -372,6 +381,19 @@ export default function BuilderPage() {
 
           <div className="flex items-center gap-1 sm:gap-2">
             <button
+              onClick={() => setShowSaved(true)}
+              className="relative flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all"
+              aria-label={t("savedTitle")}
+            >
+              <BookmarkPlus className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{t("savedTitle")}</span>
+              {savedCount > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-primary text-background-primary text-[9px] font-bold flex items-center justify-center tabular-nums">
+                  {savedCount > 30 ? "30" : savedCount}
+                </span>
+              )}
+            </button>
+            <button
               onClick={() => {
                 resetTactic();
                 trackEvent("builder_reset");
@@ -622,6 +644,16 @@ export default function BuilderPage() {
           state={state}
           formationLabel={currentFormationLabel}
           onClose={() => setShowShare(false)}
+        />
+      )}
+
+      {showSaved && (
+        <SavedTacticsDialog
+          state={state}
+          formationLabel={currentFormationLabel}
+          onLoad={loadTactic}
+          onCountChange={setSavedCount}
+          onClose={() => setShowSaved(false)}
         />
       )}
     </div>

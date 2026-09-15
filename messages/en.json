@@ -656,7 +656,18 @@
     "txtStep3": "3. Set team mentality and tick the team instructions above.",
     "txtStep4": "4. Share your in-game result back at www.fm26tactics.com",
     "analysisTab": "Analysis",
-    "analysisMovedPanel": "Tactical Analysis now lives in the dedicated right-hand panel"
+    "analysisMovedPanel": "Tactical Analysis now lives in the dedicated right-hand panel",
+    "savedTitle": "My Tactics",
+    "savedDesc": "Tactics are saved in this browser only. Export a .json backup (Export panel) to keep them across devices.",
+    "savedNamePlaceholder": "Tactic name, e.g. 4-2-3-1 High Press",
+    "savedSaveButton": "Save current",
+    "savedSaved": "Saved!",
+    "savedStorageFail": "Couldn't save — browser storage is unavailable or full.",
+    "savedEmpty": "No saved tactics yet — name your current build and hit Save.",
+    "savedSavedAt": "Saved {date}",
+    "savedLoad": "Load",
+    "savedDelete": "Delete",
+    "savedConfirmDelete": "Click again to delete"
   },
   "shareView": {
     "subheading": "A tactic built with the FM26 Tactic Builder",
