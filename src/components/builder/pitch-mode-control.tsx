@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Pencil, Radar, X } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 
 const NUDGE_KEY = "fm26-visualize-nudge-dismissed";
 
@@ -19,41 +20,35 @@ interface PitchModeControlProps {
  */
 export function PitchModeControl({ visualize, onChange }: PitchModeControlProps) {
   const t = useTranslations("visualize");
-  const [showNudge, setShowNudge] = useState(false);
-  const nudgeTimerRef = useRef<number | undefined>(undefined);
 
-  // One-time nudge: pulse + tooltip until the user interacts (dismissed forever).
+  // One-time nudge: pulse + tooltip, persisted as soon as it is rendered so it
+  // can never come back (even if the user reloads without closing it).
+  const nudge = useOneTimeBanner(NUDGE_KEY, { delayMs: 800 });
+
   useEffect(() => {
-    if (window.localStorage.getItem(NUDGE_KEY)) return;
-    nudgeTimerRef.current = window.setTimeout(() => {
-      setShowNudge(true);
-      trackEvent("visualize_nudge_shown");
-    }, 800);
-    return () => window.clearTimeout(nudgeTimerRef.current);
-  }, []);
+    if (nudge.visible) trackEvent("visualize_nudge_shown");
+  }, [nudge.visible]);
 
   const dismissNudge = () => {
-    setShowNudge(false);
-    window.localStorage.setItem(NUDGE_KEY, "1");
+    nudge.dismiss();
     trackEvent("visualize_nudge_dismiss");
   };
 
   const select = (next: boolean) => {
-    if (showNudge) {
+    if (nudge.visible) {
       dismissNudge();
-    } else if (!window.localStorage.getItem(NUDGE_KEY)) {
+    } else {
       // Clicked within the 800ms delay — the feature is already discovered:
-      // cancel the pending nudge and persist the dismissal silently so it
-      // never shows again (and is not double-counted in analytics).
-      window.clearTimeout(nudgeTimerRef.current);
-      window.localStorage.setItem(NUDGE_KEY, "1");
+      // cancel the pending nudge silently so it never shows (and is not
+      // double-counted in analytics).
+      nudge.dismiss();
     }
     if (next !== visualize) onChange(next);
   };
 
   return (
     <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10">
-      {showNudge && (
+      {nudge.visible && (
         <div className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 w-max max-w-[240px] sm:max-w-[280px]">
           <div className="relative flex items-start gap-2 rounded-xl border border-[#1C2436] bg-background-secondary/95 backdrop-blur-xs shadow-[0_4px_24px_rgba(0,0,0,0.5)] px-3 py-2 animate-slide-up">
             <Radar className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
@@ -77,7 +72,7 @@ export function PitchModeControl({ visualize, onChange }: PitchModeControlProps)
         role="group"
         aria-label={t("modeGroup")}
         className={`flex items-center gap-0.5 rounded-xl border border-[#1C2436] bg-background-secondary/95 backdrop-blur-xs shadow-[0_4px_24px_rgba(0,0,0,0.5)] p-1 ${
-          showNudge ? "animate-pulse-glow" : ""
+          nudge.visible ? "animate-pulse-glow" : ""
         }`}
       >
         <button

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity } from "lucide-react";
 import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
+import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
 import { usePhaseAnalysis } from "@/hooks/use-phase-analysis";
 import { trackEvent } from "@/lib/analytics";
@@ -58,8 +59,6 @@ export default function BuilderPage() {
     return tab === "instructions" || tab === "formation" || tab === "analysis" ? tab : "role";
   });
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
-  const [showNudge, setShowNudge] = useState(false);
-  const [showFmfAlert, setShowFmfAlert] = useState(false);
   const [appliedChange, setAppliedChange] = useState<AppliedChange | null>(null);
 
   // Mirror the sidebar tab into the URL (same pattern as ?phase=) so the tab
@@ -148,44 +147,6 @@ export default function BuilderPage() {
     [state.players]
   );
 
-  // One-time .fmf export limitation alert — shown once per browser
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const acknowledged = window.localStorage.getItem("fm26-builder-fmf-alert-ack");
-    if (!acknowledged) {
-      setShowFmfAlert(true);
-      trackEvent("builder_fmf_alert_shown");
-    }
-  }, []);
-
-  const dismissFmfAlert = () => {
-    setShowFmfAlert(false);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("fm26-builder-fmf-alert-ack", "1");
-    }
-    trackEvent("builder_fmf_alert_dismiss");
-  };
-
-  // One-time hint nudging users to the Export button (dismissed forever after close)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const dismissed = window.localStorage.getItem("fm26-builder-nudge-dismissed");
-    if (!dismissed) {
-      setShowNudge(true);
-      trackEvent("builder_nudge_shown");
-    }
-  }, []);
-
-  const dismissNudge = () => {
-    setShowNudge(false);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("fm26-builder-nudge-dismissed", "1");
-    }
-    trackEvent("builder_nudge_dismiss");
-  };
-
-  const [showConfigNudge, setShowConfigNudge] = useState(false);
-
   // The board is always "full" (formation presets auto-fill the XI), so the real
   // signal for E-7 is a pristine default config: balanced mentality + no team
   // instructions. Nudge those users once to set roles & mentality.
@@ -195,21 +156,39 @@ export default function BuilderPage() {
     state.teamInstructions.inTransition.length === 0 &&
     state.teamInstructions.outOfPossession.length === 0;
 
+  // One-time banners: the flag is written the moment they are rendered, so a
+  // user sees each one at most once even if they never close it.
+  const fmfAlert = useOneTimeBanner("fm26-builder-fmf-alert-ack");
+  const exportNudge = useOneTimeBanner("fm26-builder-nudge-dismissed");
+  // Held back while the export nudge is up so the two never stack on a first visit.
+  const configNudge = useOneTimeBanner("fm26-builder-config-nudge-dismissed", {
+    enabled: !exportNudge.visible && isPristineConfig,
+  });
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (showNudge) return; // let the export nudge run first
-    if (!isPristineConfig) return;
-    const dismissed = window.localStorage.getItem("fm26-builder-config-nudge-dismissed");
-    if (dismissed) return;
-    setShowConfigNudge(true);
-    trackEvent("builder_config_nudge_shown");
-  }, [showNudge, isPristineConfig]);
+    if (fmfAlert.visible) trackEvent("builder_fmf_alert_shown");
+  }, [fmfAlert.visible]);
+
+  useEffect(() => {
+    if (exportNudge.visible) trackEvent("builder_nudge_shown");
+  }, [exportNudge.visible]);
+
+  useEffect(() => {
+    if (configNudge.visible) trackEvent("builder_config_nudge_shown");
+  }, [configNudge.visible]);
+
+  const dismissFmfAlert = () => {
+    fmfAlert.dismiss();
+    trackEvent("builder_fmf_alert_dismiss");
+  };
+
+  const dismissNudge = () => {
+    exportNudge.dismiss();
+    trackEvent("builder_nudge_dismiss");
+  };
 
   const dismissConfigNudge = () => {
-    setShowConfigNudge(false);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("fm26-builder-config-nudge-dismissed", "1");
-    }
+    configNudge.dismiss();
     trackEvent("builder_config_nudge_dismiss");
   };
 
@@ -438,7 +417,7 @@ export default function BuilderPage() {
         )}
       </div>
 
-      {showNudge && (
+      {exportNudge.visible && (
         <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
           <button
             onClick={() => {
@@ -461,7 +440,7 @@ export default function BuilderPage() {
         </div>
       )}
 
-      {showConfigNudge && (
+      {configNudge.visible && (
         <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-amber-500/10 border-b border-amber-500/20">
           <button
             onClick={() => {
@@ -605,7 +584,7 @@ export default function BuilderPage() {
         </>
       )}
 
-      {showFmfAlert && (
+      {fmfAlert.visible && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 animate-fade-in px-4">
           <div className="max-w-md w-full bg-background-secondary rounded-2xl border border-[#1C2436] shadow-2xl p-6 space-y-4">
             <div className="flex items-start gap-3">
