@@ -843,12 +843,6 @@
       "hold": "holding position",
       "drop": "dropping into shape"
     },
-    "defensiveMetrics": {
-      "pressure": "Press",
-      "compact": "Compact",
-      "ballSide": "Ball side",
-      "behind": "In behind"
-    },
     "defensiveFindings": {
       "noPressure": "No press on the ball — only {pressure}% weighted pressure nearby",
       "exposedLine": "Space in behind the line (depth y={lineY}) — runs in behind will hurt",

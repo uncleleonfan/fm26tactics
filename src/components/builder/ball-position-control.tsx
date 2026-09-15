@@ -4,7 +4,11 @@ import { useTranslations } from "next-intl";
 import { Circle } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import type { BallZoneId } from "@/types/analysis";
+import type { DefensiveFinding } from "@/tactics/engine/defensive-engine";
 import { ballZones } from "@/tactics/data/zones";
+
+/** Only the top findings are surfaced — the panel must stay compact. */
+const MAX_FINDINGS = 2;
 
 interface BallPositionControlProps {
   ballZone: BallZoneId;
@@ -14,6 +18,12 @@ interface BallPositionControlProps {
    * the out-of-possession defensive scenario (defensive scene shortcuts).
    */
   variant?: "ours" | "opponent";
+  /**
+   * Defensive findings for the current opponent-ball scenario. Rendered
+   * inside this panel instead of a separate floating layer, which would
+   * compete with the Edit/Visualize switch for the pitch's top centre.
+   */
+  findings?: DefensiveFinding[];
 }
 
 const ZONE_ABBR: Record<BallZoneId, string> = {
@@ -59,6 +69,7 @@ export function BallPositionControl({
   ballZone,
   onChange,
   variant = "ours",
+  findings,
 }: BallPositionControlProps) {
   const t = useTranslations("visualize");
   const opponent = variant === "opponent";
@@ -127,6 +138,22 @@ export function BallPositionControl({
         </p>
         {!opponent && (
           <p className="mt-0.5 text-[9px] text-text-muted text-center">{t("occupancyHint")}</p>
+        )}
+        {opponent && findings && findings.length > 0 && (
+          <ul className="mt-1 space-y-0.5 border-t border-[#1C2436] pt-1">
+            {findings.slice(0, MAX_FINDINGS).map((f) => (
+              <li key={f.id} className="flex items-start gap-1 text-[9px] leading-snug">
+                <span
+                  aria-hidden
+                  className="mt-[3px] w-1 h-1 rounded-full shrink-0"
+                  style={{ backgroundColor: f.severity === "warning" ? "#FFB300" : "#448AFF" }}
+                />
+                <span className={f.severity === "warning" ? "text-accent-amber" : "text-[#448AFF]"}>
+                  {t(`defensiveFindings.${f.messageKey}`, f.values)}
+                </span>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>

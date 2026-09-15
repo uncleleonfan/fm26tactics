@@ -4,7 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import { InteractivePlayerNode } from "./interactive-player-node";
 import { PitchBackground } from "./pitch-background";
 import { VisualizeLayer } from "./visualize-layer";
-import { DefensiveVisualizeLayer, DefensiveMetricsPanel } from "./defensive-visualize-layer";
+import { DefensiveVisualizeLayer } from "./defensive-visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
 import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
@@ -317,14 +317,12 @@ export function Pitch({
         <BallPositionControl ballZone={ballZone} onChange={onBallZoneChange} />
       )}
       {phase === "out-of-possession" && visualize && defensiveAnalysis && oppBallZone && onOppBallZoneChange && (
-        <>
-          <DefensiveMetricsPanel result={defensiveAnalysis} />
-          <BallPositionControl
-            ballZone={oppBallZone}
-            onChange={onOppBallZoneChange}
-            variant="opponent"
-          />
-        </>
+        <BallPositionControl
+          ballZone={oppBallZone}
+          onChange={onOppBallZoneChange}
+          variant="opponent"
+          findings={defensiveAnalysis.findings}
+        />
       )}
     </div>
   );
