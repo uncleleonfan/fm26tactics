@@ -51,17 +51,32 @@ export function loadSavedTactics(): SavedTactic[] {
   }
 }
 
-function persist(tactics: SavedTactic[]): boolean {
+/** Why a write failed — surfaced to analytics so "cancel" and "full disk" differ. */
+export type SaveFailure = "quota" | "unavailable";
+
+/** Returns null on success, or the reason the write was rejected. */
+function persist(tactics: SavedTactic[]): SaveFailure | null {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tactics));
-    return true;
-  } catch {
-    return false;
+    return null;
+  } catch (err) {
+    // 22 / QuotaExceededError — the browser quota (or private-mode limit) is full.
+    if (err instanceof DOMException && (err.name === "QuotaExceededError" || err.code === 22)) {
+      return "quota";
+    }
+    return "unavailable";
   }
 }
 
-/** Save the given state as a new entry (newest first). Returns null on storage failure. */
-export function saveTactic(state: TacticBoardState, name: string): SavedTactic | null {
+/**
+ * Save the given state as a new entry (newest first). The failure reason is
+ * returned rather than swallowed so the caller can report it to analytics —
+ * save failures were previously indistinguishable from the user cancelling.
+ */
+export function saveTactic(
+  state: TacticBoardState,
+  name: string
+): { entry: SavedTactic } | { error: SaveFailure } {
   const entry: SavedTactic = {
     id: makeId(),
     name: name.trim().slice(0, 60),
@@ -70,7 +85,8 @@ export function saveTactic(state: TacticBoardState, name: string): SavedTactic |
     state,
   };
   const next = [entry, ...loadSavedTactics()].slice(0, MAX_SAVED_TACTICS);
-  return persist(next) ? entry : null;
+  const error = persist(next);
+  return error ? { error } : { entry };
 }
 
 export function deleteSavedTactic(id: string): void {

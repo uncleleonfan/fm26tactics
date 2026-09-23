@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, AlertCircle, Activity, BookmarkPlus, FolderOpen } from "lucide-react";
+import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, Activity, BookmarkPlus, FolderOpen } from "lucide-react";
 import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
@@ -180,16 +180,17 @@ export default function BuilderPage() {
 
   // One-time banners: the flag is written the moment they are rendered, so a
   // user sees each one at most once even if they never close it.
-  const fmfAlert = useOneTimeBanner("fm26-builder-fmf-alert-ack");
+  //
+  // The .fmf export limitation alert used to live here as a full-screen modal
+  // on entry. It was closed by 96.5% of the users who saw it, and the same
+  // information is already carried inline by `exportNote` at the top of the
+  // Export dialog — which is exactly where a user looks for .fmf. The modal
+  // was therefore removed rather than rewritten.
   const exportNudge = useOneTimeBanner("fm26-builder-nudge-dismissed");
   // Held back while the export nudge is up so the two never stack on a first visit.
   const configNudge = useOneTimeBanner("fm26-builder-config-nudge-dismissed", {
     enabled: !exportNudge.visible && isPristineConfig,
   });
-
-  useEffect(() => {
-    if (fmfAlert.visible) trackEvent("builder_fmf_alert_shown");
-  }, [fmfAlert.visible]);
 
   useEffect(() => {
     if (exportNudge.visible) trackEvent("builder_nudge_shown");
@@ -198,11 +199,6 @@ export default function BuilderPage() {
   useEffect(() => {
     if (configNudge.visible) trackEvent("builder_config_nudge_shown");
   }, [configNudge.visible]);
-
-  const dismissFmfAlert = () => {
-    fmfAlert.dismiss();
-    trackEvent("builder_fmf_alert_dismiss");
-  };
 
   const dismissNudge = () => {
     exportNudge.dismiss();
@@ -651,31 +647,6 @@ export default function BuilderPage() {
         </>
       )}
 
-      {fmfAlert.visible && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 animate-fade-in px-4">
-          <div className="max-w-md w-full bg-background-secondary rounded-2xl border border-[#1C2436] shadow-2xl p-6 space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-amber-500/15 flex items-center justify-center shrink-0">
-                <AlertCircle className="w-5 h-5 text-amber-400" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h2 className="text-lg font-bold text-text-primary">{t("fmfAlertTitle")}</h2>
-              </div>
-            </div>
-            <div className="space-y-2.5 text-sm text-text-secondary leading-relaxed">
-              <p>{t("fmfAlertBody")}</p>
-              <p>{t("fmfAlertBody2")}</p>
-            </div>
-            <button
-              onClick={dismissFmfAlert}
-              className="w-full py-2.5 rounded-lg bg-primary text-background-primary font-semibold text-sm hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
-            >
-              {t("fmfAlertButton")}
-            </button>
-          </div>
-        </div>
-      )}
-
       {showExport && (
         <TacticExport
           state={state}
@@ -696,6 +667,7 @@ export default function BuilderPage() {
         <SaveTacticDialog
           state={state}
           defaultName={currentFormationLabel}
+          formationLabel={currentFormationLabel}
           onSaved={handleTacticSaved}
           onClose={() => setShowSaveDialog(false)}
         />

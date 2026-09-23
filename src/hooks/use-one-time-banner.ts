@@ -41,12 +41,20 @@ interface Options {
   enabled?: boolean;
   /** Delay before revealing, so the page can settle first. */
   delayMs?: number;
+  /**
+   * Auto-hide this long after revealing. Use for attention cues that carry no
+   * text to read (e.g. a pulse on a control) — the cue fades on its own, so
+   * there is nothing to dismiss and no reason to interrupt. The seen flag is
+   * still written, so it never returns.
+   */
+  durationMs?: number;
 }
 
 export function useOneTimeBanner(key: string, options: Options = {}) {
-  const { enabled = true, delayMs = 0 } = options;
+  const { enabled = true, delayMs = 0, durationMs = 0 } = options;
   const [visible, setVisible] = useState(false);
   const timerRef = useRef<number | undefined>(undefined);
+  const hideRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (!enabled || hasSeen(key)) return;
@@ -54,19 +62,27 @@ export function useOneTimeBanner(key: string, options: Options = {}) {
     const reveal = () => {
       markSeen(key);
       setVisible(true);
+      if (durationMs > 0) {
+        hideRef.current = window.setTimeout(() => setVisible(false), durationMs);
+      }
     };
 
     if (delayMs > 0) {
       timerRef.current = window.setTimeout(reveal, delayMs);
-      return () => window.clearTimeout(timerRef.current);
+    } else {
+      reveal();
     }
 
-    reveal();
-  }, [key, enabled, delayMs]);
+    return () => {
+      window.clearTimeout(timerRef.current);
+      window.clearTimeout(hideRef.current);
+    };
+  }, [key, enabled, delayMs, durationMs]);
 
   /** Hide immediately and make sure it can never come back. */
   const dismiss = useCallback(() => {
     window.clearTimeout(timerRef.current);
+    window.clearTimeout(hideRef.current);
     markSeen(key);
     setVisible(false);
   }, [key]);
