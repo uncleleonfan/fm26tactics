@@ -3,6 +3,8 @@ import { Link } from "@/i18n/routing";
 import { allGuides } from "contentlayer/generated";
 import { BookOpen, BarChart3, ClipboardCheck, Crosshair, Flame, Target, Users, ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import type { Metadata } from "next";
 import { generateSEO } from "@/lib/metadata";
 
@@ -84,12 +86,19 @@ export default async function GuidesPage({ params }: { params: { locale: string 
           </p>
         </div>
 
+        {/* Right rail wrapper (xl+): sticky 160x600 beside the guide
+            categories while they scroll. */}
+        <div className="flex gap-8 items-start">
+        <div className="flex-1 min-w-0">
         <div>
           <div className="min-w-0 space-y-10">
-            {allCategories.map((cat) => {
+            {allCategories.map((cat, catIndex) => {
               const catGuides = guidesByCategory[cat] || [];
               return (
-                <section key={cat}>
+                <div key={cat}>
+                {/* In-feed native after the 3rd category (mid-hub seam). */}
+                {catIndex === 2 && <AdsterraNativeBanner placement="list-mid" />}
+                <section>
                   <div className="flex items-center gap-3 mb-4">
                     <div className={categoryColors[cat]}>
                       {categoryIcons[cat]}
@@ -144,9 +153,22 @@ export default async function GuidesPage({ params }: { params: { locale: string 
                     </div>
                   )}
                 </section>
+                </div>
               );
             })}
           </div>
+        </div>
+        </div>
+
+        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+          <div className="sticky top-24">
+            <AdsterraSlot
+              format="160x600"
+              className=""
+              label="rail-list-160x600"
+            />
+          </div>
+        </aside>
         </div>
       </div>
     </div>

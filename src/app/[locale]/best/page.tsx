@@ -5,6 +5,8 @@ import { allTactics } from "contentlayer/generated";
 import { ArrowRight, Trophy, Star, Zap, Shield, Wrench } from "lucide-react";
 import { styleColors } from "@/lib/tactics-data";
 import { generateLocaleSEO } from "@/lib/metadata";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import Script from "next/script";
 
 // Turkish pilot L1: core list page is part of the minimal indexable set (§2b)
@@ -102,6 +104,11 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
     <>
       <Script id="best-tactics-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <main className="min-h-screen bg-background-primary">
+        {/* Right rail wrapper (xl+): sticky 160x600 beside the centered
+            content column. The sections keep their own max-w-* centering
+            inside the flex column. */}
+        <div className="max-w-6xl mx-auto xl:flex xl:items-start xl:gap-8">
+        <div className="min-w-0 flex-1">
         <section className="py-16 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-6">
@@ -126,7 +133,13 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
               const diff = difficultyConfig[tactic.difficulty];
               if (!meta) return null;
               return (
-                <div key={tactic.slug} className="glass-card group hover:border-primary/30 transition-all duration-300 relative">
+                <div key={tactic.slug}>
+                {/* In-feed native mid-list — inside the scroll path, unlike
+                    a page-bottom slot. Only while the full ranking shows. */}
+                {index === 4 && ranked.length > 5 && (
+                  <AdsterraNativeBanner placement="list-mid" />
+                )}
+                <div className="glass-card group hover:border-primary/30 transition-all duration-300 relative">
                   <Link href={`/tactics/${tactic.slug}`} className="block p-5 sm:p-6">
                     <div className="flex items-center gap-3 mb-4 flex-wrap pr-28 sm:pr-36">
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${meta.color}`}>{meta.icon}{b(meta.badgeKey)}</span>
@@ -146,6 +159,7 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
                     <Wrench className="w-3 h-3" />
                     {b("tryInBuilder")}
                   </Link>
+                </div>
                 </div>
               );
             })}
@@ -240,6 +254,18 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
             ))}
           </div>
         </section>
+        </div>
+
+        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+          <div className="sticky top-24">
+            <AdsterraSlot
+              format="160x600"
+              className=""
+              label="rail-list-160x600"
+            />
+          </div>
+        </aside>
+        </div>
       </main>
     </>
   );

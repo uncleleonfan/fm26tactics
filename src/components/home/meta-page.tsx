@@ -6,6 +6,8 @@ import { ArrowLeft, Zap, AlertTriangle, CheckCircle, Download, ExternalLink, Use
 import { trackEvent } from "@/lib/analytics";
 import { formationGuideSlugs } from "@/lib/formation-guide-slugs";
 import { playerRoles } from "@/lib/tactics-data";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import {
   topTestedTactics,
   formationInsights,
@@ -56,7 +58,9 @@ export function MetaPage() {
 
   return (
     <div className="min-h-screen bg-background-primary pt-24 pb-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      {/* Right rail wrapper (xl+): sticky 160x600 beside the content column. */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex gap-8 items-start">
+        <div className="flex-1 min-w-0 max-w-5xl">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-8 transition-colors"
@@ -219,6 +223,10 @@ export function MetaPage() {
             </div>
           </div>
         </section>
+
+        {/* In-feed native between the rankings and the roles deep-dive —
+            the natural mid-page seam of this hub. */}
+        <AdsterraNativeBanner placement="list-mid" />
 
         {/* ===== SECTION 2: Meta Player Roles ===== */}
         <section className="mb-12">
@@ -493,6 +501,17 @@ export function MetaPage() {
             </Link>
           </div>
         </div>
+        </div>
+
+        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+          <div className="sticky top-24">
+            <AdsterraSlot
+              format="160x600"
+              className=""
+              label="rail-list-160x600"
+            />
+          </div>
+        </aside>
       </div>
     </div>
   );

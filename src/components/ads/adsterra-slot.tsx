@@ -5,14 +5,14 @@ import {
   adsAllowedOnClient,
   subscribeToConsentChanges,
 } from "@/lib/consent-region";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Adsterra fixed-size banner slot.
  *
- * Deliberately limited to static banner formats. Pop-unders, Social Bar,
- * in-page push, direct links and interstitials are NOT supported here — they
- * are the formats that jeopardise an AdSense application, and later an AdSense
- * account. Background: docs/adsense-review-2026-10.md.
+ * Pop-unders, Social Bar and in-page push stay out of this component (they are
+ * page-global scripts, not slots) — see adsterra-global-script.tsx, where they
+ * are env-gated and off by default.
  *
  * The keys below are client-visible values, like the AdSense publisher id in
  * adsense-script.tsx. They can be overridden per size from the environment.
@@ -20,7 +20,8 @@ import {
  * Environment overrides (Vercel → Environment Variables, then redeploy —
  * NEXT_PUBLIC_* values are inlined at build time):
  *   NEXT_PUBLIC_ADSTERRA_ENABLED      = false      # kill switch for every slot
- *   NEXT_PUBLIC_ADSTERRA_KEY_160X600  = <key>      # "" disables this size
+ *   NEXT_PUBLIC_ADSTERRA_KEY_728X90   = <key>      # "" disables this size
+ *   NEXT_PUBLIC_ADSTERRA_KEY_320X50   = <key>
  *   NEXT_PUBLIC_ADSTERRA_HOST         = <host>     # if Adsterra moves the host
  *
  * Behaviour:
@@ -30,21 +31,25 @@ import {
  * - Injects the ad only once the slot scrolls near the viewport. Because the
  *   hidden responsive variant is `display:none`, it never intersects and never
  *   loads — one slot, two sizes, one request.
+ * - Fires trackEvent("ad_slot_view", { label }) once when the slot first
+ *   enters the viewport, so GA4 can rank placements by actual viewability.
  *
- * Sizes: article containers cap content width (max-w-3xl ≈ 720px of inner
- * width), so 728x90 does not fit in a blog article and is intentionally not
- * offered. Article slots use the native unit instead.
+ * 728x90 exists for the sticky bottom bar (adsterra-sticky.tsx), not for
+ * article bodies — article containers cap content width (max-w-3xl ≈ 720px),
+ * articles use the native unit instead.
  *
  * One banner per page: Adsterra's `atOptions` is a global that the invoke
  * script reads on load, so two slots with different keys on the same page can
- * clash.
+ * clash. The sticky component is route-aware for exactly this reason: on pages
+ * that carry a rail, its desktop tiers stand down.
  *
- * Host note: Adsterra assigns the host per banner, not per account — the
- * 160x600 uses www.highrevenueformat.com. A future size may live on a
+ * Host note: Adsterra assigns the host per banner, not per account — every
+ * current size uses www.highrevenueformat.com. A future size may live on a
  * different host; add a per-format host map here if that happens.
  */
 
 const FORMATS = {
+  "728x90": { width: 728, height: 90 },
   "468x60": { width: 468, height: 60 },
   "320x50": { width: 320, height: 50 },
   "300x250": { width: 300, height: 250 },
@@ -60,8 +65,13 @@ const KEYS: Record<AdsterraFormat, string | undefined> = {
   "160x600":
     process.env.NEXT_PUBLIC_ADSTERRA_KEY_160X600 ??
     "0a10f1179828aa089fc729009bdc247d",
+  "728x90":
+    process.env.NEXT_PUBLIC_ADSTERRA_KEY_728X90 ??
+    "c81c015459aed44f796e54a2ba56d359",
+  "320x50":
+    process.env.NEXT_PUBLIC_ADSTERRA_KEY_320X50 ??
+    "4902863f280880059e628b4f1332f04c",
   "468x60": process.env.NEXT_PUBLIC_ADSTERRA_KEY_468X60,
-  "320x50": process.env.NEXT_PUBLIC_ADSTERRA_KEY_320X50,
   "300x250": process.env.NEXT_PUBLIC_ADSTERRA_KEY_300X250,
   "160x300": process.env.NEXT_PUBLIC_ADSTERRA_KEY_160X300,
 };
@@ -70,7 +80,8 @@ const HOST =
   process.env.NEXT_PUBLIC_ADSTERRA_HOST || "www.highrevenueformat.com";
 
 /** Set NEXT_PUBLIC_ADSTERRA_ENABLED=false to switch off every Adsterra slot. */
-const ENABLED = process.env.NEXT_PUBLIC_ADSTERRA_ENABLED !== "false";
+export const ADSTERRA_ENABLED =
+  process.env.NEXT_PUBLIC_ADSTERRA_ENABLED !== "false";
 
 interface AdsterraSlotProps {
   format: AdsterraFormat;
@@ -80,9 +91,18 @@ interface AdsterraSlotProps {
    * (or "") inside a container that already handles spacing.
    */
   className?: string;
+  /**
+   * GA4 label for the ad_slot_view event (e.g. "rail-list-160x600",
+   * "sticky-728x90"). Defaults to the format, e.g. "160x600".
+   */
+  label?: string;
 }
 
-export function AdsterraSlot({ format, className = "my-8" }: AdsterraSlotProps) {
+export function AdsterraSlot({
+  format,
+  className = "my-8",
+  label,
+}: AdsterraSlotProps) {
   const size = FORMATS[format];
   const key = KEYS[format]?.trim();
   const slotRef = useRef<HTMLDivElement>(null);
@@ -121,9 +141,17 @@ export function AdsterraSlot({ format, className = "my-8" }: AdsterraSlotProps) 
     return () => observer.disconnect();
   }, []);
 
+  // inView only ever flips false → true once per mount, so this fires once.
+  useEffect(() => {
+    if (inView) {
+      trackEvent("ad_slot_view", { category: "ad", label: label ?? format });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
   useEffect(() => {
     const el = slotRef.current;
-    if (!el || !inView || !ENABLED || consentOk !== true || !key) return;
+    if (!el || !inView || !ADSTERRA_ENABLED || consentOk !== true || !key) return;
     // Adsterra keys are alphanumeric; refuse anything else rather than
     // injecting an unexpected string into an inline script.
     if (!/^[A-Za-z0-9_-]+$/.test(key)) return;
@@ -145,7 +173,7 @@ export function AdsterraSlot({ format, className = "my-8" }: AdsterraSlotProps) 
   }, [inView, key, size.width, size.height, consentOk]);
 
   // Keep the reserved box while the answer is unknown, drop it once refused.
-  if (!ENABLED || !key || consentOk === false) return null;
+  if (!ADSTERRA_ENABLED || !key || consentOk === false) return null;
 
   return (
     <div className={className}>

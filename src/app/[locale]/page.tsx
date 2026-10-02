@@ -8,6 +8,7 @@ import { TacticBuilderCTA } from "@/components/home/cta-section";
 import { LatestGuides } from "@/components/home/latest-guides";
 import { FaqSection } from "@/components/home/faq-section";
 import { ExploreSection } from "@/components/home/explore-section";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import { JsonLd } from "@/components/shared/json-ld";
 import { generateLocaleSEO } from "@/lib/metadata";
 
@@ -73,6 +74,11 @@ export default function HomePage({ params }: { params: { locale: string } }) {
       <CommunityInsights />
       <FeaturedTactics locale={params.locale} />
       <StatsSection />
+      {/* In-feed native at the mid-page seam (between the social proof stats
+          and the builder CTA). The home page is full-bleed marketing blocks,
+          so it gets no structural rail — the sticky banner covers desktop
+          with its full three tiers here instead. */}
+      <AdsterraNativeBanner placement="list-mid" />
       <TacticBuilderCTA />
       <LatestGuides locale={params.locale} />
       <ExploreSection locale={params.locale} />

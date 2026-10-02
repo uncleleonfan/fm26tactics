@@ -6,6 +6,8 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, LayoutGrid, Wrench } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   return generateLocaleSEO({
@@ -84,7 +86,9 @@ export default function FormationsPage() {
 
   return (
     <div className="min-h-screen -mt-16 pt-16">
-      <div className="max-w-5xl mx-auto px-4 py-12 space-y-8">
+      {/* Right rail wrapper (xl+): sticky 160x600 beside the content column. */}
+      <div className="max-w-6xl mx-auto px-4 py-12 flex gap-8 items-start">
+        <div className="flex-1 min-w-0 max-w-5xl space-y-8">
         {/* Hero */}
         <section className="text-center space-y-3">
           <h1 className="text-3xl sm:text-4xl font-bold">{t("heroTitle")}</h1>
@@ -95,7 +99,7 @@ export default function FormationsPage() {
 
         {/* Formation Cards */}
         <section className="space-y-6">
-          {formationPresets.map((formation) => {
+          {formationPresets.map((formation, formationIndex) => {
             const formationKey = `data.${formation.formation}`;
 
             let hasSeo = false;
@@ -122,8 +126,12 @@ export default function FormationsPage() {
             );
 
             return (
+              <div key={formation.formation}>
+              {/* In-feed native mid-list, inside the scroll path. */}
+              {formationIndex === 3 && formationPresets.length > 4 && (
+                <AdsterraNativeBanner placement="list-mid" />
+              )}
               <div
-                key={formation.formation}
                 id={formation.formation}
                 className="glass-card rounded-2xl p-6 space-y-4 scroll-mt-20"
               >
@@ -214,6 +222,7 @@ export default function FormationsPage() {
                   </Link>
                 </div>
               </div>
+              </div>
             );
           })}
         </section>
@@ -239,6 +248,17 @@ export default function FormationsPage() {
             );
           })}
         </section>
+        </div>
+
+        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+          <div className="sticky top-24">
+            <AdsterraSlot
+              format="160x600"
+              className=""
+              label="rail-list-160x600"
+            />
+          </div>
+        </aside>
       </div>
 
       <JsonLd data={faqData} />

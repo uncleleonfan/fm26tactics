@@ -3,6 +3,8 @@ import { Link } from "@/i18n/routing";
 import { Shield, Zap, Swords, Crosshair, ArrowRight, BookOpen, LayoutGrid, Wrench } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import type { PlayerRoleCategory } from "@/types/tactic";
 
 const categoryKeys: Record<string, string> = {
@@ -59,12 +61,21 @@ export default async function RolesPage({ params }: { params: { locale: string }
           <p className="text-text-secondary max-w-2xl">{rl("description")}</p>
         </div>
 
+        {/* Right rail wrapper (xl+): sticky 160x600 beside the role
+            categories while they scroll. */}
+        <div className="flex gap-8 items-start">
+        <div className="flex-1 min-w-0">
         <div>
           <div className="min-w-0">
-            {categories.map((category) => {
+            {categories.map((category, categoryIndex) => {
               const catRoles = playerRoles.filter((r) => r.category === category);
               return (
-                <section key={category} className="mb-12">
+                <div key={category} className="mb-12">
+                {/* In-feed native after the 2nd category (mid-hub seam). */}
+                {categoryIndex === 1 && (
+                  <AdsterraNativeBanner placement="list-mid" />
+                )}
+                <section>
                   <div className="flex items-center gap-3 mb-6">
                     <div className={categoryColors[category]}>{categoryIcons[category]}</div>
                     <h2 className="text-xl font-bold text-text-primary">{rl(categoryKeys[category] as any)}</h2>
@@ -130,9 +141,22 @@ export default async function RolesPage({ params }: { params: { locale: string }
                     ))}
                   </div>
                 </section>
+                </div>
               );
             })}
           </div>
+        </div>
+        </div>
+
+        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+          <div className="sticky top-24">
+            <AdsterraSlot
+              format="160x600"
+              className=""
+              label="rail-list-160x600"
+            />
+          </div>
+        </aside>
         </div>
 
         {/* Internal Links — Topical Graph */}

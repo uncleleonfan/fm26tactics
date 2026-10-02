@@ -99,3 +99,11 @@
     height: -webkit-fill-available;
   }
 }
+
+/* Adsterra sticky banner coordination — the sticky component toggles this
+   body class while a bottom bar is active, so fixed-position UI can move out
+   of its way (builder mobile FAB: 50px bar + safe gap above the default
+   bottom-4). */
+body.fm26-sticky-bottom .builder-fab {
+  bottom: 4.75rem;
+}

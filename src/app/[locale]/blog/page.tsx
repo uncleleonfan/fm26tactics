@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { allBlogs } from "contentlayer/generated";
 import { BlogList } from "@/components/blog/blog-list";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
@@ -49,7 +50,22 @@ export default async function BlogPage({ params }: { params: { locale: string } 
           </p>
         </div>
 
-        <BlogList posts={posts} />
+        {/* Right rail wrapper (xl+): sticky 160x600 beside the post grid. */}
+        <div className="flex gap-8 items-start">
+          <div className="flex-1 min-w-0">
+            <BlogList posts={posts} />
+          </div>
+
+          <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+            <div className="sticky top-24">
+              <AdsterraSlot
+                format="160x600"
+                className=""
+                label="rail-list-160x600"
+              />
+            </div>
+          </aside>
+        </div>
 
         <div className="mt-16 text-center glass-card p-8 rounded-2xl border-primary/10">
           <h2 className="text-xl font-bold text-text-primary mb-2">

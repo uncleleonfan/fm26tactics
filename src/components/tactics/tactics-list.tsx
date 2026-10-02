@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { TacticCard } from "@/components/tactics/tactic-card";
 import { TacticFilterBar } from "@/components/tactics/tactic-filter-bar";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import type { FormationType, PlayStyle } from "@/types/tactic";
 import type { Tactic } from "contentlayer/generated";
 
@@ -49,20 +50,30 @@ export function TacticsList({ tactics }: Props) {
 
         {filteredTactics.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {filteredTactics.map((tactic) => (
-              <TacticCard
-                key={tactic.slug}
-                slug={tactic.slug}
-                title={tactic.title}
-                description={tactic.description}
-                formation={tactic.formation as FormationType}
-                style={tactic.style as PlayStyle}
-                difficulty={
-                  tactic.difficulty as "beginner" | "intermediate" | "advanced"
-                }
-                publishedAt={tactic.publishedAt}
-                coverImage={tactic.coverImage}
-              />
+            {filteredTactics.map((tactic, index) => (
+              <div key={tactic.slug} className="contents">
+                {/* In-feed native after the 3rd row (6 cards) — where the
+                    scroll path actually crosses it, unlike a page-bottom
+                    slot. Renders only while enough results are listed. */}
+                {index === 5 && filteredTactics.length > 6 && (
+                  <AdsterraNativeBanner
+                    placement="list-mid"
+                    className="col-span-full md:col-span-full"
+                  />
+                )}
+                <TacticCard
+                  slug={tactic.slug}
+                  title={tactic.title}
+                  description={tactic.description}
+                  formation={tactic.formation as FormationType}
+                  style={tactic.style as PlayStyle}
+                  difficulty={
+                    tactic.difficulty as "beginner" | "intermediate" | "advanced"
+                  }
+                  publishedAt={tactic.publishedAt}
+                  coverImage={tactic.coverImage}
+                />
+              </div>
             ))}
           </div>
         ) : (

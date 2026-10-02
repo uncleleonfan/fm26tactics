@@ -188,6 +188,9 @@ NEXT_PUBLIC_ADSTERRA_NATIVE_KEY   = <key>
 | `/blog/[slug]` | Native | 正文与 FAQ 之后、相关阅读之前 | 全部 |
 | `/guides/[slug]` | Native | 同上 | 全部 |
 | `/tactics/[slug]` | Native | 同上 | 全部 |
+| `/tactics/[slug]` | 160×600 固定 | **右侧粘性轨道**（`xl:grid-cols-[minmax(0,1fr)_160px]`），整篇文章期间常驻可见 | 仅 xl+（≥1280px） |
+
+关于右侧轨道（2026-10-02 追加）：文末的 native 可见度低（用户滚不到底），因此为战术页加了常驻右轨。**复用角色页同一个 160×600 key 是安全的**——它是不同页面的请求，不存在同页 `atOptions` 冲突。右轨仅 xl+ 显示，文末 native 保留以覆盖移动端与 1024–1280 视口（两者不同时可见：native 仍需滚入视口才加载）。
 
 说明：
 

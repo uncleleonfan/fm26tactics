@@ -5,6 +5,7 @@ import {
   adsAllowedOnClient,
   subscribeToConsentChanges,
 } from "@/lib/consent-region";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Adsterra Native Banner slot.
@@ -55,13 +56,27 @@ const ENABLED = process.env.NEXT_PUBLIC_ADSTERRA_ENABLED !== "false";
 // Guards against React re-mounts injecting the same script twice.
 const injected = new Set<string>();
 
+/**
+ * Where the unit sits on the page. Only used as the GA4 ad_slot_view label
+ * (and for documentation) — the container key is shared, so there can still be
+ * only ONE native unit per page.
+ */
+export type NativePlacement =
+  | "article-end"
+  | "article-mid"
+  | "list-mid"
+  | "list";
+
 interface AdsterraNativeBannerProps {
   /** Outer wrapper classes. Defaults to "my-8". */
   className?: string;
+  /** Slot position label for GA4 viewability reporting. */
+  placement?: NativePlacement;
 }
 
 export function AdsterraNativeBanner({
   className = "my-8",
+  placement = "article-end",
 }: AdsterraNativeBannerProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -98,6 +113,14 @@ export function AdsterraNativeBanner({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  // inView only ever flips false → true once per mount, so this fires once.
+  useEffect(() => {
+    if (inView) {
+      trackEvent("ad_slot_view", { category: "ad", label: placement });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   useEffect(() => {
     if (!inView || !ENABLED || consentOk !== true || !HOST || !KEY) return;

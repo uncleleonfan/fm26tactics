@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Clock, Tag } from "lucide-react";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import type { Blog } from "contentlayer/generated";
 
 const categoryColors: Record<string, string> = {
@@ -46,8 +47,16 @@ export function BlogList({ posts }: BlogListProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {sorted.map((post, i) => (
+        <div key={post.slug} className="contents">
+        {/* In-feed native after ~3 rows of cards — inside the scroll path,
+            unlike a page-bottom slot. */}
+        {i === 4 && sorted.length > 5 && (
+          <AdsterraNativeBanner
+            placement="list-mid"
+            className="col-span-full"
+          />
+        )}
         <Link
-          key={post.slug}
           href={`/blog/${post.slug}`}
           className={`glass-card p-6 group hover:border-primary/30 transition-all duration-300 ${
             i === 0 ? "md:col-span-2" : ""
@@ -112,6 +121,7 @@ export function BlogList({ posts }: BlogListProps) {
             </span>
           </div>
         </Link>
+        </div>
       ))}
     </div>
   );

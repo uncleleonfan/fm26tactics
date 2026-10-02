@@ -11,6 +11,8 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { DeferredSpeedInsights } from "@/components/shared/deferred-speed-insights";
 import { AdSenseScript } from "@/components/ads/adsense-script";
+import { AdsterraSticky } from "@/components/ads/adsterra-sticky";
+import { AdsterraGlobalScript } from "@/components/ads/adsterra-global-script";
 import { ConsentBanner } from "@/components/consent/consent-banner";
 import { siteConfig, websiteJsonLd } from "@/lib/metadata";
 import { routing } from "@/i18n/routing";
@@ -141,6 +143,12 @@ export default async function LocaleLayout({
           <MainWrapper>{children}</MainWrapper>
           <Footer />
           <ConsentBanner />
+          {/* Route-aware sticky banner (bottom bar / wide-viewport side rail).
+              Renders nothing on no-ad pages and in consent regions. */}
+          <AdsterraSticky />
+          {/* Optional Adsterra global formats (popunder/social bar/in-page
+              push). Env-gated, OFF by default — see the component header. */}
+          <AdsterraGlobalScript />
         </NextIntlClientProvider>
       </body>
     </html>

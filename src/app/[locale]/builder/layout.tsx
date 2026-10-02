@@ -3,6 +3,7 @@ import { generateLocaleSEO } from "@/lib/metadata";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   return generateLocaleSEO({
@@ -117,6 +118,10 @@ export default function BuilderLayout({ children }: { children: React.ReactNode 
             image you can recreate in-game.
           </p>
         </div>
+
+        {/* The only native unit on this route — sits between the intro copy
+            and the how-to list, where scroll-readers actually see it. */}
+        <AdsterraNativeBanner placement="list" className="my-10" />
 
         <div>
           <h3 className="text-xl font-bold mb-4">How to Use the FM26 Tactic Builder</h3>

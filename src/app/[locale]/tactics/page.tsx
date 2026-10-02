@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { TacticsList } from "@/components/tactics/tactics-list";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
 import { JsonLd } from "@/components/shared/json-ld";
 import { allTactics } from "contentlayer/generated";
 import type { Tactic } from "contentlayer/generated";
@@ -135,6 +136,13 @@ export default async function TacticsListPage({
           className="mb-6"
         />
 
+        {/* Structural right rail (xl+): sticky 160x600 that stays visible
+            while the list scrolls. The adsterra-sticky banner's desktop tiers
+            stand down on this page from 1280px up (same 160x600 key — one
+            fixed banner per viewport). EEA/UK without consent: slot renders
+            null and the aside collapses to nothing. */}
+        <div className="flex gap-8 items-start">
+          <div className="flex-1 min-w-0">
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3">
             <span className="gradient-text">{tc("h1")}</span>
@@ -328,6 +336,18 @@ export default async function TacticsListPage({
           faqs={faqPairsEn}
           locale={locale}
         />
+          </div>
+
+          <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
+            <div className="sticky top-24">
+              <AdsterraSlot
+                format="160x600"
+                className=""
+                label="rail-list-160x600"
+              />
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );

@@ -10,7 +10,8 @@ import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedTactics } from "@/components/shared/related-tactics";
 import { FormationDiagram } from "@/components/tactics/formation-diagram";
-import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
+import { ArticleMidAd } from "@/components/ads/article-mid-ad";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
 import { encodeTacticSetupParam } from "@/hooks/use-tactic-builder";
@@ -119,7 +120,7 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
           className="mb-8"
         />
 
-        <div>
+        <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_160px] xl:gap-10">
           <div className="min-w-0">
             <div className="max-w-4xl">
               {/* Back link */}
@@ -223,8 +224,11 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
                 <MDXContent components={mdxComponents} />
               </article>
 
-              {/* Ad slot — end of article. Native unit, see adsterra-native-banner.tsx */}
-              <AdsterraNativeBanner />
+              {/* Native ad — inserted mid-article (before the 2nd h2) via
+                  post-mount DOM insertion; falls back to end-of-article when
+                  the post has fewer than 2 h2 sections. key forces re-run per
+                  post on client-side navigation. See article-mid-ad.tsx */}
+              <ArticleMidAd key={tactic._id} />
 
               {/* Related Tactics — internal linking for SEO */}
               <RelatedTactics
@@ -260,6 +264,18 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
 
             </div>
           </div>
+
+          {/*
+            Right rail — desktop only. A sticky 160x600 stays in view for the
+            whole article, unlike the end-of-article native unit. It reuses the
+            Adsterra key from the roles sidebar because that is a different
+            page, so there is no clash. See docs/adsense-review-2026-10.md.
+          */}
+          <aside className="hidden xl:block">
+            <div className="sticky top-24">
+              <AdsterraSlot format="160x600" />
+            </div>
+          </aside>
         </div>
       </div>
     </div>
