@@ -8,6 +8,7 @@ import { TryInBuilderButton } from "@/components/shared/try-in-builder-button";
 import { TacticBoardCta } from "@/components/shared/tactic-board-cta";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { FormationDiagram } from "@/components/tactics/formation-diagram";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import type { Blog } from "contentlayer/generated";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
@@ -176,6 +177,9 @@ export function BlogDetail({ post }: BlogDetailProps) {
           </div>
         </section>
       )}
+
+      {/* Ad slot — end of article. Native unit, see adsterra-native-banner.tsx */}
+      <AdsterraNativeBanner />
 
       {/* Related Links */}
       {(post.relatedTactic || post.relatedGuide) && (

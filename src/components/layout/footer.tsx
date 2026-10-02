@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { CookieSettingsButton } from "@/components/consent/consent-banner";
 
 
 // ── Footer link groups type ──────────────────────────────────────────────
@@ -91,7 +92,10 @@ export function Footer() {
           <p className="text-xs text-text-muted">
             &copy; {new Date().getFullYear()} FM26 Tactics. {t("allRightsReserved")}
           </p>
-          <p className="text-xs text-text-muted">www.fm26tactics.com</p>
+          <div className="flex items-center gap-4">
+            <CookieSettingsButton />
+            <p className="text-xs text-text-muted">www.fm26tactics.com</p>
+          </div>
         </div>
       </div>
     </footer>

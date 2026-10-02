@@ -10,6 +10,7 @@ import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedTactics } from "@/components/shared/related-tactics";
 import { FormationDiagram } from "@/components/tactics/formation-diagram";
+import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import { styleLabels, styleColors } from "@/lib/tactics-data";
 import { tacticCopyTexts } from "@/lib/tactic-copy-texts";
 import { encodeTacticSetupParam } from "@/hooks/use-tactic-builder";
@@ -221,6 +222,9 @@ export function TacticDetailPage({ tactic, formationDiagram }: TacticDetailPageP
               <article className="prose-custom">
                 <MDXContent components={mdxComponents} />
               </article>
+
+              {/* Ad slot — end of article. Native unit, see adsterra-native-banner.tsx */}
+              <AdsterraNativeBanner />
 
               {/* Related Tactics — internal linking for SEO */}
               <RelatedTactics

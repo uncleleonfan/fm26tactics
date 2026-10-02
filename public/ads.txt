@@ -1,1 +1,8 @@
 google.com, pub-2798522702383698, DIRECT, f08c47fec0942fa0
+
+# Adsterra ads.txt lines, if any, go below this line.
+# Only add them when the Adsterra dashboard gives you the exact lines
+# (format: <exchange domain>, <publisher id>, DIRECT). If it does not,
+# leave this file alone: ads.txt only affects programmatic demand, wrong
+# entries are worse than none, and Adsterra ads serve without it.
+# See docs/adsense-review-2026-10.md section 8.

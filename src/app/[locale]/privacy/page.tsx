@@ -30,7 +30,7 @@ This information is collected through standard web server logs and analytics too
 
 - **Essential Cookies**: Required for core site functionality, such as maintaining your theme preference (dark mode). These do not track you across other websites.
 - **Analytics Cookies** (optional): We may use anonymized analytics to understand how visitors interact with our content. No personally identifiable information is collected.
-- **Advertising Cookies**: Google and its partners may use cookies to serve ads based on your prior visits to this website or other websites. See the Advertising section below for opt-out options.
+- **Advertising Cookies**: Our advertising partners may use cookies and similar technologies to serve ads based on your prior visits to this and other websites. See the Advertising section below for the current partners and opt-out options.
 
 You can disable cookies in your browser settings at any time. The site will continue to function normally.`,
   },
@@ -46,19 +46,24 @@ You can clear this data at any time by clearing your browser's site data for fm2
 
 - **Vercel**: Hosting platform. Vercel may collect standard server logs including IP addresses and request data as part of their infrastructure operation. See Vercel's privacy policy for details.
 - **Google AdSense**: Advertising partner. Google uses cookies (including the DoubleClick DART cookie) to serve ads based on your visits to this and other websites. See the Advertising section below for details and opt-out options.
+- **Adsterra**: Advertising partner used to serve display banners. Adsterra and its demand partners may set cookies or similar identifiers to serve and measure advertising. See the Advertising section below.
 - **Google Analytics**: We use anonymized analytics to understand aggregate site usage and improve our content.
 - **External Links**: Our content links to third-party websites (FM-Arena, FM Scout, Football Manager Blog, etc.). We are not responsible for the privacy practices of those sites.`,
   },
   {
     title: "Advertising and Your Choices",
-    content: `FM26 Tactics is a free resource supported by advertising. We use Google AdSense to display ads:
+    content: `FM26 Tactics is a free resource supported by advertising. Ads on this site are served by third-party advertising partners, currently Google AdSense and Adsterra:
 
 - Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites.
 - Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the Internet.
+- Other partners, including Adsterra, may also use cookies or similar identifiers to serve and measure display advertising on this site.
+- Where local law requires prior consent for advertising cookies — for example in the EEA and the United Kingdom — we ask before setting them. If you decline, no advertising script is loaded and no advertising cookies are set.
+- You can change that choice at any time with the "Cookie settings" link in the footer.
+- We only place static display banners inside our content. We do not use pop-up, pop-under, push notification or automatic redirect advertising formats.
 - You may opt out of personalized advertising by visiting Google Ads Settings (www.google.com/settings/ads).
 - You may also opt out of personalized advertising from many third-party vendors at www.aboutads.info/choices or www.youronlinechoices.eu (EU).
 
-Opting out of personalized advertising does not remove ads; it only makes the ads you see less relevant to your interests.`,
+Opting out of personalized advertising does not remove ads; it only makes the ads you see less relevant to your interests. Advertising partners may still show contextual, non-personalized ads.`,
   },
   {
     title: "Data Security",
@@ -88,7 +93,7 @@ To exercise any of these rights, contact us at the email address below.`,
     title: "Changes to This Policy",
     content: `We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically.
 
-Last updated: September 7, 2026.`,
+Last updated: October 2, 2026.`,
   },
 ];
 

@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { DeferredSpeedInsights } from "@/components/shared/deferred-speed-insights";
 import { AdSenseScript } from "@/components/ads/adsense-script";
+import { ConsentBanner } from "@/components/consent/consent-banner";
 import { siteConfig, websiteJsonLd } from "@/lib/metadata";
 import { routing } from "@/i18n/routing";
 
@@ -139,6 +140,7 @@ export default async function LocaleLayout({
           <Header />
           <MainWrapper>{children}</MainWrapper>
           <Footer />
+          <ConsentBanner />
         </NextIntlClientProvider>
       </body>
     </html>

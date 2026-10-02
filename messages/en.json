@@ -166,6 +166,14 @@
       "close": "Close"
     }
   },
+  "consent": {
+    "title": "Advertising cookies",
+    "body": "This site is supported by ads. With your permission, our advertising partners may set cookies to show and measure advertising. You can change this choice at any time.",
+    "accept": "Accept ads",
+    "reject": "Reject",
+    "privacy": "Privacy policy",
+    "settings": "Cookie settings"
+  },
   "blog": {
     "title": "FM26 Tactics Blog",
     "description": "In-depth Football Manager 2026 guides, tactics, and meta analysis to help you dominate the pitch.",

@@ -22,6 +22,7 @@ import { roleDepth } from "@/lib/role-depth";
 import { attributeDescriptions } from "@/lib/attribute-descriptions";
 import { roleWonderkids } from "@/lib/role-wonderkids";
 import { generateSEO } from "@/lib/metadata";
+import { AdsterraSlot } from "@/components/ads/adsterra-slot";
 import type { PlayerDuty } from "@/types/tactic";
 
 const RoleRadarChart = dynamic(
@@ -659,6 +660,10 @@ export default async function RoleDetailPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Ad slot — desktop only. Placed above the sticky builder panel so
+                the two never overlap while scrolling. See adsterra-slot.tsx */}
+            <AdsterraSlot format="160x600" className="hidden lg:block" />
+
             {/* FM26 Tactic Builder CTA */}
             <div className="glass-panel p-5 sticky top-24">
               <h3 className="text-sm font-semibold mb-3">{rl("tryThisRole")}</h3>
