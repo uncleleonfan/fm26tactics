@@ -87,8 +87,13 @@ export function AdsterraSlot({ format, className = "my-8" }: AdsterraSlotProps) 
   const key = KEYS[format]?.trim();
   const slotRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  // Optimistic for the server render; the effect resolves the real answer.
-  const [consentOk, setConsentOk] = useState(true);
+  /**
+   * null = not resolved yet. It must NOT start as true: injecting optimistically
+   * and then resolving to "blocked" makes React run the effect cleanup, which
+   * removes the still-loading script and aborts the request in the browser
+   * (net::ERR_ABORTED).
+   */
+  const [consentOk, setConsentOk] = useState<boolean | null>(null);
 
   useEffect(() => {
     const update = () => setConsentOk(adsAllowedOnClient());
@@ -118,7 +123,7 @@ export function AdsterraSlot({ format, className = "my-8" }: AdsterraSlotProps) 
 
   useEffect(() => {
     const el = slotRef.current;
-    if (!el || !inView || !ENABLED || !consentOk || !key) return;
+    if (!el || !inView || !ENABLED || consentOk !== true || !key) return;
     // Adsterra keys are alphanumeric; refuse anything else rather than
     // injecting an unexpected string into an inline script.
     if (!/^[A-Za-z0-9_-]+$/.test(key)) return;
@@ -139,12 +144,20 @@ export function AdsterraSlot({ format, className = "my-8" }: AdsterraSlotProps) 
     };
   }, [inView, key, size.width, size.height, consentOk]);
 
-  if (!ENABLED || !key || !consentOk) return null;
+  // Keep the reserved box while the answer is unknown, drop it once refused.
+  if (!ENABLED || !key || consentOk === false) return null;
 
   return (
     <div className={className}>
+      {/*
+        The id is required: Adsterra's invoke.js looks up
+        `document.getElementById(atOptions.container || "container-" + key)`
+        and appends the ad element into that node. An anonymous placeholder
+        gives it nothing to fill.
+      */}
       <div
         ref={slotRef}
+        id={`container-${key}`}
         className="mx-auto"
         style={{ width: size.width, height: size.height }}
         aria-hidden="true"

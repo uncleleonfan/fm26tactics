@@ -65,8 +65,13 @@ export function AdsterraNativeBanner({
 }: AdsterraNativeBannerProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  // Optimistic for the server render; the effect resolves the real answer.
-  const [consentOk, setConsentOk] = useState(true);
+  /**
+   * null = not resolved yet. It must NOT start as true: injecting optimistically
+   * and then resolving to "blocked" makes React run the effect cleanup, which
+   * removes the still-loading script and aborts the request in the browser
+   * (net::ERR_ABORTED).
+   */
+  const [consentOk, setConsentOk] = useState<boolean | null>(null);
 
   useEffect(() => {
     const update = () => setConsentOk(adsAllowedOnClient());
@@ -95,7 +100,7 @@ export function AdsterraNativeBanner({
   }, []);
 
   useEffect(() => {
-    if (!inView || !ENABLED || !consentOk || !HOST || !KEY) return;
+    if (!inView || !ENABLED || consentOk !== true || !HOST || !KEY) return;
     // Refuse unexpected values rather than building a script URL out of them.
     if (!/^[A-Za-z0-9.-]+$/.test(HOST) || !/^[A-Za-z0-9_-]+$/.test(KEY)) return;
     // The container div must already be in the DOM for the script to fill it.
@@ -119,7 +124,8 @@ export function AdsterraNativeBanner({
     };
   }, [inView, consentOk]);
 
-  if (!ENABLED || !HOST || !KEY || !consentOk) return null;
+  // Keep the reserved box while the answer is unknown, drop it once refused.
+  if (!ENABLED || !HOST || !KEY || consentOk === false) return null;
 
   return (
     <div ref={wrapRef} className={className}>

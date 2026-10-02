@@ -247,6 +247,29 @@ NEXT_PUBLIC_ADSTERRA_NATIVE_KEY   = <key>
 - 上线后自测（非 EEA）：横幅不应出现，DevTools 可见 `invoke.js`
 - 测 EEA 分支：临时把 `needsAdConsent()` 改为恒 `true` 推到 preview —— 应出现横幅；点 Accept 后 `invoke.js` 立即加载；点 Reject 后始终不加载。验完改回（Vercel 无法覆盖 geo）
 
+### 8.5 线上排查记录（2026-10-02，广告不显示）
+
+用户反馈"线上广告没出来"。逐层排查结论：
+
+| 检查 | 手段 | 结果 |
+|---|---|---|
+| 部署版本 | 抓线上 HTML + 客户端 chunk | 广告位与同意逻辑**都已上线**（native 容器 id 在 HTML 中；页面 chunk 含 `pl30662924`；layout chunk 含 `div[role=dialog]` + `bottom-0` + `z-50`） |
+| 访客区域 | 看响应头 | `Set-Cookie: fm26-ad-consent-region=1` → **测试者本身位于 EEA/UK**，广告被同意门控挡住，必须先点 Accept |
+| key 是否有效 | `curl invoke.js` | 无 Referer → 200 但 **0 字节**；带 Referer + 浏览器 UA → **约 50KB**。<br>**结论：空响应是防爬保护，不代表 key 失效，排查时必须带 Referer。** |
+| 注入方式是否可行 | 分析脚本内容 | 两个脚本**都不用 `document.write`**，动态注入可行 |
+| 落点元素 | 分析脚本反混淆片段 | 两个脚本都按 `document.getElementById(atOptions.container \|\| "container-" + key)` 找落点并 `appendChild` → **容器必须带该 id** |
+
+**发现的 bug 1**：`AdsterraSlot` 原先只渲染匿名占位 div，没有 id，脚本无处 append（native 组件一直是对的，它渲染的就是 `container-<key>`）。已修复：固定尺寸位现在渲染 `id="container-<key>"`。
+
+**发现的 bug 2（ERR_ABORTED 的根源）**：两个组件的同意状态原先初始化为"乐观允许"（`useState(true)`），于是 EEA/UK 访客刷新页面时，注入副作用会**先**把脚本插入 DOM，紧接着同意检查解析为"未同意"→ React 执行清理 → 移除仍在加载的 script → **浏览器报 `net::ERR_ABORTED`**。已改为三态（`null` = 未决）：
+- 未决时不注入、但保留 SSR 预留的占位盒子（避免非 EEA 用户的 CLS）
+- 明确拒绝时才移除占位
+- 只有明确允许才注入
+
+**未解释的部分**：同机器、同 IP、同 UA/Referer 用 curl 拉 `invoke.js` 一律 200（约 50KB），而浏览器端返回 **403 Forbidden**。因此 403 不由 key / host / 区域 / 同意状态引起，需要看浏览器端 403 的**响应体与响应头**（可能是 Adsterra 侧的 bot 防护，或浏览器扩展/代理造成的链路差异）。待补。
+
+**排查顺序（下次照此走）**：① 响应头里的区域 cookie → ② 同意横幅是否出现 → ③ 广告位容器 id 是否在 HTML 中 → ④ chunk 内是否含 host/key → ⑤ 带 Referer 拉 invoke.js。
+
 ### 9.5 测试
 
 `src/lib/__tests__/consent-region.test.ts`（15 项）：EEA 名单边界、区域 cookie 解析、`adsAllowed` 的四种组合（区域外 / 区域内未决定 / 已同意 / 已拒绝）、提示条件、服务端 fail-closed。
