@@ -1,68 +1,97 @@
 ---
 author: "FM26 Tactics Team"
 title: "De Zerbi Tactics FM26: Recreating Brighton's Build-Up Machine"
-description: "How to recreate Roberto De Zerbi's tactical approach in FM26. Central progression, baiting the press, and the 4-2-4 buildup shape that changed modern football — adapted for Football Manager 2026."
+description: "How De Zerbi's build-up actually works in FM26: the dropping pivot, the deliberately slow first pass, third-man runs and the role setup that still works against a low block. Includes what breaks the system and when to pick something else."
 category: "tactics"
 tags:
   - "de zerbi tactics fm26"
-  - "de zerbi fm26"
-  - "fm26 build up"
+  - "fm26 build up play"
   - "fm26 possession tactics"
-  - "brighton tactics fm26"
-  - "fm26 modern tactics"
+  - "fm26 dropping defensive midfielder"
   - "fm26 tactical replication"
 publishedAt: "2026-08-08"
-readTime: 6
+updatedAt: "2026-10-02"
+readTime: 14
 relatedTactic: "4-3-3-tiki-taka"
+faq:
+  - question: "Does De Zerbi's system work in FM26?"
+    answer: "It works, but only with the right squad. The system needs centre-backs who can receive the ball under pressure and a pivot comfortable playing with his back to goal. Without those two things the build-up stalls in your own third and you concede from turnovers instead of creating chances."
+  - question: "Which FM26 role plays the De Zerbi pivot?"
+    answer: "The Dropping Defensive Midfielder is the closest fit. Its description is the job De Zerbi asks for: dropping into the back line when the team is pressed to form a temporary back three and play through the press. A Deep-Lying Playmaker on Defend works as a second choice if you want more passing range and less screening."
+  - question: "Why do I have 70% possession but no chances in FM26?"
+    answer: "Because the opponent never took the bait. The slow build-up only creates space if the other team steps up to press you. Against a passive low block, keep the short passing but widen the shape, push one full-back higher and stop waiting for a press that is not coming."
+  - question: "Do I need a sweeper keeper for this tactic?"
+    answer: "Not strictly, but you need a keeper who can pass. The goalkeeper is part of the build-up shape and will be asked to make the first pass of most attacks. If your keeper has poor Composure and Passing, either accept longer distribution or use a keeper with those attributes and drop the line slightly."
 ---
 
-## De Zerbi Tactics in FM26: The Philosophy
+Most possession tactics in Football Manager ask one question: can your players pass well enough? De Zerbi's asks a second one. Can they pass well enough while standing still and waiting for a striker to arrive?
 
-Roberto De Zerbi's tactical approach isn't about a formation — it's about a **build-up philosophy**. The key principles:
+That waiting is the system. The narrow shape, the inverted full-back, the pivot slipping into the back line — all of it exists to make the opposition come and take the ball, so that the space they leave behind is the space your next pass travels through. Everything De Zerbi built at Brighton comes back to that one behaviour, and because it is a behaviour rather than a formation, it survives a change of shape, a change of club and a change of division.
 
-1. **Draw the press deep** — Invite pressure in your own third to create space higher up
-2. **Central overloads** — Pack the middle to progress through the thirds
-3. **Third-man runs** — Use decoy movement to free the next pass
-4. **Striker drops deep** — Creates a 4v3 or 5v4 in midfield build-up
+It is also the reason this is the hardest system on this site to copy. A gegenpress works with fast, hard-working players. This works with calm ones, and calm is expensive.
 
----
+## The first pass is deliberately slow
 
-## The De Zerbi Formation in FM26
+Watch a De Zerbi side build up and the first thing you notice is how little happens. The centre-back takes a touch, looks up, takes another touch. Nobody is sprinting. The opposition's front line starts to creep forward because standing still while a centre-back holds the ball feels wrong.
+
+That creep is the point.
+
+In FM26 this shows up as a fairly literal chain of events. Your centre-back receives from the keeper, your pivot drops into the space between the centre-backs, the opposition's forwards step up to close the centre-back down, and the passing lane into the pivot — or straight over the top of the stepping line into the number 8 — opens as they move. You are not trying to beat the press with skill. You are trying to make it commit, then pass through the gap it created.
+
+Three things have to be true for this to work:
+
+1. Your centre-backs must be comfortable receiving with a striker closing them down.
+2. Somebody must be dropping into the right space at the right moment.
+3. Your midfielders must already be positioned where the press is not.
+
+Get one of the three wrong and the build-up does not just get worse, it becomes a goal against. Which is why this tactic punishes weak squads far more than a direct system does.
+
+## The shape: a 4-3-3 that becomes a 3-2-5
+
+The base is a 4-3-3. In possession it is closer to a 3-box-3: the pivot drops between the centre-backs to make a back three, both number 8s push into the half-spaces, and the front five spreads across the pitch. Out of possession it collapses back toward the original 4-3-3.
 
 <TacticBoardCta
   formation="4-3-3"
-  caption="The De Zerbi build-up shape from a 4-3-3 base"
+  caption="The FM26 build-up shape: keeper plus two centre-backs plus the dropping pivot, with both 8s ahead of the ball"
   setup={[
     { roleId: "sweeper-keeper", duty: "support" },
-    { roleId: "full-back", duty: "support" },
+    { roleId: "inverted-full-back", duty: "support" },
     { roleId: "ball-playing-defender", duty: "defend" },
     { roleId: "ball-playing-defender", duty: "defend" },
     { roleId: "full-back", duty: "support" },
-    { roleId: "deep-lying-playmaker", duty: "support" },
-    { roleId: "advanced-playmaker", duty: "support" },
     { roleId: "channel-midfielder", duty: "support" },
+    { roleId: "dropping-defensive-midfielder", duty: "defend" },
+    { roleId: "advanced-playmaker", duty: "support" },
     { roleId: "inside-forward", duty: "support" },
     { roleId: "centre-forward", duty: "support" },
     { roleId: "inside-forward", duty: "attack" },
   ]}
 />
 
-**This is effectively a 4-2-3-1 that morphs into a 4-2-4 in possession.** Here's why each role matters:
+Slot by slot, the parts that actually matter:
 
-| Position | Role | De Zerbi Logic |
+| Slot | Role | What it does in this system |
 |---|---|---|
-| GK | **Sweeper Keeper (Support)** | Short distribution, plays as 11th outfield player |
-| CDs | **Ball-Playing Defenders** | Crucial for drawing the press — must have Composure 14+ |
-| Fullbacks | **Wing-Backs (Support)** | Stay wide in buildup, then underlap in final third |
-| DM Double-Pivot | **DLP(S) + BBM(S)** | The DLP dictates tempo; BBM makes third-man runs |
-| Wide Forwards | **IF(A) left, IW(S) right** | Asymmetric — IF cuts inside, IW stays wide for switches |
-| Striker | **Deep-Lying Forward (Attack)** | Drops into midfield to create overload, then spins in behind |
+| GK | Sweeper Keeper (Support) | Makes the first pass and joins the build-up as an extra man behind the ball |
+| LB | Inverted Full-Back (Support) | Steps into midfield so the trap has a spare receiver inside, not on the touchline |
+| CBs | Ball-Playing Defender (Defend) x2 | The press bait. They hold the ball, invite the step, then release |
+| RB | Full-Back (Support) | Stays wider and deeper than the left — the escape valve if the middle closes |
+| Left 8 | Channel Midfielder (Support) | Occupies the half-space the pressing winger vacates |
+| Pivot | Dropping Defensive Midfielder (Defend) | The mechanism. Drops into the back line when pressed and forms the temporary three |
+| Right 8 | Advanced Playmaker (Support) | Between the lines, receiving on the half-turn where the opposition midfield cannot follow |
+| LW | Inside Forward (Support) | Holds width until the ball enters the final third, then attacks the box |
+| ST | Centre Forward (Support) | Drops to link, spins in behind. In FM26 the drops are what create the overload |
+| RW | Inside Forward (Attack) | The finisher from the right, arriving late at the back post |
 
----
+Two notes on that setup, because they are where most copies go wrong.
 
-## Team Instructions: The De Zerbi Build-Up
+The asymmetric full-backs are deliberate. If both full-backs invert you have nobody holding the pitch wide, and the opposition full-backs can squeeze the middle without any cost. One inverting, one staying is the version that keeps the trap honest.
 
-### In Possession — The Most Important Section
+The Dropping Defensive Midfielder is not decoration. Its description — falling into the back line when the team is pressed to create a temporary back three — is almost a word-for-word description of what De Zerbi asks a pivot to do. If you set a defensively-minded midfielder there and leave him, you get a normal 4-3-3 holding midfielder and none of the bait.
+
+## Team instructions, and the two that do the real work
+
+In possession:
 
 ```
 Attacking Width: FAIRLY NARROW
@@ -70,129 +99,115 @@ Approach Play: PLAY OUT OF DEFENCE
 Passing Directness: SHORT PASSING
 Tempo: SLIGHTLY LOWER
 Time Wasting: NEVER
-Play For Set Pieces: ✅ (for restarts and tactical resets)
-
+Play For Set Pieces: ON
 Overlap/Underlap: UNDERLAP BOTH SIDES
 Focus Play: THROUGH THE MIDDLE
 Dribbling: RUN AT DEFENCE
 ```
 
-**Why narrow + underlap:** De Zerbi's teams overload the center to bait the press, then release the wing-backs into the vacated wide spaces. The narrow attacking width forces opponents to compact centrally — exactly where the overload is.
+Fairly Narrow and Through The Middle look counter-intuitive next to a system that eventually attacks with five players, but they are doing the same job as the slow first pass: forcing the opposition to defend the centre, which is where the overload is. The width arrives later, when the full-back and the wide forwards spread out after the bait has been taken.
 
-### In Transition
+Run At Defence is worth arguing about. It looks reckless next to a control system, but De Zerbi's players do carry the ball into pressure on purpose — a dribbler draws a second defender, and that is another man out of position. If your side is giving the ball away on the halfway line, turn this off before you change anything else.
+
+In transition:
 
 ```
 When possession is lost: COUNTER-PRESS
 When possession is won: HOLD SHAPE
-Goalkeeper: ROLL IT OUT → CENTRE-BACKS
+Goalkeeper Distribution: TAKE SHORT KICKS
 ```
 
-**Key detail:** "Hold Shape" on winning possession is deliberate. De Zerbi doesn't want chaotic counters — he wants to restart the controlled build-up from the back.
+Hold Shape is the instruction people skip past, and it is the one that makes the tactic recognisable. Winning the ball back and immediately launching a counter is not De Zerbi. Winning it back and starting the build-up again is. In practice this costs you a few promising breaks per season and buys you far more control, which is the trade the system is designed around.
 
-### Out of Possession
+Out of possession:
 
 ```
 Trigger Press: MUCH MORE OFTEN
-Prevent Short GK Distribution: ✅
+Prevent Short GK Distribution: ON
 Defensive Line: HIGHER
-Press Line: MUCH HIGHER
-Trigger Press: Tight Marking off ✅ (maintain shape)
+Line of Engagement: MUCH HIGHER
 Tackling: STAY ON FEET
 ```
 
-The high line is non-negotiable. De Zerbi's Brighton played with the highest defensive line in the Premier League. In FM26, you need CBs with **Pace 14+** and **Anticipation 15+** to make this work.
+The high line is not optional, because the space between your midfield and your defence is where the third-man passes go. If your centre-backs cannot recover over 20 metres, this is the wrong tactic for your squad, and you will find that out in the first away game against a fast striker.
 
----
+<Callout type="tip" title="Stay On Feet is a build-up instruction, not a defensive one">
 
-## Player Requirements for De Zerbi FM26
+It is easy to file this under defensive discipline. The real reason is that a sliding tackle is a coin flip, and a coin flip in your own half is how this system concedes. Stay On Feet keeps the defensive shape intact so the counter-press has something to press with.
 
-### The Goalkeeper — Your Deepest Playmaker
+</Callout>
 
-```
-First Touch 14+ | Composure 15+ | Passing 13+ | Kicking 14+
-```
-The sweeper keeper needs to receive under pressure and find the CBs. Don't use a traditional shot-stopper.
+## When the AI refuses to take the bait
 
-### Centre-Backs — Press Bait
+This is where most FM26 De Zerbi saves stall, so it deserves its own section.
 
-```
-Composure 16+ | First Touch 13+ | Passing 14+ | Pace 14+
-```
-These are the most important players in the system. They'll receive the ball with a striker closing down — they need to stay calm and find the pass.
+The trap only works on opponents who step up. Teams that fear you — a defensive side away from home, or a mid-table AI that has decided to sit in a 5-3-2 — will not press the centre-backs at all. They will stand in their block and let your defenders hold the ball for as long as they like. Waiting for a press that is never coming produces exactly the football people complain about: possession without threat.
 
-### Wing-Backs — The Release Valve
+Before you touch the instructions, check what you are seeing. If the opposition front line is staying in their own half, the bait is dead. Then do this:
 
-```
-Work Rate 15+ | Crossing 13+ | Off The Ball 14+ | Stamina 15+
-```
-They run the entire flank. In FM26, you'll need a backup for each because their condition will drop to 65-70% by minute 70.
+- Raise Attacking Width to Fairly Wide. The narrow shape only creates an overload if someone is contesting the middle, and in a passive game it creates congestion instead.
+- Turn on the underlap opposite the inverting full-back, or drop Overlap/Underlap entirely and push the right full-back to Attack. You need a way to reach the byline that does not involve a press.
+- Keep Short Passing but raise Tempo one notch. Slow build-up against a block is just slow.
+- If they are defending with nine players behind the ball, stop trying to walk it in. Add Hit Early Crosses and treat the wide forwards' attacking runs as the main threat.
 
-### Double Pivot — The Engine Room
+That set of changes is not a De Zerbi tactic anymore, and pretending otherwise does not help anyone. It is the same squad playing a different problem, which is what the system's own author does.
 
-**DLP (Support):** Passing 16+, Vision 15+, Decisions 15+, Composure 15+. This is your Mac Allister/Gross — the one who dictates everything.
+## The third man, and how to see it working
 
-**BBM (Support):** Work Rate 16+, Stamina 16+, Off The Ball 14+, Long Shots 13+. This is your Caicedo — the destroyer who also arrives late in the box.
+Third-man runs are the part of this system that FM26 renders well if you set them up, and badly if you talk about them abstractly.
 
----
+The pattern is: centre-back passes to the pivot, the pivot is immediately closed down, and the ball goes to a player who was never the target of the first pass. That third player has to be moving as the ball travels, not after it arrives. In practice:
 
-## FM26 Match Engine Specifics
+- Give the Advanced Playmaker Roam From Position. Static 8s turn a 3-box-3 into a passing carousel.
+- Set the striker to drop rather than stay high. The Support duty already encourages it, but if your striker refuses to leave the centre-backs, this system has no central link at all.
+- Watch the first 20 minutes of any match with the passing map open. You want a cluster of passes in the central third between your own box and the halfway line, and one or two longer passes up the middle when the opposition line steps. If the pass map is two neat vertical lines down the flanks, you are playing possession football, not De Zerbi football.
 
-After extensive testing in FM26 ME, here are critical adjustments that differ from pure De Zerbi theory:
+## The goalkeeper problem
 
-### 1. Sweeper Keeper Distribution
+Your goalkeeper will touch the ball more than any outfield player in this system, and he will touch it under pressure. That means Composure, Passing and a bit of First Touch matter more than shot-stopping for once.
 
-De Zerbi wants the GK to play short to CBs every time. In FM26, set:
-- **Distribute to Centre-Backs**
-- **Take Short Kicks** (not Roll It Out — short kicks in FM26 are more reliable for beating a high press)
+If your number one cannot pass, you have three honest options. Take Short Kicks off and accept long distribution, which weakens the build-up but stops the turnovers. Use a ball-playing keeper and live with the drop in shot-stopping. Or change tactics, because buying a keeper who can play is usually the cheapest way to make this system work — a passing goalkeeper costs less than a passing centre-back.
 
-### 2. The Press Trap
+## Where this breaks
 
-In real life, De Zerbi baits the press then plays through. In FM26, this requires a specific setup:
-- **Press Much More Often** + **Higher Line** — this is aggressive but necessary
-- If you're conceding too many through balls, drop to **Higher Press** (not Much More) and keep **Higher Line**
-
-### 3. Attacking Width Adjustment
-
-Against teams that sit back (low block), temporarily widen to **Fairly Wide + Hit Early Crosses**. The narrow overload stops working when the opponent refuses to press.
-
----
-
-## Best Teams for De Zerbi Tactics FM26
-
-| Tier | Teams | Notes |
+| What you face | What goes wrong | What to change |
 |---|---|---|
-| **Elite** | Man City, Barcelona, Bayern Munich, Arsenal | Perfect. Elite CBs on the ball + relentless work rate |
-| **Great Fit** | Brighton, Napoli, Real Sociedad, Borussia Dortmund | Good technical CBs, strong double pivot options |
-| **Challenging** | Lower-half Premier League, Serie B | Need to sign technical CBs first — without them the system collapses |
-| **Avoid** | Lower-league save, physical/long-ball league | The required attributes are rare at lower levels |
+| A deep low block that refuses to press | High possession, no chances, frustration | Widen, raise tempo, use the full-back overlap, hit early crosses |
+| Man-marking on the pivot | The dropping pivot is followed and the free man disappears | Send the pivot higher and let a centre-back carry the ball instead |
+| A physical long-ball side | Your high line is attacked directly, bypassing the trap | Drop the defensive line one notch, keep the press; consider a taller centre-back pair |
+| An elite press that wins the ball high | Turnovers in your own third lead to chances against | Reduce Trigger Press, and stop asking the keeper to play short every time |
+| Fatigue after 70 minutes | The press stops, the trap stops, the shape stretches | Two wing-back quality options on the bench is not a luxury here |
+| A lower-league squad | Centre-backs panic on the ball, build-up collapses | Do not run this system below the level where ball-playing defenders exist in numbers |
 
----
+## Which squads can run it
 
-## Results You Can Expect
+| Tier | Clubs | Why |
+|---|---|---|
+| Comfortable from day one | Man City, Barcelona, Bayern, Arsenal | Ball-playing centre-backs and a technical pivot are already in the building |
+| Good fit with one signing | Brighton, Napoli, Real Sociedad, Dortmund | Strong midfield, technical enough at the back, one centre-back away from comfortable |
+| Tough but playable | Mid-table Premier League and Serie A sides | You will spend the first season signing defenders rather than attackers |
+| Avoid | Lower-league saves, physical long-ball divisions | The attributes this system needs are rare and expensive at that level |
 
-Based on test saves with mid-table Premier League sides:
+The honest summary: this is a system for a team that is already better than most of its league, or for a manager willing to spend two transfer windows making the squad fit it. There is no version of De Zerbi's football that works with defenders who panic.
 
-- **Possession:** 58-65% (league-leading)
-- **Pass completion:** 88-92%  
-- **xG per game:** 1.8-2.3
-- **Goals from open play build-up:** ~70%
-- **Weakness:** Vulnerable to 5-3-2 counter systems that bypass the press with long balls
+## When to pick something else
 
-The De Zerbi approach in FM26 is not about winning every game — it's about dominating the ball and creating high-quality chances. When it works, it produces some of the most beautiful football in the match engine.
+Some triggers are worth checking before you commit a save to this.
 
----
+If your centre-backs have poor Composure and First Touch, the possession pages on this site will not save you — you want the [4-3-3 Tiki-Taka setup](/tactics/4-3-3-tiki-taka), which keeps the passing structure but asks less of the last line, or a pressing system where the defenders' job is simpler and faster.
 
-**Related content:**
-- [4-3-3 Tiki-Taka](/tactics/4-3-3-tiki-taka) — Similar possession philosophy with different structure
-- [Player Roles Explained](/blog/player-roles-explained) — Understanding the roles in this system
-- [Build Your Own Tactic](/builder) — Adapt De Zerbi principles to your squad
+If you want control without the patient build-up, [Guardiola's 3-2-5](/blog/guardiola-tactics-fm26) is the closest relative: same urge to dominate the ball, different mechanism, and far less reliance on the opponent taking a bait.
 
----
+If what you actually enjoy is watching your team win the ball back in the opposition's box, this is the wrong family of tactic entirely. The [gegenpress setup guide](/blog/gegenpress-setup-guide) is the opposite school and a much easier first project.
 
-## More Manager Tactics in FM26
+And if you have not picked a club yet, the [best teams for each coach tactic](/blog/fm26-best-teams-for-coach-tactics) lists which squads fit this system without a rebuild.
 
-Building a tactical education from the touchline? Our full manager series covers every coaching school in Football Manager 2026:
+## Setting it up in one sitting
 
-- [Guardiola Tactics in FM26](/blog/guardiola-tactics-fm26) - the school De Zerbi's build-up evolved from
-- [Alonso Tactics in FM26](/blog/alonso-tactics-fm26) - patient build-up married to vertical transitions
-- [Arteta Tactics in FM26](/blog/arteta-tactics-fm26) - structured possession with Premier League bite
+1. Pick the 4-3-3 base, then set the eleven roles from the board above before touching any instruction.
+2. Apply the in-possession instructions, then the out-of-possession block. Leave transitions until last — they are the ones you will change most.
+3. Give the Advanced Playmaker Roam From Position and check the striker is actually dropping in the first friendly.
+4. Play two friendlies against weak opposition and confirm the pattern: centre-back holds, pivot drops, press steps up, ball goes through. If the press never arrives, that is not a bug in the setup, it is the low-block branch above.
+5. Only then look at results. The first three competitive matches of a possession system are noise, and judging a De Zerbi tactic on them is how most people end up deleting a good save.
+
+If you want to skip the manual setup, the [Tactic Builder](/builder) takes the shape above and lets you export it straight into your save with the roles already filled in.

@@ -1,163 +1,193 @@
 ---
 author: "FM26 Tactics Team"
 title: "Guardiola Tactics FM26: Recreating Man City's 3-2-5 Positional Play"
-description: "How to recreate Pep Guardiola's Manchester City in FM26. The 3-2-5 attacking shape, the inverted full-back, the box midfield, and total positional control — adapted for Football Manager 2026."
+description: "How to build Guardiola's 3-2-5 in FM26 with real role setups: the two full-backs who come inside, the double pivot nobody presses, the five attacking lanes, and an honest look at what breaks the system against a deep block."
 category: "tactics"
 tags:
   - "guardiola tactics fm26"
-  - "guardiola fm26"
-  - "man city tactics fm26"
   - "fm26 positional play"
   - "fm26 3-2-5"
-  - "fm26 box midfield"
-  - "fm26 tactical replication"
+  - "man city tactics fm26"
+  - "fm26 possession tactics"
 publishedAt: "2026-08-22"
-readTime: 6
+updatedAt: "2026-10-02"
+readTime: 15
 relatedTactic: "4-3-3-tiki-taka"
 faq:
-  - question: "How does Guardiola's Man City play in FM26?"
-    answer: "Guardiola's City build in a 3-2-5 shape: a centre-back steps into midfield, the full-backs tuck in, and five players attack the final third. It's the most structured positional system in football — every player occupies a pre-planned lane."
-  - question: "What is the 3-2-5 formation in FM26?"
-    answer: "The 3-2-5 is City's attacking shape, not their defensive one. From a 4-3-3 base, the right-back inverts into midfield, a centre-back steps up alongside the pivot, and the left-back joins the front line — creating three at the back and five in attack."
-  - question: "What player roles fit Guardiola's system in FM26?"
-    answer: "A Ball-Playing Defender trio, a Half-Back or inverted full-back who steps into midfield, a deep-lying playmaker and a box-to-box in the middle, and an attacking front five led by a false nine or a centre forward."
+  - question: "What is the 3-2-5 shape in FM26?"
+    answer: "It is an in-possession shape built from a 4-3-3 base. One full-back tucks in to make a back three, the other steps into midfield to form a double pivot with the holding player, and five players occupy the attacking third in defined lanes."
+  - question: "Which FM26 roles make a 3-2-5?"
+    answer: "An Inside Full-Back on Support and an Inverted Full-Back on Support are the two roles doing the structural work. The Inside Full-Back makes the back three, and the Inverted Full-Back joins the Deep-Lying Playmaker in the double pivot."
+  - question: "Why does my Guardiola tactic have 70% possession and no shots in FM26?"
+    answer: "Usually because nobody is attacking the final lane. The 8s must arrive in the box, the left winger must hold width, and the striker must drop and spin. If all four stay in front of the block, the shape creates passing lanes instead of chances."
+  - question: "Does Guardiola's system work against a low block in FM26?"
+    answer: "It dominates the ball and often underwhelms. Against a 5-4-1, keep the structure but raise tempo, push one 8 higher, and add crosses aimed at the striker. Switching the shape entirely is usually a mistake."
 ---
 
-## Guardiola Tactics in FM26: The Philosophy
+There is a version of Guardiola's football that FM26 players try to copy and mostly fail at, and it fails for a predictable reason. People build the shape — the 3-2-5, the inverted full-back, the box midfield — and then expect the shape to score goals. It does not. The shape is there to move the ball into positions where one specific player has one specific job, and if nobody is doing that job, you get a beautiful 0-0.
 
-Pep Guardiola's Manchester City is the most **structured** system in modern football. Where Arteta removes the press and De Zerbi baits it, Guardiola *plans around it*: every player has a lane, every lane has a job, and the ball is moved through the geometry of the pitch.
+So this guide is organised around that: what the structure is for, who has to arrive, and what to do when the opponent stops playing along.
 
-The core principles:
+## What the 3-2-5 is actually for
 
-1. **The 3-2-5 attacking shape** — from a 4-3-3 base, one centre-back steps up and one full-back inverts
-2. **The box midfield** — four players occupy the middle in a 2-2 diamond, making the press impossible to cut through
-3. **Positional play, not improvisation** — the system wins the space before the ball arrives
-4. **Counter-press as a shield** — lose the ball high, win it back in 5 seconds
+A 3-2-5 exists to solve one problem: how do you attack with five players without leaving your centre-backs alone?
 
----
+The answer is to reduce the number of players defending, without reducing the number of players preventing counter-attacks. A back three plus a double pivot is five players behind the ball, in two layers, with the ball circulating in front of them. That is a lot of insurance for a team whose full-backs are nowhere near their own corners.
 
-## The Guardiola Formation in FM26
+Everything else — the half-space occupation, the five lanes, the one-touch passing — is downstream of that. If you set up the structure and cannot stop conceding on the break, the structure is not the problem, the instructions that feed it are.
+
+## The board, and the two players who make it legal
 
 <TacticBoardCta
   formation="4-3-3"
-  caption="City's 4-3-3 base — in possession it becomes a 3-2-5"
+  caption="The 4-3-3 base: the left-back tucks in to make a three, the right-back steps into midfield"
   setup={[
     { roleId: "sweeper-keeper", duty: "support" },
-    { roleId: "full-back", duty: "support" },
+    { roleId: "inside-full-back", duty: "support" },
     { roleId: "ball-playing-defender", duty: "defend" },
     { roleId: "ball-playing-defender", duty: "defend" },
-    { roleId: "full-back", duty: "support" },
+    { roleId: "inverted-full-back", duty: "support" },
+    { roleId: "channel-midfielder", duty: "support" },
     { roleId: "deep-lying-playmaker", duty: "support" },
     { roleId: "advanced-playmaker", duty: "support" },
-    { roleId: "channel-midfielder", duty: "support" },
-    { roleId: "inside-forward", duty: "support" },
+    { roleId: "winger", duty: "support" },
     { roleId: "centre-forward", duty: "support" },
     { roleId: "inside-forward", duty: "attack" },
   ]}
 />
 
-**Read the shape carefully: the right-back is an Inverted Full-Back and the left-back attacks.** In possession this becomes a 3-2-5 — the IFB joins the midfield two, and the left-back pushes into the front line.
+Two roles do the structural work and both are FM26-specific, which is why copies built from older role names never look right:
 
-| Position | Role | Guardiola Logic |
+**Inside Full-Back (Support)** at left-back tucks into the central defensive corridor when the team attacks. That is the third centre-back, and it is why your back line survives turnovers on the left. It is not an attacking role. If you want him overlapping instead, you have abandoned the 3-2-5.
+
+**Inverted Full-Back (Support)** at right-back does the opposite job: he leaves the defensive line and joins central midfield. Together with the Deep-Lying Playmaker on Support, that is the "2" in 3-2-5. Two controllers, both of whom can receive the ball from a centre-back with their back to the pitch and turn into space.
+
+The first genuine decision in this tactic is which side does which. I have put the inside full-back on the left and the inverter on the right because that combination produces an attacking overload on the right: the advanced playmaker drifts into the right half-space, the inside forward attacks the box from the right, and the left winger stays wide to keep the pitch honest. Flip it if your best wide player is on the right, but have a reason.
+
+| Slot | Role | Its job in the shape |
 |---|---|---|
-| GK | **Sweeper Keeper (Support)** | The 11th outfield player — City build from the keeper |
-| Back three | **IFB(D) + BPD(D) + CD(D)** | The IFB steps into midfield; the BPD switches play |
-| Left-back | **Full-Back (Attack)** | The width on the inverted side — the 5 in 3-2-5 |
-| Midfield | **HB(D) + DLP(S)** | The Half-Back drops into the back three; the DLP dictates |
-| Attacking Mid | **SS(A)** | The De Bruyne/Foden role — arrives in the box late |
-| Wingers | **IF(A) + IW(S)** | Tuck inside to crowd the box and press the full-backs |
-| Striker | **Deep-Lying Forward (Attack)** | The false-nine movement — drops to create the overload |
+| GK | Sweeper Keeper (Support) | First pass, and the spare man when the opponent presses high |
+| LB | Inside Full-Back (Support) | Makes the back three |
+| CBs | Ball-Playing Defender (Defend) x2 | Switch play, step up, start the line |
+| RB | Inverted Full-Back (Support) | Steps into midfield, forms the double pivot |
+| Left 8 | Channel Midfielder (Support) | Occupies the left half-space, arrives in the box late |
+| Pivot | Deep-Lying Playmaker (Support) | The controller. Never the runner |
+| Right 8 | Advanced Playmaker (Support) | Between the lines on the right, the pivot's forward option |
+| LW | Winger (Support) | Holds the touchline — this is the team's width |
+| ST | Centre Forward (Support) | Drops to link, then spins into the space he created |
+| RW | Inside Forward (Attack) | Attacks the back post and the half-space the right 8 vacates |
 
----
+One note on that table, because it is where the original version of this article went wrong: the width in this shape comes from the left winger, not the full-backs. Both full-backs are inside by design. If you also want a full-back providing width, you are building a different system with a different risk profile.
 
-## Team Instructions: The Guardiola Settings
+## The double pivot nobody presses
 
-### In Possession
+The inverted full-back and the deep-lying playmaker stand next to each other in the same horizontal band, and the whole point is that the opponent cannot press both.
 
-| Instruction | Setting | Why |
+If their striker steps onto the pivot, the inverted full-back is free, and he is a better passer than most centre-backs. If they commit a midfielder to the inverted full-back, the pivot is free with the whole pitch in front of him. This is why the system generates so much sterile possession against passive opponents: the opponent declines the invitation, keeps their shape, and there is nothing to break.
+
+In FM26 the practical detail is this: set the Deep-Lying Playmaker to **Roam From Position** if he is being man-marked. A static pivot with a marker attached is worse than useless, because the ball goes to him, he cannot turn, and the pass goes backwards. The Inverted Full-Back should not roam — he is the structural piece, and structure that wanders is not structure.
+
+## Instructions: fewer than you think
+
+| Phase | Setting | Reason |
 |---|---|---|
-| Width | Fairly Narrow | The box midfield lives in the middle — width comes from full-backs only |
+| Width | Standard | The 8s compress the middle; narrowing the pitch would starve the wide man |
 | Passing | Shorter | Every pass is a positional move, not a gamble |
-| Tempo | Slightly Lower | Control the rhythm — City don't rush unless the space is there |
-| Play Out of Defence | ON | Non-negotiable — the 3-2-5 starts from the keeper |
-| Work Ball Into Box | ON | No wasteful shots — the geometry creates the chances |
-| Overlap | Left Side | The attacking left-back overlaps while the IFB inverts |
-
-### In Transition
-
-| Instruction | Setting | Why |
-|---|---|---|
-| Counter | ON | When the press wins the ball, attack before the reset |
-| Counter-Press | ON | The shield — win it back in 5 seconds or drop into shape |
+| Tempo | Slightly Lower | The shape needs time to form before the ball arrives |
+| Play Out of Defence | On | Non-negotiable — the 3-2-5 starts from the keeper |
+| Work Ball Into Box | On | The geometry creates high-value chances; do not waste them |
+| Counter | On | Recover the ball, attack before they reset |
+| Counter-Press | On | The insurance policy for five players being upfield |
 | GK Distribution | Roll It Out | Short, structured restart |
+| Line of Engagement | Higher | The counter-press has to start somewhere |
+| Defensive Line | Higher | Squeeze the space; the back three covers it |
+| Trigger Press | More Often | Press the passes into their pivot, not the ball carrier |
+| Prevent Short GK Dist | On | Force long kicks, win the second ball |
+| Offside Trap | On | A coordinated line, or none at all |
 
-### Out of Possession
+Two deliberate omissions.
 
-| Instruction | Setting | Why |
+**No overlap instruction.** Overlap tells a full-back to go outside the winger, which is the exact opposite of what an inside full-back or an inverted full-back does. Turning it on and watching the shape collapse is a common and entirely avoidable mistake.
+
+**No Be More Expressive.** It sounds right for a team with five attackers. In practice it loosens the lanes, and lanes are the only thing holding this system together. The right 8 and the striker are the two players worth freeing with individual instructions — not the team.
+
+## The five lanes, and who has to arrive
+
+This is the part that decides whether the tactic creates chances, and it has nothing to do with the shape.
+
+A 3-2-5 attacks in five vertical lanes: left touchline, left half-space, centre, right half-space, right touchline. In this setup the five occupants are the left winger, the channel midfielder, the striker, the advanced playmaker, and the inside forward — and they must be at different heights, not lined up like a wall.
+
+The two arrivals that actually produce goals:
+
+**The channel midfielder running past the striker.** With the striker dropping to link, someone has to attack the space he leaves. If your Channel Midfielder on Support never enters the box, the striker's movement is wasted and the build-up ends with a pass back to the pivot.
+
+**The inside forward attacking the back post.** The right-sided overload only pays off if the cross or the cut-back has two targets. An inside forward on Attack who arrives late at the back post converts the geometry into a shot. One who stays on the edge of the area does not.
+
+You can watch this in the match viewer rather than guessing. If every attack ends with the ball out wide and then back to the centre-backs, nobody is arriving. If your striker keeps receiving with his back to goal and no runner is beyond him, the same problem. Both are usually fixed by individual instructions, not by changing the system.
+
+## What actually goes wrong
+
+| Symptom | Cause | What to do |
 |---|---|---|
-| Line of Engagement | Higher | Press in the opponent's half — the counter-press starts there |
-| Defensive Line | Higher | Squeeze the pitch; the HB covers the space behind |
-| Trigger Press | More Often | Press triggers on passes to the pivot and full-backs |
-| Prevent Short GK Dist | ON | Force long kicks, win the second ball |
-| Offside Trap | ON | A coordinated line — City's CBs step up together |
+| 70% possession, no shots | No one is attacking the final lane | Check the channel midfielder's runs and the inside forward's arrival |
+| Repeatedly caught on the break | Counter-press off, or the line is too high for your defenders | Counter-Press on, check your centre-backs' Pace |
+| The pivot keeps losing the ball with his back to goal | Man-marked and static | Roam From Position, or switch him to the Advanced Playmaker and move the 8 deeper |
+| The 3-2-5 collapses when the opponent counters | The inverted full-back is too far forward | He should be in midfield, not in the attacking third — check individual mentality |
+| The back three becomes a back two | Left-back is not tucking in | Confirm Inside Full-Back, not Full-Back or Wing-Back |
+| Nothing works for more than 30 minutes | Tactical familiarity | Three friendlies, and do not judge it before the shape is trained |
 
----
+## Two matches that tell you whether it works
 
-## The Box Midfield: Why the Press Can't Touch It
+You do not need a season to know if the build is right. Two specific fixtures will answer the question, and they should be played before you commit to the system.
 
-The 2-2 midfield box (HB + DLP behind, IW + SS ahead) is Guardiola's greatest invention. It gives every passing lane an option and every presser a decoy:
+**The first is an away game against a mid-table side that presses.** This tests the structural half of the tactic. Watch the first ten minutes and answer three questions. Does the left-back end up between the centre-backs when your team has the ball? Does the pivot have two short options under pressure, or one? And when the opponent wins the ball, are there five players behind it?
 
-1. **Four passing options in the middle** — pressing one unlocks the other three
-2. **The IFB makes it a 3-2** — the back line stays secure while the box attacks
-3. **The SS and IW swap positions constantly** — the press can never lock onto a man
-4. **In FM26, set both central players to Roam From Position** — static midfielders kill the box
+If the answer to any of those is no, the instructions are wrong, not the squad. The usual culprits are an individual instruction overriding the team press — anything with "Close Down Much More" attached to a centre-back will destroy the shape — or the inside full-back having been set to a role that attacks instead of tucking in.
 
-The box only works with elite passing and off-the-ball movement. If your midfielders can't play one-touch, this system becomes sideways possession with no threat.
+**The second is a home game against a side that defends in a 5-4-1.** This tests the attacking half. The shape will hold and you will have 65% of the ball. The question is whether anyone arrives in the box: the channel midfielder running past the striker, the inside forward attacking the back post. If the shot count consists of long-range attempts from your 8s, the lanes are populated but nobody is running, and no amount of instruction tweaking fixes that — it is an individual instruction problem and a player quality problem, in that order.
 
----
+Play those two matches and you will know more about the tactic than a full pre-season of friendlies will tell you, because a friendly against a weak side never puts the build-up under real pressure.
 
-## Key Player Requirements
+## What this system is not
 
-1. **First Touch 15+ for every outfield player** — one-touch play is the entire system
-2. **Passing 15+ for the midfield box** — the box needs four passing lanes, not four runners
-3. **Positioning 15+ for the IFB and HB** — the 3-2-5 collapses if the shapes are wrong
-4. **Composure 15+ under pressure** — City play out against the highest presses
-5. **Off the Ball 15+ for the front five** — positional play is movement, not sprinting
+Three systems get confused with this one, and the confusion leads to contradictory advice, so it is worth separating them.
 
----
+**It is not tiki-taka.** The [4-3-3 Tiki-Taka setup](/tactics/4-3-3-tiki-taka) is about keeping the ball and starving the opponent of it. The 3-2-5 is about moving the ball into positions from which a specific player can attack. You can hold 70% possession with this shape and still be playing it badly, because possession is the by-product rather than the objective.
 
-## Common Mistakes
+**It is not De Zerbi's build-up.** The [De Zerbi system](/blog/de-zerbi-tactics-fm26) deliberately leaves a man free in front of the ball and waits for the opponent to step onto him. This system removes the invitation: the double pivot exists so that nobody has to be baited into pressing. One tactic wants the opponent to make a decision; the other wants to make the decision for them.
 
-### Inverting both full-backs
-City always keep one full-back wide to complete the 5 in the 3-2-5. Two inverted full-backs leave you with no width and no front-line balance.
+**It is not a pressing system.** The counter-press here is insurance for the five players ahead of the ball, and it lasts about five seconds. If you are pressing because you want to win the ball in the opponent's box, you want the [Klopp gegenpress](/blog/klopp-tactics-fm26) instead, and pressing is the primary mechanism rather than an emergency brake.
 
-### Static box midfielders
-The box is a *movement* structure. If the DLP and SS stand still, the box is just four players standing in the middle of the pitch. Use Roam From Position and look for elite off-the-ball movement.
+The distinction matters because the three systems need different players. De Zerbi's needs brave centre-backs. The gegenpress needs athletic midfielders. This one needs technical players in every position, including the ones who never touch the ball in the final third.
 
-### Playing it against weaker teams
-This system dominates the ball but can underwhelm against deep blocks — the geometry creates passing lanes, not goal chances. Add the "Hit Early Crosses" outlet and a target in the box when opponents park the bus.
+## Squad requirements without the romance
 
----
+The honest list, in priority order:
 
-## When Guardiola's System Struggles
+1. **First Touch 15+ across the front five.** The whole system runs on first-time combinations. A front five with First Touch 12 does not play this football; it plays slow football.
+2. **Passing 15+ for the double pivot.** Two controllers, both comfortable under pressure, or the block gets stuck.
+3. **Positioning and Decisions 15+ for the inside full-back.** He is a defender playing in midfield. If he reads the game badly, every turnover on that side is a counter-attack into empty space.
+4. **Pace 14+ for the centre-backs.** A higher line with a slow defender is a documented way to lose 3-0.
+5. **Composure 15+ for the keeper.** He will be pressed, and a long clearance surrenders the shape you spent ten passes building.
 
-- **Against elite transition teams** — the 3-2-5 leaves three at the back against pacey front threes. In big away games, keep one full-back home and drop the SS to a 4-3-3.
-- **Against physical mid-blocks** — a team that sits in a 5-4-1 and lets you have the ball needs patience, not system changes. Keep the shape, raise the tempo gradually, and wait for the half-space opening.
+If your squad is strong in the middle of the pitch but your defenders are slow, this is the wrong system — and the [five control systems compared](/blog/fm26-positional-control-managers) maps out which of the alternatives asks the least of your last line.
 
----
+## Switching out of it
 
-## Final Word
+Three triggers worth acting on.
 
-Guardiola's 3-2-5 is the end point of positional football — the hardest system in FM26 to learn and the most devastating when it clicks. It demands elite technicians at every position and weeks of tactical familiarity. If you have the squad, no other system creates so many chances with so little risk.
+**Your centre-backs are fast but cannot pass.** Move towards the [De Zerbi build-up](/blog/de-zerbi-tactics-fm26), which keeps the patient possession but puts the pivot in the back line rather than asking the defenders to make the passes.
 
-For the full possession instruction set, our [4-3-3 Tiki-Taka breakdown](/tactics/4-3-3-tiki-taka) is the deeper dive. And to find the technical midfielders and ball-playing defenders this system demands, see [FM26 Wonderkids by Role](/blog/fm26-wonderkids-by-role).
+**You have the technical players but not the patience, and you want to win the ball back in the opponent's box instead of at the halfway line.** The [Klopp gegenpress](/blog/klopp-tactics-fm26) is a different sport with a similar squad requirement, and the [gegenpress setup guide](/blog/gegenpress-setup-guide) is the practical version.
 
----
+**You want the same positional ideas with fewer moving parts.** The [4-3-3 Tiki-Taka breakdown](/tactics/4-3-3-tiki-taka) is the pure possession version — more passing, less structural ambition, and far less risk.
 
-## More Manager Tactics in FM26
+## Installing it
 
-Building a tactical education from the touchline? Our full manager series covers every coaching school in Football Manager 2026:
+1. Set the eleven roles from the board first. Do not touch instructions until the shape is right.
+2. Apply the in-possession settings, then the out-of-possession block. Leave transitions to last; they are the ones you will adjust most.
+3. Give the advanced playmaker Roam From Position. Leave everything else alone for now.
+4. Play three friendlies and watch the left-back. If he is not ending up between the centre-backs, the shape is not forming and nothing else you do will matter.
+5. Only then look at the results — and give it a full season, because a system that takes 30 matches to learn does not reveal itself in five.
 
-- [Arteta Tactics in FM26](/blog/arteta-tactics-fm26) - the student running the school's ideas in the Premier League
-- [De Zerbi Tactics in FM26](/blog/de-zerbi-tactics-fm26) - the possession school taken one step further
-- [Alonso Tactics in FM26](/blog/alonso-tactics-fm26) - possession control fused with lethal transition
+The [Tactic Builder](/builder) will load this setup into the 4-3-3 shape with all eleven roles filled in, if you would rather start from a working tactic than type it out.

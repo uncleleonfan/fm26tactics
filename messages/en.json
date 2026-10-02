@@ -186,7 +186,8 @@
     "backToBlog": "Back to all articles",
     "builderCtaTitle": "Build Your Own FM26 Tactic",
     "builderCtaText": "Want to create a custom system? Use our free FM26 Tactic Builder — drag players onto the pitch, assign any player role, and export your formation for Football Manager 2026.",
-    "builderCtaButton": "Open Tactic Builder"
+    "builderCtaButton": "Open Tactic Builder",
+    "faqTitle": "Frequently Asked Questions"
   },
   "tactics": {
     "title": "Tactics Library",

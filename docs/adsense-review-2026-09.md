@@ -1,5 +1,7 @@
 # AdSense 拒批诊断与整改记录（2026-09）
 
+> **后续（2026-10）**：本次整改后仍收到第二次 **Low value content** 拒批。技术面已无可整改项，问题落在内容模板化，处置见 `docs/adsense-review-2026-10.md`（经理系列 12 → 6 URL 合并）。
+
 > 拒批时间：2026-09-07 · 类型：**Low value content**（"Your site does not yet meet the criteria of use in the Google publisher network"）
 > 引用标准：Minimum content requirements / Webmaster quality guidelines (thin content)
 

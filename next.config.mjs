@@ -79,6 +79,49 @@ const nextConfig = {
         destination: "/:path*",
         permanent: true,
       },
+      // Manager series consolidated (see docs/adsense-review-2026-09.md).
+      // Eight near-identical single-club guides became two comparison articles;
+      // each retired URL maps to the article that now owns that system, one hop.
+      {
+        source: "/blog/arteta-tactics-fm26",
+        destination: "/blog/fm26-positional-control-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/alonso-tactics-fm26",
+        destination: "/blog/fm26-positional-control-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/nagelsmann-tactics-fm26",
+        destination: "/blog/fm26-positional-control-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/emery-tactics-fm26",
+        destination: "/blog/fm26-positional-control-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/flick-barcelona-tactics-fm26",
+        destination: "/blog/fm26-positional-control-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/mourinho-tactics-fm26",
+        destination: "/blog/fm26-low-block-counter-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/simeone-tactics-fm26",
+        destination: "/blog/fm26-low-block-counter-managers",
+        permanent: true,
+      },
+      {
+        source: "/blog/ancelotti-tactics-fm26",
+        destination: "/blog/fm26-low-block-counter-managers",
+        permanent: true,
+      },
     ];
   },
   async headers() {

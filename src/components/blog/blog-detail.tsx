@@ -90,6 +90,7 @@ interface BlogDetailProps {
 export function BlogDetail({ post }: BlogDetailProps) {
   const t = useTranslations();
   const MDXContent = useMDXComponent(post.body.code);
+  const faqItems = (post.faq ?? []) as Array<{ question: string; answer: string }>;
 
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -152,6 +153,29 @@ export function BlogDetail({ post }: BlogDetailProps) {
       <div className="prose-custom">
         <MDXContent components={mdxComponents} />
       </div>
+
+      {/* FAQ — visible rendering matching the FAQPage JSON-LD */}
+      {faqItems.length > 0 && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4 pb-2 border-b border-[#1C2436]/50">
+            {t("blog.faqTitle")}
+          </h2>
+          <div className="space-y-3">
+            {faqItems.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-lg border border-surface-border bg-surface"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-3 p-4 text-base font-semibold text-text-primary select-none">
+                  {item.question}
+                  <span className="text-text-muted transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="px-4 pb-4 text-base text-text-primary/90 leading-7">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Related Links */}
       {(post.relatedTactic || post.relatedGuide) && (
