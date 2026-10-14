@@ -2,19 +2,35 @@
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Download, Check, Copy, FileText, FileJson, Upload, Columns2, X } from "lucide-react";
+import {
+  Download,
+  Check,
+  Copy,
+  FileText,
+  FileJson,
+  Upload,
+  Columns2,
+  X,
+  Layers,
+  BookmarkPlus,
+} from "lucide-react";
 import { resolvePhasePlayers } from "@/hooks/use-tactic-builder";
 import { trackEvent } from "@/lib/analytics";
 import { playerRoles } from "@/lib/tactics-data";
 import { computePhaseMetrics } from "@/tactics/phases/phase-analysis";
 import { MOVEMENT_LABELS } from "./movement-arrow";
 import { StaticPhasePitch } from "./static-phase-pitch";
+import { ShareActions } from "./share-actions";
 import type { TacticBoardState } from "@/types/tactic";
 
 interface TacticExportProps {
   state: TacticBoardState;
+  /** Human formation label, e.g. "4-2-3-1 Gegenpress" — used as the share text. */
+  formationLabel: string;
   onClose: () => void;
   onImport: (value: unknown) => boolean;
+  /** Opens the "save a named copy" dialog from the post-download step. */
+  onSave: () => void;
 }
 
 interface SvgOutput {
@@ -22,6 +38,15 @@ interface SvgOutput {
   width: number;
   height: number;
 }
+
+type ExportFormat = "txt" | "json" | "svg" | "png" | "svg-both-phases" | "bundle";
+
+/**
+ * The one format that matches what users actually do with the output.
+ * GA4 (2026-10-07→13) shows .txt was 35 of 78 downloads — the step-by-step
+ * card, not an image. It is promoted to the single primary action.
+ */
+const DEFAULT_FORMAT: ExportFormat = "txt";
 
 const CATEGORY_SHORT: Record<string, string> = {
   goalkeeper: "GK",
@@ -237,13 +262,41 @@ function triggerDownload(href: string, filename: string) {
   document.body.removeChild(link);
 }
 
-export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
+/**
+ * Export panel, grouped by what the user is about to DO rather than by file
+ * type. The 2026-10 analytics showed every download the panel offered was
+ * being sampled (1.86 formats per downloading user) and that .txt carried 45%
+ * of the demand — so the step-by-step card is the single primary action, the
+ * images are grouped as "share it", and a one-click bundle absorbs the
+ * hedging clicks.
+ *
+ * The first successful download swaps the panel to a post-download step
+ * (share / save). With no accounts and localStorage-only persistence, that
+ * moment is the last chance to bring the user back, so it must not be a dead
+ * end.
+ */
+export function TacticExport({
+  state,
+  formationLabel,
+  onClose,
+  onImport,
+  onSave,
+}: TacticExportProps) {
   const b = useTranslations("builder");
   const [copied, setCopied] = useState(false);
   const [importMsg, setImportMsg] = useState<"ok" | "fail" | null>(null);
   const [exportError, setExportError] = useState(false);
+  // null while browsing formats; set to the first format that actually
+  // downloaded, which switches the panel to the post-download step.
+  const [doneFormat, setDoneFormat] = useState<ExportFormat | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const openTimeRef = useRef(Date.now());
+  // Everything below exists to answer "did the 84% who never downloaded even
+  // look?" — GA4 could not separate "opened and bounced" from "read the list
+  // and left" without it.
+  const downloadIndexRef = useRef(0);
+  const downloadedRef = useRef(false);
+  const selectedRef = useRef<Set<string>>(new Set());
 
   const fileBase = `fm26-tactic-${state.formation.replace(/-/g, "")}`;
 
@@ -252,7 +305,12 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
   const dwellTime = () => Date.now() - openTimeRef.current;
 
   const closeWithDwell = () => {
-    trackEvent("builder_export_close", { value: dwellTime() });
+    trackEvent("builder_export_close", {
+      value: dwellTime(),
+      had_selection: selectedRef.current.size > 0 ? "true" : "false",
+      downloaded: downloadedRef.current ? "true" : "false",
+      formats_selected: Array.from(selectedRef.current).join(",") || "none",
+    });
     onClose();
   };
 
@@ -264,120 +322,159 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     setTimeout(() => setExportError(false), 2500);
   };
 
-  const exportAsSvg = () => {
-    const output = buildSvgString(state);
-    if (!output) {
-      exportFail("svg");
-      return;
+  const trackSelect = (format: ExportFormat) => {
+    selectedRef.current.add(format);
+    trackEvent("builder_export_format_select", {
+      format,
+      is_default: format === DEFAULT_FORMAT ? "true" : "false",
+    });
+  };
+
+  /**
+   * Fire only once a download actually happened, so `format_select` minus
+   * `download` isolates the failures that used to pollute the download data
+   * (N4). The first success also reveals the post-download step.
+   */
+  const onDownloaded = (format: ExportFormat) => {
+    downloadIndexRef.current += 1;
+    trackEvent("builder_download", {
+      label: format,
+      format,
+      is_default: format === DEFAULT_FORMAT ? "true" : "false",
+      download_index: downloadIndexRef.current,
+      value: dwellTime(),
+    });
+    if (!downloadedRef.current) {
+      downloadedRef.current = true;
+      trackEvent("builder_export_success_shown", { format });
+      setDoneFormat(format);
     }
-    trackEvent("builder_download", { label: "svg", value: dwellTime() });
-    const blob = new Blob([output.svgString], { type: "image/svg+xml" });
+  };
+
+  const saveFile = (content: string, mime: string, filename: string) => {
+    const blob = new Blob([content], { type: mime });
     const url = URL.createObjectURL(blob);
-    triggerDownload(url, `${fileBase}.svg`);
+    triggerDownload(url, filename);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
-  const exportAsPng = () => {
-    const output = buildSvgString(state);
-    if (!output) {
-      exportFail("png");
-      return;
-    }
-    trackEvent("builder_download", { label: "png", value: dwellTime() });
-
+  const renderPng = (
+    output: SvgOutput,
+    filename: string,
+    format: ExportFormat,
+    scale: number
+  ) => {
     const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(output.svgString)}`;
     const img = new Image();
     img.onload = () => {
-      const scale = 2; // 2x for crisp output
       const canvas = document.createElement("canvas");
       canvas.width = output.width * scale;
       canvas.height = output.height * scale;
       const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        exportFail("png");
-        return;
-      }
+      if (!ctx) return exportFail(format);
       // Solid background so dark text is always visible
       ctx.fillStyle = "#0A0E17";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       canvas.toBlob((blob) => {
-        if (!blob) {
-          exportFail("png");
-          return;
-        }
+        if (!blob) return exportFail(format);
         const url = URL.createObjectURL(blob);
-        triggerDownload(url, `${fileBase}.png`);
+        triggerDownload(url, filename);
         setTimeout(() => URL.revokeObjectURL(url), 1000);
+        onDownloaded(format);
       }, "image/png");
     };
-    img.onerror = () => exportFail("png");
+    img.onerror = () => exportFail(format);
     img.src = svgUrl;
   };
 
-  const exportBothPhasesAsSvg = () => {
+  const writeTxt = (): boolean => {
+    try {
+      saveFile(buildTacticText(state, b), "text/plain;charset=utf-8", `${fileBase}.txt`);
+    } catch {
+      exportFail("txt");
+      return false;
+    }
+    onDownloaded("txt");
+    return true;
+  };
+
+  const writeJson = (): boolean => {
+    try {
+      saveFile(JSON.stringify(state, null, 2), "application/json", `${fileBase}.json`);
+    } catch {
+      exportFail("json");
+      return false;
+    }
+    onDownloaded("json");
+    return true;
+  };
+
+  const writeBothPhasesSvg = (): boolean => {
     const output = buildPhasesSvgString(state, b);
     if (!output) {
-      exportFail("svg-both");
-      return;
+      exportFail("svg-both-phases");
+      return false;
     }
-    trackEvent("builder_download", { label: "svg-both-phases", value: dwellTime() });
-    const blob = new Blob([output.svgString], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(blob);
-    triggerDownload(url, `${fileBase}-phases.svg`);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    saveFile(output.svgString, "image/svg+xml", `${fileBase}-phases.svg`);
+    onDownloaded("svg-both-phases");
+    return true;
   };
 
-  const exportBothPhasesAsPng = () => {
-    const output = buildPhasesSvgString(state, b);
-    if (!output) {
-      exportFail("png-both");
-      return;
-    }
-    trackEvent("builder_download", { label: "png-both-phases", value: dwellTime() });
-
-    const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(output.svgString)}`;
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = output.width;
-      canvas.height = output.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        exportFail("png-both");
-        return;
-      }
-      ctx.fillStyle = "#0A0E17";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob((blob) => {
-        if (!blob) {
-          exportFail("png-both");
-          return;
-        }
-        const url = URL.createObjectURL(blob);
-        triggerDownload(url, `${fileBase}-phases.png`);
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      }, "image/png");
-    };
-    img.onerror = () => exportFail("png-both");
-    img.src = svgUrl;
+  const handleTxt = () => {
+    trackSelect("txt");
+    writeTxt();
   };
 
-  const exportAsTxt = () => {
-    trackEvent("builder_download", { label: "txt", value: dwellTime() });
-    const blob = new Blob([buildTacticText(state, b)], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    triggerDownload(url, `${fileBase}.txt`);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  const handleJson = () => {
+    trackSelect("json");
+    writeJson();
   };
 
-  const exportAsJson = () => {
-    trackEvent("builder_download", { label: "json", value: dwellTime() });
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    triggerDownload(url, `${fileBase}.json`);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  const handleSvg = () => {
+    trackSelect("svg");
+    const output = buildSvgString(state);
+    if (!output) return exportFail("svg");
+    saveFile(output.svgString, "image/svg+xml", `${fileBase}.svg`);
+    onDownloaded("svg");
+  };
+
+  const handlePng = () => {
+    trackSelect("png");
+    const output = buildSvgString(state);
+    if (!output) return exportFail("png");
+    renderPng(output, `${fileBase}.png`, "png", 2);
+  };
+
+  const handleSvgBothPhases = () => {
+    trackSelect("svg-both-phases");
+    writeBothPhasesSvg();
+  };
+
+  /**
+   * One click for the three things the panel is actually for: the in-game
+   * recipe, the backup, and the shareable two-phase image. All three fire
+   * synchronously inside the same user gesture — staggering them with setTimeout
+   * would break the gesture and let Safari block the later files.
+   */
+  const handleBundle = () => {
+    trackSelect("bundle");
+    let count = 0;
+    if (writeTxt()) count += 1;
+    if (writeJson()) count += 1;
+    if (writeBothPhasesSvg()) count += 1;
+    trackEvent("builder_export_bundle_download", { count, value: dwellTime() });
+    if (count === 0) exportFail("bundle");
+  };
+
+  const handleSaveCopy = () => {
+    trackEvent("builder_post_download_action", { action: "save" });
+    onSave();
+  };
+
+  const handleDownloadMore = () => {
+    trackEvent("builder_post_download_action", { action: "more" });
+    setDoneFormat(null);
   };
 
   const handleImportFile = (file: File) => {
@@ -411,8 +508,16 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
     }
   };
 
+  const formatButtonClass =
+    "w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group";
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-label={b("exportTitle")}
+    >
       {/* Hidden render targets for the both-phases export (styled DOM → SVG clone) */}
       <div aria-hidden className="fixed left-[-9999px] top-0 w-[300px] pointer-events-none opacity-0">
         <StaticPhasePitch
@@ -429,7 +534,7 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
         />
       </div>
       <div className="absolute inset-0 bg-black/60" onClick={closeWithDwell} />
-      <div className="relative glass-panel p-6 w-[340px] max-h-[85vh] overflow-y-auto animate-fade-in">
+      <div className="relative glass-panel p-6 w-[92vw] max-w-[360px] max-h-[85vh] overflow-y-auto animate-fade-in">
         <button
           onClick={closeWithDwell}
           aria-label={b("close")}
@@ -437,141 +542,190 @@ export function TacticExport({ state, onClose, onImport }: TacticExportProps) {
         >
           <X className="w-4 h-4" />
         </button>
-        <h3 className="text-sm font-semibold text-text-primary mb-2">{b("exportTitle")}</h3>
 
-        <p className="mb-4 text-[10px] leading-relaxed text-text-muted bg-surface border border-surface-border rounded-md px-3 py-2">
-          {b("exportNote")}
-        </p>
-
-        {exportError && (
-          <p className="mb-3 text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-3 py-2">
-            {b("exportFailed")}
-          </p>
-        )}
-
-        <div className="space-y-3">
-          <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold">
-            {b("images")}
-          </p>
-
-          <button
-            onClick={exportAsSvg}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <Download className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">{b("downloadSvg")}</p>
-              <p className="text-[10px] text-text-muted">{b("downloadSvgDesc")}</p>
+        {doneFormat ? (
+          <>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                <Check className="w-3 h-3 text-primary" />
+              </span>
+              <h3 className="text-sm font-semibold text-text-primary">{b("exportSuccessTitle")}</h3>
             </div>
-          </button>
+            <p className="mb-4 text-[11px] leading-relaxed text-text-muted">
+              {b("exportSuccessDesc")}
+            </p>
 
-          <button
-            onClick={exportAsPng}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <Download className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">{b("downloadPng")}</p>
-              <p className="text-[10px] text-text-muted">{b("downloadPngDesc")}</p>
-            </div>
-          </button>
+            <ShareActions state={state} formationLabel={formationLabel} source="export-success" />
 
-          <button
-            onClick={exportBothPhasesAsSvg}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <Columns2 className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">{b("downloadBothSvg")}</p>
-              <p className="text-[10px] text-text-muted">{b("downloadBothSvgDesc")}</p>
-            </div>
-          </button>
+            <button onClick={handleSaveCopy} className={`${formatButtonClass} mt-3`}>
+              <BookmarkPlus className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+              <span className="text-left">
+                <span className="block text-sm font-medium text-text-primary">
+                  {b("exportSaveForLater")}
+                </span>
+                <span className="block text-[10px] text-text-muted">
+                  {b("exportSaveForLaterDesc")}
+                </span>
+              </span>
+            </button>
 
-          <button
-            onClick={exportBothPhasesAsPng}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <Columns2 className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">{b("downloadBothPng")}</p>
-              <p className="text-[10px] text-text-muted">{b("downloadBothPngDesc")}</p>
-            </div>
-          </button>
+            <button
+              onClick={handleDownloadMore}
+              className="mt-3 w-full py-2 text-xs text-text-muted hover:text-text-secondary transition-colors"
+            >
+              {b("exportDownloadMore")}
+            </button>
+          </>
+        ) : (
+          <>
+            <h3 className="text-sm font-semibold text-text-primary mb-2">{b("exportTitle")}</h3>
 
-          <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
-            {b("files")}
-          </p>
+            <p className="mb-4 text-[10px] leading-relaxed text-text-muted bg-surface border border-surface-border rounded-md px-3 py-2">
+              {b("exportNote")}
+            </p>
 
-          <button
-            onClick={exportAsTxt}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <FileText className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">{b("downloadTxt")}</p>
-              <p className="text-[10px] text-text-muted">{b("downloadTxtDesc")}</p>
-            </div>
-          </button>
-
-          <button
-            onClick={exportAsJson}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <FileJson className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">{b("downloadJson")}</p>
-              <p className="text-[10px] text-text-muted">{b("downloadJsonDesc")}</p>
-            </div>
-          </button>
-
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            <Upload className="w-4 h-4 text-text-secondary group-hover:text-primary" />
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">
-                {importMsg === "ok" ? b("importLoaded") : importMsg === "fail" ? b("importInvalid") : b("importJson")}
+            {exportError && (
+              <p className="mb-3 text-[11px] text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-3 py-2">
+                {b("exportFailed")}
               </p>
-              <p className="text-[10px] text-text-muted">{b("importJsonDesc")}</p>
-            </div>
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".json,application/json"
-            className="hidden"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) handleImportFile(file);
-              e.target.value = "";
-            }}
-          />
-
-          <button
-            onClick={copyToClipboard}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-surface border border-surface-border hover:border-primary/30 transition-all group"
-          >
-            {copied ? (
-              <Check className="w-4 h-4 text-primary" />
-            ) : (
-              <Copy className="w-4 h-4 text-text-secondary group-hover:text-primary" />
             )}
-            <div className="text-left">
-              <p className="text-sm font-medium text-text-primary">
-                {copied ? b("copied") : b("copyAsText")}
-              </p>
-              <p className="text-[10px] text-text-muted">{b("copyTextDesc")}</p>
-            </div>
-          </button>
-        </div>
 
-        <button
-          onClick={closeWithDwell}
-          className="w-full mt-4 py-2 text-xs text-text-muted hover:text-text-secondary transition-colors"
-        >
-          {b("cancel")}
-        </button>
+            <div className="space-y-3">
+              <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold">
+                {b("exportGroupSetup")}
+              </p>
+
+              <button
+                onClick={handleTxt}
+                className="relative w-full flex items-center gap-3 p-3 rounded-lg bg-primary/10 border border-primary/40 hover:border-primary/70 hover:bg-primary/15 transition-all group"
+              >
+                <FileText className="w-4 h-4 text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-semibold text-text-primary">
+                    {b("downloadTxt")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("downloadTxtDesc")}</span>
+                </span>
+                <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded-full bg-primary text-background-primary text-[9px] font-bold uppercase tracking-wide">
+                  {b("exportRecommended")}
+                </span>
+              </button>
+
+              <button onClick={handleBundle} className={formatButtonClass}>
+                <Layers className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {b("exportBundle")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("exportBundleDesc")}</span>
+                </span>
+              </button>
+
+              <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
+                {b("exportGroupShare")}
+              </p>
+
+              <button onClick={handlePng} className={formatButtonClass}>
+                <Download className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {b("downloadPng")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("downloadPngDesc")}</span>
+                </span>
+              </button>
+
+              <button onClick={handleSvg} className={formatButtonClass}>
+                <Download className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {b("downloadSvg")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("downloadSvgDesc")}</span>
+                </span>
+              </button>
+
+              <button onClick={handleSvgBothPhases} className={formatButtonClass}>
+                <Columns2 className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {b("downloadBothSvg")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">
+                    {b("downloadBothSvgDesc")}
+                  </span>
+                </span>
+              </button>
+
+              <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
+                {b("exportGroupReuse")}
+              </p>
+
+              <button onClick={handleJson} className={formatButtonClass}>
+                <FileJson className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {b("downloadJson")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("downloadJsonDesc")}</span>
+                </span>
+              </button>
+
+              <button onClick={copyToClipboard} className={formatButtonClass}>
+                {copied ? (
+                  <Check className="w-4 h-4 text-primary shrink-0" />
+                ) : (
+                  <Copy className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                )}
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {copied ? b("copied") : b("copyAsText")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("copyTextDesc")}</span>
+                </span>
+              </button>
+
+              <p className="text-[10px] uppercase tracking-wider text-text-muted font-semibold pt-2">
+                {b("exportGroupRestore")}
+              </p>
+
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className={formatButtonClass}
+              >
+                <Upload className="w-4 h-4 text-text-secondary group-hover:text-primary shrink-0" />
+                <span className="text-left">
+                  <span className="block text-sm font-medium text-text-primary">
+                    {importMsg === "ok"
+                      ? b("importLoaded")
+                      : importMsg === "fail"
+                        ? b("importInvalid")
+                        : b("importJson")}
+                  </span>
+                  <span className="block text-[10px] text-text-muted">{b("importJsonDesc")}</span>
+                </span>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json,application/json"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) handleImportFile(file);
+                  e.target.value = "";
+                }}
+              />
+            </div>
+
+            <button
+              onClick={closeWithDwell}
+              className="w-full mt-4 py-2 text-xs text-text-muted hover:text-text-secondary transition-colors"
+            >
+              {b("cancel")}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

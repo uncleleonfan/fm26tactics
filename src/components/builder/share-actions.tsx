@@ -15,10 +15,11 @@ import type { TacticBoardState } from "@/types/tactic";
 
 /**
  * Which surface rendered the share actions. Carried on the copy/share events so
- * the standalone Share dialog and the post-save success step stay separable in
- * GA4 (the save flow is the one we are trying to grow).
+ * the standalone Share dialog, the post-save success step and the
+ * post-download step stay separable in GA4 (a real download is the strongest
+ * intent signal we have without accounts, so its share rate is the one to grow).
  */
-export type ShareSource = "share-dialog" | "save-success";
+export type ShareSource = "share-dialog" | "save-success" | "export-success";
 
 interface ShareActionsProps {
   state: TacticBoardState;

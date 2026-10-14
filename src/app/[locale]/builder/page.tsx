@@ -78,8 +78,16 @@ export default function BuilderPage() {
   }, [sidebarTab]);
 
   // Topbar badge for the local "My Tactics" library (E-9 phase 1).
+  //
+  // Landing with a non-empty library is the closest thing to a "returning
+  // user" signal we have without accounts: localStorage only exists in the
+  // browser that created the tactic, so a hit here means someone came back to
+  // their own build. This is the only retention proxy available until the
+  // account layer (N19) exists.
   useEffect(() => {
-    setSavedCount(loadSavedTactics().length);
+    const saved = loadSavedTactics().length;
+    setSavedCount(saved);
+    if (saved > 0) trackEvent("builder_return_with_saved", { value: saved });
   }, []);
   const [visualize, setVisualize] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
@@ -224,6 +232,13 @@ export default function BuilderPage() {
     setSavedCount(loadSavedTactics().length);
     setJustSaved(true);
     setTimeout(() => setJustSaved(false), 2000);
+  };
+
+  // Post-download "save a copy" step in the export panel: the export dialog
+  // hands over to the naming dialog rather than stacking two overlays.
+  const handleExportSave = () => {
+    setShowExport(false);
+    setShowSaveDialog(true);
   };
 
   // Single selection funnel: fires for both plain taps and drag-starts, so a
@@ -454,7 +469,7 @@ export default function BuilderPage() {
             <button
               onClick={() => {
                 setShowExport(true);
-                trackEvent("builder_open_export");
+                trackEvent("builder_open_export", { placement: "toolbar" });
               }}
               className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg bg-primary text-background-primary text-xs font-semibold hover:shadow-[0_0_20px_rgba(0,230,118,0.3)] transition-all"
             >
@@ -484,7 +499,7 @@ export default function BuilderPage() {
             onClick={() => {
               setShowExport(true);
               dismissNudge();
-              trackEvent("builder_open_export");
+              trackEvent("builder_open_export", { placement: "nudge" });
             }}
             className="flex items-center gap-2 flex-1 min-w-0 text-left text-xs text-text-primary hover:text-primary transition-colors"
           >
@@ -670,8 +685,10 @@ export default function BuilderPage() {
       {showExport && (
         <TacticExport
           state={state}
+          formationLabel={currentFormationLabel}
           onClose={() => setShowExport(false)}
           onImport={loadTactic}
+          onSave={handleExportSave}
         />
       )}
 

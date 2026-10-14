@@ -13,6 +13,13 @@ export type TrackParams = {
   category?: string;
   label?: string;
   value?: number;
+  /**
+   * Any additional GA4 event-scoped params (e.g. `format`, `placement`,
+   * `action`). They are forwarded verbatim so an exploration can break an
+   * event down by user without needing a separate event per variant.
+   * GA4 only accepts string | number for custom params.
+   */
+  [param: string]: string | number | undefined;
 };
 
 declare global {
@@ -26,10 +33,12 @@ export const GA_MEASUREMENT_ID = "G-VRVQP5CPK2";
 /** Fire a GA4 event. */
 export function trackEvent(action: string, params: TrackParams = {}) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  const { category, label, value, ...custom } = params;
   window.gtag("event", action, {
-    event_category: params.category,
-    event_label: params.label,
-    value: params.value,
+    event_category: category,
+    event_label: label,
+    value,
+    ...custom,
   });
 }
 
