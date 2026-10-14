@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { allBlogs } from "contentlayer/generated";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { BlogDetail } from "@/components/blog/blog-detail";
+import { JsonLd } from "@/components/shared/json-ld";
 
 export async function generateStaticParams() {
   return allBlogs.map((post) => ({
@@ -115,20 +115,30 @@ export default function BlogPostPage({
       }
     : null;
 
+  const howtoData = post.howto as
+    | { name: string; description: string; steps: string[] }
+    | undefined;
+
+  const howtoJsonLd = howtoData?.steps?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: howtoData.name,
+        description: howtoData.description,
+        step: howtoData.steps.map((step, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: step,
+          text: step,
+        })),
+      }
+    : null;
+
   return (
     <main className="min-h-screen bg-background-primary">
-      <Script
-        id="blog-article-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-      {faqJsonLd && (
-        <Script
-          id="blog-faq-jsonld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
+      <JsonLd data={articleJsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
+      {howtoJsonLd && <JsonLd data={howtoJsonLd} />}
       <BlogDetail post={post} />
     </main>
   );

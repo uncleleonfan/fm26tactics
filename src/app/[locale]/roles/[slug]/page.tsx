@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const role = playerRoles.find((r) => r.id === params.slug);
   if (!role) return {};
   return generateSEO({
-    title: `${role.name} FM26: Role Guide, Best Duties & Attributes`,
+    title: `${role.name} FM26: Role Guide, Best Players & When to Use`,
     description: role.description,
     path: `/roles/${role.id}`,
     type: "article",

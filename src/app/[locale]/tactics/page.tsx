@@ -43,7 +43,8 @@ const formationAnchors = [
 
 const relatedArticles = [
   { slug: "gegenpress-setup-guide", label: "Gegenpress Setup Guide" },
-  { slug: "de-zerbi-tactics-fm26", label: "De Zerbi Tactics" },
+  { slug: "fm26-positional-control-managers", label: "Positional Control Managers — Arteta to De Zerbi" },
+  { slug: "fm26-low-block-counter-managers", label: "Low-Block Counter Managers — Mourinho to Simeone" },
   { slug: "fm26-best-tactics-beginners", label: "Best FM26 Tactics for Beginners" },
   { slug: "how-to-load-tactics-fm26", label: "How to Load Tactics in FM26" },
 ];

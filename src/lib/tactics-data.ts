@@ -567,7 +567,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "goalkeeper",
     availableDuties: ["defend", "support", "attack"],
     keyAttributes: ["Rushing Out", "First Touch", "Passing", "Composure", "Acceleration", "Decisions"],
-    description: "A goalkeeper who sweeps up balls behind the defensive line and initiates counter-attacks with long distribution.",
+    description: "A goalkeeper who sweeps up behind the defensive line and starts attacks — when to use a sweeper keeper in FM26, the key attributes and how it differs from a standard keeper.",
     bestFormations: ["4-2-3-1", "4-3-3", "5-3-2"],
   },
   {
@@ -577,7 +577,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "goalkeeper",
     availableDuties: ["defend"],
     keyAttributes: ["Aerial Reach", "Command of Area", "Handling", "Reflexes", "Positioning", "Decisions"],
-    description: "The standard goalkeeper role. Stays between the sticks, organizes the defense, and makes saves.",
+    description: "The standard FM26 goalkeeper role — stays between the sticks, organizes the defense and makes saves. When a simple keeper beats a sweeper keeper.",
     bestFormations: ["4-2-3-1", "4-3-3", "4-4-2", "3-5-2", "5-3-2", "3-4-3"],
   },
   {
@@ -587,7 +587,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "defender",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Passing", "Composure", "Vision", "First Touch", "Technique", "Decisions"],
-    description: "A center-back who builds play from the back with accurate passing and composure under pressure.",
+    description: "A centre-back who builds play from the back with line-breaking passes — the key attributes, duties and formations for a ball-playing defender in FM26.",
     bestFormations: ["4-2-3-1", "4-3-3", "3-5-2"],
   },
   {
@@ -597,7 +597,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "defender",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Tackling", "Marking", "Heading", "Positioning", "Strength", "Jumping Reach"],
-    description: "The traditional no-nonsense defender. Wins aerial duels and makes crucial tackles.",
+    description: "The traditional no-nonsense defender — wins aerial duels, makes tackles and holds the line. When the simple centre-back beats a ball-playing defender.",
     bestFormations: ["4-4-2", "5-3-2"],
   },
   {
@@ -617,7 +617,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "defender",
     availableDuties: ["defend", "support", "attack"],
     keyAttributes: ["Stamina", "Crossing", "Dribbling", "Acceleration", "Work Rate", "Off the Ball"],
-    description: "An attacking-minded wide player who provides the main source of width in formations without wingers.",
+    description: "The main source of width in formations without wingers — wing-back duties explained, key attributes and the best FM26 formations for wing-backs.",
     bestFormations: ["3-5-2", "5-3-2", "3-4-3"],
   },
   {
@@ -627,7 +627,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "midfielder",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Passing", "Vision", "Technique", "Decisions", "Composure", "First Touch"],
-    description: "A midfield orchestrator who dictates tempo from deep positions with incisive passing range.",
+    description: "The midfield orchestrator who dictates tempo from deep — DLP duties, key attributes, best formations and when to use a deep-lying playmaker in FM26.",
     bestFormations: ["4-2-3-1", "4-3-3", "3-5-2"],
   },
   {
@@ -637,7 +637,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "midfielder",
     availableDuties: ["support"],
     keyAttributes: ["Stamina", "Work Rate", "Passing", "Tackling", "Long Shots", "Off the Ball"],
-    description: "An energetic midfielder who contributes at both ends of the pitch with relentless running.",
+    description: "The relentless runner who contributes at both ends — box-to-box midfielder attributes, best formations and how to use a BBM in FM26.",
     bestFormations: ["4-3-3", "4-4-2", "3-5-2"],
   },
   {
@@ -657,7 +657,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "forward",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Dribbling", "Finishing", "Acceleration", "Off the Ball", "Composure", "Technique"],
-    description: "Cuts inside from wide positions to score goals, acting more like a striker than a traditional winger.",
+    description: "Cuts inside from wide to score goals — inside forward attributes, best formations and how an IF differs from a winger in FM26.",
     bestFormations: ["4-3-3", "4-2-3-1"],
   },
   {
@@ -667,7 +667,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "forward",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Strength", "Heading", "Jumping Reach", "First Touch", "Bravery", "Balance"],
-    description: "A physical presence who holds up the ball and brings teammates into play with knock-downs and layoffs.",
+    description: "A physical presence who holds up the ball and brings teammates into play — target forward attributes, duties and when to use a TF in FM26.",
     bestFormations: ["4-4-2", "3-5-2"],
   },
   // === FM26 NEW ROLES ===
@@ -708,7 +708,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "midfielder",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Off the Ball", "Acceleration", "Passing", "First Touch", "Decisions", "Teamwork"],
-    description: "A new FM26 midfielder who attacks the half-spaces between the lines, arriving late in the box and combining between midfield and attack.",
+    description: "The new FM26 midfielder who attacks the half-spaces and arrives late in the box — how the channel midfielder works, key attributes and best formations.",
     bestFormations: ["4-3-3", "4-2-3-1", "3-4-3"],
   },
   // === FM26 STANDARD ROLES (real in-game names) ===
@@ -759,7 +759,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "midfielder",
     availableDuties: ["defend", "support"],
     keyAttributes: ["Tackling", "Positioning", "Marking", "Strength", "Anticipation", "Concentration"],
-    description: "The anchor of the midfield who sits in front of the back line, screening passes into central areas.",
+    description: "The anchor who sits in front of the back line and screens central passes — defensive midfielder attributes, duties and best FM26 formations.",
     bestFormations: ["4-2-3-1", "4-1-2-1-2", "4-4-2"],
   },
   {
@@ -769,7 +769,7 @@ export const playerRoles: PlayerRoleData[] = [
     category: "midfielder",
     availableDuties: ["support", "attack"],
     keyAttributes: ["Vision", "Passing", "Technique", "Off the Ball", "Flair", "Long Shots"],
-    description: "A central creator in the hole between the opposition midfield and defence, linking play and arriving late in the box.",
+    description: "The creator in the hole between midfield and defence — attacking midfielder attributes, best duties and the formations that get the most from an AM in FM26.",
     bestFormations: ["4-2-3-1", "4-1-2-1-2"],
   },
   {

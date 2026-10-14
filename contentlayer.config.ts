@@ -115,6 +115,7 @@ export const Blog = defineDocumentType(() => ({
     relatedGuide: { type: "string", required: false },
     // FAQ array for JSON-LD (list of {question, answer}); stored as raw JSON
     faq: { type: "json", required: false },
+    howto: { type: "json", required: false },
     category: {
       type: "enum",
       options: ["training", "set-pieces", "scouting", "team-management", "match-day", "youth-development", "tactics", "meta-analysis"],

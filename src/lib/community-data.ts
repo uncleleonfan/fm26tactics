@@ -1,4 +1,4 @@
-// === FM-Arena Community Tested Tactics (Patch 26.3.0, Aug 2026) ===
+// === FM-Arena Community Tested Tactics (Patch 26.3.0, Oct 2026) ===
 // Source: https://fm-arena.com/table/fm26-the-best-plug-and-play-tactics/
 // Tested with 2,700 matches (±1.8 PTS accuracy)
 
@@ -20,17 +20,17 @@ export interface TestedTactic {
 export const topTestedTactics: TestedTactic[] = [
   {
     rank: 1,
-    name: "Atonement",
-    author: "CBP87",
-    formation: "3-4-3",
-    pts: 81.1,
-    gd: 44,
-    gf: 90,
+    name: "ZaZ - Autumn 5.57 ST",
+    author: "ZaZ",
+    formation: "TBC",
+    pts: 81.7,
+    gd: 43,
+    gf: 89,
     ga: 46,
-    efficiency: "71.1%",
-    style: "Control Possession",
-    notes: "New #1 — a patient possession + high-press 3-4-3. Best xG differential on the board (+36.4) and elite home/away balance.",
-    arenaUrl: "https://fm-arena.com/thread/20283-atonement/",
+    efficiency: "71.7%",
+    style: "Gegenpress",
+    notes: "New #1 (uploaded Sep 14) — best xG differential on the board (+36.5 for / 43.1 against). Formation field pending confirmation from the FM-Arena thread.",
+    arenaUrl: "https://fm-arena.com/table/fm26-the-best-plug-and-play-tactics/",
   },
   {
     rank: 2,
@@ -48,6 +48,20 @@ export const topTestedTactics: TestedTactic[] = [
   },
   {
     rank: 3,
+    name: "Orange 5122 v1",
+    author: "CBP87",
+    formation: "5-1-2-2",
+    pts: 78.5,
+    gd: 39,
+    gf: 83,
+    ga: 44,
+    efficiency: "68.9%",
+    style: "Control Possession",
+    notes: "New entry (uploaded Sep 18) — CBP87's five-back jumps straight to #3 with the best defensive record in the top 5 (44 GA).",
+    arenaUrl: "https://fm-arena.com/table/fm26-the-best-plug-and-play-tactics/",
+  },
+  {
+    rank: 4,
     name: "Granny Poison 451 26.3 AWB",
     author: "CBP87",
     formation: "4-5-1",
@@ -59,20 +73,6 @@ export const topTestedTactics: TestedTactic[] = [
     style: "Control Possession",
     notes: "More attacking 4-5-1 variant. Uses Advanced Wing-Backs for width. 87 goals scored.",
     arenaUrl: "https://fm-arena.com/thread/20090-granny-poison-451-26-3-awb/",
-  },
-  {
-    rank: 4,
-    name: "5-1-2-2 Purge PP v4.0",
-    author: "wjechal123",
-    formation: "5-1-2-2",
-    pts: 77.8,
-    gd: 40,
-    gf: 85,
-    ga: 45,
-    efficiency: "68.2%",
-    style: "Gegenpress",
-    notes: "Five-back system that still scores 85 goals. Perfect blend of defense and attack.",
-    arenaUrl: "https://fm-arena.com/thread/20239-5-1-2-2-purge-pp-v4-0/",
   },
   {
     rank: 5,
@@ -171,10 +171,10 @@ export interface FormationInsight {
 }
 
 export const formationInsights: FormationInsight[] = [
-  { formation: "3-4-3 / 3-4-2-1 / 3-3-3-1", avgPts: 78.3, avgGD: 39, appearances: 3, verdict: "The new meta king — Atonement (81.1 PTS) leads a three-back revolution. Elite attack and defense in one shape.", tier: "S" },
+  { formation: "4-5-1 / 4-1-4-1", avgPts: 78.3, avgGD: 40, appearances: 2, verdict: "Strongest group on the board. CBP87's Granny Poison series dominates the shape — low goals conceded, consistent at every club level.", tier: "S" },
   { formation: "4-2-4", avgPts: 77.0, avgGD: 37, appearances: 3, verdict: "Most aggressive meta formation. 90+ goal potential with 2 strikers + 2 wingers, still three entries in the top 10.", tier: "S" },
-  { formation: "4-5-1 / 4-1-4-1", avgPts: 78.3, avgGD: 40, appearances: 2, verdict: "Best defensive solidity. CBP87's Granny Poison series dominates the shape — low goals conceded, consistent at every club level.", tier: "S" },
-  { formation: "5-1-2-2", avgPts: 77.8, avgGD: 40, appearances: 1, verdict: "Surprise meta contender. 5-defender systems can be elite with the right setup.", tier: "A" },
+  { formation: "5-1-2-2", avgPts: 78.5, avgGD: 39, appearances: 1, verdict: "Elite contender — Orange 5122 v1 took #3 with only 44 goals conceded. Five-defender systems can dominate with the right setup.", tier: "S" },
+  { formation: "3-4-3 / 3-4-2-1 / 3-3-3-1", avgPts: 77.0, avgGD: 37, appearances: 2, verdict: "Lost its #1 — Atonement dropped off the table (v4 retesting). The Raptor 3421 still holds elite defensive numbers (43 GA).", tier: "A" },
   { formation: "4-2-3-1", avgPts: 75.9, avgGD: 36, appearances: 1, verdict: "Classic formation still strong. Most familiar setup for transitioning players (tied with HIGHWAY STAR on 75.9 PTS).", tier: "A" },
 ];
 

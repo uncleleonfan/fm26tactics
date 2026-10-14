@@ -5,7 +5,7 @@ import { allTactics } from "contentlayer/generated";
 import { ArrowRight, Trophy, Star, Zap, Shield, Wrench } from "lucide-react";
 import { styleColors } from "@/lib/tactics-data";
 import { generateLocaleSEO } from "@/lib/metadata";
-import Script from "next/script";
+import { JsonLd } from "@/components/shared/json-ld";
 
 // Turkish pilot L1: core list page is part of the minimal indexable set (§2b)
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -100,7 +100,7 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
 
   return (
     <>
-      <Script id="best-tactics-faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <JsonLd data={faqJsonLd} />
       <main className="min-h-screen bg-background-primary">
         {/* Right rail wrapper (xl+): sticky 160x600 beside the centered
             content column. The sections keep their own max-w-* centering
@@ -236,6 +236,8 @@ export default async function BestTacticsPage({ params }: { params: { locale: st
               { label: "FM26 Formations", href: "/formations" },
               { label: "FM26 Tactics Library", href: "/tactics" },
               { label: "FM26 Player Roles", href: "/roles" },
+              { label: "Positional Control Managers", href: "/blog/fm26-positional-control-managers" },
+              { label: "Low-Block Counter Managers", href: "/blog/fm26-low-block-counter-managers" },
             ].map((link) => (
               <Link
                 key={link.href}

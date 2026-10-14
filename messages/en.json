@@ -95,7 +95,7 @@
     "interactiveBuilderDesc": "Visual drag-and-drop tactic editor to experiment with formations in real-time.",
     "communityData": "Community Data",
     "communitySubtitle": "What the Meta Says",
-    "communityDesc": "Aggregated from FM-Arena community testing, Passion4FM analysis, and Reddit/Sortitoutsi consensus. Patch 26.3 · Aug 2026.",
+    "communityDesc": "Aggregated from FM-Arena community testing, Passion4FM analysis, and Reddit/Sortitoutsi consensus. Patch 26.3 · Oct 2026.",
     "ranked1": "#1 RANKED",
     "bestFormation": "Best Formation",
     "bestDefense": "Best Defense",
@@ -144,7 +144,7 @@
     "styleFluidCounter": "Fluid Counter",
     "styleParkTheBus": "Park the Bus",
     "styleControlPossession": "Control Possession",
-    "statBestFormationSub": "81.1 PTS · Atonement",
+    "statBestFormationSub": "81.7 PTS · ZaZ Autumn",
     "statBestDefenseSub": "41 GA · Bielsa Style",
     "statOpRoleSub": "S+ Tier · Elite Width",
     "statMatchesSub": "matches per tactic"
@@ -890,7 +890,7 @@
   "meta": {
     "pageTitle": "FM26 Meta Analysis",
     "pageDescription": "Community-sourced FM26 meta analysis — track the most effective formations, player roles, and tactical trends.",
-    "updatedBadge": "Updated Aug 2026 · Patch 26.3",
+    "updatedBadge": "Updated Oct 2026 · Patch 26.3",
     "h1Pre": "FM26",
     "h1Highlight": "Meta",
     "h1Post": "Analysis",
@@ -923,7 +923,7 @@
     "mistakesTitle": "Common Mistakes & Fixes",
     "creatorsTitle": "Community Top Creators",
     "keySourcesTitle": "Key Data Sources",
-    "footerNote": "Data sourced from FM-Arena, Passion4FM, FM Scout, FM Blog, Sortitoutsi, and Reddit community. Updated for Patch 26.3.0 — August 2026.",
+    "footerNote": "Data sourced from FM-Arena, Passion4FM, FM Scout, FM Blog, Sortitoutsi, and Reddit community. Updated for Patch 26.3.0 — October 2026.",
     "browseTacticsCta": "Browse all 8 tactics →",
     "browseGuidesCta": "Read tactical guides →"
   },
