@@ -84,6 +84,25 @@ export default async function AboutPage({ params }: { params: { locale: string }
           </p>
         </div>
 
+        <div className="glass-panel p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-3">Friends &amp; Partners</h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            Sites we recommend:
+          </p>
+          <ul className="text-text-secondary text-sm leading-relaxed space-y-2 pl-5">
+            <li className="list-disc marker:text-primary">
+              <a
+                href="https://www.fccareer.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                fccareer.ai
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <Link href="/" className="text-primary text-sm hover:underline">
           &larr; {a("backToHome")}
         </Link>
