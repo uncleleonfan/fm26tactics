@@ -18,9 +18,9 @@ import {
  * prominent and as easy as "Accept", and the decision can be changed later
  * from the footer's cookie settings link.
  *
- * This is sufficient for Adsterra. It is NOT a Google-certified CMP, so when
- * AdSense is approved this should be replaced by Google's Privacy & messaging
- * (or another certified CMP) — see docs/adsense-review-2026-10.md section 9.
+ * This is NOT a Google-certified CMP, so when AdSense is approved this should
+ * be replaced by Google's Privacy & messaging (or another certified CMP) —
+ * see docs/adsense-review-2026-10.md section 9.
  */
 export function ConsentBanner() {
   const t = useTranslations("consent");

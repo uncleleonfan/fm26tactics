@@ -8,7 +8,6 @@ import { TryInBuilderButton } from "@/components/shared/try-in-builder-button";
 import { TacticBoardCta } from "@/components/shared/tactic-board-cta";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { FormationDiagram } from "@/components/tactics/formation-diagram";
-import { ArticleMidAd } from "@/components/ads/article-mid-ad";
 import type { Blog } from "contentlayer/generated";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
@@ -177,11 +176,6 @@ export function BlogDetail({ post }: BlogDetailProps) {
           </div>
         </section>
       )}
-
-      {/* Native ad — inserted mid-article (before the 2nd h2), falls back to
-          end-of-article for short posts. key forces re-run per post on
-          client-side navigation. See article-mid-ad.tsx */}
-      <ArticleMidAd key={post._id} />
 
       {/* Related Links */}
       {(post.relatedTactic || post.relatedGuide) && (

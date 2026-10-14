@@ -8,7 +8,6 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Callout } from "@/components/shared/callout";
 import { MdxLink } from "@/components/shared/mdx-link";
 import { RelatedGuides } from "@/components/shared/related-guides";
-import { ArticleMidAd } from "@/components/ads/article-mid-ad";
 import { formatDate } from "@/lib/utils";
 import type { Guide } from "contentlayer/generated";
 
@@ -192,11 +191,6 @@ export function GuideDetail({ guide }: GuideDetailProps) {
                   </div>
                 </section>
               )}
-
-              {/* Native ad — inserted mid-article (before the 2nd h2), falls
-                  back to end-of-article for short guides. key forces re-run
-                  per guide on client-side navigation. See article-mid-ad.tsx */}
-              <ArticleMidAd key={guide._id} />
 
               {/* Related Guides — internal linking for SEO */}
               <RelatedGuides

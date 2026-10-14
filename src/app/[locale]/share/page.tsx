@@ -11,7 +11,6 @@ import {
 } from "@/lib/tactic-share";
 import { formationPresets } from "@/lib/tactics-data";
 import { StaticPhasePitch } from "@/components/builder/static-phase-pitch";
-import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 
 interface SharePageProps {
   params: { locale: string };
@@ -128,10 +127,6 @@ export default function SharePage({ searchParams }: SharePageProps) {
           </div>
         )}
 
-        {/* Native below the CTA — only for valid shares, so the invalid-state
-            path stays a clean conversion funnel. This route carries no rail;
-            the sticky banner covers desktop with its full tier set. */}
-        {tactic && <AdsterraNativeBanner placement="list" />}
       </div>
     </div>
   );

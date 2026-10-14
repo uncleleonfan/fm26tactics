@@ -2,8 +2,8 @@
  * Advertising consent, scoped to the regions that require it.
  *
  * GDPR / ePrivacy (EEA) and UK GDPR require prior consent before non-essential
- * cookies are set, and that applies to any ad network — Adsterra included. A
- * plain accept/reject banner is enough for that; the stricter requirement is
+ * cookies are set, and that applies to any advertising network. A plain
+ * accept/reject banner is enough for that; the stricter requirement is
  * Google's: serving AdSense to EEA/UK traffic needs a **Google-certified CMP**
  * (IAB TCF v2.2), which is a separate step to take when AdSense is approved.
  * See docs/adsense-review-2026-10.md section 9.

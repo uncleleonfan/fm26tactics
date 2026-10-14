@@ -24,7 +24,6 @@ import { ShareDialog } from "@/components/builder/share-dialog";
 import { SavedTacticsDialog } from "@/components/builder/saved-tactics-dialog";
 import { SaveTacticDialog } from "@/components/builder/save-tactic-dialog";
 import { loadSavedTactics } from "@/lib/saved-tactics";
-import { AdsterraSlot } from "@/components/ads/adsterra-slot";
 import { AnalysisPanel } from "@/components/builder/analysis-panel";
 import type { AppliedChange } from "@/components/builder/recommendation-panel";
 import { dimensionScores } from "@/lib/tactical-scores";
@@ -543,25 +542,6 @@ export default function BuilderPage() {
       )}
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
-        {/* Desktop ad rail beside the pitch. Takes up layout space (never
-            overlays the canvas). Below the breakpoint it is display:none, so
-            the lazy loader never fires and the rail collapses to zero width.
-            In compare mode both panels need >=500px, so there the rail only
-            appears from 1840px up. Shares the 160x600 key with the site's
-            other rails; the sticky banner's builder policy keeps its desktop
-            tiers off this page, so this stays the only fixed banner >=768px.
-            In EEA/UK without consent the slot renders null and collapses. */}
-        <div
-          className={`shrink-0 self-center hidden ${
-            showCompare ? "min-[1840px]:block" : "min-[1600px]:block"
-          }`}
-        >
-          <AdsterraSlot
-            format="160x600"
-            className="mr-3"
-            label="rail-builder-160x600"
-          />
-        </div>
         <div className="flex-1 flex flex-col min-h-0 min-w-0">
           <div className="shrink-0 flex items-center gap-2 px-3 pt-3 sm:px-4">
             <PhaseTab

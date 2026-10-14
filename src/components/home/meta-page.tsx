@@ -6,8 +6,6 @@ import { ArrowLeft, Zap, AlertTriangle, CheckCircle, Download, ExternalLink, Use
 import { trackEvent } from "@/lib/analytics";
 import { formationGuideSlugs } from "@/lib/formation-guide-slugs";
 import { playerRoles } from "@/lib/tactics-data";
-import { AdsterraSlot } from "@/components/ads/adsterra-slot";
-import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import {
   topTestedTactics,
   formationInsights,
@@ -223,10 +221,6 @@ export function MetaPage() {
             </div>
           </div>
         </section>
-
-        {/* In-feed native between the rankings and the roles deep-dive —
-            the natural mid-page seam of this hub. */}
-        <AdsterraNativeBanner placement="list-mid" />
 
         {/* ===== SECTION 2: Meta Player Roles ===== */}
         <section className="mb-12">
@@ -503,15 +497,7 @@ export function MetaPage() {
         </div>
         </div>
 
-        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
-          <div className="sticky top-24">
-            <AdsterraSlot
-              format="160x600"
-              className=""
-              label="rail-list-160x600"
-            />
-          </div>
-        </aside>
+
       </div>
     </div>
   );

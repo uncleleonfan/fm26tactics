@@ -6,8 +6,6 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, LayoutGrid, Wrench } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { AdsterraSlot } from "@/components/ads/adsterra-slot";
-import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   return generateLocaleSEO({
@@ -127,10 +125,6 @@ export default function FormationsPage() {
 
             return (
               <div key={formation.formation}>
-              {/* In-feed native mid-list, inside the scroll path. */}
-              {formationIndex === 3 && formationPresets.length > 4 && (
-                <AdsterraNativeBanner placement="list-mid" />
-              )}
               <div
                 id={formation.formation}
                 className="glass-card rounded-2xl p-6 space-y-4 scroll-mt-20"
@@ -250,15 +244,7 @@ export default function FormationsPage() {
         </section>
         </div>
 
-        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
-          <div className="sticky top-24">
-            <AdsterraSlot
-              format="160x600"
-              className=""
-              label="rail-list-160x600"
-            />
-          </div>
-        </aside>
+
       </div>
 
       <JsonLd data={faqData} />

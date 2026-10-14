@@ -3,8 +3,6 @@ import { Link } from "@/i18n/routing";
 import { Shield, Zap, Swords, Crosshair, ArrowRight, BookOpen, LayoutGrid, Wrench } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { playerRoles } from "@/lib/tactics-data";
-import { AdsterraSlot } from "@/components/ads/adsterra-slot";
-import { AdsterraNativeBanner } from "@/components/ads/adsterra-native-banner";
 import type { PlayerRoleCategory } from "@/types/tactic";
 
 const categoryKeys: Record<string, string> = {
@@ -71,10 +69,6 @@ export default async function RolesPage({ params }: { params: { locale: string }
               const catRoles = playerRoles.filter((r) => r.category === category);
               return (
                 <div key={category} className="mb-12">
-                {/* In-feed native after the 2nd category (mid-hub seam). */}
-                {categoryIndex === 1 && (
-                  <AdsterraNativeBanner placement="list-mid" />
-                )}
                 <section>
                   <div className="flex items-center gap-3 mb-6">
                     <div className={categoryColors[category]}>{categoryIcons[category]}</div>
@@ -148,15 +142,7 @@ export default async function RolesPage({ params }: { params: { locale: string }
         </div>
         </div>
 
-        <aside className="hidden xl:block w-[160px] shrink-0" aria-hidden="true">
-          <div className="sticky top-24">
-            <AdsterraSlot
-              format="160x600"
-              className=""
-              label="rail-list-160x600"
-            />
-          </div>
-        </aside>
+
         </div>
 
         {/* Internal Links — Topical Graph */}
