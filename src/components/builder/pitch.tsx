@@ -6,7 +6,6 @@ import { PitchBackground } from "./pitch-background";
 import { VisualizeLayer } from "./visualize-layer";
 import { DefensiveVisualizeLayer } from "./defensive-visualize-layer";
 import { BallPositionControl } from "./ball-position-control";
-import { PitchModeControl } from "./pitch-mode-control";
 import { zoneAtPoint } from "@/tactics/data/zones";
 import { trackEvent } from "@/lib/analytics";
 import { MIN_MOVEMENT_DIST } from "@/tactics/visualization/arrows";
@@ -30,8 +29,6 @@ interface PitchProps {
   onChangeDuty: (playerId: string, duty: "defend" | "support" | "attack") => void;
   /** Visualize overlay mode: expected positions, arrows, zone density, ball. */
   visualize?: boolean;
-  /** Toggles pitch mode via the floating Edit/Visualize switch. */
-  onToggleVisualize?: (visualize: boolean) => void;
   analysis?: AnalysisResult | null;
   ballZone?: BallZoneId;
   onBallZoneChange?: (zone: BallZoneId) => void;
@@ -56,7 +53,6 @@ export function Pitch({
   onChangeRole,
   onChangeDuty,
   visualize = false,
-  onToggleVisualize,
   analysis = null,
   ballZone,
   onBallZoneChange,
@@ -239,9 +235,13 @@ export function Pitch({
     // In visualize mode the ball-zone panel floats over the bottom of the
     // board. Reserving space below the board keeps the pitch (and anything
     // drawn in our defensive third) clear of it.
+    // The board geometry is square (viewBox 0 0 100 100), so the element is
+    // square too — this maps the drawn board 1:1 onto the element and avoids
+    // any letterboxing, maximizing the on-screen size. p-2 keeps a small
+    // breathing gap to the surrounding panels.
     <div
-      className={`relative flex-1 flex items-center justify-center p-3 min-h-0 min-w-0 ${
-        visualize ? "pb-24 sm:pb-32" : ""
+      className={`relative flex-1 flex items-center justify-center p-2 min-h-0 min-w-0 ${
+        visualize ? "pb-20 sm:pb-28" : ""
       }`}
     >
       <svg
@@ -249,7 +249,7 @@ export function Pitch({
         ref={svgRef}
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"
-        className="h-full w-auto max-w-full aspect-[2/3] touch-none select-none"
+        className="h-full w-auto max-w-full aspect-square touch-none select-none"
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
@@ -315,10 +315,6 @@ export function Pitch({
           );
         })}
       </svg>
-
-      {onToggleVisualize && (
-        <PitchModeControl visualize={visualize} onChange={onToggleVisualize} />
-      )}
 
       {phase === "in-possession" && visualize && ballZone && onBallZoneChange && (
         <BallPositionControl ballZone={ballZone} onChange={onBallZoneChange} />

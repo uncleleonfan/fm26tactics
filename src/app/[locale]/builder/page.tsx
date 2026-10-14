@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, RotateCw, Download, Share2, Info, X, Settings, LayoutGrid, Check, Activity, BookmarkPlus, FolderOpen } from "lucide-react";
 import { useTacticBuilder, resolvePhasePlayers } from "@/hooks/use-tactic-builder";
-import { useOneTimeBanner } from "@/hooks/use-one-time-banner";
 import { useTacticalAnalysis } from "@/hooks/use-tactical-analysis";
 import { usePhaseAnalysis } from "@/hooks/use-phase-analysis";
 import { useDefensiveAnalysis } from "@/hooks/use-defensive-analysis";
@@ -13,7 +12,8 @@ import { trackEvent } from "@/lib/analytics";
 import { formationPresets, playerRoles } from "@/lib/tactics-data";
 import { useRouter } from "next/navigation";
 import { Pitch } from "@/components/builder/pitch";
-import { PhaseTab, type PhaseView } from "@/components/builder/phase-tab";
+import { PhaseSelect, type PhaseView } from "@/components/builder/phase-select";
+import { PitchModeControl } from "@/components/builder/pitch-mode-control";
 import { PhasePositionEditor } from "@/components/builder/phase-position-editor";
 import { CompareView } from "@/components/builder/compare-view";
 import { RoleSelector } from "@/components/builder/role-selector";
@@ -176,47 +176,6 @@ export default function BuilderPage() {
     },
     [state.players]
   );
-
-  // The board is always "full" (formation presets auto-fill the XI), so the real
-  // signal for E-7 is a pristine default config: balanced mentality + no team
-  // instructions. Nudge those users once to set roles & mentality.
-  const isPristineConfig =
-    state.teamInstructions.mentality === "balanced" &&
-    state.teamInstructions.inPossession.length === 0 &&
-    state.teamInstructions.inTransition.length === 0 &&
-    state.teamInstructions.outOfPossession.length === 0;
-
-  // One-time banners: the flag is written the moment they are rendered, so a
-  // user sees each one at most once even if they never close it.
-  //
-  // The .fmf export limitation alert used to live here as a full-screen modal
-  // on entry. It was closed by 96.5% of the users who saw it, and the same
-  // information is already carried inline by `exportNote` at the top of the
-  // Export dialog — which is exactly where a user looks for .fmf. The modal
-  // was therefore removed rather than rewritten.
-  const exportNudge = useOneTimeBanner("fm26-builder-nudge-dismissed");
-  // Held back while the export nudge is up so the two never stack on a first visit.
-  const configNudge = useOneTimeBanner("fm26-builder-config-nudge-dismissed", {
-    enabled: !exportNudge.visible && isPristineConfig,
-  });
-
-  useEffect(() => {
-    if (exportNudge.visible) trackEvent("builder_nudge_shown");
-  }, [exportNudge.visible]);
-
-  useEffect(() => {
-    if (configNudge.visible) trackEvent("builder_config_nudge_shown");
-  }, [configNudge.visible]);
-
-  const dismissNudge = () => {
-    exportNudge.dismiss();
-    trackEvent("builder_nudge_dismiss");
-  };
-
-  const dismissConfigNudge = () => {
-    configNudge.dismiss();
-    trackEvent("builder_config_nudge_dismiss");
-  };
 
   const selectedPlayer = state.players.find((p) => p.id === selectedPlayerId);
   const currentFormationLabel =
@@ -479,98 +438,43 @@ export default function BuilderPage() {
         </div>
       </div>
 
-      {/* Reserved slot: the shared-tactic notice mounts/unmounts without
-          shifting the layout below (fixed-height container, always present). */}
-      <div className="shrink-0 h-8" aria-hidden={sharedLoadMsg !== "ok"}>
-        {sharedLoadMsg === "ok" && (
-          <div className="h-full flex items-center gap-2 px-3 sm:px-4 bg-primary/10 border-b border-primary/20">
-            <Check className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span className="text-xs text-text-primary">
-              {t("sharedLoaded")}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {exportNudge.visible && (
-        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 border-b border-primary/20">
-          <button
-            onClick={() => {
-              setShowExport(true);
-              dismissNudge();
-              trackEvent("builder_open_export", { placement: "nudge" });
-            }}
-            className="flex items-center gap-2 flex-1 min-w-0 text-left text-xs text-text-primary hover:text-primary transition-colors"
-          >
-            <Download className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span className="truncate">{t("exportNudge")}</span>
-          </button>
-          <button
-            onClick={dismissNudge}
-            className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
-            aria-label={t("dismiss")}
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
+      {/* Shared-tactic notice: mounted only while a shared tactic is loaded,
+          so in the normal case the workspace sits flush against the top
+          bar with no gap. */}
+      {sharedLoadMsg === "ok" && (
+        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 h-8 bg-primary/10 border-b border-primary/20">
+          <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+          <span className="text-xs text-text-primary">
+            {t("sharedLoaded")}
+          </span>
         </div>
       )}
 
-      {configNudge.visible && (
-        <div className="shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 bg-amber-500/10 border-b border-amber-500/20">
-          <button
-            onClick={() => {
-              const firstOutfield = state.players[1];
-              if (firstOutfield) setSelectedPlayerId(firstOutfield.id);
-              setSidebarTab("role");
-              setShowMobileSidebar(true);
-              dismissConfigNudge();
-              trackEvent("builder_config_nudge_click");
-            }}
-            className="flex items-center gap-2 flex-1 min-w-0 text-left text-xs text-text-primary hover:text-amber-400 transition-colors"
-          >
-            <Settings className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span className="truncate">{t("configNudge")}</span>
-          </button>
-          <button
-            onClick={dismissConfigNudge}
-            className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
-            aria-label={t("dismiss")}
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      )}
-
+      {/* Main region: configuration sidebar on the left, the tactical board
+          (with its phase toolbar) centered in the middle, analysis on the
+          right at wide breakpoints. */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
+        <aside className="hidden lg:flex lg:flex-col w-[300px] shrink-0 border-r border-[#1C2436]/50 bg-surface/30">
+          {sidebarContent}
+        </aside>
         <div className="flex-1 flex flex-col min-h-0 min-w-0">
-          <div className="shrink-0 flex items-center gap-2 px-3 pt-3 sm:px-4">
-            <PhaseTab
-              value={showCompare ? "compare" : activePhase}
-              onChange={handlePhaseChange}
-            />
-            {showCompare ? (
-              <div className="shrink-0 hidden sm:flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-[#1C2436] bg-surface/60 text-[11px] font-semibold whitespace-nowrap">
-                <span className="text-emerald-300 tabular-nums">
-                  {phaseAnalysis.transition.possessionShapeLabel}
-                </span>
-                <span className="text-text-muted font-normal">→</span>
-                <span className="text-blue-300 tabular-nums">
-                  {phaseAnalysis.transition.defensiveShapeLabel}
-                </span>
-              </div>
-            ) : (
-              <div className="shrink-0 hidden sm:flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-[#1C2436] bg-surface/60 text-[11px] whitespace-nowrap">
-                <span
-                  className={`font-semibold tabular-nums ${
-                    activePhase === "in-possession" ? "text-emerald-300" : "text-blue-300"
-                  }`}
-                >
-                  {phaseAnalysis[activePhase].metrics.shape.label}
-                </span>
-                <span className="text-text-muted">·</span>
-                <span className="text-text-muted">{t("phaseShapeBadge")}</span>
-              </div>
-            )}
+          <div className="shrink-0 flex justify-center px-3 pt-2">
+            <div
+              role="toolbar"
+              aria-label={t("pageTitle")}
+              className="flex items-center gap-0.5 rounded-xl border border-[#1C2436] bg-background-secondary/95 backdrop-blur-xs shadow-[0_4px_24px_rgba(0,0,0,0.5)] p-1"
+            >
+              <PhaseSelect
+                value={showCompare ? "compare" : activePhase}
+                onChange={handlePhaseChange}
+              />
+              {!showCompare && (
+                <>
+                  <div className="w-px h-5 bg-[#1C2436]" aria-hidden />
+                  <PitchModeControl visualize={visualize} onChange={toggleVisualize} />
+                </>
+              )}
+            </div>
           </div>
           {showCompare ? (
             <CompareView
@@ -589,7 +493,6 @@ export default function BuilderPage() {
           onChangeRole={setPlayerRole}
           onChangeDuty={setPlayerDuty}
           visualize={visualize}
-          onToggleVisualize={toggleVisualize}
           analysis={analysis}
           ballZone={ballZone}
           onBallZoneChange={setBallZone}
@@ -600,9 +503,6 @@ export default function BuilderPage() {
         />
           )}
         </div>
-        <aside className="hidden lg:flex lg:flex-col w-[300px] shrink-0 border-l border-[#1C2436]/50 bg-surface/30">
-          {sidebarContent}
-        </aside>
         <aside
           className="hidden xl:flex flex-col w-[360px] shrink-0 border-l border-[#1C2436]/50"
           aria-label={t("analysisTab")}
